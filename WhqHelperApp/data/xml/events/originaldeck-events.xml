@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'>
+        
+  <event id="od-cave-in" name="Cave In">
+    <rules>Place the Cave-1n marker in the board section where this Event was triggered to show that all exits except the one the Warriors entered by are now blocked.
+Any Warriors still in this board section at the end of the next turn are crushed
+by rubble and killed.  Any Monsters in the room are crushed by falling masonry.
+Warriors attempting to escape are not subject to the rules for pinning whilst in
+this room.
+The room is now impassable and may not be re-entered.</rules>
+    <special>If this card is drawn in the first room in the dungeon, ignore it and draw another Event Card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="od-portcullis" name="Portcullis">
+    <rules>Once all the Warriors have entered this board section, a portcullis slams shut behind them, cutting them off. They can only retrace their steps if they have the key.
+Place the portcullis marker across the doorway the Warriors entered by to
+show that it is blocked.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="od-dead-body" name="Dead Body">
+    <rules>The Warriors find a dead Barbarian. lying in a pool of blood. Clutched tightly to his chest is a bag. Roll 1D6 for each Warrior. The Warrior with the lowest score must take the bag from the body and open it. Roll 1D6 on the following table to see what happens when he does:
+ 1  Poison Gas! Every model on 
+    this board section takes 1D6
+    Wounds with no modifiers 
+    for Toughness or armour. 
+    The bag is empty.
+2-3 Trap! A spear shoots out of 
+    the wall and inflicts 2D6 
+    Wounds on the Warrior who 
+    took the bag. The bag turns 
+    out to be empty.
+4-6 Treasure. The bag contains 
+    (1D6 x 100) Gold, to be given 
+    to the Warrior who took it.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="od-trap" name="Trap">
+    <rules>Roll 1D6 for each Warrior.  The Warrior with the lowest score has set off a trap.  Roll 1D6 on the following table:
+ 1  There is a loud explosion and
+    the room is filled with fire
+    and smoke. Every model on 
+    this board section takes 1D6
+    Wounds, with no modifiers
+    for Toughness or armour.
+2-5 A pit opens in the floor and
+    your Warrior plummets onto
+    the rocky floor below. He
+    takes 2D6 Wounds, and can
+    only escape if the party has
+    the rope or a Levitation spell.
+ 6  A stone slab slides back in
+    the wall, revealing the glint
+    of gems and gold.  Draw one
+    Treasure Card.</rules>
+    <special>Roll 1D6.  On a 1, 2, or 3 draw another Event Card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="od-encounter" name="Encounter">
+    <rules>Slumped against the wall the Warriors find a dying Dwarf prospector, riddled with Orc arrows. As they approach he growls a warning, threatening them with a huge axe.  When he sees they are not Orcs or evil creatures, he calms down and gives them a key.  With his dying breath he says:
+"This is the key to the portcullis.  Without it you will never get through."
+One of the players should keep this card to remind you that his Warrior has the key.</rules>
+    <special>Draw another Event Card immediately.</special>
+    <treasure>false</treasure>    
+  </event>
+  <event id="od-scorpions" name="Scorpions">
+    <rules>A scorpion swarm is a special form of Monster and its attack is resolved immediately.  Randomly determine which Warrior is attacked by the swarm.
+There are 12 scorpions in the swarm, but they are very small and are not represented by miniatures on the board.
+Roll your Warrior's normal damage dice (1D6 + Strength) to see how many scorpions he kills with his attack - the number rolled is the number of scorpions he kills.  Each scorpion killed is worth 5 Gold.
+Any scorpions that are left inflict 1 Wound each, with no modifiers for Toughness or armour.
+The scorpion swarm then scuttles away and this card is discarded.</rules>
+    <special>Roll 1D6.  On a 1, 2 or 3 draw another Event Card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="od-old-bones" name="Old Bones">
+    <rules>The floor of this room is littered with bones and skulls, with the glint of gold underneath.  As the Warriors collect the gold, roll 1D6:
+ 1  Trap! Cackling laughter
+    echoes around the room and
+    lightning flashes. Take a
+    Warrior Counter to determine
+    which Warrior is hit by a
+    magical bolt that inflicts 1D6
+    Wounds, with no modifiers
+    for Toughness or armour.
+2-3 Illusion. In a bright flash of
+    light, the bones and gold
+    vanish. Draw another Event
+    Card immediately.
+4-5 Each Warrior on this board
+    section finds (1D6 x 10)
+    Gold.  Draw another EVent
+    Card immediately.
+ 6  Each Warrior on this board
+    section finds (2D6 x 10)
+    Gold. In addition, draw one
+    Treasure Card.</rules>
+    <treasure>false</treasure>
+  </event>
+</events>

@@ -1,0 +1,375 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="rpb-ghost" factions="undead" name="Ghost" plural="Ghosts">
+    <wounds>16</wounds>
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>-</strength>
+    <toughness>3</toughness>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>-</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-chill">Chill 1</rule>
+      <rule id="rpb-ethereal">Ethereal -1</rule>
+      <rule id="rpb-fear">Fear 6</rule>
+    </special>
+  </monster>
+  <monster id="rpb-liche" factions="undead" name="Liche" plural="Liches">
+    <wounds>40</wounds>
+    <move>4</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <initiative>6</initiative>
+    <attacks>5</attacks>
+    <gold>3500</gold>
+    <armor>-</armor>
+    <damage>4D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 10</rule>
+      <rule id="rpb-magic-items">2 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <magic id="rpb-necromantic" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-liche-king" factions="undead" name="Liche King" plural="Liche Kings">
+    <wounds>63</wounds>
+    <move>6</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>7</strength>
+    <toughness>6</toughness>
+    <initiative>4</initiative>
+    <attacks>5</attacks>
+    <gold>7500</gold>
+    <armor>6</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">3 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-terror">Terror 14</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <magic id="rpb-chaos" level="2" />
+      <magic id="rpb-necromantic" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-ghoul" factions="undead" name="Ghoul" plural="Ghouls">
+    <wounds>4</wounds>
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>80</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-break:">Break</rule>
+      <rule id="rpb-fear">Fear 4</rule>
+    </special>
+  </monster>
+  <monster id="rpb-mummy" factions="undead" name="Mummy" plural="Mummies">
+    <wounds>40</wounds>
+    <move>3</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>450</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-tomb-rot">Tomb Rot (1D3)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-tomb-king" factions="undead" name="Tomb King" plural="Tomb Kings">
+    <wounds>45</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <initiative>4</initiative>
+    <attacks>3</attacks>
+    <gold>1000</gold>
+    <armor>2</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-tomb-rot">Tomb Rot (1D6)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-necromancer" factions="undead" name="Necromancer" plural="Necromancers">
+    <wounds>25</wounds>
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>680</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <magic id="rpb-necromantic" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-necromancer-champion" factions="undead" name="Necromancer Champion" 
+           plural="Necromancer Champions">
+    <wounds>29</wounds>
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>4</initiative>
+    <attacks>3</attacks>
+    <gold>1630</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">2 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <magic id="rpb-necromantic" level="2" />
+    </special>
+  </monster>
+  <monster id="rpb-master-necromancer" factions="undead" name="Master Necromancer" 
+           plural="Master Necromancers">
+    <wounds>34</wounds>
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <initiative>5</initiative>
+    <attacks>4</attacks>
+    <gold>2780</gold>
+    <armor>3</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">2 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <magic id="rpb-necromantic" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-necromancer-lord" factions="undead" name="Necromancer Lord" 
+           plural="Necromancer Lords">
+    <wounds>39</wounds>
+    <move>4</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <initiative>6</initiative>
+    <attacks>5</attacks>
+    <gold>4100</gold>
+    <armor>4</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">4 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <magic id="rpb-necroantic" level="4" />
+    </special>
+  </monster>
+  <monster id="rpb-skeleton" factions="undead" name="Skeleton" plural="Skeletons">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>5</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>80</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 3) or [4-6] Swords</rule>
+      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-regenerate">Regenerate 1</rule>
+    </special>
+  </monster>
+  <monster id="rpb-tomb-guardian" factions="undead" name="Tomb Guardian" plural="Tomb Guardians">
+    <wounds>15</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>6</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>110</gold>
+    <armor>1</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-regenerate">Regenerate 1</rule>
+    </special>
+  </monster>
+  <monster id="rpb-zombie" factions="undead" name="Zombie" plural="Zombies">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>5</wounds>
+    <initiative>1</initiative>
+    <attacks>1</attacks>
+    <gold>40</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 3</rule>
+    </special>
+  </monster>
+  <monster id="rpb-wraith" factions="undead" name="Wraith" plural="Wraiths">
+    <wounds>30</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>750</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-chill">Chill 2</rule>
+      <rule id="rpb-ethereal">Ethereal -1</rule>
+      <rule id="rpb-terror">Terror 8</rule>
+    </special>
+  </monster>
+  <monster id="rpb-vampire-count" factions="undead" name="Vampire Count" plural="Vampire Counts">
+    <wounds>30</wounds>
+    <move>6</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>7</strength>
+    <toughness>6</toughness>
+    <initiative>8</initiative>
+    <attacks>3</attacks>
+    <gold>2000</gold>
+    <armor>3</armor>
+    <damage>2D6/3D6(5+)</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-vampire">Vampire</rule>
+      <magic id="rpb-necromantic" level="2" />
+    </special>
+  </monster>
+  <monster id="rpb-vampire-lord" factions="undead" name="Vampire Lord" plural="Vampire Lords">
+    <wounds>42</wounds>
+    <move>6</move>
+    <weaponskill>8</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>7</strength>
+    <toughness>6</toughness>
+    <initiative>9</initiative>
+    <attacks>4</attacks>
+    <gold>3750</gold>
+    <armor>3</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-vampire">Vampire</rule>
+      <magic id="rpb-necromantic" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-vampire-lord-necromancer" factions="undead" name="Vampire Lord Necromancer"
+           plural="Vampire Lord Necromancers">
+    <wounds>38</wounds>
+    <move>6</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>6</strength>
+    <toughness>5</toughness>
+    <initiative>8</initiative>
+    <attacks>3</attacks>
+    <gold>4750</gold>
+    <armor>4</armor>
+    <damage>4D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-vampire">Vampire</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">2 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-necromantic" level="4" />
+    </special>
+  </monster>
+  <monster id="rpb-wight" factions="undead" name="Wight" plural="Wights">
+    <wounds>14</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>370</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 7</rule>
+    </special>
+  </monster>
+  <monster id="rpb-wight-lord" factions="undead" name="Wight Lord" plural="Wight Lords">
+    <wounds>35</wounds>
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>4</initiative>
+    <attacks>2</attacks>
+    <gold>650</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 8</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+</monsters>

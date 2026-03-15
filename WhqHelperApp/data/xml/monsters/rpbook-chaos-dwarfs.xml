@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="rpb-chaos-dwarf" factions="chaosdwarves" name="Chaos Dwarf" plural="Chaos Dwarfs">
+    <wounds>8</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>140</gold>
+    <armor>2</armor>
+    <damage>1D6/2D6(6+)</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-dwarf-blunderbuss" 
+           factions="chaosdwarves" name="Chaos Dwarf with Blunderbuss" 
+           plural="Chaos Dwarfs with Blunderbuss">
+    <wounds>8</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>140</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Blunderbuss</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-dwarf-champion" factions="chaosdwarves" name="Chaos Dwarf Champion" 
+           plural="Chaos Dwarf Champions">
+    <wounds>16</wounds>
+    <move>3</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>480</gold>
+    <armor>2</armor>
+    <damage>2D6/3D6(5+)</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-dwarf-lord" factions="chaosdwarves" name="Chaos Dwarf Lord" 
+           plural="Chaos Dwarf Lords">
+    <wounds>33</wounds>
+    <move>3</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>5</initiative>
+    <attacks>4</attacks>
+    <gold>1600</gold>
+    <armor>3</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">2 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-dwarf-sorcerer" factions="chaosdwarves" name="Chaos Dwarf Sorcerer" 
+           plural="Chaos Dwarf Sorcerers">
+    <wounds>8</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>6</toughness>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>590</gold>
+    <armor>2</armor>
+    <damage>1D6/2D6(6+)</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-protection-ring">Protection Ring (+1 T)</rule>
+      <magic id="rpb-chaos-dwarf" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-chaos-dwarf-master-sorcerer" 
+           factions="chaosdwarves" name="Chaos Dwarf Master Sorcerer" 
+           plural="Chaos Dwarf Master Sorcerers">
+    <wounds>26</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>4</initiative>
+    <attacks>2</attacks>
+    <gold>2190</gold>
+    <armor>3</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-armour">Magic Armour; Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-chaos-dwarf" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-chaos-dwarf-sorcerer-lord" factions="chaosdwarves" name="Chaos Dwarf Sorcerer Lord" 
+           plural="Chaos Dwarf Sorcerer Lord">
+    <wounds>40</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>5</initiative>
+    <attacks>3</attacks>
+    <gold>3280</gold>
+    <armor>3</armor>
+    <damage>3D6/4D6(5+)</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 3+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">3 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-chaos-dwarf" level="4" />
+    </special>
+  </monster>
+</monsters>

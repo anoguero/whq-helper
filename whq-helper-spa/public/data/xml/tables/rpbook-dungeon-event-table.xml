@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+  <table name="Roleplay Book Dungeon Events Table">
+    <event id="rpb-cave-in" />
+    <event id="rpb-dead-body" />
+    <event id="rpb-encounter-dying-dwarf" />
+    <event id="rpb-encounter-warrior" />
+    <event id="rpb-encounter-sneaky-git" />
+    <event id="rpb-encounter-ghost" />
+    <event id="rpb-encounter-prisoners" />
+    <event id="rpb-encounter-stranger" />
+    <event id="rpb-encounter-gold-digger" />
+    <event id="rpb-encounter-nurgle's-rot" />
+    <event id="rpb-scorpion-swarm" />
+    <event id="rpb-snakes" />
+    <event id="rpb-trap" />
+    <event id="rpb-trap-spiked-pit" />
+    <event id="trap-poison-dart" />
+    <event id="rpb-trap-stone-block" />
+    <event id="rpb-trap-paralysis-spell" />
+    <event id="rpb-trap-gaseous-explosion" />
+    <event id="rpb-trap-lightning-bolt" />
+    <event id="rpb-old-bones" />
+    <event id="rpb-locked-door" />
+    <event id="rpb-portcullis" />
+    <event id="rpb-lost" />
+    <event id="rpb-the-flames-of-khazla" />
+    <event id="rpb-footprints" />
+    <event id="rpb-slaves" />
+    <event id="rpb-dying-orc" />
+    <event id="rpb-change-of-plan" />
+    <event id="rpb-secret-door" />
+    <event id="rpb-lost-gold" />
+    <event id="rpb-daylight?" />
+    <event id="rpb-missed-footing" />
+    <event id="rpb-orc-runes" />
+    <event id="rpb-lantern-goes-out" />
+    <event id="rpb-imperial-knight" />
+    <event id="rpb-curse-of-hashakk" />
+  </table>
+</tables>

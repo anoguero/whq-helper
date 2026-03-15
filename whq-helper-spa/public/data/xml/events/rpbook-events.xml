@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'>
+        
+  <event id="rpb-cave-in" name="Cave In">
+    <flavor>As the Warriors enter this area of the cave system, the floor shudders, the walls splinter and huge chunks of masonry fall from the roof - the dungeon is caving in!</flavor>
+    <rules>Place the Cave-1n marker in the board section where this Event was triggered to show that all exits except the one the Warriors entered by are now blocked by a huge pile of masonry.
+Any Warriors still in this board section at the end of the next turn are crushed
+by falling rubble and are killed.
+Warriors attempting to escape are not subject to the rules for pinning whilst in
+this room.
+The room is now impassable and may not be re-entered.</rules>
+    <special>If this Event occurs in the first room, ignore it and draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-dead-body" name="Dead Body">
+    <rules>The Warriors find a dead Barbarian. lying in a pool of blood. Clutched tightly to his chest is a bag. Roll 1D6 for each Warrior. The Warrior with the lowest score must take the bag from the body and open it. Roll 1D6 on the following table:
+ 1  Poison Gas! You have set off a trap. Every
+    model on this board section takes 1D6
+    Wounds with no modifiers for Toughness or
+    armour. The bag is empty.
+2-3 Trap! A spear shoots out of the wall and
+    inflicts 2D6 Wounds on the Warrior who took
+    the bag. The bag turns out to be empty.
+4-6 Treasure. The bag contains (1D6 x 100) gold.
+    to be given to the Warrior who took it.
+    Draw another Event card immediately.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-dying-dwarf" name="Encounter - Dying Dwarf">
+    <rules>Slumped against the wall the Warriors find a dying Dwarf prospector, riddled with Orc arrows. As they approach he growls a warning, threatening them with a huge axe. When he sees that they are not Orcs or other evil creatures he calms down and gives them a key. With his dying breath he says:
+"This is the key to the portcullis. Without it you will never get through."
+Make a note on one of the Warrior's Adventure Record sheet to remind you that he has the key.</rules>
+    <treasure>false</treasure>    
+  </event>
+  <event id="rpb-encounter-warrior" name="Encounter - Warrior">
+    <rules>The Warriors meet a lone mercenary, the only survivor of another brave band who ventured into this perilous dungeon. He can remember some of the layout of the dungeon and quickly describes it to the Warriors before he heads for the way out and safety.
+You may take the next three cards from the Dungeon deck and reorder them as you like.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-sneaky-git" name="Encounter - Sneaky Git">
+    <rules>A small figure runs out of the darkness nearby and is quickly identified as a
+Snotling. He tags along behind the Warriors, hoping to steal some of their treasure. He is a shifty little character, and squeaks a warning every time the Warriors enter a room - but for whose benefit it is not exactly clear. While the Snotling is with the Warriors they may all move an extra square each turn, as he can guide them through the tunnels. In addition, whenever an Unexpected Event that reveals Monsters occurs, roll 1D6 on the following table:
+1-3 The Snotling warns the Monsters the
+    Warriors are here and they therefore attack
+    immediately. rather than waiting until the
+    Monsters' Phase.
+4-6 The Snotling warns the Warriors that they are
+    about to be ambushed and they therefore get
+    +1 Attack each in the first round of combat.
+If the Warriors kill the Snotling, his bloodcurdling death scream reverberates through the dungeon and you must roll twice on the Monster Table one higher than the party's Battle-level to determine what Monsters arrive to investigate the noise. 
+At the end of each turn, roll 2D6. On a double 1 or 2, the Snotling sneaks off into the darkness and is never seen again.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-ghost" name="Encounter - Ghost">
+    <rules>A dim lights flickers in front of the Warriors, coalescing into the shadowy form of a ghostly man. He smiles grimly and beckons them on. The Warriors are compelled to follow him. Roll 1D6 on the following table:
+1   The Ghost leads the Warriors into a pit trap. Each
+    Warrior takes 2D6 Wounds. with no modifiers for
+    Toughness or armour. It takes three turns to climb
+    out of the pit without a rope, but only one turn with
+    it.
+2-3 Roll 1D6 for each Warrior. The Warrior with the
+    lowest score triggers off a trip wire, which fires a
+    poison dart into his leg and causes 1D6 Wounds,
+    with no modifiers for Toughness or armour.
+4-6 The Ghost leads the Warriors to a concealed pile of
+    gold. hidden in an alcove in the wall. Determine
+    how much gold each Warrior finds using the
+    Treasure Table in the Treasure section.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-prisoners" name="Encounter - Prisoners">
+    <rules>Three prisoners emerge from the shadows and run towards the Warriors, having escaped their captors. They look desperate, haggard and tortured, and beg for protection, explaining that they are wealthy merchants and will pay the Warriors richly once they are free.
+If the Warriors let them join the party, make a note on the leader's Adventure Record sheet that they are tagging along.
+During combat the prisoners hide in the shadows, avoiding detection while the Warriors fight the Monsters. If the Warriors are killed. the prisoners are recaptured.
+If the Warriors survive the dungeon, they may escort the prisoners to the nearest Settlement. Once there, roll 1D6 on the following table:
+1   The prisoners are merchants, but denounce the Warriors
+    as their kidnappers, demanding their arrest and
+    recompense for their lost wealth. Each Warrior must pay
+    1D6 x 100 gold to escape the clutches of the militia.
+2-6 The prisoners are merchants, and are true to their word.
+    giving each Warrior 2D6 x 100 gold.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-stranger" name="Encounter - Stranger">
+    <rules>The Warriors meet a mysterious cloaked stranger who asks them what their business is in this dark realm.
+If the Warriors attack him, roll 1D6 on the following table:
+1-3 Like a blur of lightning, the stranger s sword flashes right
+    and left, inflicting 2D6 Wounds on each Warrior. That done,
+    he leaps over their heads and vanishes.
+4-6 Under the combined attacks of the Warriors the stranger is
+    forced back. He seems surprised that the Warriors should
+    attack him and leaps away down a corridor into the darkness,
+    dropping a small bag on the floor in his haste. The bag is
+    made of soft leather and is covered with Elven runes. If one
+    of the Warriors attempts to take it, roll 1D6 on the following
+    table:
+        1   The bag explodes as the Warrior touches it, inflicting
+            2D6 Wounds on all the Warriors, with no modifiers
+            for Toughness or armour.
+        2-6 The bag is full of healing herbs, enough to restore
+            4D6 Wounds on a single Warrior. 2D6 on two (or any
+            similar combination).
+If the Warriors do not attack the stranger he warns them that evil grows in this area, and that they should be on their guard. He then nods farewell and walks into the darkness. Rolls 1D6 for each Warrior. On a score of 1, the stranger has stolen a single item of treasure (determine randomly) from that Warrior as payment for his advice.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-gold-digger" name="Encounter - Gold Digger">
+    <rules>The Warriors meet an aged Dwarf, labouring under the weight of a sack as large as himself. He eyes the Warriors suspiciously. convinced they want to steal its contents. He explains that he is Lord of the Dungeon, and the Warriors may go no further unless they pay him 100 gold each.
+The only ways to get past the old Dwarf are either to kill him or pay the gold. If the Warriors kill him, he curses each of them in the rich language of his kind. Roll 1D6 for each Warrior.
+  1 Choose any one of that Warrior's characteristics except
+    Wounds and permanently reduce it by -1.
+2-6 The curse has no effect, but the death of a mad old
+    prospector is now forever on your Warrior's conscience.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-encounter-nurgle's-rot" name="Encounter - Nurgle's Rot">
+    <rules>The Warriors are confronted by a slumped, cowled figure crawling towards them, calling for help in a piteous voice. Roll 1D6 for each Warrior. The Warrior with the lowest score rushes to help the stranger. If more than one Warrior has the same lowest score all of them go to help.
+However, upon reaching the stranger they realise that offering aid was not a good idea. The figure slumps in their arms, dead, his cowl falling to one side and revealing his plague-ridden face. Boils and pustules cover the stranger's cheeks and his eyes weep a thick yellow fluid.
+Roll 1D6 for each Warrior, adding his Toughness (not including armour) to the score. If the score is 7 or greater that Warrior has avoided contracting the plague. if the score is less than 7 that Warrior has caught Nurgle's Rot. The Warrior's Toughness is immediately reduced by -1. Furthermore, if an Unexpected Event occurs during the Power Phase any one of the Warrior's other characteristics, except Wounds, is reduced by -1 (your choice). If any of the Warrior's characteristics are reduced to zero he dies.
+The Warrior suffers from Nurgle's Rot until either he dies, is given 3 healing potions or - if he makes it back to a Settlement - pays 2,000 gold to be cured. Upon being cured the Warrior's profile returns to normal.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-scorpion-swarm" name="Scorpion Swarm">
+    <rules>A scuttling mass of stinging, biting scorpions emerges from the darkness and engulfs one of the Warriors.
+A scorpion swarm is a special form of Monster and its attack is resolved immediately. Randomly determine which Warrior is attacked by the swarm. There are 12 scorpions in the swarm, but they are very small, and are not represented by miniatures on the board.
+Roll your Warrior's normal damage dice (1D6 + Strength) to see how many scorpions he kills with his attack - the number rolled is the number of scorpions he kills. Each scorpion killed is worth 5 gold.
+Any scorpions that are left inflic+1 Wound each, with no modifiers for Toughness or armour.
+The scorpion swarm then scuttles away.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-snakes" name="Snakes">
+    <rules>Without warning, hundreds of snakes suddenly drop into the room through carefully concealed holes in the roof. Each Warrior is quickly covered in a writhing mass of venomous serpents. Roll 1D6 for each Warrior on the following table:
+1-2 The snakes manage to bite your Warrior, finding chinks in
+    even the toughest armour. He suffers 1D6 Wounds, with
+    no modifiers for Toughness or armour. He cannot do
+    anything for the rest of the turn, and any Monster who
+    attacks him gets +1 on its to hit rolls. At the start of the
+    next Warriors' Phase, roll on this table again.
+3-4 The snakes manage to bite your Warrior. He suffers 1D6
+    Wounds. with no modifiers for Toughness or armour. He
+    then manages to free himself from the writhing mass and
+    slashes the foul creatures to pieces.
+5-6 Your Warrior nimbly avoids the snakes as they drop from
+    above, killing them as they fall at his feet. The attack has
+    no effect.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-trap" name="Trap">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a trap. Roll 1D6 on the following table:
+  1 There is a loud explosion and the room is filled with fire and
+    smoke. Every model on this board section takes 1D6
+    Wounds, with no modifiers for Toughness or armour.
+2-5 A pit opens in the floor and your Warrior plummets onto the
+    rocky floor below. He takes 2D6 Wounds and can only
+    escape if the party has the rope or a Levitation spell.
+  6 A stone slab slides back in the wall, revealing the glint of
+    gems and gold. Draw one Treasure card.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-trap-spiked-pit" name="Trap - Spiked Pit">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score tumbles into a spiked pit. He takes 4D6 Wounds as he hits the floor with a thud, impaling himself on the sharpened stakes at the bottom of the drop. He may only escape from the pit if he has the rope or access to the Levitate spell, otherwise he must spend the rest of his days at the bottom of a very dark hole.</rules>
+    <special>Roll 1D6. On a score of 1. 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="trap-poison-dart" name="Trip - Poison Dar">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a poison dart trap and is hit in the arm. He suffers 1D6 Wounds, with no modifier for armour.
+Once the damage from the dart has been resolved, roll another 1D6. If the score is a 1, 2 or 3, the poison has got into the Warrior's system, reducing his Strength by -1 for the rest of the adventure, or until he drinks a healing potion.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-trap-stone-block" name="Trap - Stone Block">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a trap. Roll 1D6 on the following table:
+1-3 A huge stone block crushes your Warrior, trapping
+    him and inflicting 5D6 Wounds.
+4-6 Your Warrior steps out of the way of a massive
+    stone block as it falls from the roof above him. The
+    trap has no effect.
+Once trapped by the stone block, the only way a Warrior can get free is for the other Warriors to move the block. Roll 1D6 for each Warrior who isn't trapped by the block at the start of each turn, adding their Strengths to the total score. If the combined score is 20 or more, they manage to move the block and free their companion.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-trap-paralysis-spell" name="Trap - Paralysis Spell">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a trap, causing a bolt of power to shoot out from the nearest wall and paralyse him for 1D6 turns.
+While paralysed, a Warrior may do nothing at all, and no Monsters will attack him. He is, to all intents and purposes, a statue.</rules>
+     <special>Draw another Event card immediately.</special>
+     <treasure>false</treasure>
+  </event>
+  <event id="rpb-trap-gaseous-explosion" name="Trap - Gaseous Explosion">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a trap, causing the room to flood with gas.
+Roll 1D6 for each Warrior. On a score of 4, 5 or 6 the Warrior manages to hold his breath until the gas dissipates, and suffers no ill effects. On a score of
+1, 2 or 3, the Warrior is affected by the gas. Roll 1D6 on the following table:
+  1 Your Warrior's Toughness and Strength are reduced by 1 for
+    the next 2D6 turns.
+  2 Your Warrior's to hit rolls are reduced by -1 for the rest of
+    the adventure.
+  3 Your Warrior's Toughness and Strength are reduced by 1 for
+    the nex+1D6 turns.
+  4 Your Warrior's Strength is reduced by -1 for the nex+1D6
+    turns.
+  5 Your Warrior's Toughness is reduced by -1 for the nex+1D6
+    turns.
+  6 Your Warrior suffers 1D6 Wounds, with no modifiers for
+    Toughness or armour.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-trap-lightning-bolt" name="Trap - Lightning Bolt">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a trap, causing a lightning bolt to arc from a rod in the ceiling and hit him full in the head, causing 2D6 Wounds, with no modifier for armour. After resolving the damage on the Warrior who set off the trap, roll another 1D6. On a score of 1, 2 or 3, the lightning bolt arcs across to the next nearest Warrior (if there is any dispute, determine randomly) and hits him, causing the same amount of damage.
+This process repeats until either all the Warriors have been hit. or the dice roll is a 4, 5 or 6 and the bolt earths to the ground.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-old-bones" name="Old Bones">
+    <rules>The floor of this room is littered with bones and skulls. with the glint of gold underneath. Roll 1D6:
+  1 Trap! Cackling laughter echoes around the room and
+    lightning flashes. Randomly determine which Warrior in
+    the room is hit by a magical bolt that inflicts 1D6 Wounds,
+    with no modifiers for Toughness or armour.
+2-3 Illusion. In a bright flash of light, the bones and gold
+    vanish. Draw another Event card immediately.
+4-5 Each Warrior on this board section finds (1D6 x 10) gold.
+    Draw another Event card immediately.
+  6 Each Warrior on this board section finds (2D6 x 10) gold.
+    In addition, draw one Treasure card.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-locked-door" name="Locked Door">
+    <rules>The next door the Warriors find is locked with a huge padlock. If one of the Warriors has bought a set of lock picks he may try to pick it. Roll 1D6 each turn he spends doing so. On a score of 6 the padlock opens. While picking the lock a Warrior may do nothing else. If the padlock cannot be opened the Warriors must turn back.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-portcullis" name="Portcullis">
+    <rules>Once all the Warriors have entered this board section, a portcullis slams shut behind them. cutting them off. The only way for them to retrace their steps is if they have the key. (See Dungeon Even+15)
+Place the portcullis marker across the doorway the Warriors entered by to show that it is blocked.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-lost" name="Lost">
+    <rules>After wandering around the dungeon for what seems likes hours with no sign of anything interesting, the Warriors realise they are lost.
+Take another 1D6 Dungeon cards from those you put back in the box at the start of the game, making sure that none of them are objective rooms. Put the cards on the top of the Dungeon deck. To get back on track, the Warriors must first go through these extra cards.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-the-flames-of-khazla" name="The Flames of Khazla">
+    <rules>As soon as all the Warriors have entered this board section, huge stone shutters slide into place in all the doorways, forming airtight seals and blocking them in. Looking around for a means of escape, they find small alcoves in each wall, each containing a small brazier that burns without any visible supply of fuel.
+The Dwarf and the Wizard recognise the braziers as ancient Dwarf artefacts, used in times long gone as a form of trial by ordeal. In order to prove his honour, the accused would plunge his arm into the magical flames. If he remained unharmed, he was proclaimed innocent and the shutters would lift. If not. the flames burnt him terribly and the shutters remained shut for a period of 72 hours. After that amount of time it was highly unlikely the accused survived. If he did, the trial was resumed...
+To open the shutters and allow the party to escape, one of the Warriors must thrust his arm into each of the two braziers, making a 1D6 roll for each. It both dice score a 3, 4. 5 or 6 the shutters open and the Warriors are free to go. If either dice scores a 1 or 2 the Warrior suffers 1D6+ 1 Wounds, with no modifiers for Toughness or armour, and the shutters stay closed. 
+Each Warrior may only try to open the shutters once. If all of the Warriors
+fail, the whole party is trapped for the next 72 hours and is suffocated to
+death.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-footprints" name="Footprints">
+    <rules>The Warriors spot some footprints on the dusty stone floor that lead to a blank section of wall and vanish.
+If the Warriors investigate, roll 1D6 on the following table:
+  1 Roll 1D6 for each Warrior. The Warrior with the lowest score
+    is hit in the head by a spiked metal ball that swings down from
+    a concealed hole in the roof. He suffers 2D6 Wounds, with no
+    modifier for armour except a helmet. If more than one Warrior
+    rolls the same lowest score, these Warriors are all hit.
+  2 The Warriors find nothing.
+3-6 The Warriors find a concealed door. Place a doorway on one of
+    the two blank walls. Take 1D6 extra Dungeon cards that have
+    been put back in the box, making sure that none of them are
+    objective rooms, shuffle them, and put them in a pile face down
+    by the new doorway. Randomly take one of the spare objective
+    room cards and place it at the bottom of the new deck.
+    
+    If the Warriors explore this sub-dungeon, roll twice on the
+    Objective Room Monster Table to determine what the extra
+    objective room contains.
+
+    If the Warriors kill all the Monsters in this extra objective
+    room, each of them gains 1,000 gold!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-slaves" name="Slaves">
+    <rules>The Warriors come across 2D6 slaves chained to the walls. They are in a particularly sorry state, and look as if they haven't been fed for many days. They cry out to be freed.
+There is no reward to be gained for helping the slaves, but compassion demands their freedom! It takes the Warriors 1D6 turns to free the slaves. For each turn spent breaking their chains, an Unexpected Event occurs on a roll of 1 or 2, rather than just a 1, as the process is quite noisy.
+If the Warriors decide not to free the slaves, they must make a note of the fact on their Adventure Record sheets. Now, every time a Warrior wishes to be trained, roll 1D6 on the following table.
+1-3 The owner of the training ground recognises your Warrior from
+    a description given to him by a close friend, who was one of
+    the slaves. The poor, unfortunate man managed to escape on
+    his own. but died shortly afterwards, cursing the Warriors who
+    left him to rot. The training ground owner refuses to train such
+    a cowardly knave. Your Warrior must wait until after the next
+    dungeon and see if he can train at the next Settlement, at which
+    point you must roll on this table again.
+4-5 Your Warrior is spotted by the training ground owner as the cur
+    who refused to free his recently released son from the clutches
+    of the local Orcs. He agrees to train him, but charges double the
+    normal rate. It is your choice whether the offer is accepted.
+  6 No-one recognises your Warrior or remembers his cowardly
+    actions. He may train as normal here, but the fate of the slaves
+    he deserted must surely remain on his conscience. Roll again
+    the next time he trains.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-dying-orc" name="Dying Orc">
+    <rules>The Warriors find a dying Orc lying on the floor, the victim of an intertribal feud. Even though bleeding from a dozen fatal wounds, he still manages to growl and snarl at them to keep back. He seems to be protecting a sturdy iron key he is clutching in his left hand.
+The Warriors can either rush him or wait until he dies before relieving him of
+the key.
+If they rush him, he fights desperately even as his final life blood ebbs away. Roll 1D6 for each Warrior. On a score of 1, 2 or 3 that Warrior suffers 1D6+2 Wounds as the Orc slashes him. At the end of this savage. and somewhat onesided fight. the Orc will be dead and the key in the Warriors' possession. 
+If the Warriors wait, the Orc takes 1D6 turns to die, during which time he makes a lot of noise. If an Unexpected Event occurs during this time, rather than take an Event card, make two rolls on the Monster Table to see what arrives. These Monsters must be killed before the key can be taken.
+The key is for the iron padlock on the locked door from "Locked Door" event</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-change-of-plan" name="Change of Plan">
+    <rules>A cloaked, stooped figure slinks into view, keeping to the shadows and moving with an eerie silence. He furtively approaches the Warriors and while looking theatrically about him to check for enemies - says in little more than a whisper.
+"Well met my friends. for I bring important news. Your quest must be postponed, for the danger is greater than ever imagined. You must abandon your task and return whence you came. You will each be given 750 gold for your trouble."
+With that he slinks away with surprising speed, merging with the shadows
+once more.
+If the Warriors abandon their quest, they must work their way back to the entrance, rolling for Unexpected Events as normal. If the way is blocked by a cave-in or other obstacle they have no choice but to go on.
+Depending on what they do, when the Warriors either get out of the dungeon or reach the objective room, roll 1D6 on the table below.
+1-3 The stranger lied, and you weren't expected back!
+    If the Warriors left the dungeon, abandoning their quest, each of them
+    loses 1D6 x 100 gold as he tries to make amends for his shame at failure!
+    If the Warriors carry on, they may now finish the adventure as normal.
+4-6 The character told the truth!
+
+    If the Warriors abandon their quest they may collect their payment as
+    agreed.
+
+    If the Warriors go ahead and finish their quest, roll twice on the Objective
+    Room Monster Table to see what their objective room contains.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-secret-door" name="Secret Door">
+    <rules>The Warriors' sharp eyes notice that the stones in the wall conceal a well hidden secret door.
+Place a doorway on any free wall of the board section and take one of the objective room board sections: this is the room that lies beyond the doorway.
+If the Warriors wish to, they may decline to enter the room. If they do go in, roll once on the Objective Room Monster Table to determine what it contains.
+Once all the Monsters in the room are dead, in addition to the normal treasure, one of the Warriors (determine randomly) gets a single item of objective room treasure rolled on the Objective Room Treasure Table.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-lost-gold" name="Lost Gold">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score realises that his backpack has a small hole in it and he has los+1D6 x 200 gold!</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-daylight?" name="Daylight?">
+    <rules>The Warriors notice light streaming through a slit in the ceiling and, on investigation, discover the underside of a trapdoor.
+To see if a Warrior can force open the trapdoor roll 1D6. On a score of 1, 2, 3 or 4 it is too stiff to push open. On a score of 5 or 6 the wood gives and the trapdoor bursts open. Each Warrior can try to open the trapdoor once per turn.
+The trapdoor leads to the outside world and freedom! Make a note of where it is on the leader's Adventure Record sheet. The Warriors can either leave now or come back later.</rules>
+    <special>Roll 1D6. On a score of 1-3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-missed-footing" name="Missed Footing">
+    <rules>One of the Warriors misses his footing on the cold dungeon floor and slips, falling awkwardly and spraining his ankle. Randomly determine which Warrior has fallen. For the rest of the dungeon he is at -1 to his Move.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-orc-runes" name="Orc Runes">
+    <rules>The Warriors notice that there are dozens of Orc runes inscribed crudely on the wall of this room. Roll 1D6 for each Warrior. On a score of 5 or 6, that Warrior understands the runes. and reveals that they explain how to open a secret alcove in the wall.
+The alcove contains a cache of treasure. Make one roll on the Dungeon Room Treasure Table for each Warrior.
+As the Warriors take the treasure, they hear the screams and bellows of enraged Monsters hurtling towards them. Make two rolls on the Monster Table of the party's Battle-level to determine whose treasure the Warriors are stealing, and who turns up to defend it!.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-lantern-goes-out" name="Lantern Goes Out">
+    <rules>A sudden chill breeze blows out the Warriors' lantern! Unless they have another source of light. the Warriors must remain still and do nothing. To see if the lantern can be re-lit, roll 1D6 during the Warriors' Phase. On a score of 4, 5 or 6 the lantern comes back on.
+If an Unexpected Event occurs while the lamp is out, any Monsters that arrive must be fought in pitch darkness. Each Warrior is at -2 to his to hit rolls until the lantern is re-lit.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-imperial-knight" name="Imperial Knight">
+    <rules>The Warriors meet an Imperial Knight Panther on a personal quest. He warns them about some Monsters that lurk nearby. Forewarned. the Warriors are ready for their attack when it happens, and take the Monsters by surprise.
+During the first turn of the next combat, each Warrior is at +2 Attacks.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-curse-of-hashakk" name="Curse of Hashakk">
+    <rules>As the last Warrior steps into the room, a disembodied voice rings out, flatly stating that the Warriors have entered forbidden halls and must face the Curse of Hashakk.
+One of the Warriors (Determine randomly) suddenly feels a searing pain strike at him from all sides, as spirits of the long-dead Lords of this realm attack him.
+Roll 1D6 for the chosen Warrior. adding his Strength to the score. If the total score is 7 or more, he suffers 2D6 Wounds, with no modifiers for Toughness or armour. If the total score is less than 7, he suffers 1D6 Wounds, with no modifiers for Toughness or armour, and is at -1 Strength and -1 Toughness for the rest of the dungeon.</rules>
+    <special>Draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+</events>

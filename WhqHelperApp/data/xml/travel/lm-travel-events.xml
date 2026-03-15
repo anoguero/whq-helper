@@ -1,0 +1,2317 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'>
+  <event id="lm-travel-imminent-danger-11-12-man-eating-tiger" name="Man-Eating Tiger">
+    <rules>The Warriorslearn of aroyal edictwhichproclaimsthere tobe a
+man-eatingtiger on theloose in this area. Soon enough, one of
+the Warriors isattackedby theferociouscat. Each Warrior
+must roll 2 D 6 andthelowestscoreisthe Warriorwhois
+attacked. Use thelowest rolling Warrior's scoreonthe table
+belowtoseewhathappenstothem. Iftwoormore Warriors
+have the samelowestscore, theybothare affected thesame
+way!
+2
+Beforethegroupmanagestobringdownthebig
+beast, ittakesyour Warriorwithit! Your Warriorhas
+beenrippedtodeathand isremovedfromthegame!
+3-4
+Your Warriorisripped, scratched, and bitten badly!
+Theymustdeduct 1 Woundfromtheir Starting Wounds
+scorepermanently!
+5-7
+Your Warriordrawssteeljustasthetigerpounces!
+Wounded, the animal turns tail and runs away.
+8+
+Witha quickdrawand thrust, your Warriorslices open
+thehugecat'sbelly and itfallsdead! Amid thecat's
+innardsyour Warriorfinds a ringworth 1 D 6 x 100 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-13-14-kidnapped" name="Kidnapped">
+    <rules>Oneof the Warriors(determinedrandomly)hasbeenkidnapped
+whileonwatchduringthenight! Afterathoroughsearchofthe
+area, thekidnapped Warrioris discoveredbattered, bound and
+gagged. Theabducted Warriormustroll 1 D 6 toseewhathas
+been stolen:
+Everything! Your Warriorhasbeenstrippedofalltheir
+possessions(as wellastheirself-esteem)!
+2-3
+1 D 6 x 100 goldpieces.
+4-5
+Oneitemof Treasure(determinedrandomly).
+6
+Oneitemof Equipment(determinedrandomly).</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-15-16-dragons" name="Dragons">
+    <rules>The Warriorsspotagroupofdragonsupintheskyinthe
+directiontheyaretravelling. The dragonsappeartobecircling
+for prey. If the Warriors continue ontheir presentcourse roll
+1 D 6 onthetablebelow:
+1
+Attacked! Asthe Warriorsneartheareawherethe
+dragonswerespotted, theyareviciouslyattackedby
+themonsters! Although theymanage tofindrefugein a
+smallcavewhere theycan tend to theirinjuries, each
+Warriormustdeduct 1 fromtheir Starting Wounds
+scorepermanently!
+2-3
+Spotted! Thedragonsspotthe Warriors approaching
+andmenacinglyswoopdownonthemtofeast!
+Althoughthe Warriorsareabletotakerefugeinadense
+forest, thedragons waitpatiently for them tore-
+emerge. The Warriorshave nochoice but toproceed
+immediatelyintothenext Adventure.
+4-6
+Bythetimethe Warriorsreachtheareawheretheyhad
+spotted the dragons, thebeasts arelong gone and the
+Warriorsmaycontinueontheirjourneywithoutdelay.
+If the Warriorschangecourseroll 1 D 6 below:
+1-4
+Thewaychosenadds 1 D 3 weeks totheirjourney.
+5
+Thewaychosen adds 1 weekto theirjourmey.
+6
+The way chosen is the same distance with noloss of
+time.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-21-22-harpies" name="Harpies">
+    <rules>As the Warriors pass through somerocky crags, they are set
+upon byviciousharpies. They swoopin andclaw atthe Warriors
+and snatch some of their belongings before flying off. Each
+Warriormustroll 1 D 6 onthetablebelowtoseewhatthey've
+lost:
+1-2
+Aharpysnatchesarandomitemof Treasure.
+Aharpysnatchesa moneypouchcontaining 1 D 6 x 100
+3-4
+gold.
+5-6
+Aharpysnatchesacoinpursecontaining 1 D 6 x 20 gold.
+3</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-23-24-vanished" name="Vanished">
+    <rules>Afterarestfulandrelaxingnightunder the star litsky, the
+Warriors awake tofindsomethingmissing: one of the Warriors!
+Roll 1 D 6 foreach Warriorwiththelowestscorebeingthe
+Warriorwhohasdisappeared.
+Afterhours of fruitless searching, the other Warriors come to
+the solemnconclusion that their companion has vanished
+withoutatrace. Theyhavenochoicebuttocontinueontoward
+the Settlement.
+In the first Dungeon Room of the next Adventure, the
+Warriors will come across their companion; gagged, bound and
+heavilyguarded(makeonerollonthe Monster Tableof the
+current Dungeon-levelwith themaximumnumber of Monsters
+appearing). Onceallthe Monsters inthe roomhavebeen
+defeated, the Warrior may be freed. They have lost 1 Wound
+permanentlyfromtheir Starting Woundsscoredue tothe
+andequipmentarelocatedinaheavychestnearbyalthough
+anygoldtheyhadisnowheretobefound.
+Oncefree, the Warrior fightswithunbridledferocityasthey
+seekrevengefor theirordeal. The Warriorgains+1 Attackand
++1 Strength, but suffers-1 To Hit for the rest of the Adventure.
+The Warriorreceivesanadditional 1 o%goldforany Monster
+theydefeat.
+If the Warriors clear the Objective Room of Monsters, they
+succeedinrestoringthe Warrior'shonour. Theyeachgainone
+Objective Room Treasureinadditiontoanyotherreward that
+theywereentitledto.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-25-26-collapsing-bridge" name="Collapsing Bridge">
+    <rules>The Warriorsfindthemselveshalfwayacrossabridgewhich
+spansacrossadeepchasmwhentheysuddenlyfeelandhear
+thebridgestartingtogiveway! The Warriorsquicklybegina
+maddashtotheothersidebefore thebridgecollapses. Each
+Warriormustroll 1 D 6 onthe tablebelow:
+1
+Your Warriordoesnotmakeittoothersidebeforethe
+bridgecollapsesandtheyplummetintothechasm
+below. Theyaredead andremoved from thegame.
+2-3
+Your Warriorisalmosttoothersidewhenthebridge
+crumbles. Your Warriorslamsinto themountainside
+sufferingsevereinjuriesintheprocess. Theymust
+deduct 1 fromtheir Starting Woundsscore
+permanently. Anymount theywereriding isdead and
+anywagondestroyed. Theother Warriorsmanage to
+reachtheirwoundedcomradebuttheymustadd
+injured Warrioralong.
+4-6
+Thebridgegiveswayjustbeforeyour Warriorreaches
+theother side. Ina dramaticfashion they(ortheir
+mount)launch themselfintothe air and landsafelyon
+the otherside!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-31-32-assassin" name="Assassin">
+    <rules>While travelling on theroad, one ofthe Warriors(determined
+randomly)is struckby apoisoned arrowfired from thebushes.
+Theassailantpromptlydisappearswithouta trace.
+Thepoisoned Warriorisabletotravelbutmustreceive
+medical treatmentfrom ahealer assoon aspossible. Forevery
+weekthe Warriorscontinue theirjourney, thepoisoned Warrior
+must roll 1 D 6. If the result is a 1 or 2, then the Warrior must
+deduct 1 Woundfromtheir Starting Woundsscorepermanently.
+If their Starting Wounds everyreaches zero, or if theydonot
+reacha Settlement, thentheyaredeadandremovedfromthe
+game.
+If the Warriorreachesa Settlement, thelocalhealerisableto
+curetheircondition, although Woundslostarepermanent.
+4</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-33-34-hungry-wolves" name="Hungry Wolves">
+    <rules>Whiletraversingthroughagrovethe Warriorsarethreatened
+by hungrywolves. The Warriors must toss a total of 2 D 3 food
+items topacify the packor thewild canineswill attack.
+If the Warriorsdon'thave enoughfoodorif theychoosenot
+tofeedthemthe Warriorseventuallydispatchtheattacking
+wolves. However, during theconflicteach Warriorhas one item
+of Equipmentdamagedbeyondrepair(determinedrandomly).
+Itmustbe discarded immediately.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-35-36-village-of-the-damned" name="Village of the Damned">
+    <rules>The Warriorsenterwhatappearstobeadesertedvillage. As
+they wander aboutscrounging for supplies, they find thatthe
+residentshavemutated into Ghoulsand Zombies! The Warriors
+supplies. Now theyonlyhopetoescapewiththeirlives!
+Each Warrior mustroll 1 D 6 andaddtheir Strength. If the
+totalis 7 ormore, theyhavemanagedtofighttheirwayout of
+the Settlementsafely. If the totalis 6 orless, the Warrior is
+clawedandscratchedsobadlyby theafflictedtownsfolk that
+they suffer either-1 Toughness or-1 Movement(their choice)
+forthenext Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-41-42-evil-combatants" name="Evil Combatants">
+    <rules>Agroupoffourevilcombatantsappearfromroundabend.
+Theyhaveweaponsdrawnand itiscleartheyintendtoattack.
+Roll 1 D 6 tosee who the combatants are:
+1-2 Dark Elf Warriors
+3-4
+Chaos Warriors
+5-6
+Chaos Dwarf Warriors
+Theoutcomeofthefightisimpossibletodetermineas the
+combatantsareofsimilarstrengthandabilitytothe Warriors.
+Mixthe Warrior Countersintoacup. Startingwiththeparty
+leader and continuingin turn, draw a counter out of the cup. If
+none of the Warriors draw their own counter, then it means
+thatthe Warriorshavewon thefight. Theyeachreceiveanitem
+of Dungeon Room Treasure. Todeterminehowmuchgoldthey
+each receive, multiply the number rolled to determine the
+combatantsby 100. For example, ifyou rolled a 2(Dark Elves)
+theneach Warriorreceives 2 o 0 gold.
+Ifoneoformore ofthe Warriors drawtheirowncounter,
+thenitmeans that the Warriorshavelost thefight. Theymust
+eachdiscardanitemof Dungeon Room Treasure(determined
+randomly)andhalfoftheirgold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-43-44-river-sprites" name="River Sprites">
+    <rules>Near anidyllic streamthe Warriorsencounterriversprites.
+These fairy-like, magical creatureswith blue and pink skin sing
+beautiful songsbut theirkisses arefatal!
+Each Warrior mustroll 1 D 6. On a roll of 1, they cannotavoid
+themagical temptationtokissasprite andthe Warriorfallsinto
+adeathlyslumber whichcan onlybe curedwitha healing
+potion.
+Foreveryweekthatthepartycontinuestotravelwiththeir
+comatose companion, roll 2 D 6. If the result is a double 1, the
+Warriorhasperishedandmustberemovedfrom thegame.
+Ifthe Warriorsreacha Settlement, theslumbering Warrior
+canbecuredbyahealer at thecostof 1 o 0 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-45-46-ambush" name="Ambush">
+    <rules>As the Warriorstravelthroughaparticularlydarkgladeina
+gloomy forest, they are ambushed by Forest Goblins riding
+Giant Spiders. Leaping from the shadows, they threaten to
+overwhelmthehardy Warriorsbysheerweightofnumbers. Roll
+1 D 6 foreach Warrioronthefollowingtable:
+Knocked outbya sneakyblow frombehind, your Warrior
+awakestofindoneoftheirweapons(determine
+randomly)and 2 D 6 x 100 goldstolen.
+2
+Knocked out by a sneakyblow frombehind, your Warrior
+awakestofind 2 D 6 x 100 piecesof theirgoldstolen.
+3
+Knockedoutbyasneakyblowfrombehind, your Warrior
+awakestofindoneitemofequipmentstolen(determine
+randomly).
+4
+Fightingagloriousbattle, your Warriorkillsmany Forest
+Goblinsandgains 1 D 6 x 10 gold.
+5
+Fightingagloriousbattle, your Warriorkillsmany Forest
+Goblinsandgains 1 D 6 x 50 gold.
+6
+Fightingagloriousbattle, your Warriorkillsmany Forest
+Goblinsandgains 1 D 6 x 100 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-51-52-treasure-or-your-life" name="Treasure or Your Life">
+    <rules>The Warriorsaresurroundedbyadeadlyanddesperategroup
+ofhighwayrobbers. The Warriorscaneitherfighttherobbersor
+giveupanitemof Treasure(yourchoice).
+Ifthe Warriorsdecidetofightthehighwaymen, eachofthem
+mustroll 1 D 6 andaddtheir Initiative. Thetotalofalltheir
+Next, roll 1 D 6 for each Warrior and add their Battle-level. The
+totalofall thosescoresishowmanyhighwaymen theydefeat.
+If any highway robbers remain, the Warriors are overtaken,
+boundandleftforthewolves. Theyarerobbedof alloftheir
+gold and one Item of Treasure (chosen at random), but,
+thankfully, theymanage to free themselves before they are
+devouredbywildanimals.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-53-54-witch-doctor" name="Witch Doctor">
+    <rules>Inaclearing, the Warriors are confrontedbyagrey-haired
+stranger with bulging eyes, wearing nothing but a loin cloth. A
+boneholdsuphishair andbrightlycolouredfeathersadornhis
+headdress. His actions are erratic and unpredictable as he
+motions toeachof them. Each Warriormustroll 1 D 6 onthe
+tablebelow:
+1-2
+The Witch Doctorbestowsthecurseofthe Evil Eye
+uponyour Warrior. The Warriorsuffers-1 Strengthfor
+thenext Adventureunlesstheypay the Witch Doctor
+1 D 6 x 50 goldtohavethecurseremoved.
+3-4
+The Witch Doctorcursesyour Warrior. They suffer-1
+Weapon Skillforthenext Adventureunless theypay
+the Witch Doctor 1 D 6 x 25 gold.
+5-6
+The Witch Doctorpointsatyour Warriorsternlybut
+then gives thema potion. When drunk, it restores 1 D 6
+Wounds.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-55-56-food-shortage" name="Food Shortage">
+    <rules>Whether throughtoomanylatenightscarousingaroundthe
+fire, carelessness, or simply throwing out supplies to carry more
+gold, the Warriorsfindthemselves dealing with adangerous
+food shortage.
+Roll 1 D 6 for each Warrior. If the roll is a 1, the Warrior's
+stamina ispoor and their foraging skills awful. They suffer-1
+Toughnessforthenext Adventure. Ifthescoreis 2 ormore, the
+Warrior'sconstitution is sound andforaging skills are sufficient
+to sustain them.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-61-62-brigands" name="Brigands">
+    <rules>As the Warriorsreach the outskirts ofa small Settlement, they
+Warriors, butseem waryof their superior armsand armour.
+The Warriorshaveachoice: theycaneitherpaythebrigandsor
+fightthem.
+Ifthe Warriorsdecidetopaythebrigands, each Warriormust
+giveup 1 D 6 x 20 gold.
+Ifthe Warriors fightthebrigands, roll 1 D 6 for each Warrior
+and add them together. This is the totalnumber of brigands
+Warrior andadd them together. This is thetotal number of
+brigandsthatthe Warriorsmanagetokill. If there are any
+brigandsleftalive after this, then theyoverpower the Warriors,
+steal 1 D 6 x 50 gold from each of them, anddisappear intothe
+shadows.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-63-64-hornets-nest" name="Hornets Nest">
+    <rules>The Warriorsinadvertentlydisturbahornet'snest. Theenraged
+insects attack the fleeing Warriors mercilessly. Each Warrior
+must roll 1 D 6 and add their Toughness. If the score is a 6 or
+less, the Warrior reacts sobadlyto the stings that theysuffer
+-1 Strengthuntil the end of thenext Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-imminent-danger-65-66-horsemen" name="Horsemen">
+    <rules>Alargebandof tough-lookinghorsemenaccost the Warriors.
+Each Warriormustroll 1 D 6, adding+1 if the Warriorisriding a
+Horseand+2 if the Warriorisridinga Warhorse. Therollcannot
+be modified by any other means (Faith, etc. ). Look up the result
+on thetablebelow:
+1-2
+Your Warriorisnomatchforthehorsemenandis
+severelytrampledanddefeated. Theyrelievethe
+Warriorofanitemof Treasure(determinedrandomly)
+before galloping off.
+3-4
+Your Warriorisbeatenandhumiliated. Thehorsemen
+relieve them of 1 D 6 x 100 gold.
+5-6
+Your Warriorsuccessfullykeepsaneyeon theirpurse
+whilstmanagingtoholdtheirownagainstthe
+brigands. Thehorsemen get nothingbefore they are
+finally driven off.
+7
+From atop their horse, your Warrior proves to be the
+betterriderand thebetterfighter. Afterdispatchinga
+fewof thehorsemen, the restgallop awayinfear.
+Your Warriorfinds 1 D 6 x 50 goldonthebodiesofthe
+slain horsemen.
+8
+your Warriorhumiliatesmanyofthebrigands. Oncethe
+horsemenhavebeendrivenoff, the Warriordismounts
+and lootsthefallenfor 1 D 6 x 10 gold andoneitem of
+Dungeon Room Treasure!
+5</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-11-12-avalanche" name="Avalanche">
+    <rules>Thepathtothe Settlementtakes the Warriorsbetweentwo
+large, snow-covered mountains. Upon reaching the canyon, the
+Warriors comeacross asmall Village. Thelocals notifythe
+Warriorsthattheroutebeyondhasbeencutoffbyarecent
+avalanche. The Warriors'journeyendshereastheyloseallhope
+ofmakingittoatown orcity.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-13-14-quake" name="Quake">
+    <rules>The ground opens up in front of the Warriors, creating an
+impassable chasmmanymiles long. The Warriors have three
+choices:
+a)
+Abandonanyhopetheyhaveofreachinga Settlement,
+inwhichcasetheymustgostraightintothenext
+Adventure.
+b)
+Gobackto thecaves theyjustleftandstarttheir
+journeyagainfromscratchtakingadifferentroute.
+C)
+Useanylengthofropethattheyhavetocrossthe
+chasm. If theycrossthe chasm with arope, theymay
+not take horses, carts, etc. with them, and must
+discardtheropeoncetheyhavesafelyreachedthe
+other side.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-15-16-heatwave" name="Heatwave">
+    <rules>Thisregionisinthegripofanunprecedentedheatwaveand the
+Warriorsareonlyabletotravelatnightwhichadds 2 more
+weeks totheirjourney.
+Atthebeginningofeveryweekuntil theyreacha Settlement,
+each Warriormustroll 1 D 6. If the resultis a 1, the Warriormust
+deduct Wound from their Starting Woundsscorepermanently.
+Iftheyeverreachzero Starting Wounds, theyaredeadand
+removed from the game.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-21-22-tornado" name="Tornado">
+    <rules>The Warriorsarerestingwhenatornadounexpectedlytears
+throughtheircamp. Thewindsareferocious and the Warriors
+have tofighttopreventbeing suckedupandblown away.
+Roll 1 D 6 foreach Warriorandlookupthelowestnumber
+rolledonthefollowingtabletodeterminewhathappenedtothe
+Warriorwith thatscore. Iftwo ormore Warriorshave thesame
+score, re-rolluntil thevictim isdetermined.
+1
+Unabletoresist, your Warriorissuckeduphigh into the
+airbefore crashingbackto the ground. Theymustbe
+carriedtosafetybytheother Warriors, addingone
+weekto the journey time. As soon as theparty arrives
+atitsdestination, the Warriormustpay 1 o 0 goldtobe
+healed. Iftheinjured Warriorcannotaffordit, thehealer
+takesall thegoldtheydohaveplusonepieceof
+Equipmentor Treasureaspayment.
+2
+Desperatelyclingingtoa largeboulder, your Warrior
+onlykeepstheirgripbylighteningtheweightoftheir
+coinpurseby 1 D 6 x 50 gold.
+3-6
+Your Warriorresists thehowlingwindsbut at a cost as
+a weapon isplucked from theirgrasp. Discard any one
+ofyour Warrior'sweapons.
+6
+: ACT OF NATURE .</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-23-24-plague" name="Plague">
+    <rules>The Warriors arrive atalargetown inthegripofaterrible
+plague. All roads, bar the one the Warriors entered by, are
+blocked. Theirjourneyisover and theymust noweither go
+straightintothenext Adventure, ortheymaystayinthe
+afflicted town.
+If the Warriorsstay. use thenormalrules todeterminewhat
+theydo there(see the Settlement section), buteach time a
+Warriormakesarollonanytableforanyreasonyourmust
+makerollanother 1 D 6 onthefollowingtable:
+1
+The Warriorcontracts theplague. Theysuffer-1
+Strengthforthedurationofthenext Adventure.
+The Warrior contracts the plague. They suffer-1
+2
+Toughnessforthedurationofthenext Adventure.
+3-6
+The Warriorremainsunaffectedbytheplague-for
+now!
+Once a Warriorhasrolleda 1 or 2 on the tableabove, they
+need notrollonthe table for therestoftheirstayin the Plague
+Town.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-25-26-volcanic-eruption" name="Volcanic Eruption">
+    <rules>Travelling througha Mountainpass, the Warriors are shaken
+violentlybya thunderousexplosion. Fromtheskyfallchunks of
+moltenlava! As the area is sprayed withvolcanic fire and ash
+the Warriorsarepeltedandsmothered. Each Warriormustroll
+1 D 6 andadd their Toughness and Armour. If the score isless
+than 8, the Warrior is scalded and burned badly, and must
+deduct 1 fromthe Starting Wounds scorepermanently. In
+addition, the groupmust fleethe area, thus adding one weekto
+their journey.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-31-32-famine" name="Famine">
+    <rules>On the Warriors' travels, they pass through lands cursed by
+famineand drought. Beingtheworthyherothattheyare, each
+Warriorgivesthepovertystrickenpeasants aproportionof
+theirgold. Roll 1 D 6 foreach Warrioronthefollowingtable:
+1-2
+Your Warriorgivesanyoneitemoftreasuretothe
+peasants.
+3
+Your Warriorgives 1 oogold tothepoor.
+4-5
+Your Warriorgives 1 D 6 x 10 goldtothepoor.
+6
+Touched byyourkindness and concern, thevillage elder
+brings a carefullywrapped sword outof hishouse,
+presentingittoyour Warriorinexchangefor 1 D 6 x 50
+gold.
+Themagicalbladeisa Swordof Sharpness, andeachtimeit
+isused itcauses+1 D 3 Woundsonany Monsterithits.
+However, the sword can never be sold, as any attempt to
+getrid of itresults in itmysteriouslyfinding itswaybackto the
+village.
+Ifmorethanoneplayerrollsa 6, drawa Warrior Counter to
+determinewhose Warriorgetstheswordandrollagainfor the
+other Warriors.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-33-34-forest-fire" name="Forest Fire">
+    <rules>Anenormousforestfireisragingoutofcontrol inthis area. The
+Warriorsmustaddanotherweektotheirjourneyasthey
+circumvent the blaze.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-35-36-lightning" name="Lightning">
+    <rules>As the Warriors are settingup camp on the top of a hill, a storm
+gathers above them. The sky blackens and grows dim, and
+thunderrolls. Thenextinstanta lighting bolt streaks from the
+sky, hitting one of the Warriors on the head.
+Roll 1 D 6 foreach Warrior. The Warriorwiththelowestscore
+ishitbylightning, meltingtheirarmour. Theylosetwoitems of
+armour (a shield and a helmet, for instance). If the Warrior
+doesn'thavetwoitemsofarmour, thearmourtheydowearis
+melted, and thelightning boltsetstheir clothes alighttoo-they
+arriveatthe next Settlementintattered, charredragsandmust
+thereforebuynewrobes and newboots.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-41-42-flood" name="Flood">
+    <rules>Theweatherhasbeenbadrecentlyandthelandformiles
+around has flooded, creating an impassablelake. The Warriors
+caneitherabandonanyhopetheyhaveofreachingtheir
+destination, in whichcase they must go straight into the next
+Adventure, orpay 20 goldeachtoaferrymantotakethem
+acrosstheobstruction.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-43-44-hailstorm" name="Hailstorm">
+    <rules>Chunks of ice the size of bird eggsbombard the Warriors as
+theywalkalongtheroad. Theyfleeforcoverinadilapidated
+cottage but intheir haste, each Warrior drops one itemof
+Dungeon Room Treasure. Whenthestormfinallyends the
+Warriorsretrievetheitem. Roll 1 D 6 foreach Warriortosee
+whatstatetheitem isin:
+1-3
+Thehailhas damaged the item beyondrepair. Discard it
+immediately.
+4-6
+The itemhas suffered no damage from thehail.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-45-46-drought" name="Drought">
+    <rules>Thedaysbecomehotter and hotterand norainfallsfrom the
+sky. Waterholesareemptyuponarrivalandstreams have
+driedupinthesurroundingarea. Each Warriormustroll 1 D 6
+below:
+1
+Your Warriorisseverelydehydratedandtheirthroat
+feels like aragingfire. Theycollapseoften and their
+companionsmustfrequentlycarry them thusadding 1
+weektothejourney(cumulativewithother Warriors
+whoroll result 1&amp;2). In addition, the Warrior must
+deduct 1 Woundpermanentlyfromtheir Starting
+Woundsscorepermanently.
+2
+Your Warriordoeseverythingtheycantotrudge
+onwardbutslowsthegroupdownby 1 week
+(cumulativewith other Warriorswhoroll result 1&amp;2. )
+3-5
+Your Warriorisoccasionallyoverwhelmed. Although
+onward.
+6
+Your Warriorwillsthemselftocontinue. Whenthey
+emergefromthedrought, theyaremuchstronger. Your
+Warriorpermanentlyadds+1 totheir Starting Wounds
+score!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-51-52-blizzard" name="Blizzard">
+    <rules>Ablizzard howls across theland, swathing allin white.
+Unprepared, the Warriors aretrappedinabitterlycold
+landscapewherevisibilityisreducedtoafewyardsand
+movementisalmostimpossible through thebankeddriftsof
+snow. The Warriors abandon allhope ofreaching a town or city.
+and take refuge in the nearest village, cutting their journey
+short. Theymaybuyequipmentthereasnormal. After the
+blizzard abates, the Warriors may go straight into the next
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-53-54-rockfall" name="Rockfall">
+    <rules>As the Warriors trek throughadark ravine, there isadull
+rumblingabove them. Afewsecondslaterashower ofrocks
+and boulders comes crashing down, blocking their route
+completely. Although they can still complete their journey
+withoutlosing anytime, theymust employlocallabourersto
+clearapath, costingeach Warrior 1 D 6 x 20 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-55-56-erosion" name="Erosion">
+    <rules>A portion of themountainside here has eroded away creating a
+newpathway through the areawhich reduces the Warriors'
+journeybyoneweek.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-61-62-dense-fog" name="Dense Fog">
+    <rules>While the Warriors arecrossing a steep ridge, adense fog
+quicklydescendsintothearea. If the Warriorscircumvent the
+fog, they mustadd oneweek to theirjourney.
+If theydecideto continue through thedangerousfog, they
+mustroll 1 D 6 on thetablebelow:
+1
+The Warriorsemergefromthefoggyridgeinfrontofa
+Villageanddiscoverthattheyhavebeentravellingin
+thewrongdirection! Theirjourneyhasended.
+2
+Oneofthe Warriors(determinedrandomly)nearlyfalls
+off the ridge. Another Warriorpulls themtosafetybut
+oneof the falling Warrior'sbelongings(yourchoice)
+plungesintothe gullybelowandoutofsight. Rollon
+this table again.
+3-4
+Thefogisthick and the Warriorsproceedcautiously
+along theridge. Roll onthis table again.
+5
+Thefogeventuallyliftsand the Warriorsmanageto
+cross theridgewithoutfurtherincident.
+6
+The Warriorscrosstheridgeandwhenthefogliftsthey
+canseeacityin thedistance! Theymaystophere or
+continueontotheiroriginaldestination.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-63-64-glorious-weather" name="Glorious Weather">
+    <rules>The sun shines over fields of golden wheat, andall is wellwith
+theworld. Havingwalkedformanymilesandmanydaysover
+bleakandinhospitablerealms, the Warriors decide to takeit</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-act-of-nature-65-66-storm" name="Storm">
+    <rules>A storm hits the Warrior's camp, blowing away their tents and
+equipmentina torrentialrainstorm. Each Warriorlosesoneitem
+of Treasureofyourchoice.
+7</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-11-12-mystic" name="Mystic">
+    <rules>Near a fast-flowing brook the Warriors meet an old, blind hermit
+whoclaimstobeaprophet. Herevealshowtoovercomea
+terriblefatethatawaitsthe Warriors.
+Thenexttimeanyofthe Warriorsmustrollfora
+Catastrophic Event, they may ignore the result and roll again.
+Theymustaccept the outcome ofthe secondroll.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-13-14-religious-pilgrims" name="Religious Pilgrims">
+    <rules>Stopping to rest at a nearby river, the Warriors encounter a
+group of religious pilgrimswhoareaggressivelypassionate
+abouttheirspiritualjourneyandturnouttobeextremely
+persuasivespeakers.
+Each Warriormustroll 1 D 6 andaddtheir Willpower. If the
+scoreis 7 orless, the Warriorisconvincedtodonate 2 D 6 x 100
+goldtotheircause. If the Warriordoesnothave thatamount,
+theygivethepilgrimswhatevergoldtheyhave.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-15-16-pedlar" name="Pedlar">
+    <rules>The Warriors arestoppedbyapedlar-astrange-looking
+individualwearingbrightlycolouredragsandcarryinganumber
+ofwicker baskets in which he keepshiswares. He capers from
+sidetoside, playing apiping tuneonareedyflute. The Warriors
+maybuythings fromhim:
+·Healing Potion. 50 gold. Heals 1 D 6 Wounds. One use.
+·Lucky Charm. 50 gold. AWarriorwearingthismayre-roll
+anysingledicerollonceper Adventure.
+·Bronze Wristbands. 30 gold. AWarriorwearingthesemay
+ignore 1 Wound during any singlecombat. Oneuse, then
+theyarebroken.
+·Chalk. 20 gold. AWarriorwithchalkmaymarkanescape
+route outof the Dungeon and therefore needs notroll on
+the Escape Table(fromthe Adventure Book)should they
+wishtoleavethe Dungeon. Oneuse.
+·Trinkets. 2 ogold. Ifonthe Warriors'travels anyone
+demandsgoldfromthemforanyreasontheycantryand
+give them these trinkets instead. Roll 1 D 6. On a score of 1,
+2 or 3 theyrefuse the trinkets and insistonbeing given the
+gold. Onascore of 4, 5 or 6 theyaccept thetrinkets
+insteadofthegold. Trinkets are onlyacceptabletofellow
+travellers, andareneveracceptedaspaymentforanything
+ina Settlement.
+Each Warriormaybuyamaximum of one ofeachitem, except
+trinkets, whichtheymaybuyuptosixof.
+Once the Warriors have made their purchases, thepedlar
+Warriorshavebought. If theresultis a 1, thatitemisshoddily
+made and isuseless. The Warrior has been conned and must
+discardtheitemimmediately.
+8
+. ENCOUNTER.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-21-22-caravan-guards" name="Caravan Guards">
+    <rules>After itseems that Warriorswill never find civilization, theysee
+thethatchedroof and wooden wallof asmallvillage. The
+Warriors abandon allhopeof reachinga Town or City. .. until
+larger Settlement(1-4 Town, 5-6 City). The Warriors are told
+thatconstantbandit raids havekept thelast twomonthly
+shipments from reaching their destination. The Warriors can
+eitheragreetoguardthecaravaninexchangeforalifttothe
+next Settlementorremaininthe Village.
+If the Warriorschoose toguard thecaravan, roll 1 D 6 onthe
+tablebelow:
+1
+The Caravanisambushedanddespitethe Warriors'
+besteffortsthegrainstolen! With thewagonsburning
+behind them, the Warriorsonlysurvivebyescapinginto
+thewilderness. The Warriorsmustimmediately
+proceed tothenext Adventure.
+2-3
+Onlymilesfrom the Village, the Caravan isattacked by
+hordes ofbrigands! Soon, the Warriors and farmers
+have toretreatbackempty-handed andmustremain in
+the Village. With the third lossofgrain in asmany
+months, the Village suffers from costinflation in goods
+andservices. Allcostsare 5 xthelistedprice!
+4
+The pounding of drums and whizzing of fire-arrows
+signalaraidon thecaravan! Withsomeof thewagons
+burning, the Warriorsmuster theircourage and
+managetoforcethebanditsintoretreat! Withhalfthe
+shipmentstill intact, the Warriorsmaycontinue toward
+the Settlement.
+5
+Thebanditsdoindeedattackbutthe Warriorsgive
+them a firm drubbing. Divided, bloodied and
+bewildered, thebanditsbeatahastyretreat. The
+Warriorsmaycontinuetothe Settlementwith 75%of
+the shipment intact. As a reward for their efforts, the
+caravancompanywillpayallofthe Warriors'Living
+Expensesatthenext Settlement.
+6
+Thebanditsarenomatchfor the Warriorsandaftera
+briefbattle thebrigandsareeitherdeadorcaptured. If
+the Warriorsreachthe Settlement, theyarewelcomed
+bywaves of cheerful citizens and need notpay Living
+Expensesduringtheirstay. Theycanhandoverthe
+banditstotheauthoritieswhereuponeach Warrior
+receives 1 D 6 x 50 gold!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-23-24-waylaid" name="Waylaid">
+    <rules>The Warriors come across a village hit by a storm. The villagers
+aretrying torebuild theirhomes, andwouldgreatlyappreciate
+the Warriors'help. Theheroic Warriors cannot refuse their
+pleas, and stayand help them whichadds one more week to
+theirjourney.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-25-26-prisoner" name="Prisoner">
+    <rules>As the Warriors approach the crestof ahill, theyhear the noise
+ofarmedmen approaching. Takingcover, theywatch as aband
+ofswarthymercenariestroopsbydraggingawealthymerchant
+behind them.
+The Warriorscaneitherfightthemercenariesandfreethe
+prisoner, orletthempassunhindered. If the Warriors attackthe
+mercenaries, rill 1 D 6 onthefollowingtable:
+1-2
+The mercenaries drive the Warriors off, taking some of
+theirgold. Each Warriorloses 1 D 6 x 10 gold.
+3-4
+The Warriorskill the mercenaries afteralongstruggle,
+butnotquicklyenoughtopreventthemslaughtering
+theprisoner. The Warriorseachfind 1 D 6 x 20 gold if they
+search thebodies.
+5-6
+The Warriorsbestthemercenariesina fiercefight, and
+free the prisoner. He cannottravelvery fast, and if the
+Warriorstakehimwiththemheaddsoneweektotheir
+journeytime. Uponarrivingattheirdestination, hegives
+each Warrior 1 oogoldforrescuinghim.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-31-32-merchants" name="Merchants">
+    <rules>The Warriors meetsomedatemerchants ontheroad. The
+ravaged Warriorsaremorethangladtopay 10 goldeachin
+exchange for some of the dates the merchants are selling,
+whichtheyconsume eagerly. Roll 1 D 6 forthe Warriors:
+1-3
+The Warriors'headsbegintospin, and theydropone
+byone. Paralysedstiff, the Warriorscandonothing
+whilethedatemerchantsrob themblind. When the
+Warriors cometo, they find thathalf of theirgold has
+been stolen! Roll 2 D 6 foreach Warrior. If theresult is
+double 1's, the Warriorhad ahorriblyallergicreaction
+tothedrug and theydonotwakeup. Theyaredead
+andremovedfromthegame.
+4-6
+The Warriorsenjoythe dates, bid farewell tothe</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-33-34-leprechaun" name="Leprechaun">
+    <rules>The Warriors'enjoythewondroussightofarainbowasthey
+travel. Whilsttraversingsomewoodlandthe Warriorsare
+shocked todiscover theend of therainbow! Sleeping soundly
+nearbyinapatchofemeraldgreencloverisalittlebearded
+manwithasquarehat, buckledshoesandalargepotofgold.
+Thismustbethe Warriors'luckyday!
+Roll 1 D 6 foreach Warriorwhowishestotryandsneakupto
+catch the little fellow, the highest score being the one to nab
+himfirst. Ifmore thanone Warrior tiesfor thehighestnumber
+thelittlemanisawakenedbythe Warriorsarguingoverwho
+getstocatchhimandthefellowvanishesbeforeanyofthem
+canreachhim.
+Ifa single Warriorhas thehighestroll, that Warrior must roll
+onthe following table(this rollcannotbe affected by Luck or
+anything else):
+"Me luck hasrun out! But sohasyours! "the little man
+screams. The Leprechaunwrigglesfreeofyour Warrior's
+clumsy grasp and with a click of his fingers he and his
+goldvanish. The Warrior suffers-1 Luck for the next
+Adventure!
+2
+"Unhand me, brigand! "the little man cries. The man is
+nota leprechaun, butalocal Halfling outcollectingwood.
+Your Warriornoticesthatthe‘potofgold'isjustayellow
+basketfilledwithlogs. Sheepishlyyour Warriorbribeshim
+with 1 D 6 x 50 gold tonotreportthem tothe authorities.
+3
+"Oh, please! "the little man begs, "I'll grant ye one wish if
+yeletmego! "Thinking diligentlyabout thepossibilitiesof
+your Warriordropstherotundlittlefellowtotheground.
+Givingyour Warriora swiftkickto theshin andgrabbing
+after all! Snapping his fingers, he is suddenly gone. ..
+"Now I've gotyou! You have to give me a wish! "your
+Warriorexclaims, wrappinghisarmsaroundthegreen
+changed since the old days-ye don't justgetthatwish
+forfree anymore, "he snorts. He motions the Warrior
+over andsoon they are in thebushes andoutofsight.
+Upon emerging, the little guyis grinning ear to ear. He
+grabs his pot of gold, tosses a few dozens coins atyour
+Warrior'sfeet, anddisappearsintothethicket. Your
+Warrior collects 1 D 6 x 20 gold. "Call me! "your Warrior
+yells afterhim.
+5
+"Me lucky charms! "thelittle man squeals. "You have me
+indeed! "the Leprechaunhasno choicebuttogrant the
+Warrior+1 toeither Strength, Toughness, Weapon Skill,
+or Ballistic Skillforthenext Adventure, giveapermanent
++1 Wound, orgive the Warrior 1 D 6 x 100 gold. He then
+clickshisfingersand disappears.
+6
+"Another fine mess I've gotten me self into, don'tyou
+know? !" the little man bellows. He grantsyour Warrior
++1 permanently to either Strength, Toughness, Attacks,
+Weapon Skill, Ballistic Skill, Luck, 1 D 6 Wounds, orhe
+givesyour Warrior 1 D 6 x 300 gold. He thenclickshis
+fingersanddisappears.
+9</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-35-36-stranger" name="Stranger">
+    <rules>The Warriorsmeetastrangerwhoaskswheretheyare
+heading. Afterbeing told, he says thathe too is going thatway,
+knowsashortcut, andwillpayeach Warrior 40 goldtolethim
+join them. After all, he explains, there is a safety in numbers.
+The Warriors must let him jointhem. Roll 1 D 6 on the
+following table:
+1-3
+Thestrangerdoesnotknowthewayand thepartyare
+soonlost-add 1 D 6 weeksto thelengthofthejourney.
+He is apologetic, however, and when the Warriors
+finallyarrive, hepayseachofthem 40 goldas
+promised.
+4-5
+The stranger's shortcut turns out tobe no quicker.
+Uponreachingcivilization, hepaysthe Warriors 40 gold
+each.
+6
+The strangerdoesknow thewaywell, knocking a
+weekoffthe Warriors'journeytime. Uponarrivalat
+their destination, hegratefullypayseach Warrior the
+40 goldaspromised.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-41-42-messenger" name="Messenger">
+    <rules>An Elf messenger crashes into the Warriors'campsite. Panting
+andpuffing, hebegs the Warriors tohelphim delivera message
+tooneof twolarge Settlements in the area. Ahordeof Orcs
+and Goblinsare stormingthecountrysidewithadevastating
+surpriseattack. If the Warriors cangetto thenext Settlement
+andpre-warntheinhabitants, theymayhave timetomount a
+defence.
+Whenthe Warriorsreachthenext Settlement, roll 1 D 6:
+1
+The Orcshavereached the Settlementfirstand have
+sacked it. The Settlement is a mess, bodies arebeing
+collected and thereis a food and water shortage. No
+shopsareopenas theinhabitantsstruggletoputtheir
+livesbacktogetherandeach Warriorfeelscompelledto
+give 1 D 6 x 100 gold tohelp the survivors. Afterall, it
+was the Warriorswho arrivedwith thenews toolate!
+Theymustproceeddirectlyintothenext Adventure.
+2-4
+The Warriorsarrivebeforethe Orcsanddeliverthe
+news. The Settlementis thrown into chaos as they
+prepare forthe onslaught. Roll 2 D 6, the resultbeing
+thenumberofdaysthe Warriorshaveuntil the Orcs
+and Goblins attack. If they are stillinthis Settlementat
+the end of thespecified timeperiod, follow
+Catastrophic Event#4 inthe Roleplay Book(page 25).
+5-6
+The Warriorsreachthe Settlementandwarnthelocal
+militia of the attack. The Warriors offer theirswords
+forserviceand actasgenerals. Being abletoprepare
+fortheonslaughtprovestobethedifferencein the
+battle. Withcleverambushtechniques, well-
+coordinatedflankingmanueversandpowerfulcolumn
+offences, the greenskins are no match for the Warriors
+and the Settlement soldiers. The Orcs and Goblins are
+devastatedinrecordtimeandthe Settlement
+experiencesminimal casualties. The Warriors and
+soldiersreturnfromthe field toahero'swelcome. For
+therestof theirstayinthe Settlementtheyneed not
+payanylivingexpensesandeverythinginthe
+Settlementissoldtothemathalfprice!
+10</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-43-44-dryads" name="Dryads">
+    <rules>In the shadowy depths of the forest, the Warriors encounter a
+groupof Dryadswhoprotectthe area. Theyareeasilyprovoked
+and the Warriorsmustbecareful not to offend them.
+Each Warriormust roll 1 D 6 onthe tablebelow(the Elf
+Warrior, the Wardancer, and the Albion Druid may add +1 to
+their dice roll):
+1
+The Dryadsperceiveyour Warriorasathreattothe
+forestandpunish themaccordingly. Your Warriormust
+deduct 1 fromtheir Starting Woundsscore
+permanently.
+Your Warrioroffendsthe Dryadsandisbeatebn
+2-3
+senseless. Your Warriorsuffers-1 Strengthuntil the
+endofthenext Adventure.
+4-5
+Your Warriorbefriendsthe Dryadsandtheyare
+allowedtopassthroughunharmed.
+6
+Your Warriorimpresses the Dryadsand isseen asan
+allyoftheforest. Theygiftyour Warriorahealing
+potionthatwhendrunkwill healyour Warriorbackup
+to full Wounds.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-45-46-traveller" name="Traveller">
+    <rules>Passing througha smallforestthe Warriorscatchawhiffof the
+unmistakable smellof gamecooked over an openfire. In a
+nearbyclearingtheyfindatravellerwhoinvitesthe Warriorsto
+joinhim fordinner. During thenight, the travellersecretlyplaces
+anitemof Treasure in one of the Warrior'spack. In the morning
+thetravellerbidsthemallfarewellandcontinuesonhisway.
+Drawa Warrior Countertodeterminewhich Warriorhasthe
+itemandthenroll 1 D 6 todeterminewhattheitem is. Ona
+scoreof 1, 2, or 3 itis an itemof Dungeon Room Treasure. On a
+Scoreof 4, 5 or 6 itis anitem of Objective Room Treasure.
+When the Warriorsenter thenext Settlement, the Watchare
+carryingtheitemfrom thetravellermustroll 1 D 6 below:
+1
+The itemyour Warrioriscarryingisconfiscatedasit
+wasrecentlystolenfromaprominentnoble. Your
+Warrior isflogged in thetown square and thrown into
+jail. Theyarereleasedafter 7 daysoncetheyconvince
+the authorities of theirinnocence.
+2
+The itemyour Warrioriscarrying isconfiscatedasit
+wasreportedstolenbyawealthymerchant. Your
+Warrior spends 1 D 6 days in jail and fined 100 gold.
+3-4
+The Watch arenot interested in anyitemsyour Warrior
+iscarrying and theyareallowedentry. Themoment
+theysetfootthrough the settlementgates, ayoung
+knavediscreetlyliftstheitemoffofthe Warrior
+(discardit). The Warriorhasbeenanunsuspecting
+playerinasmugglingring thatoperatesin the area.
+5-6
+Theitemyour Warrioriscarryingisnottheitemthe
+Watchislookingforand thepuzzled Warriormaykeep
+theitemforhimself.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-51-52-guide" name="Guide">
+    <rules>Athin, wiry, andadventuringfellowapproachesthe Warriors
+andclaims tobe alocalguideoftheprovince andwill show the
+Warriorstotheirdestination, reducing theirjourneytimebyone
+week. If the Warriors take him on as their guide, they must
+eachpay 1 D 6 x 20 gold. Whenthe Warriorsreachthe
+Settlement, the guide disappears into a crowded market. Roll
+1 D 6 on the tablebelow(make onerollforthe entire group):
+1-3
+The Warriorsnotice thattheyareeachmissingan item!
+Oneitem of Treasure(determinedrandomly)hasbeen
+stolenbytheguideduringthepastweek!
+4-6
+Theguidewasactuallyafamousrangerfrom thearea
+andthelocalshopkeepersareimpressedtoseeyou
+enterwithhim. Each Warriormaypickanyoneitemfor
+sale they find in stock froma single Trader atthe
+Settlementandcanbuyitforhalfprice!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-53-54-gypsies" name="Gypsies">
+    <rules>Drawn bythesounds of singing and dancing, the Warriorscome
+upon acaravanofgypsiesjust as they arebreaking camp.
+Coincidentally. the gypsies areheading to the same Settlement
+asthe Warriorsandsuggesttravellingtogether. Ifthe Warriors
+refuse, theymusteach roll 1 D 6. If the roll is a 1, the Warrior has
+incurred thewwrathof theoffendedgypsiesandmustdeduct 1
+fromtheir Luck Characteristicpermanently!
+If the Warriors allow the gypsies to travelwith them, the
+Warriorslosevaluabletimeandmustadd 1 weektotheir
+journey. When theyarriveat the Settlement, they find their
+purses 1 D 6 x 50 gold lighter!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-55-56-drinks-and-deals" name="Drinks and Deals">
+    <rules>During a brief interlude inthe journeyat aroadsideinn, the
+Warriors havejustagreed that the next drinkreallymustbe
+theirlastwhenanothergroupofadventurousroguesarriveat
+the bar. Severalrounds of drinks later, eachmember of the
+othergroupoffers one of the Warriorsa‘blind trade'. Anyitem
+oftheirsforanyitemofthe Warriors.
+If a Warrioraccepts, discard one Treasure androll 1 D 6 tosee
+is given to them in exchange. If the score is 1, 2, 3, 4 or 5 then
+the Warriorreceivesanitemof Dungeon Room Treasure. Ifthe
+dicerollisa 6, thenthe Warriorreceivesoneitemof Objective
+Room Treasureinstead!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-61-62-militia" name="Militia">
+    <rules>The Warriorsseesmokecurlingabovethetrees, andwithina
+fewminutes reach thecrestof ahilloverlookingasmall
+Settlement. As they get closer, a group of armed men on
+horseback approach. Theyarethe townmilitiaandarevery
+waryofstrangers. Theyrefusetoletthe Warriorsstayatthe
+Settlement, butforapaymentof 30 goldeachwillallowthem
+around thevillageand thesurroundingfields, addingoneweek
+to theirjourney.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-63-64-travelling-minstrel" name="Travelling Minstrel">
+    <rules>Atravellingminstreljoins the Warriorsfor therestof their
+journey. When theyreachthegatesofthe Settlementtheyare
+travelling to, he begins to play and sing, convinced that he will
+earn themallfreeentrytothe Settlement. Roll 1 D 6 onthe
+followingtablewhenthe Warriorsreachtheirdestination:
+1
+The minstrels'playingis awful, and the Warriors are
+forbiddentoenterthe Settlement. Theymustgo
+straightinto thenext Adventure.
+2-5
+No one is particularly impressed, but a few inhabitants
+give the minstrel somegold. The Warriorsmeanwhile,
+arefreetoenterthe Settlementasusual.
+6
+Theminstrel'ssong issorousing that theinhabitants of
+the Settlementshowergolduponyou. Each Warrior
+gains 1 D 6 x 10 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-encounter-65-66-adventuring-party" name="Adventuring Party">
+    <rules>The Warriorscrosspathswithapartyofbrashadventurers;
+two Humans, a Dwarf and a Halfling. Each Warrior must roll
+1 D 6 andaddtheir Willpower.
+Roll 1 D 6 onthetablebelowfor thegroup. Add+1 for every
+Warriorwhoscored 7 ormoreontheir Willpower Testand
+subtract 1 forevery Warriorwhoscored 6 orless:
+1 or
+The Warriorsareimmediatelyirritatedwiththe
+presumptuousgroupofadventurersanditisn't
+less
+longbefore the twopartiesbreakout intoin all out
+rumble! Whenthedustclearsthe Warriorshumbly
+find themselvesbloodiedandbattered. Theyeach
+have 1 D 6 x 100 goldandanitemof Treasure
+(determinedatrandom)takenfromthem.
+2-3
+The Warriors are annoyed bythe arrogance and
+overconfidenceofthissmallgroupofadventurers.
+Afterabriefexchangeofformalities, the Warrior
+withthelowest Willpowertestscorecan'thelpbut
+makeasnideremark. The Halflingimmediately
+sendshisfistinto the Warrior'smouth, smashing
+outfourteeth. The Halflingdemands 1 D 6 x 100 gold
+piecestofurtherresolvethematterwhichthe
+Warriorhappilypayssellingitemsof Treasureto
+coverthecost. (The Warriorisnowreferred as
+"[Warrior's Name], the Toothless"by theirpeers in
+private. .. )
+4-5
+The Warriorsdemonstratedignityandpoiseasthey
+exchangeformalitieswiththeotherparty. When
+their Dwarfmakearuderemark, oneofthe
+Warriors(chosen atrandom)deliversaswiftkick
+whichsend the Dwarfsprawling. The Dwarf
+manages a whispered apology, begsforforgiveness
+andgivesthe Warrior 1 D 6 x 50 goldas
+compensationfortheinsult.
+6+
+The Warriorsare the epitome ofvirtue andhonour.
+Thesamecan'tbesaidfortheotherpartyof
+adventurersastheybegintotauntthe Warriors.
+Theotherpartydrawstheirweaponsandthe
+Warriors areforced torespond inkind. Moments
+later, theotherpartymembers all laydead. when
+the Warriorssearchtheirbodiestheyturnup
+1 D 6 x 50 goldpiecesandone itemof Dungeon Room
+Treasureeach!
+11</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-11-12-tower" name="Tower">
+    <rules>The Warriorsspyatowerinthedistancewithalonewindow
+near thetop. Theyhear thecallsofafairmaidenbutthey
+cannotfindanywaytoenterthestructure.
+If the Warriorshavearopethentheycanrescue thedamsel
+butitwillbelostintheprocess(discard it).
+Whenthen Warriorreachthenext Settlement, roll 1 D 6. Ona
+score of 2, 3, 4, 5 or 6 they are rewarded for rescuing the
+burgomeister'smissingdaughter. The Warriorsreceive
+1 D 6 x 100 gold tobesharedequallybetween them. Ifthescore
+isa 1, however, thewomanaccusesthe Warriorsofkidnapping
+1 D 6 x 25 per Battle-levelgoldeach!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-13-14-chapel" name="Chapel">
+    <rules>The Warriorssee a small chapel. Ifyou wish, your Warriormay
+spend some time in prayer totheirgods. Afteryour Warrior
+1 D 6 onthe followingtable:
+1-3
+Thegodsaren't listening, andignoreyour Warrior.
+4-6
+Your Warriorhas+1 Woundsadded totheir Starting
+Woundsscore. Thisisapermanentaddition.
+Each Warriormaymakeoneprayerand thenmustmoveon.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-15-16-strange-brew" name="Strange Brew">
+    <rules>Passing througharecentlyabandonedcampsite the Warriors
+discoverabarrel marked Bugman's Brew. Lappinga fewdrinks
+withtheladletoquench theirthirstthe Warriorssoondiscover
+that this is certainlynot Bugman's Brew! Each Warriormustroll
+1 D 6 foronthetablebelow:
+1
+Thebrewmakesyour Warriorfeelhorriblysickand
+they lose 1 Wound permanently.
+2
+Thebrewmakesyour Warriorfeelweakandthey
+suffer-1 Strengthforthenext Adventure.
+3
+Thebrewcausesyour Warriortofallill. Thegroupmust
+addoneweektotheirjourneyastheircomradeslows
+them down. (Addoneweekforeach Warriorwhorolls
+this result. )
+4
+Your Warriorbecomesbefuddledanddisorientedand
+spendsthenexthourfrolickingamongtheflowers
+singing songs.
+5
+Your Warriorhasamind-alteringexperienceasthey
+face theirdeepestfear. They gain+1 to all Fearrolls
+and+2 toall Terrorrollsin thenext Adventure.
+6
+Your Warrior'smusclesbulgeandtheyfeelmore
+powerful thaneverbefore! Theygain+1 Strengthfor
+thenext Adventure! Rollanother 1 D 6 andiftheresult
+isa 6, thentheadditionispermanent!
+12</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-21-22-dungeon-map" name="Dungeon Map">
+    <rules>The Warriors take refuge for a nightin an abandonedkeep, its
+walls crumbling and itshalls long since plundered. Among the
+debris, one of the Warriors (determined randomly) notices a
+batteredbutstilllockedironbox. Breakingopentheage-old
+lock proves easy enough and inside the Warrior finds, what
+appears tobe the mapof a dungeon. Although faded, part of
+themap is stillclearlyvisible.
+At the start of the next Dungeon, the Warrior with the map
+maylookat(and layoutonthetable)the topsixcardsof the
+Dungeon Deck, forewarnedastheyareofwhatistocome.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-23-24-population-marker" name="Population Marker">
+    <rules>Approachingawaypoint, the Warriorsfindoutmoreabout their
+destinationandits population. Roll 1 D 6 toseewhatthe
+population marker says:
+1-2
+The Warriors'target Settlementisonesizesmallerthan
+theywereleadtobelieve!
+3-4
+The Warriors'target Settlementsizeisaccurate.
+5-6
+The Warriors'target Settlementisonesizelargerthan
+theywereleadtobelieve!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-25-26-wild-mushrooms" name="Wild Mushrooms">
+    <rules>The Warriorsdiscoverapatchofwildmushroomswhichthey
+canpickanddryinthesunas theytravel. When theyreach the
+next Settlementeach Warriorcanmake 1 D 6 specialprovisions
+from the dried mushrooms. Keep those provisions separate
+from any others.
+Whenconsumed, eachmushroomprovisionheals 1 D 6
+Woundsbut if you rolla‘1'thenyour Warrior begins to
+Inawildpanic theylashoutallaroundandeverymodel
+adjacenttoyour Warriorsuffers 1 D 3 Woundswithnomodifiers
+for anything.
+Themushroomprovisionsneverspoil.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-31-32-giant-nest" name="Giant Nest">
+    <rules>The Warriors catch sight of colourfulbirds or enormous size
+suchbirds might fetcha pretty price, the Warriors wonder
+aboutfinding theirnests. Each Warriorwhowishes totryand
+findanestbefore thegiantbirdsreturn mayroll 1 D 6 andadd
+their Initiative. If thetotalis 8 ormorethe Warrior has
+successfully navigated the crag and found some eggs! The
+Warriorfinds 1 D 6 gianteggswhichmaybesoldata Settlement
+for 1 D 3 x 100 goldpieceseach.
+Ifnoneofthe Warriorsscore 8 ormore, thenthegiantbirds
+returns aggressively, forcing them to continue on theirway.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-33-34-bad-map" name="Bad Map">
+    <rules>The Warriors'journeyisover, butthe Settlementthattheywere
+heading for turns outtobewronglymarkedon themap, and is
+littlemorethanahamlet. The Warriorsmaystay thereanyway
+andbuyequipment, etc. butmustrollforitem availabilityasfor
+a Village.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-35-36-monolith" name="Monolith">
+    <rules>In the middle of the forest, the Warriors come upon a huge
+stonemonolith; itsoriginunknownanditspurpose
+unfathomable. Themonolithhumswithawesomepoweranda
+suddenflashoflightblindsthe Warriorscausingthemtotopple
+backward. Whentheyregaintheirfeettheyfindthemselves
+imbuedwithmagicalpower.
+Duringthenext Adventureeach Warriormaychoosetoadd
++2 toasingle Power Phaseroll, althoughan Unexpected Event
+stilloccursona roll of 1. Onlyone Warriormayuse this ability at
+any one time-itis not cumulative. Once used, this abilityis
+goneforever.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-41-42-damaged-wagon" name="Damaged Wagon">
+    <rules>The Warriorscomeacrossabroken-downwagonthatlooksto
+havebeen discardedon the side oftheroad. The Warriorsmay
+attempttofixthewagonanduseittoreducetheirtraveltime
+tothenext Settlement.
+1
+Nomatterhowhard they try. the Warriorsareunable to
+getthepileofwreckagetofunctionas thewagon it
+oncewas. The Warriorsspendsomuchtimeandenergy
+tryingtorepairitthattheirjourneytimeisextended by
+twoweeks.
+2
+Thewagonproves tobe more trouble than it isworth
+and the Warriorsproperlyabandonitbythesideof the
+road. Thetime spent trying tofixit adds one week to
+theirjourney.
+3-4
+The Warriorsmanage tomakethewagonoperational
+butitrepeatedlybreaksdown and the Warriorssaveno
+timeontheirjourneythisweek. Foreachadditional
+weektheytravelwiththewagon, the Warriorsmustroll
+fora Travelling Hazard asnormalbutmust alsoroll on
+thistableuntiltheyobtainadifferentresult.
+5
+The Warriorsareabletofixthewagonand theirjourney
+timetothenext Settlementisreducedbyoneweek!
+Unfortunately, the wagonfalls apart just as theyreach
+the Settlementgates. There isnopossibility torepairit
+anditmustbediscardedimmediately.
+6
+The Warriorsrestore thewagoninto excellentcondition.
+Theirjourneytimetothenext Settlementisreducedby
+twoweeks!
+The Warriorsmaykeep thewagonastheirown andit
+willknock 2 weeksoff theirjourneytoany Settlement.
+Butaslongastheyhaveit, theymustroll 1 D 6 each
+time theyreacha Settlement. If the score is a 6, the
+ownerofthewagonhasdiscardeditasjunk and the
+Warriorsnolongerhavetorollfor thewagonwhenthey
+reacha Settlement. Butif theresultisa 1, thewagon
+wasreportedstolen and authoritiesarrestthe Warriors
+for theft. Theyarethrown intojailfor 1 D 3 days and
+fined 1 D 6 x 25 goldeachandthewagonisreturnedtoits
+rightly owner.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-43-44-death-note" name="Death Note">
+    <rules>Slumped againstthe trunk of an old tree sits the sad remains of
+aonceproudwarriorwith acrumplednoteclutched inhis cold,
+dead hand. The note is the last will of the warrior, evidently
+writtentheyweredying, anditrevealsthatthewarriorwas
+betrayedbyoneoftheircomradesoversometreasuretheyhad
+stashedfollowingarecentadventure. Althoughthenotedetails
+thelocationof thetreasure, suchadetourwouldaddan
+additional 1 D 3 weekstothe Warriors'currentjourney.
+If the Warriors decide to go after the treasure, roll on the
+following table:
+1
+The Warriorsfind the treasurelocation, butwhen they
+pull therocks aside to claimit, they find nothing!
+Someonehasbeatenthemtoit!
+2-3
+The Warriors find the treasure in a buried chest. Far
+fromfabulous, the Warriorsfind 1 D 6 x 25 goldeach.
+4-5
+The Warriors'searchendsinanabandonedcottage. In a
+floorboard, just as thenote indicated, one of the
+Warriors(determinerandomly)findsagleaminganitem
+of Objective Room Treasure!
+6
+The Warriors find themselves in a secret glade. In a
+nearbyhiddencave, justasthenote explained, the
+Warriorsdiscovertreasure! Each Warriorreceivesone
+itemof Objective Room Treasure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-45-46-hunting-snare" name="Hunting Snare">
+    <rules>Trudgingthroughthewilderness, oneofthe Warriors
+(determine randomly)inadvertentlysteps intoa foot noose. In
+theblink of an eye, the foot noose hauls the Warrior high up
+into a tree. Theycan easily cuttheir foot loose but theresulting
+fallwouldbefatal!
+Oneoftheother Warriorswillhavetotryandcatch their
+unfortunatecompanion. The Warriorsmayeitherdecide
+amongstthemselvesordrawlots(determinerandomly)tosee
+who will attempt the catch. Once a catcher has beenchosen,
+thesuspended Warriorcuts thecordholding themaloftand
+plummetstowards theirwide-eyed comrade. The catchermust
+roll 2 D 6 andaddtheir Strengthandtheir Initiative.
+Ifthe score isless than 16, theensuing impactis asmuch
+comicalasit is alarming. Both Warriors suffer-1 D 3 Wounds to
+startthenext Adventurewhichcanbehealedbynormalmeans.
+Ifadouble 1 is rolled, however, thecatchgoesterriblywrong
+andboth Warriorsmustdeduct 1 D 3 Woundsfrom their Starting
+Woundsscorepermanently.
+If the totalscore is 16+, the crazy idea workedand both
+Warriorsendupwithnothingmorethanminorbumpsand
+bruises.
+13</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-51-52-toll-station" name="Toll Station">
+    <rules>The Warriorsattempttocrossintoanewareabutarestopped
+bythelocalmilitiawhoinsistthateach Warriorpay 5 goldfor
+eachitemof Equipmentand Treasurethattheyarecarrying.
+The Warriormust sell Equipment and Treasure if necessary. If
+they cannotpay, the guards take as much as theyhavebefore
+letting thempass.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-53-54-tombstone" name="Tombstone">
+    <rules>Onthesideoftheroad isanelaboratetombstonewith one of
+the Warrior's nameengraveduponit! Each Warriormustroll
+1 D 6. The name on the tombstone is thatof the Warriorwith the
+lowestscore.
+As the Warriors stand dumbfounded, a black-robed figure
+emergesfrom the shadows. The grim figure points a skeletal
+fingeraccusinglyatthe Warriorwhosenamewhosenameison
+the tombstone. Somehow, in a previous Adventure, your
+Warriorcheateddeath! The Warriormustroll 1 D 6 below:
+1
+Thecloakedfigurehascome totake themaway. If
+your Warrioris Battle-level 1, the skeletalfiguredrags
+themawayscreaminginterror. Ifyour Warriorisany
+other Battle-level, theyfeela stabbingpain intheir
+stomach. Your Warrior suffers-1 Toughness, -1
+Strength, -1 Weapon Skilland-1 Luck until the end of
+thenext Adventure!
+2
+Your Warriorfeelsthelifeforcedraining awayand
+mustdeduct 1 D 3 Woundsfrom their Starting Wounds
+scorepermanently!
+3-4
+Facedwithsuchastarkreminderoftheirown
+mortalityyour Warriorsuffers-1 Willpower, -1 ontheir
+To Hitrolls and-1 to all Fear and Terrorsrolls during
+thenext Adventure!
+5-6
+Your Warriorissappedofenergyandmustdeduct 1
+Woundfromtheir Starting Woundsscorepermanently!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-55-56-wagon-train" name="Wagon Train">
+    <rules>Theleadwagonofaconvoypullsupalongsidethe Warriors.
+Thedriversays thathe isheadingfor thesamedestination as
+they are, andif each Warrior pays him 1 D 6 x 10 gold they can
+hitcha lift, saving themoneweek'stravelling time.
+14</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-61-62-shrine" name="Shrine">
+    <rules>The Warriorsmaketheirwaythroughathicketandstumble
+across anold shrine. A stonewellsitsin the middle ofthe shrine
+withacrackedornatetablethangingaboveit. Aplaquereads:
+"Partwithyourwealth andgainenlightenment. "
+AWarriormaythrow 1 D 6 x 25 goldintothewellonetime,
+whereuponitmysteriouslyvanishesandthe Warriormaymake
+rollonthefollowingtable:
+The Warriorgainsnoknowledge.
+1-2
+E
+The Warriorreceivesinsightintoaconceptofefficient
+movement, gaining+1 Initiativeforthenext
+Adventure.
+4
+The Warriorunderstandstherelationshipbetweena
+Warrior and theirweapon. Theygain+1 Weapon Skill
+or Ballistic Skillforthenext Adventure.
+5
+The Warriorfeelsaresolvedeepintheirsoul. Theygain
++1 Toughnessfor the next Adventure.
+6
+The Warriorsees a glimpse ofenlightenmentin the
+watersofthewell. Theygain+1 Luckfor thenext
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-63-64-cottage" name="Cottage">
+    <rules>The Warriorsstrayoff themainroadandhappenuponan
+abandoned stonecottage. Theinterioris quaint andfurnished
+withchairs andevenbeds. The Warriors are soelated tofind a
+comfortableplacetorestthattheyfind it hardtoleave the
+place. The Warriorsdecidetorelaxandenjoythecomfortofthe
+cottage, addingoneweektotheirjourney. Theyarewell-rested,
+however, andeachofthemgain+1 willpowerand+Initiative
+untiltheendofthenext Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-structure-or-object-65-66-portal" name="Portal">
+    <rules>Trekkingacrossashallowstream the Warriorssee anancient
+stonearchwaycoveredinmossandvines. As theypass
+throughthestructurethe Warriorspromptlydisappear,
+rematerialisingnearastreamthatthey'veneverseenbefore.
+Afterchecking theirmapwith thesurroundinglandmarks, they
+determinethattheyaresomehowclosertotheirdestination
+thantheywerebefore. Thearchwayportalthattheycame
+through is nowhere tobe seenbuttheirjourneyisreducedby
+oneweek.
+Each Warriormustroll 1 D 6 andif thescoreisa‘1'itmeans
+thatoneofthe Warrior'sitemsof Equipmentor Treasure
+(determinedrandomly)didnotmake itthroughwiththem.
+Discard itimmediately.
+. EVENT</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-11-12-massacre" name="Massacre">
+    <rules>The Warriorscomeacrossaburningwagon ina forestclearing.
+Roll 1 D 6 foreach Warrior. The Warrior with thehighestscore
+recognizesthedyingtravellersastheirbloodkin. Oneofthemis
+abletotellthe Warriorswhoperpetratedthemassacre. Roll
+1 D 6:
+Goblins
+Dark Elves
+4
+1
+5
+2
+Skaven
+Chaos Warriors
+3
+Orcs
+6
+Beastmen
+From nowon, the Warrior whose kinhavebeen slaughtered
+Hates the type of Monster(see the Psychologysection of the
+Roleplay Book). Note this downontheir Adventure Record
+sheet. Every time they kill one of these Monsters, this Warrior
+gainsanextra 5 goldontopofthe Monster's Gold Value.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-13-14-fire" name="Fire">
+    <rules>During the night afirerages through the camp. Theintensity of
+theblazeis suchthatit may turnthewarriors'gold tolumps of
+moltenmetal. Roll 1 D 6 foreach Warriorandconsultthe
+following table:
+1
+Your Warrior'sgold ismeltedbeyondrecognition. Itis
+nowonlyworthhalfitsoriginalvalue.
+2-5
+Luckily, your Warrior'sgold wasn'taffected and they
+arestillaswealthy, oraspoor, astheywerebeforethe
+fire!
+6
+Your Warrior'sgold is intact! In addition, asthey
+scrambleintheblackened Earthtoretrieve their
+fortune, they find along-buriedgemstoneworth
+1 D 6 x 50 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-15-16-commotion" name="Commotion">
+    <rules>The Warriorshearasmallcommotion justoff themainroad.
+Followingthevoicestheyemergeintoasmallclearing. Roll 1 D 6
+foreach Warriorandaddthedicetogether:
+4-8
+Orcs! The Warriorshave stumbledupona massive
+Orcraidingparty. Their only choice is toflee for their
+lives. Lost and confused, they abandon all hope of
+reaching a settlement. Theymustproceed directly
+intothenext Adventure.
+9-17
+Bandits! Theyareplotting thekidnappingofa Royal
+nephew. Afterabriefbattle, the Warriors emerge
+victorious. The Warriorstakethegrumblingleader
+withthemto thenext Settlement. Althoughthey
+mustnowaddaweektotheirjourney, theyareeach
+rewardedwith 1 D 6 x 50 goldforhiscapture!
+18-24
+Merchants. The Warriorsfind a group oflost and
+panickedmerchants. If the Warriorsescort them to
+thenext Settlement, theyoffertopayeach Warrior
+1 D 6 x 100 golduponarrival!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-21-22-troupe" name="Troupe">
+    <rules>The Warriors come upon a travelling entertainment troupe,
+complete with the strongman, the fire-eater, the fortune-teller
+andthebeardedlady! Each Warriormaymakeonevisittoone
+ofthefollowingtroupemembersbeforethetroupedeparts:
+STRONGMAN
+Armwrestlethestrongmanwithawagerupto 5 o 0 goldbefore
+rolling 1 D 6 andaddingyour Warrior's Strength:
+2-6
+Witharoarof laughterfrom thecircustroupe, the
+strongmanslamsyour Warrior'sarmintothetable.
+The strongman counts his newly acquired gold in
+8-9
+Grunting and sweating, thematchteetersback and
+forth. Finally, with a sneakykickunder the table, the
+strongmanmanagestotake the Warrior'shand tothe
+table! Cryingfoul, your Warriorarguesthematchuntil
+thestrongmanagreestoadraw.
+10+
+With a swift, powerful moveyour Warriorsmashesthe
+strongman's arminto the makeshifttable, pullinghim
+offhis seatwith aloud whimper. The smallcrowd goes
+wildandthe Warriorwinsthewager!
+FORTUNE-TELLER
+Seekthefortune-teller'sadvicebycrossingherpalmwith 50
+goldbeforerolling 1 D 6 andaddingyour Warrior's Willpower:
+2-6
+Reading the palm, thewomanpredicts a loss of
+financesverysoon. As the Warriorpaysher, they
+wonderwheninthefuture theywill partwiththeir
+money. ..
+8-9
+Throughacrystalball thewomanexposes the
+Warrior'sfoolishpastbutuncovers anoptimisticfuture.
+Atthenext Settlement, the Warriormayignoreone
+Settlement Event, treatingitasan Uneventful Day
+instead.
+10+
+Withacarefullylaidouttarotcardreading, thewoman
+clearlyshowsthe Warrior'sfuture. Theymayadd+1 to
+their Luck Characteristicpermanently!
+GAMBLER
+Playagameoffindthepeawiththegamblerbywageringupto
+500 goldontheoutcomebeforerolling 1 D 6 andaddingyour
+Warrior's Initiative:
+2-6
+Your Warriortracksthepeaasgoodastheycanbutis
+soondazzledby thegambler'sskilfulhandiwork. Your
+Warriorsoonloses trackof thepea and theirgold.
+8-9
+Your Warrior's eyes aregood, butthegambler'shands
+arebetter. As the gambler lifts the shell, thepea drops
+outof nowhere. Hehas cheated! Hequicklycalls ahalt
+tothegameanddeclarestheroundadraw, packingup
+anddepartingquickly！
+10+
+Thegamblerspinstheshellsinadazzlingdisplayof
+skilland dexterity! Evenmoreimpressive, though, are
+the Warrior's eyes: witha confidentandpoised finger,
+the Warriorpointsout thepropershell. With thelook of
+grimdefeat, thegamblerunveilsthepeaand
+reluctantlypays thewager. Theonlookersare indeed
+impressed!
+15</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-23-24-unicorn" name="Unicorn">
+    <rules>Asthe Warriorslaydowntheirgeartorestandrelaxina
+beautifulmeadow, abeautifulunicornrunspastin the distance.
+Roll 1 D 6 foreach Warriorand ifthescoreisa 6, the Warrior
+catchesa glimpse of thisrare and extraordinary event. Each
+Warriorwhosees the Unicorngains+1 Luck for thenext
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-25-26-guests" name="Guests">
+    <rules>The Warriorsarrive ina small hamletas alocal festivalisin full
+swing, and they are invited to stay as guests. Theyarewined
+andfedtoexcess, andhaveamostenjoyableevening.
+Wakingupthenextmorning, theyfeelitisonlyfairtooffer
+paymentfor thehospitalitythatthevillagershave offered. Roll
+1 D 6 foreach Warrior. The Warriorwith thelowestscorehasto
+pay thevillagers(1 D 6 x 20)gold. If two or more Warriors score
+equallylow, theymustrolloffuntil only oneplayerislefttofoot
+the bill.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-31-32-feud" name="Feud">
+    <rules>The Warriorsaretravellinginawar-tornareawhere two Lords
+havebeenfeudingoverlandrightsfor thepastfewmonths. All
+thelocalsmithsarebusy forgingweapons as eachside
+preparesforbattlewhilstbothlordshave sent armed gangs to
+theroads in order toconfiscateweapons andgenerate funds
+for theircause. Roll 1 D 6 for the groupon the tablebelow:
+1-2
+Each Warrioris'encouraged'tocontributeoneitemof
+Treasureandhalftheirgoldtooneofthe Lords.
+3-4
+Each Warriormust'donate'one Itemof Treasure
+(determined randomly)in support to one of the Lords.
+5-6
+Thearmedgangsareintimidatedbythe Warriorsand
+wiselydecidenottobotherthem.
+16</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-33-34-distressed-villager" name="Distressed Villager">
+    <rules>The Warriorscomeuponafarmerfromanearbyvillagewho
+begs forthe Warriors'helpindefendingthevillagefroman
+impendingbandit attack. The Warriors cannot refusesucha
+noblecauseandfollowthemanconfidentlybackto the Village
+Elders toformulateaplan ofdefence. The Warriors'journeyis
+over, but the battlehas just begun! Roll 1 D 6 on the following
+table:
+Thebanditsarenottobetrifledwith! Theirfirstattack
+isdevastatingand the Warriorsfindthemselvesinfull
+retreat! Regretfully determining that thevillage islost,
+the Warriorshavenootherchoicebuttoabandon the
+poorvillagers and immediatelyproceed tothenext
+Adventure. Becauseoftheterribledefeat, each Warrior
+suffers-1 Willpowerduringthenext Adventure.
+2-3
+Thebanditsarestrongerthan anticipated. The Warriors
+eventuallydefeatthem, butthevillagesuffersmany
+losses. The Warriorseachdonate 1 D 6 x 50 per Battle-
+levelgold tothevillagerstohelppayforrepairsto the
+villageandproperburialsforthedead.
+4-6
+Thebattle isglorious! with cunning strategyand brave
+actions, the Warriorstriumphoverthebandits. The
+cheeringvillagersregard the Warriors asheroesfor
+theireffortsandofferthemthanks. Forthedurationof
+the Warriors'stay, allitems arereduced tohalfprice
+andtheypayno Living Expenses!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-35-36-foul-odour" name="Foul Odour">
+    <rules>As the Warriorstrudge through thebrush, theybecome aware
+ofafoulodour. Roll 1 D 6 on thefollowingtabletoseewhatthe
+causeoftheodouris:
+1-4
+The Warriorscomeupon anemptyvillage. Chaos
+Warriorshavemurderedtheinhabitantsanddead
+bodies laystrewn about. Thelone survivoris ayoung
+girl, drenched inblood. The Warriorsmusttakeherwith
+themtothenext Settlement, addingoneweektotheir
+journey.
+5-6
+The Warriorscomeuponabattlefieldofdefeated Orcs.
+Rummaging throughthebodies, each Warriorfinds
+1 D 6 x 20 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-41-42-lost" name="Lost">
+    <rules>Afterafewdays'travel, the Warriorsadmittothemselvesthat
+theyareabsolutelylost. Theyare abouttogiveupthe journey
+completelywhentheynoticesmokecurlingintotheskyafew
+miles away. A couple ofhours later, the Warriors discover the
+source of the smoke-a smallvillagenotmarkedon theirmap.
+Heretheyare told thatthenearesttownisanothersixweeks'
+travel. The Warriorscan either carryon to the town, orend their
+journeynowandseewhattheycanbuyhere.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-43-44-warrant" name="Warrant">
+    <rules>As the Warriorsapproach amake-shiftmilitia checkpoint, they
+aresurroundedbydozensofarmedsoldiers. Thecaptainsteps
+under arrest! "
+Roll 1 D 6 for each Warrior, withthelowestscorebeing the
+targetofthecaptain's words. Theyaredraggedaway
+immediately. Theother Warriorshavetwooptions:
+a)
+The Warriorscancontinueontheirwaywithoutdelay
+inwhichcase the jailed Warrior mustpay 1 D 6 x 50 gold
+inbribes(sellingany Equipmentor Treasureif
+necessary)and maycontinuetheirjourney toa
+Settlementon theirown. If the Warriorcannotpay,
+theyareheldinadankprisonwheretheycatchasickly
+fever. Theyarefinallyfreedmanyweekslaterandcan
+meetupwiththeother Warriorsattheentrance to the
+next Dungeon. Duetothe fever, however, they suffer
+-1 Toughnessforthe next Adventure.
+b)
+The Warriorsmaybribethecaptain intoreleasingtheir
+comradeandlettingthemgoontheirway. Thebribe
+amountsto 150 goldfromeachoftheremaining
+Warriors.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-45-46-which-road" name="Which Road">
+    <rules>Theroadsplitsintotwobefore the Warriors. Oneroadleadsto
+their chosendestination, butfrom their map itis impossible to
+tellwhich. Do theytake theleftforkor the rightfork?
+Once theplayershaveagreedwhichroad the Warriors take,
+roll 1 D 6 onthefollowingtable:
+1-3
+The Warriorschose thecorrectpathandmaycontinue
+on their journey.
+4-6
+The Warriorstookthewrongrouteandendupata
+smallvillage, finishingtheirjourneyprematurely.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-51-52-ceremony" name="Ceremony">
+    <rules>The Warriors hear strange sounds frombehindsome large
+bouldersandwhentheyinvestigatetheyrealisetheyhave
+interruptedasacredceremonybeingheldbyagroupof
+worshippers. Roll 1 D 6 tosee thereactionof theworshippers:
+Theworshippersarefuriousthattheirceremonyhas
+been interrupted byoutsiders. Theybegan chanting a
+curseupon the Warriors, driving them awayfrom the
+area. The nexttimeeach Warriorrolls a'6'on a 1 D 6
+roll, theymust treat itas a'1'instead.
+5-6
+Theworshippersareecstatictoseethe Warriorsand
+claim thattheirprayershavebeenanswered! They
+insistonpresentingeach Warrioranitemof Dungeon
+Room Treasure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-53-54-double-back" name="Double Back">
+    <rules>to see the sun, the Warriors emerge into a gloomy clearing. In
+front of them is a cave entrance into a craggy rock face. After a
+moment's study, theyrecognise it as the veryexitbywhich
+theyleftthe Dungeon!
+The Warriors have managed to work their way back to
+wheretheystarted and mustnowsetoff afresh!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-55-56-mage-battle" name="Mage Battle">
+    <rules>Asthe Warriorsapproach theoutskirtsofanabandonedvillage,
+theyrealizethattheyareencroachinguponthecombatzoneof
+two powerful and long-feuding mages!
+The Warriorsmusteitherlose 1 D 3 weekstravel
+circumventingthe conflict, or chance a dangerous crossing. Any
+Warriorattemptingtocrosstheareamustroll 2 D 6 below:
+Caughtwithinthemaelstromofarcaneenergies
+unleashedbythebattlingwizards, the Warrioristorn
+asunderbytheunfetteredforceof the Windsof Magic.
+They are quite dead.
+Weigheddownbyriches, the Warriorstrugglestomove
+swiftlyacrossthedangerzone. Caughtbetweenclouds
+oflivinglightning andwallofroilingmagma, the
+Warriorfaces aharshchoice: bepoororbedead.
+Abandoning 2 D 6 x 50 goldthe Warriorisabletohasten
+theirescapeandfleesthebattlefieldunharmed.
+4-6
+Struckbyanerrantblastfromoneofthemagesthe
+Warrior, possessions and all, is turned into a toad until
+thestartof thenext Adventure. Theymaydonothing
+butlaylowinthenext Settlement(snuggledsafelyin
+oneoftheother Warrior'spocket)andrevertsto
+normalattheentranceofthenext Dungeon.
+7+
+Withfireballsexplodingaroundthemandboltsof
+lightningscreaming overhead, the Warriormakesit
+safelyacrossthebattlefieldwithonlyafewminor
+burns and ahuge senseofrelief.
+17</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-61-62-procession" name="Procession">
+    <rules>The Warriorscrosspathswithaprocessionofsoldierswhoare
+travellingtothesamesettlementasthe Warriors. Theleaderof
+theprocessionwarnsthattrolls andogres arebesieging small
+groupsandlonetravellersin thisarea. The Warriorscanjoin the
+their own.
+If the Warriorsjoin thegroup, roll 1 D 6 onthe tablebelow:
+1-2 The journey isfraughtwith attacking ogres and
+ambushing Trollsbut the group manages to stave off
+each attack. The Warriorsaresafebuttheconstant
+harassmentaddsanother 1 D 3 weekstothetravel.
+3-4
+Thecaravanmustoccasionallycopewithattacking
+Ogreswhichaddsoneweektothetraveltime.
+5-6
+Thejourneyissafe andsteadywithnoloss oftime.
+If the Warriors continue on their own, roll 1 D 6 on the table
+below:
+1
+Itisn'tlongbeforeagroupofrock-throwingtrolls
+ambush the Warriors. Although theymanage toescape
+withtheirlivesbyslippingintoanearbycave, theymust
+proceed directlyinto thenext Adventure.
+2-3
+Forewarnedofdanger, the Warriorsscoutvariousareas
+wheretheymightencounterenemies. Suchaprecaution
+slowsthemdown and theymustadd 1 D 3 weeksto
+theirjourney.
+4-6
+The Warriorsmanagetoavoidanyenemiesontheroute
+withoutlossoftime.
+18</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-63-64-ransom" name="Ransom">
+    <rules>The Warriorscometotheedgeofagullywhenamaskedrider
+approachesfromthe otherside. Mistaking the Warriors as
+representative ofthelocal Baron, hedemands thattheytoss
+overaransomof 2 D 6 x 100 gold(heacceptsitemsof Treasure
+ofequalvalue)orhe'llkillthe Baron'sdaughter!
+If the Warriors pay the ransom they must roll 1 D 6 on the
+tablebelow:
+1-4
+Themaskedridergrabsthegoldandridesoutof
+sight. ..
+5-6
+Themaskedridergrabs the gold and tells the Warriors
+wheretheycanfindthe Baron'sdaughteraliveand
+well. Whentheyreachthenext Settlement, the Baron is
+sothankfultohavehisdaughterbacksafeandsound
+thathepays the Warriorstwicetheamounttheypaid
+themaskedrider.
+If the Warriorsdonotpaytheransom, when theyreach the
+next Settlement, theymustroll 1 D 6 on thetablebelow:
+The Warriors arearrestedbythe Baronafter some
+localssweartheysawthe Warriorsspeakingwiththe
+masked rider. Whenhis daughter'sdead bodyappears
+soonafterwards, the Baronhas the Warriors beaten
+viciously. Theymusteachdeduct 1 D 3 Woundstotheir
+Starting Woundsscorepermanently. The Baron'srage
+eventuallycoolsbutthe Warriorsarethrownoutofthe
+Settlement andmust proceed directlyinto the next
+Adventure.
+2-3
+The Warriorsareaccusedofbeingaccomplicesandare
+throwinjailforthe next 1 D 6 days and fined 1 D 6 x 100
+gold each(selling Equipment and items of Treasure if
+necessary).
+4-6
+The Warriorsareaccusedofbeingaccomplicesandare
+throwinjailfor 1 D 3 days. Thebaron'sdaughter is
+foundsoon after and she exonerates the Warriors.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-event-65-66-fall" name="Fall">
+    <rules>Roll 1 D 6 for each Warrior. The Warrior with thelowestscore
+tripsoveralogandbreaks theirankle. Howembarrassing!
+to thejourney. When the Warriors reach a Settlement, itcosts
+theinjured Warrior 30 goldtohavetheiranklehealed.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-11-12-graveyard" name="Graveyard">
+    <rules>The Warriors comeacrossstrangelyexpansiveyetobviously
+neglectedgraveyard justoutsideofa meagrevillage. Asoft,
+hauntingwailingdriftsout fromamongst thetombstones
+settingthehaironthe Warriors'necksonendbeforethe
+shimmeringspectreofanarmouredwomanappears just
+beyondthegatewaytothegraveyard, beckoningtooneofthe
+Warriors.
+Roll 1 D 6 foreach Warrior. Thespectreleads the Warriorwith
+thehighestscoretoatreasurethathaslongkepthiddenwithin
+themausoleum. Roll 2 D 6 todeterminewhattreasure the
+spectreguardingnowgivestothe Warrior:
+1
+Afinecloakworth 15 goldpieces.
+2-3
+1 D 6 x 50 gold.
+4-5
+Oneitemof Dungeon Room Treasure.
+Oneitemof Objective Room Treasure.
+9</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-13-14-fire-spring" name="Fire Spring">
+    <rules>Fromthetopofahill, the Warriorsspotabeautiful springdown
+inthevalleywheretheycanquenchtheirthirst. Uponreaching
+it, the Warriorsdiscoveradancingbluefireburningjustbeneath
+the water.
+The Warriorsrealisethattheyhavefoundthefabledweapon-
+quenchingpoolfromanancient Dwarfclan!
+Each Warriormaychooseoneweapontothrustintothe
+magicalspringbeforerolling 1 D 6 on the tablebelow:
+1
+Theweaponisnowmagical.
+Theweaponcanblockone Attackonceper Combat,
+2
+whichcompletelynegatesany Damagetheattackwould
+have caused.
+3
+Theweapon nowcauses +1 Wound when it strikes.
+4
+The weapon now adds+1 Strength to thewielder.
+5
+Theweaponnowconveys+1 Toughnesstothewielder.
+6
+Theweaponnowcausesanextra 1 D 6 Woundsthefirst
+time ithitsin each Combat.
+Roll another 1 D 6. If the score is a 6, the effectispermanent! On
+any other score, the weapon's new effectlasts until the end of
+thenext Adventureafterwhichtheweaponreturmstonormal.
+. PLACE.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-15-16-bandit-stronghold" name="Bandit Stronghold">
+    <rules>Whilethe Warriors foragefor food,
+they come across a hidden fortress.
+Throughthe wooden palisade, they
+canseeagroupofarmedindividuals
+movingaround within. The Warriors
+recogniseoneof thebanditsasa
+notorious
+outlaw
+chief
+whose
+likenesstheyhaveseenonagreat
+many wanted posters in this area.
+The
+bandits
+completely
+appear
+unawareandthe Warriorsbelieve
+thattheycanovertakethem. Roll
+2 D 6 toseetheoutcomebelow:
+2-3
+The Warriorsunderestimate thenumberofbanditsin
+thegroupanditisn'tlongbeforetheyareforcedto
+surrender. Strippedofalltheirgoldandtreasurethe
+Warriorsaresentpackingbythebanditstoserveas
+anexampletootherswhomightbefoolishenough to
+crossthem. Each Warriormustrollanadditional 1 D 6
+and if the result is a'1', then the bandits takes an
+ear, fingerorothernon-vitalappendage(player's
+choice) as part of theirwarning.
+4-5
+Thebanditsarehighlyskilled andefficiently
+organisedand theysubdue the Warriorswithin
+minutes. Thebandits take all of the Warriors'gold
+andanitemof Treasurebeforereleasingthemmiles
+downtheroadasawarningforothers.
+6-8
+Itisn'tlongbeforethe Warriorsrealisethattheirplan
+isn'tgoingwell. Theyfleethebattlebutdrop 1 D 6 x 50
+goldintheprocess. Thebanditslaughatsucha
+paltryattemptatcapturingthemandthankthe
+Warriorsfortheir"donation"totheircause!
+9-10
+The Warriors launcha surprise attack on thebandits
+thatsendsthemintodisarray. Intheensuing
+confusionthe Warriorsareabletopickthemoffone
+by one. Unfortunately, the banditleader escapes, but
+a searchofthestrongholdturnsup 4 D 6 x 50 which
+the Warriorsdistributeevenlyamong themselves.
+11-12
+Theattackthe Warriorslaunch thefortressmakes
+thebandits thinkthattheforestisbeinginvadedby
+anarmy! Theleaderand 2 D 6 ofhiscronies
+immediatelysurrenderwhilsttherestofthebandits
+flee for theirlives. Once chained together thecaptive
+bandits areeasyenoughforthe Warriorstocontrol
+for therestof thejourney. When the Warriorsreach
+thenext Settlement, the Warriorsarerewardedwith
+50 goldperbanditwhiletheleaderisworth 1 D 6 x 100
+goldwhichis distributed amongstallof the Warriors
+evenly.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-21-22-garden" name="Garden">
+    <rules>The Warriorsnoticeasmallwoodengatejustoff themainpath
+which leads toalushgardenfilledwith ripevegetables. The
+Warriorsload theirpacksfrom theabundantcropsgrowingin
+thegardenandeatwell for severaldays thereafter. Fullof
+renewedvigour, the Warriorsareabletotravelatafasterpace
+andthusreducetheirjourneytimebyoneweek.
+19</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-23-24-encampment" name="Encampment">
+    <rules>The Warriorscomeupontheencampmentofasmallgroupof
+soldierswhoarebeingdeployedtoanearbyprovince. They
+welcomethe Warriors tositandrestwith them.
+of thesoldiersintheencampmentbyrolling 1 D 6 below:
+1-3
+Thesoldieristiredanddoesnotwishtotalkabout
+combatorweaponry.
+4-5
+The soldier enjoys the Warrior's company. He is skilled
+in the art of weapon sharpening and, in a show of
+friendship, offers to put a nice edge on your Warrior's
+blade. For thenext Adventure, one ofthe Warrior's
+weapons(theirchoice)causesanextra Woundeach
+time it hits.
+Thesoldierisquitetakenwiththe Warriorand
+excitedlydiscusses the fighting arts. The soldieris
+skilledindefencewiththebladeandshowsthe Warrior
+a newmanuever. Oncepercombat, the Warriormay
+attempttoturnasideablowbyrolling 1 D 6. Ifthe
+numberrolledisequal toorgreaterthantheattacker's
+Strength, theblowisblocked and causesno Damage.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-25-26-beautiful-grove" name="Beautiful Grove">
+    <rules>Withinabeautifulgrovetheweary Warriorsarebefriendedby
+anold sage. Heinvites the Warriors torest and offers to take
+the Warriors on a spiritual journey. Intrigued, the Warriors take
+himuponhis offer andeachmust roll 1 D 6 andaddtheir
+Willpowerandlookinguptheresultonthetablebelow:
+5 or
+Your Warriorexperienceshorridvisions; demonsslash
+less
+ghouls carry them away. .. they finally awaken, butis
+Adventureyour Warriorsuffers-1 To Hitand must
+deduct 1 onalloftheir Fearand Terrorrolls.
+6-8
+The insects aredistracting, thewind istoo cooland
+the ground is toohard. Your Warriorisrestless and
+cannotseemtofocusandlearmsnothing.
+9+
+Your Warriorendstheirmeditationwithaclearmind
+and tempered soul. Your Warrior'spathin life is
+clearer than ever. The nexttimeyour Warrior
+advancesin Battle-levelandrollsforaskill(or
+equivalent), theymayadd or subtract 1 from the dice
+rolltoseewhichskilltheyhavelearned.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-31-32-witchs-cave" name="Witch's Cave">
+    <rules>Deepinagloomyravine the Warriorscome across theentrance
+toa darkcave. Insideitdwellsa twisted, uglyhag whoclaims
+to be a witch.
+Each Warriormaypurchaseasinglepotionbypayingthe
+woman 1 D 6 x 10 gold(itmustbedrunkimmediately). Roll 1 D 6
+onthefollowing table:
+1
+Your Warriorfallsunconscious, writhinginagonyasif a
+firewereburningthroughthem. Whentheyawaken
+theyfeeldeathlyweak. Theysuffer-1 Toughnessfor
+thedurationofthenext Adventure.
+2-4
+Thepotionwarmsyour Warriortothecore. Theymay
+add+1 D 6 Woundstotheir Starting Woundsscore for
+thedurationofthenext Adventure.
+5-6
+Apowerfulheatsurgesthroughyour Warrior, andthey
+feel energy coursing through theirmuscles and sinews.
+They gain +1 Toughness for the duration of the next
+Adventure.
+20</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-33-34-chasm" name="Chasm">
+    <rules>The Warriors'pathstopsattheedgeofachasmwherea
+pathetic, brokenropebridgedanglesuselesslyon the far side.
+Theredoesseemtobeaplacefor arope tofastenontheother
+end, but it is across the chasm and far out of the Warriors'
+reach.
+Ifthe Warriorshavearopeandabow&amp;arrow(orother
+throwingweapon), oneofthemcanattachtheropetoitand
+attempt to shoot(or throw)it across the chasm. The Warrior
+makingtheattemptmust Make Difficult Shot(see the Action
+Tablenear thebackofyour Warrior's Rulebookorpage 166 of
+the Roleplay Bookforanymodifiers)byrolling To Hitwiththeir
+Ballistic Skill.
+If the shot is successful, the Warriors may use the rope to
+crawlacross the chasm. Each Warrior thatcrosses thechasm
+ontheropemustroll toseeif theropebreaksonce theyreach
+theother side. If itholds, the next Warriorcan crossin the same
+manner. Of course, any Warrior who crosses the chasm in this
+mannermustleavebehind anyhorses andcarts.
+If the shotmisses(orif the ropebreaks), the Warrior must
+discardthe rope(and throwingweaponif applicable). Any
+Warrior stillon the nearsideof the chasmcanrepeatthe
+processabovewithanotherprojectileweaponandropeifthey
+havethem.
+Any Warriorwhodoesnotcrossthechasminmannermust
+takethealternateroute, whichisanextremelyrockypath
+aroundthemountainwhichaddstwoweekstothejourney.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-35-36-pool-of-dreams" name="Pool of Dreams">
+    <rules>The Warriorscomeacrossadeeppooloffreezingwaterontop
+of a mountain; reflecting like a mirror, with shifting images
+drifting across its still, icy surface. As the Warriors gaze into
+the chill waters, they see twisted reflections of themselves
+Warriormustroll 1 D 6 onthefollowingtable:
+1-3
+Althoughtheycanseethesereflections, your Warrior
+cannotmakeanysenseofthem.
+4-6
+Your Warriorrealisesthattheyarebeinggranted a
+visionofthefuture! Atanytimeduringthenext
+Adventure, theymayignoreanyoneblowthatwould
+otherwisehitthem. Your Warriorrecognisestheblow
+beforeithitshome as thevisionfrom thepool, and
+dodges away just in time.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-41-42-checkpoint" name="Checkpoint">
+    <rules>The Warriorsarriveata militarycheckpointsetupbythelordof
+theregiontocombat the bandits thathave been attacking
+travellersontheroadbetweencities.
+Thesoldiersarecertainthatthe Warriorsareofillrepute and
+will not let them pass. Moreover, the Sergeant wants all of
+themarrestedandtaken to thenearbyvillageforinterrogation.
+The Warriorsmustchoose amongstthemwhowillstepforward
+and"convince"the sergeant thatthe Warriors are notbandits.
+That Warriormustmakea Bluffing Enemies(seethe Action
+Tablenearthebackofyour Warrior's Rulebookorpage 166 of
+the Roleplay Bookforanymodifiers)byrolling 1 D 6 withthe
+resultonthetablebelow:
+5 or The Sergeant is incensed that the Warriorswould try to
+lesslie theirway through thecheckpoint. All the Warriors
+arearrestedandtakentoanearby Villagewheretheir
+journeyends. Heretheymustpay 1 D 6 x 50 goldeachor
+bejailedfor 2 weeksuntil theyareclearedofcharges.
+Remember: ifthe Warriorsdonotimmediatelyproceed
+tothenext Adventure, theymustmakeonerollon the
+Catastrophic Events Table!
+The Sergeantrealizesthatthe Warriorsarerespectful
+6-8
+citizens and allow them topasswithnoloss of time.
+9+
+Afterbeingtoldanelaboratestoryfullof
+embellishmentsandexaggeratedmetaphorsthe
+Sergeantarrangesforaguide. Surelysuchnobleand
+fantasticwarriorsmustnotbedetainedontheirway to
+gloriousbattleswithfoulanddetestablemonsters! The
+Warriors'journeyisreducedby 1 weekandtheymay
+upgradethesizeofthe Settlementtheywereheaded
+to(a Villagetoa Townora Towntoa City)!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-43-44-mysterious-hollow" name="Mysterious Hollow">
+    <rules>The Warriorstravelthroughamistyhollowattheedgeofa
+denseforest. Unabletoseebuta fewinchesinfrontofthemfor
+many hours, the Warriors become separated. Each Warrior
+mustroll 1 D 6 onthe tablebelow:
+1
+Your Warrioriscompletelylostandlosesallhopeof
+findinga Settlement. Theymanage tomeetupwith the
+other Warriorsattheentrancetothenext Dungeon.
+2
+Your Warriorcontinuestheirjourneytoa Settlement
+aloneandwill meetupwith theother Warriorsatthe
+entrance to thenext Dungeon.
+3-4
+Your Warriorresumestheirjourneyalonebutwillmeet
+upwithanyother Warriorwhofindsthesamesize
+Settlementastheydo.
+5-6
+Your Warriorquicklyrendezvouswithanyother Warrior
+whorolled thisresultand theymaycontinuetheir
+journeytoa Settlementtogether.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-45-46-mausoleum" name="Mausoleum">
+    <rules>As the Warriorssearchfor a safeplace to camp on amoonless
+night, they take sanctuary inside an old stonehouse which isin
+afactaweatheredmausoleum. Aghostmaterialisesand
+accuses the Warriorsof being the onesresponsible for the
+mausoleum's stateof disrepair. The ghostdemands thateach
+Warriorpay 1 D 6 x 20 goldtoitslivingrelativestohelpthem
+rebuild the tomb(selling items of Equipment or Treasure if
+necessary) or it will curse them.
+Whenthe Warriorsreachthenext Settlement, theymayseek
+outanddonate the amounttotheghost's livingrelatives by
+followingtherules forfindinga Special Location. Any Warrior
+whodoesnotfind therelativesanddonatetherequiredamount
+iscursedbytheghostandtheysuffer-1 Luckfor thenext
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-51-52-magic-glade" name="Magic Glade">
+    <rules>As darkness falls, the Warriors stop in a glade to camp for the
+night. As they settle down to sleep, the Warriorsfeel soft magic
+flowing all around themwhichseems topermeatetheirbodies.
+Each Warriormustroll 1 D 6 andmayaddthatnumbertothe
+Warrior's Starting Woundsscoreforthenext Adventureonly.
+Throughoutthe Adventurethese Woundscanbehealedinthe
+normalfashionbutatthe end ofthe Adventure, the Warrior's
+Starting Woundsreturntonormal.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-53-54-swamp" name="Swamp">
+    <rules>As the Warriors pass by a vile swamp, they fail to notice a
+magicalgreenmist that seeps from the murkywaters and
+slowlymovestowardthem. Themistabsorbsenergyfrom
+everythinginthevicinityandeach Warrior findsthatoneof
+theirmagical weapons (their choice)hasbeen drained of its
+magical properties. For all intents and purposes (including its
+Gold Value)theweaponfunctionsasanon-magicalweaponof
+itskind. At theend of the next Adventure itrevertsbacktoits
+magicalstate.
+21</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-55-56-den" name="Den">
+    <rules>As the cloudsgrow dark and a savagerainbegins falling down,
+the Warriorsfind anarrowentrancein theclifffacewhichopens
+upintoalargecavern. Astheireyesadjusttothedarknessa
+horrorgripsthem. Sleepingsoundlyinthemiddleof thecavern
+isahugedragonsurroundedbytreasure.
+Your Warriorcaneitherexitsafelythroughthenarrow
+openingimmediatelyortheycantemptfateandsteala
+treasure from the sleeping dragon, hoping it doesn'twake up
+before the Warriormakestheirescape. (AHalfling Thiefcannot
+resistthe temptation and must steal a treasure. )
+Ifa Warrior optstosteal treasure, theymustroll 2 D 6 on the
+tablebelow:
+2
+Lootinhandyour Warrior almostmakesit to the den
+entrancebeforetheyareviolentlyyankedbackinby
+theawakeneddragon. Your Warriorscreamstheirlast
+as thecreaturedevoursthem. Remove the Warrior
+from the game.
+3-6
+On theverge ofescaping, your Warrior trips atthe
+cavern opening, waking the dragon in theprocess.
+Scramblingtotheirfeet, your Warriorabandonsall
+thoughtsoftreasureandleapsfromthecavernwith
+theenragedbeast'sfierybreathclosebehind. Your
+Warriorbarelysurvives, empty-handedandbadlyburnt
+andmustdeduct 1 Woundfrom their Starting Wounds
+scorepermanently.
++L
+Clutchingapieceoftreasuretightly, your Warrior
+makesittosafety and the dragon lets out anear-
+piercingroarfromwithin. Theitem of Treasureis
+yours! Roll another 1 D 6. If the score is 1, 2, 3 or 4 it is a
+piece of Dungeon Room Treasure and if the score isa 5
+or 6 itisapieceof Objective Room Treasure.
+22</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-61-62-waterfall" name="Waterfall">
+    <rules>Asthepathcurvesaroundthesideof themountainthe
+Warriors findamajesticwaterfallcascadingdownover the
+ledge they are walking along. As they pass underneath, the
+Warriors opentheirmouthsanddrinktherefreshingwater.
+Each Warriormayaddanextra+1 D 6 Woundsuntil theend of
+thenext Adventure. Theseextra Woundscannotbehealedand
+oncelosttheyarelostforever.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-63-64-abandoned-mine" name="Abandoned Mine">
+    <rules>Againstthe hillside, the Warriors see anold, abandoned Dwarf
+mine. Something isgleaming frominside and the Warriorscan't
+resistexaminingfurther. Roll 1 D 6 on the tablebelow:
+1
+Theold mine is dangerous and unstable! Itcollapses on
+the Warriors'heads as theyenter. If theyhave away of
+diggingoutofthecave-in, the Warriorseventuallyexit
+and continue on theirjourney. If not, then the Warriors
+onlyexitliesstraightahead throughthemines. They
+mustproceed directlyinto thenext Adventure.
+2-3
+The old mine collapseson the Warriors'headsjustas
+theyenter. Theymanagetoescape thefallingdebris
+butin theirhaste one of the Warriors(determined
+randomly)dropsanitemof Treasure(determined
+randomly)whichdisappearsundertherubble.
+4-5
+Thegleaminglightisindeedgold! The Warriorsrush in
+andbegindigging, managingtoscroungeup 1 D 6 x 10
+gold each.
+6
+Thegleaminglightiscomingfrom aveinofgold! The
+Warriorshavehitthemotherlodeandtheymanageto
+extract 1 D 6 x 100 goldeach!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-travel-place-65-66-battlefield" name="Battlefield">
+    <rules>Theareathatthe Warriorsaretravellingthroughwasthesiteof
+manyhistoricbattles. Each Warriormaycomb the area on the
+mayhave beenleftbehind. Searchingthebattlefield isan
+arduous process, however, and will add another week to the
+Warriors'journey.
+Any Warriorwhochoosestosearchcanlookforanyitem
+thatisavailableatthe Armourer, Fletcherorthe Weaponsmith.
+Roll for stock as if in a Town but with a -2 penalty(2 D 6-2). If
+the item is in stock, it means that your Warrior did indeed
+uncoverit onthebattlefield. However, the itemhasmost likely
+beendamagedinbattleandisquiteunusable.
+Ifyour Warriortakesthedamageditemtoatraderwhosells
+oneslikeit, however, the traderwillrepairitforhalf thenormal
+gold of the Cost(Buy)valuelisted.
+Forexample: ifthe Barbarianlooksfora Leather Helmwhich
+hasa stocknumberof 4. Herolls a 7 on 2 D 6 and subtracts the
+penalty-2 and sohis final score is a 5. The stock roll for the
+itemisa 4 whichmeansthatthe Barbariandoesfindabroken
+Leather Helm onthebattlefield. when he reaches the next
+Settlement, hevisits the Armourerwhorepairs theitemfor 50
+gold, which is half of the cost to buy a Leather Helm. The
+Barbariannowhasafunctioning Leather Helmthathecan
+eitherwear, sellorgivetoanother Warrior, etc.
+Thisexpansionadds 72 moreexcitinghazardsfor
+your Warriors to experienceas they travel toa
+Settlement!
+Separatedinto 6 distinctcategorieswith 18 entries
+ineach, thissupplementwillgiveyoumorevariety,
+moreexcitementandmoreroleplayingopportunities
+in your Warhammer Quest games!
+GAMES
+WORKSHOP
+TRAVELLINGHAZARDS?
+Di SCLAIMER: Warhammer Questisa trademarkof Games Workshop Limited. Thissupplementis
+statusisintended. Theoriginalrulesandformatsarecopyright Games Workshop. Thissupplement
+is No TFo RSALE andcanbedistributedfreelyso long asitisnotaltered inanyway, shape, orform.
+LM
+LITTLEMONK</rules>
+    <treasure>false</treasure>
+  </event>
+</events>

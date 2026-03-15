@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+
+  <monster id="od-giant-bat" name="Giant Bat" plural="Giant Bats">
+    <move>8</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>2</strength>
+    <toughness>2</toughness>
+    <wounds>1</wounds>
+    <initiative>-</initiative>
+    <attacks>1</attacks>
+    <gold>15</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text>Giant Bats make an immediate attack as soon as they are placed on the board and then attack as normal in the Monsters' Phase.
+After the first Turn, the combat sequence returns to normal.
+Bats are never pinned and will change target each turn if possible.</text></special>
+  </monster>
+  <monster id="od-giant-rat" name="Giant Rat" plural="Giant Rats">
+    <move>6</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>1</wounds>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>25</gold>
+    <armor>-</armor>
+    <damage>5D6</damage>
+    <special><text>When a Giant Rat hits your Warrior, roll 2 dice to see how many Wounds it causes, and add its Strength (2) to the score.
+Once a Giant Rat has attacked your Warrior, roll 1D6.  On a 3+ the Giant Rat's sucidial, frenzied attack has opened it up to your Warrior's attacks and he kills it automatically.</text></special>
+  </monster>
+  <monster id="od-giant-spider" name="Giant Spider" plural="Giant Spiders">
+    <move>6</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>S</strength>
+    <toughness>2</toughness>
+    <wounds>1</wounds>
+    <initiative>-</initiative>
+    <attacks>1</attacks>
+    <gold>15</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text>If a Spider attacks a Warrior who is already webbed, the Spider automatically bites him inflicting 1D3 Wounds with no modifiers for Toughness or armour.
+If the Warrior wasn't already webbed, make a roll to hit.  If the Spider hits, the Warrior is now webbed and may do nothing until he gets free.  Put a Webbed counter next to him.
+At the start of each turn roll 1D6 for each webbed Warrior and add his Strength.  If the total is 7 or more, he frees himself and may act normally.</text></special>
+  </monster>
+  <monster id="od-snotling" name="Snotling" plural="Snotlings">
+    <move>4</move>
+    <weaponskill>1</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>1</strength>
+    <toughness>1</toughness>
+    <wounds>1</wounds>
+    <initiative>1</initiative>
+    <attacks>1</attacks>
+    <gold>10</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special><text>Snotlings make an immediate attack as soon as they are placed on the board and then attack as normal in the Monsters' Phase.
+Draw a Warrior counter and place as many Snotlings as you can around that Warrior.  Repeat until all the Snotlings have been placed.
+For each Snotling above one in combat with a Warrior, add +1 to their hit roll and increase their Strength by +1: e.g., 4 Snotlings make a single Strength 4 attack with +3 on the to hit roll.
+Snotlings do not switch attacks unless their target dies, and will fight until killed.</text></special>
+  </monster>
+  <monster id="od-goblin-archer" name="Goblin Archer" plural="Goblin Archers">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>2</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>20</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text>When shooting with their bows, Night Goblin archers need to roll a 5 or more to hit.  A Goblin's bow has Stength 1, and causes 1D6+1 Wounds.
+Before fighting the Night Goblin archers, take another Event card.</text></special>
+  </monster>
+  <monster id="od-goblin-spearman" 
+           name="Goblin Spearman" plural="Goblin Spearmen">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>2</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>20</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text>When shooting with their bows, Night Goblin archers need to roll a 5 or more to hit.  A Goblin's bow has Stength 1, and causes 1D6+1 Wounds.
+Goblins armed with spears may attack from 2 squares away, even past intervening Monsters and Warriors.</text></special>
+  </monster>
+  <monster id="od-skaven" name="Skaven" plural="Skaven">
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>3</wounds>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>40</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text></text></special>
+  </monster>
+  <monster id="od-orc" name="Orc" plural="Orcs">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <wounds>3</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>55</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text></text></special>
+  </monster>
+  <monster id="od-orc-archer" name="Orc Archer" plural="Orc Archers">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <wounds>3</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>55</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special><text>When shooting with their bows, Orc archers need to roll a 4 or more to hit.  An Orc's bow has Strength 3, and causes 1D6+3 Wounds.</text></special>
+  </monster>
+  <monster id="od-minotaur-solo" name="Minotaur" plural="Minotaurs">
+    <move>6</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>15</wounds>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>440</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special><text>When a Minotaur hits a Warrior, roll 2 dice to see how many Wounds it causes, adding its Strength of 4 to the total.
+Before fighting the Minotaur, take another Event card.  If this is an Event, resolve it before fighting the Minotaur.  If it reveals more Monsters, fight them all at once.</text></special>
+  </monster>
+  <monster id="od-minotaur" name="Minotaur" plural="Minotaurs">
+    <move>6</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>15</wounds>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>440</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special><text>When a Minotaur hits a Warrior, roll 2 dice to see how many Wounds it causes, adding its Strength of 4 to the total.</text></special>
+  </monster>
+</monsters>

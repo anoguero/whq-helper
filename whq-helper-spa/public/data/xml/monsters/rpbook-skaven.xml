@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="rpb-skaven-clanrat" 
+           factions="skaven" name="Skaven Clanrat" plural="Skaven Clanrats">
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>3</wounds>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>40</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special></special>
+  </monster>
+  <monster id="rpb-skaven-clanrat-champion" factions="skaven" name="Skaven Clanrat Champion"
+           plural="Skaven Clanrat Champions">
+    <wounds>11</wounds>
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>5</initiative>
+    <attacks>2</attacks>
+    <gold>270</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-never-pinned">Never Pinned</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-chieftain" factions="skaven" name="Skaven Cheiftain" 
+           plural="Skaven Cheiftains">
+    <wounds>20</wounds>
+    <move>5</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>6</initiative>
+    <attacks>3</attacks>
+    <gold>590</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-never-pinned">Never Pinned</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-gutter-runner" factions="skaven" name="Skaven Gutter Runner"
+           plural="Skaven Gutter Runners">
+    <wounds>5</wounds>
+    <move>6</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>5</initiative>
+    <attacks>1</attacks>
+    <gold>120</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush">Ambush 4+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-assassin" factions="skaven" name="Skaven Assassin" 
+           plural="Skaven Assassins">
+    <wounds>7</wounds>
+    <move>6</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>5</initiative>
+    <attacks>2</attacks>
+    <gold>300</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush">Ambush A</rule>
+      <rule id="rpb-assassinate">Assassinate 6+</rule>
+      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-deathmaster-assassin" factions="skaven" name="Skaven Deathmaster" 
+           plural="Skaven Deathmasters">
+    <wounds>32</wounds>
+    <move>6</move>
+    <weaponskill>8</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>10</initiative>
+    <attacks>5</attacks>
+    <gold>2300</gold>
+    <armor>-</armor>
+    <damage>4D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-assassinate">Assassinate 4+</rule>
+      <rule id="rpb-dodge">Dodge 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-warpfire-thrower-team" factions="skaven" name="Warpfire Thrower Team"
+           plural="Warpfire Thrower Teams">
+    <wounds>3</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>700</gold>
+    <armor>1</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-warfire-thrower">Armed with Warpfire Thrower (Missile Troops)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-jezzail" factions="skaven" name="Skaven Jezzail" 
+           plural="Skaven Jezzails">
+    <wounds>6</wounds>
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>300</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-skaven-jezzail">Armed with Jezzail (Str 5, ignore 3 points of armour)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-vermin-lord" factions="skaven" name="Skaven Vermin Lord" 
+           plural="Skaven Vermin Lords">
+    <wounds>75</wounds>
+    <move>8</move>
+    <weaponskill>8</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>8</strength>
+    <toughness>7</toughness>
+    <initiative>10</initiative>
+    <attacks>8</attacks>
+    <gold>6000</gold>
+    <armor>6</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-doom-glaive">Armed with Doom Glaive</rule>
+      <rule id="rpb-dodge">Dodge 3+</rule>
+      <rule id="rpb-frenzy">Frenzy 5+</rule>
+      <rule id="rpb-greater-daemon">Greater Daemon 14</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 6</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-skitterleap">Skitterleap</rule>
+      <magic id="rpb-skaven" level="4" />
+    </special>
+  </monster>
+  <monster id="rpb-skaven-stormvermin" 
+           factions="skaven" name="Skaven Stormvermin" plural="Skaven Stormvermin">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>5</wounds>
+    <initiative>5</initiative>
+    <attacks>1</attacks>
+    <gold>95</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special></special>
+  </monster>
+  <monster id="rpb-skaven-stormvermin-champion" 
+           factions="skaven" name="Skaven Stormvermin Champion" 
+           plural="Skaven Stormvermin Champions">
+    <wounds>10</wounds>
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>5</initiative>
+    <attacks>1</attacks>
+    <gold>110</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Halberds</rule>
+      <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
+    </special>
+  </monster>   
+  <monster id="rpb-skaven-warlord" factions="skaven" name="Skaven Warlord" 
+           plural="Skaven Warlords">
+    <wounds>30</wounds>
+    <move>5</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>7</initiative>
+    <attacks>4</attacks>
+    <gold>900</gold>
+    <armor>3</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-plague-censer-bearer" factions="skaven" name="Plague Censer Bearer" 
+           plural="Plague Censer Bearers">
+    <wounds>4</wounds>
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>150</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-plague-censers">Armed with plague censers</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-plague-monk" factions="skaven" name="Skaven Plague Monk" 
+           plural="Skaven Plague Monks">
+    <wounds>5</wounds>
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>60</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-frenzy">Frenzy 5+</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-plague-priest" 
+           factions="skaven" name="Skaven Clanrat Plague Priest" 
+           plural="Skaven Clanrat Plague Priests">
+    <wounds>23</wounds>
+    <move>5</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>6</initiative>
+    <attacks>3</attacks>
+    <gold>730</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-frenzy">Frenzy 4+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-plague-lord" factions="skaven" name="Skaven Plague Lord" 
+           plural="Skaven Plague Lords">
+    <wounds>30</wounds>
+    <move>5</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>7</initiative>
+    <attacks>4</attacks>
+    <gold>2250</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-death-fog">Death Fog</rule>
+      <rule id="rpb-dodge">Dodge 3+</rule>
+      <rule id="rpb-frenzy">Frenzy 3+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 3+</rule>
+      <rule id="rpb-magic-item">3 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-never-pinned">Never Pinned</rule>
+      <rule id="rpb-terror">Terror 10</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-poison-globadier" factions="skaven" name="Skaven Poison Globadier"
+           plural="Skaven Poison Globadiers">
+    <wounds>4</wounds>
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>200</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-poison-wind-globes">Armed with poison wind globes</rule>
+    </special>
+  </monster>
+  <monster id="rpb-skaven-warlock" factions="skaven" name="Skaven Warlock" 
+           plural="Skaven Warlocks">
+    <wounds>15</wounds>
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>5</initiative>
+    <attacks>1</attacks>
+    <gold>560</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 6+</rule>
+      <magic id="rpb-skaven" level="1" />
+    </special>
+  </monster>  
+  <monster id="rpb-skaven-warlock-champion" factions="skaven" name="Skaven Warlock Champion"
+           plural="Skaven Warlock Champions">
+    <wounds>18</wounds>
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>5</initiative>
+    <attacks>1</attacks>
+    <gold>1180</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 5+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-weeping-blade">Weeping Blade</rule>
+      <magic id="rpb-skaven" level="2" />
+    </special>
+  </monster>
+  <monster id="rpb-skaven-master-warlock" factions="skaven" name="Skaven Master Warlock"
+           plural="Skaven Master Warlocks">
+    <wounds>30</wounds>
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>1900</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">3 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-skaven" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-skaven-grey-seer" factions="skaven" name="Skaven Grey Seer" 
+           plural="Skaven Grey Seers">
+    <wounds>43</wounds>
+    <move>5</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>7</initiative>
+    <attacks>4</attacks>
+    <gold>3400</gold>
+    <armor>-</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">4 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-skaven" level="4" />
+    </special>
+  </monster>
+</monsters>

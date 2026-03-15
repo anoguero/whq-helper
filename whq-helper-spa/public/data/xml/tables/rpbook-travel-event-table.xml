@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+  <table name="Roleplay Book Travel Hazards Table" kind="travel">
+    <event id="rpb-massacre" />
+    <event id="rpb-fire" />
+    <event id="rpb-chapel" />
+    <event id="rpb-quake" />
+    <event id="rpb-stranger" />
+    <event id="rpb-pedlar" />
+    <event id="rpb-tornado" />
+    <event id="rpb-travel-22-uneventful-week" />
+    <event id="rpb-travel-23-plague" />
+    <event id="rpb-travel-24-uneventful-week" />
+    <event id="rpb-travel-25-prisoner" />
+    <event id="rpb-travel-26-guests" />
+    <event id="rpb-travel-31-witchs-cave" />
+    <event id="rpb-travel-32-famine" />
+    <event id="rpb-travel-33-uneventful-week" />
+    <event id="rpb-travel-34-bad-map" />
+    <event id="rpb-travel-35-pool-of-dreams" />
+    <event id="rpb-travel-36-lightning" />
+    <event id="rpb-travel-41-lost" />
+    <event id="rpb-travel-42-lightning" />
+    <event id="rpb-travel-43-waylaid" />
+    <event id="rpb-travel-44-uneventful-week" />
+    <event id="rpb-travel-45-which-road" />
+    <event id="rpb-travel-46-ambush" />
+    <event id="rpb-travel-51-uneventful-week" />
+    <event id="rpb-travel-52-blizzard" />
+    <event id="rpb-travel-53-double-back" />
+    <event id="rpb-travel-54-rockfall" />
+    <event id="rpb-travel-55-wagon-train" />
+    <event id="rpb-travel-56-uneventful-week" />
+    <event id="rpb-travel-61-militia" />
+    <event id="rpb-travel-62-brigands" />
+    <event id="rpb-travel-63-travelling-minstrel" />
+    <event id="rpb-travel-64-fall" />
+    <event id="rpb-travel-65-glorious-weather" />
+    <event id="rpb-travel-66-storm" />
+  </table>
+</tables>

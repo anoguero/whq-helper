@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="hothq-black-dragon" factions="darkelves chaos" name="Black Dragon" plural="Black Dragons">
+    <move>6</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>6</strength>
+    <toughness>6</toughness>
+    <wounds>74</wounds>
+    <initiative>8</initiative>
+    <attacks>7</attacks>
+    <gold>4500</gold>
+    <armor>6</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="hothq-breathes-smoke">Breathes Smoke (Ambush, Magic A)</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-terror">Terror 12</rule>
+      <rule id="rpb-treasure-hoard">Treasure Hoard +0</rule>
+    </special>
+  </monster>
+  <monster id="hothq-cave-dragon" factions="chaos darkelves" name="Cave Dragon" plural="Cave Dragons">
+    <move>8</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <wounds>35</wounds>
+    <initiative>6</initiative>
+    <attacks>3</attacks>
+    <gold>910</gold>
+    <armor>3</armor>
+    <damage>3D6/4D6(5+)</damage>
+    <special>
+      <rule id="hothq-breathes-noxious-vapour">Breathes Noxious Vapour 4+</rule>
+      <rule id="rpb-fear">Fear 10</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-plague">Plague</rule>
+    </special>
+  </monster>
+  <monster id="hothq-cave-troll" factions="chaos orcs darkelves" name="Cave Troll" plural="Cave Trolls">
+    <move>6</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>6+</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <wounds>30</wounds>
+    <initiative>1</initiative>
+    <attacks>3</attacks>
+    <gold>650</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-vomit">Vomit</rule>
+    </special>
+  </monster>
+  <monster id="hothq-emperor-black-dragon" factions="darkelves chaos" name="Emperor Black Dragon" plural="Emperor Black Dragons">
+    <move>6</move>
+    <weaponskill>8</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>8</strength>
+    <toughness>8</toughness>
+    <wounds>94</wounds>
+    <initiative>10</initiative>
+    <attacks>9</attacks>
+    <gold>7500</gold>
+    <armor>8</armor>
+    <damage>7D6</damage>
+    <special>
+      <rule id="hothq-breathes-smoke">Breathes Smoke (Ambush, Magic A)</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 3D6</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-terror">Terror 14</rule>
+      <rule id="rpb-treasure-hoard">Treasure Hoard +2</rule>
+      <magic id="rpb-chaos" level="2" />
+    </special>
+  </monster>
+  <monster id="hothq-great-black-dragon" factions="darkelves chaos" name="Great Black Dragon" plural="Great Black Dragons">
+    <move>6</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>7</strength>
+    <toughness>7</toughness>
+    <wounds>84</wounds>
+    <initiative>9</initiative>
+    <attacks>8</attacks>
+    <gold>6000</gold>
+    <armor>7</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="hothq-breathes-smoke">Breathes Smoke (Ambush, Magic A)</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-terror">Terror 13</rule>
+      <rule id="rpb-treasure-hoard">Treasure Hoard +1</rule>
+      <magic id="rpb-chaos" level="1" />
+    </special>
+  </monster>
+  <monster id="hothq-ogre-mercenary" factions="chaos darkelves" name="Ogre Mercenary" plural="Ogre Mercenaries">
+    <move>6</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>5+</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <wounds>13</wounds>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>400</gold>
+    <armor>-</armor>
+    <damage>2D6/3D6(5+)</damage>
+    <special>
+      <rule id="rpb-fear">Fear 5</rule>
+    </special>
+  </monster>
+  <monster id="hothq-ogre-mercenary-champion" factions="chaos darkelves" name="Ogre Mercenary Champion" plural="Ogre Mercenary Champions">
+    <move>6</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4+</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <wounds>24</wounds>
+    <initiative>4</initiative>
+    <attacks>3</attacks>
+    <gold>1000</gold>
+    <armor>1</armor>
+    <damage>3D6/4D6(5+)</damage>
+    <special>
+      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="hothq-river-troll" factions="chaos orcs darkelves" name="River Troll" plural="River Trolls">
+    <move>6</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>6+</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <wounds>25</wounds>
+    <initiative>1</initiative>
+    <attacks>3</attacks>
+    <gold>650</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="hothq-slimy-skin">Slimy Skin</rule>
+      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-regenerate">Regenerate 2</rule>
+    </special>
+  </monster>
+</monsters>

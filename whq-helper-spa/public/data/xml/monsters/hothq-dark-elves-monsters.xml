@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="hothq-black-ark-corsair" factions="darkelves" name="Black Ark Corsair" plural="Black Ark Corsairs">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>6</wounds>
+    <initiative>6</initiative>
+    <attacks>1</attacks>
+    <gold>120</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="hothq-dragon-cloak">Dragon Cloak</rule>
+      <rule id="rpb-dodge">Dodge 6+</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+    </special>
+  </monster>
+  <monster id="hothq-black-ark-corsair-champion" factions="darkelves" name="Black Ark Corsair Champion" plural="Black Ark Corsair Champions">
+    <move>5</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <wounds>14</wounds>
+    <initiative>7</initiative>
+    <attacks>2</attacks>
+    <gold>590</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="hothq-dragon-cloak">Dragon Cloak</rule>
+      <rule id="rpb-dodge">Dodge 6+</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="hothq-bloodshade" factions="darkelves" name="Bloodshade" plural="Bloodshades">
+    <move>5</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>18</wounds>
+    <initiative>8</initiative>
+    <attacks>3</attacks>
+    <gold>700</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-armed-with">Armed with Heavy Repeater Crossbows (Str 4)</rule>
+      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+    </special>
+  </monster>
+  <monster id="hothq-cold-one" factions="darkelves" name="Cold One" plural="Cold Ones">
+    <move>8</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <wounds>30</wounds>
+    <initiative>2</initiative>
+    <attacks>2</attacks>
+    <gold>650</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="hothq-poison-slime">Poison Slime (1D3)</rule>
+      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+    </special>
+  </monster>
+  <monster id="hothq-cold-one-knight" factions="darkelves" name="Cold One Knight" plural="Cold One Knights">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>14</wounds>
+    <initiative>7</initiative>
+    <attacks>1</attacks>
+    <gold>300</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Lance</rule>
+      <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-rider">Rider</rule>
+    </special>
+  </monster>
+  <monster id="hothq-dark-elf-naggaroth-black-guard-champion" factions="darkelves" name="Naggaroth Black Guard Champion" plural="Naggaroth Black Guard Champions">
+    <move>5</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>14</wounds>
+    <initiative>8</initiative>
+    <attacks>2</attacks>
+    <gold>590</gold>
+    <armor>3</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Halberds</rule>
+      <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+    </special>
+  </monster>
+  <monster id="hothq-dark-elf-master-sorceress" factions="darkelves" name="Dark Elf Master Sorceress" plural="Dark Elf Master Sorceresses">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>30</wounds>
+    <initiative>8</initiative>
+    <attacks>2</attacks>
+    <gold>2190</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="hothq-2x-magic-item">2 x Magic Item</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-dark-elf" level="3" />
+    </special>
+  </monster>
+  <monster id="hothq-dark-elf-sorceress" factions="darkelves" name="Dark Elf Sorceress" plural="Dark Elf Sorceresses">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <wounds>12</wounds>
+    <initiative>7</initiative>
+    <attacks>1</attacks>
+    <gold>590</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <magic id="rpb-dark-elf" level="1" />
+    </special>
+  </monster>
+  <monster id="hothq-dark-elf-sorceress-champion" factions="darkelves" name="Dark Elf Sorceress Champion" plural="Dark Elf Sorceress Champions">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>20</wounds>
+    <initiative>7</initiative>
+    <attacks>1</attacks>
+    <gold>1210</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-dark-elf" level="2" />
+    </special>
+  </monster>
+  <monster id="hothq-dark-elf-sorceress-lord" factions="darkelves" name="Dark Elf Sorceress Lord" plural="Dark Elf Sorceress Lords">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>41</wounds>
+    <initiative>9</initiative>
+    <attacks>3</attacks>
+    <gold>3280</gold>
+    <armor>3</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="hothq-3x-magic-item">3 x Magic Item</rule>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 3+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-dark-elf" level="4" />
+    </special>
+  </monster>
+  <monster id="hothq-har-ganeth-executioner" factions="darkelves" name="Har Ganeth Executioner" plural="Har Ganeth Executioners">
+    <move>5</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <wounds>18</wounds>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>650</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="hothq-executioners-blow">Executioner's Blow</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+    </special>
+  </monster>
+  <monster id="hothq-har-ganeth-expert-executioner" factions="darkelves" name="Har Ganeth Expert Executioner" plural="Har Ganeth Expert Executioners">
+    <move>5</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <wounds>26</wounds>
+    <initiative>8</initiative>
+    <attacks>3</attacks>
+    <gold>1200</gold>
+    <armor>3</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="hothq-executioners-blow">Executioner's Blow</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+    </special>
+  </monster>
+  <monster id="hothq-shade" factions="darkelves" name="Shade" plural="Shades">
+    <move>5</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>4</wounds>
+    <initiative>6</initiative>
+    <attacks>1</attacks>
+    <gold>75</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-armed-with">Armed with Repeater Crossbows (Str 3)</rule>
+      <rule id="rpb-break">Break</rule>
+      <rule id="rpb-dodge">Dodge 6+</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+    </special>
+  </monster>
+  <monster id="hothq-witch-elf-murderess" factions="darkelves" name="Witch Elf Murderess" plural="Witch Elf Murderesses">
+    <move>5</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1+</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>28</wounds>
+    <initiative>8</initiative>
+    <attacks>3</attacks>
+    <gold>1300</gold>
+    <armor>-</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-frenzy">Frenzy 2+</rule>
+      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="hothq-venom">Venom</rule>
+    </special>
+  </monster>
+  <monster id="hothq-harpy" factions="darkelves" name="Harpy" plural="Harpies">
+    <move>5</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>8</wounds>
+    <initiative>2</initiative>
+    <attacks>2</attacks>
+    <gold>200</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-fly">Fly</rule>
+    </special>
+  </monster>
+</monsters>

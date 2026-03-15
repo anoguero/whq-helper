@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+  <table name="Roleplay Book Settlement Events Table" kind="settlement">
+    <event id="rpb-thrown-out" />
+    <event id="rpb-settlement-12-pickpocket" />
+    <event id="rpb-settlement-13-uneventful-day" />
+    <event id="rpb-settlement-14-good-deed" />
+    <event id="rpb-settlement-15-investment" />
+    <event id="rpb-settlement-16-steam-bath" />
+    <event id="rpb-settlement-21-fight" />
+    <event id="rpb-settlement-22-uneventful-day" />
+    <event id="rpb-settlement-23-fooled" />
+    <event id="rpb-settlement-24-circus" />
+    <event id="rpb-settlement-25-reward" />
+    <event id="rpb-settlement-26-betrothed" />
+    <event id="rpb-settlement-31-drugged" />
+    <event id="rpb-settlement-32-uneventful-day" />
+    <event id="rpb-settlement-33-an-honest-days-work" />
+    <event id="rpb-settlement-34-riotous-living" />
+    <event id="rpb-settlement-35-duel" />
+    <event id="rpb-settlement-36-uneventful-day" />
+    <event id="rpb-settlement-41-gambling" />
+    <event id="rpb-settlement-42-uneventful-day" />
+    <event id="rpb-settlement-43-join-the-watch" />
+    <event id="rpb-settlement-44-illness" />
+    <event id="rpb-settlement-45-pet-dog" />
+    <event id="rpb-settlement-46-runaway" />
+    <event id="rpb-settlement-51-crime" />
+    <event id="rpb-settlement-52-uneventful-day" />
+    <event id="rpb-settlement-53-counterfeit" />
+    <event id="rpb-settlement-54-beggars" />
+    <event id="rpb-settlement-55-debt" />
+    <event id="rpb-settlement-56-uneventful-day" />
+    <event id="rpb-settlement-61-temple-donation" />
+    <event id="rpb-settlement-62-uneventful-day" />
+    <event id="rpb-settlement-63-hunting" />
+    <event id="rpb-settlement-64-witchcraft" />
+    <event id="rpb-settlement-65-uneventful-day" />
+    <event id="rpb-settlement-66-accident" />
+  </table>
+</tables>

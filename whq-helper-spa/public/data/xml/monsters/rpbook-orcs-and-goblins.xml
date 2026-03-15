@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="rpb-goblin" factions="orcs" name="Goblin" plural="Goblins">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>2</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>20</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 1) or [4-6] Spears (Fight in Ranks)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-goblin-boss" factions="orcs" name="Goblin Boss" plural="Goblin Bosses">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <wounds>6</wounds>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>150</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-goblin-big-boss" 
+           factions="orcs" name="Goblin Big Boss" plural="Goblin Big Bosses">
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>12</wounds>
+    <initiative>4</initiative>
+    <attacks>3</attacks>
+    <gold>330</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+ (Ring)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-goblin-netter" factions="orcs" name="Goblin Netter" plural="Goblin Netters">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>2</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>35</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Nets</rule>
+    </special>
+  </monster>
+  <monster id="rpb-goblin-fanatic" 
+           factions="orcs" name="Goblin Fanatic" plural="Goblin Fanatics">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>2</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>300</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Ball and Chain</rule>
+      <rule id="rpb-never-pinned">Never Pinned</rule>
+    </special>
+  </monster>
+  <monster id="rpb-goblin-squig-hunter"
+           factions="orcs" name="Goblin Squig Hunter" plural="Goblin Squig Hunters">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>2</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>25</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-herd-squigs">Herd Squigs</rule>
+    </special>
+  </monster>
+  <monster id="rpb-goblin-shaman" factions="orcs" name="Goblin Shaman" plural="Goblin Shamans">
+    <move>4</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <wounds>3</wounds>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>280</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+ (Ring)</rule>
+      <magic id="rpb-goblin" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-hobgoblin" factions="orcs chaosdwarves" name="Hobgoblin" plural="Hobgoblins">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <wounds>4</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>50</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush">Ambush, Magic A</rule>
+      <rule id="rpb-break">Break</rule>
+    </special>
+  </monster>
+  <monster id="rpb-orc" factions="orcs" name="Orc" plural="Orcs">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <wounds>3</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>55</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 3) or [4-6] Swords</rule>
+    </special>
+  </monster>
+  <monster id="rpb-orc-boss" factions="orcs" name="Orc Boss" plural="Orc Bosses">
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>18</wounds>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>330</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-orc-big-boss" factions="orcs" name="Orc Big Boss" plural="Orc Big Bosses">
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <wounds>25</wounds>
+    <initiative>4</initiative>
+    <attacks>3</attacks>
+    <gold>720</gold>
+    <armor>3</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-ignore-pain">Ignore Pain 6+</rule>
+      <rule id="rpb-magic-armour">Magic Armor</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-orc-war-boss" factions="orcs" name="Orc War Boss" plural="Orc War Bosses">
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <wounds>33</wounds>
+    <initiative>5</initiative>
+    <attacks>4</attacks>
+    <gold>1100</gold>
+    <armor>3</armor>
+    <damage>2D6/3D6(5+)</damage>
+    <special>
+      <rule id="rpb-ignore-pain">Ignore Pain 5+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-items">2 x Magic Items</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-black-orc" factions="orcs" name="Black Orc" plural="Black Orcs">
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>7</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>90</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special></special>
+  </monster>  
+  <monster id="rpb-black-orc-champion" 
+           factions="orcs" name="Black Orc Champion" plural="Black Orc Champions">
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>10</wounds>
+    <initiative>2</initiative>
+    <attacks>2</attacks>
+    <gold>140</gold>
+    <armor>2</armor>
+    <damage>1D6/2D6(5+)</damage>
+    <special>
+      <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
+    </special>
+  </monster>  
+  <monster id="rpb-black-orc-boss" 
+           factions="orcs" name="Black Orc Boss" plural="Black Orc Bosses">
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <wounds>20</wounds>
+    <initiative>3</initiative>
+    <attacks>2</attacks>
+    <gold>420</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>  
+  <monster id="rpb-black-orc-big-boss" 
+           factions="orcs" name="Black Orc Big Boss" plural="Black Orc Big Bosses">
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <wounds>23</wounds>
+    <initiative>4</initiative>
+    <attacks>3</attacks>
+    <gold>910</gold>
+    <armor>3</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>  
+  <monster id="rpb-savage-orc" factions="orcs" name="Savage Orc" plural="Savage Orcs">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <wounds>5</wounds>
+    <initiative>2</initiative>
+    <attacks>1</attacks>
+    <gold>65</gold>
+    <armor>S</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-armed-with">Armed with Bows (Str 3)</rule>
+      <rule id="rpb-tattoos">Tattoos 6+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-orc-shaman" factions="orcs" name="Orc Shaman" plural="Orc Shamans">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>5</toughness>
+    <wounds>16</wounds>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>590</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-orc" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-orc-shaman-champion" 
+           factions="orcs" name="Orc Shaman Champion" plural="Orc Shaman Champions">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <wounds>20</wounds>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>1180</gold>
+    <armor>2</armor>
+    <damage>1D6/2D6(5+)</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-orc" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-orc-shaman-lord"
+           factions="orcs" name="Orc Shaman Lord" plural="Orc Shaman Lords">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <wounds>42</wounds>
+    <initiative>5</initiative>
+    <attacks>3</attacks>
+    <gold>2870</gold>
+    <armor>2</armor>
+    <damage>2D6/3D6(5+)</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 5+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-orc" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-savage-orc-shaman"
+           factions="orcs" name="Savage Orc Shaman" plural="Savage Orc Shamans">
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>5</toughness>
+    <wounds>16</wounds>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>590</gold>
+    <armor>S</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-tattoos">Tattoos 5+</rule>
+      <magic id="rpb-orc" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-snotling" factions="orcs" name="Snotling" plural="Snotlings">
+    <move>4</move>
+    <weaponskill>1</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>1</strength>
+    <toughness>1</toughness>
+    <wounds>1</wounds>
+    <initiative>1</initiative>
+    <attacks>1</attacks>
+    <gold>10</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-gang-up">Gang Up</rule>
+    </special>
+  </monster>
+</monsters>

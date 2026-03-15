@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'> 
+<event id="rpb-treasure-dungeon-gold" name="Gold"><rules>Each player may roll as many D6 as he likes, adding up the score and multiplying it by 10 to determine how much gold his Warrior finds. However, if any of the dice score a 1 his Warrior finds nothing at all.</rules><goldValue>-</goldValue><treasure>true</treasure></event>
+</events>

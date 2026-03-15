@@ -1,0 +1,1326 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+        
+  <!-- Level 1 -->
+  <table name="Roleplay Book Monsters - Level 1">
+    <monster id="rpb-ogre" number="1-3" ambiences="chaos" level="1" />
+    <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="1" />
+    <monster id="rpb-skaven-stormvermin" number="4-9" ambiences="skaven" level="1" />
+    <monster id="rpb-snotling" number="7-12" ambiences="orcs-goblins" level="1" />
+    <monster id="rpb-giant-bat" number="7-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+    <monster id="rpb-giant-spider" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+    <monster id="rpb-giant-rat" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+    <monster id="rpb-orc" number="2-12" ambiences="orcs-goblins" level="1" />
+    <monster id="rpb-skaven-clanrat" number="2-12" ambiences="skaven" level="1" />
+    <group level="1">
+      <monster id="rpb-savage-orc" number="1-6" ambiences="orcs-goblins" level="1" />
+      <monster id="rpb-savage-orc-shaman" number="1" ambiences="orcs-goblins" level="1" />
+   </group>
+   <monster id="rpb-goblin-netter" number="2-6" ambiences="orcs-goblins" level="1" />
+   <monster id="rpb-skeleton" number="2-12" ambiences="undead" level="1" />
+   <monster id="rpb-zombie" number="1-6" ambiences="undead" level="1" />
+   <monster id="rpb-ghoul" number="2-12" ambiences="undead" level="1" />
+   <monster id="rpb-dark-elf-warrior" number="4-9" ambiences="dark-elves" level="1" />
+   <monster id="rpb-giant-spider" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+   <group level="1">
+     <monster id="rpb-wild-cave-squig" number="1-3" ambiences="orcs-goblins" level="1" />
+     <monster id="rpb-goblin-squig-hunter" number="S" ambiences="orcs-goblins" level="1" />
+   </group>
+   <group level="1">
+     <monster id="rpb-trained-cave-squig" number="1-3" ambiences="orcs-goblins" level="1" />
+     <monster id="rpb-goblin-squig-hunter" number="S" ambiences="orcs-goblins" level="1" />
+   </group>
+   <monster id="rpb-snotling" number="7-12" ambiences="orcs-goblins" level="1" />
+   <monster id="rpb-giant-bat" number="7-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+   <monster id="rpb-hobgoblin" number="4-9" ambiences="orcs-goblins chaos-dwarves" level="1" />
+   <group level="1">
+     <monster id="rpb-goblin" number="7-12" ambiences="orcs-goblins" level="1" />
+     <monster id="rpb-goblin-shaman" number="1" ambiences="orcs-goblins" level="1" />
+   </group>
+   <monster id="rpb-minotaur" number="1-3" ambiences="chaos" level="1" />
+   <monster id="rpb-orc" number="2-12" ambiences="orcs-goblins" level="1" />
+   <monster id="rpb-snotling" number="7-12" ambiences="orcs-goblins" level="1" />
+   <monster id="rpb-giant-bat" number="7-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+   <monster id="rpb-giant-spider" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+   <monster id="rpb-giant-rat" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
+   <monster id="rpb-skaven-clanrat" number="2-12" ambiences="skaven" level="1" />
+   <monster id="rpb-skeleton" number="2-12" ambiences="undead" level="1" />
+   <monster id="rpb-goblin" number="7-12" ambiences="orcs-goblins" level="1" />
+   <monster id="rpb-hobgoblin" number="4-9" ambiences="orcs-goblins chaos-dwarves" level="1" />
+   <monster id="rpb-dark-elf-naggaroth-black-guard" number="3-8" ambiences="dark-elves" level="1" />
+   <monster id="rpb-centaur" number="1-3" ambiences="chaos" level="1" />
+   <monster id="rpb-minotaur" number="1-3" ambiences="chaos" level="1" />
+  </table>
+  
+  <!-- Level 2 -->
+  <table name="Roleplay Book Monsters - Level 2">
+    <monster id="rpb-chaos-warrior" number="2-7" ambiences="chaos" level="2" />
+    <monster id="rpb-centaur" number="1-3" ambiences="chaos" level="2" />
+    <monster id="rpb-ogre" number="3" ambiences="chaos" level="2" />
+    <monster id="rpb-minotaur" number="3" ambiences="chaos" level="2" />
+    <monster id="rpb-snotling" number="12" ambiences="orcs-goblins" level="2" />
+    <monster id="rpb-giant-bat" number="12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="2" />
+    <monster id="rpb-giant-spider" number="12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="2" />
+    <monster id="rpb-giant-rat" number="12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="2" />
+    <monster id="rpb-hobgoblin" number="12" ambiences="orcs-goblins chaos-dwarves" level="2" />
+    <monster id="rpb-rat-ogre" number="1-3" ambiences="skaven" level="2" />
+    <group level="2">
+      <monster id="rpb-pink-horror-of-tzeentch" number="1-6" ambiences="chaos" level="2" />
+      <monster id="rpb-blue-horror-of-tzeentch" number="S" ambiences="chaos" level="2" />
+    </group>
+    <monster id="rpb-fiend-of-slaanesh" number="1-6" ambiences="chaos" level="2" />
+    <monster id="rpb-bloodletter-of-khorne" number="3-8" ambiences="chaos" level="2" />
+    <monster id="rpb-plaguebearer-of-nurgle" number="3-8" ambiences="chaos" level="2" />
+    <monster id="rpb-chaos-hound" number="1-6" ambiences="chaos dark-elves" level="2" />
+    <monster id="rpb-black-orc" number="5-10" ambiences="orcs-goblins chaos-dwarves" level="2" />
+    <monster id="rpb-savage-orc" number="2-12" ambiences="orcs-goblins" level="2" />
+    <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="2" />
+    <group level="2">
+      <monster id="rpb-skaven-gutter-runner" number="1-6" ambiences="skaven" level="2" />
+      <monster id="rpb-plague-censer-bearer" number="1-6" ambiences="skaven" level="2" />
+      <monster id="rpb-skaven-poison-globadier" number="1-6" ambiences="skaven" level="2" />
+    </group>
+    <group level="2">
+      <monster id="rpb-goblin" number="12" ambiences="orcs-goblins" level="2" />
+      <monster id="rpb-goblin-boss" number="1" ambiences="orcs-goblins" level="2" />
+    </group>
+    <monster id="rpb-dark-elf-naggaroth-black-guard" number="2-12" ambiences="dark-elves" level="2" />
+    <monster id="rpb-chaos-warrior" number="2-7" ambiences="chaos" level="2" />
+    <monster id="rpb-centaur" number="1-3" ambiences="chaos" level="2" />
+    <monster id="rpb-ogre" number="3" ambiences="chaos" level="2" />
+    <monster id="rpb-minotaur" number="3" ambiences="chaos" level="2" />
+    <monster id="rpb-skeleton" number="12" ambiences="undead" level="2" />
+    <monster id="rpb-zombie" number="6" ambiences="undead" level="2" />
+    <monster id="rpb-ghoul" number="12" ambiences="undead" level="2" />
+    <group level="2">
+      <monster id="rpb-savage-orc" number="2-12" ambiences="orcs-goblins" level="2" />
+      <monster id="rpb-savage-orc-shaman" number="1" ambiences="orcs-goblins" level="2" />
+    </group>
+    <monster id="rpb-chaos-dwarf" number="3-8" ambiences="chaos-dwarves" level="2" />
+    <monster id="rpb-chaos-dwarf-blunderbuss" number="3-8" ambiences="chaos-dwarves" level="2" />
+    <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="2" />
+    <monster id="rpb-hobgoblin" number="12" ambiences="orcs-goblins chaos-dwarves" level="2" />
+    <group level="2">
+      <monster id="rpb-minotaur" number="1-3" ambiences="chaos" level="2" />
+      <monster id="rpb-ogre" number="1-3" ambiences="chaos" level="2" />
+    </group>
+  </table>
+  
+  <!-- Level 3 -->
+  <table name="Roleplay Book Monsters - Level 3">
+    <monster id="rpb-troll" number="1-3" ambiences="chaos orcs-goblins" level="3" />
+    <group level="3">
+      <monster id="rpb-minotaur" number="1-3" ambiences="chaos" level="3" />
+      <monster id="rpb-ogre" number="1-3" ambiences="chaos" level="3" />
+    </group>
+    <group level="3">
+      <monster id="rpb-centaur" number="1-6" ambiences="chaos" level="3" />
+      <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="3" />
+    </group>
+    <monster id="rpb-daemonette-of-slaanesh" number="1-6" ambiences="chaos" level="3" />
+    <monster id="rpb-nurgling" number="2-12" ambiences="chaos" level="3" />
+    <monster id="rpb-flamer-of-tzeentch" number="2-7" ambiences="chaos" level="3" />
+    <group level="3">
+      <monster id="rpb-bloodletter-of-khorne" number="1-6" ambiences="chaos" level="3" />
+      <monster id="rpb-minotaur" number="1" ambiences="chaos" level="3" />
+      <monster id="rpb-beastman" number="1-6" ambiences="chaos" level="3" />
+    </group>
+    <monster id="rpb-chaos-warrior" number="2-12" ambiences="chaos" level="3" />
+    <group level="3">
+      <monster id="rpb-skaven-stormvermin" number="4-9" ambiences="skaven" level="3" />
+      <monster id="rpb-skaven-stormvermin-champion" number="1" ambiences="skaven" level="3" />
+    </group>
+    <monster id="rpb-skaven-assassin" number="3-8" ambiences="skaven" level="3" />
+    <group level="3">
+      <monster id="rpb-orc" number="2-12" ambiences="orcs-goblins" level="3" />
+      <monster id="rpb-orc-boss" number="1" ambiences="orcs-goblins" level="3" />
+    </group>
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="3" />
+    <monster id="rpb-wight" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-giant-scorpion" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+    <monster id="rpb-gigantic-spider" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+    <group level="3">
+      <monster id="rpb-rat-ogre" number="1-3" ambiences="skaven" level="3" />
+      <monster id="rpb-skaven-stormvermin" number="4-9" ambiences="skaven" level="3" />
+    </group>
+    <group level="3">
+      <monster id="rpb-pink-horror-of-tzeentch" number="6" ambiences="chaos" level="3" />
+      <monster id="rpb-blue-horror-of-tzeentch" number="S" ambiences="chaos" level="3" />
+    </group>
+    <monster id="rpb-fiend-of-slaanesh" number="6" ambiences="chaos" level="3" />
+    <monster id="rpb-chaos-warrior" number="7" ambiences="chaos" level="3" />
+    <monster id="rpb-plaguebearer-of-nurgle" number="5-10" ambiences="chaos" level="3" />
+    <group level="3">
+      <monster id="rpb-chaos-dwarf" number="3-8" ambiences="chaos-dwarves" level="3" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="3-8" ambiences="chaos-dwarves" level="3" />
+    </group>
+    <group level="3">
+      <monster id="rpb-chaos-dwarf-sorcerer" number="1" ambiences="chaos-dwarves" level="3" />
+      <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="3" />
+      <monster id="rpb-hobgoblin" number="12" ambiences="orcs-goblins chaos-dwarves" level="3" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="3">
+      <monster id="rpb-snotling" number="12" ambiences="orcs-goblins" level="3" />
+      <monster id="rpb-giant-rat" number="12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+    </group>
+    <group level="3">
+      <monster id="rpb-giant-spider" number="12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+      <monster id="rpb-giant-bat" number="12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+    </group>
+    <group level="3">
+      <monster id="rpb-black-orc" number="3-8" ambiences="orcs-goblins chaos-dwarves" level="3" />
+      <monster id="rpb-goblin" number="7-12" ambiences="orcs-goblins" level="3" />
+    </group>
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="3" />
+    <monster id="rpb-stone-troll" number="1-3" ambiences="chaos orcs-goblins" level="3" />
+    <group level="3">
+      <monster id="rpb-minotaur" number="3" ambiences="chaos" level="3" />
+      <monster id="rpb-ogre" number="3" ambiences="chaos" level="3" />
+    </group>
+    <monster id="rpb-troll" number="1-3" ambiences="chaos orcs-goblins" level="3" />
+    <monster id="rpb-nurgling" number="2-12" ambiences="chaos" level="3" />
+    <monster id="rpb-daemonette-of-slaanesh" number="1-6" ambiences="chaos" level="3" />
+    <monster id="rpb-giant-scorpion" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+    <monster id="rpb-gigantic-spider" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="3" />
+    <monster id="rpb-flamer-of-tzeentch" number="2-7" ambiences="chaos" level="3" />
+  </table>
+  
+  <!-- Level 4 -->
+  <table name="Roleplay Book Monsters - Level 4">
+    <group level="4">
+      <monster id="rpb-chaos-warrior" number="2-4" ambiences="chaos" level="4" >
+        <special append="false">
+          <text>Choose whether your Warrior attacks Juggernaut or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-juggernaut-of-khorne" number="S (mounts)" ambiences="chaos" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-necromancer" number="1" ambiences="undead" level="4" />
+      <monster id="rpb-skeleton" number="2-12" ambiences="undead" level="4" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="4" />
+      <monster id="rpb-ghost" number="1-6" ambiences="undead" level="4" />
+    </group>
+    <monster id="rpb-daemonette-of-slaanesh" number="1-6" ambiences="chaos" level="4" />
+    <group level="4">
+      <monster id="rpb-skaven-warlock" number="1" ambiences="skaven" level="4" />
+      <monster id="rpb-skaven-assassin" number="1-6" ambiences="skaven" level="4" />
+      <monster id="rpb-skaven-stormvermin-champion" number="4-9" ambiences="skaven" level="4" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Skaven Warlock)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-skaven-chieftain" number="1" ambiences="skaven" level="4" />
+    </group>
+    <monster id="rpb-beastman-champion" number="1-3" ambiences="chaos" level="4" />
+    <group level="4">
+      <monster id="rpb-black-orc-champion" number="5-10" ambiences="orcs-goblins chaos-dwarves" level="4" />
+      <monster id="rpb-black-orc-boss" number="" ambiences="orcs-goblins chaos-dwarves" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-dark-elf-beastmaster" number="1" ambiences="dark-elves" level="4" />
+      <monster id="rpb-chaos-hound" number="1-6" ambiences="chaos dark-elves" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-goblin" number="24" ambiences="orcs-goblins" level="4" />
+      <monster id="rpb-goblin-fanatic" number="1-3" ambiences="orcs-goblins" level="4" />
+      <monster id="rpb-goblin-big-boss" number="1" ambiences="orcs-goblins" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-minotaur" number="1-3" ambiences="chaos" level="4" />
+      <monster id="rpb-ogre" number="1-3" ambiences="chaos" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-giant-scorpion" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="4" />
+      <monster id="rpb-gigantic-spider" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="4" />
+      <monster id="rpb-beastman-champion" number="1" ambiences="chaos" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-chaos-dwarf-sorcerer" number="1" ambiences="chaos-dwarves" level="4" />
+      <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="4" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="4" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="4" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="4">
+      <monster id="rpb-dark-elf-beastmaster" number="1" ambiences="dark-elves" level="4" />
+      <monster id="rpb-warhound" number="1-6" ambiences="chaos dark-elves" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-rat-ogre" number="1-3" ambiences="skaven" level="4" />
+      <monster id="rpb-skaven-stormvermin" number="12" ambiences="skaven" level="4" />
+    </group>
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="4" />
+    <monster id="rpb-stone-troll" number="1-3" ambiences="chaos orcs-goblins" level="4" />
+    <monster id="rpb-beast-of-nurgle" number="1-3" ambiences="chaos" level="4" />
+    <monster id="rpb-beastman-champion" number="1-3" ambiences="chaos" level="4" />
+    <monster id="rpb-dragon-ogre" number="1-3" ambiences="chaos" level="4" />
+    <monster id="rpb-skaven-jezzail" number="1-6" ambiences="skaven" level="4" />
+    <monster id="rpb-daemonette-of-slaanesh" number="1-6" ambiences="chaos" level="4" />
+    <monster id="rpb-dragon-ogre" number="1-3" ambiences="chaos" level="4" />
+    <monster id="rpb-mummy" number="2-4" ambiences="undead" level="4" />
+    <group level="4">
+      <monster id="rpb-troll" number="1-3" ambiences="chaos orcs-goblins" level="4" />
+      <monster id="rpb-minotaur" number="1-3" ambiences="chaos" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-chaos-warrior" number="2-4" ambiences="chaos" level="4" >
+        <special append="false">
+          <text>Choose whether your Warrior attacks Juggernaut or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-juggernaut-of-khorne" number="S (mounts)" ambiences="chaos" level="4" />
+    </group>
+    <monster id="rpb-mummy" number="2-4" ambiences="undead" level="4" />
+    <group level="4">
+      <monster id="rpb-necromancer" number="1" ambiences="undead" level="4" />
+      <monster id="rpb-skeleton" number="2-12" ambiences="undead" level="4" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="4" />
+      <monster id="rpb-ghost" number="1-6" ambiences="undead" level="4" />
+    </group>
+    <group level="4">
+      <monster id="rpb-goblin" number="24" ambiences="orcs-goblins" level="4" />
+      <monster id="rpb-goblin-fanatic" number="1-3" ambiences="orcs-goblins" level="4" />
+      <monster id="rpb-goblin-big-boss" number="1" ambiences="orcs-goblins" level="4" />
+    </group>    
+    <monster id="rpb-chaos-champion" number="1-3" ambiences="chaos" level="4" />
+    <group level="4">
+      <monster id="rpb-rat-ogre" number="1-3" ambiences="skaven" level="4" />
+      <monster id="rpb-skaven-stormvermin" number="12" ambiences="skaven" level="4" />
+    </group>
+    <monster id="rpb-dragon-ogre" number="1-3" ambiences="chaos" level="4" />
+    <group level="4">
+      <monster id="rpb-skaven-warlock" number="1" ambiences="skaven" level="4" />
+      <monster id="rpb-skaven-assassin" number="1-6" ambiences="skaven" level="4" />
+      <monster id="rpb-skaven-stormvermin-champion" number="4-9" ambiences="skaven" level="4" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Skaven Warlock)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-skaven-chieftain" number="1" ambiences="skaven" level="4" />
+    </group>
+    <monster id="rpb-stone-troll" number="1-3" ambiences="chaos orcs-goblins" level="4" />
+    <monster id="rpb-mummy" number="2-4" ambiences="undead" level="4" />
+  </table>
+    
+  <!-- Level 5 -->
+  <table name="Roleplay Book Monsters - Level 5">
+    <group level="5">
+      <monster id="rpb-dark-elf-warrior" number="2-12" ambiences="dark-elves" level="5" />
+      <monster id="rpb-witch-elf" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="5" />
+    </group>
+    <monster id="rpb-dragon-ogre" number="3" ambiences="chaos" level="5" />
+    <group level="5">
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="5" />
+      <monster id="rpb-chaos-warrior" number="1-6" ambiences="chaos" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-skaven-warpfire-thrower-team" number="1" ambiences="skaven" level="5" />
+      <monster id="rpb-skaven-jezzail" number="1-6" ambiences="skaven" level="5" />
+      <monster id="rpb-skaven-warlord" number="1" ambiences="skaven" level="5" />
+    </group>    
+    <monster id="rpb-beast-of-nurgle" number="1-3" ambiences="chaos" level="5" />
+    <group level="5">
+      <monster id="rpb-chaos-warrior" number="2-4" ambiences="chaos" level="5" >
+        <special append="false">
+          <text>Choose whether your Warrior attacks Juggernaut or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-juggernaut-of-khorne" number="S (mounts)" ambiences="chaos" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-necromancer" number="1" ambiences="undead" level="5" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="5" />
+      <monster id="rpb-ghost" number="1-6" ambiences="undead" level="5" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer)</rule>
+        </special>
+      </monster>
+    </group>
+    <monster id="rpb-stone-troll" number="3" ambiences="chaos orcs-goblins" level="5" />
+    <group level="5">
+      <monster id="rpb-beastman-champion" number="1-3" ambiences="chaos" level="5" />
+      <monster id="rpb-minotaur" number="3" ambiences="chaos" level="5" />
+      <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="5" />
+    </group>
+    <monster id="rpb-dragon-ogre" number="3" ambiences="chaos" level="5" />
+    <monster id="rpb-beast-of-nurgle" number="1-3" ambiences="chaos" level="5" />
+    <group level="5">
+      <monster id="rpb-ogre" number="3" ambiences="chaos" level="5" />
+      <monster id="rpb-minotaur" number="3" ambiences="chaos" level="5" />
+      <monster id="rpb-rat-ogre" number="3" ambiences="skaven" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-troll" number="3" ambiences="chaos orcs-goblins" level="5" />
+      <monster id="rpb-stone-troll" number="3" ambiences="chaos orcs-goblins" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-orc-shaman" number="1" ambiences="orcs-goblins" level="5" />
+      <monster id="rpb-black-orc-champion" number="1-6" ambiences="orcs-goblins chaos-dwarves" level="5" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Orc Shaman)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-orc-big-boss" number="1" ambiences="orcs-goblins" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="5" />
+      <monster id="rpb-ghost" number="1-6" ambiences="undead" level="5" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="5" />
+      <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="5" />
+    </group>
+    <monster id="rpb-gorgon" number="1-3" ambiences="chaos" level="5" />
+    <group level="5">
+      <monster id="rpb-skaven-plague-monk" number="2-12" ambiences="skaven" level="5" />
+      <monster id="rpb-skaven-assassin" number="1-6" ambiences="skaven" level="5" />
+      <monster id="rpb-skaven-plague-priest" number="1" ambiences="skaven" level="5" />
+      <monster id="rpb-skaven-warlord" number="1" ambiences="skaven" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-beastman-shaman" number="1" ambiences="chaos" level="5" />
+      <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="5" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-beastman-champion" number="1-3" ambiences="chaos" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" />
+      <monster id="rpb-wight-lord" number="1" ambiences="undead" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="5" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="5" />
+      <monster id="rpb-tomb-king" number="1" ambiences="undead" level="5" />
+    </group>
+    <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="5" />
+    <group level="5">
+      <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="5" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="5" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="5" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-chaos-dwarf-sorcerer" number="1" ambiences="chaos-dwarves" level="5" />
+    </group>
+    <monster id="rpb-gorgon" number="1" ambiences="chaos" level="5" />
+    <group level="5">
+      <monster id="rpb-chaos-warrior" number="2-4" ambiences="chaos" level="5" >
+        <special append="false">
+          <text>Choose whether your Warrior attacks Juggernaut or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-juggernaut-of-khorne" number="S (mounts)" ambiences="chaos" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="5" />
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="5" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-chaos-warrior" number="1-6" ambiences="chaos" level="5" />
+    </group>
+    <monster id="rpb-dragon-ogre" number="3" ambiences="chaos" level="5" />
+    <monster id="rpb-beast-of-nurgle" number="1-3" ambiences="chaos" level="5" />
+    <group level="5">
+      <monster id="rpb-dark-elf-warrior" number="2-12" ambiences="dark-elves" level="5" />
+      <monster id="rpb-witch-elf" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-wight-lord" number="1" ambiences="undead" level="5" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" />
+    </group>
+    <monster id="rpb-skaven-warpfire-thrower-team" number="1-3" ambiences="skaven" level="5" />
+    <group level="5">
+      <monster id="rpb-giant-scorpion" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="5" />
+      <monster id="rpb-gigantic-spider" number="1-3" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="5" />
+      <monster id="rpb-ghost" number="1-6" ambiences="undead" level="5" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" />
+    </group>
+    <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="5" />
+  </table>
+  
+  <!-- Level 6 -->
+  <table name="Roleplay Book Monsters - Level 6">
+    <group level="6">
+      <monster id="rpb-chaos-dwarf-sorcerer" number="1" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="6" />
+    </group>
+    <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="6" />
+    <group level="6">
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="6" />
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-chaos-dwarf-master-sorcerer" number="1" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Master Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-skaven-warlock-champion" number="1" ambiences="skaven" level="6" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Skaven Warlock Champion)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-skaven-plague-priest" number="1" ambiences="skaven" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="6" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" />
+      <monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" />
+    </group>
+    <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="6" />
+    <group level="6">
+      <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="6" />
+      <monster id="rpb-mummy" number="6" ambiences="undead" level="6" />
+      <monster id="rpb-ghost" number="6" ambiences="undead" level="6" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="6">
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-chaos-dwarf-lord" number="1" ambiences="chaos-dwarves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-beastman-shaman" number="1" ambiences="chaos" level="6" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-beastman-lord" number="1" ambiences="chaos" level="6" />
+    </group>
+    <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="6" />
+    <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="6" />
+    <group level="6">
+      <monster id="rpb-beastman" number="8" ambiences="chaos" level="6" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="6" />
+      <monster id="rpb-beastman-hero" number="1" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-ogre" number="3" ambiences="chaos" level="6" />
+      <monster id="rpb-minotaur" number="3" ambiences="chaos" level="6" />
+      <monster id="rpb-minotaur-champion" number="1" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-dark-elf-warrior" number="12" ambiences="dark-elves" level="6" />
+      <monster id="rpb-witch-elf" number="6" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-assassin" number="6" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="6" />
+      <monster id="rpb-chaos-warrior" number="2-4" ambiences="chaos" level="6" >
+        <special append="false">
+          <text>Choose whether your Warrior attacks Juggernaut or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-juggernaut-of-khorne" number="S (mounts)" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="6" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="6" />
+      <monster id="rpb-wight-lord" number="1" ambiences="undead" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="6" />
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-troll" number="3" ambiences="chaos orcs-goblins" level="6" />
+      <monster id="rpb-stone-troll" number="3" ambiences="chaos orcs-goblins" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="6" />
+      <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-chaos-warrior" number="6" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-centaur" number="1-3" ambiences="chaos" level="6" />
+      <monster id="rpb-minotaur" number="3" ambiences="chaos" level="6" />
+      <monster id="rpb-centaur-champion" number="1" ambiences="chaos" level="6" />
+    </group>
+    <monster id="rpb-gorgon" number="3" ambiences="chaos" level="6" />
+    <group level="6">
+      <monster id="rpb-orc-big-boss" number="1-6" ambiences="orcs-goblins" level="6" />
+      <monster id="rpb-orc-war-boss" number="1" ambiences="orcs-goblins" level="6" />
+      <monster id="rpb-orc-shaman" number="1" ambiences="orcs-goblins" level="6" />
+    </group>
+    <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="6" />
+    <group level="6">
+      <monster id="rpb-dragon-ogre" number="3" ambiences="chaos" level="6" />
+      <monster id="rpb-dragon-ogre-champion" number="1" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-orc-big-boss" number="1-6" ambiences="orcs-goblins" level="6" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Orc Shaman Champion)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-orc-shaman-champion" number="1" ambiences="orcs-goblins" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-beast-of-nurgle" number="3" ambiences="chaos" level="6" />
+      <monster id="rpb-plaguebearer-of-nurgle" number="3-8" ambiences="chaos" level="6" />
+      <monster id="rpb-chaos-warrior" number="12" ambiences="chaos" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-black-orc-champion" number="5-10" ambiences="orcs-goblins chaos-dwarves" level="6" />
+      <monster id="rpb-black-orc-big-boss" number="1" ambiences="orcs-goblins chaos-dwarves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-skaven-plague-monk" number="6" ambiences="skaven" level="6" />
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="6" />
+      <monster id="rpb-skaven-plague-priest" number="1" ambiences="skaven" level="6" />
+      <monster id="rpb-skaven-warlord" number="1" ambiences="skaven" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="6" />
+      <monster id="rpb-chaos-warrior" number="2-4" ambiences="chaos" level="6" >
+        <special append="false">
+          <text>Choose whether your Warrior attacks Juggernaut or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-juggernaut-of-khorne" number="S (mounts)" ambiences="chaos" level="6" />
+    </group>
+    <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="6" />
+    <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="6" />
+    <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="6" />
+    <monster id="rpb-skaven-plague-lord" number="1" ambiences="skaven" level="6" />
+  </table>
+  
+  <!-- Level 7 -->
+  <table name="Roleplay Book Monsters - Level 7">
+    <group level="7">
+      <monster id="rpb-skaven-grey-seer" number="1" ambiences="skaven" level="7" />
+      <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="7" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="1-3" ambiences="skaven" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Skaven Grey Seer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="7" />
+    </group>
+    <monster id="rpb-hydra" number="1" ambiences="chaos dark-elves" level="7" />
+    <group level="7">
+      <monster id="rpb-centaur-champion" number="4" ambiences="chaos" level="7" />
+      <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-dark-elf-sorcerer" number="1" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-assassin" number="6" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-warrior" number="8" ambiences="dark-elves" level="7" />
+      <monster id="rpb-witch-elf-champion" number="1-6" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-skaven-master-warlock" number="1" ambiences="skaven" level="7" />
+      <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="7" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="1-3" ambiences="skaven" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Skaven Master Warlock)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="7">
+      <monster id="rpb-chaos-dwarf-master-sorcerer" number="1" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Master Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-chaos-champion" number="4" ambiences="chaos" level="7" />
+      <monster id="rpb-chaos-dwarf-lord" number="1" ambiences="chaos-dwarves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-minotaur-hero" number="1" ambiences="chaos" level="7" />
+      <monster id="rpb-minotaur-champion" number="3" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-centaur-champion" number="4" ambiences="chaos" level="7" />
+      <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-beastman-shaman" number="2" ambiences="chaos" level="7" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" >
+        <special append="false">
+          <rule id="rpb-armed-with">Armed with Crossbow (Str 7)</rule>
+          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-magic-weapon">Magic Weapon</rule>
+        </special>
+      </monster>
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" />
+      <monster id="rpb-beastman-lord" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="7" />
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Sorcerer)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-chaos-warrior" number="6" ambiences="chaos" level="7" />
+      <monster id="rpb-chaos-hero" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="7" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="7" />
+      <monster id="rpb-wight-lord" number="1" ambiences="undead" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-dragon-ogre" number="3" ambiences="chaos" level="7" />
+      <monster id="rpb-dragon-ogre-champion" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-beastman-shaman" number="2" ambiences="chaos" level="7" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" >
+        <special append="false">
+          <rule id="rpb-armed-with">Armed with Crossbow (Str 7)</rule>
+          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-magic-weapon">Magic Weapon</rule>
+        </special>
+      </monster>
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" />
+      <monster id="rpb-beastman-lord" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-orc-shaman-champion" number="1" ambiences="orcs-goblins" level="7" />
+      <monster id="rpb-black-orc-champion" number="2-12" ambiences="orcs-goblins chaos-dwarves" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Orc Shaman Champion)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-black-orc-big-boss" number="1" ambiences="orcs-goblins chaos-dwarves" level="7" />
+      <monster id="rpb-orc-war-boss" number="1" ambiences="orcs-goblins" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-gorgon" number="3" ambiences="chaos" level="7" />
+      <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-lord" number="2" ambiences="dark-elves" level="7" />
+    </group>
+    <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="7" />
+    <monster id="rpb-manticore" number="1" ambiences="chaos undead dark-elves" level="7" />
+    <monster id="rpb-hydra" number="1" ambiences="chaos dark-elves" level="7" />
+    <monster id="rpb-wyvern" number="1" ambiences="chaos orcs-goblins" level="7" />
+    <group level="7">
+      <monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" />
+      <monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="7" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" />
+      <monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" />
+    </group>
+    <monster id="rpb-chimera" number="1" ambiences="chaos undead dark-elves" level="7" />
+    <group level="7">
+      <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="7" />
+      <monster id="rpb-beastman" number="8" ambiences="chaos" level="7" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" />
+      <monster id="rpb-beastman-hero" number="1" ambiences="chaos" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-lammasu" number="1" ambiences="chaos undead chaos-dwarves" level="7" />
+      <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-chaos-dwarf-lord" number="1" ambiences="chaos-dwarves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-skaven-plague-lord" number="1" ambiences="skaven" level="7" />
+      <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-skaven-deathmaster-assassin" number="1" ambiences="skaven" level="7" />
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="7" />
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="7" />
+      <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-master-chaos-sorcerer" number="1" ambiences="chaos" level="7" />
+      <monster id="rpb-chaos-sorcerer" number="1-3" ambiences="chaos" level="7" />
+      <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+        </special>      
+      </monster>
+    </group>
+    <group level="7">
+      <monster id="rpb-master-necromancer" number="1" ambiences="undead" level="7" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="7" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Necromancer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="7" />
+    </group>
+    <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="7" />
+    <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="7" />
+    <group level="7">
+      <monster id="rpb-chimera" number="1" ambiences="chaos undead dark-elves" level="7" />
+      <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="7" />
+    </group>
+  </table> 
+  
+  <!-- Level 8 -->
+  <table name="Roleplay Book Monsters - Level 8">
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="8" />
+    <group level="8">
+      <monster id="rpb-vampire-lord" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="8" />
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="8" />
+    </group>    
+    <monster id="rpb-manticore" number="1" ambiences="chaos undead dark-elves" level="8" />
+    <monster id="rpb-hydra" number="1" ambiences="chaos dark-elves" level="8" />
+    <group level="8">
+      <monster id="rpb-wyvern" number="1" ambiences="chaos orcs-goblins" level="8" />
+      <monster id="rpb-black-orc-champion" number="2-12" ambiences="orcs-goblins chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-skaven-grey-seer" number="1" ambiences="skaven" level="8" />
+      <monster id="rpb-skaven-plague-priest" number="3" ambiences="skaven" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="8" />
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="8" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-mummy" number="6" ambiences="undead" level="8" />
+      <monster id="rpb-tomb-king" number="3" ambiences="undead" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Lord)</rule>
+        </special>      
+      </monster>
+    </group>
+    <group level="8">
+      <monster id="rpb-dragon-ogre-hero" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-dragon-ogre-champion" number="3" ambiences="chaos" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Champion)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-chaos-hero" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-chaos-lord" number="1" ambiences="chaos" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-beastman-shaman-champion" number="2" ambiences="chaos" level="8" />
+      <monster id="rpb-beastman-champion" number="6" ambiences="chaos" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Beastman Shaman Champions)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-beastman-lord" number="2" ambiences="chaos" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-master-chaos-sorcerer" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-chaos-hero" number="1" ambiences="chaos" level="8" />
+    </group>
+    <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="8" />
+    <group level="8">
+      <monster id="rpb-skaven-grey-seer" number="1" ambiences="skaven" level="8" />
+      <monster id="rpb-skaven-plague-priest" number="6" ambiences="skaven" level="8" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+        </special>      
+      </monster>
+    </group>
+    <group level="8">
+      <monster id="rpb-lammasu" number="1" ambiences="chaos undead chaos-dwarves" level="8" />
+      <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-orc-shaman-lord" number="1" ambiences="orcs-goblins" level="8" />
+      <monster id="rpb-orc-shaman-champion" number="1" ambiences="orcs-goblins" level="8" />
+      <monster id="rpb-black-orc-champion" number="2-12" ambiences="orcs-goblins chaos-dwarves" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Orc Shaman Lord)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-black-orc-big-boss" number="1" ambiences="orcs-goblins chaos-dwarves" level="8" />
+      <monster id="rpb-orc-war-boss" number="1" ambiences="orcs-goblins" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="8" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" />
+      <monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" />
+    </group>
+    <monster id="rpb-chimera" number="1" ambiences="chaos undead dark-elves" level="8" />
+    <group level="8">
+      <monster id="rpb-liche" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-skeleton" number="12" ambiences="undead" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Liche)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-wight" number="6" ambiences="undead" level="8" />
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="6" ambiences="chaos-dwarves" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Sorcerer Lord)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-bull-centaur-hero" number="1-3" ambiences="chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-minotaur-hero" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-minotaur-champion" number="1-3" ambiences="chaos" level="8" />
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-beastman-shaman" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-beastman-champion" number="6" ambiences="chaos" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Shaman)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-centaur-champion" number="1" ambiences="chaos" level="8" />
+      <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="8" />
+    </group>
+    <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="8" />
+    <monster id="rpb-chimera" number="1" ambiences="chaos undead dark-elves" level="8" />
+    <group level="8">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-lammasu" number="1" ambiences="chaos undead chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-chaos-dwarf-master-sorcerer" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Sorcerer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-centaur-champion" number="4" ambiences="chaos" level="8" />
+      <monster id="rpb-chaos-dwarf-lord" number="1" ambiences="chaos-dwarves" level="8" />
+      <monster id="rpb-bull-centaur-lord" number="1" ambiences="chaos-dwarves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-skaven-deathmaster-assassin" number="1" ambiences="skaven" level="8" />
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="8" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-gorgon" number="3" ambiences="chaos" level="8" />
+      <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-skeleton" number="12" ambiences="undead" level="8" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Lord)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="8" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" />
+      <monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-vampire-lord" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" />
+      <monster id="rpb-mummy" number="6" ambiences="undead" level="8" />
+      <monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" />
+    </group>
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="8" />
+  </table>
+  
+  <!-- Level 9 -->
+  <table name="Roleplay Book Monsters - Level 9">
+    <monster id="rpb-keeper-of-secrets" number="1" ambiences="chaos" level="9" />
+    <monster id="rpb-great-unclean-one" number="1" ambiences="chaos" level="9" />
+    <group level="9">
+      <monster id="rpb-chaos-dwarf-sorcerer" number="1" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-bull-centaur-hero" number="3" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-bull-centaur-lord" number="1" ambiences="chaos-dwarves" level="9" />
+    </group>
+    <monster id="rpb-lord-of-change" number="1" ambiences="chaos" level="9" />
+    <monster id="rpb-great-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    <group level="9">
+      <monster id="rpb-wyvern" number="1" ambiences="chaos orcs-goblins" level="9" />
+      <monster id="rpb-cockatrice" number="1" ambiences="chaos dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" />
+      <monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="9" />
+      <monster id="rpb-wraith" number="6" ambiences="undead" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-vampire-lord" number="1" ambiences="undead" level="9" />
+      <monster id="rpb-vampire-count" number="2" ambiences="undead" level="9" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf-lord" number="1" ambiences="chaos-dwarves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-lammasu" number="S (mounts)" ambiences="chaos undead chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf-champion" number="6" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf-lord" number="1" ambiences="chaos-dwarves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" />
+      <monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" />
+      <monster id="rpb-liche" number="1" ambiences="undead" level="9" />
+      <monster id="rpb-skeleton" number="12" ambiences="undead" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Liche)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-wight" number="6" ambiences="undead" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Lord)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-skaven-grey-seer" number="1" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-plague-lord" number="1" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-deathmaster-assassin" number="1" ambiences="skaven" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-dragon-ogre-hero" number="1" ambiences="chaos" level="9" />
+      <monster id="rpb-dragon-ogre-champion" number="3" ambiences="chaos" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-skaven-grey-seer" number="2" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="1-3" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="9" />
+      <monster id="rpb-rat-ogre" number="3" ambiences="skaven" level="9" />
+      <monster id="rpb-skaven-stormvermin" number="12" ambiences="skaven" level="9" />
+    </group>
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    <group level="9">
+      <monster id="rpb-dragon-ogre-hero" number="1" ambiences="chaos" level="9" />
+      <monster id="rpb-dragon-ogre-champion" number="3" ambiences="chaos" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-chaos-lord" number="1" ambiences="chaos" level="9" />
+      <monster id="rpb-manticore" number="S (mounts)" ambiences="chaos undead dark-elves" level="9" />
+      <monster id="rpb-chaos-hero" number="1-6" ambiences="chaos" level="9" />
+    </group>
+    <monster id="rpb-hydra" number="1" ambiences="chaos dark-elves" level="9" />
+    <group level="9">
+      <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="9" />
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-chimera" number="1" ambiences="chaos undead dark-elves" level="9" />
+      <monster id="rpb-manticore" number="1" ambiences="chaos undead dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-beastman-shaman" number="2" ambiences="chaos" level="9" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-beastman-lord" number="2" ambiences="chaos" level="9" />
+      <monster id="rpb-minotaur-hero" number="1" ambiences="chaos" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-chaos-dwarf-champion" number="12" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-lammasu" number="1" ambiences="chaos undead chaos-dwarves" level="9" />
+      <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-manticore" number="1" ambiences="chaos undead dark-elves" level="9" />
+      <monster id="rpb-hydra" number="1" ambiences="chaos dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Sorcerer Lord)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-chaos-dwarf-lord" number="3" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-bull-centaur-lord" number="2" ambiences="chaos-dwarves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-master-chaos-sorcerer" number="2" ambiences="chaos" level="9" />
+      <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="9" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-chaos-hero" number="1-6" ambiences="chaos" level="9" />
+      <monster id="rpb-chaos-lord" number="1" ambiences="chaos" level="9" />
+    </group>
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+    <monster id="rpb-keeper-of-secrets" number="1" ambiences="chaos" level="9" />
+    <monster id="rpb-great-unclean-one" number="1" ambiences="chaos" level="9" />
+    <group level="9">
+      <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-bull-centaur-hero" number="3" ambiences="chaos-dwarves" level="9" />
+      <monster id="rpb-bull-centaur-lord" number="1" ambiences="chaos-dwarves" level="9" />
+    </group>
+    <monster id="rpb-lord-of-change" number="1" ambiences="chaos" level="9" />
+    <monster id="rpb-great-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="9" />
+  </table>
+
+  <!-- Level 10 -->
+  <table name="Roleplay Book Monsters - Level 10">
+    <monster id="rpb-bloodthirster" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-keeper-of-secrets" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-great-unclean-one" number="1" ambiences="chaos" level="10" />
+    <group level="10">
+      <monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="10" />
+      <monster id="rpb-wraith" number="6" ambiences="undead" level="10" />
+      <monster id="rpb-tomb-king" number="4" ambiences="undead" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-master-chaos-sorcerer" number="2" ambiences="chaos" level="10" />
+      <monster id="rpb-centaur-champion" number="3" ambiences="chaos" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="10" />
+      <monster id="rpb-chaos-lord" number="1" ambiences="chaos" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-liche" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="10" />
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="10" />
+      <monster id="rpb-tomb-king" number="2" ambiences="undead" level="10" />
+      <monster id="rpb-wight-lord" number="1" ambiences="undead" level="10" />
+    </group>
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+    <monster id="rpb-lord-of-change" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-great-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+    <monster id="rpb-emperor-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+    <group level="10">
+      <monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-mummy" number="4" ambiences="undead" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="10" />
+    </group>
+    <monster id="rpb-emperor-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+    <monster id="rpb-skaven-vermin-lord" number="1" ambiences="skaven" level="10" />
+    <monster id="rpb-liche-king" number="1" ambiences="undead" level="10" />
+    <group level="10">
+      <monster id="rpb-great-taurus" number="1" ambiences="chaos-dwarves" level="10" />
+      <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-griffon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+      <monster id="rpb-chaos-lord" number="1" ambiences="chaos" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-skaven-grey-seer" number="2" ambiences="skaven" level="10" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-skaven-deathmaster-assassin" number="3" ambiences="skaven" level="10" />
+      <monster id="rpb-skaven-plague-lord" number="2" ambiences="skaven" level="10" />
+    </group>
+    <monster id="rpb-skaven-vermin-lord" number="1" ambiences="skaven" level="10" />
+    <group level="10">
+      <monster id="rpb-hydra" number="1" ambiences="chaos dark-elves" level="10" />
+      <monster id="rpb-hippogriff" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+      <monster id="rpb-manticore" number="1" ambiences="chaos undead dark-elves" level="10" />
+    </group>
+    <monster id="rpb-bloodthirster" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-giant" number="1" ambiences="orcs-goblins chaos" level="10" />
+    <group level="10">
+      <monster id="rpb-master-chaos-sorcerer" number="2" ambiences="chaos" level="10" />
+      <monster id="rpb-centaur-champion" number="3" ambiences="chaos" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+        </special>      
+      </monster>
+      <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="10" />
+      <monster id="rpb-chaos-lord" number="1" ambiences="chaos" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-liche" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-wight" number="6" ambiences="undead" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Liche)</rule>
+        </special>              
+      </monster>
+      <monster id="rpb-wraith" number="3" ambiences="undead" level="10" />
+      <monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" />
+    </group>
+    <monster id="rpb-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+    <group level="10">
+      <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="10" />
+      <monster id="rpb-lammasu" number="1" ambiences="chaos undead chaos-dwarves" level="10" />
+      <monster id="rpb-bull-centaur-hero" number="3" ambiences="chaos-dwarves" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Sorcerer Lord)</rule>
+        </special>              
+      </monster>
+      <monster id="rpb-bull-centaur-lord" number="1" ambiences="chaos-dwarves" level="10" />
+      <monster id="rpb-chaos-dwarf-lord" number="3" ambiences="chaos-dwarves" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-skaven-grey-seer" number="2" ambiences="skaven" level="10" />
+      <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+        </special>              
+      </monster>
+      <monster id="rpb-skaven-deathmaster-assassin" number="3" ambiences="skaven" level="10" />
+      <monster id="rpb-skaven-plague-lord" number="2" ambiences="skaven" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="10" />
+      <monster id="rpb-mummy" number="4" ambiences="undead" level="10" >
+        <special append="true">
+          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+        </special>              
+      </monster>
+      <monster id="rpb-wraith" number="4" ambiences="undead" level="10" />
+    </group>
+    <monster id="rpb-skaven-vermin-lord" number="1" ambiences="skaven" level="10" />
+    <monster id="rpb-liche-king" number="1" ambiences="undead" level="10" />
+    <monster id="rpb-emperor-dragon" number="1" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="10" />
+    <monster id="rpb-lord-of-change" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-keeper-of-secrets" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-great-unclean-one" number="1" ambiences="chaos" level="10" />
+    <monster id="rpb-bloodthirster" number="1" ambiences="chaos" level="10" />
+  </table>
+</tables>

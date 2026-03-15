@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="hothq-demona-ryme-l1" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>4</weaponskill><ballisticskill>3</ballisticskill><strength>3</strength><toughness>3</toughness><wounds>6</wounds><initiative>6</initiative><attacks>1</attacks><gold>300</gold><armor>1</armor><damage>1D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-hate">Hate Elves</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l2" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>4</weaponskill><ballisticskill>3</ballisticskill><strength>4</strength><toughness>3</toughness><wounds>9</wounds><initiative>6</initiative><attacks>1</attacks><gold>350</gold><armor>1</armor><damage>1D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-hate">Hate Elves</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l3" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>4</weaponskill><ballisticskill>2</ballisticskill><strength>4</strength><toughness>3</toughness><wounds>12</wounds><initiative>7</initiative><attacks>2</attacks><gold>410</gold><armor>1</armor><damage>2D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-hate">Hate Elves</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l4" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>5</weaponskill><ballisticskill>2</ballisticskill><strength>4</strength><toughness>3</toughness><wounds>14</wounds><initiative>7</initiative><attacks>2</attacks><gold>470</gold><armor>2</armor><damage>2D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 6+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l5" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>5</weaponskill><ballisticskill>2</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>17</wounds><initiative>7</initiative><attacks>2</attacks><gold>560</gold><armor>2</armor><damage>2D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l6" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>5</weaponskill><ballisticskill>1</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>20</wounds><initiative>8</initiative><attacks>3</attacks><gold>670</gold><armor>2</armor><damage>2D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-armour">Magic Armour</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l7" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>6</weaponskill><ballisticskill>1</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>22</wounds><initiative>8</initiative><attacks>3</attacks><gold>780</gold><armor>2</armor><damage>3D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-armour">Magic Armour</rule><rule id="rpb-magic-item">Magic Item</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l8" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>6</weaponskill><ballisticskill>1</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>25</wounds><initiative>8</initiative><attacks>3</attacks><gold>910</gold><armor>3</armor><damage>3D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-armour">Magic Armour</rule><rule id="rpb-magic-item">Magic Item</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l9" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>7</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>28</wounds><initiative>9</initiative><attacks>4</attacks><gold>1050</gold><armor>3</armor><damage>3D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-armour">Magic Armour</rule><rule id="rpb-magic-item">Magic Item</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-demona-ryme-l10" factions="darkelves" name="Demona Ryme" plural="Demona Ryme">
+    <move>5</move><weaponskill>7</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>31</wounds><initiative>9</initiative><attacks>4</attacks><gold>1200</gold><armor>3</armor><damage>3D6</damage>
+    <special><rule id="rpb-armed-with">Armed with Whip of Obedience (Strength 5)</rule><rule id="rpb-beast-handler">Beast Handler</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-armour">Magic Armour</rule><rule id="rpb-magic-item">Magic Item</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule></special>
+  </monster>
+  <monster id="hothq-julong-l1" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>4</weaponskill><ballisticskill>-</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>10</wounds><initiative>5</initiative><attacks>1</attacks><gold>400</gold><armor>-</armor><damage>2D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-fear">Fear 5</rule><rule id="rpb-never-pinned">Never Pinned</rule></special>
+  </monster>
+  <monster id="hothq-julong-l2" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>4</weaponskill><ballisticskill>-</ballisticskill><strength>4</strength><toughness>5</toughness><wounds>15</wounds><initiative>5</initiative><attacks>1</attacks><gold>800</gold><armor>-</armor><damage>2D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-fear">Fear 8</rule><rule id="rpb-ignore-blows">Ignore Blows 5+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 1</rule></special>
+  </monster>
+  <monster id="hothq-julong-l3" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>4</weaponskill><ballisticskill>-</ballisticskill><strength>5</strength><toughness>5</toughness><wounds>20</wounds><initiative>5</initiative><attacks>1</attacks><gold>1200</gold><armor>-</armor><damage>2D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-fear">Fear 9</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-magic-drain">Magic Drain 5+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 1</rule></special>
+  </monster>
+  <monster id="hothq-julong-l4" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>5</weaponskill><ballisticskill>-</ballisticskill><strength>5</strength><toughness>5</toughness><wounds>27</wounds><initiative>6</initiative><attacks>2</attacks><gold>1500</gold><armor>-</armor><damage>3D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-fear">Fear 9</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-magic-drain">Magic Drain 5+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-julong-l5" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>5</weaponskill><ballisticskill>-</ballisticskill><strength>5</strength><toughness>6</toughness><wounds>34</wounds><initiative>6</initiative><attacks>2</attacks><gold>1800</gold><armor>-</armor><damage>3D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-fear">Fear 9</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-ignore-pain">Ignore Pain 7</rule><rule id="rpb-magic-drain">Magic Drain 4+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-julong-l6" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>5</weaponskill><ballisticskill>-</ballisticskill><strength>5</strength><toughness>6</toughness><wounds>42</wounds><initiative>6</initiative><attacks>2</attacks><gold>2100</gold><armor>-</armor><damage>3D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-fear">Fear 9</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-ignore-pain">Ignore Pain 7</rule><rule id="rpb-magic-drain">Magic Drain 4+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-julong-l7" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>6</weaponskill><ballisticskill>-</ballisticskill><strength>5</strength><toughness>6</toughness><wounds>50</wounds><initiative>7</initiative><attacks>3</attacks><gold>2500</gold><armor>-</armor><damage>4D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-terror">Terror 10</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-ignore-pain">Ignore Pain 7</rule><rule id="rpb-magic-drain">Magic Drain 4+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-julong-l8" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>6</weaponskill><ballisticskill>-</ballisticskill><strength>5</strength><toughness>7</toughness><wounds>60</wounds><initiative>7</initiative><attacks>3</attacks><gold>3200</gold><armor>-</armor><damage>4D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-terror">Terror 12</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-ignore-pain">Ignore Pain 7</rule><rule id="rpb-magic-drain">Magic Drain 4+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-julong-l9" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>6</weaponskill><ballisticskill>-</ballisticskill><strength>6</strength><toughness>7</toughness><wounds>73</wounds><initiative>7</initiative><attacks>3</attacks><gold>4500</gold><armor>-</armor><damage>4D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-terror">Terror 12</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-ignore-pain">Ignore Pain 7</rule><rule id="rpb-magic-drain">Magic Drain 4+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-julong-l10" factions="darkelves" name="Julong" plural="Julong">
+    <move>6</move><weaponskill>7</weaponskill><ballisticskill>-</ballisticskill><strength>6</strength><toughness>7</toughness><wounds>85</wounds><initiative>8</initiative><attacks>4</attacks><gold>6000</gold><armor>-</armor><damage>5D6</damage>
+    <special><rule id="hothq-wardog-attack">Wardog Attack</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-terror">Terror 12</rule><rule id="rpb-ignore-blows">Ignore Blows 4+</rule><rule id="rpb-ignore-pain">Ignore Pain 7</rule><rule id="rpb-magic-drain">Magic Drain 4+</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-never-pinned">Never Pinned</rule><rule id="rpb-regenerate">Regenerate 2</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l1" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>5</weaponskill><ballisticskill>3</ballisticskill><strength>3</strength><toughness>3</toughness><wounds>7</wounds><initiative>8</initiative><attacks>1</attacks><gold>370</gold><armor>-</armor><damage>1D6</damage>
+    <special><rule id="hothq-disappear">Disappear 6+</rule><rule id="rpb-ambush-magic">Ambush, Magic 6+</rule><rule id="rpb-assassinate">Assassinate 6+</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-never-pinned">Never Pinned</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l2" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>6</weaponskill><ballisticskill>2</ballisticskill><strength>3</strength><toughness>4</toughness><wounds>9</wounds><initiative>9</initiative><attacks>1</attacks><gold>500</gold><armor>-</armor><damage>1D6</damage>
+    <special><rule id="hothq-disappear">Disappear 5+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic 5+</rule><rule id="rpb-assassinate">Assassinate 6+</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l3" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>6</weaponskill><ballisticskill>1</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>12</wounds><initiative>9</initiative><attacks>1</attacks><gold>650</gold><armor>-</armor><damage>1D6</damage>
+    <special><rule id="hothq-disappear">Disappear 5+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic 4+</rule><rule id="rpb-assassinate">Assassinate 5+</rule><rule id="rpb-dodge">Dodge 5+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l4" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>7</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>15</wounds><initiative>9</initiative><attacks>2</attacks><gold>800</gold><armor>-</armor><damage>2D6</damage>
+    <special><rule id="hothq-disappear">Disappear 4+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 6+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l5" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>7</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>18</wounds><initiative>10</initiative><attacks>2</attacks><gold>1050</gold><armor>-</armor><damage>2D6</damage>
+    <special><rule id="hothq-disappear">Disappear 4+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l6" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>8</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>21</wounds><initiative>10</initiative><attacks>3</attacks><gold>1200</gold><armor>-</armor><damage>2D6</damage>
+    <special><rule id="hothq-disappear">Disappear 4+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l7" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>9</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>24</wounds><initiative>10</initiative><attacks>3</attacks><gold>1600</gold><armor>-</armor><damage>3D6</damage>
+    <special><rule id="hothq-disappear">Disappear 4+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l8" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>10</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>27</wounds><initiative>10</initiative><attacks>3</attacks><gold>2200</gold><armor>-</armor><damage>3D6</damage>
+    <special><rule id="hothq-disappear">Disappear 4+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l9" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>10</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>30</wounds><initiative>10</initiative><attacks>4</attacks><gold>2500</gold><armor>-</armor><damage>4D6</damage>
+    <special><rule id="hothq-disappear">Disappear 4+</rule><rule id="hothq-venom">Venom</rule><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule></special>
+  </monster>
+  <monster id="hothq-raith-darkfoot-l10" factions="darkelves" name="Raith Darkfoot" plural="Raith Darkfoot">
+    <move>5</move><weaponskill>10</weaponskill><ballisticskill>Auto</ballisticskill><strength>4</strength><toughness>4</toughness><wounds>34</wounds><initiative>10</initiative><attacks>4</attacks><gold>2700</gold><armor>-</armor><damage>4D6</damage>
+    <special><rule id="rpb-ambush-magic">Ambush, Magic A</rule><rule id="rpb-assassinate">Assassinate 4+</rule><rule id="hothq-disappear">Disappear 4+</rule><rule id="rpb-dodge">Dodge 4+</rule><rule id="rpb-hate">Hate Elves</rule><rule id="rpb-magic-resistance">Magic Resistance 5+</rule><rule id="rpb-magic-weapon">Magic Weapon</rule><rule id="hothq-venom">Venom</rule></special>
+  </monster>
+</monsters>

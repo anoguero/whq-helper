@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="dungeonCards">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="card" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="description" type="xs:string"/>
+              <xs:element name="rules" type="xs:string"/>
+              <xs:element name="tileImagePath" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="type" use="required">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="DUNGEON_ROOM"/>
+                  <xs:enumeration value="OBJECTIVE_ROOM"/>
+                  <xs:enumeration value="CORRIDOR"/>
+                  <xs:enumeration value="SPECIAL"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="environment" type="xs:string" use="required"/>
+            <xs:attribute name="copyCount" type="xs:nonNegativeInteger" use="required"/>
+            <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

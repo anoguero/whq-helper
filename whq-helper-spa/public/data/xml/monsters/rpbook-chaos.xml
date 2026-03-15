@@ -1,0 +1,543 @@
+<?xml version="1.0"?>
+
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
+  <monster id="rpb-beastman" factions="chaos beastmen" name="Beastman" plural="Beastmen">
+    <wounds>6</wounds>
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>100</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-throw">Throw Spears (Str 3)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-beastman-champion" factions="chaos beastmen" name="Beastman Champion" 
+           plural="Beastman Champions">
+    <wounds>30</wounds>
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>3</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>4</initiative>
+    <attacks>2</attacks>
+    <gold>610</gold>
+    <armor>-</armor>
+    <damage>1D6/2D6(5+)</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-throw">Throw Spears (Str 8)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-beastman-hero" factions="chaos beastmen" name="Beastman Hero" plural="Beastman Heroes">
+    <wounds>34</wounds>
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>5</initiative>
+    <attacks>3</attacks>
+    <gold>1300</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-throw">Throw Spears (Str 9)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-beastman-lord" factions="chaos beastmen" name="Beastman Lord" plural="Beastman Lords">
+    <wounds>47</wounds>
+    <move>4</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>5</initiative>
+    <attacks>3</attacks>
+    <gold>1300</gold>
+    <armor>2</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-magic-armour">Magic Armor</rule>
+      <rule id="rpb-magic-item">2 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-throw">Throw Spears (Str 10)</rule>
+    </special>
+  </monster>
+  <monster id="rpb-beastman-shaman" factions="chaos beastmen" name="Beastman Shaman" 
+           plural="Beastman Shamans">
+    <wounds>26</wounds>
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>5</ballisticskill>
+    <strength>3</strength>
+    <toughness>5</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>680</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-beastman" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-beastman-shaman-champion" factions="chaos beastmen" name="Beastman Shaman Champion" 
+             plural="Beastman Shaman Champions">
+    <wounds>34</wounds>
+    <move>4</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>4</initiative>
+    <attacks>1</attacks>
+    <gold>1340</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <magic id="rpb-beastman" level="2" />
+    </special>
+  </monster>
+  <monster id="rpb-chaos-warrior" factions="chaos" name="Chaos Warrior" 
+           plural="Chaos Warriors">
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <wounds>12</wounds>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>240</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special></special>
+  </monster>
+  <monster id="rpb-chaos-champion" factions="chaos" name="Chaos Champion" 
+           plural="Chaos Champions">
+    <wounds>15</wounds>
+    <move>4</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <initiative>7</initiative>
+    <attacks>3</attacks>
+    <gold>910</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-armour">Magic Armor</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-hero" factions="chaos" name="Chaos Hero" plural="Chaos Heroes">
+    <wounds>30</wounds>
+    <move>4</move>
+    <weaponskill>8</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <initiative>8</initiative>
+    <attacks>4</attacks>
+    <gold>1930</gold>
+    <armor>6</armor>
+    <damage>3D6</damage>
+    <special>
+      <rule id="rpb-magic-armour">Magic Armor</rule>
+      <rule id="rpb-magic-item">2 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-lord" factions="chaos" name="Chaos Lord" plural="Chaos Lords">
+    <wounds>35</wounds>
+    <move>4</move>
+    <weaponskill>9</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <initiative>9</initiative>
+    <attacks>5</attacks>
+    <gold>3050</gold>
+    <armor>6</armor>
+    <damage>4D6</damage>
+    <special>
+      <rule id="rpb-magic-armour">Magic Armor</rule>
+      <rule id="rpb-magic-item">3 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+    </special>
+  </monster>
+  <monster id="rpb-chaos-sorcerer" factions="chaos" name="Chaos Sorcerer" 
+           plural="Chaos Sorcerers">
+    <wounds>15</wounds>
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>840</gold>
+    <armor>1</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-parry">Parry 5+</rule>
+      <magic id="rpb-chaos" level="1" />
+    </special>
+  </monster>
+  <monster id="rpb-master-chaos-sorcerer" factions="chaos" name="Master Chaos Sorcerer"
+           plural="Master Chaos Sorcerers">
+    <wounds>31</wounds>
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>1</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <initiative>8</initiative>
+    <attacks>3</attacks>
+    <gold>2400</gold>
+    <armor>1</armor>
+    <damage>4D6</damage>
+    <special>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="rpb-magic-item">3 x Magic Item</rule>
+      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-parry">Parry 5+</rule>
+      <magic id="rpb-chaos" level="3" />
+    </special>
+  </monster>
+  <monster id="rpb-chaos-hound" factions="chaos darkelves beastmen" name="Chaos Hound" plural="Chaos Hounds">
+    <wounds>8</wounds>
+    <move>6</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>4</toughness>
+    <initiative>4</initiative>
+    <attacks>2</attacks>
+    <gold>160</gold>
+    <armor>2</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush">Ambush 5+</rule>
+      <rule id="rpb-gang-up">Gang Up</rule>
+    </special>
+  </monster>
+  <monster id="rpb-bloodletter-of-khorne" factions="chaos" name="Bloodletter of Khorne" 
+           plural="Bloodletters of Khorne">
+    <wounds>7</wounds>
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>200</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-hellblade">Armed with Hellblade</rule>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 5</rule>
+    </special>
+  </monster>
+  <monster id="rpb-juggernaut-of-khorne" factions="chaos" name="Juggernaut of Khorne" 
+           plural="Juggernauts of Khorne">
+    <wounds>35</wounds>
+    <move>7</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>5</strength>
+    <toughness>5</toughness>
+    <initiative>2</initiative>
+    <attacks>2</attacks>
+    <gold>700</gold>
+    <armor>2</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-never-pinned">Never Pinned</rule>
+    </special>
+  </monster>
+  <monster id="rpb-bloodthirster" factions="chaos" name="Bloodthirster" plural="Bloodthirsters">
+    <wounds>125</wounds>
+    <move>6</move>
+    <weaponskill>10</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>8</strength>
+    <toughness>7</toughness>
+    <initiative>8</initiative>
+    <attacks>10</attacks>
+    <gold>8000</gold>
+    <armor>-</armor>
+    <damage>8D6</damage>
+    <special>
+      <rule id="rpb-axe-of-khorne">Armed with Axe of Khorne</rule>
+      <rule id="rpb-daemon-whip">Armed with Daemon Whip</rule>
+      <rule id="rpb-drain-power">Drain Power</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-greater-daemon">Greater Daemon 14</rule>
+      <rule id="rpb-ignore-blows">Ignore Blow 3+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 12</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-magic-drain">Magic Drain 5+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-daemonette-of-slaanesh" factions="chaos" name="Daemonette of Slaanesh"
+           plural="Daemonettes of Slaanesh">
+    <wounds>15</wounds>
+    <move>4</move>
+    <weaponskill>6</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>6</initiative>
+    <attacks>3</attacks>
+    <gold>300</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-ambush">Ambush 5+</rule>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-fiend-of-slaanesh" factions="chaos" name="Fiend of Slaanesh" 
+           plural="Fiends of Slaanesh">
+    <wounds>8</wounds>
+    <move>6</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>3</initiative>
+    <attacks>3</attacks>
+    <gold>250</gold>
+    <armor>250</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-aura-of-slaanesh">Aura of Slaanesh</rule>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 6</rule>
+    </special>
+  </monster>
+  <monster id="rpb-keeper-of-secrets" factions="chaos" name="Keeper of Secrets" 
+           plural="Keeper of Secrets">
+    <wounds>84</wounds>
+    <move>6</move>
+    <weaponskill>9</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>7</strength>
+    <toughness>7</toughness>
+    <initiative>7</initiative>
+    <attacks>6</attacks>
+    <gold>5500</gold>
+    <armor>4</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic 2+</rule>
+      <rule id="rpb-aura-of-slaanesh">Aura of Slaanesh</rule>
+      <rule id="rpb-greater-daemon">Greater Daemon 13</rule>
+      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-magic">Chaos Magic 4</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-never-pinned">Never Pinned</rule>
+    </special>
+  </monster>
+  <monster id="rpb-plaguebearer-of-nurgle" factions="chaos" name="Plaguebearer of Nurgle"
+           plural="Plaguebearers of Nurgle">
+    <wounds>9</wounds>
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>200</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-plague">Plague</rule>
+    </special>
+  </monster>
+  <monster id="rpb-beast-of-nurgle" factions="chaos" name="Beast of Nurgle" 
+           plural="Beasts of Nurgle">
+    <wounds>25</wounds>
+    <move>3</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>5</toughness>
+    <initiative>3</initiative>
+    <attacks>1D6</attacks>
+    <gold>750</gold>
+    <armor>-</armor>
+    <damage>2D6</damage>
+    <special>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-paralysis">Paralysis</rule>
+      <rule id="rpb-plague">Plague</rule>
+      <rule id="rpb-slime-trail">Slime Trail</rule>
+    </special>
+  </monster>
+  <monster id="rpb-nurgling" factions="chaos" name="Nurgling" plural="Nurgling">
+    <wounds>2</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>4</initiative>
+    <attacks>2</attacks>
+    <gold>50</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-ambush">Ambush A</rule>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 4</rule>
+      <rule id="rpb-gang-up">Gang Up</rule>
+      <rule id="rpb-plague">Plague</rule>
+    </special>
+  </monster>
+  <monster id="rpb-great-unclean-one" factions="chaos" name="Great Unclean One" 
+           plural="Great Unclean Ones">
+    <wounds>100</wounds>
+    <move>4</move>
+    <weaponskill>7</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>7</strength>
+    <toughness>8</toughness>
+    <initiative>4</initiative>
+    <attacks>7</attacks>
+    <gold>5500</gold>
+    <armor>4</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic 5+</rule>
+      <rule id="rpb-greater-daemon">Greater Daemon 13</rule>
+      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 10</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-plague">Plague</rule>
+      <rule id="rpb-stream-of-corruption">Stream of Corruption</rule>
+      <magic id="rpb-chaos" level="4" />
+    </special>
+  </monster>
+  <monster id="rpb-flamer-of-tzeentch" factions="chaos" name="Flamer of Tzeentch" 
+           plural="Flamers of Tzeentch">
+    <wounds>17</wounds>
+    <move>9</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>5</strength>
+    <toughness>4</toughness>
+    <initiative>4</initiative>
+    <attacks>S</attacks>
+    <gold>300</gold>
+    <armor>-</armor>
+    <damage>S</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic 5+</rule>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-flamer-of-tzeentch-attack">Flamer of Tzeentch Attack</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-pink-horror-of-tzeentch" factions="chaos" name="Pink Horror of Tzeentch"
+           plural="Pink Horrors of Tzeentch">
+    <wounds>8</wounds>
+    <move>4</move>
+    <weaponskill>5</weaponskill>
+    <ballisticskill>2</ballisticskill>
+    <strength>4</strength>
+    <toughness>3</toughness>
+    <initiative>6</initiative>
+    <attacks>2</attacks>
+    <gold>200</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-die-blue-horrors">Die -> Blue Horrors</rule>
+    </special>
+  </monster>
+  <monster id="rpb-blue-horror-of-tzeentch" factions="chaos" name="Blue Horrors of Tzeentch"
+           plural="Blue Horrors of Tzeentch">
+    <wounds>4</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>4</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>7</initiative>
+    <attacks>1</attacks>
+    <gold>100</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-fear">Fear 4</rule>
+      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+    </special>
+  </monster>
+  <monster id="rpb-lord-of-change" factions="chaos" name="Lord of Change" 
+           plural="Lords of Change">
+    <wounds>75</wounds>
+    <move>8</move>
+    <weaponskill>9</weaponskill>
+    <ballisticskill>Auto</ballisticskill>
+    <strength>7</strength>
+    <toughness>7</toughness>
+    <initiative>10</initiative>
+    <attacks>6</attacks>
+    <gold>5000</gold>
+    <armor>4</armor>
+    <damage>6D6</damage>
+    <special>
+      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-greater-daemon">Greater Daemon 13</rule>
+      <rule id="rpb-fly">Fly</rule>
+      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-large-monster">Large Monster</rule>
+      <rule id="rpb-magic-source">Magic Source</rule>
+      <rule id="rpb-magic-item">3 x Magic Item</rule>
+      <rule id="rpb-power-of-tzeentch">Power of Tzeentch</rule>
+      <magic id="rpb-chaos" level="5" />
+    </special>
+  </monster>
+</monsters>

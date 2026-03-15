@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+     Warhammer Quest Monster Special Rules schema.
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:complexType name="ruleType">              
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="id"   type="xsd:string"/>
+        <xsd:attribute name="name" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:element name="rules">
+    <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+        <xsd:choice>
+          <xsd:element name="rule" type="ruleType" />
+          <xsd:element name="magic" type="ruleType" />
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+</xsd:schema>

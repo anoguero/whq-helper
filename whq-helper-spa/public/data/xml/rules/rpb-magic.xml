@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+
+<rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:noNamespaceSchemaLocation='whq-rules-schema.xsd'>
+
+  <magic id="rpb-beastman" name="Beastman">A Beastman Shaman may cast spells at the start of each Monsters' Phase. Roll 2D6 on the following table to determine which.
+2-5 Failure. The Shaman fails to cast a spell.
+    6 Battle Lust. The Shaman gives an extra (1 x the Dungeon level)
+    Attacks to the Monsters in combat with the Warriors, distributed as
+    evenly as possible.
+  7 Doombolt. A bolt of black fire bursts from the Shaman's palm
+    towards one of the Warriors. Draw a Warrior counter to determine
+    which Warrior is hit. The Doombolt inflicts (2 x the Dungeon
+    level) Wounds, with no modifiers for Toughness or armour.
+  8 Hand of Dust. The Shaman may attack any single adjacent
+    Warrior. If there is more than one eligible target take a Warrior
+    counter to determine which one the Shaman attacks. Roll 1D6 for
+    the chosen Warrior and add his Strength to the score. Roll 2D6 for
+    the Shaman and add his Strength to the score. The highest score
+    wins. If the Warrior wins the spell fails.
+    If the Shaman wins the Warrior suffers (2 x the Dungeon level)
+    Wounds with no modifiers for Toughness or armour. If the
+    Shaman is not in hand-to-hand combat ignore this result and re-roll
+    on this table.
+  9 Blade Wind. The Shaman summons a storm of slashing blades.
+    Take a Warrior counter to determine who is affected. That Warrior
+    suffers (the Dungeon level) D6 Wounds, modified for Toughness
+    and armour as usual.
+ 10 Soul Drain. The Shaman creates a storm of dark magic. Roll 1D6
+    for each Warrior adding his Toughness to the score. If the total is
+    equal to or more than the Dungeon level he suffers no ill effects
+    from the spell. If the score is less than the Dungeon level the
+    Warrior suffers (1D6 + the Dungeon level) Wounds and the
+    Shaman gains the same amount. The Shaman may never gain more
+    Wounds than he started with - any extra Wounds are lost in the
+    warp.
+    A Warrior reduced to zero Wounds by this spell is immediately
+    killed and may not he brought back to life by any means other than
+    those spells and magic items that raise the dead.
+ 11 Arnizipal's Black Horror. A black cloud issues from the
+    Shaman's mouth, engulfing the Warriors in darkness. Roll 1D6 for
+    each Warrior adding his Strength to the score. If the total is 7 or
+    more he suffers no ill effects from the spell. If the score is 6 or less
+    he suffers (the Dungeon level) D6 Wounds, with no modifier for
+    armour.
+ 12 Malediction of Nagash. The Shaman causes cuts to open up on
+    the body of one of the Warriors. Draw a Warrior counter to
+    determine which Warrior is hit. For 1 turn that Warrior is unable to
+    move, fire a missile weapon, and is at -2 to all of his to hit rolls in
+    close combat.
+    Now, and at the start of each subsequent turn, the same Warrior
+    loses (1 x the Dungeon level) Wounds. with no modifiers for
+    Toughness or armour, until the Shaman is dead.</magic>
+  <magic id="rpb-chaos" name="Chaos">At the start of each Monsters' Phase, a Chaos Sorcerer may cast one or more of the following spells. Roll the relevant number of D6 on the following table to determine which spells are cast:
+2-4 Failure. The Sorcerer fails to cast this spell.
+  5 Battle Lust. The Sorcerer gives an extra (1 x the Dungeon level) Attacks
+    to the Monsters in combat with the Warriors, distributed as evenly as
+    possible.
+  6 Doombolt. A bolt of black fire bursts from the Sorcerer's palm towards
+    one of the Warriors. Draw a Warrior counter to determine which Warrior
+    is hit. The Doombolt inflicts (2 x the Dungeon level) Wounds, with no
+    modifiers for Toughness or armour.
+  7 Hand of Dust. The Sorcerer may attack any single adjacent Warrior. If
+    there is more than one eligible target take a Warrior counter to
+    determine who the Sorcerer attacks. Roll 1D6 for the chosen Warrior
+    and add his Strength to the score. Roll 2D6 for the Sorcerer and add his
+    Strength to the score. The highest score wins. If the Warrior wins the
+    spell fails. If the Sorcerer wins the Warrior suffers (2 x the Dungeon
+    level) Wounds with no modifiers for Toughness or armour.
+    If the Chaos Sorcerer is not in hand-to-hand combat ignore this result
+    and re-roll on this table.
+  8 Blade Wind. The Sorcerer summons a storm of slashing blades. Take a
+    Warrior counter to determine who is affected. That Warrior suffers (the
+    Dungeon level) D6 Wounds, modified for Toughness and armour as
+    usual.
+  9 Soul Drain. The Sorcerer creates a storm of dark magic. Roll 1D6 for
+    each Warrior adding his Toughness to the score. If the total is equal to
+    or more than the Dungeon level he suffers no ill effects from the spell.
+    If the score is less than the Dungeon Level the Warrior suffers (1D6 +
+    the Dungeon level) Wounds and the Sorcerer gains the same amount.
+    The Sorcerer may never gain more Wounds than he started with any
+    extra Wounds are lost in the warp.
+    A Warrior reduced to zero Wounds by this spell is immediately killed
+    and may not be brought back to life by any means other than those
+    spells and magic items that raise the dead.
+ 10 Amizipal's Black Horror. A black cloud issues from the Sorcerer's
+    mouth, engulfing the Warriors in darkness. Roll i D6 for each Warrior
+    adding his Strength to the score. If the total is 7 or more he suffers no
+    ill effects from the spell. If the score is 6 or less he suffers (the
+    Dungeon level) D6 Wounds, with no modifier for armour.
+ 11 Malediction of Nagash. The Sorcerer causes cuts to open up on the
+    body of one of the Warriors. Draw a Warrior counter to determine
+    which Warrior is hit. For 1 turn that Warrior is unable to move, fire a
+    missile weapon, and is at -2 to all of his to hit rolls in close combat.
+    Now, and at the start of each subsequent turn, the same Warrior loses
+    (1 x the Dungeon level) Wounds, with no modifiers for Toughness or
+    armour, until the Sorcerer is dead.
+ 12 The Transformation of Kadon. The Sorcerer transforms himself into
+    one of the following monsters. Roll 1D6:
+      1-2 Wyvern
+      3-4 Chimera
+       5  Manticore
+       6  Hydra
+    If the transformation turns the Sorcerer into a Monster of less value
+    than himself, re-roll the spell.
+    See the Monsters section of the Bestiary for full details and profiles for
+    these Monsters.
+    The Sorcerer remains transformed until either he or all of the Warriors
+    are dead. While transformed he may not cast any more spells.</magic>
+  <magic id="rpb-chaos-dwarf" name="Chaos Dwarf">At the start of each Monsters' Phase, a Chaos Dwarf Sorcerer may cast one or more of the following spells, depending on his Magic Rating. Roll the relevant number of D6 on the following table to determine which spells are cast:
+  1 Doomroar. The Chaos Dwarf Sorcerer takes on the shape of the
+    mighty Bull God Hashut and, with a shake of his horned head,
+    gives a terrifying roar that goads his minions into action. This turn
+    all Monsters get +1 Attacks.
+  2 Eruption. The ground beneath one of the Warrior's feet erupts in a
+    plume of magma. Draw a Warrior counter to determine which
+    Warrior is affected. He suffers 5D6 Wounds, modified for
+    Toughness and armour as usual
+  3 Ash Cloud. The dungeon is suddenly filled with clouds of smoke
+    and ash. All of the Warriors are at -2 on their to hit rolls for the
+    next Warriors' Phase.
+  4 Sorcerer's Curse. Cackling hideously the Chaos Dwarf Sorcerer
+    utters a terrible curse on one of the Warriors. Draw a Warrior
+    counter to determine who is affected. Unless he is given a healing
+    potion or a healing spell is cast on him immediately the cursed
+    Warrior is turned to stone and is out of the game. If he is given
+    treatment, roll 1D6. On a score of 1. 2, 3 or 4 the Warrior is at -1
+    Movement, -1 Initiative and -1 to hit until the Sorcerer is dead,
+    when he returns to normal. On a score of 5 or 6 the spell has no
+    effect at all.
+  5 Lava Storm. With a majestic sweep of his arm the Sorcerer
+    creates a stream of balls of molten lava. There are 2D6 balls and
+    they are distributed amongst the Warriors evenly. Each causes 2D6
+    Wounds, with no modifier for armour.
+  6 Flames of Azgorh. The Sorcerer breathes out whirling tendrils of
+    flame. Draw a Warrior counter to determine who is attacked. The
+    target and every model adjacent to him, whether friend or foe,
+    takes 2D6 Wounds, with no modifiers for Toughness or armour.
+    Note that the Chaos Dwarf Sorcerer is the only model immune to
+    the effects of the spell.</magic>
+  <magic id="rpb-dark-elf" name="Dark Elf">At the start of each Monsters' Phase, a Dark Elf Sorcerer may cast one or more of the following spells. Roll 2D6 on the following table to determine which.
+2-4 Failure. The Sorcerer fails to cast this spell.
+  5 Battle Lust. The Sorcerer gives an extra (1 x the Dungeon level)
+    Attacks to the Monsters in combat with the Warriors, distributed as
+    evenly as possible.
+  6 Doombolt. A bolt of black fire bursts from the Sorcerer's palm
+    towards one of the Warriors. Draw a Warrior counter to determine
+    which Warrior is hit. The Doombolt inflicts (2 x the Dungeon
+    level) Wounds, with no modifiers for Toughness or armour.
+  7 Hand of Dust. The Sorcerer may attack any single adjacent
+    Warrior. If there is more than one eligible target take a Warrior
+    counter to determine who the Sorcerer attacks. Roll 1D6 for the
+    chosen Warrior and add his Strength to the score. Roll 2D6 for the
+    Sorcerer and add his Strength to the score. The highest score wins.
+    If the Warrior wins the spell fails. If the Sorcerer wins the Warrior
+    suffers (2 x the Dungeon level) Wounds with no modifiers for
+    Toughness or armour.
+    If the Chaos Sorcerer is not in hand-to-hand combat ignore this
+    result and re-roll on this table.
+  8 Blade Wind. The Sorcerer summons a storm of slashing blades.
+    Take a Warrior counter to determine who is affected. That Warrior
+    suffers (the Dungeon level) D6 Wounds, modified for Toughness
+    and armour as usual.
+  9 Soul Drain. The Sorcerer creates a storm of dark magic. Roll 1D6
+    for each Warrior adding his Toughness to the score. If the total is
+    equal to or more than the Dungeon level he suffers no ill effects
+    from the spell. If the score is less than the Dungeon Level the
+    Warrior suffers (1D6 + the Dungeon level) Wounds and the
+    Sorcerer gains the same amount. The Sorcerer may never gain
+    more Wounds than he started with any extra Wounds are lost in the
+    warp.
+    A Warrior reduced to zero Wounds by this spell is immediately
+    killed and may not be brought back to life by any means other than
+    those spells and magic items that raise the dead.
+ 10 Amizipal's Black Horror. A black cloud issues from the
+    Sorcerer's mouth, engulfing the Warriors in darkness. Roll i D6 for
+    each Warrior adding his Strength to the score. If the total is 7 or
+    more he suffers no ill effects from the spell. If the score is 6 or less
+    he suffers (the Dungeon level) D6 Wounds, with no modifier for
+    armour.
+ 11 Malediction of Nagash. The Sorcerer causes cuts to open up on
+    the body of one of the Warriors. Draw a Warrior counter to
+    determine which Warrior is hit. For 1 turn that Warrior is unable to
+    move, fire a missile weapon, and is at -2 to all of his to hit rolls in
+    close combat.
+    Now, and at the start of each subsequent turn, the same Warrior
+    loses (1 x the Dungeon level) Wounds, with no modifiers for
+    Toughness or armour, until the Sorcerer is dead.
+ 12 The Transformation of Kadon. The Sorcerer transforms himself
+    into one of the following monsters. Roll 1D6:
+      1-2 Wyvern
+      3-4 Chimera
+       5  Manticore
+       6  Hydra
+    If the transformation turns the Sorcerer into a Monster of less value
+    than himself, re-roll the spell.
+    See the Monsters section of the Bestiary for full details and
+    profiles for these Monsters.
+    The Sorcerer remains transformed until either he or all of the
+    Warriors are dead. While transformed he may not cast any more
+    spells.</magic>
+  <magic id="rpb-goblin" name="Goblin">At the start of each Monsters' Phase, a Goblin Shaman may cast one of the following spells. Roll 2D6 on the following table to determine which.
+2-4 Failure. The Shaman fails to cast a spell.
+ 5  'Ere We Go. The Shaman floods his allies with power. All Orcs
+    and Goblins on the board get fl Attack this turn and +1 Toughness
+    next turn.
+  6 Waaagh! Roll 2D6 for each Warrior spellcaster on the board. If the
+    score is equal to or greater than the Warrior's Battle-level he is
+    knocked to the ground for 1 turn, during which time he may do
+    nothing.
+  7 Brain Bursta. A bolt of power erupts from the Shaman's head.
+    Draw a Warrior counter to determine which Warrior is targeted.
+    Roll 2D6. If the score is greater than the target's Battle-level he is
+    hit - roll 1D6:
+        1 The Warrior's head explodes, killing him instantly
+      2-5 The Warrior suffers (2 x the Dungeon level) Wounds, with
+          no modifiers for Toughness or armour.
+        6 The Warrior suffers 1D6 Wounds, with no modifiers for
+          Toughness or armour.
+  8 Hand of Gork. This spell moves the Shaman and any allied
+    Monsters using missile weapons out of hand-to-hand combat with
+    the Warriors. Move the Monsters so that they are no longer adjacent
+    to the Warriors, moving other Monsters to make room if necessary.
+    If the Shaman is not in hand-to-hand combat re-roll this result.
+  9 Fist of Gork. The Shaman's arms become enwrapped with glowing
+    bands of power. Draw a Warrior counter to determine which
+    Warrior is targeted. That Warrior suffers 1D6 hits at the Shaman's
+    Strength+4.
+ 10 Da Krunch. One of the Warriors is stamped on by the mighty Foot
+    of Cork. Draw a Warrior counter to determine which Warrior is
+    targeted. That Warrior suffers 1D6+10 Wounds.
+ 11 Mork Save Uz! Roll 1D6 for each spellcasting Warrior. On a score
+    of 4, 5 or 6 all of that Warriors' remaining points of Power are lost
+    this turn. This does not affect any innate stored Power.
+ 12 'Eadbutt. The Shaman magically 'eadbutts one of the Warrior
+    spellcasters. If there is more than one spellcaster, draw a Warrior
+    counter to determine which Warrior is targeted. Roll (1D6+
+    Dungeon level) for the Shaman and (1D6+ Battle level) for the
+    target. If the Shaman wins or it is a draw add the two dice together:
+    the target takes that many Wounds, with no modifiers for Toughness
+    or armour, and cannot cast any magic next turn. If the Warrior wins
+    the spell has no effect.</magic>
+  <magic id="rpb-orc" name="Orc">An Orc Shaman may cast spells at the start of each Monsters' Phase. Roll 2D6 on the following table to determine which spells are cast:
+  2 Failure. The Shaman fails to cast a spell.
+  3 'Ere We Go. The Shaman floods his allies with power. All Orcs and
+    Goblins on the board get fl Attack this turn and +1 Toughness next
+    turn.
+  4 Waaagh! Roll 2D6 for each Warrior spellcaster on the board. If the
+    score is equal to or greater than the Warrior's Battle-level he is
+    knocked to the ground for 1 turn, during which time he may do
+    nothing.
+  5 Brain Bursta. A bolt of power erupts from the Shaman's head. Draw
+    a Warrior counter to determine which Warrior is targeted. Roll 2D6.
+    If the score is greater than the target's Battle-level he is hit - roll 1D6:
+        1 The Warrior's head explodes, killing him instantly
+      2-5 The Warrior suffers (2 x the Dungeon level) Wounds, with
+          no modifiers for Toughness or armour.
+        6 The Warrior suffers 1D6 Wounds, with no modifiers for
+          Toughness or armour.
+  6 Hand of Gork. This spell moves the Shaman and any allied
+    Monsters using missile weapons out of hand-to-hand combat with the
+    Warriors. Move the Monsters so that they are no longer adjacent to
+    the Warriors, moving other Monsters to make room if necessary. If
+    the Shaman is not in hand-to-hand combat re-roll this result.
+  7 Fist of Gork. The Shaman's arms become enwrapped with glowing
+    bands of power. Draw a Warrior counter to determine which Warrior
+    is targeted. That Warrior suffers 1D6 hits at the Shaman's
+    Strength+4.
+  8 Da Krunch. One of the Warriors is stamped on by the mighty Foot
+    of Cork. Draw a Warrior counter to determine which Warrior is
+    targeted. That Warrior suffers 1D6+10 Wounds.
+  9 Mork Save Uz! Roll 1D6 for each spellcasting Warrior. On a score
+    of 4, 5 or 6 all of that Warriors' remaining points of Power are lost
+    this turn. This does not affect any innate stored Power.
+10-12 'Eadbutt. The Shaman magically 'eadbutts one of the Warrior
+    spellcasters. If there is more than one spellcaster, draw a Warrior
+    counter to determine which Warrior is targeted. Roll (1D6+ Dungeon
+    level) for the Shaman and (1D6+ Battle level) for the target. If the
+    Shaman wins or it is a draw add the two dice together: the target
+    takes that many Wounds, with no modifiers for Toughness or
+    armour, and cannot cast any magic next turn. If the Warrior wins the
+    spell has no effect.</magic>
+  <magic id="rpb-skaven" name="Skaven">At the start of each Monsters' Phase, a Skaven spellcaster may cast one or more of the following spells. Roll the relevant number of 1D6 on the following table to determine which spells are cast:
+  1 Warp Power. The Skaven uses the power of the warp to heal
+    himself, curing 2D6 of his Wounds up to a maximum of his Starting
+    Wounds. If the Skaven is already at his Starting Wounds score re-roll
+    this result.
+  2 Pestilent Breath. The Skaven opens its jaws and black, pestilential
+    fumes pour out and flood into the dungeon. Roll 1D6 for each
+    Warrior and add his Toughness to the score. If the score is greater
+    than 7 he is not affected. If the score is equal to or less than 7 he
+    suffers (1D3 x the dungeon level) Wounds, with no modifiers for
+    Toughness or armour.
+  3 Warp Lightning. Screeching in fury, the Skaven points its clawed
+    hand at one of the Warriors and then blasts him with a streak of warp
+    lightning. Draw a Warrior counter to determine who is targeted. The
+    bolt causes (2D6 + the Dungeon level) Wounds, with no modifier for
+    armour.
+  4 Wither. A greenish pallid glow spreads from the Skaven's
+    outstretched paw. All adjacent Warrior suffer (1D6 + the Dungeon
+    level) Wounds, with no modifiers for Toughness or armour. If there
+    are no Warriors adjacent to the Skaven re-roll this result.
+  5 Putrefy. The Warriors see their surroundings begin to rot and decay,
+    with worms and maggots writhing upon the bodies of the dead and
+    wounded. The hallucination created by the Skaven is terrifyingly
+    real. Roll 1D6 for each Warrior. On a score of 5 or 6 that Warrior is
+    unaffected by the spell. On a score of 1, 2, 3 or 4 that Warrior may
+    do nothing at all in the next Warriors' Phase.
+  6 Scorch. Flames engulf one of the Warriors, turning him into an
+    incandescent column of fire. Draw a Warrior counter to determine
+    who is targeted. The flames cause 4D6 Wounds, with no modifiers
+    for Toughness or armour.</magic>
+  <magic id="rpb-necromantic" name="Necromantic">At the start of each Monsters' Phase, a Necromancer may cast one or more of the following spells, depending on his Magic Rating. Roll the relevant number of D6 to determine which spells are cast:
+  1 Winds of Death. Reduces all of the Warriors' Attacks by -1 for the
+    next Warriors' Phase.
+  2 Soul Drain. Inflicts 2D6 Wounds, with no modifiers for
+    Toughness or armour, on a single Warrior. Use the Warrior
+    counters to determine which Warrior is affected.
+  3 Deathchill. Reduces a single Warrior's Toughness by -2 . If this
+    reduces his Toughness to zero he is killed and may not he healed
+    by any means except spells and magic items, etc., that can resurrect
+    the dead. Use the Warrior counters to determine which Warrior is
+    affected.
+    If the Necromancer and all of his followers are destroyed, any
+    Warriors whose Toughness has been reduced in this combat and
+    are still alive have the damage to their Toughness restored.
+  4 Summon Skeletons. The Necromancer summons 6 Skeletons.
+    They are placed on the board immediately and may move and fight
+    this turn.
+  5 Summon Ghouls. The Necromancer summons 6 Ghouls. They are
+    placed on the board immediately and may move and fight this turn.
+  6 Summon Mummies. The Necromancer summons 1D6 Mummies.
+    They are placed on the board immediately and may move and fight
+    this turn.</magic>
+</rules>

@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'>
+        
+  <event id="rpb-thrown-out" name="Thrown Out">
+    <rules>Your Warrior's wild behaviour attracts the attention of the Settlement
+authorities and he is thrown out of town. He must wait outside the Settlement
+gates for the other Warriors. While outside, he spends his Living Expenses as
+normal.
+
+In addition, roll 1D6. On a score of 1 your Warrior is fleeced by the state guards as he is thrown out and has all his gold stolen.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-12-pickpocket" name="Pickpocket">
+    <rules>As your Warrior rushes through the busy streets, his money pouch is stolen.
+Your Warrior loses 1D6 x 20 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-13-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-14-good-deed" name="Good Deed">
+    <rules>Leaving most of his gold carefully stashed away in his hotel, your Warrior
+goes out on the town, taking 1D6 x 20 gold with him. As he crosses the street,
+he spots an old crone in an upstairs window shouting that robbers have broken
+into her attic room and are stealing her few possessions. Happy to assist the
+helpless, he bounds up the rickety stairs to her room three at a time. As he
+enters her dimly lit room, a black bag is placed over his head, swiftly
+followed by a heavy iron bar. He awakens in the gutter several hours later,
+nursing a sore head. Not surprisingly, the gold he was carrying has all gone.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-15-investment" name="Investment">
+    <rules>In one of the wharf side bars, your Warrior meets a young entrepreneur with
+great ideas for establishing a trading empire to cover the known world. He
+talks your warrior into investing 1D6 x 50 gold, giving him a certificate of
+partnership.
+
+From now on, at the end of each dungeon, whenever your Warrior reaches
+civilisation, he may visit the local Merchants' Guild and show them his deed
+of partnership. Consulting their records, they can tell him how the company is
+doing. Roll 1D6 on the following table:
+
+1       The company has gone bust, and your Warrior's
+investment is worth nothing. In addition, he must pay
+the merchants 1D6 x 50 gold in outstanding debts.
+
+2-5     Your Warrior's investment is performing fairly well,
+and the merchant forwards him 1D6 x 10 gold as his
+share of the profits
+
+6       Business is booming! After consulting the ledger, the
+merchant confirms that he can forward your Warrior
+1D6 x 50 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-16-steam-bath" name="Steam Bath">
+    <rules>Your Warrior spends the rest of his day in the heady atmosphere of a steam
+bath, sweating off the after effects of last night's sojourn at the tavern. He
+emerges feeling far healthier than he has for a good while, with +1
+permanently added to his Starting Wounds score.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-21-fight" name="Fight">
+    <rules>Your Warrior argues with a burly street trader who has tried to charge him far
+too much for some cheap, shoddy items. The argument escalates to a brawl
+very quickly. Roll 1D6 on the following table:
+
+1       Your Warrior is soundly thrashed and loses 200 gold.
+
+2       Your Warrior is bested after a hard struggle against the
+trader and his cronies and loses 100 gold.
+
+3       Your Warrior walks away with a bloody nose and 50 gold
+worse off, but leaves the trader badly bruised.
+
+4       After a fierce struggle, your Warrior knocks the impudent
+trader to the ground, where he stays to collect his teeth.
+While he is busy, your Warrior takes 100 gold from his
+stall as compensation.
+
+5       Your Warrior quickly disarms the trader. With a sword at
+his throat, the lout has no choice but to apologise and offer
+your Warrior 200 gold as compensation.
+
+6       A dozen evil-looking thugs - the trader's bodyguards leap
+out from the shadows, attacking your Warrior with knives,
+coshes and cudgels. Unperturbed, he coolly dispatches
+them with a few well placed sword strokes, empties their
+purses, and ends up 300 gold better off.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-22-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-23-fooled" name="Fooled">
+    <rules>Your Warrior must discard any one purchase he has made in this Settlement,
+as it was a fake and is worth nothing!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-24-circus" name="Circus">
+    <rules>There is a travelling circus in town, and your Warrior spends the rest of his
+day wandering from sideshow to sideshow. Having met the bearded woman
+and the two-headed goat, he decides to have his fortune read.
+
+Perhaps the sign above the door to that particular wagon should say 'Have
+your fortune stolen', as for a cost of 2D6 x 10 gold, your Warrior is told
+nothing more than that his destiny lies with a tall, dark stranger from
+Erengrad!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-25-reward" name="Reward">
+    <rules>Your Warrior sees a poster warning that a well known murderer is reputed to
+be in the area, and offers a reward for his capture. The criminal in question is
+described as very tall, wearing a black cloak and hat, and having an Erengrad
+accent. Upon reading this, your Warrior realises that the description exactly
+fits a character he bumped into earlier, and rushing back, manages to
+apprehend the villain just as he drags a gagged merchant into a dark alley.
+Roll 1D6 on the following table:
+
+1       The murderer laughs, slits the merchant's
+throat, throws the knife at your Warrior's feet
+and flees, shouting "Help, murder!".
+
+Soon your Warrior is surrounded by an
+angry mob, and only his best efforts (and
+1D6 x 50) gold coins persuade them that he
+is innocent.
+
+2-5     Your Warrior saves the merchant's life, for
+which he gives you 20 gold, but the
+murderer slips away into the gloom.
+
+6       Your Warrior frees the merchant and
+captures the murderer, for which he is
+proclaimed a hero and given 100 gold
+reward.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-26-betrothed" name="Betrothed">
+    <rules>Due to a mistake in identity, your Warrior finds himself surrounded by a gang
+of angry young men who insist that he is betrothed to marry their sister. Your
+Warrior agrees, albeit at knife point, and pledges his troth to a farmer's
+daughter of ample charms.
+
+The marriage is arranged for tomorrow, so your Warrior must either leave the
+Settlement immediately, or get married...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-31-drugged" name="Drugged">
+    <rules>Visiting a local hostelry in a rather seedy area, your Warrior partakes of a
+curious drink offered him by the bartender. After one swig, he feels the effects
+of the liquid take hold he has been drugged! Roll 1D6 on the following table:
+
+1-3     Your Warrior has been poisoned and is at -1
+Toughness for the duration of the next
+adventure.
+
+4-6     The liquid in question is simply very strong
+ale, and your Warrior quickly gets a taste for
+it. The only ill effect is a pounding head next
+morning.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-32-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-33-an-honest-days-work" name="An Honest Day's Work">
+    <rules>Your Warrior is employed by a local merchant to carry bales of cotton to the
+riverside area for the day. This task earns him 20 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-34-riotous-living" name="Riotous Living">
+    <rules>Taken with the joys of hot food and a comfortable bed after so long out in the
+wild, your Warrior overspends on such luxuries by 50 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-35-duel" name="Duel">
+    <rules>Your Warrior is challenged to a duel by a professional duellist whom he
+insulted in a tavern. The duel is scheduled to take place at dawn tomorrow.
+Your Warrior can either leave town immediately or take up the challenge.
+
+If your Warrior takes part in the duel, roll 1D6 on the following table:
+
+1       With a single, well-placed sword thrust your
+Warrior's heart is speared and he falls to the
+ground, quite dead.
+
+2-4     The two duellists fight for hour after hour,
+each inflicting many light wounds on the
+other. Eventually the sun goes down and the
+fight is declared a draw. The duellist
+congratulates your Warrior on his
+swordsmanship, and offers him a fine supper
+and the best wine at the most expensive hotel
+in the Settlement
+
+5-6     After a few minutes, your Warrior realises
+that he has the better of the duellist and
+despatches him. On his body he finds jewels
+worth 2D6 x 50 gold and a single item of
+treasure (take a Treasure card).</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-36-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-41-gambling" name="Gambling">
+    <rules>Your Warrior visits a local inn and gets involved in a dubious game of dice.
+Roll 1D6 on the following table:
+
+1       Your Warrior loses badly, and must forfeit
+one piece of treasure of your choice
+
+2       Your Warrior loses 1D6 x 20 gold.
+
+3-4     Your Warrior comes out of the game evens
+
+5       Your Warrior wins 1D6 x 10 gold.
+
+6       Your Warrior wins 3D6 x 10 gold</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-42-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-43-join-the-watch" name="Join The Watch">
+    <rules>The Captain of the Watch marks your Warrior as a useful looking recruit and,
+as he is short on manpower, press gangs him for a week. Your Warrior can
+either try to escape the Watch by making a donation to their funds of 2D6 x
+10 gold, or join up.
+
+If your Warrior joins up he does not have to pay Living Expenses for the
+week and earns 20 gold in wages. However, while in the Watch he has no
+time to visit any traders or Special Locations.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-44-illness" name="Illness">
+    <rules>A terrible illness strikes the Settlement, and your Warrior falls prey to it. He
+must spend the next two days in bed, paying 10 gold per day for medication
+as well as the normal Living Expenses. While your Warrior is in bed, you do
+not have to roll on this table for him.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-45-pet-dog" name="Pet Dog">
+    <rules>Your Warrior is adopted by a small dog. It follows him around everywhere,
+skulking in the shadows while the fighting goes on and then emerging after
+the adventure is completed to shower his new master with adoration.
+Unfortunately, his appetite is beyond all expectations for his size, and he
+doubles your Warrior's Living Expenses. Your Warrior can kill it if you want,
+but it would be a cruel and heartless thing to do and it will cost him 1,000
+gold to pay for a decent burial for the hound!
+
+If your Warrior already has a pet dog, roll on this table again. If not, name
+him and note him down on your Warrior's Adventure Record sheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-46-runaway" name="Runaway">
+    <rules>While walking along the main street, your Warrior hears a disturbance just
+around the corner. A moment later a huge runaway bull charges down the
+street, wrecking market stalls and causing panic. Your Warrior can let it pass
+by hiding down a side alley, or try to stop the enraged animal.
+
+If your Warrior hides down the alley and lets the bull pass, roll
+
+1D6 on the following table:
+1-3    Your Warrior skulks in the shadows, waiting for the
+action to die down. As he peeps round the corner, a
+mugger's metal bar hits him over the head. When he
+regains consciousness, his purse is 100 gold coins
+lighter.
+
+4-6     After waiting nervously in the dark for a few
+minutes, your Warrior sees the bull roar past and
+career off down a side street. The danger is passed
+and your Warrior may carry on about his business.
+
+If your Warrior tries to stop the bull, roll 1D6 on the following table:
+1-2     Your Warrior waves the passers-by aside and leaps
+out in front of the bull, sword drawn. The bull
+hesitates for half a second or so, and then tramples
+him into the dirt before carrying on its way. The
+crowd then stomp all over him in the rush to follow
+the bull, leaving him to nurse his injuries alone in
+an empty street.
+
+3-4     A single sword thrust stops the bull dead in its
+tracks literally. As its carcass twitches
+spasmodically, the crowd roar in approval and
+shower your Warrior with 100 gold. Then the bull's
+enraged owner arrives, and relieves him of 150 gold
+- it was his prize stud, and he wanted it stopped, not
+slaughtered!
+
+5-6     Your Warrior gives the bull a hard stare and it skids
+to a halt, snorting and pawing the ground. Putting a
+rope around its neck, he leads it back to its stall.
+The crowd cheer and shower him with 150 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-51-crime" name="Crime">
+    <rules>Your Warrior is accused of murder and thrown in jail. The matter is sorted out
+eventually, but only after your Warrior's companions have bailed him out.
+Each Warrior in the party except the accused must pay 1D6 x 5 gold to the
+authorities.
+
+If his companions do not have the money, your Warrior must spend 1D6 days
+in jail. While in jail he doesn't have to pay Living Expenses or roll on this
+table.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-52-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-53-counterfeit" name="Counterfeit">
+    <rules>As your Warrior attempts to buy some equipment, the trader points out his
+gold is counterfeit and refuses to take it. Looking through his stash, your
+Warrior discovers that 1D6 x 10 of his gold is indeed worthless. Discard it
+and cross it off his Adventure Record sheet.
+
+If your Warrior does not have that much gold left, and has already spent some
+in the Settlement, he must leave for the next dungeon immediately before
+anyone catches on.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-54-beggars" name="Beggars">
+    <rules>Your Warrior is accosted by beggars and, overwhelmed by the sadness of
+their plight, gives each of the 2D6+2 pitiful wretches 5 gold. If your Warrior
+cannot pay he is a beggar himself, and you must roll 1D6 on the following
+table:
+
+1       Your Warrior is thrown out of the Settlement - see
+Settlement Event 11.
+
+2-6     Your Warrior gains 1D6 x 10 gold by begging.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-55-debt" name="Debt">
+    <rules>A debt collector catches up with your Warrior, demanding payment for
+money borrowed years ago. The sum your Warrior borrowed was not
+substantial, but the interest rates are astronomical. The outstanding balance is
+1D6 x 20 gold, and if your Warrior cannot pay in full immediately the debt
+collector takes all his gold plus one piece of equipment or treasure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-56-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-61-temple-donation" name="Temple Donation">
+    <rules>Much taken with the teachings of the local priest, your Warrior pledges 1D6 x
+50 gold to his cause, selling equipment if necessary to meet the cost of the
+donation. The next time your Warrior is in a fight and fails to hit his
+opponent, the sect's deity shines on him and he may re-roll the attack. He may
+only do this once for each donation he makes (i.e., each time he rolls this
+result on this table.)</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-62-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-63-hunting" name="Hunting">
+    <rules>Your Warrior is invited by a group of locals to go on a nocturnal hunt.
+Meeting them just before sunset, he is informed that tonight's prey is the great
+Quarg - a beast of fearsome temper and foul disposition. His task in the group
+is to take the hunting tools a net, a small pole with a bell on it and a bag full of
+garlic - and wait in the middle of the woods while the rest of the hunters
+spread out into the forest and drive the Quarg towards him.
+
+As the sun rises the next morning, and the owls return to their nests, there is
+still no sign of the Quarg, your Warrior begins to wonder if someone is being
+made a fool of...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-64-witchcraft" name="Witchcraft">
+    <rules>Your Warrior is accused of witchcraft, and is chased through the streets by an
+angry mob. Roll 1D6 on the following table:
+
+1-3     Your Warrior escapes by jumping over the
+Settlement wall and into the filthy water of the
+moat. Pelted with eggs and rotten fruit, he staggers
+out onto the far side, where he has to wait outside
+for his companions.
+
+4-5     Your Warrior ducks down a side alley and escapes,
+but from now on must wear a disguise when out in
+public!
+
+6       Your Warrior turns angrily on the mob, demanding
+an explanation. Shouting down the leader of the
+mob, he establishes his authority over the crowd,
+who sheepishly return to their hovels, pausing only
+to give him 100 gold as way of compensation.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-65-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="rpb-settlement-66-accident" name="Accident">
+    <rules>As your Warrior helps an old crone to cross the busy main street, a beer wagon unexpectedly crashes into him. She carefully peels him off the heavy,
+iron-shod wheel, and takes him to the infirmary to be patched up. Your
+Warrior cannot buy anything or visit any Special Locations for 1D6 days
+while he recovers. While he is recovering you do not have to roll for him on
+this table.</rules>
+    <treasure>false</treasure>
+  </event>
+</events>

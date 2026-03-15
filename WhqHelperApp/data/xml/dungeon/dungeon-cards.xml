@@ -1,0 +1,495 @@
+<?xml version='1.0' encoding='utf-8'?>
+<dungeonCards>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="42" name="ALLEYWAY" type="CORRIDOR">
+    <description>As if the townsfolk had fled in great haste, broken crates on the ground and shattered cobblestones lead you into an alleyway.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/alleyway.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="49" name="BACK GARDEN" type="DUNGEON_ROOM">
+    <description>A garden rest area seems to offer the group a brief moment of respite.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/back-garden.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="36" name="BROKEN ROAD" type="CORRIDOR">
+    <description>There is a pit in the middle of the road, though someone has laid some old planks across it to pass.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/broken-road.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="38" name="CORNER" type="CORRIDOR">
+    <description>The streets of the city turn at your path. No one remains, yet everything is full of closed coffins.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/corner.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="48" name="EAST DISTRICT" type="DUNGEON_ROOM">
+    <description>In this district there is a bloodstained column in the centre, and a large crate.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/east-district.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="39" name="ENTRANCE" type="CORRIDOR">
+    <description>An access point to the city that serves as a crossroads of streets. So much silence is deeply unsettling.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/entrance.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="41" name="GRAVEYARD" type="DUNGEON_ROOM">
+    <description>The city's necropolis, where all the townsfolk and villagers who died were laid to rest.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/graveyard.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="50" name="GREEN ZONE" type="DUNGEON_ROOM">
+    <description>A leafy tree fills the room, offering some shade all around it. Ideal for a brief pause.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/green-zone.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="51" name="MONUMENT" type="DUNGEON_ROOM">
+    <description>In the centre of the plaza, an immense monument rises. It seems especially strange when the moonlight reflects on it.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/monument.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="53" name="OLD TOWN" type="OBJECTIVE_ROOM">
+    <description>The city centre lies abandoned. As you arrive, you sense a kind of magical aura surrounding the place. Everything is in ruins after the siege.</description>
+    <rules>For details about this room, consult the Adventure Book.</rules>
+    <tileImagePath>resources/tiles/cc/old-town.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="47" name="PIT OF CORPSES" type="DUNGEON_ROOM">
+    <description>There is a small water fountain beside a nauseating smell coming from a pit filled with skulls and bones.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/pit-of-corpses.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="52" name="SEWER GRATE" type="DUNGEON_ROOM">
+    <description>Beneath the great grate, water runs, falls, and splashes everywhere. It might be an escape route.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/sewer-grate.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="40" name="SHORT STREET" type="CORRIDOR">
+    <description>A narrow, short street where the cobblestones have been worn down by the passage of time.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/short-street.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="44" name="SHORT STREET II" type="CORRIDOR">
+    <description>The city's sewer system bears an engraved emblem you do not recognize at all.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/short-street-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="45" name="STREET CROSSING" type="CORRIDOR">
+    <description>An intersection where the streets continue endlessly between tall ruined buildings. The city has a grim, gothic character.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/street-crossing.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="43" name="TOPPLED STATUE" type="DUNGEON_ROOM">
+    <description>A gigantic stone idol has been cast down and shattered into hundreds of pieces.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/toppled-statue.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="37" name="WILL-O'-THE-WISPS" type="CORRIDOR">
+    <description>At this spot, four ghostly lights illuminate the citadel with an intense blue glow.</description>
+    <rules>A Corridor will always be empty, unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/cc/will-o-the-wisps.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Cursed City" id="46" name="WISHING WELL" type="DUNGEON_ROOM">
+    <description>The bottom of the well cannot be seen, and even shouting into it brings back an echo. There are traces of fresh blood near the dark well.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/cc/wishing-well.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="56" name="BOTTOMLESS PIT" type="CORRIDOR">
+    <description>Hovering over a bottomless pit is a series of wooden planks tied precariously together.</description>
+    <rules>See the Hall of the Hag Queen rulebook for details of the Bottomless Pit.</rules>
+    <tileImagePath>resources/tiles/bottomless-pit.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="35" name="BRIDGE OF DESPAIR" type="SPECIAL">
+    <description>This rickety bridge spans a deadly spike lined pit. Flanked by dungeon denizens intent on knocking the adventurers into the deadly defile. However the bridge itself holds further surprises yet.</description>
+    <rules>Rules can be found in the Pits and Traps Supplement.</rules>
+    <tileImagePath>resources/tiles/bridge-of-despair.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="23" name="CHASM OF DESPAIR" type="CORRIDOR">
+    <description>This narrow bridge crosses a deep chasm.</description>
+    <rules>Any Warrior or Monster that rolls a natural 1 to hit in hand-to-hand combat will lose their balance and fall to their death in the chasm below. A Warrior may only be rescued by use of a rope or the levitate spell. You must test to see if the rope breaks as normal.</rules>
+    <tileImagePath>resources/tiles/chasm-of-despair.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="13" name="CIRCLE OF POWER" type="DUNGEON_ROOM">
+    <description>Shards of flickering, unnatural green light pierce the darkness from within this room.</description>
+    <rules>The Circle of Power will always trigger an Event Card, unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/circle-of-power.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="25" name="COLLAPSED PASSAGE" type="CORRIDOR">
+    <description>A cave-in has nearly sealed this passageway, forcing the Warriors to walk in single file.</description>
+    <rules>This passageway will be empty unless an Unexpected Event is rolled during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/collapsed-passage.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="9" name="CORNER" type="CORRIDOR">
+    <description>The corridor suddenly and sharply twists into the darkness.</description>
+    <rules>The Corner will always be empty unless the Adventure Book states otherwise or an Unexpected Event is rolled during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/corner.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="34" name="CROSSROADS OF DOOM" type="SPECIAL">
+    <description>A secret passage way? A devious trap? A dastardly ambush? A hidden treasure horde? All it takes is a pull of the lever to find out.</description>
+    <rules>Rules can be found in the Pits and Traps Supplement.</rules>
+    <tileImagePath>resources/tiles/crossroads-of-doom.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="57" name="CRYSTAL CAVE" type="CORRIDOR">
+    <description>Protruding out of the cave walls are enormous crystals which seem to pulsate with energy.</description>
+    <rules>The first time a Warrior enters this Board Section they roll 1D6 and add that number to the Power Phase roll. The total is the number of Wounds they heal, up to their Starting Wounds score.</rules>
+    <tileImagePath>resources/tiles/crystal-cave.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="28" name="DEAD END" type="CORRIDOR">
+    <description>A rockfall blocks the tunnel ahead and there seems no obvious way deeper into the dungeon.</description>
+    <rules>See White Dwarf 192 for details of the Dead End.</rules>
+    <tileImagePath>resources/tiles/dead-end.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="21" name="DREAD KING'S THRONE ROOM" type="OBJECTIVE_ROOM">
+    <description>This massive chamber is the royal hall of the Liche King himself. The Warriors can see the Dread King seated upon his ornate throne.</description>
+    <rules>See the Catacombs of Terror rulebook for details of the Dread King's Throne Room.</rules>
+    <tileImagePath>resources/tiles/dread-kings-throne-room.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="12" name="DUNGEON CELL" type="DUNGEON_ROOM">
+    <description>What little light penetrates this room seems to be absorbed by its deep blue floor.</description>
+    <rules>The Dungeon Cell will always trigger an Event Card, unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/dungeon-cell.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="33" name="DWARVEN FORGE" type="OBJECTIVE_ROOM">
+    <description>An intense light radiates from this room, you can hear the sizzle of hot lava, feel the blistering heat and smell the noxious fumes.</description>
+    <rules>See article for details of Dwarven Forge.</rules>
+    <tileImagePath>resources/tiles/dwarven-forge.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="20" name="FIGHTING PIT" type="OBJECTIVE_ROOM">
+    <description>The dim light of a single lamp suspended from the ceiling barely penetrates the shadows of this dark and forbidding room.</description>
+    <rules>See the Adventure Book for details of the Fighting Pit.</rules>
+    <tileImagePath>resources/tiles/fighting-pit.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="8" name="FIRECHASM" type="OBJECTIVE_ROOM">
+    <description>A deep red light seeps out from this room, suffusing the area with a burning glow. The air is almost too hot to breathe and the walls are warm to the touch.</description>
+    <rules>See the Adventure Book for details of the Firechasm.</rules>
+    <tileImagePath>resources/tiles/firechasm.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="24" name="FLAMES OF KHAZLA" type="CORRIDOR">
+    <description>Nestled in the corner ahead is a small shrine of multi-coloured flames.</description>
+    <rules>The first time a Warrior enters this board section, he regains 2D6 Wounds, up to his starting Wounds maximum. Each Warrior may only be healed once in this way. The Flames of Khazla is a corridor, not a dungeon room, so entering it will not trigger an Event card.</rules>
+    <tileImagePath>resources/tiles/flames-of-khazla.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="19" name="FOUNTAIN OF LIGHT" type="OBJECTIVE_ROOM">
+    <description>A faint yellow glow emanates from this room, and you can just hear the trickle of running water.</description>
+    <rules>See the Adventure Book for details of the Fountain of Light.</rules>
+    <tileImagePath>resources/tiles/fountain-of-light.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="27" name="GORGUT'S LAIR" type="OBJECTIVE_ROOM">
+    <description>This huge room has an air of menace. Facing the Warriors is a deep, spiked pit. Beyond the pit the Warriors can see a dimly-lit platform upon which stands an imposing throne.</description>
+    <rules>See the Lair of the Orc Lord rulebook for details of Gorgut's Lair.</rules>
+    <tileImagePath>resources/tiles/gorguts-lair.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="7" name="GUARD ROOM" type="DUNGEON_ROOM">
+    <description>The dim light of your lantern illuminates what appears to be a floor covered in a checkerboard pattern.</description>
+    <rules>The Guard Room will always trigger an Event Card, unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/guard-room.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="22" name="HALL OF DEATH" type="DUNGEON_ROOM">
+    <description>This bone-filled room reeks of terror, decay and death.</description>
+    <rules>When the Warriors find this room, split the rest of the dungeon deck between the three exits, just as for a T-junction. Take three Event cards, without looking at them, and place one by each exit. When exploring these exits, as well as turning over the next Dungeon card, resolve the Event card for that doorway too.</rules>
+    <tileImagePath>resources/tiles/hall-of-death.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="18" name="IDOL CHAMBER" type="OBJECTIVE_ROOM">
+    <description>The wan light of your lantern glints off the cold stone walls of this chamber, revealing a hideous stone idol at the far end of the room.</description>
+    <rules>See the Adventure Book for details of the Idol Chamber.</rules>
+    <tileImagePath>resources/tiles/idol-chamber.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="30" name="INTO THE DARK" type="SPECIAL">
+    <description>A set of ancient stairs descends into the depths of the dungeon.</description>
+    <rules>See White Dwarf 192 for details of this room.</rules>
+    <tileImagePath>resources/tiles/into-the-dark.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="58" name="LANDING" type="CORRIDOR">
+    <description>This shadowy corridor leads to a flight of steps.</description>
+    <rules>The Landing will always be empty unless an Unexpected Event is rolled during the Power Phase. Choose one of two doorway positions.</rules>
+    <tileImagePath>resources/tiles/landing.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="17" name="MONSTERS' LAIR" type="DUNGEON_ROOM">
+    <description>As you peer into the gloom, the lantern's light glints off what seems to be bones.</description>
+    <rules>The Monsters' Lair will always trigger an Event Card, unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/monsters-lair.png</tileImagePath>
+  </card>
+  <card copyCount="3" enabled="true" environment="The Old World" id="10" name="PASSAGEWAY I" type="CORRIDOR">
+    <description>You face a moss covered corridor, its end hidden in the gloom.</description>
+    <rules>The Passageway will always be empty unless the Adventure Book states otherwise or an Unexpected Event is rolled during the Power Phase. Choose one of three doorway positions.</rules>
+    <tileImagePath>resources/tiles/passageway-i.png</tileImagePath>
+  </card>
+  <card copyCount="3" enabled="true" environment="The Old World" id="11" name="PASSAGEWAY II" type="CORRIDOR">
+    <description>You are standing just inside a dank, dark expanse of corridor that disappears into the gloom.</description>
+    <rules>The Passageway will always be empty unless the Adventure Book states otherwise or an Unexpected Event is rolled during the Power Phase. Choose one of three doorway positions.</rules>
+    <tileImagePath>resources/tiles/passageway-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="32" name="QUIRRIK'S LABORATORY" type="OBJECTIVE_ROOM">
+    <description>The stench of burning warpstone fills the air, and the ominous hum of powerful machinery makes the floor shake. In the darkness you spy the bulky form of the warpfire generator!</description>
+    <rules>See White Dwarf 195 for details.</rules>
+    <tileImagePath>resources/tiles/quirriks-laboratory.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="31" name="SEWER" type="SPECIAL">
+    <description>The rancid stench of noxious vapours assails the Warrior's nostrils as they reach this intersection with an effluent channel.</description>
+    <rules>See White Dwarf 204 for details of the Sewer.</rules>
+    <tileImagePath>resources/tiles/sewer.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="26" name="SHAMAN'S DEN" type="DUNGEON_ROOM">
+    <description>The Warriors can feel the magical power in the room, but the poor light of the lantern is not enough to show what might lurk within. Crumbling sandstone steps lead up into the darkness.</description>
+    <rules>The Shaman's Den will always trigger an Event card unless the Lair of the Orc Lord rulebook states otherwise. There are special rules for this room - see the Shaman's Den special card.</rules>
+    <tileImagePath>resources/tiles/shamans-den.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="6" name="STAIRWAY" type="CORRIDOR">
+    <description>You almost stumble and fall down a set of slimy stone steps that descend into the darkness.</description>
+    <rules>The Stairway will always be empty unless the Adventure Book states otherwise or an Unexpected Event is rolled during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/stairway.png</tileImagePath>
+  </card>
+  <card copyCount="3" enabled="true" environment="The Old World" id="5" name="T-JUNCTION" type="CORRIDOR">
+    <description>The passage divides into two here, leaving you with no idea as to which direction to take.</description>
+    <rules>The T-junction will always be empty, unless the Adventure Book states otherwise or an Unexpected Event is rolled during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/t-junction.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="55" name="TEMPLE OF KHAINE" type="OBJECTIVE_ROOM">
+    <description>A towering statue of Khaine greets visitors. On a platform behind it is a cauldron dripping with blood.</description>
+    <rules>See the Hall of the Hag Queen rulebook for details about the Temple of Khaine. Choose one of two doorway positions.</rules>
+    <tileImagePath>resources/tiles/temple-of-khaine.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="29" name="THE GAOL" type="SPECIAL">
+    <description>This tiny cell is dark and damp and smells of rotten flesh.</description>
+    <rules>See White Dwarf 185 for details of the Gaol. Draw another Objective Room card to find out your adventure.</rules>
+    <tileImagePath>resources/tiles/the-gaol.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="16" name="TOMB CHAMBER" type="OBJECTIVE_ROOM">
+    <description>A chill breeze blows from this room. In the flickering light, you can make out the shape of a stone slab inside.</description>
+    <rules>See the Adventure Book for details of the Tomb Chamber.</rules>
+    <tileImagePath>resources/tiles/tomb-chamber.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="15" name="TORTURE CHAMBER" type="DUNGEON_ROOM">
+    <description>By the flickering light of your lantern, you can just make out a small rough-hewn room.</description>
+    <rules>The Torture Chamber will always trigger an Event Card, unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/torture-chamber.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="54" name="WATER CAVE" type="DUNGEON_ROOM">
+    <description>You see deep, murky water and are fairly certain that something just swam by.</description>
+    <rules>See the Hall of the Hag Queen rulebook for details of the Water Cave.</rules>
+    <tileImagePath>resources/tiles/water-cave.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="The Old World" id="14" name="WELL OF DOOM" type="DUNGEON_ROOM">
+    <description>The stench of decay hangs heavy in the air, emanating from a bottomless shaft in the centre of the room.</description>
+    <rules>The Well of Doom will always trigger an Event Card, unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/well-of-doom.png</tileImagePath>
+  </card>
+  
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="59" name="VALLEY OF BONES" type="OBJECTIVE_ROOM">
+    <description>Suddenly the ground hardens and, among the dunes, a graveyard of bones from an immense creature of ages past emerges.</description>
+    <rules>See the Adventure Book for details about this room.</rules>
+    <tileImagePath>resources/tiles/ad/valley-of-bones.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="60" name="FOUNTAIN OF LIFE" type="OBJECTIVE_ROOM">
+    <description>Among the desert dunes, beside some ruins, you find the coveted Fountain of Life, from which the sacred waters of Khemri flow.</description>
+    <rules>See the Adventure Book for details about this room.</rules>
+    <tileImagePath>resources/tiles/ad/fountain-of-life.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="61" name="COBBLED ROAD" type="CORRIDOR">
+    <description>A cobbled path stretches before you, as if it once belonged to the streets of a forgotten city.</description>
+    <rules>Roads will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/cobbled-road.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="62" name="T-JUNCTION I" type="CORRIDOR">
+    <description>The path forks and you do not know which direction to choose; the heat bears down and your supplies are running short.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/t-junction-i.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="63" name="ROCKY STAIRWAY" type="CORRIDOR">
+    <description>A stone stairway lifts you up along the path. From it, you can glimpse part of the desert.</description>
+    <rules>Stairs will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/rocky-stairway.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="64" name="TURNING PASSAGE I" type="CORRIDOR">
+    <description>The path bends and the sandy wind blinds you. Every step becomes more uncertain.</description>
+    <rules>Passageways will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/turning-passage-i.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="65" name="CORNER I" type="CORRIDOR">
+    <description>The path suddenly turns and the vast desert seems endless to you.</description>
+    <rules>Corners will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/corner-i.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="66" name="X-JUNCTION I" type="CORRIDOR">
+    <description>A junction opens into four possible directions to take.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/x-junction-i.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="67" name="ROUTE" type="CORRIDOR">
+    <description>A dune track lies before you; every step sinks deep and the sand-laden wind blinds you.</description>
+    <rules>Passageways will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/route.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="68" name="CORNER II" type="CORRIDOR">
+    <description>The path suddenly turns and the vast desert seems endless to you.</description>
+    <rules>Corners will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/corner-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="69" name="TURNING PASSAGE II" type="CORRIDOR">
+    <description>The path bends and the sandy wind blinds you. Every step becomes more uncertain.</description>
+    <rules>Passageways will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/turning-passage-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="70" name="X-JUNCTION II" type="CORRIDOR">
+    <description>A junction appears on your route, offering new directions to take.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/x-junction-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="71" name="T-JUNCTION II" type="CORRIDOR">
+    <description>The path forks and you do not know which direction to choose; the heat bears down and your supplies are running short.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/t-junction-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="72" name="TORTURED PRISONERS" type="DUNGEON_ROOM">
+    <description>Beside a small grate in the centre lie two chained bodies, consumed by the passage of time.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/tortured-prisoners.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="73" name="PIT OF DEATH" type="DUNGEON_ROOM">
+    <description>Amid your exploits you come upon a water-filled pit. It seems like a good moment to rest.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/pit-of-death.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="74" name="STAIR" type="CORRIDOR">
+    <description>The ground hardens and, among the dunes, you find a kind of stair hidden in the desert.</description>
+    <rules>Stairs will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/ad/stair.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="75" name="DESERT DUNES" type="DUNGEON_ROOM">
+    <description>The desert dunes become firmer than usual; a small rocky patch rises above the sand.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/desert-dunes.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="76" name="RUINED HOUSE" type="DUNGEON_ROOM">
+    <description>The ruins of a small house that was destroyed have been overrun by the monsters of the area.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/ruined-house.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="77" name="OASIS" type="DUNGEON_ROOM">
+    <description>A small oasis in the middle of nowhere offers the party a little peace and rest.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/oasis.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="78" name="MAGIC SEAL" type="DUNGEON_ROOM">
+    <description>This room is flooded with supreme magical power. Not everyone is capable of surviving it.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/magic-seal.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="79" name="MALEVOLENT RITUAL" type="DUNGEON_ROOM">
+    <description>Candles arranged in a circle surround a mystic symbol. A bad omen comes over you as you reach this room.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/malevolent-ritual.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="80" name="ANCIENT RUINS" type="DUNGEON_ROOM">
+    <description>Remnants of ancient ruins rise from the sand; it is hard to tell from which age they date.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/ancient-ruins.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Deserts" id="81" name="CAGE" type="DUNGEON_ROOM">
+    <description>The bones of a prisoner lie inside the cage; you do not know whether time or the fierce heat claimed him.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/ad/cage.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="82" name="CORRIDOR I" type="CORRIDOR">
+    <description>Brightly coloured tiles form a straight corridor. They look almost new, which suggests very few people have reached this place.</description>
+    <rules>Roads will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/corridor-i.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="83" name="T-JUNCTION III" type="CORRIDOR">
+    <description>The path forks and you do not know which direction to choose; the heat bears down and your supplies are running short.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/t-junction-iii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="84" name="STAIRS I" type="CORRIDOR">
+    <description>Stairs made of ancient tiles, still gleaming despite the passing of the years.</description>
+    <rules>Stairs will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/stairs-i.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="85" name="X-JUNCTION III" type="CORRIDOR">
+    <description>A junction appears in the dungeon, with new directions to take.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/x-junction-iii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="86" name="CORNER III" type="CORRIDOR">
+    <description>Without knowing what lies ahead, the corridor turns and forces you deeper into the dungeon.</description>
+    <rules>Corners will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/corner-iii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="87" name="TURNING PASSAGE III" type="CORRIDOR">
+    <description>The corridor bends, but the darkness keeps you from seeing what lies ahead.</description>
+    <rules>Passageways will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/turning-passage-iii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="88" name="CHAMBER OF DUSK" type="DUNGEON_ROOM">
+    <description>The chamber of dusk, the end of times where everything ends, also known as the deathly hall.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/at/chamber-of-dusk.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="89" name="CHAMBER OF REBIRTH" type="DUNGEON_ROOM">
+    <description>The adventurers feel their Wounds mending; the tiles shine and fill those who step into the chamber with courage.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/at/chamber-of-rebirth.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="90" name="ALTAR OF THE FALLEN" type="OBJECTIVE_ROOM">
+    <description>After climbing the steps, you find a raised walkway with water on either side.</description>
+    <rules>See the Adventure Book for details about this room.</rules>
+    <tileImagePath>resources/tiles/at/altar-of-the-fallen.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="91" name="SETTRA'S SARCOPHAGUS" type="OBJECTIVE_ROOM">
+    <description>A mummified body rests atop a small altar surrounded by skulls and burning candles.</description>
+    <rules>See the Adventure Book for details about this room.</rules>
+    <tileImagePath>resources/tiles/at/settras-sarcophagus.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="92" name="THE HERALD'S PASSAGE" type="SPECIAL">
+    <description>The passage crosses a narrow chamber with two enormous statues at its entrance.</description>
+    <rules>See the Adventure Book for details about this section.</rules>
+    <tileImagePath>resources/tiles/at/heralds-passage.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="93" name="HALL OF THE IDOL" type="DUNGEON_ROOM">
+    <description>A huge carving of a scorpion lies on the floor, with a skull in each corner.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/at/hall-of-the-idol.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="94" name="X-JUNCTION IV" type="CORRIDOR">
+    <description>A junction appears in the dungeon, with new directions to take.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/x-junction-iv.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="95" name="CORNER IV" type="CORRIDOR">
+    <description>The corridor turns sharply and you have no idea what lies in the depths of the dungeon.</description>
+    <rules>Corners will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/corner-iv.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="96" name="CHAMBER OF PUNISHMENT" type="DUNGEON_ROOM">
+    <description>An empty room, barely lit, with paving stones worn down by the passage of time.</description>
+    <rules>Upon entering a Dungeon Room, draw an Event Card unless the Adventure Book states otherwise.</rules>
+    <tileImagePath>resources/tiles/at/chamber-of-punishment.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="97" name="CORRIDOR II" type="CORRIDOR">
+    <description>A faint corridor lit by torches fixed to the walls.</description>
+    <rules>Passageways will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/corridor-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="98" name="T-JUNCTION IV" type="CORRIDOR">
+    <description>The corridor splits and you do not know which direction to choose; whichever path you take, you sense nothing good ahead.</description>
+    <rules>Junctions will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/t-junction-iv.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="99" name="STAIRS II" type="CORRIDOR">
+    <description>Stairs made of ancient tiles, still gleaming despite the passing of the years.</description>
+    <rules>Stairs will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/stairs-ii.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="100" name="TURNING PASSAGE IV" type="CORRIDOR">
+    <description>The corridor bends, yet the darkness prevents you from seeing what lies ahead.</description>
+    <rules>Passageways will always be empty unless the Adventure Book states otherwise or an Unexpected Event occurs during the Power Phase.</rules>
+    <tileImagePath>resources/tiles/at/turning-passage-iv.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="101" name="QUEEN'S CHAMBERS" type="OBJECTIVE_ROOM">
+    <description>A long chamber lined with columns and, at the far end, a great throne flanked by a banner on each side.</description>
+    <rules>See the Adventure Book for details about this room.</rules>
+    <tileImagePath>resources/tiles/at/queens-chambers.png</tileImagePath>
+  </card>
+  <card copyCount="1" enabled="true" environment="Arabian Tombs" id="102" name="CHAMBER OF SCARABS" type="OBJECTIVE_ROOM">
+    <description>Walls of skulls form the vaulted chamber, with a great emblem engraved on the floor.</description>
+    <rules>See the Adventure Book for details about this room.</rules>
+    <tileImagePath>resources/tiles/at/chamber-of-scarabs.png</tileImagePath>
+  </card>
+  
+</dungeonCards>

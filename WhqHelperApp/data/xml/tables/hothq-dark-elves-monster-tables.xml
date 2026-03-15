@@ -1,0 +1,690 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+
+  <!-- HOTHQ tables do include cross-table re-roll instructions in the booklet.
+       The current runtime only supports direct monster/group/event entries, so
+       those reference rows are intentionally omitted here. -->
+
+  <table name="Hall of the Hag Queen Monsters - Level 1">
+    <monster id="rpb-witch-elf" number="2-4" ambiences="dark-elves" level="1" />
+    <monster id="rpb-dark-elf-warrior" number="3-8" ambiences="dark-elves" level="1" />
+    <group level="1">
+      <monster id="hothq-demona-ryme-l1" number="1" ambiences="dark-elves" level="1" />
+      <monster id="hothq-julong-l1" number="1" ambiences="dark-elves" level="1" />
+    </group>
+    <monster id="rpb-warhound" number="3" ambiences="dark-elves" level="1" />
+    <monster id="rpb-beastman" number="1-6" ambiences="dark-elves" level="1" />
+    <monster id="rpb-dark-elf-warrior" number="3-8" ambiences="dark-elves" level="1">
+      <special append="false">
+        <text>Armed with Swords; Dodge 6+; Hate Elves.</text>
+      </special>
+    </monster>
+    <monster id="rpb-dark-elf-naggaroth-black-guard" number="1-6" ambiences="dark-elves" level="1" />
+    <monster id="rpb-giant-spider" number="2-12" ambiences="dark-elves" level="1" />
+    <monster id="hothq-black-ark-corsair" number="2-7" ambiences="dark-elves" level="1" />
+    <monster id="hothq-shade" number="3-8" ambiences="dark-elves" level="1" />
+    <group level="1">
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="1" />
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="1">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+    </group>
+    <monster id="hothq-harpy" number="1-3" ambiences="dark-elves" level="1" />
+    <monster id="rpb-giant-spider" number="7-12" ambiences="dark-elves" level="1" />
+    <monster id="rpb-dark-elf-naggaroth-black-guard" number="1-6" ambiences="dark-elves" level="1" />
+    <monster id="hothq-shade" number="4-9" ambiences="dark-elves" level="1" />
+    <monster id="rpb-hobgoblin" number="2-12" ambiences="dark-elves" level="1" />
+    <monster id="hothq-raith-darkfoot-l1" number="1" ambiences="dark-elves" level="1" />
+    <monster id="rpb-witch-elf" number="1-6" ambiences="dark-elves" level="1" />
+    <monster id="rpb-giant-bat" number="2-12" ambiences="dark-elves" level="1" />
+    <monster id="hothq-ogre-mercenary" number="1-3" ambiences="dark-elves" level="1" />
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 2">
+    <monster id="rpb-witch-elf" number="1-6" ambiences="dark-elves" level="2" />
+    <monster id="hothq-ogre-mercenary" number="1-3" ambiences="dark-elves" level="2" />
+    <monster id="rpb-hobgoblin" number="7-12" ambiences="dark-elves" level="2" />
+    <monster id="rpb-dark-elf-warrior" number="4-9" ambiences="dark-elves" level="2">
+      <special append="false">
+        <text>Armed with Swords; Dodge 6+; Hate Elves.</text>
+      </special>
+    </monster>
+    <monster id="rpb-giant-scorpion" number="2-12" ambiences="dark-elves" level="2" />
+    <monster id="rpb-dark-elf-warrior" number="4-9" ambiences="dark-elves" level="2" />
+    <monster id="rpb-warhound" number="2-6" ambiences="dark-elves" level="2" />
+    <monster id="hothq-black-ark-corsair" number="3-8" ambiences="dark-elves" level="2" />
+    <monster id="rpb-dark-elf-naggaroth-black-guard" number="2-7" ambiences="dark-elves" level="2" />
+    <monster id="rpb-witch-elf" number="2-4" ambiences="dark-elves" level="2" />
+    <monster id="hothq-shade" number="4-9" ambiences="dark-elves" level="2" />
+    <group level="2">
+      <monster id="rpb-dark-elf-warrior" number="3-8" ambiences="dark-elves" level="2" />
+      <monster id="rpb-dark-elf-warrior" number="3-8" ambiences="dark-elves" level="2">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+    </group>
+    <monster id="hothq-raith-darkfoot-l2" number="1" ambiences="dark-elves" level="2" />
+    <monster id="rpb-giant-spider" number="2-12" ambiences="dark-elves" level="2" />
+    <monster id="rpb-beastman" number="3-8" ambiences="dark-elves" level="2" />
+    <monster id="hothq-ogre-mercenary" number="2" ambiences="dark-elves" level="2" />
+    <group level="2">
+      <monster id="hothq-demona-ryme-l2" number="1" ambiences="dark-elves" level="2" />
+      <monster id="hothq-julong-l2" number="1" ambiences="dark-elves" level="2" />
+    </group>
+    <monster id="hothq-harpy" number="3" ambiences="dark-elves" level="2" />
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 3">
+    <monster id="hothq-cold-one-knight" number="2-4" ambiences="dark-elves" level="3" />
+    <monster id="hothq-river-troll" number="1-3" ambiences="dark-elves" level="3" />
+    <monster id="rpb-beastman" number="8" ambiences="dark-elves" level="3" />
+    <monster id="rpb-gigantic-spider" number="1-3" ambiences="dark-elves" level="3" />
+    <group level="3">
+      <monster id="rpb-dark-elf-warrior" number="2-12" ambiences="dark-elves" level="3" />
+      <monster id="rpb-dark-elf-warrior" number="2-12" ambiences="dark-elves" level="3">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+    </group>
+    <group level="3">
+      <monster id="hothq-demona-ryme-l3" number="1" ambiences="dark-elves" level="3" />
+      <monster id="hothq-julong-l3" number="1" ambiences="dark-elves" level="3" />
+    </group>
+    <monster id="rpb-chaos-hound" number="4-9" ambiences="dark-elves" level="3" />
+    <monster id="rpb-witch-elf" number="6" ambiences="dark-elves" level="3" />
+    <group level="3">
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="3" />
+      <monster id="rpb-dark-elf-naggaroth-black-guard" number="2-12" ambiences="dark-elves" level="3" />
+    </group>
+    <monster id="hothq-harpy" number="6" ambiences="dark-elves" level="3" />
+    <monster id="rpb-chaos-warrior" number="2-12" ambiences="dark-elves" level="3" />
+    <group level="3">
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="3" />
+      <monster id="hothq-black-ark-corsair" number="12" ambiences="dark-elves" level="3" />
+    </group>
+    <group level="3">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="3" />
+      <monster id="hothq-ogre-mercenary" number="1-3" ambiences="dark-elves" level="3" />
+      <monster id="rpb-dark-elf-naggaroth-black-guard" number="1-6" ambiences="dark-elves" level="3">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+        </special>
+      </monster>
+    </group>
+    <monster id="rpb-giant-scorpion" number="1-3" ambiences="dark-elves" level="3" />
+    <monster id="hothq-raith-darkfoot-l3" number="1" ambiences="dark-elves" level="3" />
+    <monster id="hothq-shade" number="12" ambiences="dark-elves" level="3" />
+    <monster id="hothq-cave-troll" number="1-3" ambiences="dark-elves" level="3" />
+    <group level="3">
+      <monster id="hothq-shade" number="1-6" ambiences="dark-elves" level="3" />
+      <monster id="rpb-witch-elf" number="1-6" ambiences="dark-elves" level="3" />
+      <monster id="hothq-black-ark-corsair" number="2-12" ambiences="dark-elves" level="3" />
+    </group>
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 4">
+    <monster id="hothq-bloodshade" number="1-3" ambiences="dark-elves" level="4" />
+    <monster id="hothq-cave-troll" number="3" ambiences="dark-elves" level="4" />
+    <monster id="hothq-black-ark-corsair-champion" number="4-9" ambiences="dark-elves" level="4" />
+    <monster id="hothq-har-ganeth-executioner" number="1-3" ambiences="dark-elves" level="4" />
+    <group level="4">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="4" />
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="4">
+        <special append="false">
+          <text>Armed with Repeater Crossbows (Str 3); Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+      <monster id="hothq-ogre-mercenary" number="3" ambiences="dark-elves" level="4" />
+      <monster id="hothq-black-ark-corsair" number="6" ambiences="dark-elves" level="4">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="4">
+      <monster id="hothq-demona-ryme-l4" number="1" ambiences="dark-elves" level="4" />
+      <monster id="hothq-julong-l4" number="1" ambiences="dark-elves" level="4" />
+    </group>
+    <monster id="rpb-gigantic-spider" number="3" ambiences="dark-elves" level="4" />
+    <monster id="rpb-witch-elf-champion" number="1-6" ambiences="dark-elves" level="4" />
+    <group level="4">
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="4">
+        <special append="false">
+          <text>Armed with Repeater Crossbows (Str 3); Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="4">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+    </group>
+    <monster id="rpb-chaos-warrior" number="7-12" ambiences="dark-elves" level="4" />
+    <monster id="hothq-harpy" number="9" ambiences="dark-elves" level="4" />
+    <monster id="rpb-stone-troll" number="1-3" ambiences="dark-elves" level="4" />
+    <monster id="hothq-dark-elf-naggaroth-black-guard-champion" number="3-8" ambiences="dark-elves" level="4" />
+    <monster id="rpb-giant-scorpion" number="3" ambiences="dark-elves" level="4" />
+    <group level="4">
+      <monster id="hothq-raith-darkfoot-l4" number="1" ambiences="dark-elves" level="4" />
+      <monster id="hothq-shade" number="2-12" ambiences="dark-elves" level="4" />
+    </group>
+    <monster id="hothq-cold-one-knight" number="1-6" ambiences="dark-elves" level="4" />
+    <monster id="hothq-black-ark-corsair-champion" number="2-12" ambiences="dark-elves" level="4" />
+    <monster id="rpb-beastman-champion" number="1-3" ambiences="dark-elves" level="4" />
+    <monster id="rpb-witch-elf-champion" number="2-6" ambiences="dark-elves" level="4" />
+    <monster id="hothq-cave-dragon" number="1" ambiences="dark-elves" level="4" />
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 5">
+    <monster id="rpb-cockatrice" number="1" ambiences="dark-elves" level="5" />
+    <group level="5">
+      <monster id="hothq-demona-ryme-l5" number="1" ambiences="dark-elves" level="5" />
+      <monster id="hothq-julong-l5" number="1" ambiences="dark-elves" level="5" />
+    </group>
+    <monster id="rpb-witch-elf-champion" number="2-6" ambiences="dark-elves" level="5" />
+    <group level="5">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="5">
+        <special append="false">
+          <text>Armed with Repeater Crossbows (Str 3); Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+      <monster id="hothq-ogre-mercenary" number="3" ambiences="dark-elves" level="5" />
+      <monster id="hothq-black-ark-corsair" number="6" ambiences="dark-elves" level="5">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="5">
+      <monster id="hothq-river-troll" number="3" ambiences="dark-elves" level="5" />
+      <monster id="rpb-stone-troll" number="3" ambiences="dark-elves" level="5" />
+    </group>
+    <group level="5">
+      <monster id="hothq-cave-troll" number="1-3" ambiences="dark-elves" level="5" />
+      <monster id="hothq-river-troll" number="1" ambiences="dark-elves" level="5" />
+      <monster id="rpb-stone-troll" number="1" ambiences="dark-elves" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-dark-elf-warrior" number="1-6" ambiences="dark-elves" level="5">
+        <special append="false">
+          <text>Armed with Repeater Crossbows (Str 3); Dodge 6+; Hate Elves.</text>
+        </special>
+      </monster>
+      <monster id="hothq-black-ark-corsair-champion" number="2-12" ambiences="dark-elves" level="5" />
+    </group>
+    <monster id="hothq-dark-elf-naggaroth-black-guard-champion" number="2-12" ambiences="dark-elves" level="5" />
+    <group level="5">
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-chaos-warrior" number="1-6" ambiences="dark-elves" level="5" />
+    </group>
+    <monster id="hothq-har-ganeth-executioner" number="1-6" ambiences="dark-elves" level="5" />
+    <monster id="hothq-bloodshade" number="1-6" ambiences="dark-elves" level="5" />
+    <group level="5">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="5" />
+      <monster id="rpb-chaos-champion" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-chaos-warrior" number="1-6" ambiences="dark-elves" level="5" />
+    </group>
+    <group level="5">
+      <monster id="rpb-dark-elf-champion" number="1-6" ambiences="dark-elves" level="5">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-witch-elf-champion" number="1-3" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="5" />
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="5" />
+    </group>
+    <monster id="hothq-cave-dragon" number="1" ambiences="dark-elves" level="5" />
+    <group level="5">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="5" />
+      <monster id="rpb-beastman" number="3-8" ambiences="dark-elves" level="5">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-beastman-champion" number="1-3" ambiences="dark-elves" level="5" />
+    </group>
+    <group level="5">
+      <monster id="hothq-raith-darkfoot-l5" number="1" ambiences="dark-elves" level="5" />
+      <monster id="hothq-bloodshade" number="1-6" ambiences="dark-elves" level="5" />
+    </group>
+    <monster id="hothq-cold-one-knight" number="6" ambiences="dark-elves" level="5" />
+    <monster id="rpb-witch-elf-champion" number="6" ambiences="dark-elves" level="5" />
+    <monster id="rpb-gorgon" number="1-3" ambiences="dark-elves" level="5" />
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 6">
+    <group level="6">
+      <monster id="hothq-raith-darkfoot-l6" number="1" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="6" />
+    </group>
+    <monster id="rpb-cockatrice" number="1" ambiences="dark-elves" level="6" />
+    <group level="6">
+      <monster id="rpb-dark-elf-champion" number="6" ambiences="dark-elves" level="6">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-witch-elf-champion" number="3" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-assassin" number="6" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-hippogriff" number="1" ambiences="dark-elves" level="6" />
+      <monster id="hothq-harpy" number="6" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="hothq-dark-elf-sorceress-champion" number="1" ambiences="dark-elves" level="6" />
+      <monster id="hothq-cold-one-knight" number="1-6" ambiences="dark-elves" level="6" />
+      <monster id="hothq-dark-elf-naggaroth-black-guard-champion" number="12" ambiences="dark-elves" level="6">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress Champion)</rule>
+        </special>
+      </monster>
+    </group>
+    <group level="6">
+      <monster id="rpb-dark-elf-champion" number="3-8" ambiences="dark-elves" level="6">
+        <special append="false">
+          <text>Armed with Heavy Crossbows (Str 5); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1-3" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="hothq-bloodshade" number="1-6" ambiences="dark-elves" level="6" />
+      <monster id="hothq-witch-elf-murderess" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="6">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="hothq-black-ark-corsair-champion" number="12" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-beastman" number="8" ambiences="dark-elves" level="6" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="dark-elves" level="6" />
+      <monster id="rpb-beastman-hero" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-dark-elf-champion" number="3-8" ambiences="dark-elves" level="6">
+        <special append="false">
+          <text>Armed with Heavy Crossbows (Str 5); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-witch-elf-champion" number="1-6" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="hothq-har-ganeth-executioner" number="1-6" ambiences="dark-elves" level="6" />
+      <monster id="hothq-har-ganeth-expert-executioner" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="hothq-cave-troll" number="3" ambiences="dark-elves" level="6" />
+      <monster id="hothq-river-troll" number="3" ambiences="dark-elves" level="6" />
+      <monster id="rpb-stone-troll" number="3" ambiences="dark-elves" level="6" />
+    </group>
+    <group level="6">
+      <monster id="rpb-witch-elf" number="1-6" ambiences="dark-elves" level="6" />
+      <monster id="rpb-witch-elf-champion" number="1-3" ambiences="dark-elves" level="6" />
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="6" />
+      <monster id="hothq-witch-elf-murderess" number="1" ambiences="dark-elves" level="6" />
+    </group>
+    <monster id="rpb-gorgon" number="3" ambiences="dark-elves" level="6" />
+    <group level="6">
+      <monster id="hothq-demona-ryme-l6" number="1" ambiences="dark-elves" level="6" />
+      <monster id="hothq-julong-l6" number="1" ambiences="dark-elves" level="6" />
+    </group>
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 7">
+    <monster id="rpb-chimera" number="1" ambiences="dark-elves" level="7" />
+    <monster id="hothq-har-ganeth-expert-executioner" number="1-6" ambiences="dark-elves" level="7" />
+    <group level="7">
+      <monster id="hothq-raith-darkfoot-l7" number="1" ambiences="dark-elves" level="7" />
+      <monster id="hothq-bloodshade" number="2-12" ambiences="dark-elves" level="7" />
+    </group>
+    <monster id="rpb-dark-elf-hero" number="1-6" ambiences="dark-elves" level="7" />
+    <group level="7">
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="7">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="hothq-witch-elf-murderess" number="1" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="7" />
+      <monster id="rpb-beastman" number="8" ambiences="dark-elves" level="7">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+        </special>
+      </monster>
+      <monster id="rpb-beastman-champion" number="3" ambiences="dark-elves" level="7" />
+      <monster id="rpb-beastman-hero" number="1" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="hothq-dark-elf-sorceress-champion" number="1" ambiences="dark-elves" level="7" />
+      <monster id="hothq-cold-one-knight" number="6" ambiences="dark-elves" level="7" />
+      <monster id="hothq-dark-elf-naggaroth-black-guard-champion" number="12" ambiences="dark-elves" level="7">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress Champion)</rule>
+        </special>
+      </monster>
+      <monster id="hothq-harpy" number="9" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-dark-elf-assassin" number="1-6" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="7">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-lord" number="2" ambiences="dark-elves" level="7" />
+    </group>
+    <monster id="rpb-manticore" number="1" ambiences="dark-elves" level="7" />
+    <group level="7">
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="7">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="7">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+    </group>
+    <group level="7">
+      <monster id="rpb-cockatrice" number="1" ambiences="dark-elves" level="7" />
+      <monster id="rpb-beastman" number="8" ambiences="dark-elves" level="7" />
+      <monster id="rpb-beastman-champion" number="3" ambiences="dark-elves" level="7" />
+      <monster id="rpb-beastman-hero" number="1" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="7">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1-3" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="hothq-demona-ryme-l7" number="1" ambiences="dark-elves" level="7" />
+      <monster id="hothq-julong-l7" number="1" ambiences="dark-elves" level="7" />
+    </group>
+    <group level="7">
+      <monster id="rpb-witch-elf" number="6" ambiences="dark-elves" level="7" />
+      <monster id="rpb-witch-elf-champion" number="3" ambiences="dark-elves" level="7" />
+      <monster id="rpb-dark-elf-assassin" number="6" ambiences="dark-elves" level="7" />
+      <monster id="hothq-witch-elf-murderess" number="1" ambiences="dark-elves" level="7" />
+    </group>
+    <monster id="hothq-witch-elf-murderess" number="1-6" ambiences="dark-elves" level="7" />
+    <monster id="rpb-hydra" number="1" ambiences="dark-elves" level="7" />
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 8">
+    <monster id="hothq-black-dragon" number="1" ambiences="dark-elves" level="8" />
+    <monster id="hothq-witch-elf-murderess" number="6" ambiences="dark-elves" level="8" />
+    <monster id="rpb-dark-elf-hero" number="2-12" ambiences="dark-elves" level="8" />
+    <group level="8">
+      <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="8" />
+      <monster id="rpb-dark-elf-champion" number="1-6" ambiences="dark-elves" level="8">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="8" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="8">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="1" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="hothq-witch-elf-murderess" number="1-6" ambiences="dark-elves" level="8" />
+      <monster id="hothq-harpy" number="9" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-hydra" number="1" ambiences="dark-elves" level="8" />
+      <monster id="hothq-cave-dragon" number="1" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="8">
+        <special append="false">
+          <text>Armed with Heavy Crossbows (Str 5); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1-6" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-chimera" number="1" ambiences="dark-elves" level="8" />
+      <monster id="rpb-cockatrice" number="1" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="hothq-demona-ryme-l8" number="1" ambiences="dark-elves" level="8" />
+      <monster id="hothq-julong-l8" number="1" ambiences="dark-elves" level="8" />
+      <monster id="hothq-raith-darkfoot-l8" number="1" ambiences="dark-elves" level="8" />
+      <monster id="hothq-bloodshade" number="12" ambiences="dark-elves" level="8" />
+    </group>
+    <monster id="rpb-manticore" number="1" ambiences="dark-elves" level="8" />
+    <group level="8">
+      <monster id="hothq-dark-elf-master-sorceress" number="1" ambiences="dark-elves" level="8" />
+      <monster id="rpb-dark-elf-champion" number="2-12" ambiences="dark-elves" level="8">
+        <special append="false">
+          <text>Armed with Heavy Crossbows (Str 5); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1-6" ambiences="dark-elves" level="8">
+        <special append="false">
+          <text>Armed with Swords; Dodge 4+; Hate Elves; Magic Resistance 5+; Magic Armour; Magic Weapon.</text>
+        </special>
+      </monster>
+    </group>
+    <group level="8">
+      <monster id="hothq-dark-elf-master-sorceress" number="1" ambiences="dark-elves" level="8" />
+      <monster id="rpb-dark-elf-champion" number="6" ambiences="dark-elves" level="8">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-gorgon" number="3" ambiences="dark-elves" level="8" />
+      <monster id="rpb-cockatrice" number="1" ambiences="dark-elves" level="8" />
+    </group>
+    <group level="8">
+      <monster id="rpb-dark-elf-champion" number="12" ambiences="dark-elves" level="8">
+        <special append="false">
+          <text>Armed with Heavy Crossbows (Str 5); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="hothq-witch-elf-murderess" number="1" ambiences="dark-elves" level="8" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="8">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="1" ambiences="dark-elves" level="8" />
+    </group>
+    <monster id="hothq-har-ganeth-expert-executioner" number="2-7" ambiences="dark-elves" level="8" />
+    <monster id="rpb-dark-elf-hero" number="7-12" ambiences="dark-elves" level="8" />
+    <monster id="rpb-giant" number="1" ambiences="dark-elves" level="8" />
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 9">
+    <monster id="hothq-great-black-dragon" number="1" ambiences="dark-elves" level="9" />
+    <group level="9">
+      <monster id="rpb-dark-elf-hero" number="12" ambiences="dark-elves" level="9" />
+      <monster id="hothq-witch-elf-murderess" number="6" ambiences="dark-elves" level="9" />
+      <monster id="hothq-har-ganeth-expert-executioner" number="6" ambiences="dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-dark-elf-champion" number="12" ambiences="dark-elves" level="9">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="6" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="9">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="1" ambiences="dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="hothq-demona-ryme-l9" number="1" ambiences="dark-elves" level="9" />
+      <monster id="hothq-julong-l9" number="1" ambiences="dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="hothq-dark-elf-master-sorceress" number="2" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-champion" number="6" ambiences="dark-elves" level="9">
+        <special append="false">
+          <text>Armed with Swords; Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-hero" number="1-6" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="9">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="1" ambiences="dark-elves" level="9" />
+    </group>
+    <monster id="rpb-giant" number="1-3" ambiences="dark-elves" level="9" />
+    <group level="9">
+      <monster id="hothq-dark-elf-master-sorceress" number="1" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-champion" number="12" ambiences="dark-elves" level="9">
+        <special append="false">
+          <text>Armed with Heavy Crossbows (Str 5); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="hothq-bloodshade" number="12" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-hero" number="6" ambiences="dark-elves" level="9">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Master Sorceress)</rule>
+        </special>
+      </monster>
+    </group>
+    <monster id="hothq-black-dragon" number="1" ambiences="dark-elves" level="9" />
+    <group level="9">
+      <monster id="hothq-dark-elf-sorceress-lord" number="1" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-champion" number="6" ambiences="dark-elves" level="9">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-assassin" number="6" ambiences="dark-elves" level="9" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="9">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="1" ambiences="dark-elves" level="9" />
+      <monster id="hothq-raith-darkfoot-l9" number="1" ambiences="dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-hydra" number="1" ambiences="dark-elves" level="9" />
+      <monster id="rpb-manticore" number="1" ambiences="dark-elves" level="9" />
+    </group>
+    <group level="9">
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="9">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-black-dragon" number="1" ambiences="dark-elves" level="9" />
+    </group>
+  </table>
+
+  <table name="Hall of the Hag Queen Monsters - Level 10">
+    <group level="10">
+      <monster id="hothq-dark-elf-sorceress-lord" number="1" ambiences="dark-elves" level="10">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="rpb-dark-elf-champion" number="6" ambiences="dark-elves" level="10">
+        <special append="false">
+          <text>Armed with Heavy Repeater Crossbows (Str 4); Dodge 6+; Hate Elves; Magic Weapon.</text>
+        </special>
+      </monster>
+      <monster id="hothq-raith-darkfoot-l10" number="1" ambiences="dark-elves" level="10" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="10">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="2" ambiences="dark-elves" level="10" />
+    </group>
+    <monster id="hothq-great-black-dragon" number="1" ambiences="dark-elves" level="10" />
+    <group level="10">
+      <monster id="hothq-dark-elf-master-sorceress" number="1" ambiences="dark-elves" level="10" />
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="10">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-black-dragon" number="1" ambiences="dark-elves" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-hydra" number="1" ambiences="dark-elves" level="10" />
+      <monster id="rpb-hippogriff" number="1" ambiences="dark-elves" level="10" />
+      <monster id="rpb-manticore" number="1" ambiences="dark-elves" level="10" />
+    </group>
+    <group level="10">
+      <monster id="hothq-dark-elf-sorceress-lord" number="1" ambiences="dark-elves" level="10" />
+      <monster id="hothq-dark-elf-master-sorceress" number="1" ambiences="dark-elves" level="10">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-cold-one" number="1" ambiences="dark-elves" level="10" />
+      <monster id="hothq-witch-elf-murderess" number="6" ambiences="dark-elves" level="10" />
+      <monster id="rpb-dark-elf-hero" number="6" ambiences="dark-elves" level="10" />
+    </group>
+    <group level="10">
+      <monster id="hothq-demona-ryme-l10" number="1" ambiences="dark-elves" level="10" />
+      <monster id="hothq-julong-l10" number="1" ambiences="dark-elves" level="10" />
+    </group>
+    <group level="10">
+      <monster id="rpb-dark-elf-lord" number="1" ambiences="dark-elves" level="10">
+        <special append="true">
+          <text>Choose whether your Warrior attacks Mount or Rider.</text>
+        </special>
+      </monster>
+      <monster id="hothq-great-black-dragon" number="1" ambiences="dark-elves" level="10" />
+    </group>
+    <monster id="rpb-giant" number="1-3" ambiences="dark-elves" level="10" />
+    <group level="10">
+      <monster id="hothq-dark-elf-sorceress-lord" number="1" ambiences="dark-elves" level="10" />
+      <monster id="rpb-dark-elf-hero" number="12" ambiences="dark-elves" level="10">
+        <special append="true">
+          <rule id="rpb-guards">Guards (Dark Elf Sorceress Lord)</rule>
+        </special>
+      </monster>
+      <monster id="hothq-witch-elf-murderess" number="6" ambiences="dark-elves" level="10" />
+      <monster id="hothq-har-ganeth-expert-executioner" number="6" ambiences="dark-elves" level="10" />
+      <monster id="rpb-dark-elf-lord" number="2" ambiences="dark-elves" level="10" />
+    </group>
+    <group level="10">
+      <monster id="hothq-bloodshade" number="12" ambiences="dark-elves" level="10" />
+      <monster id="hothq-witch-elf-murderess" number="6" ambiences="dark-elves" level="10" />
+      <monster id="rpb-dark-elf-hero" number="12" ambiences="dark-elves" level="10" />
+      <monster id="hothq-har-ganeth-expert-executioner" number="6" ambiences="dark-elves" level="10" />
+    </group>
+    <monster id="hothq-emperor-black-dragon" number="4" ambiences="dark-elves" level="10" />
+  </table>
+</tables>

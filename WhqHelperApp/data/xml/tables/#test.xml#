@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="whq-tables-schema.xsd">
+        
+  <!-- Level 1 -->
+	<table name="Test">
+		<group>
+			<monster id="rpb-savage-orc" number="1-6" />
+			<monster id="rpb-savage-orc-shaman" number="1" />
+		</group>
+		<group>
+			<monster id="rpb-wild-cave-squig" number="1-3" />
+			<monster id="rpb-goblin-squig-hunter" number="S" />
+		</group>
+		<group>
+			<monster id="rpb-trained-cave-squig" number="1-3" />
+			<monster id="rpb-goblin-squig-hunter" number="S" />
+		</group>
+		<group>
+			<monster id="rpb-goblin" number="7-12" />
+			<monster id="rpb-goblin-shaman" number="1" />
+		</group>
+	</table>
+</tables>

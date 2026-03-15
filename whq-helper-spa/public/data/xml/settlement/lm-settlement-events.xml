@@ -1,0 +1,2465 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-events-schema.xsd">
+  <event id="lm-outskirts-11-city-watch" name="City Watch">
+    <rules>The City Watch is responding to citizen reports of particularly
+aggressive vagrants and brazen pickpockets outside the
+Settlement gates. Your Warrior is among those who are
+detained by the angry(and extremely corrupt) guards. One
+item of Treasure or piece of Equipment is confiscated as a
+"stolen" article (determined at random) and your Warrior is
+brutally flogged and must deduct 1D3 from their Starting
+Wounds permanently.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-12-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-13-bandits" name="Bandits">
+    <rules>Inanactofrevengeforthelossofoneof theirleaders,a group
+of vicious bandits emerge from the hills on horseback,raiding
+and looting the helpless peasants outside the Settlement.Your
+Warrior mustroll1D6 on the table below:
+1
+Your Warrior is soon targeted by the bandits who
+overpower them bysheernumbers.Theystealallof
+theirgoldand1D3itemsofTreasure (your choice)
+before the Settlement soldiers are able to drive them
+back into the hills.
+2-3
+Theattackcatcheseveryonebysurpriseand,despite
+the Warrior's best efforts to defend their belongings,
+the bandits make off with oneitem ofTreasure(your
+choice).
+4-5
+Your Warrior hides behind the makeshifttents,quietly
+slashing bandits astheyrideby.WhentheSettlement
+soldiers arrive,theyrewardyour Warrior with 1D6x25
+gold for helping to defend the Settlement inhabitants.
+6
+Withadramaticleapoffathatchedroof,yourWarrior
+attacksthelargest,mostpowerfulbanditin thegroup,
+killing him outright.Theleaderlessattackersare easily
+routed by the Settlementsoldiers.TheSettlement
+leaders reward your Warrior with 1D6x50 gold for their
+role in the fight and they are allowed entry into the
+Settlement.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-14-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-15-argil-s-magic-emporium" name="Argil's Magic Emporium">
+    <rules>Argil Fend le petter, a dishevelled travelling purveyor of salves
+and unguents,has setup shop here for the day.Your Warrior
+m ay purchase Argil's waresby following all of the normal rules
+of visiting a Traderin the Settle m ent.
+Cost
+ITEM
+Stock
+Description
+Buy
+5
+Heals 1D3 Wounds.
+25g
+Liniment
+Tonic
+6
+50g
+Heals 1D6 Wounds.
+100g
+Restores1pointtoany
+6
+Balm
+Statistic that has previously
+been reduced for anyreason.
+150g
+Heals Warrior to full.
+10
+Home Brew
+175g
+Gives your Warrior double
+Quicksilver
+Attacks for 1 Turn.
+When using any of Argil'sitemsroll1D6.Ifthe scoreis1 your
+Warriorloses1 Wound permanently and the item hasnoeffect.
+If the score is a 2 or3 your Warrior loses 1 Wound permanently
+but the item worksasstated.On a scoreof4,5 or 6theitem
+worksas stated with no side effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-16-beggars" name="Beggars">
+    <rules>Your Warrior cannot hide their heroic stature and dozens of
+peasants soon surround them begging for money andfood.
+that half of allthe Provisions they were carrying are gone
+(roundeddown)and theyare1D6x20goldlighter!
+3</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-21-bard" name="Bard">
+    <rules>A colour fully dressed minstrel who is heading toward the
+t gates notices your Warrior. with a look of
+Settlement
+recognition
+1 he excitedly approaches your Warrior, loudly
+strum ming his instrument and singing a ballad allabout your
+Warrior'sexploits.Roll1D6below:
+1-2
+While the lyrical poet relates all of the interesting
+exploits of your Warrior,a sm allcrowd gathers around,
+excitedly.Ayoungloutsuddenlylashesout,stabbing
+your Warriorwithapoisonousdagger!Hehappensto
+be the offspring of a criminal who your Warrior once
+broughttojustice.Theyoungscampisquicklysubdued
+by the other peasants and your hero is rushed to a wise
+man whomanagestoremovemuchof thevenom.Your
+Warrior's life is saved but must deduct 1 Wound from
+their Starting Wounds score permanently.
+3-6
+The bard's music focuses on all of your Warrior's good
+deedsandheroics!SoonyourWarriorismobbedby the
+the rest of the day giving blessings and allowing the
+wretched to kiss their boots and touch their sweat
+soaked handkerchief.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-22-hay-wagon" name="Hay Wagon">
+    <rules>Your Warrior sees a wagon filled with hay enter through the
+Settlement gates, presumably to feed the various animals
+inside.A second hay wagon canbe seen approaching from a
+distance and your Warrior has the crazy idea that they could
+possibly steal away inside the wagonin orderto get backinto
+theSettlement.IfyourWarriorchoosestodoso,roll1D6onthe
+tablebelow:
+1
+Injured!Asthe wagonreachestheSettlementGate,it
+is stopped by the guards who begin stabbing their
+swordsrandomlyinto thehaypile.Asoneof thesword
+thrusts penetrates your Warrior'sstomach,theyletout
+ablood-curdlingcry!Rollanother1D6andifthescoreis
+a1,yourWarriorexpiresonthespotandisremoved
+from the game.Onany other score they survive
+although they mustdeduct1 Wound permanently from
+their Starting Woundsscore.YourWarriorspendthe
+next 1D6 daysinjail,isfined 100 gold and is thrown
+back outof the Settlement.
+2-3
+Caught!AnobservantgateguardseesyourWarrior's
+foot sticking partiallyoutof thehay.Your Warrior is
+wrenched from the wagon and thrown into a jail cell for
+1D3days.Theyarefined1o0goldbeforebeingthrown
+4-5
+Unnoticed!Thehaywagonpassesthroughthegates
+with your Warrior hidden in the hay and noone is the
+wiser!Afew momentsafteritstops,your Warrior hops
+outunobserved.YourWarriormaynowfollowallthe
+normal rules for staying in aSettlement.
+6
+Spotted!YourWarriorhidesin thehay wagonand
+enters the Settlementunnoticed.Whentheyfeelitis
+the wagon is parked in front of thejail!Standingnextto
+your Warrior is the captain of the watch who eyes them
+suspiciously."Notimefornapping!" he snorts."This
+hayneedstogetdeliveredto theanimalpens." The
+captain hands your Warrior 1D6x10gold coins and
+sends them on their way!Your W arrior m ay now follow
+all the normal rules for staying in a Settlement.
+4</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-23-outbreak" name="Outbreak">
+    <rules>There is an outbreak of Tyrant's Fever and your Warrior quickly
+becomes bed-ridden,their face becomes red and painfully
+swollen.They mustroll1D6atthebeginning ofeach dayonthe
+following table adding +1to the score each subsequent time
+(remembering the Rule of1and 6).
+1
+The fever has taken a turn for the worse and your
+Warrior can only moanin pain,unabletoleavetheirbed.
+Your Warriorsuffers-1to Strength or Toughness (your
+choice)forthenext Adventure.IftheirStrength or
+Toughnesseverreacheszero,theyaredead.
+2-5
+The fever runs high and your Warrior is bedridden in
+their makeshift hovel. Whilst laid up,your Warrior does
+6
+The fever breaks and your Warrior returns to normal by
+the end of the day.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-24-horse-thief" name="Horse Thief">
+    <rules>While your Warrior is busy relieving himself in a m a ke shift
+latrine,ahorsethief makes off with theirmount.Ifyour Warrior
+has a horse, markit offyour Adventure Record Sheet along
+with anything that was attached it, such as a cart. If your
+Warriorhasnomounts,treatitasanUneventfulDayinstead.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-25-riot" name="Riot">
+    <rules>Stoked by the words of a few malcontents the lowly inhabitants
+who dwell outside of the Settlement have had enough of their
+impoverished situation. A small gathering has erupted into a
+dangerous riot pitting the peasantsagainstthelocalWatch.Roll
+1D6onthetablebelow:
+1
+Your Warrior is arrested and charged with inciting ariot
+They(ortheircompanions) mustpay 1D6x200 goldin
+fines and bribes to clear up the matter.Iftheycannot
+pay they are hangedin the center of the Settlement in
+1D6daysasawarningto theothervagabondsOutside
+theGates.
+Your Warrior is beaten terribly by the Watch and
+2-3
+thrownintojail.Theymustpay1D6x100gold.Ifthey
+cannotpaytheymustspendthenext1D6 days in jail
+4-5
+Joiningtherioters,your Warrior strides steadfastly into
+the Settlement where the angry mob demand sample
+sustenance,clean water and accessto medical
+treatment.TheSettlementofficials eventually agreeto
+acompromiseandeachpeasant,includingyour Warrior,
+isgiven 1D3 Provisions,1D3Bandages and1D6x5gold.
+6
+Organizingtherioters,your Warrior marches the pack
+of peasants into the Settlement demanding to meet
+with high officials.Theterrifiedauthorities quickly meet
+the demands of your Warrior and the peasants are
+given accesstofood,clean waterand medical facilities.
+ThepeasantsandyourWarriorareeachgiven1D6
+Provisionsand1D6Bandages.YourWarrioralso
+receives1D6x50goldinpaymentasanegotiatorand
+for keeping the peasants from using violence to solve
+the matter.
+SE</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-26-the-black-tiger" name="The Black Tiger">
+    <rules>A masked criminal,the Black Tiger,sneaksinto your Warrior's
+makeshift camp in the middle of the night.Hestealsfrom the
+rich and gives to the poor.Ifyour Warrior has more than 1oo
+gold,the outlaw steals half. If your Warrior has less than 100
+gold,theoutlaw does nothing.Ifyour Warrior has no gold atall,
+the Black Tiger slips 1oo gold pieces into your Warrior's purse.
+In any case,the outlaw leaves a piece of parchment with a
+tiger's paw print on your Warrior's chest which they findin the
+morning upon waking.
+Note: if the Bounty Hunter rolls this Event,im mediate ly roll up
+a new Outlaw following allthe normalrules. This Outlaw also
+has the Vanish 5+ Ability in addition to any others. (See the
+Bounty Hunter Revision by Littlemonk).</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-31-bad-omen" name="Bad Omen">
+    <rules>Your Warrior continually glimpses a black cat prowling about
+nearthem. Others in the vicinity also notice and swear it is a
+bad omen.Your Warrior is so perturbed by the situation that
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-32-wizard-s-apprentice" name="Wizard's Apprentice">
+    <rules>Late at night your Warrior witnesses a thin, frail man being
+assaulted by a group of hoodlums. Rushing to his aid your
+Warrior fends off the attackers whoscatterinto thenight.The
+man gasps for breath as blood pours from anopen woundon
+hishead.Bythelook of his clothes and belongings the young
+manappearstobeanapprenticingwizard.Fartooinjuredtobe
+healed by bandages,your Warrior can onlysave him ifthey give
+themanahealingpotion.
+Ifyour Warrior does so,theapprenticerepaysyour Warrior
+by casting a powerful spell that permanently increases one of
+1 1D6 to see which
+Warrior's Characteristics. Roll
+your
+Characteristic is affected:
+Initiative
+1
+4
+Weapon Skill
+Willpower
+2
+5
+Strength
+3
+Luck
+Toughness
+6
+If your Warrior has no healing potion, the young apprentice
+expires...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-33-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-34-curse" name="Curse">
+    <rules>into a patch of dead weeds and flowers adjacent to a crude
+dwelling. An old crone im mediate ly em erges yelling and
+screaming that your Warrior has destroyed her perfect lilies.
+She levels her finger at your Warrior and curses them
+malevolently before returning to her abode. Your Warrior must
+im mediatelydeduct1Luckpointpermanently!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-35-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-36-animal-rampage" name="Animal Rampage">
+    <rules>attackingthepeasants.Your Warrior mustroll2D6.Thisisthe
+number of animals attacking them.Rollanother 1D6and add
+your W arrior's Battle-level,the score beingthe amount of wild
+animals your Warrior kills. If any animals remain, your Warrior
+injures their hand in theskirmishandsuffers-1 WeaponS kill for
+the next Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-41-stench" name="Stench">
+    <rules>The smell of urine and excrement is particularly overwhelming
+second time during their stay atthis Settlement,then they are
+so sickened by the smell that they suffer-1 Strength forthe
+next Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-42-famished" name="Famished">
+    <rules>Your Warrior must eat a provision or other food they are
+carrying to maintain their health and strength.Ifthey have no
+food,your Warriorsuffers-1Strengthin thenextAdventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-43-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-44-collapse" name="Collapse">
+    <rules>In the middle of the night a wall collapses upon your Warrior's
+m a ke shift cam p. Your Warrior's legis severely injured and they
+areunabletotravelfor1D3daysandmustremain outside the
+gates of theSettlement.In addition they suffer-1Movementfor
+the next Adventure. Whilstinjured,your Warrior does not have</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-45-spirit" name="Spirit">
+    <rules>The spirit of a druid appears in front of your Warrior late at
+night and accuses them of destroying sacred foliage during
+their recent journey to the Settlement.He demands that your
+Warrior make amends by planting atree or bushin a shady
+grove.Your Warrior suffers-1 Luck until they do so.Ittakes
+1D3 days to make amends and your Warrior must rollfor
+5</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-46-noble" name="Noble">
+    <rules>An influential noble and his entourage are galloping through
+toward the Settlement gates and soon a small crowd has
+blocked their way to beg for food and coin. The noble
+inexplicably spots your Warrior amongst the crowd and points a
+fingeratthem.Roll1D6 one the following table:
+1
+The noble is extremely irritated that the crowdhas
+stoppedhim.Itisobviousto him thatyour Warrior,
+beingstoutandstrongcomparedto thefrailbeggars,is
+theoneincharge.Hedirectshisguardstosurround
+your Warrior aggressively and they drag them in front
+of thenobleforaseverebeating.Your Warrior must
+deduct1from their Starting Wounds score
+permanently.
+2
+The greedy noble eyes one of your Warrior's it emf
+Treasure(determinedatrandom)andsendshislackeys
+toobtainit.Uponpain ofdeath,your Warrior reluctantly
+hands over the item.
+3
+The noble is suspicious ofyour Warrior and calls for the
+Watch to apprehend and interrogatethem.For1D3
+daysyour Warrior is grilled and beaten until eventually
+being fined 1D6x10 goldforloitering(your Warrior
+m ustsell item sorequipmentifnecessary).Theyare
+4
+Among all of the wretched beggars the compassionate
+noblehaschosenyouastherecipientof1D6x10gold.
+5
+Thenoble keenly observes that your Warrior may be of
+someuseforaparticularlyimportanttask.Heoffersto
+hire them for the day,payingthem 1D6x20gold to
+watch hishorse while in the Settlement.In addition,
+your Warrior m ay visit any Location not previously
+visited during this stay in the Settlement and must pay
+LivingExpensesasnormal.YourWarriorreturns
+6
+The noble calls out your name and beckons you over.
+Familiar with your recent heroic undertakings he wishes
+todonate1D6x100goldtoyourcause.IfyourWarrior
+wasnotallowedinto theSettlementforanyreason,he
+berates the watchcom m anderand Settlement officials
+whoim mediate ly apologize to your Warrior for any
+misunderstandingsandallowthemre-entry.Youmay
+treat this as a new visit to the Settlement and your
+Warrior m ay visit Traders and Special Locations even
+they had done so previously in this Settlement.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-51-pests" name="Pests">
+    <rules>Mischievous wild animals sneak into your Warrior's camp and
+pilfer some of your Warrior'spossessions.Roll1D6to see what
+they have taken:
+1
+Anitem ofTreasure(determined atrandom).
+2
+A Potion(determined atrandom).
+3
+ARope.
+4
+ABandage.
+5
+A Provision.
+Nothing.
+6
+Ifthe Warrior has such asitem they mustdiscardit.Ifthey
+don't have it,they does nothing.In any case,rollagain.Ifyou
+roll lower than your first score to see whattheanimalstole,the
+animal also stole the second item too,and soon.Assoon as
+you roll the same number again orhigher,stoprolling.
+6</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-52-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-53-pet-dog" name="Pet Dog">
+    <rules>Your Warrior is adopted byasmalldog.Itfollowsthem around
+and then emerging after the adventure is completed to shower
+itsnew master withadoration.Rollonthe Pet Dog Event Table
+(page 24) to see exactly which type of canine has attached
+itselftoyou.
+Your Warrior can killthe dogif you want,butit would be a
+crueland heartless thing to do andit will cost them 1,ooo gold
+to pay for a decent burial for the hound!
+Ifyour Warrior already hasa pet dog,rollonthistable again.
+Ifnot,nameit and noteit down on your Warrior's Adventure
+RecordSheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-54-lepers" name="Lepers">
+    <rules>Lepers begging for food accost your Warrior. The lepers will
+approach your Warrior each day until your Warrior gives them
+food,untilyour Warrior departs for the nextAdventure,or until
+your Warrior contracts their horrid affliction.
+Each day the lepers approachtobegforfood,your Warrior
+mustroll2D6.Ifboth dice come up the same number your
+Warrior has contracted their foul disease and they suffer-1
+Movement from nowuntiltheendof thenextAdventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-55-madman" name="Madman">
+    <rules>A deranged lunatic approaches your Warrior and lunges forward
+with a knife! Your Warrior deals him a fatal blow in a clear act
+of self-defense. Rummaging through the deceased man's
+belongings your Warrior realizes that the man's necklace bears
+the crest of Duke Hilderwhelm.Monthsago,the Duke's nephew
+wasrumouredtobemissingandthismustbehim!Roll1D6to
+see the result of your Warrior's actions:
+1
+The authorities are furious and accuse your Warrior of
+murder!Theyarethrownintojailandscheduledtobe
+executedin10days.Attheendofeachdaythat
+passes,including this one,roll 1D6.If the result is a 6,it
+means that a witness to the incident has come forward
+to exonerate your Warrior.YourWarrioristhen
+immediatelyescortedoutsidetheSettlementgates.If
+no witnesscomesforwardby theendof thetenthday,
+your Warrior is beheaded in the center of the
+Settlementbeforealarge,jeeringcrowd.
+2-3
+In order to avoid any public embarrassment abouthis
+deceased nephew's stateofmind,DukeHilderwhelm
+has your Warrior arrested on trumped up charges.He
+will only drop the charges if your Warrior agrees to pay
+afine and keep quiet about the entireincident.These
+negotiationstake1D6daysandcostyourWarrior
+1D6x50gold.IfyourWarriordoesnothavetheamount
+(after selling any Equipment or Treasure to cover the
+cost)thentheDuketakeswhatevergoldtheyhaveand
+drops the charges.
+4-5
+The influential Duke Hil der w helm has your Warrior
+arrested claiming that your Warrior killed his nephew
+during aduel.Your Warrior spends 3 days in jail while
+authoritiesdetermineiftheduelwasproper.
+6
+DukeHilderwhelm,wellawareofhisnephew's
+deterioratedmentalstate,paysyourWarrior1D6x100
+goldtokeepsilentabouttheentireincident.
+SE</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-56-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-61-mysterious-priest" name="Mysterious Priest">
+    <rules>frail looking horseis offering comfort and solace to some of the
+more wretched inhabitants - or so it seems. As the wagon
+approaches your Warrior,roll1D6onthetablebelow:
+1
+Uponcom mandfrom the priest a nightmarish creature
+bursts from the wagon and assaults your Warrior who
+manages to dispatchit,butonly after it claws them
+repeatedly.Thepriestvanishesduringthestruggleand
+your Warrior im m ediatelybeginstofeelill,thevictim of
+a strange disease that the creature carried.They m ust
+spendthenext1D3daysinbeddoingnothingand must
+deduct1D6 Wounds from their Starting Wounds score
+permanently.
+The priest convinces your Warrior to trade one of their
+2-3
+weapons for one the priest claims is a holy artefact that
+will protect them from harm.Ifyour Warrior is the
+WarriorPriest,theBretonnian Knight,ortheSisterof
+Sigmar,theysenseeviland corruption and decline the
+offersteadfastly.AnyotherWarriormustroll1D6and
+addtheir Willpower.Ifthetotalis 8or more they refuse.
+If the total is less than 8theyreadily agree to the trade
+and must discard a weapon of theirchoice.The weapon
+traded for is the same type as the one given but it
+carriesa terrible curse.
+Inthe nextAdventure,eachtime anatural1isrolled
+in the Power Phase,yourWarrior mustdraw and use
+the cursed weapon.The weapononlyhitsonanatural6
+anddoesDamageasnormal.However,ifhisToHitisa
+natural1,your Warrior uncontrollably lashes outand
+attacks the nearest Warrior instead.
+AtthenextSettlement,your Warrior may rid himself
+of the weapon and the curse by visiting a Temple and
+paying 1D6x100 gold.
+4
+The priest turns out to be a simple clergyman on his
+wayto anearbymonastery.
+5
+The priest is carrying food for the less fortunate and
+upon seeing the sorry state ofyour Warrior's tattered
+gear and items he offers to trade food in exchange for
+anyitem your Warrioriscarrying.Foreachitem of
+Equipment or Treasure that they give up,your Warrior
+is given 1D6 Provisions.
+6
+The priest tells your Warrior that he has seen them in a
+vision and that they willbecomea'starof theheavens'.
+Heplaces something in your Warrior's hand and then
+leads his horse and wagon away into the darkness.
+Theitem placedin his hand is a polished stone with a
+strangerune.OnceperAdventureyourWarriormay
+utilise the power within thestone which allows them to
+addanextra1D6to theirStrengthforoneCombat.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-62-healer" name="Healer">
+    <rules>A healeris passing through the makeshift camps outside the
+Settlements offering to cure any maladies at no charge. Roll
+1D6 and if the score is a 5 or6,thehealerreallydoes have the
+power to heal and restores 1 point to one Characteristic (your
+choice)thathasbeen previouslyreducedforanyreason(such
+as Poison, etc.). On any other score,the healer blesses your
+Warrior by licking his thum b and then rubbing it across your
+Warrior's forehead before moving on.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-63-heavy-rains" name="Heavy Rains">
+    <rules>A heavy rainfall bombards the Settlement. With no placeto
+the constant downpour, your Warrior
+seek refuge from
+develops a terrible, hacking cough.During the nextDungeon,
+your Warrior suffers-1 To Hit until they drink a Healing Potion.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-64-young-whelp" name="Young Whelp">
+    <rules>Your Warrior catches ayoung urchin trying to steal their purse.
+The boy claims that he's an orphan supporting himself and his
+sisterandbegsformercy.IfyourWarriorfreeshim,roll1D6:
+1-2
+ThecontemptuousyoungladpromisestoNEVER,EVER
+steal again and darts away.YourWarrior'sfearsare
+confirmed when they reach into their pack and
+discoversthatoneitemismissing(determined
+randomly).
+3-6
+Theboyfallstohiskneesinoverwhelmingthanks.
+Before departing he gives your Warriora piece of
+parchment that he lifted offofa merchant in the
+Settlement,explainingthathecan'tread anyway.Onit
+is the location of a secret cache of gold worth 1D6x100
+gold.Ifthe Warriors defeat all of the Monsters in the
+Objective Room duringthenextAdventure,your
+Warrior may claim this treasure.
+Ifyour Warrior delivers him in to the Watchroll1D6:
+1-3
+The poor lad cannot withstand the severe beating
+receives from the authoritiesanddies,leavinghissister
+to careforherself.Accordingtolocallawsand customs
+your Warrior is now responsible for the girl's welfare.
+From now on,each time your Warrior reaches a
+Settlement,they mustsend1D6x50goldforherliving
+expenses.
+4-6
+The impudent child has been a huge menace and the
+Watch has been trying to apprehend the young whelp
+forthepastmonth.YourWarriorisgiven 1D6x25gold
+for catching the troublesome urchin.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-65-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-outskirts-66-admittance" name="Admittance">
+    <rules>In order to address the grumbling of the lower classes, the
+mayor of the Settlement has declared that a small handful of
+peasants willbe allowed to enter.Ifyour Warrior was restricted
+from entering the Settlement for any reason,they are one of
+the lucky few selected. They may re-enter the Settlement
+immediately if they so choose, paying Living Expenses and
+7</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-11-thrown-out" name="Thrown Out">
+    <rules>Your Warrior's wild behaviour attracts the attention of the
+Settlement authorities and there are thrown outoftown.They
+must wait outside the Settlement gates for the other Warriors.
+In addition,roll1D6.On a score of1 your Warrior is fleeced
+by the gate guards asthey are thrown outand have alltheir
+gold stolen!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-12-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-13-hunting" name="Hunting">
+    <rules>Your Warrior is invited by a group of locals togo on a nocturnal
+hunt.
+Meeting them just before sunset,they are informed that
+tonight's prey is the great Qu arg a beast of fearsome temper
+andfouldisposition.Your Warrior's task in the group is to take
+the hunting tools- a net,a sm all pole with a bellon it and a bag
+full of garlic and wait in the middle of the woods while the rest
+of the hunters spread out into the forest and drive theQuarg
+towardsthem.Asthesunrisesthenextmorning,and theowls
+return to their nests, there is stillno sign of the Quarg,your
+Warrior begins to wonder if someone is being madeafoolof...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-14-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-15-witchcraft" name="Witchcraft">
+    <rules>Your Warrior is accused of witchcraft,andis chased through
+the streets by an angry mob. Roll1D6 on the following table
+(the Witch Hunter may add +1tohisscore):
+1-3 Your Warrior escapes by jumping over the Settlement
+wall and into the filthy water of the moat.Pelted with
+eggsandrottenfruit,theystaggeroutonto thefar
+rules (page 3).
+4-5
+Your Warrior ducks down aside alley andescapes,but
+from now on must wear a disguise when out in public!
+6
+Your Warrior turns angrily on the mob,demandingan
+explanation.Shoutingdowntheleaderof the m ob,they
+establish theirauthorityoverthecrowd,who sheepishly
+returnto theirhovels,pausingonlytogive your Warrior
+1o0goldas way of compensation.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-16-nightmare" name="Nightmare">
+    <rules>As your Warrior retires for the evening they fall into a deep
+slumber.Theybeginto dream that they are fighting a terrifying
+gorgon;herhaircomposedofvicioussnakesand agaze which
+can turn a person to stone. with a horrendous scream the
+gorgon attacks! Roll 1D6 to see how the dream ends:
+1
+No matter how many times or how hardyour Warrior
+strikes the creature with their weapon,the beast
+seemsinvulnerable.Withaterrifying scream the
+gorgon shootsan arrow directly into your Warrior's
+heart!
+Whenyour Warriorwakes,theyfindthat theyhave
+permanently lost 1 Wound!Ifyour Warrior's Starting
+Woundsiseverreducedtozerobecauseofthisdream,
+theyaredead.
+Tomorrow night the nightmare returns and they must
+roll on this table again.MakeanoteonyourAdventure
+Record Sheet to remind you.
+2-5
+The battle is brutal and neither your Warrior nor the
+creatureseemstogettheupperhand.YourWarrior
+wakesin acold sweat.
+Tomorrow night the nightmare returns and they must
+roll on this table again!MakeanoteonyourAdventure
+Record Sheet to remind you.
+Your Warrior courageously stands their ground and
+6
+strikes the wretchedbeastdown!A sense of relief fills
+your Warrior and they sleep better than they have in a
+long time.
+Whenyour Warrior awakens they discover that they
+are +1to his Starting Wounds!The nightmare ends
+and theydonothavetorollonthistableagain(unless
+theyencounterthisSettlementEventagain)!
+If your Warrior leaves the Settlement before the dream
+concludes, the nightmare temporarily ends. At the next
+Settlement, however,it returns to haunt the Warrior again.
+MakeanoteonyourAdventureRecordSheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-21-well" name="Well">
+    <rules>Strolling alongside a dilapidated oldhouse your Warrior spies an
+old,stone well.Your Warrior casually tosses in 1 gold coin.Roll
+1D6 on the table below:
+1
+Acreepy,gutturalmoanechoesupwardinanunknown
+tongue.A terrible sense of dread overwhelms your
+Warriorand theysuffer-1LuckforthenextAdventure.
+2-5
+Nothing happens and your Warrior is now carrying one
+less gold piece.
+6
+A high pitched squeal and soft giggling can be heard at
+the bottom of the well.Your Warrior gains +1Luck for
+next Adventure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-22-festival" name="Festival">
+    <rules>Asyour Warriors trolls through the village centre it is abuzz with
+thepreparationsfortomorrow'sfestival.Roll1D6tosee what
+festival is being celebrated and another 1D6tosee what effect
+ithason ALL ofyour Warriors.
+1D6
+Festival
+A Beer festival
+1
+2
+A Food festival
+A festival for the Deceased
+3
+4
+A Religious festival
+A Music festival
+5
+6
+A Cultural festival
+1D6
+Effect
+1
+In recognition of thefestival,alllocations willbe closed
+forthenext1D6 days.Warriorswhoaretrainingwill
+find their instruction interrupted during the period and
+they mustadd on those extra days to their training
+time.
+2
+In recognition of the festival, all traders will close up
+shopforthenext1D3days.
+3
+The population of the Village will double as it welcomes
+visitors from thesurroundingregion.Forthenext1D3
+days all Warriors must roll on the Town Events Table
+instead of the Village Events Table.In addition,
+Warriors may make all stock rolls as if in a Town
+(2D6).
+4
+Vendors,merchantsandtraders will make their wayto
+the Village tomorrow and any Warrior may visitthe
+Peddler, who is treated exactly asthe Peddler from the
+Role play Book (page 15)orthenew,expanded
+Travelling Hazards by Little monk (page 8).Visitingthe
+Peddler takes an entire day during which a Warrior
+5
+In celebration (but mostly to lure in new customers)all
+locations will offer one item in stock at5o%.Thissale
+is offered tomorrow only.
+6
+In celebration (but m ostly tolurein customers)all
+locations willoffer1o% of fall items in stock.Thissale
+is offered tomorrow only!
+If any Warrior rolls this Settlement Event again during this
+stay,re-rollthis result.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-23-family-heirloom" name="Family Heirloom">
+    <rules>An item of Treasure that your Warrior is carrying (determined
+randomly)isidentifiedbya wealthy,influentialmemberof the
+local citizenry ashisfamilyheirloom,stolenlastyearby wanton
+burglars.The local Watch confiscates theitem and you must
+discarditimmediately.If your Warrior has no Treasure items,
+the wealthy local accuses your Warrior of hiding it and demands
+1D6x50 goldin restitutioninstead.Ifthey cannotpay,then your</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-24-runaway" name="Runaway">
+    <rules>While walking along the main street, your Warrior hears a
+disturbance just around the corner.A moment later a huge
+runaway bull charges down thestreet, wrecking market stalls
+andcausingpanic.YourWarriorcanletitpassbyhidingdowna
+side alley, or try to stop the enraged animal.If your Warrior
+hides down the alley and lets the bullpass, roll 1D6 on the
+following table:
+1-3
+YourWarriorskulksin theshadows,waitingforthe
+actiontodiedown.Astheypeep roundthecorner,a
+mugger's metal bar hits them overthe head.Whenthey
+regain consciousness,your Warrior's purse is 1oo gold
+coins lighter.
+4-6
+After waiting nervously in the dark forafew minutes,
+your Warrior sees the bull roar past and career off
+downasidestreet.Thedangerispassedandyour
+Warrior may carry on about their business.
+Ifyour Warrior tries to stopthe bull,roll1D6 on the following
+table:
+1-2
+Your Warrior waves the passers by aside and leaps out
+infrontof thebull,sword drawn.The bull hesitates for
+halfa secondorso,and thentramplesthem into the
+dirt before carrying on its way.The crowd then stomps
+all over your Warrior in the rush to follow the bull,
+leaving them to nurse their injuries alonein an empty
+street.
+3-4
+A single sword thrust stops the bull dead in its tracks
+literally.Asitscarcasstwitchesspasmodically,the
+crowd roars in approval and showers your Warrior with
+100 gold.Thenthebull'senragedownerarrives,and
+relieves them of150gold-it washisprizestud,and he
+wanteditstopped,notslaughtered!
+5-6
+Your Warrior gives the bulla hard stare and its kids to a
+halt,snortingandpawingtheground.Puttingarope
+arounditsneck,theyleaditbacktoitsstall.Thecrowd
+cheers and showers them with150gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-25-illness" name="Illness">
+    <rules>A terrible illness strikes the Settlem ent, and your W arrior falls
+preytoit.Theymustspend thenexttwodaysinbed,paying10
+gold per day for medication as well as the normal Living
+Expenses.Whileyour Warrior is in bed,youdonothavetoroll</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-26-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-31-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-32-temple-donation" name="Temple Donation">
+    <rules>Much taken with the teachings of thelocalpriest,your Warrior
+pledges 1D6x50 gold to his cause, selling equipment if
+necessary to meetthecostof thedonation.Thenexttime your
+Warrior is in a fight and fails to hit their opponent,the sect's
+only do this once foreach donation they make (i.e.,each time
+they roll this result on this table).</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-33-river-monster" name="River Monster">
+    <rules>Your Warrior overhears that the local fisherman are com plaining
+ofa giant aquatic monster that has been terror ising them down
+by the river. Upon investigation your Warrior discovers a
+massive creature thathas somehow managed to findits way
+inland.Aftera few patient hours your Warrior spots the beast
+anda smallbattleforwaterrightsensues.Roll1D6onthetable
+below:
+1
+ThestrangecreatureistoomuchforyourWarrior.
+Razor sharp teeth and a piercing snout tear at your
+Warrior and soonthey are running from the river at top
+speed,muchto thechagrin of thelocals.Yourbested
+Warriorsuffers-1ToughnessforthenextAdventure.
+2-3
+The mighty fish tosses your Warrior about and leaves
+them on the bank in a heap.Theirhandis badly injured
+in the struggle and they suffer-1 Weapon Skill for the
+next Adventure.
+4-5
+Your Warrior thrashes about in the water as the
+creature snaps and stabs at them with its long duck
+likebill.Eventually your Warrior drives the creature
+away and returns to the applauding fishermen who
+thank them with1D6x25 gold.
+6
+As the giant fish leaps outof the water,yourWarrior
+fellsit withone swift and accurate blow.The fishermen
+are ecstatic as they haul the beast out of the water.
+They regard your Warrior as a hero and givethem
+1D6x50 gold.Inaddition,theyusethecreatureto
+prepare1D6 ProvisionsforyourWarrior.Treatthem
+like normal Provisions from the General Store.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-34-snake" name="Snake">
+    <rules>As your Warrior passes bya potter'sstore,a woman comes
+running out hollering about a poisonous snake that has slipped
+in. She immediately hires your Warrior to rid hershop of the
+snake,butshe warns them notto break any of her pottery
+which is on display throughout the shop.Roll1D6below:
+1
+The snake is much harder to catch or kill than
+anticipated and your Warrior practically tears the shop
+apart before finally corralling thereptile.Angrily,the
+shopownerdemands1D6x50goldforherloses.
+2-3
+Justas your Warriors lips the snag into a burlap sack,
+they stumble backward into a rare and expensive pot
+which falls to the ground withaloudcrash.After
+deducting their pay for catching the snake,your Warrior
+owesthepotter1D6x10goldforthedamage.
+4-5
+Stepping into the potter's shop your Warrior spies the
+cold blooded creature coiled upin therafters.They
+manageto bring it down along with afew cups hanging
+onthe wall.Thepotteris elated and,afterdeductingfor
+damage,paysyour Warrior1D6x10gold.
+6
+No sooner than your Warrior enters the shop do they
+pounce upon the terrifying reptile,snatchingit with
+their bare hands.Whenthey bringthe beastie back out,
+the potter is elated that nothing wasdamaged.She
+paysyour Warrior1D6x25goldfor theirservices.
+10</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-35-accident" name="Accident">
+    <rules>As your Warrior helps an old crone to cross the busy main
+street,a beer wagon unexpectedly crashes into them. She
+carefully peels them offthe heavy,iron-shed wheel,andtakes
+them to the infirmary to be patched up. Your Warrior cannot
+buy anything or visit any Special Locations for 1D6 days while
+they recover. While they are recovering you do not have to roll</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-36-pacifist" name="Pacifist">
+    <rules>Seeing them armed andbattle-hardened,apacifistapproaches
+your Warrior,attemptingtoconvertthem to the ways ofnon-
+violence.Theyounglady is passionate and convincing and you
+mustroll1D6 and add your Warrior's Willpower.Look upthe
+result on the table below to see what effect her words have on
+your W arrior.
+2-4
+Your Warrior takes the words of the woman to heart
+and they vow to relinquish one of their weapons(your
+choice).Discarditim mediately.
+5-6
+Your Warrior is thoroughly convinced by the wordsof
+theyoung woman and in the next Adventure they
+promisethat,asidefrom theirregularAttacks,they
+will not use any special skills or abilities that cause
+Damage.
+7-8
+Your Warrior deeply considers the words of the young
+woman and in the next Dungeon they refuse to make
+an Attack in the first Warriors ' Phase ofeach combat.
+Your Warrior is unaffected by the words of the young
+9or
+lady.
+more</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-41-pickpocket" name="Pickpocket">
+    <rules>As your Warrior rushes through the busy streets,theirmoney
+pouch is stolen.
+YourWarriorloses1D6x20 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-42-betrothed" name="Betrothed">
+    <rules>Due to a mistake in identity, your Warrior finds himself
+are betrothed to marrytheirsister.Your Warrior agrees,albeit
+at knifepoint,andpledgestheirtroth to a farmer's daughter of
+a m ple charm s.
+The marriage is arranged fortomorrow,so your Warrior
+must either leave the Settlement im mediately,orget married...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-43-friendly-villager" name="Friendly Villager">
+    <rules>As your Warrior heads back to the inn for a bit of relaxation,
+they encounter a villager who welcomes them to the Settlement
+heartily and insists on taking them to the nearest tavern for a
+drink.Roll1D6 on the following tables:
+1D6
+ThepersonistheVillage...
+1
+Idiot
+Drunk
+2
+3
+Loudmouth
+4
+Bard
+Gate Guard
+5
+Elder
+6
+Nowrollanother1D6andaddthenumberrolledabove.Look
+uptheresultonthetablebelow:
+Result
+Total
+2-3
+Upon entering thetavern,yourWarrioris
+im mediate ly surrounded byruffians.Theyfind out
+that the villager owes a huge debt to the owner of
+the establishment and he was told not to return until
+hisdebt waspaidinfull.Beforebeingthrown out
+with theirnew friend,your Warrior is relieved of
+1D6x50gold.Iftheydonothavethatamount,the
+owner takes one item ofTreasure(determinedat
+random)ascompensation.
+4-5
+As your Warrior struts into the tavern with the
+villageritisapparentthat theyarenotwelcomehere.
+Afterbeingroughedupandthrownout,yourWarrior
+finds outthat one of the enforcers made off with one
+item of Equipment(determined atrandom).Discard
+itim mediately.
+6-8
+Your Warrior spends the next few hours politely
+listening to the boring history of the settlement after
+whichthe villager leaves them to foot the bill, which
+amountsto1D6x10gold.
+As your Warrior and the villager walk through the
+9-10
+door,theotherpatronscheerfully greet them (the
+villager is apparently a bit of a celebrity).Your
+Warriorand thevillageraregivenfreefoodanddrink.
+Your Warrior does not need to pay for living
+expenses today.
+11-12
+The villager is well known and wellrespected.Seeing
+your Warrior with him,thevillagersin thetavernpay
+allof the Living Expenses for the rest of their stay in
+theSettlementanddonate1D6x25goldtowardtheir
+next Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-44-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-45-circus" name="Circus">
+    <rules>Thereis a travelling circusintown,and your Warrior spends the
+rest of their day wanderingfromsideshowtosideshow.Having
+metthebeardedwomanand thetwo-headedgoat,theydecide
+tohavetheirfortuneread.Perhapsthe sign above the door to
+that particular wagon should say Have your fortune stolen',as
+for a cost of 1D6x10 gold,your Warrior is told nothing more
+than that their destiny lies with a tall, dark stranger from
+Erengrad!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-46-gambling" name="Gambling">
+    <rules>Your Warrior visits a localinn and gets involved in a dubious
+gameofdice.Roll1D6onthefollowingtable:
+Your Warriorlosesbadly,and must forfeit one item of
+1
+Treasure of your choice.
+2
+YourWarriorloses1D6x20gold.
+3-4
+YourWarriorcomesoutof thegameeven.
+Your Warriorwins1D6x10gold.
+5
+Your Warrior wins3D6x10gold.
+6</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-51-beggars" name="Beggars">
+    <rules>Your Warrior is accosted by beggars and,overwhelmed by the
+sadness of theirplight,gives each of the1D6 pitiful wretches5
+gold.Ifyour Warriorcannotpaytheyareabeggarthemselves,
+and you m ustroll1D6 on the following table:
+1
+Your Warrior is thrown out of the Settlement see
+VillageEvent11.
+Your Warriorgains1D6x5goldbybegging.
+2-6</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-52-pugilist" name="Pugilist">
+    <rules>As you wander through the Village your Warrior comes upon
+some bare knuckle pugilists competing with one another.
+Catching sight of your Warrior's garb and equipment they
+im mediate ly hailyou tojoin them in a friendly bout,albeit with
+much public jeering and taunting.Your Warrior has no choice
+buttoupholdtheirreputationbyacceptingthelocals'challenge.
+Stepping up to meet your Warrior is Bam wig,localchampion
+and prize fighter. The protocols for such a bout here are
+unfamiliar to your Warrior so they are given alist of rules and
+regulations that they must adhere to.
+Add your Warrior's Strength and Toughness together and
+then factor in their Alehouse modifier (see your Warrior's
+Rulebook). This is your Warrior's Fight Total. The local
+champion's Fight Tota/is8.
+Eachroundyoumustrolla1D6foryour Warrior and another
+1D6forBamwig.Deduct your Warrior's score from their Fight
+Totaland then deduct Bam wig's roll from his. Keep a running
+total on a piece of paperand the first contender whose Fight
+Total reaches zero (orbelow)is theloser.Ifboth contestants '
+score reach zero or below atthe same time the higher score
+prevails.In case ofa tie, continue another round until one of
+them is the winner.
+If your Warrior wins the match they receive one item of
+Dungeon Room Treasure. If they are defeated, the local
+champion and his cohorts relieve them of half their gold!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-53-inheritance" name="Inheritance">
+    <rules>A head villager approaches your Warrior and in forms them that
+a distant relative hasjust passed away and has left them an
+inheritance.Roll1D6 tosee what the inheritance is:
+1
+The inheritance is a debt and the head villager has come
+tocollect!Your Warrior mustforfeit1D6x25 gold selling
+Equipment and Treasure if necessary!
+2-3
+The inheritance is actually apet dog(seeEvent63).If
+your W arrior already has a pet dog,treat this as a roll
+of 1 above.
+4
+The inheritance is a small sum of money to the amount
+of 1D6x25 gold!
+The inheritance is a small sum of money to the amount
+5
+of1D6x50 gold!
+6
+The inheritance is anitem of Dungeon Room Treasure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-54-fooled" name="Fooled">
+    <rules>Your Warrior must discard anyone purchase they have madein
+this Settlement,as it was a fake and is worth nothing!Ifyour
+Warrior has not yet made any purchases in this Settlement,
+treat this as an Uneventful Day.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-55-riotous-living" name="Riotous Living">
+    <rules>Taken with the joys of hot food and a comfortable bed afterso
+long outin the wild,your Warrior overspends on such luxuries
+by30 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-56-an-honest-day-s-work" name="An Honest Day's Work">
+    <rules>Your Warrior is employed by a local farmer to carry bales of
+cotton to the riverside area forthe day.This task earns them
+20 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-61-fire" name="Fire">
+    <rules>As your Warrior passes by a small house they see smoke
+seeping out from underthefrontdoor.Rushinginsidetheydrag
+outthe unconsciousinhabitants.Almostthe entire village turns
+outto fight the blaze and the house is saved with no casualties.
+Your Warrior is being congratulated as a hero,especially from
+the surviving family who makea giftof 1D6x20 gold in thanks.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-62-troubadour" name="Troubadour">
+    <rules>A colour fully dressed minstrel notices your Warrior as they pass
+by. With an exasperated laugh he follows your Warrior,loudly
+strum ming hislute and singing aballad allabout your Warrior's
+exploits.Roll1D6:
+1-2
+The raucous tune is an insulting account of all of your
+Warrior'sfollies;from their missteps in combatto
+spilling their drink atthetavern.Thebard also singsof
+the unfortunate encounter with the miller's daughter
+down by the river which angers some of her close male
+relatives.They waitfor your Warrior around acorner,
+throw a sack over their head and beat them severely.
+Your Warriorsuffers-1 Strength forthe next
+Adventure.
+3-4
+The ballad is all about your Warrior's exploits but no one
+seemsto even notice orcare.
+5-6
+The bard embellishes all of your Warrior's good deeds
+and heroics to such degree that even your Warrior is
+impressed with himself.Alargegroup quickly gathers
+and givesthreecheers!Your Warrior's inner spirit is
+bolsteredand theyare+1Strengthforthenext
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-63-pet-dog" name="Pet Dog">
+    <rules>YourWarriorisadoptedbyasmalldog.Itfollowsthem around
+everywhere,skulkingin theshadows while the fighting goes on
+and then emerging after the adventure is completed to shower
+its new master withadoration.RollonthePetDog Event Table
+(page 24) to see exactly which type of canine has attached
+itselftoyou.
+Your Warrior can killthe dogif you want,butit wouldbea
+cruel and heartless thingto doandit will cost them 1,ooo gold
+to pay for a decent burial for the hound!
+Ifyour Warrior already has a pet dog,ignorethis result and
+roll again on the Village Events table.Ifnot,nameitand noteit
+downonyourWarrior'sAdventureRecordSheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-64-crime" name="Crime">
+    <rules>Your Warrior is accused of murder and thrown in jail. The
+matter is sorted out eventually, but only after your Warrior's
+companions have bailed them out.Each Warrior in the party
+except the accused mustpay 1D6x5 gold to the authorities.
+Iftheir companions do not have the money,your Warrior
+mustspend1D6 daysinjail.Whileinjail they don't have to pay</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-65-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-village-66-fearful-villagers" name="Fearful Villagers">
+    <rules>Your Warrior is carrying an item of magical Treasure
+(determined randomly) that the villagers perceive as unlucky,
+unholy ortaboo.ThelocalWatchisim mediate ly summoned and
+your Warrior must either leave the Settlement im mediate ly or
+surrender the item to the authorities (after which it is properly
+destroyed in a cerem ony involving a bonfire,a catapult,a ten
+poundhammerandalargesquash).</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-11-thrown-out" name="Thrown Out">
+    <rules>Your Warrior's wild behaviour attracts the attention of the
+Settlement authorities and there are thrown out oftown.They
+must wait outside the Settlement gates for the other Warriors.
+In addition,roll1D6.On ascore of 1 your Warrior is fleeced
+goldstolen!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-12-well" name="Well">
+    <rules>Strolling alongside a dilapidated old house your Warrior spies an
+old,stone well.Your Warrior casually tosses in 1 gold coin. Roll
+1D6onthetablebelow:
+1
+Acreepy,guttural moan echoes upward in an unknown
+tongue.Aterriblesenseofdreadoverwhelmsyour
+Warrior and they suffer-1 Luck for the next Adventure.
+2-5
+Nothing happens and your Warrior is now carrying one
+less gold piece.
+6
+A high pitched squeal and soft giggling can be heard at
+the bottom of the well.Your Warrior is +1Luckforthe
+next Adventure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-13-debt" name="Debt">
+    <rules>A debt collector catches up with your Warrior, demanding
+payment for money borrowed yearsago.Thesum your Warrior
+borrowed was not substantial, but the interest rates are
+astronomical. The outstanding balance is 1D6x20 gold,andif
+your Warrior cannot pay in fullim mediate ly the debt collector
+takes alltheir gold plus one piece of Equipment or Treasure
+(determinedrandomly).</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-14-investment" name="Investment">
+    <rules>In one of the wharf side bars,your Warrior meets a young
+to cover the known world.Hetalksyour Warrior into investing
+1D6x50 gold, giving them a certificate of partnership. From
+now on,at the end of each Dungeon, whenever your Warrior
+reaches civilisation,they may visitthe local Merchants ' Guild
+and show them their deed of partnership. Consulting their
+records,they can tell your Warrior how the company is doing.
+Roll1D6 on the following table:
+1
+Thecompanyhasgonebust,andyourWarrior's
+investment is worthnothing.Inaddition,they mustpay
+themerchants1D6x50 goldin outstanding debts.
+2-5
+Your Warrior's investment is performing fairly well,and
+the merchant forwards them 1D6x10 gold as their
+share of the profits.
+6
+Businessisbooming!Afterconsultingtheledger,the
+merchant confirms that he can forward your Warrior
+1D6x50gold.
+artisans,traders and such.Unfortunately,that also means
+and more spread out than villages, many more things can
+ead ofevents and encounters. However,townsfolk can still
+heir step and not upsetthelocals...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-15-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-16-fire" name="Fire">
+    <rules>seeping out from underthefrontdoor.Rushinginsidetheydrag
+outthe unconsciousinhabitants.Almostthe entire village turns</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-21-fight" name="Fight">
+    <rules>Your Warrior is being congratulated as ahero,especiallyfrom
+the surviving family who makea giftof 1D6x50 gold in thanks.
+FIGHT
+Your W arrior argues with a burly street trader who has tried to
+charge them fartoo muchforsomecheap,shoddyitems.The
+argument escalates to a brawl very quickly as the trader calls in
+hisguards.Roll1D6 on the following table:
+Your Warriorissoundlythrashedandloses2oogold.
+1
+2
+Your Warrior is bested after a hard struggle against the
+traderandhiscroniesandloses1oogold.
+Your Warrior walks away withabloodynoseand50
+3
+gold worse off,butleavesthetraderbadlybruised.
+4
+Afterafiercestruggle,your Warrior knocks the
+impudent trader to theground,wherehestays to
+collecthisteeth.Whileheisbusy,yourWarriortakes
+100 goldfrom his stall as compensation.
+YourWarriorquicklydisarmsthetrader.Withasword
+5
+athisthroat,thelouthasno choice but to apologise
+and offer your Warrior2oo gold as compensation.
+6
+A dozen evil looking thugs the trader's bodyguards
+leapoutfrom theshadows,attackingyour Warrior with
+knives,coshes and cudgels.Unperturbed,they coolly
+dispatch them with afew well placed sword strokes,
+emptiestheirpurses,andendsup3o0 gold better off.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-22-nightmare" name="Nightmare">
+    <rules>As your Warrior retires for the evening they fallinto a deep
+slumber.They beginto dream that they are fighting a terrifying
+gorgon;herhaircomposedofvicioussnakesand agaze which
+can turn a person to stone. with a horrendous scream the
+gorgon attacks! Roll 1D6 to see how the dream ends:
+1
+No matter how many times or how hard your Warrior
+strikes the creature with their weapon,the beast
+seems invulnerable. With a terrifying scream the
+gorgonshootsanarrowdirectlyinto theirheart!
+WhenyourWarriorwakes,theyfindthat theyhave
+permanentlylost1 Wound!Ifyour Warrior's Starting
+Woundsiseverreducedtozerobecauseofthisdream,
+theyare dead.
+Tomorrow night the nightmare returns and they must
+roll on this table again.Makeanote on your Adventure
+Record Sheet to remind you.
+2-5
+The battle is brutal and neither your Warrior nor the
+creature seems to gettheupperhand.Your Warrior
+wakesina coldsweat.
+Tomorrow night the nightmare returns and they must
+rollonthistableagain!MakeanoteonyourAdventure
+Record Sheet to remind you.
+6
+Your Warrior courageously stands their ground and
+strikes the wretchedbeastdown!A sense of relief fills
+your Warrior and they sleep better than they have in a
+long time.
+When your Warrior awakens they discover that they
+are +1tohisStarting Wounds!Thenightmareends
+and they do not have to roll on this table again (unless
+theyencounterthisSettlementEventagain)!
+If your Warrior leaves the Settlement before the dream
+concludes, the nightmare temporarily ends. At the next
+Settlement,however,it returns to haunt the Warrior again.
+MakeanoteonyourAdventureRecordSheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-23-drugged" name="Drugged">
+    <rules>Visiting a local hostelry in a rather seedy area, your W arrior
+partakes of a curious drink offered them by the bartender.
+Afterone swig,theyfeelthe effects of the liquid take hold-
+they have been drugged! Roll1D6 on the following table:
+Your Warriorhasbeenpoisonedandsuffers-1
+1-3
+Toughness for the duration of the next Adventure.
+4-6
+The liquid in question is simply very strong ale,and your
+Warrior quickly getsatasteforit. The only ill effect is a
+pounding head next morning.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-24-family-heirloom" name="Family Heirloom">
+    <rules>An item of Treasure that your Warrior is carrying (determined
+randomly)is identified by a wealthy,influential member of the
+local citizenry ashisfamilyheirloom,stolenlastyearby wanton
+burglars. The local Watch confiscates the item and you m ust
+discard itim mediately.If your Warrior has no Treasure items,
+the wealthy local accuses your Warrior of hiding it and demands
+1D6x50 goldin restitutioninstead.Ifthey cannotpay,then your</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-25-accident" name="Accident">
+    <rules>As your Warrior helps an old crone to cross the busy m ain
+street,a beer wagon unexpectedly crashes into them. She
+carefully peels them offtheheavy,iron-shed wheel,and takes
+them to the infirmary to be patched up. Your Warrior cannot
+buy anything or visit any Special Locations for 1D6 days while
+theyrecover.Whiletheyarerecovering you do not have to roll</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-26-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-31-riotous-living" name="Riotous Living">
+    <rules>Taken with the joys of hot food and a comfortable bed after so
+long out in the wild,your Warrior overspends on such luxuries
+by50gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-32-circus" name="Circus">
+    <rules>Thereis a travelling circusintown,and your Warrior spends the
+rest of their day wandering from sideshowtosideshow.Having
+metthebeardedwomanand thetwo-headedgoat,theydecide
+tohavetheirfortuneread.Perhapsthe sign above the doorto
+that particular wagon should say Have your fortune stolen',as
+for a costof2D6x10 gold,your Warrior is told nothing more
+than that their destiny lies with a tall, dark stranger from
+Erengrad!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-33-crime" name="Crime">
+    <rules>Your Warrior is accused of murder and thrown in jail. The
+matter is sorted out eventually, but only after your Warrior's
+companions have bailed them out.Each Warrior in the party
+except the accused m ustpay 1D6x10 gold to the authorities.
+Iftheir companions do not have the money,your Warrior
+m ust spend1D6 daysinjail. While in jail they don't have to pay</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-34-snake" name="Snake">
+    <rules>As your warrior passes bya potter's store,a woman comes
+running out hollering abouta poisonous snake that has slipped
+in. She immediately hires your Warrior to rid hershop of the
+snake,butshe warns them not to break any ofher pottery
+which is on display throughout the shop.Roll1D6 below:
+1
+The snake is much harder to catch or kill than
+anticipated and your Warrior practically tears the shop
+apart before finallycorrallingthereptile.Angrily,the
+shopownerdemands1D6x50goldforherloses.
+2-3
+JustasyourWarriorslipsthesnagintoaburlapsack,
+they stumble backward into a rare and expensive pot
+which falls to the ground with aloud crash.After
+deducting theirpayforcatchingthesnake,yourWarrior
+owesthepotter1D6x10goldforthedamage.
+4-5
+Stepping into the potter's shop your Warrior spies the
+cold blooded creature coiled upin therafters.They
+manageto bring it down along with afew cups hanging
+onthe wall.Thepotteris elated and,afterdeductingfor
+damage,paysyour Warrior1D6x10gold.
+6
+No sooner than your Warrior enters the shop do they
+pounce upon the terrifying reptile,snatching it with
+their bare hands.Whentheybringthe beastie back out,
+the potter is elated that nothing wasdamaged.She
+paysyour Warrior1D6x25 gold for their services.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-35-witchcraft" name="Witchcraft">
+    <rules>Your Warrior is accused of witchcraft, and is chased through
+the streets by an angry mob.Roll1D6 on the following table
+(the Witch Hunter may add +1to theirscore):
+1-3
+Your Warrior escapes by jumping over the Settlement
+wall and into the filthy water of the moat.Pelted with
+eggsandrottenfruit,they stagger out onto thefar
+rules (page 3).
+4-5
+Your Warriorducksdownasidealleyandescapes,but
+from now on must wear a disguise when out in public!
+Your Warrior turns angrily on the mob,demandingan
+6
+explanation.Shoutingdowntheleaderof the mob,they
+establish their authority overthe crowd, who sheepishly
+returnto theirhovels,pausingonlyto give your Warrior
+1o0 gold as way of compensation.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-36-pet-dog" name="Pet Dog">
+    <rules>Your Warrior is adopted by a smalldog.Itfollowsthem around
+everywhere,skulkingin theshadows while the fighting goes on
+and then emerging after the adventure is completed to shower
+its new master with adoration.RollonthePetDogEventTable
+(page 24) to see exactly which type of canine has attached
+itselftoyou.
+Your Warrior can kill the dog if you want,butit would bea
+crueland heartless thing to doandit will cost them 1,ooo gold
+to pay for a decent burial for thehound!
+Ifyour Warrior already has a petdog,ignorethiseventand
+roll on the Town Events table again.Ifnot,name it and note it
+down on your Warrior's Adventure Record Sheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-41-fooled" name="Fooled">
+    <rules>this Settlement,asit was a fake andis worth nothing!Ifyour
+Warrior has not yet made any purchases in this Settlement,
+treat this as an Uneventful Day.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-42-inheritance" name="Inheritance">
+    <rules>Ahead villager approaches your Warrior and in forms them that
+a distant relative has just passed away and has left them an
+inheritance.Roll1D6toseewhattheinheritanceis:
+1
+The inheritance is a debt and the head villager has come
+tocollect!Your Warrior mustforfeit1D6x50gold selling
+Equipment and Treasure if necessary!
+2-3
+The inheritance is actuallyapetdog(seeEvent36).If
+your Warrior already has apetdog,treatthisasa 1.
+4
+The inheritance is a small sum of money to the amount
+of1D6x50 gold!
+5
+The inheritance is an item of Dungeon Room Treasure!
+6
+The inheritance is an item of Objective Room Treasure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-43-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-44-steam-bath" name="Steam Bath">
+    <rules>Your Warrior spends the rest of their day in the heady
+atmosphere of a steam bath,sweating offthe aftereffects of
+last night's sojourn at the tavern. They emerge feeling far
+healthierthantheyhaveforagoodwhile,and theymayadd+1
+Wound to their Starting Wounds score permanently.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-45-overturned-cart" name="Overturned Cart">
+    <rules>Your Warrior hears a loud cry from for help from around the
+cart has turned over andis crushingalocalboy.Your Warrior
+runs overto try and push the cart off the young lad.Roll1D6
+and add your Warrior's Strength then look up the result below:
+6 or
+Asyour Warriorliftsthecartuptheylosetheirgrip!
+less
+Thecartfallsbackonto theboy,maiminghim!The
+boy's family demands restitution for the accident and
+your Warrior m ust give up half their gold or besentto
+prisonfor1D6 weeks!IfyourWarriorhasnogold,they
+must give the family 1D3 TreasureItems(yourchoice)
+instead.
+7
+Your Warrior manages to movethecart,buttheboyis
+injuredin theprocess.YourWarriorfeelssoterrible
+aboutthe situation that theygive1D6x50 goldto cover
+thecost of medical treatment.
+8-9
+Your Warrior shifts the heavy cart enough for someone
+to pull the boy out,thussaving hislife.Hisfather,a
+localmerchant,isso grateful that he gives your Warrior
+1D6x50gold.
+10+
+In aheroicfeat,your Warrior hauls the massive cartoff
+theboyandheescapesunscathed.Theonlookers
+cheer buoyantly and theboy'sfamily,who arerich
+nobles,givesyourWarrior1D6x100goldandanItem
+of Dungeon Room Treasure ingratitude!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-46-sword-for-sale" name="Sword For Sale">
+    <rules>Strolling passed a bazaar your Warrior notices a young woman
+who is selling agrandlookingsword.The woman claims that
+theswordisafamilytreasure,handeddownfrom generation to
+generation.Sheexplainsthatsheisimpoverishedand mustsell
+it.Aninterested buyer is hovering overyour Warrior's shoulder
+andhe tellsthe young woman that he will purchase it if your
+Warrior doesn't.
+The price the woman is asking is 1D6x1o0 gold and your
+Warrior may buythe weapon if they wish bypaying the gold
+and then rolling on the table below:
+1
+The sword functions as a regular sword from the
+Weaponsmith,butitissopoorlyconstructedthat the
+first time the Warriorrollsa1 To Hitin combat,the
+blade shatters and must be discarded.
+2
+The sword functions as a regular sword from the
+Weaponsmith,butisabitheavierandnotas well
+balanced.Thus,the wieldersuffers-1Initiative when
+wielding this sword in combat.
+3
+The sword is actually the Bronze Sigil Sword and gives
+the wielder +2Initiative.
+4
+The sword is actually the Sword of Might and givesthe
+wielder+1Strength.
+5
+The sword is actually the Blade of Leaping Copper and
+givesthe wielder+1Attacks.
+6
+The sword is actually the Heart seekerS word and once
+per Turn your Warrior may re roll anyone of their
+Attacks that misses.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-51-beggars" name="Beggars">
+    <rules>Your Warrior is accostedbybeggarsand,overwhelmed by the
+sadnessof theirplight,giveseachof the1D6+4pitifulwretches
+5
+5 gold. If your Warrior cannot pay they are a beggar
+themselves,andyou mustroll1D6 on the following table:
+1
+Your Warrior is thrown out of the Settlement see
+TownEvent11.
+2-6
+YourWarriorgains1D6x10goldbybegging.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-52-troubadour" name="Troubadour">
+    <rules>A colourfully-dressedbardnoticesyourWarriorastheypassby.
+With an exasperated laugh he follows your Warrior,loudly
+strum ming hislute and singing a ballad all about your Warrior's
+exploits.Roll1D6:
+1-2
+The raucous tune is an insulting account of all of your
+Warrior'sfollies;from their missteps in combatto
+spilling their drink atthetavern.Thebardalso singsof
+the unfortunate encounter with the miller's daughter
+down by the river which angers some of her close male
+relatives.They wait for your Warrior around a corner,
+throw a sack over their head and beat them severely.
+Your Warrior suffers-1Strengthforthe next
+Adventure.
+3-4
+The ballad is all about your Warrior's exploits but noone
+seemsto even notice or care.
+5-6
+The bard embellishes all of your Warrior's good deeds
+and heroics to such degree that even your Warrior is
+impressed with themselves.Alarge group quickly
+gathersandgivesthreecheers!YourWarrior'sinner
+spirit is bolstered and they are +1Strengthforthenext
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-53-an-honest-day-s-work" name="An Honest Day's Work">
+    <rules>Your Warrior is employed by a local apothecary to unload
+suppliesathisshopfortheday.Thistask earns them 35 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-54-robbery" name="Robbery">
+    <rules>Your Warrior bumps into a thief who hasjust robbed the
+jeweller'sstore.Roll1D6 on the table below:
+1
+The culprit escapes as the shop owner emerges and
+accuses your Warrior of thetheft!Heim mediate ly
+summons the Watch who throw your Warrior in jail for
+1D3daysandfinethem 1D6x100gold!
+2-3
+TherobberthrowssomejewelsatyourWarrior,yelling
+Townsfolk come running out of the surroundings
+buildings and surround yourWarrior,screamingforthe
+Watch.Afterrepeatedpleasofinnocence,yourWarrior
+isfined 1D6x50 goldforfailingtostopthecrime.
+4-5
+Your Warrior instinctively knocks the culprit down,
+forcing him to drop allofhisloot.The nimble thief
+manages to regain his feet and climb over a wall and
+outofsight.Alocalwhowitnessedeverything
+corroborates your story to the shopkeeper and the
+Watch whentheyarrive.Theownerrewardsyour
+Warrior with 1D6x25 gold for saving his merchandise.
+6
+Your Warriorgrabsthethief,slamshim to the floor and
+sitson him untilthe Watch arrive.Theshopkeeperlauds
+your Warrior as a hero and rewards them with1D6x50
+gold!Inaddition,theyare given a bronze pendant with
+an ancient rune offortuneinscribeduponit.Eachtime
+your Warrior visitsa Settlement the pendant allows you
+tore roll one SettlementEvent.You must accept the
+result of the secondroll.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-55-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-56-hunting" name="Hunting">
+    <rules>Your Warrior is invited by a group of locals togo on a nocturnal
+hunt.
+Meeting them just before sunset,they are informed that
+tonight's prey is the great Qu arg a beast of fearsome temper
+andfouldisposition.Your Warrior's task in the group is to take
+thehuntingtools-anet,asmallpolewithabellonitandabag
+fullof garlic and waitin the middle of the woods while the rest
+of the hunters spread out into the forest and drive the Quarg
+towardsthem.Asthesunrisesthenextmorning,and theowls
+return to their nests, there is still no sign of the Quarg,your
+Warrior begins to wonder if someone is being made afoolof...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-61-pickpocket" name="Pickpocket">
+    <rules>As your Warrior rushes through the busystreets,theirmoney
+pouch is stolen.
+YourWarriorloses1D6x30gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-62-runaway" name="Runaway">
+    <rules>While walking along the main street, your Warrior hears a
+disturbance just around the corner.A moment later a huge
+runaway bull charges down thestreet,wrecking market stalls
+andcausingpanic.Your Warrior can let it pass by hiding down a
+side alley, or try to stop the enraged animal.If your Warrior
+hides down the alley and lets the bullpass,roll1D6 onthe
+following table:
+1-3
+Your Warriorskulksin theshadows,waitingforthe
+action todiedown.Astheypeep roundthecorner,a
+mugger's metal bar hits them overthe head. Whenthey
+regain consciousness,your Warrior's purse is 1oo gold
+coins lighter.
+After waiting nervously in the dark forafew minutes,
+4-6
+your Warrior sees the bull roar past and career off
+downasidestreet.Thedangerispassedandyour
+Warriormaycarryonabouttheirbusiness.
+Ifyour Warrior tries to stop the bull,roll1D6 on the following
+table:
+1-2
+Your Warrior waves the passers by aside and leaps out
+infrontof thebull,sword drawn.Thebullhesitatesfor
+half a second orso,and thentramplesthem into the
+dirtbeforecarryingonitsway.Thecrowdthenstomps
+all over your Warrior in the rush to follow thebull,
+leaving them to nurse their injuries alonein an empty
+street.
+3-4
+A single sword thrust stops the bull dead in its tracks
+literally.Asits carcasstwitchesspasmodically,the
+crowd roars in approval and showers your Warrior with
+100gold.Thenthebull'senragedownerarrives,and
+relieves them of150 gold-itwashisprizestud,and he
+wanteditstopped,notslaughtered!
+5-6
+Your Warrior gives the bulla hard stare and its kids to a
+halt,snorting andpawingtheground.Putting arope
+arounditsneck,theyleaditback toitsstall.The crowd
+cheers and showers them with150gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-63-jealous-adventurer" name="Jealous Adventurer">
+    <rules>Unbeknownst to them, your Warrior is being watched and
+followed bya young man. The stranger is a failed adventurer
+and he longs for the fame and glory that your Warrior seems to
+haveobtained.Hejealously decides to sabotage your Warrior's
+achievements.
+In the next Dungeon it becomes clear that someone has
+alerted the denizens to the Warriors ' coming. Each time an
+Unexpected Event occurs that reveals Monsters,you mustroll
+1D6.On a score of 1-3 you must roll twice on the Monster Table
+with the minimum amountof Monstersarriving.On ascoreof
+4-6you rollonly once onthe Monster Table as normal,butthe
+maximum numberof Monsters arrive.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-64-join-the-watch" name="Join The Watch">
+    <rules>The Captain of the Watch marks your Warrior as a useful
+looking recruit and,ashe is short on manpower,press gangs
+them fora week.Your Warrior can either try to escape the
+Watch by making a donation to their funds of 2D6x10 gold,or
+join up.
+If your Warrior joins up they do not have to pay Living
+Expenses for the weekandearns2ogoldin wages.However,
+while in the Watch they have no time to visit any traders or
+Special Locations.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-65-salesman" name="Salesman">
+    <rules>A salesman has set up shop just outside an inn selling Holy
+Water.He offers it to your Warrior claiming thatit will protect
+themfrom evilspiritsandcanevendestroytheundead.
+You m ay buy up to 1D6 Holy Water vials at the cost of
+1D6x50 gold each. After purchasing the vials,the salesman
+takes downhis wares and disappears into theinn.Nowrollfor
+each holy watervialpurchased.Onascore of1 or2,the vialis
+filled with simple drinking water and is useless.
+On any other score,the vial actually does contain a magical
+holy water, purified and blessed by a priest.If drunk, the
+imbibe r is protected by a magical aura which lasts for one Turn
+and all attacks against the drinker made by Undead Monsters
+do half the normalDamage(rounded down).If thrown atan
+Undead Monster rollon your Ballistic Skill,each successful hit
+causing1D6 Wounds with no deductions for anything.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-town-66-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-11-thrown-out" name="Thrown Out">
+    <rules>Your Warrior's wild behaviour attracts the attention of the
+Settlement authorities and there are thrown outoftown.They
+must wait outside the Settlement gates for the other Warriors.
+In addition,roll1D6.On a score of1 your Warrior is fleeced
+by the gate guards asthey are thrown outand have alltheir
+gold stolen!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-12-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-13-investment" name="Investment">
+    <rules>In one of the wharf side bars, your Warrior meets a young
+entrepreneur with great ideas for establishing a trading empire
+tocover the Known World.Hetalksyour Warrior into investing
+1D6x5o gold per Battle-level, giving them a certificate of
+purchase.
+From now on,atthe end of the Dungeon,wheneveryour
+Warrior reaches civilisation,they may visit the local Merchant's
+Guild andshow them theirdeedofpartnership(thistakesone
+day). Consulting their records,they can tellyour Warrior how
+the companyisdoing.Roll1D6 on the following table:
+1
+Thecompanyhasgonebust,andyourWarrior's
+investment is worthnothing.In addition,they mustpay
+the merchants1D6x50goldperBattle-levelin
+outstanding debts.
+2-5
+Your Warrior's investment is performing fairly well and
+the merchant forward them 1D6x10goldperBattle-
+level as their share of the profits.
+Businessisbooming!Afterconsultingtheledger,the
+6
+merchant confirms that he can forward your Warrior
+1D6x50 goldperBattle-level.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-14-pet-dog" name="Pet Dog">
+    <rules>Your Warriorisadoptedbyasmalldog.Itfollowsthem around
+everywhere,skulkingin theshadows while the fighting goes on
+and then emerging after the adventure is completed to shower
+its new master with adoration.Rollonthe Pet Dog Event Table
+(page 24) to see exactly which type of canine has attached
+itself to you.
+Your Warrior can killthe dogifyou want,butitwouldbe a
+cruel and heartless thing to doandit will cost them 1,ooo gold
+topayforadecentburialforthehound!
+Ifyour Warrior already hasapetdog,ignore this event and
+roll again on the City Events table.Ifnot, name it and noteit
+downon your Warrior's Adventure Record Sheet.
+18
+llfind a whole array ofthings to do! There willbe more
+more chances of something great happening butalso more
+a in ment and more people to meet.A crow dedcity willalso
+t m ore...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-15-cutpurse" name="Cutpurse">
+    <rules>As your Warrior rushes through the busy streets, their money
+pouch is stolen.
+YourWarriorloses1D6x50gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-16-bathhouse" name="Bathhouse">
+    <rules>Your Warrior spends the rest of their day in the heady
+atm o sphere of a steam bath,sweating off the aftereffects of
+last night's sojourn at the tavern. They emerge feeling far
+healthierthantheyhaveforagoodwhile,and theymayadd+1
+Wound to their Starting Wounds scorepermanently.Inaddition,
+they are +1Initiativeforthe next Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-21-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-22-an-honest-day-s-work" name="An Honest Day's Work?">
+    <rules>Your Warrior encounters a nervous looking merchant who is in a
+bitofa bind and asksforhelp.Someofhis workers have failed
+toshow up for work and he has a lot of crates that need to be
+transported to the warehouse district. Roll 1D6 on the table
+below:
+1
+The crates contain stolen goods and the Watch has had
+themerchantundersuspicionforsometime.Theentire
+group, including your Warrior, is arrested. Your Warrior
+mustspendthenext2 days in jail during which they are
+cleared of any wrong doing.Unfortunately,they fail to
+getpaid.
+2-3
+Your Warrior does not realise that the crates are filled
+with illegal substances and is surprised when the Watch
+arrives to arrest the merchant.Obviously,your Warrior
+receives no pay.
+4-5
+Your Warrior works diligently andis paid 50 goldfor a
+hard day's work.
+6
+Your Warrior's efforts are exemplary and the task
+earns them 1oo gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-23-riotous-living" name="Riotous Living">
+    <rules>Taken with the joys of hot food and a comfortable bed after so
+long outin the wild,your Warrior overspends on such luxuries
+by 50 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-24-hunting" name="Hunting">
+    <rules>Your Warrior is invited by a group of locals to goon a nocturnal
+hunt.
+Meeting them just before sunset,they are informed that
+tonight's prey is the great Qu arg a beast of fearsome temper
+andfouldisposition.Your Warrior's task in the group is to take
+thehuntingtools-anet,asmallpolewithabellonitandabag
+full of garlic and wait in the middle of the woods while the rest
+of the hunters spread out into the forest and drivethe Quarg
+towardsthem.Asthesunrisesthenextmorning,and theowls
+return to their nests, there is stillno sign of the Quarg,your
+Warrior begins to wonder if someone is being made afoolof...</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-25-street-artists" name="Street Artists">
+    <rules>Your Warrior is captivated by a particular brilliant team of
+street artists, who are performing their own rendition of a
+popular and contemporary play.
+The play your Warrior is watching iscalled (rollonce on each
+of thetablesbelow):
+1D6
+Result
+1
+Death of...
+The Lost Love of...
+2
+A Return To...
+3
+4
+No Solace For...
+Cursed Be...
+5
+6
+Drunken As...
+1D6
+Result
+1
+...theEmperor.
+...aLove Struck Wastrel!
+2
+3
+...Solitude.
+...the Creeping Dead.
+4
+5
+...the Sylvan ian Counts.
+...the Ever hungry Halfling!
+6
+Rollanother1D6toseehow good the actors were:
+1
+Appalling! Your Warrior has never seen such rubbish in
+their life and pelts the unfortunate actors with rotten
+vegetables!
+2-5
+Entertaining! Your Warrior gives the actors 10 gold x
+the total of the numbers rolled on the tables above.
+6
+Splendid! Your Warrior is captivated and showers the
+actors with well-earnedpraiseandalotofgoldtoo!
+Your Warrior gives the actors5o gold xthe numbers
+rolled on the tables above.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-26-counterfeit" name="Counterfeit">
+    <rules>As your Warrior attempts to buy someequipment,the trader
+points out their gold is counterfeit and refuses to take it.
+Looking through their stash, your Warrior discovers that
+1D6x10 of their gold is indeed worthless. Discard it and crossit
+off your Adventure Record Sheet.
+Ifyour Warrior does nothavethatmuchgoldleft,andhas
+already spent some in theSettlement,they must leave forthe
+nextDungeonimmediatelybeforeanyonecatcheson.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-31-false-accusation" name="False Accusation">
+    <rules>Studying the weapons on display in the local smithy, your
+Warrior feels a steel gauntlet ed hand upon their shoulder.Itis
+the Marshal of the Watch and your Warrior is accused ofacrime
+they did not com mit!
+Your Warrior is arrested and thrown uponthe mercy of the
+courts. Your Warrior must roll once on each table below to see
+what crime they are accused ofand what their sentence is.
+1D6
+Crime
+1
+Trouble making
+2
+Robbery
+3
+Forgery
+4
+Arson
+Treachery
+5
+6
+Murder
+Sentence
+1D6
+1
+Innocent
+A stern warning!
+2
+3
+1000 gold fine
+Lose a limb*
+4
+10 years in jail**
+5
+Deathby(rollontheExecution MethodTable)
+6
+1D6
+Execution Method
+1
+Burning
+2
+Beheading
+3
+Impalement
+Drowning
+4
+5
+Torture
+6
+Firing Squad
+*Lose a Limb
+The authorities decide to chop offone ofyour Warrior's limbs as
+punishment. You may choose which.If theylose aleg,your
+Warrior's Movement is halved and their Escape from Pinning roll
+is always a 6+.Ifthey everlose another leg they maynot move
+atall. If they lose a hand,thentheyare-2 onallTo Hit rolls and
+they may neveruse missile weaponsorcastspells.Iftheyever
+lose another hand they may not fight at all.
+**10YearsinJail
+This effectively means your Warrior is out of the game (as
+indeed does ' sentenced to death by...'.However,atthe start
+of every Adventure from now on,roll1D6.Onascoreof5or6
+your Warrior escapes,together with all their gear, and may
+rejoin their fellow Warriors.
+Buying Your Freedom
+Ifthe sentence is a 4,5 or 6,the arrested Warrior(and other
+Warriors) can bribe the guards and the court officials in orderto
+avoidharm.Thecostofthis will be found by adding together all
+of the dice rolls from the Crime/Sentence/Execution Method
+tablesandmultiplyingtheresultby1oo.Thatishow muchgold
+it will cost for your Warrior to w alkfree,unharmed.
+19</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-32-wrestler" name="Wrestler">
+    <rules>"The Slammer" has come to town and he is taking on all
+challengers in a 'friendly' wrestling match! Boasting a perfect
+record,theNorseman wagers5oogoldpiecestoanyonein the
+crowd who defeats him in unarmed combat. At the urgingof
+the crowd your Warrior accepts the challenge,roll2D6 and
+apply their Alehouse modifier (see your Warrior's Rulebook).
+Look uptheresultonthetablebelow:
+2-3
+In the first few seconds,TheSlammerpicksyour
+Warrior up and promptly smashes them to the ground.
+The sickening thud ofyour Warrior hitting the ground
+sendsashudderthroughthecrowd.Momentslater
+your Warrioriscartedoffonawoodenplank.Notonly
+isyour Warrior5o0gold pieceslighter,butThe
+Slam mer helps himself to oneitem of Treasure
+(determined atrandom)your Warrior was carrying.
+4-5
+Aftera nifty maneuver,The Slam mergrabs your
+Warrior in a bear hug that feels like they're being
+squeezed by...well,abear. With eyes bulging your
+Warrior gives up just prior to slipping into
+unconsciousness. With terribly bruised ribs and an even
+more bruised ego yourWarriorforfeits5o0gold.
+6-8
+After a grueling 15 minutes of dirt eating exchanges
+between The Slam mer and your Warrior,the matchis
+calleda draw.Your Warrior gains nothing butthe
+knowledge that they lasted longer than most and has
+lost nothing morethan afew teeth...
++6
+With all the focused fury of a hungry Half ling in apie
+shop your Warrior meets The Slam merheadon.After
+several minutes of intense combat your Warrior takes
+the measure of his foe and slams the Norseman to the
+ground!Standingtriumphantamidstacheeringcrowd,
+your Warrior dusts off their clothing before marching off
+with 5o0 moregold pieces in their pocket.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-33-uneventful-day" name="Uneventful Day">
+    <rules>Uneventful day. No special effects.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-34-robbery" name="Robbery">
+    <rules>Your Warrior bumps into a thief who hasjust robbed the
+jeweller's store.Roll1D6 on the table below:
+1
+The culprit escapes as the shop owner emerges and
+accuses your Warrior of the theft!Heim mediate ly
+summons the Watch who throw your Warrior in jail for
+1D3 days and fine them 1D6x100 gold!
+2-3
+The robber throws some jewels at your Warrior,yelling
+"Thief!Thief!" and then escapes down a dark alley.
+Townsfolk come running out of the surroundings
+buildings and surround your Warrior,screamingforthe
+Watch.Afterrepeated pleasofinnocence,yourWarrior
+isfined 1D6x50 gold for failing to stop the crime.
+4-5
+Your Warrior instinctively knocks the culprit down,
+forcing him to drop allofhisloot.Theynimblethief
+manages to regain his feet and climb over a walland
+outofsight.Alocalwho witnessed everything
+corroborates your story to the shopkeeper and the
+Watch whenthey arrive.The owner rewards your
+Warrior with 1D6x25 gold for saving his merchandise.
+6
+YourWarriorgrabsthethief,slamminghimto thefloor
+and sitson him until the Watch arrive.Theshopkeeper
+lauds your Warrior as a hero and rewards them with
+1D6x50gold!Inaddition,theyare given abronze
+pendant with an ancient rune of fortune inscribed upon
+it.Eachtimeyour Warrior visits a Settlement the
+pendantallowsyoutore-rolloneSettlementEvent.You
+m ust accept the result of the second roll.
+20</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-35-troubadour" name="Troubadour">
+    <rules>A colourfully-dressedbardnoticesyourWarriorastheypassby.
+With an exasperated laugh he follows your Warrior,loudly
+s
+exploits.Roll 1D6:
+1-2
+The raucous tune is an insulting account of all of your
+Warrior'sfollies;from their missteps in combatto
+spilling their drink atthetavern.The bard also sings of
+the unfortunate encounter with the miller's daughter
+down by the river which angers some of her close male
+relatives.They waitfor your Warrior around a corner,
+throw a sack over their head and beat them severely.
+Your Warriorsuffers-1 Strength forthe next
+Adventure.
+3-4
+The ballad is all about your Warrior's exploits but noone
+seemsto even notice or care.
+5-6
+Thebard embellishes all of your Warrior's good deeds
+and heroics to such degree that even your Warrior is
+impressed with themselves.Alarge group quickly
+gathers and gives three cheers!Your Warrior's spirit is
+bolstered and gains +1Strengthforthenext
+Adventure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-36-tax-collector" name="Tax Collector">
+    <rules>As your Warrior strolls about the civic district they are
+approached by a city employee who demands payment for the
+new ' Adventurer's Tax ' which amountsto10goldperTreasure
+item that they arecarrying.Your Warrior must either pay orthe
+local Watch will remove them from the City im m ediately (see</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-41-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-42-con-artist" name="Con Artist">
+    <rules>Mungo and his Amazing Monkeys are performing in the street
+and your Warrior laughs heartily as the creatures leap on to their
+back and scurry around theirlegs.Flipping a gold coin to the
+trainer your Warrior leaves the area.Aboutanhourlateryour
+Warrior realizes that they are missing one item of Treasure
+(determinedatrandom)!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-43-old-friend" name="Old Friend">
+    <rules>Someone across the street shouts out your Warrior'sname.Itis
+along lost friend and fellow Warrior who insists on taking your
+Warriortoeveryinnandalehouseheknowsin thevicinity.
+Your Warrior must roll on the Alehouse Events Table (ifusing
+theNew AlehouseEventsTable,the SophisticationValueisa2)
+1D6 times,deducting a cumulative -1 from the score each
+successivevisit,astheybecome moreand more inebriated.
+At the end of the merry-making, your Warrior goes their
+separate way, leaving their old friend unconscious in a
+wharf sidebar of ill repute.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-44-good-deed" name="Good Deed">
+    <rules>your Warriorgoesoutonthetown,taking 1D6x20 gold with
+them.As they cross the street,they spotan old cronein an
+upstairs window shouting that robbers have broken into her
+attic room and are stealing her few possessions.Happy to
+assist the helpless,your Warrior bounds up the rickety stairsto
+herroom three at atime.As they enter herdimlylitroom,a
+blackbagisplacedovertheirhead,swiftlyfollowedbyaheavy
+ironbar.Theyawakenin thegutterseveralhourslater,nursing
+a sore head.Not surprisingly,the gold they wer carrying is all
+gone.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-45-beggars" name="Beggars">
+    <rules>Your Warriorisaccostedbybeggarsand,overwhelmed by the
+sadness of theirplight,gives eachof the2D6+2 pitiful wretches
+5 gold. If your Warrior cannot pay they are a beggar
+themselves,andyou mustroll1D6 on the following table:
+Your Warrior is thro wn outof the Settlem ent-see City
+1
+Event11.
+2-6
+YourWarriorgains1D6x15goldbybegging.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-46-relative" name="Relative">
+    <rules>An old woman bumps into your Warrior on the city street.She
+explodes in excitement at the sight of their face and claims they
+areherdistantrelative.Beforetheycansaya word,theexcited
+lady drags your Warrior home with her where they are
+welcomed by allthe family members and fed to their heart's
+content.Your Warrior graciouslyacceptstheirhospitality,which
+includesapackageoffoodupontheirdeparture.
+Your Warrior does not have to pay living expenses for this
+Sheet.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-51-criminal" name="Criminal">
+    <rules>Your Warrior is minding theirown business when a criminal in
+custody of the Watchpassesby.Theprisonergivesanodanda
+smileto your Warrior and the captain of the guards notices.
+Roll1D6 on the table below:
+1-3
+Youarearrestedforcomplicity.Your Warrior spends
+thenext1D3 days in the local jail during which they are
+interrogated by the authorities. They are finally
+released with afine of1D6x5 gold for loitering.
+4-6
+One of the guards stops your Warrior for questioning as
+theother guardslookon.Thecriminaltakesthe
+opportunitytotryandbreakfree.Rollanother1D6.
+1-3
+The criminal manages to eludethe
+authorities and they are convinced that you
+werepurposelytryingtodistracttheguards.
+Youspendthenext1D3daysinjailuntil
+you're finally released due to lack of
+evidence.
+4-6
+As the prisoner makes a break forit,your
+Warrior frees him selffrom the bewildered
+guard,leapsoveravegetablestand,and
+apprehendsthecriminal.Dragginghim back
+to the Watch commander your Warrior
+collects1D6x25goldasareward.The
+prisoner glares at your Warrior as they are
+marched away.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-52-parade" name="Parade">
+    <rules>Alarge procession of citizens is marching down the avenue
+encouragingallonlookerstojoin them.Feelingin ajovialmood,
+your Warriordecidestojoin theparade.Roll1D6 on the table
+below:
+1-2
+The procession is a political activist group that is
+protestingthelocalauthorities.Allof the
+demonstrators,including your Warrior,are arrested by
+the Watch.Theyspendthenext1D3daysinjailand
+mustpay 1D6x20 goldinfines.
+3-4
+The procession is a victory march celebrating the most
+recentdefeatofOrcs&amp; Goblinsin thearea.Thegroup
+marches to the city centre where a decorated
+commandergivesatriumphantspeech.YourWarrior
+mayadd+1to theirWillpowerforthenextAdventure!
+5-6
+The citizens are worshippers of the new temple whoare
+trying to recruit members. The procession makesits
+way to the temple where all of the worshippers,
+including your Warrior,are blessed by the head priest.
+Your Warrior is +1Luck for the next Adventure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-53-accident" name="Accident">
+    <rules>As your Warrior helps an old crone to cross the busy main
+street,a beer wagon unexpectedly crashes into them. She
+carefully peels them offthe heavy,iron-shed wheel,andtakes
+them to the infirmary to be patched up.Your Warrior cannot
+buy anything or visit any Special Locations for 1D6 days while</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-54-city-watch" name="City Watch">
+    <rules>Your Warrior is accosted by the City Watch who has been
+warned that a Warrior bearing powerful and destructive magic
+items is on the prowl.
+Your Warrior mustroll1D6foreachitem of Treasure they
+arecarrying.Onascore 1 the Watch confiscate and it must be
+discarded im mediately.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-55-street-urchin" name="Street Urchin">
+    <rules>Your Warrior is approached by a street urchin who offers to
+guard their mountfor 10 gold pieces a day.If your Warrior pays
+the urchin, you may rolltwo dice instead of one when
+determining if your Warrior's horse has been stolen and may
+choose the higher one. If your Warrior does not have that
+amount or decides not to pay the urchin,then treat this as an
+Uneventful Day.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-56-salesman" name="Salesman">
+    <rules>An extremely persuasive salesman is making a pitch toalarge
+crowd.Roll1D6andaddyourWarrior's Willpower:
+2-4
+YourWarriorpays1D6x1o0 gold for a pair of boots
+yourfeetsmell..."
+5-7
+Your Warrior purchases a one year subscription to
+Adventurer's Monthlyfor1D6x50gold.This manuscript
+contains everything one needs to know about slaying
+monsters and keeping their gear in pristine condition!
+The manuscript willbe deliveredevery3o days directly
+toyour Warrior's doorstep!
+8+
+Your Warrior resists the great temptation to buy Super
+Belt,the all purpose survival kit that will hold the most
+important items one should carry in the wild including
+coins,abeermug,arope,rations,aknife,alargesack
+and aQua rg horn.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-61-duel" name="Duel">
+    <rules>Your Warrior is challenged to a duelby a professional duelist
+whom they insulted in atavern.The duelis scheduled to take
+place atdawn tomorrow.
+Your Warrior can either leave town im mediate ly or take up
+the challenge.
+If your Warrior takes part in the duel,roll 1D6 on the
+following table:
+1
+With asingle, well placed sword thrust your Warrior's
+heartisspearedand theyfallto theground,quitedead.
+2-4
+Thetwo duelistsfightforhourafterhour,eachinflicting
+manylightwoundsontheother.Eventuallythe sun
+goesdownand thefightisdeclaredadraw.The duelist
+congratulates your Warrior on their swordsman ship,
+and offers them a fines upper and the best wine at the
+most expensive hotel in the Settlement.
+5-6
+After a few minutes,your Warrior realizes that they
+have the better of the duellistanddespatcheshim.On
+his body they find jewels worth2D6x50 gold anda
+single item of Dungeon Room Treasure.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-62-an-adventure" name="An Adventure!">
+    <rules>See The Ultimate Adventure Book to determine what exploit the Warriors might participate in next!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-63-riot" name="Riot">
+    <rules>The lowly inhabitants outside the Settlement are fed up with
+their impoverished situation.A small gathering has erupted into
+a dangerous riot pitting the peasants against the local Watch.
+Your Warrior chooses to help restrain the peasants and must
+roll2D6onthetable below:
+2
+An angry horde of peasants overpowers your Warrior
+and theybeatthemintoabloodypulp.Theyaredead
+and must be removed from game.
+3-5
+Your Warrior is overrun by vagabonds who beat them
+senseless.They spendthenext1D6daysin the
+infirmary and mustpay1D6x50goldfortreatment.
+6-9
+Your Warrior helps the Watch beat back the miscreants
+and is paid 1D6x25 gold in wages.
+10+
+Your Warrior helps crush the riot quickly and efficiently.
+A high official is extremely impressed and pleased by
+your Warrior'sactions.Hepaysthem 1D6x50 goldand
+gives them oneitem of Dungeon Room Treasure!</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-64-trader" name="Trader">
+    <rules>A shrewd trader convinces your Warrior to swap anitem of
+Treasure(determinedatrandom)foroneofhis. Make one roll
+onthe Dungeon Room Treasure Tableto see whatitem the
+traderis giving youin exchange.Ifthe gold value of the trader's
+item is m ore than the gold value of the Warrior's item,the
+Traderisnothappy.Rollanother1D6 andif the result is a 1,
+the Trader declares that you were being deceptive in the trade
+and summons the Watch who declare that both items must be
+returned to their original owners.</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-65-reward" name="Reward">
+    <rules>Your Warrior sees a poster warning that a well known murderer
+isreputedtobein thearea,andoffersarewardforhiscapture.
+The criminal in question is described as very tall, wearing a
+black cloak and hat,and having an Erengrad accent. Upon
+reading this, your Warrior realises that the description exactly
+fits a character they bumped into earlier,and rushing back,
+manages to apprehend the villain just as he dragsa gagged
+merchant into a dark alley.Roll1D6 on the following table:
+1
+The murdererlaughs,slitsthemerchant'sthroat,
+throws the knife at your Warrior's feet andflees,
+shouting"Help,murder! Soonyour Warrior is</rules>
+    <treasure>false</treasure>
+  </event>
+  <event id="lm-city-66-assassin" name="Assassin">
+    <rules>(and1D6x50)goldcoinspersuadethem that they are
+innocent.
+Your Warrior savesthe m erchant'slife,for which he
+2-5
+gives them 20gold,butthemurdererslipsawayinto
+thegloom.
+Your Warrior frees the merchant and captures the
+6
+murderer,forwhichtheyareproclaimedaheroand
+given1o0 goldreward.
+ASSASSIN
+As your Warrior passes byan alleyway they catch sightofa
+figure lurking in the darkness. They instinctively draw their
+weaponjustasthefigurepouncesonthem!Roll1D6 andadd
+your Warrior's Initiative:
+2-4
+Your Warrior is severely wounded!Roll1D6 andifthe
+resultisa1,yourWarriorcannotbesavedand
+perishes.OnanyotherscoreyourWarriorisfoundby
+a passerby who rushes them to the infirmary where
+they are treated for their grievous wounds.They
+spendthenext1D6daysinbedand mustdeduct1
+Wound permanently from their Starting Woundsscore.
+Your Warrior suffers a serious wound as they fend off
+5-7
+theattacker,whoquicklydisappearsdownthe
+alleyway.Your Warriormustspendthenext1D3days
+in theinfirmary,paying 1D6x20 gold for treatm ent as
+well as Living Expenses.
+8-10
+Your Warrior defends himself against the assailant but
+the attacker manages to escape.
+11+
+Your Warrior deals a prompt and fatal blow to the
+villain.Upon searching the Assassin's body your
+Warrior finds oneItem of Dungeon Room Treasure on
+hisperson,butnoclueastowhohewasorwhyhe
+was trying to killyour Warrior.</rules>
+    <treasure>false</treasure>
+  </event>
+</events>

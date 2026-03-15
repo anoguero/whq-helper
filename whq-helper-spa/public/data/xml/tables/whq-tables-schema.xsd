@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+     Warhammer Quest Monster and Event table schema.
+    </xsd:documentation>
+  </xsd:annotation>
+  
+  <xsd:simpleType name="monsterNumberType">
+   <xsd:restriction base="xsd:string">
+      <xsd:pattern value="([0-9])*|([0-9]*-[0-9]*)|S|S \(mounts\)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="ambienceValueType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="chaos"/>
+      <xsd:enumeration value="undead"/>
+      <xsd:enumeration value="skaven"/>
+      <xsd:enumeration value="orcs-goblins"/>
+      <xsd:enumeration value="chaos-dwarves"/>
+      <xsd:enumeration value="dark-elves"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="ambiencesType">
+    <xsd:list itemType="ambienceValueType"/>
+  </xsd:simpleType>
+  
+  <xsd:complexType name="magicType">
+    <xsd:attribute name="id"    type="xsd:string"/>
+    <xsd:attribute name="level" type="xsd:nonNegativeInteger"/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ruleType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="id" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <xsd:complexType name="specialType">
+    <xsd:sequence>
+      <xsd:element name="text" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="rule" type="ruleType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="magic" type="magicType" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="append" type="xsd:boolean" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="monsterType">
+    <xsd:sequence minOccurs="0" maxOccurs="1">
+      <xsd:element name="special" type="specialType" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" />
+    <xsd:attribute name="number" type="monsterNumberType" />
+    <xsd:attribute name="level" type="xsd:integer" />
+    <xsd:attribute name="ambiences" type="ambiencesType" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="eventType">
+    <xsd:attribute name="id" type="xsd:string" />
+    <xsd:attribute name="ambiences" type="ambiencesType" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="groupType">
+    <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+      <xsd:element name="monster" type="monsterType" />
+    </xsd:sequence>
+    <xsd:attribute name="level" type="xsd:integer" />
+  </xsd:complexType>
+  
+  <xsd:complexType name="tableType">
+    <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+      <xsd:choice>
+        <xsd:element name="monster" type="monsterType" />
+        <xsd:element name="event" type="eventType" />
+        <xsd:element name="group" type="groupType" />
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" />
+    <xsd:attribute name="kind" type="xsd:string" />
+  </xsd:complexType>
+
+  <xsd:element name="tables">
+    <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+        <xsd:element name="table" type="tableType" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+</xsd:schema>

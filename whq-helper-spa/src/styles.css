@@ -1,0 +1,880 @@
+:root {
+  --shell-bg: #140f0c;
+  --panel-bg: #241c16;
+  --panel-alt: #372b22;
+  --parchment: #e2d6bc;
+  --mist: #ded9cd;
+  --ink: #271c12;
+  --muted-ink: #6f5a45;
+  --brass: #c29b52;
+  --brass-dark: #6a4c25;
+  --event-card: #e3d2b6;
+  --treasure-card: #f0e7d2;
+}
+
+@font-face {
+  font-family: 'Copperplate WHQ';
+  src: url('/fonts/custom/copperplate.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Casablanca Antique';
+  src: url('/fonts/custom/casablanca-antique.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Newtext Bk BT';
+  src: url('/fonts/custom/newtext-bk-bt.ttf') format('truetype');
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Newtext Bk BT', Georgia, 'Times New Roman', serif;
+  color: var(--mist);
+  background: radial-gradient(circle at top left, #2f241d 0%, #140f0c 48%, #0a0705 100%);
+  min-height: 100vh;
+}
+
+.page {
+  padding: 18px;
+}
+
+.hero {
+  border: 2px solid var(--brass);
+  background: linear-gradient(90deg, rgba(20, 15, 12, 0.95), rgba(34, 24, 18, 0.95));
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  padding: 20px 28px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  color: var(--mist);
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+}
+
+.hero p {
+  margin: 12px 0 0;
+  max-width: 920px;
+  color: var(--parchment);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.controls,
+.deck-toggles {
+  border: 1px solid var(--brass-dark);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.22)), #2b211a;
+  padding: 14px;
+}
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 560px;
+  overflow: auto;
+  border: 1px solid #5f4930;
+  background: rgba(249, 243, 229, 0.92);
+  color: var(--ink);
+}
+
+.card-list li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #c5b89a;
+  cursor: pointer;
+  line-height: 1.25;
+}
+
+.card-list li.selected {
+  background: #d8c69e;
+  font-weight: bold;
+}
+
+.card-list.small {
+  max-height: 420px;
+}
+
+#dungeonPreviewCanvas,
+#simRevealCanvas {
+  width: min(100%, 460px);
+  height: auto;
+  aspect-ratio: 847 / 1264;
+  border: 2px solid #4e3926;
+  background: #0e0b08;
+}
+
+.card-stats {
+  margin-top: 10px;
+  color: var(--parchment);
+  font-size: 0.92rem;
+}
+
+.card-stats p {
+  margin: 4px 0;
+}
+
+.controls,
+.deck-toggles {
+  margin-top: 14px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.92rem;
+}
+
+.controls select,
+.controls input,
+.maintenance-form input,
+.maintenance-form select,
+.new-dungeon-grid input,
+.new-dungeon-grid select,
+textarea {
+  padding: 8px;
+  border: 1px solid #513b28;
+  background: rgba(252, 249, 244, 0.9);
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.mode-field {
+  display: flex;
+  gap: 12px;
+  border: 1px solid #513b28;
+  margin: 0;
+  padding: 8px;
+  min-height: 74px;
+}
+
+.mode-field label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button {
+  border: 1px solid #4b3623;
+  background: linear-gradient(180deg, #80613d 0%, #614a30 100%);
+  color: #f4e8cd;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-family: 'Copperplate WHQ', Verdana, sans-serif;
+}
+
+button:hover {
+  filter: brightness(1.08);
+}
+
+.deck-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.deck-toggles label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.decks {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.simulator-panel {
+  margin-top: 16px;
+  border: 1px solid var(--brass-dark);
+  background: #efe4cd;
+  color: #2a1f14;
+  padding: 12px;
+}
+
+.simulator-panel[hidden] {
+  display: none !important;
+}
+
+.deck {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.35)),
+    var(--panel-bg);
+  border: 1px solid var(--brass-dark);
+  padding: 12px;
+  text-align: center;
+}
+
+.deck h3 {
+  margin: 0;
+  color: var(--mist);
+}
+
+.deck p {
+  margin: 8px 0 10px;
+  color: var(--parchment);
+  min-height: 38px;
+}
+
+.deck-button {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.deck-button img {
+  width: 100%;
+  max-width: 232px;
+  height: 318px;
+  object-fit: contain;
+  background: #2c221b;
+}
+
+.deck small {
+  display: block;
+  margin-top: 8px;
+  color: #c3b89f;
+}
+
+.windows {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.card-window {
+  position: absolute;
+  width: 320px;
+  height: 500px;
+  overflow: hidden;
+  padding: 10px;
+  border: 2px solid #3c2a1c;
+  background: #1a130f;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
+  pointer-events: auto;
+  user-select: none;
+}
+
+.close-window {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  display: block;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+
+.card {
+  border: 8px solid #20170f;
+  color: #23170d;
+  background: var(--event-card);
+  font-family: 'Newtext Bk BT', Georgia, 'Times New Roman', serif;
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card header {
+  text-align: center;
+  padding: 10px 12px 8px;
+  border-bottom: 2px solid #564126;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03)),
+    url('/data/graphics/paper-bg.gif') center / cover;
+  position: relative;
+}
+
+.card h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 1.26rem;
+  letter-spacing: 0.02em;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+}
+
+.card .kind {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #6e4a28;
+  font-family: 'Copperplate WHQ', Verdana, sans-serif;
+}
+
+.event-badge {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #5f4629;
+  background: #f7edd6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-family: 'Copperplate WHQ', Verdana, sans-serif;
+}
+
+.card .body {
+  padding: 12px;
+  overflow: auto;
+  flex: 1 1 auto;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02)),
+    url('/data/graphics/paper-bg.gif') center / cover;
+}
+
+.card .body p {
+  margin: 0 0 10px;
+  white-space: normal;
+}
+
+.card .flavor {
+  font-style: italic;
+}
+
+.card footer {
+  padding: 8px 10px;
+  border-top: 2px solid #564126;
+  background: #2f2217;
+  color: #efdfa9;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Copperplate WHQ', Verdana, sans-serif;
+  flex: 0 0 auto;
+}
+
+.card.treasure {
+  position: relative;
+  background: #0c0c0c;
+  color: #1f140c;
+}
+
+.card.treasure .treasure-template {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.card.treasure header,
+.card.treasure .body,
+.card.treasure .treasure-users-box,
+.card.treasure .treasure-value-badge,
+.card.treasure footer {
+  position: relative;
+  z-index: 1;
+}
+
+.card.treasure header {
+  border-bottom: 0;
+  background: transparent;
+  padding: 15px 8px 0;
+  height: 78px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.card.treasure header h3 {
+  margin: 0;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+  font-size: 0.78rem;
+  color: #88a77d;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.card.treasure header .treasure-title {
+  margin-top: 6px;
+  font-size: 1.65rem;
+  color: #88a77d;
+  line-height: 1.1;
+  max-height: calc(0.92em * 2);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-wrap: balance;
+}
+
+.card.treasure .body {
+  background: transparent;
+  position: absolute;
+  top: 74px;
+  left: 24px;
+  right: 24px;
+  bottom: 115px;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+
+.card.treasure .body p {
+  font-size: 0.86rem;
+  line-height: 1.14;
+}
+
+.card.treasure .body .flavor {
+  font-weight: 700;
+  font-style: normal;
+}
+
+.card.treasure .treasure-users-box {
+  position: absolute;
+  right: 18px;
+  bottom: 48px;
+  width: 130px;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid #7f6f57;
+  background: rgba(250, 245, 234, 0.95);
+  text-align: center;
+  z-index: 2;
+}
+
+.card.treasure .treasure-value-badge {
+  position: absolute;
+  left: 18px;
+  bottom: 46px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1px solid #7f6f57;
+  background-image: url('/data/graphics/gold.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.card.treasure .label {
+  margin: 0;
+  font-size: 0.58rem;
+  font-family: 'Copperplate WHQ', Verdana, sans-serif;
+  color: #6b5530;
+  line-height: 0.82;
+}
+
+.card.treasure .treasure-users-box p {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+}
+
+.card.treasure .treasure-value-badge .value {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: bold;
+  line-height: 0.82;
+}
+
+.card.treasure footer {
+  background: transparent;
+  border-top: 0;
+  color: #88a77d;
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 12px;
+  padding: 0;
+  font-size: 0.72rem;
+}
+
+.card.treasure.objective header,
+.card.treasure.objective .label {
+  color: #8d2b1c;
+}
+
+.card.treasure.objective header h2,
+.card.treasure.objective header h3 {
+  color: #8d2b1c;
+}
+
+.card.monster {
+  background: #ece2cc;
+}
+
+.card.monster header {
+  background: #000;
+}
+
+.card.monster footer {
+  background: #000;
+  
+}
+
+.card.monster h2 {
+  color: var(--brass);
+}
+
+.card.event {
+  background: #ece2cc;
+}
+
+.card.event header {
+  background: #000;
+}
+
+.card.event footer {
+  background: #000;
+  
+}
+
+.card.event h2 {
+  color: var(--brass);
+}
+
+.monster-top {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 8px;
+  padding: 12px;
+  flex: 0 0 auto;
+}
+
+.monster-top img {
+  width: 108px;
+  height: 132px;
+  object-fit: contain;
+  border: 1px solid #000;
+  background: #f4ecda;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 8px;
+  align-content: start;
+}
+
+.stats p {
+  margin: 0;
+}
+
+.to-hit {
+  padding: 0 12px 12px;
+  flex: 0 0 auto;
+}
+
+.to-hit p {
+  margin: 0 0 6px;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+}
+
+.to-hit .row {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.to-hit .row span {
+  border: 1px solid #6e6558;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 2px 0;
+}
+
+.specials {
+  margin: 0 12px 12px;
+  border: 1px solid #7d705d;
+  padding: 8px;
+  background: linear-gradient(180deg, #f4eedc 0%, #dfd1b4 100%);
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.specials h3 {
+  margin: 0 0 6px;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+}
+
+.specials p {
+  margin: 0 0 8px;
+}
+
+.rule-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.rule-link {
+  font-size: 0.78rem;
+  padding: 3px 6px;
+}
+
+.card.monster footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card.monster footer img {
+  width: 26px;
+  height: 26px;
+}
+
+.table-dialog {
+  width: min(760px, 94vw);
+  max-height: 88vh;
+  border: 1px solid #4b3623;
+  background: #efe4cd;
+  color: #2a1f14;
+}
+
+.wide-dialog {
+  width: min(1100px, 96vw);
+}
+
+.ultra-dialog {
+  width: min(1100px, 88vw);
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  margin: 0;
+  max-height: 88vh;
+}
+
+.table-dialog form {
+  display: grid;
+  gap: 10px;
+}
+
+.table-list {
+  max-height: 52vh;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid #9c8b6e;
+  background: #f5edd9;
+  display: grid;
+  gap: 4px;
+}
+
+.table-list label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tile-config-toolbar {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) auto auto;
+  gap: 8px;
+  align-items: end;
+}
+
+.tile-config-toolbar label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.92rem;
+}
+
+.table-dialog menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.maintenance-grid h2 {
+  margin: 0;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+}
+
+.maintenance-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 40%) minmax(0, 60%);
+  gap: 12px;
+}
+
+.maintenance-form {
+  display: grid;
+  gap: 8px;
+}
+
+.maintenance-form label,
+.new-dungeon-grid label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.92rem;
+}
+
+.new-dungeon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.objective-monster-weights {
+  border: 1px solid #8b7e67;
+  padding: 10px 12px;
+}
+
+.objective-monster-weights p {
+  margin: 0 0 10px;
+}
+
+.simulator-layout header h2 {
+  margin: 0;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+}
+
+.simulator-layout header p {
+  margin: 6px 0 0;
+}
+
+.simulator-body {
+  display: grid;
+  grid-template-columns: minmax(0, 48%) minmax(0, 52%);
+  gap: 12px;
+}
+
+.piles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.simulator-inline-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px 0 12px;
+}
+
+.pile-box {
+  border: 1px solid #7c6a50;
+  background: #f5ecd8;
+  padding: 8px;
+}
+
+.pile-box h4,
+.pile-box p {
+  margin: 0 0 6px;
+}
+
+.pile-back {
+  width: 100%;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pile-back img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  background: #1a130f;
+}
+
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 140px;
+  overflow: auto;
+  border: 1px solid #8b7e67;
+  background: #fff;
+}
+
+.history-list li {
+  padding: 4px 6px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.history-list li.selected {
+  background: #e2d1aa;
+  font-weight: bold;
+}
+
+.error {
+  color: #f8d6cc;
+  white-space: pre-wrap;
+  padding: 20px;
+}
+
+body.simulator-active .hero-actions,
+body.simulator-active .controls,
+body.simulator-active .deck-toggles {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .maintenance-layout,
+  .simulator-body {
+    grid-template-columns: 1fr;
+  }
+
+  .tile-config-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  #dungeonPreviewCanvas,
+  #simRevealCanvas {
+    width: min(100%, 520px);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 130px;
+    padding: 16px;
+  }
+
+  .deck-button img {
+    height: 280px;
+  }
+
+  .card-window {
+    width: min(95vw, 320px);
+    height: min(86vh, 500px);
+  }
+
+  .new-dungeon-grid {
+    grid-template-columns: 1fr;
+  }
+}
