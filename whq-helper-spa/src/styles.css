@@ -574,6 +574,10 @@ button:hover {
   flex: 0 0 auto;
 }
 
+.monster-top.no-image {
+  grid-template-columns: 1fr;
+}
+
 .monster-top img {
   width: 108px;
   height: 132px;
@@ -699,6 +703,21 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.table-section {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #b8aa8e;
+  background: rgba(255, 252, 244, 0.75);
+}
+
+.table-section h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-family: 'Casablanca Antique', 'Times New Roman', serif;
+  color: #4d3829;
 }
 
 .tile-config-toolbar {

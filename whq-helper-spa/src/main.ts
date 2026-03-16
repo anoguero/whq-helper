@@ -500,17 +500,72 @@ function openTableDialog(): void {
     return;
   }
 
-  const tables = Array.from(repository.tables.values()).sort((a, b) => a.name.localeCompare(b.name));
+  type TableTheme = 'events' | 'monsters' | 'settlement' | 'travel' | 'treasure' | 'objectiveTreasure';
+  const themeOrder: TableTheme[] = ['events', 'monsters', 'settlement', 'travel', 'treasure', 'objectiveTreasure'];
+  const themeLabelKey: Record<TableTheme, string> = {
+    events: 'dialog.tableSettings.group.events',
+    monsters: 'dialog.tableSettings.group.monsters',
+    settlement: 'dialog.tableSettings.group.settlement',
+    travel: 'dialog.tableSettings.group.travel',
+    treasure: 'dialog.tableSettings.group.treasure',
+    objectiveTreasure: 'dialog.tableSettings.group.objectiveTreasure'
+  };
 
-  list.innerHTML = tables
-    .map(
-      (table) => `
-      <label>
-        <input type="checkbox" data-table-name="${table.name}" ${table.active ? 'checked' : ''}>
-        ${table.name}
-      </label>
-    `
-    )
+  const tableTheme = (table: TableModel): TableTheme => {
+    const lowerName = table.name.toLowerCase();
+    if (table.kind === 'settlement') {
+      return 'settlement';
+    }
+    if (table.kind === 'travel') {
+      return 'travel';
+    }
+    if (table.kind === 'treasure') {
+      return lowerName.includes('objective') || lowerName.includes('objetive') ? 'objectiveTreasure' : 'treasure';
+    }
+    if (table.monsters.length > 0) {
+      return 'monsters';
+    }
+    return 'events';
+  };
+
+  const tables = Array.from(repository.tables.values()).sort((a, b) => {
+    const themeDiff = themeOrder.indexOf(tableTheme(a)) - themeOrder.indexOf(tableTheme(b));
+    if (themeDiff !== 0) {
+      return themeDiff;
+    }
+    return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+  });
+
+  const groupedTables = new Map<TableTheme, TableModel[]>();
+  for (const theme of themeOrder) {
+    groupedTables.set(theme, []);
+  }
+  for (const table of tables) {
+    groupedTables.get(tableTheme(table))?.push(table);
+  }
+
+  list.innerHTML = themeOrder
+    .map((theme) => {
+      const items = groupedTables.get(theme) ?? [];
+      if (items.length === 0) {
+        return '';
+      }
+      return `
+        <section class="table-section">
+          <h3>${t(settings.language, themeLabelKey[theme])}</h3>
+          ${items
+            .map(
+              (table) => `
+                <label>
+                  <input type="checkbox" data-table-name="${table.name}" ${table.active ? 'checked' : ''}>
+                  ${table.name}
+                </label>
+              `
+            )
+            .join('')}
+        </section>
+      `;
+    })
     .join('');
 
   const saveButton = dialog.querySelector<HTMLButtonElement>('#saveTables');
