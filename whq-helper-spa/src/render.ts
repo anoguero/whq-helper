@@ -201,8 +201,8 @@ export function renderMonsterCard(
   const toHitValues = Array.from({ length: 10 }, (_, i) => `<span>${toHitRollNeeded(ws, i + 1)}</span>`).join('');
 
   const imageSrcCandidates = [
-    `/data/graphics/monsters/${monster.name.toLowerCase().replaceAll(' ', '-')}.png`,
-    `/data/graphics/monsters/${monster.id.toLowerCase().replaceAll(' ', '-')}.png`
+    `/data/graphics/monsters/${monster.id.toLowerCase().replaceAll(' ', '-')}.png`,
+    `/data/graphics/monsters/${monster.name.toLowerCase().replaceAll(' ', '-')}.png`
   ];
 
   return `
@@ -212,7 +212,9 @@ export function renderMonsterCard(
         <h2>${esc(title)}</h2>
       </header>
       <section class="monster-top">
-        <img src="${esc(imageSrcCandidates[0])}" alt="${esc(monster.name)}" onerror="this.style.display='none';" />
+        <img src="${esc(imageSrcCandidates[0])}" alt="" onerror="this.alt='';if(this.dataset.fallback!=='1'){this.dataset.fallback='1';this.src='${esc(
+    imageSrcCandidates[1]
+  )}';return;}this.style.display='none';this.removeAttribute('src');this.closest('.monster-top')?.classList.add('no-image');" />
         <div class="stats">
           <p><strong>M:</strong> ${esc(monster.move)}</p>
           <p><strong>WS:</strong> ${esc(monster.weaponskill)}</p>
