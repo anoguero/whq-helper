@@ -337,7 +337,7 @@ button:hover {
 .event-badge {
   position: absolute;
   right: 10px;
-  top: 8px;
+  top: 45px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -348,6 +348,7 @@ button:hover {
   justify-content: center;
   font-size: 0.75rem;
   font-family: 'Copperplate WHQ', Verdana, sans-serif;
+  z-index: 1;
 }
 
 .card .body {

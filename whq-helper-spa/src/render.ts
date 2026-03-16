@@ -158,8 +158,8 @@ export function renderEventCard(event: EventModel, language: LanguageCode): stri
 
   return `
     <article class="${className}">
+      <span class="event-badge">${esc(badge)}</span>
       <header>
-        <span class="event-badge">${esc(badge)}</span>
         <h2>${esc(event.name || t(language, 'card.event.defaultName'))}</h2>
       </header>
       <section class="body">
@@ -201,20 +201,18 @@ export function renderMonsterCard(
   const toHitValues = Array.from({ length: 10 }, (_, i) => `<span>${toHitRollNeeded(ws, i + 1)}</span>`).join('');
 
   const imageSrcCandidates = [
-    `/data/graphics/monsters/${monster.id.toLowerCase().replaceAll(' ', '-')}.png`,
-    `/data/graphics/monsters/${monster.name.toLowerCase().replaceAll(' ', '-')}.png`
+    `/data/graphics/monsters/${monster.name.toLowerCase().replaceAll(' ', '-')}.png`,
+    `/data/graphics/monsters/${monster.id.toLowerCase().replaceAll(' ', '-')}.png`
   ];
 
   return `
     <article class="card monster">
+      <span class="event-badge">M</span>
       <header>
         <h2>${esc(title)}</h2>
-        <p class="kind">M</p>
       </header>
       <section class="monster-top">
-        <img src="${esc(imageSrcCandidates[0])}" alt="${esc(monster.name)}" onerror="this.onerror=null;this.src='${esc(
-    imageSrcCandidates[1]
-  )}';" />
+        <img src="${esc(imageSrcCandidates[0])}" alt="${esc(monster.name)}" onerror="this.style.display='none';" />
         <div class="stats">
           <p><strong>M:</strong> ${esc(monster.move)}</p>
           <p><strong>WS:</strong> ${esc(monster.weaponskill)}</p>
