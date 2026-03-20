@@ -3,6 +3,7 @@ package pms.whq.swt;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 
 import org.eclipse.swt.SWT;
@@ -11,6 +12,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -21,8 +23,18 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 
+import com.whq.app.adventure.ObjectiveRoomAdventure;
+import com.whq.app.adventure.ObjectiveRoomAdventureRepositoryException;
+import com.whq.app.adventure.XmlObjectiveRoomAdventureRepository;
 import com.whq.app.i18n.I18n;
+import com.whq.app.model.CardType;
+import com.whq.app.model.DungeonCard;
+import com.whq.app.render.CardRenderer;
+import com.whq.app.storage.DungeonCardStorageException;
+import com.whq.app.storage.XmlDungeonCardStore;
 
 import pms.whq.xml.XmlContentService;
 import pms.whq.xml.XmlContentService.EventEntry;
@@ -37,12 +49,18 @@ public final class EventContentEditorDialog {
   private static final int HEADER_BUTTON_COLUMNS = 8;
 
   private final Shell parent;
+  private final Path projectRoot;
   private final XmlContentService service;
+  private final XmlDungeonCardStore dungeonCardStore;
+  private final XmlObjectiveRoomAdventureRepository objectiveRoomAdventureRepository;
   private final Runnable onContentSaved;
 
   public EventContentEditorDialog(Shell parent, Path projectRoot, Runnable onContentSaved) {
     this.parent = parent;
-    this.service = new XmlContentService(projectRoot);
+    this.projectRoot = projectRoot.toAbsolutePath().normalize();
+    this.service = new XmlContentService(this.projectRoot);
+    this.dungeonCardStore = new XmlDungeonCardStore(this.projectRoot);
+    this.objectiveRoomAdventureRepository = new XmlObjectiveRoomAdventureRepository(this.projectRoot);
     this.onContentSaved = onContentSaved;
   }
 
@@ -50,11 +68,16 @@ public final class EventContentEditorDialog {
     Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
     dialog.setText(I18n.t("dialog.contentEditor.title"));
     dialog.setLayout(new GridLayout(1, false));
-    dialog.setSize(1280, 860);
+    dialog.setSize(1440, 920);
 
-    TabFolder tabs = new TabFolder(dialog, SWT.NONE);
-    tabs.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    SashForm layout = new SashForm(dialog, SWT.HORIZONTAL);
+    layout.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
+    Tree navigationTree = new Tree(layout, SWT.BORDER | SWT.SINGLE);
+    TabFolder tabs = new TabFolder(layout, SWT.NONE);
+    layout.setWeights(new int[] {24, 76});
+
+    createDungeonCardsTab(tabs, dialog);
     createRulesTab(tabs, dialog);
     createEventsTab(tabs, dialog);
     createDungeonTreasureTab(tabs, dialog);
@@ -63,6 +86,36 @@ public final class EventContentEditorDialog {
     createSettlementEventsTab(tabs, dialog);
     createTablesTab(tabs, dialog);
     createMonstersTab(tabs, dialog);
+    createObjectiveRoomAdventuresTab(tabs, dialog);
+
+    for (TabItem item : tabs.getItems()) {
+      TreeItem treeItem = new TreeItem(navigationTree, SWT.NONE);
+      treeItem.setText(item.getText());
+      treeItem.setData("tabItem", item);
+    }
+    if (navigationTree.getItemCount() > 0) {
+      navigationTree.setSelection(navigationTree.getItem(0));
+      tabs.setSelection(0);
+    }
+    navigationTree.addListener(
+        SWT.Selection,
+        event -> {
+          if (!(event.item instanceof TreeItem treeItem)) {
+            return;
+          }
+          Object tabData = treeItem.getData("tabItem");
+          if (tabData instanceof TabItem tabItem) {
+            tabs.setSelection(tabItem);
+          }
+        });
+    tabs.addListener(
+        SWT.Selection,
+        event -> {
+          int index = tabs.getSelectionIndex();
+          if (index >= 0 && index < navigationTree.getItemCount()) {
+            navigationTree.setSelection(navigationTree.getItem(index));
+          }
+        });
 
     Composite actions = createActionRow(dialog, 1);
 
@@ -76,6 +129,375 @@ public final class EventContentEditorDialog {
         display.sleep();
       }
     }
+  }
+
+  private void createDungeonCardsTab(TabFolder tabs, Shell dialog) {
+    TabItem tab = new TabItem(tabs, SWT.NONE);
+    tab.setText(I18n.t("dialog.contentEditor.tab.dungeonCards"));
+
+    Composite root = new Composite(tabs, SWT.NONE);
+    root.setLayout(new GridLayout(1, false));
+    tab.setControl(root);
+
+    Composite header = createActionRow(root, 4);
+    header.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    Button newButton = createActionButton(header, "editor.button.new");
+    Button deleteButton = createActionButton(header, "editor.button.delete");
+    Button saveButton = createActionButton(header, "editor.button.save");
+    Button reloadButton = createActionButton(header, "editor.button.reload");
+
+    SashForm sash = new SashForm(root, SWT.HORIZONTAL);
+    sash.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+    org.eclipse.swt.widgets.List itemList = new org.eclipse.swt.widgets.List(sash, SWT.BORDER | SWT.V_SCROLL);
+
+    Composite details = new Composite(sash, SWT.NONE);
+    details.setLayout(new GridLayout(1, false));
+    sash.setWeights(new int[] {28, 72});
+
+    Composite form = new Composite(details, SWT.NONE);
+    form.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+    GridLayout formLayout = new GridLayout(2, false);
+    formLayout.marginWidth = 0;
+    form.setLayout(formLayout);
+
+    Text nameText = createLabeledText(form, "Nombre/Name:");
+    new Label(form, SWT.NONE).setText("Tipo/Type:");
+    Combo typeCombo = new Combo(form, SWT.DROP_DOWN | SWT.READ_ONLY);
+    typeCombo.setItems(new String[] {"DUNGEON_ROOM", "OBJECTIVE_ROOM", "CORRIDOR", "SPECIAL"});
+    typeCombo.select(0);
+    typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    Text environmentText = createLabeledText(form, "Entorno/Environment:");
+    Text tilePathText = createLabeledText(form, "Tile:");
+    new Label(form, SWT.NONE).setText("Copies:");
+    org.eclipse.swt.widgets.Spinner copySpinner = new org.eclipse.swt.widgets.Spinner(form, SWT.BORDER);
+    copySpinner.setMinimum(0);
+    copySpinner.setMaximum(999);
+    copySpinner.setSelection(1);
+    copySpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    new Label(form, SWT.NONE).setText("Enabled:");
+    Button enabledCheck = new Button(form, SWT.CHECK);
+    enabledCheck.setSelection(true);
+
+    new Label(form, SWT.NONE).setText("Description:");
+    StyledText descriptionText = new StyledText(form, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+    GridData descriptionData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    descriptionData.heightHint = 90;
+    descriptionText.setLayoutData(descriptionData);
+
+    new Label(form, SWT.NONE).setText("Rules:");
+    StyledText rulesText = new StyledText(form, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+    GridData rulesData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    rulesData.heightHint = 120;
+    rulesText.setLayoutData(rulesData);
+
+    Group previewGroup = new Group(details, SWT.NONE);
+    previewGroup.setText(I18n.t("dashboard.preview.title"));
+    previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    previewGroup.setLayout(new GridLayout(1, false));
+
+    Canvas previewCanvas = new Canvas(previewGroup, SWT.DOUBLE_BUFFERED | SWT.BORDER);
+    previewCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+    CardRenderer renderer = new CardRenderer(dialog.getDisplay(), projectRoot);
+    dialog.addDisposeListener(event -> renderer.dispose());
+
+    List<DungeonCard> cards = new ArrayList<>();
+    final DungeonCard[] draftCard = new DungeonCard[1];
+    final long[] selectedCardId = new long[] {-1L};
+
+    Runnable buildDraftCard =
+        () -> {
+          long id = selectedCardId[0] > 0 ? selectedCardId[0] : 1L;
+          draftCard[0] =
+              new DungeonCard(
+                  id,
+                  nameText.getText().trim(),
+                  CardType.valueOf(typeCombo.getText()),
+                  environmentText.getText().trim(),
+                  copySpinner.getSelection(),
+                  enabledCheck.getSelection(),
+                  descriptionText.getText().trim(),
+                  rulesText.getText().trim(),
+                  tilePathText.getText().trim());
+          previewCanvas.redraw();
+        };
+
+    previewCanvas.addPaintListener(
+        event -> {
+          if (draftCard[0] == null) {
+            return;
+          }
+          org.eclipse.swt.graphics.Rectangle area = previewCanvas.getClientArea();
+          org.eclipse.swt.graphics.Point scaled = renderer.scaleToFit(area);
+          int x = area.x + (area.width - scaled.x) / 2;
+          int y = area.y + (area.height - scaled.y) / 2;
+          renderer.drawCard(event.gc, new org.eclipse.swt.graphics.Rectangle(x, y, scaled.x, scaled.y), draftCard[0]);
+        });
+
+    Runnable clearForm =
+        () -> {
+          selectedCardId[0] = -1L;
+          itemList.deselectAll();
+          nameText.setText("");
+          typeCombo.select(0);
+          environmentText.setText("");
+          tilePathText.setText("");
+          copySpinner.setSelection(1);
+          enabledCheck.setSelection(true);
+          descriptionText.setText("");
+          rulesText.setText("");
+          buildDraftCard.run();
+        };
+
+    Runnable refreshList =
+        () -> {
+          itemList.removeAll();
+          for (DungeonCard card : cards) {
+            itemList.add(card.getName() + " (#" + card.getId() + ")");
+          }
+        };
+
+    Runnable loadSelectedCard =
+        () -> {
+          int index = itemList.getSelectionIndex();
+          if (index < 0 || index >= cards.size()) {
+            return;
+          }
+          DungeonCard card = cards.get(index);
+          selectedCardId[0] = card.getId();
+          nameText.setText(safe(card.getName()));
+          typeCombo.setText(card.getType().name());
+          environmentText.setText(safe(card.getEnvironment()));
+          tilePathText.setText(safe(card.getTileImagePath()));
+          copySpinner.setSelection(card.getCopyCount());
+          enabledCheck.setSelection(card.isEnabled());
+          descriptionText.setText(safe(card.getDescriptionText()));
+          rulesText.setText(safe(card.getRulesText()));
+          buildDraftCard.run();
+        };
+
+    Runnable reloadCards =
+        () -> {
+          try {
+            cards.clear();
+            cards.addAll(dungeonCardStore.loadCards());
+            refreshList.run();
+            clearForm.run();
+            if (!cards.isEmpty()) {
+              itemList.setSelection(0);
+              loadSelectedCard.run();
+            }
+          } catch (DungeonCardStorageException ex) {
+            showError(dialog, ex.getMessage());
+          }
+        };
+
+    itemList.addListener(SWT.Selection, event -> loadSelectedCard.run());
+    newButton.addListener(SWT.Selection, event -> clearForm.run());
+    reloadButton.addListener(SWT.Selection, event -> reloadCards.run());
+
+    deleteButton.addListener(
+        SWT.Selection,
+        event -> {
+          if (selectedCardId[0] <= 0) {
+            showWarning(dialog, I18n.t("editor.message.selectEntry"));
+            return;
+          }
+          try {
+            dungeonCardStore.deleteCard(selectedCardId[0]);
+            notifySaved();
+            reloadCards.run();
+          } catch (DungeonCardStorageException ex) {
+            showError(dialog, ex.getMessage());
+          }
+        });
+
+    saveButton.addListener(
+        SWT.Selection,
+        event -> {
+          try {
+            DungeonCard card =
+                new DungeonCard(
+                    selectedCardId[0] > 0 ? selectedCardId[0] : 0L,
+                    nameText.getText().trim(),
+                    CardType.valueOf(typeCombo.getText()),
+                    environmentText.getText().trim(),
+                    copySpinner.getSelection(),
+                    enabledCheck.getSelection(),
+                    descriptionText.getText().trim(),
+                    rulesText.getText().trim(),
+                    tilePathText.getText().trim());
+            if (selectedCardId[0] > 0) {
+              dungeonCardStore.updateCard(card);
+            } else {
+              dungeonCardStore.insertCards(List.of(card));
+            }
+            notifySaved();
+            reloadCards.run();
+          } catch (Exception ex) {
+            showError(dialog, ex.getMessage());
+          }
+        });
+
+    nameText.addModifyListener(event -> buildDraftCard.run());
+    typeCombo.addListener(SWT.Selection, event -> buildDraftCard.run());
+    environmentText.addModifyListener(event -> buildDraftCard.run());
+    tilePathText.addModifyListener(event -> buildDraftCard.run());
+    copySpinner.addModifyListener(event -> buildDraftCard.run());
+    enabledCheck.addListener(SWT.Selection, event -> buildDraftCard.run());
+    descriptionText.addModifyListener(event -> buildDraftCard.run());
+    rulesText.addModifyListener(event -> buildDraftCard.run());
+
+    reloadCards.run();
+  }
+
+  private void createObjectiveRoomAdventuresTab(TabFolder tabs, Shell dialog) {
+    TabItem tab = new TabItem(tabs, SWT.NONE);
+    tab.setText(I18n.t("dialog.contentEditor.tab.objectiveRoomAdventures"));
+
+    Composite root = new Composite(tabs, SWT.NONE);
+    root.setLayout(new GridLayout(1, false));
+    tab.setControl(root);
+
+    Composite header = createActionRow(root, 4);
+    header.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    Button newButton = createActionButton(header, "editor.button.new");
+    Button deleteButton = createActionButton(header, "editor.button.delete");
+    Button saveButton = createActionButton(header, "editor.button.save");
+    Button reloadButton = createActionButton(header, "editor.button.reload");
+
+    SashForm sash = new SashForm(root, SWT.HORIZONTAL);
+    sash.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+    org.eclipse.swt.widgets.List itemList = new org.eclipse.swt.widgets.List(sash, SWT.BORDER | SWT.V_SCROLL);
+
+    Composite details = new Composite(sash, SWT.NONE);
+    details.setLayout(new GridLayout(2, false));
+    sash.setWeights(new int[] {30, 70});
+
+    Combo objectiveRoomCombo = new Combo(details, SWT.DROP_DOWN | SWT.READ_ONLY);
+    objectiveRoomCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    new Label(details, SWT.NONE).setText("");
+    new Label(details, SWT.NONE).setText("Objective room:");
+    Text nameText = createLabeledText(details, "Nombre/Name:");
+    Text idText = createLabeledText(details, "ID:");
+    idText.setEditable(false);
+    new Label(details, SWT.NONE).setText("Generica/Generic:");
+    Button genericCheck = new Button(details, SWT.CHECK);
+    new Label(details, SWT.NONE).setText("Flavor:");
+    StyledText flavorText = new StyledText(details, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+    GridData flavorData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    flavorData.heightHint = 110;
+    flavorText.setLayoutData(flavorData);
+    new Label(details, SWT.NONE).setText("Rules:");
+    StyledText rulesText = new StyledText(details, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+    GridData rulesData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    rulesData.heightHint = 150;
+    rulesText.setLayoutData(rulesData);
+
+    List<ObjectiveRoomAdventure> adventures = new ArrayList<>();
+    final String[] selectedKey = new String[] {""};
+
+    Runnable refreshId = () -> idText.setText(selectedKey[0].isBlank() ? slugify(nameText.getText()) : selectedKey[0]);
+
+    Runnable clearForm =
+        () -> {
+          selectedKey[0] = "";
+          itemList.deselectAll();
+          if (objectiveRoomCombo.getItemCount() > 0) {
+            objectiveRoomCombo.select(0);
+          }
+          nameText.setText("");
+          genericCheck.setSelection(false);
+          flavorText.setText("");
+          rulesText.setText("");
+          refreshId.run();
+        };
+
+    Runnable refreshList =
+        () -> {
+          itemList.removeAll();
+          for (ObjectiveRoomAdventure adventure : adventures) {
+            itemList.add(adventure.objectiveRoomName() + " - " + adventure.name() + " (" + adventure.id() + ")");
+          }
+        };
+
+    Runnable loadSelected =
+        () -> {
+          int index = itemList.getSelectionIndex();
+          if (index < 0 || index >= adventures.size()) {
+            return;
+          }
+          ObjectiveRoomAdventure adventure = adventures.get(index);
+          selectedKey[0] = adventure.id();
+          objectiveRoomCombo.setText(adventure.objectiveRoomName());
+          nameText.setText(adventure.name());
+          genericCheck.setSelection(adventure.generic());
+          flavorText.setText(adventure.flavorText());
+          rulesText.setText(adventure.rulesText());
+          refreshId.run();
+        };
+
+    Runnable reloadAdventures =
+        () -> {
+          try {
+            adventures.clear();
+            adventures.addAll(objectiveRoomAdventureRepository.loadAllAdventures());
+            refreshList.run();
+
+            List<DungeonCard> cards = dungeonCardStore.loadCards();
+            objectiveRoomCombo.removeAll();
+            for (DungeonCard card : cards) {
+              if (card.getType() == CardType.OBJECTIVE_ROOM && objectiveRoomCombo.indexOf(card.getName()) < 0) {
+                objectiveRoomCombo.add(card.getName());
+              }
+            }
+            clearForm.run();
+          } catch (Exception ex) {
+            showError(dialog, ex.getMessage());
+          }
+        };
+
+    itemList.addListener(SWT.Selection, event -> loadSelected.run());
+    newButton.addListener(SWT.Selection, event -> clearForm.run());
+    reloadButton.addListener(SWT.Selection, event -> reloadAdventures.run());
+    nameText.addModifyListener(event -> refreshId.run());
+
+    deleteButton.addListener(
+        SWT.Selection,
+        event -> {
+          try {
+            objectiveRoomAdventureRepository.deleteUserAdventure(objectiveRoomCombo.getText(), idText.getText());
+            notifySaved();
+            reloadAdventures.run();
+          } catch (ObjectiveRoomAdventureRepositoryException ex) {
+            showError(dialog, ex.getMessage());
+          }
+        });
+
+    saveButton.addListener(
+        SWT.Selection,
+        event -> {
+          try {
+            String objectiveRoomName = objectiveRoomCombo.getText().trim();
+            String adventureId = selectedKey[0].isBlank() ? slugify(nameText.getText()) : selectedKey[0];
+            objectiveRoomAdventureRepository.saveUserAdventure(
+                new ObjectiveRoomAdventure(
+                    objectiveRoomName,
+                    adventureId,
+                    nameText.getText().trim(),
+                    flavorText.getText().trim(),
+                    rulesText.getText().trim(),
+                    genericCheck.getSelection()));
+            notifySaved();
+            reloadAdventures.run();
+          } catch (Exception ex) {
+            showError(dialog, ex.getMessage());
+          }
+        });
+
+    reloadAdventures.run();
   }
 
   private void createRulesTab(TabFolder tabs, Shell dialog) {
@@ -1516,6 +1938,13 @@ public final class EventContentEditorDialog {
 
   private static String safe(String value) {
     return value == null ? "" : value;
+  }
+
+  private static String slugify(String value) {
+    String normalized = safe(value).trim().toLowerCase(Locale.ROOT).replace("&", "and");
+    normalized = normalized.replaceAll("[^a-z0-9]+", "-");
+    normalized = normalized.replaceAll("^-+|-+$", "");
+    return normalized.isBlank() ? "userdefined-entry" : normalized;
   }
 
   private Composite createActionRow(Composite parent, int columns) {

@@ -5,9 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,6 +19,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,23 +32,27 @@ import com.whq.app.storage.legacy.LegacyDungeonCardMigrator;
 
 public class XmlDungeonCardStore implements DungeonCardStore {
     private static final String DEFAULT_ENVIRONMENT = "The Old World";
+    private static final String XML_DIR = "data/xml/dungeon";
     private static final String XML_PATH = "data/xml/dungeon/dungeon-cards.xml";
+    private static final String USER_XML_PATH = "data/xml/dungeon/userdefined-dungeon-cards.xml";
     private static final String SCHEMA_PATH = "data/xml/dungeon/whq-dungeon-cards-schema.xsd";
 
     private final Path projectRoot;
+    private final Path xmlDirectory;
     private final Path xmlPath;
+    private final Path userXmlPath;
     private final Path schemaPath;
     private final DocumentBuilderFactory parserFactory;
-    private final DungeonCardXmlValidator validator;
     private final LegacyDungeonCardMigrator legacyMigrator;
 
     public XmlDungeonCardStore(Path projectRoot) {
         this.projectRoot = projectRoot.toAbsolutePath().normalize();
+        this.xmlDirectory = this.projectRoot.resolve(XML_DIR);
         this.xmlPath = this.projectRoot.resolve(XML_PATH);
+        this.userXmlPath = this.projectRoot.resolve(USER_XML_PATH);
         this.schemaPath = this.projectRoot.resolve(SCHEMA_PATH);
         this.parserFactory = DocumentBuilderFactory.newInstance();
         this.parserFactory.setNamespaceAware(true);
-        this.validator = new DungeonCardXmlValidator(this.projectRoot, schemaPath, xmlPath);
         this.legacyMigrator = new LegacyDungeonCardMigrator(this.projectRoot);
     }
 
@@ -86,32 +93,32 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             throw new DungeonCardStorageException("La carta a actualizar no puede ser nula.");
         }
 
-        List<DungeonCard> cards = new ArrayList<>(readCards());
+        List<DungeonCard> cards = new ArrayList<>(readUserCards());
+        List<DungeonCard> effectiveCards = readCards();
         boolean updated = false;
-        for (int i = 0; i < cards.size(); i++) {
-            DungeonCard current = cards.get(i);
+        for (int i = 0; i < effectiveCards.size(); i++) {
+            DungeonCard current = effectiveCards.get(i);
             if (current.getId() != card.getId()) {
                 continue;
             }
-            cards.set(
-                    i,
-                    new DungeonCard(
-                            current.getId(),
-                            require(card.getName(), "name"),
-                            card.getType(),
-                            normalizeEnvironment(card.getEnvironment()),
-                            Math.max(0, card.getCopyCount()),
-                            card.isEnabled(),
-                            nullToEmpty(card.getDescriptionText()),
-                            nullToEmpty(card.getRulesText()),
-                            require(card.getTileImagePath(), "tileImagePath")));
+            DungeonCard updatedCard = new DungeonCard(
+                    current.getId(),
+                    require(card.getName(), "name"),
+                    card.getType(),
+                    normalizeEnvironment(card.getEnvironment()),
+                    Math.max(0, card.getCopyCount()),
+                    card.isEnabled(),
+                    nullToEmpty(card.getDescriptionText()),
+                    nullToEmpty(card.getRulesText()),
+                    require(card.getTileImagePath(), "tileImagePath"));
+            upsertById(cards, updatedCard);
             updated = true;
             break;
         }
         if (!updated) {
             throw new DungeonCardStorageException("No se ha encontrado la carta con id " + card.getId() + ".");
         }
-        writeCards(cards);
+        writeUserCards(cards);
     }
 
     @Override
@@ -120,42 +127,40 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             throw new IllegalArgumentException("El numero de copias no puede ser negativo.");
         }
 
-        List<DungeonCard> cards = new ArrayList<>(readCards());
+        List<DungeonCard> cards = new ArrayList<>(readUserCards());
+        List<DungeonCard> effectiveCards = readCards();
         boolean updated = false;
-        for (int i = 0; i < cards.size(); i++) {
-            DungeonCard current = cards.get(i);
+        for (DungeonCard current : effectiveCards) {
             if (current.getId() != cardId) {
                 continue;
             }
-            cards.set(
-                    i,
-                    new DungeonCard(
-                            current.getId(),
-                            current.getName(),
-                            current.getType(),
-                            current.getEnvironment(),
-                            copyCount,
-                            enabled,
-                            current.getDescriptionText(),
-                            current.getRulesText(),
-                            current.getTileImagePath()));
+            upsertById(cards, new DungeonCard(
+                    current.getId(),
+                    current.getName(),
+                    current.getType(),
+                    current.getEnvironment(),
+                    copyCount,
+                    enabled,
+                    current.getDescriptionText(),
+                    current.getRulesText(),
+                    current.getTileImagePath()));
             updated = true;
             break;
         }
         if (!updated) {
             throw new DungeonCardStorageException("No se ha encontrado la carta con id " + cardId + ".");
         }
-        writeCards(cards);
+        writeUserCards(cards);
     }
 
     @Override
     public void deleteCard(long cardId) throws DungeonCardStorageException {
-        List<DungeonCard> cards = new ArrayList<>(readCards());
+        List<DungeonCard> cards = new ArrayList<>(readUserCards());
         boolean removed = cards.removeIf(card -> card.getId() == cardId);
         if (!removed) {
-            throw new DungeonCardStorageException("No se ha encontrado la carta con id " + cardId + ".");
+            throw new DungeonCardStorageException("Solo se pueden eliminar cartas definidas por el usuario. Id: " + cardId + ".");
         }
-        writeCards(cards);
+        writeUserCards(cards);
     }
 
     @Override
@@ -165,9 +170,10 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         }
 
         List<DungeonCard> existing = new ArrayList<>(readCards());
+        List<DungeonCard> userCards = new ArrayList<>(readUserCards());
         long nextId = existing.stream().mapToLong(DungeonCard::getId).max().orElse(0L) + 1L;
         for (DungeonCard card : cards) {
-            existing.add(new DungeonCard(
+            userCards.add(new DungeonCard(
                     nextId++,
                     require(card.getName(), "name"),
                     card.getType(),
@@ -178,14 +184,63 @@ public class XmlDungeonCardStore implements DungeonCardStore {
                     nullToEmpty(card.getRulesText()),
                     require(card.getTileImagePath(), "tileImagePath")));
         }
-        writeCards(existing);
+        writeUserCards(userCards);
     }
 
     private List<DungeonCard> readCards() throws DungeonCardStorageException {
-        ensureXmlExists();
+        ensureBaseXmlExists();
         try {
-            validator.validate();
-            Document document = parse(xmlPath);
+            Map<Long, DungeonCard> merged = new LinkedHashMap<>();
+            for (Path file : listCardFiles()) {
+                for (DungeonCard card : readCardsFromFile(file)) {
+                    merged.put(card.getId(), card);
+                }
+            }
+            List<DungeonCard> cards = new ArrayList<>(merged.values());
+            cards.sort(Comparator
+                    .comparing(DungeonCard::getEnvironment, String.CASE_INSENSITIVE_ORDER)
+                    .thenComparing(DungeonCard::getName, String.CASE_INSENSITIVE_ORDER)
+                    .thenComparingLong(DungeonCard::getId));
+            return cards;
+        } catch (DungeonCardStorageException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new DungeonCardStorageException("No se han podido leer las cartas XML.", ex);
+        }
+    }
+
+    private List<DungeonCard> readUserCards() throws DungeonCardStorageException {
+        ensureSchemaExists();
+        if (!Files.exists(userXmlPath)) {
+            return new ArrayList<>();
+        }
+        return readCardsFromFile(userXmlPath);
+    }
+
+    private List<Path> listCardFiles() throws DungeonCardStorageException {
+        ensureSchemaExists();
+        try {
+            if (!Files.isDirectory(xmlDirectory)) {
+                return List.of(xmlPath);
+            }
+            try (var stream = Files.list(xmlDirectory)) {
+                return stream
+                        .filter(Files::isRegularFile)
+                        .filter(path -> path.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".xml"))
+                        .sorted(Comparator
+                                .comparing((Path path) -> !path.getFileName().toString().toLowerCase(Locale.ROOT).startsWith("userdefined-"))
+                                .thenComparing(path -> path.getFileName().toString().toLowerCase(Locale.ROOT)))
+                        .toList();
+            }
+        } catch (Exception ex) {
+            throw new DungeonCardStorageException("No se ha podido listar el contenido XML de mazmorra.", ex);
+        }
+    }
+
+    private List<DungeonCard> readCardsFromFile(Path file) throws DungeonCardStorageException {
+        try {
+            validateFile(file);
+            Document document = parse(file);
             Element root = document.getDocumentElement();
             NodeList children = root.getChildNodes();
             List<DungeonCard> cards = new ArrayList<>();
@@ -206,21 +261,17 @@ public class XmlDungeonCardStore implements DungeonCardStore {
                         readChildText(element, "rules"),
                         require(readChildText(element, "tileImagePath"), "tileImagePath")));
             }
-            cards.sort(Comparator
-                    .comparing(DungeonCard::getEnvironment, String.CASE_INSENSITIVE_ORDER)
-                    .thenComparing(DungeonCard::getName, String.CASE_INSENSITIVE_ORDER)
-                    .thenComparingLong(DungeonCard::getId));
             return cards;
         } catch (DungeonCardStorageException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new DungeonCardStorageException("No se han podido leer las cartas XML.", ex);
+            throw new DungeonCardStorageException("No se han podido leer las cartas XML desde " + file + ".", ex);
         }
     }
 
-    private void writeCards(List<DungeonCard> cards) throws DungeonCardStorageException {
+    private void writeUserCards(List<DungeonCard> cards) throws DungeonCardStorageException {
         try {
-            Files.createDirectories(xmlPath.getParent());
+            Files.createDirectories(userXmlPath.getParent());
             Document document = newDocument();
             Element root = document.createElement("dungeonCards");
             document.appendChild(root);
@@ -249,10 +300,10 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-            try (OutputStream output = Files.newOutputStream(xmlPath)) {
+            try (OutputStream output = Files.newOutputStream(userXmlPath)) {
                 transformer.transform(new DOMSource(document), new StreamResult(output));
             }
-            validator.validate();
+            validateFile(userXmlPath);
         } catch (DungeonCardStorageException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -260,7 +311,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         }
     }
 
-    private void ensureXmlExists() throws DungeonCardStorageException {
+    private void ensureBaseXmlExists() throws DungeonCardStorageException {
         if (Files.exists(xmlPath)) {
             return;
         }
@@ -270,7 +321,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             cards = defaultCards();
         }
         ensureSchemaExists();
-        writeCards(cards);
+        writeBaseCards(cards);
     }
 
     private List<DungeonCard> loadLegacyCards() {
@@ -287,6 +338,59 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         } catch (Exception ex) {
             throw new DungeonCardStorageException("No se ha podido crear el esquema XML de cartas.", ex);
         }
+    }
+
+    private void writeBaseCards(List<DungeonCard> cards) throws DungeonCardStorageException {
+        try {
+            Files.createDirectories(xmlPath.getParent());
+            Document document = newDocument();
+            Element root = document.createElement("dungeonCards");
+            document.appendChild(root);
+            for (DungeonCard card : cards) {
+                Element node = document.createElement("card");
+                node.setAttribute("id", Long.toString(card.getId()));
+                node.setAttribute("name", require(card.getName(), "name"));
+                node.setAttribute("type", card.getType().name());
+                node.setAttribute("environment", normalizeEnvironment(card.getEnvironment()));
+                node.setAttribute("copyCount", Integer.toString(Math.max(0, card.getCopyCount())));
+                node.setAttribute("enabled", Boolean.toString(card.isEnabled()));
+                appendText(document, node, "description", nullToEmpty(card.getDescriptionText()));
+                appendText(document, node, "rules", nullToEmpty(card.getRulesText()));
+                appendText(document, node, "tileImagePath", require(card.getTileImagePath(), "tileImagePath"));
+                root.appendChild(node);
+            }
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+            try (OutputStream output = Files.newOutputStream(xmlPath)) {
+                transformer.transform(new DOMSource(document), new StreamResult(output));
+            }
+            validateFile(xmlPath);
+        } catch (Exception ex) {
+            throw new DungeonCardStorageException("No se han podido guardar las cartas base XML.", ex);
+        }
+    }
+
+    private void validateFile(Path file) throws DungeonCardStorageException {
+        try {
+            SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI)
+                    .newSchema(schemaPath.toFile())
+                    .newValidator()
+                    .validate(new javax.xml.transform.stream.StreamSource(file.toFile()));
+        } catch (Exception ex) {
+            throw new DungeonCardStorageException("El XML de cartas no es valido: " + file + ".", ex);
+        }
+    }
+
+    private void upsertById(List<DungeonCard> cards, DungeonCard updatedCard) {
+        for (int i = 0; i < cards.size(); i++) {
+            if (cards.get(i).getId() == updatedCard.getId()) {
+                cards.set(i, updatedCard);
+                return;
+            }
+        }
+        cards.add(updatedCard);
     }
 
     static List<DungeonCard> defaultCards() {

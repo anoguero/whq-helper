@@ -1,4 +1,5 @@
 import { t } from './i18n';
+import { getTileAsset } from './tileAssets';
 import type { DungeonCard, LanguageCode } from './types';
 
 const CARD_TYPE_ACCENT: Record<DungeonCard['type'], string> = {
@@ -33,7 +34,8 @@ async function getTile(path: string): Promise<HTMLImageElement | null> {
     return null;
   }
 
-  const normalized = path.startsWith('/') ? path : `/${path}`;
+  const stored = !path.includes('/') && !path.startsWith('data:') ? getTileAsset(path) : null;
+  const normalized = stored ?? (path.startsWith('/') || path.startsWith('data:') ? path : `/${path}`);
   const cached = assets.tileCache.get(normalized);
   if (cached) {
     return cached;

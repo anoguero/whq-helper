@@ -7,17 +7,49 @@ import { loadSettings, saveSettings } from './settings';
 import { renderEventCard, renderMonsterCard } from './render';
 import { DungeonCardStore, downloadCsv, exportCardsToCsv, importCardsFromCsvFile } from './dungeonStore';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
+import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
 import { getXmlOverride, removeXmlOverride, saveXmlOverride } from './contentOverrides';
+import {
+  createDefaultDungeonCard,
+  createDefaultEvent,
+  createDefaultMonster,
+  createDefaultObjectiveRoomAdventure,
+  createDefaultRule,
+  createDefaultTable,
+  createUserContentUid,
+  deleteUserContentItem,
+  loadUserContentItems,
+  mapDungeonCardToUserData,
+  mapEventToUserData,
+  mapMonsterToUserData,
+  mapObjectiveRoomAdventureToUserData,
+  mapRuleToUserData,
+  mapTableToUserData,
+  parseTableMetadata,
+  type UserContentItem,
+  type UserContentKind,
+  type UserDungeonCardData,
+  type UserEventData,
+  type UserMonsterData,
+  type UserObjectiveRoomAdventureData,
+  type UserRuleData,
+  type UserTableData,
+  upsertUserContentItem,
+  userContentItemXml
+} from './userContent';
 import type {
   AppSettings,
   ContentRepository,
   DeckBundle,
   DrawEntry,
   DungeonCard,
+  EventModel,
   GroupEntry,
   LanguageCode,
   MonsterEntry,
   ObjectiveRoomAdventure,
+  Rule,
+  TableRefEntry,
   TableModel
 } from './types';
 
@@ -105,6 +137,31 @@ const CARD_WINDOW_WIDTH = 320;
 const CARD_WINDOW_HEIGHT = 500;
 const CARD_WINDOW_GAP = 14;
 
+interface DashboardCategoryMeta {
+  kind: UserContentKind;
+  titleKey: string;
+}
+
+const DASHBOARD_CATEGORIES: DashboardCategoryMeta[] = [
+  { kind: 'dungeonCard', titleKey: 'contentDashboard.category.dungeonCard' },
+  { kind: 'dungeonEvent', titleKey: 'contentDashboard.category.dungeonEvent' },
+  { kind: 'treasure', titleKey: 'contentDashboard.category.treasure' },
+  { kind: 'objectiveTreasure', titleKey: 'contentDashboard.category.objectiveTreasure' },
+  { kind: 'travelEvent', titleKey: 'contentDashboard.category.travelEvent' },
+  { kind: 'settlementEvent', titleKey: 'contentDashboard.category.settlementEvent' },
+  { kind: 'rule', titleKey: 'contentDashboard.category.rule' },
+  { kind: 'monster', titleKey: 'contentDashboard.category.monster' },
+  { kind: 'table', titleKey: 'contentDashboard.category.table' },
+  { kind: 'objectiveRoomAdventure', titleKey: 'contentDashboard.category.objectiveRoomAdventure' }
+];
+
+let activeDashboardItemUid: string | null = null;
+const DASHBOARD_CREATE_PREFIX = 'create:';
+let dashboardDraftItem: UserContentItem | null = null;
+let dashboardOpen = false;
+
+type EventTableKind = 'dungeon' | 'travel' | 'settlement';
+
 function clampProbability(value: number): number {
   return Math.max(0, Math.min(100, value));
 }
@@ -136,6 +193,7 @@ function createAppShell(language: LanguageCode): void {
           <div class="hero-actions">
             <button type="button" id="newDungeonBtn">${t(language, 'deck.newDungeon')}</button>
             <button type="button" id="tileConfigBtn">${t(language, 'deck.configureTiles')}</button>
+            <button type="button" id="contentDashboardBtn">${t(language, 'deck.contentCreation')}</button>
           </div>
         </div>
       </header>
@@ -160,6 +218,8 @@ function createAppShell(language: LanguageCode): void {
       <dialog id="newDungeonDialog" class="table-dialog wide-dialog"></dialog>
       <dialog id="missionDialog" class="table-dialog"></dialog>
       <dialog id="maintenanceDialog" class="table-dialog wide-dialog"></dialog>
+      <dialog id="treasureSearchDialog" class="table-dialog ultra-dialog"></dialog>
+      <section id="contentDashboardView" class="dashboard-view" hidden></section>
     </div>
   `;
 }
@@ -171,6 +231,10 @@ function wireHeroActions(): void {
 
   document.querySelector<HTMLButtonElement>('#tileConfigBtn')?.addEventListener('click', () => {
     openMaintenanceDialog();
+  });
+
+  document.querySelector<HTMLButtonElement>('#contentDashboardBtn')?.addEventListener('click', () => {
+    openContentDashboardDialog().catch((error) => window.alert(String(error)));
   });
 }
 
@@ -269,12 +333,108 @@ function buildControls(): void {
   });
 
   controls.querySelector<HTMLButtonElement>('#closeCardsBtn')?.addEventListener('click', () => {
-    document.querySelector<HTMLElement>('#windows')!.innerHTML = '';
+    closeAllOpenCards();
   });
 
   controls.querySelector<HTMLButtonElement>('#activateTablesBtn')?.addEventListener('click', () => {
     openTableDialog();
   });
+}
+
+function closeAllOpenCards(): void {
+  document.querySelector<HTMLElement>('#windows')!.innerHTML = '';
+}
+
+function getActiveTreasureEvents(): EventModel[] {
+  const treasures = new Map<string, EventModel>();
+  for (const table of repository.tables.values()) {
+    if (!table.active || table.kind !== 'treasure') {
+      continue;
+    }
+    for (const entry of table.events) {
+      const event = repository.events.get(entry.id);
+      if (event?.treasure) {
+        treasures.set(event.id, event);
+      }
+    }
+  }
+  return Array.from(treasures.values()).sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
+}
+
+function openTreasureSearchDialog(): void {
+  const dialog = document.querySelector<HTMLDialogElement>('#treasureSearchDialog');
+  if (!dialog) {
+    return;
+  }
+
+  const treasures = getActiveTreasureEvents();
+  dialog.innerHTML = `
+    <form method="dialog" class="treasure-search-dialog">
+      <h2>${t(settings.language, 'treasureSearch.title')}</h2>
+      <label>${t(settings.language, 'treasureSearch.filter')}
+        <input id="treasureSearchInput" type="text" autocomplete="off" placeholder="${t(settings.language, 'treasureSearch.placeholder')}">
+      </label>
+      <div class="treasure-search-layout">
+        <section class="treasure-search-results">
+          <h3>${t(settings.language, 'treasureSearch.results')}</h3>
+          <div id="treasureSearchList" class="table-list"></div>
+        </section>
+        <section class="treasure-search-preview">
+          <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+          <div id="treasureSearchPreview" class="treasure-card-preview"></div>
+        </section>
+      </div>
+      <menu>
+        <button value="cancel">${t(settings.language, 'dialog.button.close')}</button>
+      </menu>
+    </form>
+  `;
+
+  const input = dialog.querySelector<HTMLInputElement>('#treasureSearchInput')!;
+  const list = dialog.querySelector<HTMLElement>('#treasureSearchList')!;
+  const preview = dialog.querySelector<HTMLElement>('#treasureSearchPreview')!;
+  let selectedId = treasures[0]?.id ?? '';
+
+  const renderPreview = (): void => {
+    const selected = treasures.find((event) => event.id === selectedId) ?? null;
+    preview.innerHTML = selected ? renderEventCard(selected, settings.language) : `<p>${t(settings.language, 'treasureSearch.empty')}</p>`;
+    fitTreasureHeaderText(preview);
+  };
+
+  const refreshList = (): void => {
+    const filter = input.value.trim().toLowerCase();
+    const filtered = treasures.filter((event) => event.name.toLowerCase().includes(filter));
+    if (!filtered.some((event) => event.id === selectedId)) {
+      selectedId = filtered[0]?.id ?? '';
+    }
+
+    list.innerHTML = filtered.length
+      ? filtered
+          .map(
+            (event) => `
+              <button type="button" class="treasure-search-item ${event.id === selectedId ? 'selected' : ''}" data-event-id="${escapeHtml(event.id)}">
+                <strong>${escapeHtml(event.name)}</strong>
+                <span>${escapeHtml(event.id)}</span>
+              </button>
+            `
+          )
+          .join('')
+      : `<p>${t(settings.language, 'treasureSearch.noResults')}</p>`;
+
+    list.querySelectorAll<HTMLButtonElement>('[data-event-id]').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedId = button.dataset.eventId ?? '';
+        refreshList();
+        renderPreview();
+      });
+    });
+
+    renderPreview();
+  };
+
+  input.addEventListener('input', refreshList);
+  refreshList();
+  dialog.showModal();
 }
 
 function buildDeckToggles(): void {
@@ -408,6 +568,9 @@ function showEntry(entry: DrawEntry): void {
       return;
     }
     windowEl.insertAdjacentHTML('beforeend', renderEventCard(event, settings.language));
+  } else if (entry.kind === 'tableRef') {
+    window.alert(`Unresolved table reference: ${entry.tableName}`);
+    return;
   } else {
     const monster = repository.monsters.get(entry.id);
     if (!monster) {
@@ -810,6 +973,2074 @@ async function openContentEditorDialog(): Promise<void> {
   dialog.showModal();
 }
 
+function splitCsv(value: string): string[] {
+  return value
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function joinCsv(values: string[]): string {
+  return values.join(', ');
+}
+
+function parseRuleLinks(value: string): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const line of value.split(/\r?\n/)) {
+    const separator = line.indexOf('=');
+    if (separator < 0) {
+      continue;
+    }
+    const key = line.slice(0, separator).trim();
+    const text = line.slice(separator + 1).trim();
+    if (key && text) {
+      result[key] = text;
+    }
+  }
+  return result;
+}
+
+function formatRuleLinks(links: Record<string, string>): string {
+  return Object.entries(links)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('\n');
+}
+
+function treasureUsersToFlags(users: string): Record<'B' | 'D' | 'E' | 'W', boolean> {
+  const normalized = users.trim().toUpperCase();
+  return {
+    B: normalized.includes('B'),
+    D: normalized.includes('D'),
+    E: normalized.includes('E'),
+    W: normalized.includes('W')
+  };
+}
+
+function treasureUsersFromFlags(flags: Record<'B' | 'D' | 'E' | 'W', boolean>): string {
+  return `${flags.B ? 'B' : ''}${flags.D ? 'D' : ''}${flags.E ? 'E' : ''}${flags.W ? 'W' : ''}`;
+}
+
+function readFileAsDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '');
+    reader.onerror = () => reject(reader.error ?? new Error('Unable to read file'));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function refreshRuntimeContent(): Promise<void> {
+  await dungeonStore.init(settings.language);
+  repository = await loadContent(settings.language);
+  refreshDungeonCards();
+  rebuildDecks();
+}
+
+function nextUserDungeonCardId(): number {
+  const fromCards = dungeonCards.map((card) => card.id);
+  const fromUserItems = loadUserContentItems()
+    .filter((item): item is Extract<UserContentItem, { kind: 'dungeonCard' }> => item.kind === 'dungeonCard')
+    .map((item) => item.data.id);
+  return Math.max(0, ...fromCards, ...fromUserItems) + 1;
+}
+
+function dashboardItemsByKind(kind: UserContentKind): UserContentItem[] {
+  return loadUserContentItems()
+    .filter((item) => item.kind === kind)
+    .sort((left, right) => left.title.localeCompare(right.title, undefined, { sensitivity: 'base' }));
+}
+
+function isDashboardDraftSelected(): boolean {
+  return activeDashboardItemUid === 'draft' && dashboardDraftItem !== null;
+}
+
+function currentDashboardItem(): UserContentItem | null {
+  if (isDashboardDraftSelected()) {
+    return dashboardDraftItem;
+  }
+  if (!activeDashboardItemUid || activeDashboardItemUid.startsWith(DASHBOARD_CREATE_PREFIX)) {
+    return null;
+  }
+  return loadUserContentItems().find((item) => item.uid === activeDashboardItemUid) ?? null;
+}
+
+function availableObjectiveRoomNames(): string[] {
+  return [...new Set(dungeonStore.loadCards().filter((card) => card.type === 'OBJECTIVE_ROOM').map((card) => card.name))]
+    .sort((left, right) => left.localeCompare(right, undefined, { sensitivity: 'base' }));
+}
+
+function availableMonsterFactions(): string[] {
+  return [...new Set(Array.from(repository.monsters.values()).flatMap((monster) => monster.factions).filter(Boolean))].sort((left, right) =>
+    left.localeCompare(right, undefined, { sensitivity: 'base' })
+  );
+}
+
+function availableMonsterRules(): Rule[] {
+  return Array.from(repository.rules.values())
+    .filter((rule) => rule.type !== 'magic')
+    .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
+}
+
+function availableMagicRules(): Rule[] {
+  return Array.from(repository.rules.values())
+    .filter((rule) => rule.type === 'magic')
+    .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
+}
+
+function eventTableUserContentKind(kind: EventTableKind): Extract<UserContentKind, 'dungeonEvent' | 'travelEvent' | 'settlementEvent'> {
+  return kind === 'travel' ? 'travelEvent' : kind === 'settlement' ? 'settlementEvent' : 'dungeonEvent';
+}
+
+function parseEventOnlyTable(xml: string): { name: string; kind: EventTableKind; eventIds: string[] } | null {
+  const doc = new DOMParser().parseFromString(xml, 'text/xml');
+  if (doc.querySelector('parsererror')) {
+    return null;
+  }
+  const table = Array.from(doc.documentElement.children).find((node) => node.tagName === 'table');
+  if (!table) {
+    return null;
+  }
+  const kindRaw = (table.getAttribute('kind') ?? '').trim().toLowerCase();
+  const kind: EventTableKind =
+    kindRaw === 'travel' ? 'travel' : kindRaw === 'settlement' ? 'settlement' : kindRaw === '' ? 'dungeon' : kindRaw === 'dungeon' ? 'dungeon' : 'dungeon';
+
+  const eventIds: string[] = [];
+  for (const child of Array.from(table.children)) {
+    if (child.tagName !== 'event') {
+      return null;
+    }
+    const eventId = (child.getAttribute('id') ?? '').trim();
+    if (eventId) {
+      eventIds.push(eventId);
+    }
+  }
+
+  return {
+    name: (table.getAttribute('name') ?? '').trim(),
+    kind,
+    eventIds
+  };
+}
+
+function serializeEventOnlyTable(name: string, kind: EventTableKind, eventIds: string[]): string {
+  const tableAttrs = [`name="${escapeHtml(name)}"`];
+  if (kind !== 'dungeon') {
+    tableAttrs.push(`kind="${kind}"`);
+  }
+  return [
+    '<?xml version="1.0"?>',
+    '<tables>',
+    `  <table ${tableAttrs.join(' ')}>`,
+    ...eventIds.map((eventId) => `    <event id="${escapeHtml(eventId)}" />`),
+    '  </table>',
+    '</tables>'
+  ].join('\n');
+}
+
+function parseMonsterTableSpecial(node: Element): Pick<MonsterEntry, 'special' | 'specialLinks' | 'magicType' | 'magicLevel' | 'appendSpecials'> {
+  const result: Pick<MonsterEntry, 'special' | 'specialLinks' | 'magicType' | 'magicLevel' | 'appendSpecials'> = {
+    special: '',
+    specialLinks: {},
+    magicType: '',
+    magicLevel: 0,
+    appendSpecials: true
+  };
+  const specialNode = Array.from(node.children).find((child) => child.tagName === 'special');
+  if (!specialNode) {
+    return result;
+  }
+  result.appendSpecials = specialNode.getAttribute('append') !== 'false';
+  for (const child of Array.from(specialNode.children)) {
+    if (child.tagName === 'rule') {
+      const id = (child.getAttribute('id') ?? '').trim();
+      const text = child.textContent?.trim() ?? '';
+      if (id && text) {
+        result.specialLinks[id] = text;
+      }
+    } else if (child.tagName === 'magic') {
+      result.magicType = (child.getAttribute('id') ?? '').trim();
+      result.magicLevel = Number.parseInt(child.getAttribute('level') ?? '0', 10) || 0;
+    } else if (child.tagName === 'text') {
+      result.special = child.textContent?.trim() ?? '';
+    }
+  }
+  return result;
+}
+
+function parseMonsterTableEntry(node: Element, defaultLevel: number): MonsterEntry {
+  const numberRaw = (node.getAttribute('number') ?? '1').trim();
+  const [min, max] = numberRaw.includes('-')
+    ? numberRaw.split('-').map((part) => Number.parseInt(part, 10) || 0)
+    : [Number.parseInt(numberRaw, 10) || 0, Number.parseInt(numberRaw, 10) || 0];
+  const level = Math.max(1, Math.min(10, Number.parseInt(node.getAttribute('level') ?? String(defaultLevel), 10) || defaultLevel));
+  const ambiences = (node.getAttribute('ambiences') ?? '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  return {
+    kind: 'monster',
+    id: (node.getAttribute('id') ?? '').trim(),
+    level,
+    min,
+    max,
+    ambiences,
+    ...parseMonsterTableSpecial(node)
+  };
+}
+
+function parseMonsterOnlyTable(xml: string): { name: string; entries: Array<MonsterEntry | GroupEntry> } | null {
+  const doc = new DOMParser().parseFromString(xml, 'text/xml');
+  if (doc.querySelector('parsererror')) {
+    return null;
+  }
+  const table = Array.from(doc.documentElement.children).find((node) => node.tagName === 'table');
+  if (!table) {
+    return null;
+  }
+  const entries: Array<MonsterEntry | GroupEntry> = [];
+  for (const child of Array.from(table.children)) {
+    if (child.tagName === 'monster') {
+      entries.push(parseMonsterTableEntry(child, 1));
+      continue;
+    }
+    if (child.tagName === 'group') {
+      const level = Math.max(1, Math.min(10, Number.parseInt(child.getAttribute('level') ?? '1', 10) || 1));
+      const monsters = Array.from(child.children)
+        .filter((member) => member.tagName === 'monster')
+        .map((member) => parseMonsterTableEntry(member, level));
+      if (monsters.length === 0 || monsters.length !== child.children.length) {
+        return null;
+      }
+      entries.push({ kind: 'group', level, entries: monsters });
+      continue;
+    }
+    return null;
+  }
+  return {
+    name: (table.getAttribute('name') ?? '').trim(),
+    entries
+  };
+}
+
+function serializeMonsterOnlyTable(name: string, entries: Array<MonsterEntry | GroupEntry>): string {
+  const serializeSpecial = (entry: MonsterEntry, indent: string): string[] => {
+    const lines: string[] = [];
+    if (!entry.special.trim() && Object.keys(entry.specialLinks).length === 0 && !entry.magicType.trim()) {
+      return lines;
+    }
+    const attrs = entry.appendSpecials ? '' : ' append="false"';
+    lines.push(`${indent}<special${attrs}>`);
+    if (entry.special.trim()) {
+      lines.push(`${indent}  <text>${escapeHtml(entry.special.trim())}</text>`);
+    }
+    for (const [id, text] of Object.entries(entry.specialLinks)) {
+      lines.push(`${indent}  <rule id="${escapeHtml(id)}">${escapeHtml(text)}</rule>`);
+    }
+    if (entry.magicType.trim()) {
+      lines.push(`${indent}  <magic id="${escapeHtml(entry.magicType.trim())}" level="${Math.max(0, entry.magicLevel)}" />`);
+    }
+    lines.push(`${indent}</special>`);
+    return lines;
+  };
+
+  const serializeMonster = (entry: MonsterEntry, indent: string): string[] => {
+    const number = entry.min === entry.max ? String(entry.min) : `${entry.min}-${entry.max}`;
+    const attrs = [
+      `id="${escapeHtml(entry.id)}"`,
+      `number="${escapeHtml(number)}"`,
+      `level="${Math.max(1, entry.level)}"`
+    ];
+    if (entry.ambiences.length > 0) {
+      attrs.push(`ambiences="${escapeHtml(entry.ambiences.join(' '))}"`);
+    }
+    const lines = [`${indent}<monster ${attrs.join(' ')}>`];
+    lines.push(...serializeSpecial(entry, `${indent}  `));
+    lines.push(`${indent}</monster>`);
+    return lines;
+  };
+
+  const lines = ['<?xml version="1.0"?>', '<tables>', `  <table name="${escapeHtml(name)}">`];
+  for (const entry of entries) {
+    if (entry.kind === 'monster') {
+      lines.push(...serializeMonster(entry, '    '));
+      continue;
+    }
+    lines.push(`    <group level="${Math.max(1, entry.level)}">`);
+    for (const member of entry.entries) {
+      lines.push(...serializeMonster(member, '      '));
+    }
+    lines.push('    </group>');
+  }
+  lines.push('  </table>', '</tables>');
+  return lines.join('\n');
+}
+
+function summarizeMonsterCount(min: number, max: number): string {
+  return min === max ? String(min) : `${min}-${max}`;
+}
+
+function monsterEntryLabel(entry: MonsterEntry): string {
+  const monster = repository.monsters.get(entry.id);
+  const name = monster?.name ?? entry.id;
+  return `${name} (${entry.id}) x ${summarizeMonsterCount(entry.min, entry.max)}`;
+}
+
+function tableEncounterLabel(entry: MonsterEntry | GroupEntry, index: number): string {
+  if (entry.kind === 'monster') {
+    const ambiences = entry.ambiences.join(', ') || '-';
+    return `${index + 1}. ${monsterEntryLabel(entry)} | L${entry.level} | ${ambiences}`;
+  }
+  const monsters = entry.entries.map((member) => monsterEntryLabel(member)).join(' + ');
+  const ambiences = entry.entries[0]?.ambiences.join(', ') || '-';
+  return `${index + 1}. ${monsters} | L${entry.level} | ${ambiences}`;
+}
+
+function availableEventItemsForTable(kind: EventTableKind, currentItemUid: string, currentIds: string[]): Array<{ id: string; label: string }> {
+  const usedIds = new Set<string>();
+
+  for (const item of loadUserContentItems()) {
+    if (item.kind !== 'table' || item.uid === currentItemUid) {
+      continue;
+    }
+    const parsed = parseEventOnlyTable(item.data.xml);
+    if (!parsed || parsed.kind !== kind) {
+      continue;
+    }
+    for (const eventId of parsed.eventIds) {
+      usedIds.add(eventId);
+    }
+  }
+
+  const selectedIds = new Set(currentIds);
+  const eventItems = dashboardItemsByKind(eventTableUserContentKind(kind)) as Array<
+    Extract<UserContentItem, { kind: 'dungeonEvent' | 'travelEvent' | 'settlementEvent' }>
+  >;
+  return eventItems
+    .map((entry) => ({ id: entry.data.id, label: `${entry.data.name} (${entry.data.id})` }))
+    .filter((entry) => selectedIds.has(entry.id) || !usedIds.has(entry.id))
+    .sort((left, right) => left.label.localeCompare(right.label, undefined, { sensitivity: 'base' }));
+}
+
+function createBlankEventTableItem(kind: EventTableKind): Extract<UserContentItem, { kind: 'table' }> {
+  const name =
+    kind === 'travel'
+      ? 'userdefined-travel-events-table'
+      : kind === 'settlement'
+      ? 'userdefined-settlement-events-table'
+      : 'userdefined-dungeon-events-table';
+
+  return {
+    uid: createUserContentUid('table'),
+    kind: 'table',
+    mode: 'new',
+    title: name,
+    updatedAt: new Date().toISOString(),
+    data: {
+      name,
+      kind,
+      xml: serializeEventOnlyTable(name, kind, [])
+    }
+  };
+}
+
+function dashboardSourceOptions(kind: UserContentKind): Array<{ id: string; label: string }> {
+  if (kind === 'dungeonCard') {
+    return dungeonStore.loadCards().map((card) => ({ id: String(card.id), label: `${card.name} (#${card.id})` }));
+  }
+  if (kind === 'treasure') {
+    return Array.from(repository.events.values())
+      .filter((event) => event.treasure && !event.id.toLowerCase().includes('-objective-'))
+      .map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+  }
+  if (kind === 'dungeonEvent') {
+    return Array.from(repository.events.values())
+      .filter((event) => !event.treasure)
+      .map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+  }
+  if (kind === 'objectiveTreasure') {
+    return Array.from(repository.events.values())
+      .filter((event) => event.treasure && event.id.toLowerCase().includes('-objective-'))
+      .map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+  }
+  if (kind === 'travelEvent') {
+    return Array.from(repository.travelEvents.values()).map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+  }
+  if (kind === 'settlementEvent') {
+    return Array.from(repository.settlementEvents.values()).map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+  }
+  if (kind === 'rule') {
+    return Array.from(repository.rules.values()).map((rule) => ({ id: rule.id, label: `${rule.name} (${rule.id})` }));
+  }
+  if (kind === 'monster') {
+    return Array.from(repository.monsters.values()).map((monster) => ({ id: monster.id, label: `${monster.name} (${monster.id})` }));
+  }
+  if (kind === 'objectiveRoomAdventure') {
+    return dungeonStore
+      .loadAllAdventures()
+      .map((adventure) => ({
+        id: `${adventure.objectiveRoomName}::${adventure.id}`,
+        label: `${adventure.objectiveRoomName} - ${adventure.name} (${adventure.id})`
+      }));
+  }
+  return Array.from(repository.tables.values()).map((table) => ({ id: table.name, label: table.name }));
+}
+
+function createBlankDashboardItem(kind: UserContentKind): UserContentItem {
+  const uid = createUserContentUid(kind);
+  const updatedAt = new Date().toISOString();
+  switch (kind) {
+    case 'dungeonCard':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultDungeonCard(nextUserDungeonCardId()) };
+    case 'treasure':
+    case 'dungeonEvent':
+    case 'objectiveTreasure':
+    case 'travelEvent':
+    case 'settlementEvent':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultEvent(kind) };
+    case 'rule':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultRule() };
+    case 'monster':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultMonster() };
+    case 'table':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultTable() };
+    case 'objectiveRoomAdventure':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultObjectiveRoomAdventure() };
+  }
+}
+
+function createModifiedDashboardItem(kind: UserContentKind, sourceId: string): UserContentItem | null {
+  const uid = createUserContentUid(kind);
+  const updatedAt = new Date().toISOString();
+  switch (kind) {
+    case 'dungeonCard': {
+      const source = dungeonStore.loadCards().find((card) => String(card.id) === sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapDungeonCardToUserData(source) } : null;
+    }
+    case 'treasure':
+    case 'dungeonEvent':
+    case 'objectiveTreasure': {
+      const source = Array.from(repository.events.values()).find((event) => event.id === sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapEventToUserData(source) } : null;
+    }
+    case 'travelEvent': {
+      const source = Array.from(repository.travelEvents.values()).find((event) => event.id === sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapEventToUserData(source) } : null;
+    }
+    case 'settlementEvent': {
+      const source = Array.from(repository.settlementEvents.values()).find((event) => event.id === sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapEventToUserData(source) } : null;
+    }
+    case 'rule': {
+      const source = repository.rules.get(sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapRuleToUserData(source) } : null;
+    }
+    case 'monster': {
+      const source = repository.monsters.get(sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapMonsterToUserData(source) } : null;
+    }
+    case 'table': {
+      const source = repository.tables.get(sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapTableToUserData(source) } : null;
+    }
+    case 'objectiveRoomAdventure': {
+      const [roomName, adventureId] = sourceId.split('::');
+      const source = dungeonStore
+        .loadAllAdventures()
+        .find((adventure) => adventure.objectiveRoomName === roomName && adventure.id === adventureId);
+      return source
+        ? {
+            uid,
+            kind,
+            mode: 'modified',
+            sourceId,
+            title: `${source.objectiveRoomName} - ${source.name}`,
+            updatedAt,
+            data: mapObjectiveRoomAdventureToUserData(source)
+          }
+        : null;
+    }
+  }
+}
+
+function downloadUserXml(item: UserContentItem): void {
+  const xml = userContentItemXml(item);
+  const blob = new Blob([xml], { type: 'application/xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  const label = item.kind === 'table' ? item.data.name : item.title || item.kind;
+  anchor.href = url;
+  anchor.download = `${label || 'user-content'}.xml`;
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+function contentDashboardSubtitle(item: UserContentItem): string {
+  return item.mode === 'modified'
+    ? t(settings.language, 'contentDashboard.mode.modified')
+    : t(settings.language, 'contentDashboard.mode.new');
+}
+
+function renderDashboardTree(container: HTMLElement): void {
+  const tree = container.querySelector<HTMLElement>('#contentDashboardTree');
+  if (!tree) {
+    return;
+  }
+
+  tree.innerHTML = DASHBOARD_CATEGORIES.map((category) => {
+    const items = dashboardItemsByKind(category.kind);
+    const selectedCreate = activeDashboardItemUid === `${DASHBOARD_CREATE_PREFIX}${category.kind}`;
+    return `
+      <section class="dashboard-tree-section">
+        <div class="dashboard-tree-header ${selectedCreate ? 'selected' : ''}" data-create-kind="${category.kind}">
+          <button type="button" class="dashboard-tree-label" data-create-kind="${category.kind}">
+            ${t(settings.language, category.titleKey)}
+          </button>
+          <button type="button" class="dashboard-tree-add" data-create-kind="${category.kind}">+</button>
+        </div>
+        <ul class="dashboard-tree-list">
+          ${items
+            .map(
+              (item) => `
+                <li class="${item.uid === activeDashboardItemUid ? 'selected' : ''}" data-item-uid="${item.uid}" title="${contentDashboardSubtitle(item)}">
+                  <span>${item.title}</span>
+                  <small>${contentDashboardSubtitle(item)}</small>
+                </li>
+              `
+            )
+            .join('')}
+        </ul>
+      </section>
+    `;
+  }).join('');
+
+  tree.querySelectorAll<HTMLElement>('[data-create-kind]').forEach((element) => {
+    element.addEventListener('click', () => {
+      activeDashboardItemUid = `${DASHBOARD_CREATE_PREFIX}${element.dataset.createKind as UserContentKind}`;
+      dashboardDraftItem = null;
+      renderContentDashboard(container);
+    });
+  });
+
+  tree.querySelectorAll<HTMLElement>('[data-item-uid]').forEach((element) => {
+    element.addEventListener('click', () => {
+      activeDashboardItemUid = element.dataset.itemUid ?? null;
+      dashboardDraftItem = null;
+      renderContentDashboard(container);
+    });
+    element.addEventListener('dblclick', () => {
+      activeDashboardItemUid = element.dataset.itemUid ?? null;
+      dashboardDraftItem = null;
+      renderContentDashboard(container);
+    });
+  });
+}
+
+function renderDashboardHome(editor: HTMLElement): void {
+  editor.innerHTML = `
+    <div class="dashboard-empty">
+      <h2>${t(settings.language, 'contentDashboard.title')}</h2>
+      <p>${t(settings.language, 'contentDashboard.description')}</p>
+    </div>
+  `;
+}
+
+function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLElement, kind: UserContentKind): void {
+  const options = dashboardSourceOptions(kind);
+  const tableTypePicker =
+    kind === 'table'
+      ? `
+      <div id="dashboardTableTypePicker" hidden>
+        <p>${t(settings.language, 'contentDashboard.tableTypePrompt')}</p>
+        <div class="dashboard-create-actions">
+          <button type="button" data-table-kind="monster">${t(settings.language, 'contentDashboard.tableType.monsterEncounters')}</button>
+          <button type="button" data-table-kind="dungeon">${t(settings.language, 'contentDashboard.tableType.dungeonEvents')}</button>
+          <button type="button" data-table-kind="travel">${t(settings.language, 'contentDashboard.tableType.travelEvents')}</button>
+          <button type="button" data-table-kind="settlement">${t(settings.language, 'contentDashboard.tableType.settlementEvents')}</button>
+        </div>
+      </div>
+    `
+      : '';
+  editor.innerHTML = `
+    <div class="dashboard-editor-shell">
+      <h2>${t(settings.language, 'contentDashboard.createPromptTitle')}</h2>
+      <p>${t(settings.language, 'contentDashboard.createPromptText')}</p>
+      <div class="dashboard-create-actions">
+        <button type="button" id="dashboardCreateNewBtn">${t(settings.language, 'contentDashboard.createNew')}</button>
+        <button type="button" id="dashboardCreateModifyBtn">${t(settings.language, 'contentDashboard.createModify')}</button>
+      </div>
+      ${tableTypePicker}
+      <div id="dashboardSourcePicker" hidden>
+        <label>
+          ${t(settings.language, 'contentDashboard.source')}
+          <select id="dashboardSourceSelect">
+            ${options.map((option) => `<option value="${option.id}">${option.label}</option>`).join('')}
+          </select>
+        </label>
+        <button type="button" id="dashboardCreateFromSourceBtn">${t(settings.language, 'contentDashboard.openEditor')}</button>
+      </div>
+    </div>
+  `;
+
+  editor.querySelector<HTMLButtonElement>('#dashboardCreateNewBtn')?.addEventListener('click', () => {
+    if (kind === 'table') {
+      const picker = editor.querySelector<HTMLElement>('#dashboardTableTypePicker');
+      if (picker) {
+        picker.hidden = false;
+      }
+      return;
+    }
+    dashboardDraftItem = createBlankDashboardItem(kind);
+    activeDashboardItemUid = 'draft';
+    renderContentDashboard(container);
+  });
+
+  editor.querySelectorAll<HTMLButtonElement>('[data-table-kind]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const tableKind = button.dataset.tableKind ?? 'monster';
+      dashboardDraftItem =
+        tableKind === 'dungeon' || tableKind === 'travel' || tableKind === 'settlement'
+          ? createBlankEventTableItem(tableKind)
+          : createBlankDashboardItem('table');
+      activeDashboardItemUid = 'draft';
+      renderContentDashboard(container);
+    });
+  });
+
+  editor.querySelector<HTMLButtonElement>('#dashboardCreateModifyBtn')?.addEventListener('click', () => {
+    const picker = editor.querySelector<HTMLElement>('#dashboardSourcePicker');
+    if (picker) {
+      picker.hidden = false;
+    }
+  });
+
+  editor.querySelector<HTMLButtonElement>('#dashboardCreateFromSourceBtn')?.addEventListener('click', () => {
+    const sourceId = editor.querySelector<HTMLSelectElement>('#dashboardSourceSelect')?.value ?? '';
+    dashboardDraftItem = createModifiedDashboardItem(kind, sourceId);
+    if (!dashboardDraftItem) {
+      window.alert(t(settings.language, 'contentDashboard.sourceNotFound'));
+      return;
+    }
+    activeDashboardItemUid = 'draft';
+    renderContentDashboard(container);
+  });
+}
+
+function bindDashboardCommonActions(container: HTMLElement, item: UserContentItem): void {
+  container.querySelector<HTMLButtonElement>('#dashboardDeleteBtn')?.addEventListener('click', async () => {
+    if (isDashboardDraftSelected()) {
+      dashboardDraftItem = null;
+      activeDashboardItemUid = null;
+      renderContentDashboard(container);
+      return;
+    }
+    deleteUserContentItem(item.uid);
+    dashboardDraftItem = null;
+    activeDashboardItemUid = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+
+  container.querySelector<HTMLButtonElement>('#dashboardDownloadBtn')?.addEventListener('click', () => {
+    downloadUserXml(item);
+  });
+}
+
+function renderDashboardEditorShell(title: string, subtitle: string, body: string, xmlPreview: string): string {
+  return `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${title}</h2>
+          <p>${subtitle}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body">
+        <div class="dashboard-form">${body}</div>
+        <div class="dashboard-xml-preview">
+          <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+            <textarea rows="18" readonly>${escapeHtml(xmlPreview)}</textarea>
+          </label>
+        </div>
+      </div>
+    </form>
+  `;
+}
+
+function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'dungeonCard' }>): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserDungeonCardData;
+  editor.innerHTML = `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${t(settings.language, 'contentDashboard.category.dungeonCard')}</h2>
+          <p>${contentDashboardSubtitle(item)}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body dungeon-card-editor-layout">
+        <div class="dashboard-form">
+          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.type')}
+            <select id="ucType">
+              <option value="DUNGEON_ROOM" ${data.type === 'DUNGEON_ROOM' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.DUNGEON_ROOM')}</option>
+              <option value="OBJECTIVE_ROOM" ${data.type === 'OBJECTIVE_ROOM' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.OBJECTIVE_ROOM')}</option>
+              <option value="CORRIDOR" ${data.type === 'CORRIDOR' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.CORRIDOR')}</option>
+              <option value="SPECIAL" ${data.type === 'SPECIAL' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.SPECIAL')}</option>
+            </select>
+          </label>
+          <label>${t(settings.language, 'contentDashboard.field.environment')}<input id="ucEnvironment" value="${escapeHtml(data.environment)}"></label>
+          <div class="dashboard-tile-upload">
+            <label>${t(settings.language, 'contentDashboard.field.tileImagePath')}<input id="ucTileImagePath" value="${escapeHtml(getTileAssetDisplayName(data.tileImagePath))}" readonly></label>
+            <div class="dashboard-inline-actions">
+              <button type="button" id="ucUploadTileBtn">${t(settings.language, 'contentDashboard.uploadTile')}</button>
+              <input id="ucTileFile" type="file" accept="image/*" hidden>
+            </div>
+          </div>
+          <label>${t(settings.language, 'contentDashboard.field.description')}<textarea id="ucDescription" rows="6">${escapeHtml(data.descriptionText)}</textarea></label>
+          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rulesText)}</textarea></label>
+          <div class="dashboard-inline-fields">
+            <label>${t(settings.language, 'contentDashboard.field.copyCount')}<input id="ucCopyCount" type="number" min="0" value="${data.copyCount}"></label>
+            <label class="dashboard-checkbox dashboard-inline-checkbox"><input id="ucEnabled" type="checkbox" ${data.enabled ? 'checked' : ''}>${t(settings.language, 'contentDashboard.field.enabled')}</label>
+          </div>
+        </div>
+        <div class="dashboard-preview-column">
+          <section class="dashboard-card-preview">
+            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <canvas id="ucPreviewCanvas" width="847" height="1264"></canvas>
+          </section>
+          <section class="dashboard-xml-panel">
+            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <div id="ucXmlPanel" hidden>
+              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+    </form>
+  `;
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const previewCanvas = editor.querySelector<HTMLCanvasElement>('#ucPreviewCanvas');
+  const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+  const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+  const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+  const tilePathInput = editor.querySelector<HTMLInputElement>('#ucTileImagePath');
+  const tileFileInput = editor.querySelector<HTMLInputElement>('#ucTileFile');
+
+  const buildDraftCard = (): DungeonCard => ({
+    id: data.id,
+    name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+    type: (editor.querySelector<HTMLSelectElement>('#ucType')?.value as DungeonCard['type']) ?? data.type,
+    environment: editor.querySelector<HTMLInputElement>('#ucEnvironment')?.value ?? '',
+    copyCount: Number.parseInt(editor.querySelector<HTMLInputElement>('#ucCopyCount')?.value ?? '0', 10) || 0,
+    enabled: editor.querySelector<HTMLInputElement>('#ucEnabled')?.checked ?? true,
+    tileImagePath: tilePathInput?.dataset.tilePath ?? data.tileImagePath,
+    descriptionText: editor.querySelector<HTMLTextAreaElement>('#ucDescription')?.value ?? '',
+    rulesText: editor.querySelector<HTMLTextAreaElement>('#ucRules')?.value ?? ''
+  });
+
+  const refreshCardEditorPreview = () => {
+    const draftCard = buildDraftCard();
+    if (previewCanvas) {
+      renderDungeonCardToCanvasLocalized(previewCanvas, draftCard, settings.language).catch((error) => console.error(error));
+    }
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({
+        ...item,
+        data: draftCard
+      });
+    }
+  };
+
+  toggleXmlButton?.addEventListener('click', () => {
+    if (!xmlPanel) {
+      return;
+    }
+    const nextHidden = !xmlPanel.hidden;
+    xmlPanel.hidden = nextHidden;
+    toggleXmlButton.textContent = nextHidden
+      ? t(settings.language, 'contentDashboard.showXml')
+      : t(settings.language, 'contentDashboard.hideXml');
+  });
+
+  editor.querySelector<HTMLButtonElement>('#ucUploadTileBtn')?.addEventListener('click', () => {
+    tileFileInput?.click();
+  });
+
+  tileFileInput?.addEventListener('change', async () => {
+    const file = tileFileInput.files?.[0];
+    if (!file) {
+      return;
+    }
+    const dataUrl = await readFileAsDataUrl(file);
+    saveTileAsset(file.name, dataUrl);
+    if (tilePathInput) {
+      tilePathInput.value = file.name;
+      tilePathInput.dataset.tilePath = file.name;
+    }
+    refreshCardEditorPreview();
+  });
+
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
+    if (field.id === 'ucTileFile') {
+      return;
+    }
+    field.addEventListener('input', refreshCardEditorPreview);
+    field.addEventListener('change', refreshCardEditorPreview);
+  });
+
+  if (tilePathInput) {
+    tilePathInput.dataset.tilePath = data.tileImagePath;
+  }
+  refreshCardEditorPreview();
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const draftCard = buildDraftCard();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: draftCard
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderEventEditor(
+  container: HTMLElement,
+  item: Extract<UserContentItem, { kind: 'dungeonEvent' | 'treasure' | 'objectiveTreasure' | 'travelEvent' | 'settlementEvent' }>
+): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserEventData;
+  const isTravelLike = item.kind === 'travelEvent' || item.kind === 'settlementEvent';
+  const isTreasure = item.kind === 'treasure' || item.kind === 'objectiveTreasure';
+
+  if (isTreasure) {
+    const userFlags = treasureUsersToFlags(data.users);
+    editor.innerHTML = `
+      <form class="dashboard-editor-shell">
+        <header class="dashboard-editor-header">
+          <div>
+            <h2>${t(settings.language, DASHBOARD_CATEGORIES.find((entry) => entry.kind === item.kind)?.titleKey ?? 'contentDashboard.title')}</h2>
+            <p>${contentDashboardSubtitle(item)}</p>
+          </div>
+          <div class="dashboard-editor-actions">
+            <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+            <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+            <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          </div>
+        </header>
+        <div class="dashboard-editor-body treasure-editor-layout">
+          <div class="dashboard-form">
+            <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+            <label>${t(settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="4">${escapeHtml(data.flavor)}</textarea></label>
+            <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rules)}</textarea></label>
+            <label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="4">${escapeHtml(data.special)}</textarea></label>
+            <label>${t(settings.language, 'contentDashboard.field.goldValue')}<input id="ucGoldValue" value="${escapeHtml(data.goldValue)}"></label>
+            <fieldset class="dashboard-checkbox-group">
+              <legend>${t(settings.language, 'contentDashboard.field.users')}</legend>
+              <label class="dashboard-checkbox"><input id="ucUserB" type="checkbox" ${userFlags.B ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.barbarian')}</label>
+              <label class="dashboard-checkbox"><input id="ucUserD" type="checkbox" ${userFlags.D ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.dwarf')}</label>
+              <label class="dashboard-checkbox"><input id="ucUserE" type="checkbox" ${userFlags.E ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.elf')}</label>
+              <label class="dashboard-checkbox"><input id="ucUserW" type="checkbox" ${userFlags.W ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.wizard')}</label>
+            </fieldset>
+          </div>
+          <div class="dashboard-preview-column">
+            <section class="dashboard-card-preview treasure-card-preview">
+              <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+              <div id="ucTreasurePreview"></div>
+            </section>
+            <section class="dashboard-xml-panel">
+              <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+              <div id="ucXmlPanel" hidden>
+                <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                  <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+                </label>
+              </div>
+            </section>
+          </div>
+        </div>
+      </form>
+    `;
+
+    bindDashboardCommonActions(container, item);
+    const form = editor.querySelector<HTMLFormElement>('form');
+    const preview = editor.querySelector<HTMLElement>('#ucTreasurePreview');
+    const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+    const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+    const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+
+    const buildDraftEvent = (): UserEventData => {
+      const flags = {
+        B: editor.querySelector<HTMLInputElement>('#ucUserB')?.checked ?? false,
+        D: editor.querySelector<HTMLInputElement>('#ucUserD')?.checked ?? false,
+        E: editor.querySelector<HTMLInputElement>('#ucUserE')?.checked ?? false,
+        W: editor.querySelector<HTMLInputElement>('#ucUserW')?.checked ?? false
+      };
+      return {
+        ...data,
+        name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+        flavor: editor.querySelector<HTMLTextAreaElement>('#ucFlavor')?.value ?? '',
+        rules: editor.querySelector<HTMLTextAreaElement>('#ucRules')?.value ?? '',
+        special: editor.querySelector<HTMLTextAreaElement>('#ucSpecial')?.value ?? '',
+        goldValue: editor.querySelector<HTMLInputElement>('#ucGoldValue')?.value ?? '',
+        users: treasureUsersFromFlags(flags)
+      };
+    };
+
+    const refreshTreasureEditorPreview = () => {
+      const draftEvent = buildDraftEvent();
+      if (preview) {
+        preview.innerHTML = renderEventCard(
+          {
+            ...draftEvent,
+            category: 'dungeon',
+            treasure: true,
+            id: data.id || (item.kind === 'objectiveTreasure' ? 'preview-objective-item' : 'preview-treasure-item')
+          },
+          settings.language
+        );
+        fitTreasureHeaderText(preview);
+      }
+      if (xmlPreview) {
+        xmlPreview.value = userContentItemXml({
+          ...item,
+          data: draftEvent
+        });
+      }
+    };
+
+    toggleXmlButton?.addEventListener('click', () => {
+      if (!xmlPanel) {
+        return;
+      }
+      const nextHidden = !xmlPanel.hidden;
+      xmlPanel.hidden = nextHidden;
+      toggleXmlButton.textContent = nextHidden
+        ? t(settings.language, 'contentDashboard.showXml')
+        : t(settings.language, 'contentDashboard.hideXml');
+    });
+
+    form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((field) => {
+      field.addEventListener('input', refreshTreasureEditorPreview);
+      field.addEventListener('change', refreshTreasureEditorPreview);
+    });
+
+    refreshTreasureEditorPreview();
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const draftEvent = buildDraftEvent();
+      const nextItem: UserContentItem = {
+        ...item,
+        updatedAt: new Date().toISOString(),
+        data: draftEvent
+      };
+      upsertUserContentItem(nextItem);
+      activeDashboardItemUid = nextItem.uid;
+      dashboardDraftItem = null;
+      await refreshRuntimeContent();
+      renderContentDashboard(container);
+    });
+    return;
+  }
+
+  const eventCategory = item.kind === 'travelEvent' ? 'travel' : item.kind === 'settlementEvent' ? 'settlement' : 'dungeon';
+  editor.innerHTML = `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${t(settings.language, DASHBOARD_CATEGORIES.find((entry) => entry.kind === item.kind)?.titleKey ?? 'contentDashboard.title')}</h2>
+          <p>${contentDashboardSubtitle(item)}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body event-editor-layout">
+        <div class="dashboard-form">
+          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          ${isTravelLike ? '' : `<label>${t(settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="4">${escapeHtml(data.flavor)}</textarea></label>`}
+          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rules)}</textarea></label>
+          ${isTravelLike ? '' : `<label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="4">${escapeHtml(data.special)}</textarea></label>`}
+        </div>
+        <div class="dashboard-preview-column">
+          <section class="dashboard-card-preview event-card-preview">
+            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <div id="ucEventPreview"></div>
+          </section>
+          <section class="dashboard-xml-panel">
+            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <div id="ucXmlPanel" hidden>
+              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+    </form>
+  `;
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const preview = editor.querySelector<HTMLElement>('#ucEventPreview');
+  const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+  const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+  const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+
+  const buildDraftEvent = (): UserEventData => ({
+    ...data,
+    name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+    flavor: editor.querySelector<HTMLTextAreaElement>('#ucFlavor')?.value ?? '',
+    rules: editor.querySelector<HTMLTextAreaElement>('#ucRules')?.value ?? '',
+    special: editor.querySelector<HTMLTextAreaElement>('#ucSpecial')?.value ?? ''
+  });
+
+  const refreshEventEditorPreview = () => {
+    const draftEvent = buildDraftEvent();
+    if (preview) {
+      preview.innerHTML = renderEventCard(
+        {
+          ...draftEvent,
+          category: eventCategory,
+          treasure: false,
+          id: data.id || `preview-${eventCategory}-event`
+        },
+        settings.language
+      );
+    }
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({
+        ...item,
+        data: draftEvent
+      });
+    }
+  };
+
+  toggleXmlButton?.addEventListener('click', () => {
+    if (!xmlPanel) {
+      return;
+    }
+    const nextHidden = !xmlPanel.hidden;
+    xmlPanel.hidden = nextHidden;
+    toggleXmlButton.textContent = nextHidden
+      ? t(settings.language, 'contentDashboard.showXml')
+      : t(settings.language, 'contentDashboard.hideXml');
+  });
+
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((field) => {
+    field.addEventListener('input', refreshEventEditorPreview);
+    field.addEventListener('change', refreshEventEditorPreview);
+  });
+
+  refreshEventEditorPreview();
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: buildDraftEvent()
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'rule' }>): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserRuleData;
+  editor.innerHTML = `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${t(settings.language, 'contentDashboard.category.rule')}</h2>
+          <p>${contentDashboardSubtitle(item)}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body">
+        <div class="dashboard-form">
+          <label>${t(settings.language, 'contentDashboard.field.id')}<input id="ucId" value="${escapeHtml(data.id)}" readonly></label>
+          <label>${t(settings.language, 'contentDashboard.field.ruleType')}
+            <select id="ucType">
+              <option value="rule" ${data.type === 'rule' ? 'selected' : ''}>rule</option>
+              <option value="magic" ${data.type === 'magic' ? 'selected' : ''}>magic</option>
+            </select>
+          </label>
+          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.text')}<textarea id="ucText" rows="12">${escapeHtml(data.text)}</textarea></label>
+        </div>
+        <div class="dashboard-xml-panel">
+          <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+          <div id="ucXmlPanel" hidden>
+            <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+              <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  `;
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+  const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+  const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+
+  const refreshRuleXmlPreview = () => {
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({
+        ...item,
+        data: {
+          ...data,
+          id: editor.querySelector<HTMLInputElement>('#ucId')?.value ?? '',
+          type: (editor.querySelector<HTMLSelectElement>('#ucType')?.value as UserRuleData['type']) ?? 'rule',
+          name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+          text: editor.querySelector<HTMLTextAreaElement>('#ucText')?.value ?? ''
+        }
+      });
+    }
+  };
+
+  toggleXmlButton?.addEventListener('click', () => {
+    if (!xmlPanel) {
+      return;
+    }
+    const nextHidden = !xmlPanel.hidden;
+    xmlPanel.hidden = nextHidden;
+    toggleXmlButton.textContent = nextHidden
+      ? t(settings.language, 'contentDashboard.showXml')
+      : t(settings.language, 'contentDashboard.hideXml');
+  });
+
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
+    field.addEventListener('input', refreshRuleXmlPreview);
+    field.addEventListener('change', refreshRuleXmlPreview);
+  });
+
+  refreshRuleXmlPreview();
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: {
+        ...data,
+        id: editor.querySelector<HTMLInputElement>('#ucId')?.value ?? '',
+        type: (editor.querySelector<HTMLSelectElement>('#ucType')?.value as UserRuleData['type']) ?? 'rule',
+        name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+        text: editor.querySelector<HTMLTextAreaElement>('#ucText')?.value ?? ''
+      }
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'monster' }>): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserMonsterData;
+  const factionOptions = availableMonsterFactions();
+  const ruleOptions = availableMonsterRules();
+  const magicOptions = availableMagicRules();
+  const damageOptions = ['S', ...Array.from({ length: 10 }, (_, index) => `${index + 1}D6`)];
+  const selectedFactions = [...data.factions];
+  const selectedRuleLinks = { ...data.specialLinks };
+
+  editor.innerHTML = renderDashboardEditorShell(
+    t(settings.language, 'contentDashboard.category.monster'),
+    contentDashboardSubtitle(item),
+    `
+      <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.plural')}<input id="ucPlural" value="${escapeHtml(data.plural)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.factions')}<input id="ucFactions" value="${escapeHtml(joinCsv(selectedFactions))}" readonly></label>
+      <div class="dashboard-inline-actions">
+        <select id="ucFactionSelect">
+          ${factionOptions.map((faction) => `<option value="${escapeHtml(faction)}">${escapeHtml(faction)}</option>`).join('')}
+        </select>
+        <button type="button" id="ucAddFactionBtn">+</button>
+        <button type="button" id="ucRemoveFactionBtn">-</button>
+      </div>
+      <label>${t(settings.language, 'contentDashboard.field.move')}<input id="ucMove" value="${escapeHtml(data.move)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.weaponSkill')}<input id="ucWeaponSkill" value="${escapeHtml(data.weaponskill)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.ballisticSkill')}<input id="ucBallisticSkill" value="${escapeHtml(data.ballisticskill)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.strength')}<input id="ucStrength" value="${escapeHtml(data.strength)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.toughness')}<input id="ucToughness" value="${escapeHtml(data.toughness)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.wounds')}<input id="ucWounds" value="${escapeHtml(data.wounds)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.initiative')}<input id="ucInitiative" value="${escapeHtml(data.initiative)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.attacks')}<input id="ucAttacks" value="${escapeHtml(data.attacks)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.gold')}<input id="ucGold" value="${escapeHtml(data.gold)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.armor')}<input id="ucArmor" value="${escapeHtml(data.armor)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.damage')}
+        <select id="ucDamage">
+          ${damageOptions
+            .map(
+              (damage) =>
+                `<option value="${damage}" ${data.damage === damage || (!data.damage && damage === '1D6') ? 'selected' : ''}>${damage}</option>`
+            )
+            .join('')}
+        </select>
+      </label>
+      <label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="5">${escapeHtml(data.special)}</textarea></label>
+      <label>${t(settings.language, 'contentDashboard.field.specialLinks')}<textarea id="ucSpecialLinks" rows="5" readonly>${escapeHtml(formatRuleLinks(selectedRuleLinks))}</textarea></label>
+      <div class="dashboard-inline-actions">
+        <select id="ucRuleSelect">
+          ${ruleOptions.map((rule) => `<option value="${escapeHtml(rule.id)}">${escapeHtml(rule.name)}</option>`).join('')}
+        </select>
+        <button type="button" id="ucAddRuleBtn">+</button>
+        <button type="button" id="ucRemoveRuleBtn">-</button>
+      </div>
+      <label>${t(settings.language, 'contentDashboard.field.magicType')}
+        <select id="ucMagicType">
+          <option value=""></option>
+          ${magicOptions.map((rule) => `<option value="${escapeHtml(rule.id)}" ${data.magicType === rule.id ? 'selected' : ''}>${escapeHtml(rule.name)}</option>`).join('')}
+        </select>
+      </label>
+      <label>${t(settings.language, 'contentDashboard.field.magicLevel')}<input id="ucMagicLevel" type="number" min="0" value="${data.magicLevel}"></label>
+    `,
+    userContentItemXml(item)
+  );
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const factionsInput = editor.querySelector<HTMLInputElement>('#ucFactions');
+  const specialLinksInput = editor.querySelector<HTMLTextAreaElement>('#ucSpecialLinks');
+  const xmlPreview = editor.querySelector<HTMLTextAreaElement>('.dashboard-xml-preview textarea');
+
+  const refreshSelections = () => {
+    if (factionsInput) {
+      factionsInput.value = joinCsv(selectedFactions);
+    }
+    if (specialLinksInput) {
+      specialLinksInput.value = formatRuleLinks(selectedRuleLinks);
+    }
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({
+        ...item,
+        data: {
+          ...data,
+          name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+          plural: editor.querySelector<HTMLInputElement>('#ucPlural')?.value ?? '',
+          factions: [...selectedFactions],
+          move: editor.querySelector<HTMLInputElement>('#ucMove')?.value ?? '',
+          weaponskill: editor.querySelector<HTMLInputElement>('#ucWeaponSkill')?.value ?? '',
+          ballisticskill: editor.querySelector<HTMLInputElement>('#ucBallisticSkill')?.value ?? '',
+          strength: editor.querySelector<HTMLInputElement>('#ucStrength')?.value ?? '',
+          toughness: editor.querySelector<HTMLInputElement>('#ucToughness')?.value ?? '',
+          wounds: editor.querySelector<HTMLInputElement>('#ucWounds')?.value ?? '',
+          initiative: editor.querySelector<HTMLInputElement>('#ucInitiative')?.value ?? '',
+          attacks: editor.querySelector<HTMLInputElement>('#ucAttacks')?.value ?? '',
+          gold: editor.querySelector<HTMLInputElement>('#ucGold')?.value ?? '',
+          armor: editor.querySelector<HTMLInputElement>('#ucArmor')?.value ?? '',
+          damage: editor.querySelector<HTMLSelectElement>('#ucDamage')?.value ?? '1D6',
+          special: editor.querySelector<HTMLTextAreaElement>('#ucSpecial')?.value ?? '',
+          specialLinks: { ...selectedRuleLinks },
+          magicType: editor.querySelector<HTMLSelectElement>('#ucMagicType')?.value ?? '',
+          magicLevel: Number.parseInt(editor.querySelector<HTMLInputElement>('#ucMagicLevel')?.value ?? '0', 10) || 0
+        }
+      });
+    }
+  };
+
+  editor.querySelector<HTMLButtonElement>('#ucAddFactionBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucFactionSelect')?.value ?? '';
+    if (value && !selectedFactions.includes(value)) {
+      selectedFactions.push(value);
+      refreshSelections();
+    }
+  });
+
+  editor.querySelector<HTMLButtonElement>('#ucRemoveFactionBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucFactionSelect')?.value ?? '';
+    const index = selectedFactions.indexOf(value);
+    if (index >= 0) {
+      selectedFactions.splice(index, 1);
+      refreshSelections();
+    }
+  });
+
+  editor.querySelector<HTMLButtonElement>('#ucAddRuleBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucRuleSelect')?.value ?? '';
+    const rule = ruleOptions.find((entry) => entry.id === value);
+    if (rule && !selectedRuleLinks[rule.id]) {
+      selectedRuleLinks[rule.id] = rule.name;
+      refreshSelections();
+    }
+  });
+
+  editor.querySelector<HTMLButtonElement>('#ucRemoveRuleBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucRuleSelect')?.value ?? '';
+    if (selectedRuleLinks[value]) {
+      delete selectedRuleLinks[value];
+      refreshSelections();
+    }
+  });
+
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
+    field.addEventListener('input', refreshSelections);
+    field.addEventListener('change', refreshSelections);
+  });
+
+  refreshSelections();
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: {
+        ...data,
+        name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+        plural: editor.querySelector<HTMLInputElement>('#ucPlural')?.value ?? '',
+        factions: [...selectedFactions],
+        move: editor.querySelector<HTMLInputElement>('#ucMove')?.value ?? '',
+        weaponskill: editor.querySelector<HTMLInputElement>('#ucWeaponSkill')?.value ?? '',
+        ballisticskill: editor.querySelector<HTMLInputElement>('#ucBallisticSkill')?.value ?? '',
+        strength: editor.querySelector<HTMLInputElement>('#ucStrength')?.value ?? '',
+        toughness: editor.querySelector<HTMLInputElement>('#ucToughness')?.value ?? '',
+        wounds: editor.querySelector<HTMLInputElement>('#ucWounds')?.value ?? '',
+        initiative: editor.querySelector<HTMLInputElement>('#ucInitiative')?.value ?? '',
+        attacks: editor.querySelector<HTMLInputElement>('#ucAttacks')?.value ?? '',
+        gold: editor.querySelector<HTMLInputElement>('#ucGold')?.value ?? '',
+        armor: editor.querySelector<HTMLInputElement>('#ucArmor')?.value ?? '',
+        damage: editor.querySelector<HTMLSelectElement>('#ucDamage')?.value ?? '1D6',
+        special: editor.querySelector<HTMLTextAreaElement>('#ucSpecial')?.value ?? '',
+        specialLinks: { ...selectedRuleLinks },
+        magicType: editor.querySelector<HTMLSelectElement>('#ucMagicType')?.value ?? '',
+        magicLevel: Number.parseInt(editor.querySelector<HTMLInputElement>('#ucMagicLevel')?.value ?? '0', 10) || 0
+      }
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'table' }>): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserTableData;
+  const parsedEventTable = parseEventOnlyTable(data.xml);
+
+  if (parsedEventTable) {
+    const renderEventTableEditor = (): void => {
+      const availableItems = availableEventItemsForTable(parsedEventTable.kind, item.uid, parsedEventTable.eventIds);
+      const selectedItemId = editor.querySelector<HTMLSelectElement>('#ucSelectedEventIds')?.value ?? parsedEventTable.eventIds[0] ?? '';
+      const selectedEventIds = selectedItemId && parsedEventTable.eventIds.includes(selectedItemId)
+        ? parsedEventTable.eventIds
+        : parsedEventTable.eventIds;
+      const availableOptions = availableItems
+        .map((entry) => `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.label)}</option>`)
+        .join('');
+      const selectedOptions = selectedEventIds
+        .map((eventId) => {
+          const available = availableItems.find((entry) => entry.id === eventId);
+          const label = available?.label ?? eventId;
+          return `<option value="${escapeHtml(eventId)}">${escapeHtml(label)}</option>`;
+        })
+        .join('');
+      const xmlPreview = serializeEventOnlyTable(
+        parsedEventTable.name,
+        parsedEventTable.kind,
+        selectedEventIds
+      );
+
+      editor.innerHTML = `
+        <form class="dashboard-editor-shell">
+          <header class="dashboard-editor-header">
+            <div>
+              <h2>${t(settings.language, 'contentDashboard.category.table')}</h2>
+              <p>${contentDashboardSubtitle(item)}</p>
+            </div>
+            <div class="dashboard-editor-actions">
+              <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+              <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+              <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+            </div>
+          </header>
+          <div class="dashboard-editor-body event-table-editor-layout">
+            <div class="dashboard-form">
+              <label>${t(settings.language, 'contentDashboard.field.name')}
+                <input id="ucTableName" value="${escapeHtml(parsedEventTable.name)}">
+              </label>
+              <label>${t(settings.language, 'contentDashboard.field.type')}
+                <input value="${escapeHtml(t(settings.language, `contentDashboard.tableType.${parsedEventTable.kind === 'dungeon' ? 'dungeonEvents' : parsedEventTable.kind === 'travel' ? 'travelEvents' : 'settlementEvents'}`))}" readonly>
+              </label>
+              <div class="dashboard-table-event-picker">
+                <label>${t(settings.language, 'contentDashboard.field.availableEvents')}
+                  <select id="ucAvailableEventId">${availableOptions}</select>
+                </label>
+                <div class="dashboard-inline-actions dashboard-table-event-actions">
+                  <button type="button" id="ucAddEventBtn">+</button>
+                  <button type="button" id="ucRemoveEventBtn">-</button>
+                </div>
+              </div>
+              <label>${t(settings.language, 'contentDashboard.field.selectedEvents')}
+                <select id="ucSelectedEventIds" size="12">${selectedOptions}</select>
+              </label>
+            </div>
+            <div class="dashboard-preview-column">
+              <section class="dashboard-xml-panel">
+                <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+                <div id="ucXmlPanel" hidden>
+                  <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                    <textarea id="ucXmlPreview" rows="18" readonly>${escapeHtml(xmlPreview)}</textarea>
+                  </label>
+                </div>
+              </section>
+            </div>
+          </div>
+        </form>
+      `;
+
+      bindDashboardCommonActions(container, item);
+
+      const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+      const toggleXmlBtn = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+      toggleXmlBtn?.addEventListener('click', () => {
+        const hidden = !(xmlPanel?.hidden ?? true);
+        if (xmlPanel) {
+          xmlPanel.hidden = hidden;
+        }
+        if (toggleXmlBtn) {
+          toggleXmlBtn.textContent = t(settings.language, hidden ? 'contentDashboard.showXml' : 'contentDashboard.hideXml');
+        }
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucAddEventBtn')?.addEventListener('click', () => {
+        const eventId = editor.querySelector<HTMLSelectElement>('#ucAvailableEventId')?.value ?? '';
+        if (!eventId || parsedEventTable.eventIds.includes(eventId)) {
+          return;
+        }
+        parsedEventTable.eventIds = [...parsedEventTable.eventIds, eventId];
+        renderEventTableEditor();
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucRemoveEventBtn')?.addEventListener('click', () => {
+        const eventId = editor.querySelector<HTMLSelectElement>('#ucSelectedEventIds')?.value ?? '';
+        if (!eventId) {
+          return;
+        }
+        parsedEventTable.eventIds = parsedEventTable.eventIds.filter((entry) => entry !== eventId);
+        renderEventTableEditor();
+      });
+
+      editor.querySelector<HTMLInputElement>('#ucTableName')?.addEventListener('input', (event) => {
+        parsedEventTable.name = (event.currentTarget as HTMLInputElement).value;
+        const preview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+        if (preview) {
+          preview.value = serializeEventOnlyTable(parsedEventTable.name, parsedEventTable.kind, parsedEventTable.eventIds);
+        }
+      });
+
+      editor.querySelector<HTMLFormElement>('form')?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const tableName = editor.querySelector<HTMLInputElement>('#ucTableName')?.value.trim() ?? '';
+        if (!tableName) {
+          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          return;
+        }
+        if (item.mode === 'new' && !tableName.toLowerCase().startsWith('userdefined-')) {
+          window.alert(t(settings.language, 'contentDashboard.tablePrefixError'));
+          return;
+        }
+        const xml = serializeEventOnlyTable(tableName, parsedEventTable.kind, parsedEventTable.eventIds);
+        const metadata = parseTableMetadata(xml);
+        if (!metadata) {
+          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          return;
+        }
+        const nextItem: UserContentItem = {
+          ...item,
+          title: metadata.name,
+          updatedAt: new Date().toISOString(),
+          data: {
+            name: metadata.name,
+            kind: metadata.kind,
+            xml
+          }
+        };
+        upsertUserContentItem(nextItem);
+        activeDashboardItemUid = nextItem.uid;
+        dashboardDraftItem = null;
+        await refreshRuntimeContent();
+        renderContentDashboard(container);
+      });
+    };
+
+    renderEventTableEditor();
+    return;
+  }
+
+  const parsedMonsterTable = parseMonsterOnlyTable(data.xml);
+  if (parsedMonsterTable) {
+    const state = {
+      name: parsedMonsterTable.name,
+      entries: [...parsedMonsterTable.entries] as Array<MonsterEntry | GroupEntry>,
+      draftMembers: [] as MonsterEntry[],
+      draftLevel: 1,
+      draftAmbiences: [] as string[]
+    };
+
+    const renderMonsterTableEditor = (): void => {
+      const monsterOptions = Array.from(repository.monsters.values())
+        .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }))
+        .map((monster) => `<option value="${escapeHtml(monster.id)}">${escapeHtml(`${monster.name} (${monster.id})`)}</option>`)
+        .join('');
+      const ambienceOptions = getAdventureAmbiences(settings.language)
+        .filter((ambience) => !state.draftAmbiences.includes(ambience.value))
+        .map((ambience) => `<option value="${escapeHtml(ambience.value)}">${escapeHtml(ambience.label)}</option>`)
+        .join('');
+      const draftMonsterOptions = state.draftMembers
+        .map((entry, index) => `<option value="${index}">${escapeHtml(monsterEntryLabel(entry))}</option>`)
+        .join('');
+      const draftAmbienceOptions = state.draftAmbiences
+        .map((ambience) => {
+          const label = getAdventureAmbiences(settings.language).find((entry) => entry.value === ambience)?.label ?? ambience;
+          return `<option value="${escapeHtml(ambience)}">${escapeHtml(label)}</option>`;
+        })
+        .join('');
+      const encounterOptions = state.entries
+        .map((entry, index) => `<option value="${index}">${escapeHtml(tableEncounterLabel(entry, index))}</option>`)
+        .join('');
+      const xmlPreview = serializeMonsterOnlyTable(state.name, state.entries);
+
+      editor.innerHTML = `
+        <form class="dashboard-editor-shell">
+          <header class="dashboard-editor-header">
+            <div>
+              <h2>${t(settings.language, 'contentDashboard.category.table')}</h2>
+              <p>${contentDashboardSubtitle(item)}</p>
+            </div>
+            <div class="dashboard-editor-actions">
+              <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+              <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+              <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+            </div>
+          </header>
+          <div class="dashboard-editor-body monster-table-editor-layout">
+            <div class="dashboard-form">
+              <label>${t(settings.language, 'contentDashboard.field.name')}
+                <input id="ucTableName" value="${escapeHtml(state.name)}">
+              </label>
+              <label>${t(settings.language, 'contentDashboard.field.monsterType')}
+                <select id="ucEncounterMonsterId">${monsterOptions}</select>
+              </label>
+              <div class="dashboard-inline-fields">
+                <label>${t(settings.language, 'contentDashboard.field.monsterMin')}
+                  <input id="ucEncounterMin" type="number" min="1" value="1">
+                </label>
+                <label>${t(settings.language, 'contentDashboard.field.monsterMax')}
+                  <input id="ucEncounterMax" type="number" min="1" value="1">
+                </label>
+              </div>
+              <div class="dashboard-inline-actions">
+                <button type="button" id="ucAddMonsterToEncounterBtn">${t(settings.language, 'contentDashboard.addMonsterToEncounter')}</button>
+                <button type="button" id="ucRemoveMonsterFromEncounterBtn">${t(settings.language, 'contentDashboard.removeMonsterFromEncounter')}</button>
+              </div>
+              <label>${t(settings.language, 'contentDashboard.field.encounterMonsters')}
+                <select id="ucEncounterMonsterList" size="6">${draftMonsterOptions}</select>
+              </label>
+              <label>${t(settings.language, 'contentDashboard.field.encounterLevel')}
+                <select id="ucEncounterLevel">
+                  ${Array.from({ length: 10 }, (_, index) => index + 1)
+                    .map((level) => `<option value="${level}" ${level === state.draftLevel ? 'selected' : ''}>${level}</option>`)
+                    .join('')}
+                </select>
+              </label>
+              <div class="dashboard-table-event-picker">
+                <label>${t(settings.language, 'contentDashboard.field.availableAmbiences')}
+                  <select id="ucEncounterAmbience">${ambienceOptions}</select>
+                </label>
+                <div class="dashboard-inline-actions dashboard-table-event-actions">
+                  <button type="button" id="ucAddAmbienceBtn">+</button>
+                  <button type="button" id="ucRemoveAmbienceBtn">-</button>
+                </div>
+              </div>
+              <label>${t(settings.language, 'contentDashboard.field.encounterAmbiences')}
+                <select id="ucEncounterAmbienceList" size="5">${draftAmbienceOptions}</select>
+              </label>
+              <div class="dashboard-inline-actions">
+                <button type="button" id="ucAddEncounterToTableBtn">${t(settings.language, 'contentDashboard.addEncounterToTable')}</button>
+                <button type="button" id="ucRemoveEncounterFromTableBtn">${t(settings.language, 'contentDashboard.removeEncounterFromTable')}</button>
+              </div>
+              <label>${t(settings.language, 'contentDashboard.field.tableEncounters')}
+                <select id="ucTableEncounterList" size="10">${encounterOptions}</select>
+              </label>
+            </div>
+            <div class="dashboard-preview-column">
+              <section class="dashboard-xml-panel">
+                <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+                <div id="ucXmlPanel" hidden>
+                  <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                    <textarea id="ucXmlPreview" rows="18" readonly>${escapeHtml(xmlPreview)}</textarea>
+                  </label>
+                </div>
+              </section>
+            </div>
+          </div>
+        </form>
+      `;
+
+      bindDashboardCommonActions(container, item);
+
+      const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+      const toggleXmlBtn = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+      toggleXmlBtn?.addEventListener('click', () => {
+        const hidden = !(xmlPanel?.hidden ?? true);
+        if (xmlPanel) {
+          xmlPanel.hidden = hidden;
+        }
+        if (toggleXmlBtn) {
+          toggleXmlBtn.textContent = t(settings.language, hidden ? 'contentDashboard.showXml' : 'contentDashboard.hideXml');
+        }
+      });
+
+      editor.querySelector<HTMLInputElement>('#ucTableName')?.addEventListener('input', (event) => {
+        state.name = (event.currentTarget as HTMLInputElement).value;
+        const preview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+        if (preview) {
+          preview.value = serializeMonsterOnlyTable(state.name, state.entries);
+        }
+      });
+
+      editor.querySelector<HTMLSelectElement>('#ucEncounterLevel')?.addEventListener('change', (event) => {
+        state.draftLevel = Math.max(1, Math.min(10, Number.parseInt((event.currentTarget as HTMLSelectElement).value, 10) || 1));
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucAddMonsterToEncounterBtn')?.addEventListener('click', () => {
+        const monsterId = editor.querySelector<HTMLSelectElement>('#ucEncounterMonsterId')?.value ?? '';
+        const min = Math.max(1, Number.parseInt(editor.querySelector<HTMLInputElement>('#ucEncounterMin')?.value ?? '1', 10) || 1);
+        const maxRaw = Math.max(1, Number.parseInt(editor.querySelector<HTMLInputElement>('#ucEncounterMax')?.value ?? '1', 10) || 1);
+        const max = Math.max(min, maxRaw);
+        if (!monsterId) {
+          return;
+        }
+        state.draftMembers.push({
+          kind: 'monster',
+          id: monsterId,
+          level: state.draftLevel,
+          min,
+          max,
+          ambiences: [...state.draftAmbiences],
+          special: '',
+          specialLinks: {},
+          magicType: '',
+          magicLevel: 0,
+          appendSpecials: true
+        });
+        renderMonsterTableEditor();
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucRemoveMonsterFromEncounterBtn')?.addEventListener('click', () => {
+        const index = Number.parseInt(editor.querySelector<HTMLSelectElement>('#ucEncounterMonsterList')?.value ?? '-1', 10);
+        if (index < 0 || index >= state.draftMembers.length) {
+          return;
+        }
+        state.draftMembers.splice(index, 1);
+        renderMonsterTableEditor();
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucAddAmbienceBtn')?.addEventListener('click', () => {
+        const ambience = editor.querySelector<HTMLSelectElement>('#ucEncounterAmbience')?.value ?? '';
+        if (!ambience || state.draftAmbiences.includes(ambience)) {
+          return;
+        }
+        state.draftAmbiences.push(ambience);
+        renderMonsterTableEditor();
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucRemoveAmbienceBtn')?.addEventListener('click', () => {
+        const ambience = editor.querySelector<HTMLSelectElement>('#ucEncounterAmbienceList')?.value ?? '';
+        if (!ambience) {
+          return;
+        }
+        state.draftAmbiences = state.draftAmbiences.filter((entry) => entry !== ambience);
+        renderMonsterTableEditor();
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucAddEncounterToTableBtn')?.addEventListener('click', () => {
+        if (state.draftMembers.length === 0) {
+          return;
+        }
+        const level = Math.max(1, Math.min(10, Number.parseInt(editor.querySelector<HTMLSelectElement>('#ucEncounterLevel')?.value ?? '1', 10) || 1));
+        const members = state.draftMembers.map((member) => ({
+          ...member,
+          level,
+          ambiences: [...state.draftAmbiences]
+        }));
+        state.entries.push(
+          members.length === 1
+            ? members[0]
+            : {
+                kind: 'group',
+                level,
+                entries: members
+              }
+        );
+        state.draftMembers = [];
+        state.draftAmbiences = [];
+        state.draftLevel = 1;
+        renderMonsterTableEditor();
+      });
+
+      editor.querySelector<HTMLButtonElement>('#ucRemoveEncounterFromTableBtn')?.addEventListener('click', () => {
+        const index = Number.parseInt(editor.querySelector<HTMLSelectElement>('#ucTableEncounterList')?.value ?? '-1', 10);
+        if (index < 0 || index >= state.entries.length) {
+          return;
+        }
+        state.entries.splice(index, 1);
+        renderMonsterTableEditor();
+      });
+
+      editor.querySelector<HTMLFormElement>('form')?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const tableName = editor.querySelector<HTMLInputElement>('#ucTableName')?.value.trim() ?? '';
+        if (!tableName) {
+          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          return;
+        }
+        if (item.mode === 'new' && !tableName.toLowerCase().startsWith('userdefined-')) {
+          window.alert(t(settings.language, 'contentDashboard.tablePrefixError'));
+          return;
+        }
+        const xml = serializeMonsterOnlyTable(tableName, state.entries);
+        const metadata = parseTableMetadata(xml);
+        if (!metadata) {
+          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          return;
+        }
+        const nextItem: UserContentItem = {
+          ...item,
+          title: metadata.name,
+          updatedAt: new Date().toISOString(),
+          data: {
+            name: metadata.name,
+            kind: metadata.kind,
+            xml
+          }
+        };
+        upsertUserContentItem(nextItem);
+        activeDashboardItemUid = nextItem.uid;
+        dashboardDraftItem = null;
+        await refreshRuntimeContent();
+        renderContentDashboard(container);
+      });
+    };
+
+    renderMonsterTableEditor();
+    return;
+  }
+
+  editor.innerHTML = renderDashboardEditorShell(
+    t(settings.language, 'contentDashboard.category.table'),
+    contentDashboardSubtitle(item),
+    `
+      <label>${t(settings.language, 'contentDashboard.field.tableXml')}
+        <textarea id="ucTableXml" rows="22">${escapeHtml(data.xml)}</textarea>
+      </label>
+    `,
+    userContentItemXml(item)
+  );
+
+  bindDashboardCommonActions(container, item);
+  editor.querySelector<HTMLFormElement>('form')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const xml = editor.querySelector<HTMLTextAreaElement>('#ucTableXml')?.value ?? '';
+    const metadata = parseTableMetadata(xml);
+    if (!metadata) {
+      window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+      return;
+    }
+    if (item.mode === 'new' && !metadata.name.trim().toLowerCase().startsWith('userdefined-')) {
+      window.alert(t(settings.language, 'contentDashboard.tablePrefixError'));
+      return;
+    }
+    const nextItem: UserContentItem = {
+      ...item,
+      title: metadata.name,
+      updatedAt: new Date().toISOString(),
+      data: {
+        name: metadata.name,
+        kind: metadata.kind,
+        xml
+      }
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderObjectiveRoomAdventureEditor(
+  container: HTMLElement,
+  item: Extract<UserContentItem, { kind: 'objectiveRoomAdventure' }>
+): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserObjectiveRoomAdventureData;
+  const objectiveRooms = availableObjectiveRoomNames();
+  const hasCurrent = data.objectiveRoomName.trim() && objectiveRooms.includes(data.objectiveRoomName);
+  const roomOptions = [
+    ...objectiveRooms.map(
+      (room) => `<option value="${escapeHtml(room)}" ${room === data.objectiveRoomName ? 'selected' : ''}>${escapeHtml(room)}</option>`
+    ),
+    ...(!hasCurrent && data.objectiveRoomName.trim()
+      ? [`<option value="${escapeHtml(data.objectiveRoomName)}" selected>${escapeHtml(data.objectiveRoomName)}</option>`]
+      : [])
+  ].join('');
+
+  editor.innerHTML = `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${t(settings.language, 'contentDashboard.category.objectiveRoomAdventure')}</h2>
+          <p>${contentDashboardSubtitle(item)}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body event-editor-layout">
+        <div class="dashboard-form">
+          <label>${t(settings.language, 'contentDashboard.field.objectiveRoomName')}
+            <select id="ucObjectiveRoomName">${roomOptions}</select>
+          </label>
+          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="6">${escapeHtml(data.flavorText)}</textarea></label>
+          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="10">${escapeHtml(data.rulesText)}</textarea></label>
+          <label class="dashboard-checkbox"><input id="ucGeneric" type="checkbox" ${data.generic ? 'checked' : ''}>${t(settings.language, 'contentDashboard.field.genericMission')}</label>
+        </div>
+        <div class="dashboard-preview-column">
+          <section class="dashboard-xml-panel">
+            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <div id="ucXmlPanel" hidden>
+              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+    </form>
+  `;
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+  const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+  const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+
+  const buildDraftAdventure = (): UserObjectiveRoomAdventureData => ({
+    ...data,
+    objectiveRoomName: editor.querySelector<HTMLSelectElement>('#ucObjectiveRoomName')?.value ?? '',
+    name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+    flavorText: editor.querySelector<HTMLTextAreaElement>('#ucFlavor')?.value ?? '',
+    rulesText: editor.querySelector<HTMLTextAreaElement>('#ucRules')?.value ?? '',
+    generic: editor.querySelector<HTMLInputElement>('#ucGeneric')?.checked ?? false
+  });
+
+  const refreshAdventureXmlPreview = () => {
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({
+        ...item,
+        data: buildDraftAdventure()
+      });
+    }
+  };
+
+  toggleXmlButton?.addEventListener('click', () => {
+    if (!xmlPanel) {
+      return;
+    }
+    const nextHidden = !xmlPanel.hidden;
+    xmlPanel.hidden = nextHidden;
+    toggleXmlButton.textContent = nextHidden
+      ? t(settings.language, 'contentDashboard.showXml')
+      : t(settings.language, 'contentDashboard.hideXml');
+  });
+
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
+    field.addEventListener('input', refreshAdventureXmlPreview);
+    field.addEventListener('change', refreshAdventureXmlPreview);
+  });
+
+  refreshAdventureXmlPreview();
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: buildDraftAdventure()
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderDashboardEditor(container: HTMLElement): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+
+  if (activeDashboardItemUid?.startsWith(DASHBOARD_CREATE_PREFIX)) {
+    renderDashboardCreateSelector(container, editor, activeDashboardItemUid.slice(DASHBOARD_CREATE_PREFIX.length) as UserContentKind);
+    return;
+  }
+
+  const item = currentDashboardItem();
+  if (!item) {
+    renderDashboardHome(editor);
+    return;
+  }
+
+  if (item.kind === 'dungeonCard') {
+    renderDungeonCardEditor(container, item);
+    return;
+  }
+  if (
+    item.kind === 'dungeonEvent' ||
+    item.kind === 'treasure' ||
+    item.kind === 'objectiveTreasure' ||
+    item.kind === 'travelEvent' ||
+    item.kind === 'settlementEvent'
+  ) {
+    renderEventEditor(container, item);
+    return;
+  }
+  if (item.kind === 'rule') {
+    renderRuleEditor(container, item);
+    return;
+  }
+  if (item.kind === 'monster') {
+    renderMonsterEditor(container, item);
+    return;
+  }
+  if (item.kind === 'objectiveRoomAdventure') {
+    renderObjectiveRoomAdventureEditor(container, item);
+    return;
+  }
+  renderTableEditor(container, item);
+}
+
+function renderContentDashboard(container: HTMLElement): void {
+  renderDashboardTree(container);
+  renderDashboardEditor(container);
+}
+
+async function openContentDashboardDialog(): Promise<void> {
+  const container = document.querySelector<HTMLElement>('#contentDashboardView');
+  if (!container) {
+    return;
+  }
+
+  dashboardOpen = true;
+  document.body.classList.add('dashboard-active');
+  container.hidden = false;
+  container.innerHTML = `
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <header class="dashboard-sidebar-header">
+          <div>
+            <h2>${t(settings.language, 'contentDashboard.title')}</h2>
+            <p>${t(settings.language, 'contentDashboard.description')}</p>
+          </div>
+          <button type="button" id="contentDashboardBackBtn">${t(settings.language, 'contentDashboard.back')}</button>
+        </header>
+        <div id="contentDashboardTree" class="dashboard-tree"></div>
+      </aside>
+      <section id="contentDashboardEditor" class="dashboard-editor"></section>
+    </div>
+  `;
+
+  container.querySelector<HTMLButtonElement>('#contentDashboardBackBtn')?.addEventListener('click', async () => {
+    await closeContentDashboardView();
+  });
+  renderContentDashboard(container);
+}
+
+async function closeContentDashboardView(): Promise<void> {
+  const container = document.querySelector<HTMLElement>('#contentDashboardView');
+  if (!container) {
+    return;
+  }
+
+  await refreshRuntimeContent();
+  dashboardOpen = false;
+  document.body.classList.remove('dashboard-active');
+  container.hidden = true;
+  container.innerHTML = '';
+}
+
 function pickCardsByCopies(pool: DungeonCard[], count: number): DungeonCard[] {
   if (count <= 0) {
     return [];
@@ -866,7 +3097,7 @@ function pickAdditionalAdventureCards(environment: string, cards: DungeonCard[],
   return eligible;
 }
 
-function matchesMonsterAmbience(entry: MonsterEntry | GroupEntry, selectedAmbience: string): boolean {
+function matchesMonsterAmbience(entry: MonsterEntry | GroupEntry | TableRefEntry, selectedAmbience: string): boolean {
   if (selectedAmbience === 'generic') {
     return true;
   }
@@ -880,6 +3111,14 @@ function matchesMonsterAmbience(entry: MonsterEntry | GroupEntry, selectedAmbien
       );
     });
   }
+  if (entry.kind === 'tableRef') {
+    if (entry.ambiences.length === 0) {
+      return true;
+    }
+    return entry.ambiences.some(
+      (ambience) => ambience.localeCompare(selectedAmbience, undefined, { sensitivity: 'base' }) === 0
+    );
+  }
   if (entry.ambiences.length === 0) {
     return true;
   }
@@ -891,7 +3130,7 @@ function matchesMonsterAmbience(entry: MonsterEntry | GroupEntry, selectedAmbien
 function activeDungeonMonsterEntries(
   repositoryToUse: ContentRepository,
   selectedAmbience: string
-): Array<MonsterEntry | GroupEntry> {
+): Array<MonsterEntry | GroupEntry | TableRefEntry> {
   const activeEntries = Array.from(repositoryToUse.tables.values())
     .filter((table) => table.active && table.kind === 'dungeon')
     .flatMap((table) => table.monsters);
@@ -919,7 +3158,54 @@ function pickRandomMonsterEncounter(
   if (entries.length === 0) {
     return null;
   }
-  return entries[Math.floor(Math.random() * entries.length)] ?? null;
+  const selected = entries[Math.floor(Math.random() * entries.length)] ?? null;
+  if (!selected || selected.kind !== 'tableRef') {
+    return selected;
+  }
+  return resolveObjectiveTableRef(repositoryToUse, selectedAmbience, selected, new Set<string>());
+}
+
+function resolveObjectiveTableRef(
+  repositoryToUse: ContentRepository,
+  selectedAmbience: string,
+  entry: TableRefEntry,
+  visited: Set<string>
+): DrawEntry | null {
+  const referencedTable = repositoryToUse.tables.get(entry.tableName);
+  if (!referencedTable || visited.has(entry.tableName)) {
+    return null;
+  }
+
+  visited.add(entry.tableName);
+  try {
+    for (let attempt = 0; attempt < 32; attempt += 1) {
+      const referencedEntries = referencedTable.monsters.filter((candidate) => {
+        if (candidate.level !== entry.targetLevel) {
+          return false;
+        }
+        return matchesMonsterAmbience(candidate, selectedAmbience);
+      });
+      if (referencedEntries.length === 0) {
+        return null;
+      }
+
+      const drawn = referencedEntries[Math.floor(Math.random() * referencedEntries.length)] ?? null;
+      if (!drawn) {
+        continue;
+      }
+      if (drawn.kind !== 'tableRef') {
+        return drawn;
+      }
+
+      const resolved = resolveObjectiveTableRef(repositoryToUse, selectedAmbience, drawn, visited);
+      if (resolved) {
+        return resolved;
+      }
+    }
+    return null;
+  } finally {
+    visited.delete(entry.tableName);
+  }
 }
 
 function resolveObjectiveEncounterLevels(
@@ -1182,6 +3468,8 @@ function openAdventureSimulator(
       <menu>
         ${adventure.generic ? '' : `<button type="button" id="showMissionBtn">${t(settings.language, 'simulator.missionButton')}</button>`}
         <button type="button" id="objectiveRoomMonstersBtn">${t(settings.language, 'button.generateObjectiveRoomMonsters')}</button>
+        <button type="button" id="treasureSearchBtn">${t(settings.language, 'treasureSearch.button')}</button>
+        <button type="button" id="closeAllAdventureCardsBtn">${t(settings.language, 'menu.item.closeAllCards')}</button>
         <button type="button" id="closeSimulatorBtn">${t(settings.language, 'button.finishAdventure')}</button>
       </menu>
     </section>
@@ -1208,6 +3496,14 @@ function openAdventureSimulator(
       })
     );
     showEntries(result.entries);
+  });
+
+  panel.querySelector<HTMLButtonElement>('#closeAllAdventureCardsBtn')?.addEventListener('click', () => {
+    closeAllOpenCards();
+  });
+
+  panel.querySelector<HTMLButtonElement>('#treasureSearchBtn')?.addEventListener('click', () => {
+    openTreasureSearchDialog();
   });
 
   panel.querySelector<HTMLButtonElement>('#closeSimulatorBtn')?.addEventListener('click', () => {
