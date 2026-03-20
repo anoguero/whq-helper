@@ -66,7 +66,16 @@ export interface GroupEntry {
   entries: MonsterEntry[];
 }
 
-export type DrawEntry = EventEntry | MonsterEntry | GroupEntry;
+export interface TableRefEntry {
+  kind: 'tableRef';
+  tableName: string;
+  level: number;
+  targetLevel: number;
+  times: number;
+  ambiences: string[];
+}
+
+export type DrawEntry = EventEntry | MonsterEntry | GroupEntry | TableRefEntry;
 
 export type TableKind = 'dungeon' | 'travel' | 'settlement' | 'treasure';
 
@@ -75,7 +84,7 @@ export interface TableModel {
   kindRaw: string;
   kind: TableKind;
   active: boolean;
-  monsters: Array<MonsterEntry | GroupEntry>;
+  monsters: Array<MonsterEntry | GroupEntry | TableRefEntry>;
   events: EventEntry[];
 }
 

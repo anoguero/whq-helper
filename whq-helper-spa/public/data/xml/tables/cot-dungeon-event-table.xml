@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+  <table name="Catacombs of Terror Dungeon Events">
+    <event id="cot-ambush" />
+    <event id="cot-ambush" />
+    <event id="cot-ambush" />
+    <event id="cot-trap-lightning-bolt" />
+    <event id="cot-trap-lightning-bolt" />
+    <event id="cot-trap-lightning-bolt" />
+    <event id="cot-trap-dark-mist-spell" />
+    <event id="cot-trap-dark-mist-spell" />
+    <event id="cot-trap-dark-mist-spell" />
+    <event id="cot-treasury" />
+    <event id="cot-treasury" />
+    <event id="cot-treasury" />
+    <event id="cot-ghost" />
+    <event id="cot-ghost" />
+    <event id="cot-ghost" />
+    <event id="cot-sarcophagus" />
+    <event id="cot-sarcophagus" />
+    <event id="cot-sarcophagus" />
+    <event id="cot-tomb-chamber" />
+    <event id="cot-tomb-chamber" />
+    <event id="cot-tomb-chamber" />
+    <event id="cot-escape-or-die" />
+    <event id="cot-escape-or-die" />
+    <event id="cot-escape-or-die" />
+    <event id="cot-the-pit-of-eternity" />
+    <event id="cot-the-pit-of-eternity" />
+    <event id="cot-the-pit-of-eternity" />
+    <event id="cot-curse-of-years" />
+    <event id="cot-curse-of-years" />
+    <event id="cot-curse-of-years" />
+    <event id="cot-laughter-of-the-damned" />
+    <event id="cot-laughter-of-the-damned" />
+    <event id="cot-laughter-of-the-damned" />
+    <event id="cot-death-rot-fungus" />
+    <event id="cot-death-rot-fungus" />
+    <event id="cot-death-rot-fungus" />
+  </table>
+</tables>

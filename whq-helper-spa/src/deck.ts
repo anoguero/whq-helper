@@ -7,6 +7,7 @@ import type {
   EventList,
   GroupEntry,
   MonsterEntry,
+  TableRefEntry,
   TableKind,
   TableModel
 } from './types';
@@ -82,12 +83,14 @@ class DeckList implements EventList {
 class TableList implements EventList {
   private readonly kind: TableKind;
   private readonly settings: AppSettings;
-  private monsters: Array<MonsterEntry | GroupEntry> = [];
+  private readonly repository: ContentRepository;
+  private monsters: Array<MonsterEntry | GroupEntry | TableRefEntry> = [];
   private events: EventEntry[] = [];
 
-  constructor(kind: TableKind, settings: AppSettings) {
+  constructor(kind: TableKind, settings: AppSettings, repository: ContentRepository) {
     this.kind = kind;
     this.settings = settings;
+    this.repository = repository;
   }
 
   addEntry(entry: DrawEntry): void {
@@ -119,10 +122,12 @@ class TableList implements EventList {
 
     if (hasMonsters && hasEvents) {
       const drawEvent = Math.random() * 100 < clampProbability(this.settings.eventProbability);
-      return drawEvent ? randomEntry(this.events) : randomEntry(filteredMonsters);
+      const drawn = drawEvent ? randomEntry(this.events) : randomEntry(filteredMonsters);
+      return this.resolveEntry(drawn);
     }
 
-    return hasMonsters ? randomEntry(filteredMonsters) : randomEntry(this.events);
+    const drawn = hasMonsters ? randomEntry(filteredMonsters) : randomEntry(this.events);
+    return this.resolveEntry(drawn);
   }
 
   size(): number {
@@ -142,15 +147,19 @@ class TableList implements EventList {
   }
 
   private filterMonsters(
-    monsters: Array<MonsterEntry | GroupEntry>,
-    selectedAmbience: string
-  ): Array<MonsterEntry | GroupEntry> {
+    monsters: Array<MonsterEntry | GroupEntry | TableRefEntry>,
+    selectedAmbience: string,
+    forcedLevel?: number
+  ): Array<MonsterEntry | GroupEntry | TableRefEntry> {
     const ambienceFiltered =
       selectedAmbience === 'generic'
         ? monsters
         : monsters.filter((entry) => {
             if (entry.kind === 'group') {
               return entry.entries.every((groupMember) => matchesAmbience(groupMember.ambiences, selectedAmbience));
+            }
+            if (entry.kind === 'tableRef') {
+              return entry.ambiences.length === 0 || matchesAmbience(entry.ambiences, selectedAmbience);
             }
             return matchesAmbience(entry.ambiences, selectedAmbience);
           });
@@ -161,13 +170,65 @@ class TableList implements EventList {
       return fallbackAmbience;
     }
 
-    const level = Math.max(1, Math.min(10, this.settings.activeDungeonLevel));
+    const level = forcedLevel ?? Math.max(1, Math.min(10, this.settings.activeDungeonLevel));
     return fallbackAmbience.filter((entry) => {
       if (entry.kind === 'group') {
         return entry.level === level;
       }
+      if (entry.kind === 'tableRef') {
+        return entry.level === level;
+      }
       return entry.level === level;
     });
+  }
+
+  private resolveEntry(entry: DrawEntry | null, visited = new Set<string>()): DrawEntry | null {
+    if (!entry || entry.kind !== 'tableRef') {
+      return entry;
+    }
+
+    const referencedTable = this.repository.tables.get(entry.tableName);
+    if (!referencedTable || visited.has(entry.tableName)) {
+      return null;
+    }
+
+    visited.add(entry.tableName);
+    const combined: MonsterEntry[] = [];
+    for (let i = 0; i < Math.max(1, entry.times); i += 1) {
+      const resolved = this.drawReferencedEntry(referencedTable, entry.targetLevel, visited);
+      this.appendResolvedEntry(combined, resolved);
+    }
+    visited.delete(entry.tableName);
+
+    if (combined.length === 0) {
+      return null;
+    }
+    if (combined.length === 1) {
+      return combined[0] ?? null;
+    }
+    return { kind: 'group', level: entry.level, entries: combined };
+  }
+
+  private drawReferencedEntry(table: TableModel, forcedLevel: number, visited: Set<string>): DrawEntry | null {
+    for (let attempt = 0; attempt < 32; attempt += 1) {
+      const filtered = this.filterMonsters(table.monsters, this.settings.adventureAmbience, forcedLevel);
+      const resolved = this.resolveEntry(randomEntry(filtered) ?? null, visited);
+      if (resolved) {
+        return resolved;
+      }
+    }
+    return null;
+  }
+
+  private appendResolvedEntry(target: MonsterEntry[], entry: DrawEntry | null): void {
+    if (!entry || entry.kind === 'event' || entry.kind === 'tableRef') {
+      return;
+    }
+    if (entry.kind === 'group') {
+      target.push(...entry.entries);
+      return;
+    }
+    target.push(entry);
   }
 }
 
@@ -204,11 +265,11 @@ export function applyTableActiveState(repository: ContentRepository, settings: A
 }
 
 export function buildDecks(repository: ContentRepository, settings: AppSettings): DeckBundle {
-  const dungeon = settings.simulateDeck ? new DeckList() : new TableList('dungeon', settings);
-  const travel = settings.simulateDeck ? new DeckList() : new TableList('travel', settings);
-  const settlement = settings.simulateDeck ? new DeckList() : new TableList('settlement', settings);
-  const treasure = settings.simulateDeck ? new DeckList() : new TableList('treasure', settings);
-  const objectiveTreasure = settings.simulateDeck ? new DeckList() : new TableList('treasure', settings);
+  const dungeon = settings.simulateDeck ? new DeckList() : new TableList('dungeon', settings, repository);
+  const travel = settings.simulateDeck ? new DeckList() : new TableList('travel', settings, repository);
+  const settlement = settings.simulateDeck ? new DeckList() : new TableList('settlement', settings, repository);
+  const treasure = settings.simulateDeck ? new DeckList() : new TableList('treasure', settings, repository);
+  const objectiveTreasure = settings.simulateDeck ? new DeckList() : new TableList('treasure', settings, repository);
 
   for (const table of repository.tables.values()) {
     if (!table.active) {

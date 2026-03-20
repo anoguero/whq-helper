@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'>
+
+  <event id="cot-ambush" name="Ambush!">
+    <rules>Draw the next two Event cards.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-trap-lightning-bolt" name="Trap - Lightning Bolt">
+    <rules>Roll 1D6 for each Warrior. The Warrior with the lowest score has set off a trap and is struck by a bolt of magical lightning from a hieroglyph on the ceiling, suffering 2D6 Wounds with no deductions for armour. There is then a chance the bolt will leap to another Warrior. Roll 1D6: on 1, 2 or 3 another Warrior is hit. The bolt strikes the Warrior nearest to the original victim. If more than one Warrior is equally near, the one with the most points of armour is hit instead, rolling randomly if there is still no clear target. Continue in this way until all the Warriors have been hit once, or until you roll a 4, 5 or 6.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-trap-dark-mist-spell" name="Trap - Dark Mist Spell">
+    <rules>The Warriors are suddenly enveloped by a dark mist. When it clears, take a Warrior counter. That Warrior loses any non-magical weapons, including missile weapons, and any non-magical armour that he was carrying.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-treasury" name="Treasury">
+    <flavor>The Warriors have stumbled upon a treasury filled with gold, weapons, magic items, jewels and armour.</flavor>
+    <rules>Take the next Event card and resolve it now. In addition to any treasure gained from that Event, each Warrior gains 2D6 x 100 gold, one Treasure card, and one roll on the Dungeon Room Treasure Table.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-ghost" name="Ghost">
+    <flavor>After a while, the Warriors realise that a ghostly figure in fine armour is following them, lacking only a sword.</flavor>
+    <rules>The ghost indicates that one of the swords the Warriors carry belongs to him. If the Warriors refuse to give him a sword, he reaches out and touches one Warrior. That Warrior is frozen to the spot for 1D6 turns, during which time he may neither attack in any way nor be attacked in any way. Take another Event card now. If the Warriors give him a weapon, the ghost departs peacefully after indicating four amulets hidden in a far corner. The amulets each contain 1D6 points of Luck which the Warriors may use instead of their own Luck. Once the stored Luck is exhausted, the amulets lose their power and may not be used again.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-sarcophagus" name="Sarcophagus">
+    <flavor>The Warriors find an ornate sarcophagus in a secret alcove.</flavor>
+    <rules>Take a Warrior counter to see who opens the sarcophagus. Then roll 1D6. 1-2: the Warrior sees an unspeakable horror and slams the lid shut. His hair turns pure white and he permanently loses -1 Strength. 3-4: the sarcophagus is empty, but as the lid is slammed shut a screeching alarm rings out. Take another Event card now. 5: the sarcophagus contains precious stones worth 1D6 x 200 gold. 6: the sarcophagus contains hidden treasure; take a Treasure card. This does not count towards the total number of Treasure cards that Warrior has gained in the adventure. Once one Warrior has opened the sarcophagus, each other Warrior may try once if he wishes.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-tomb-chamber" name="Tomb Chamber">
+    <rules>One of the Warriors steps on a false flagstone and a section of wall slides back to reveal a large room beyond. Take a Warrior counter to see who triggered the secret lock, then place a new doorway against any spare side of the board section that Warrior is on. If the Warriors choose to explore through it, place the Tomb Chamber Objective Room on the other side. This room contains three Events cards' worth of traps and Monsters. While in the Tomb Chamber, a roll of 1 or 2 in the Power Phase causes an Unexpected Event. If the Warriors clear out the Tomb Chamber, they each gain a piece of objective room treasure.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-escape-or-die" name="Escape or Die!">
+    <rules>A stone in the tunnel ceiling falls away and sand pours in from above while huge slabs of rock begin to move into place to seal the tomb forever. Each Warrior rolls 2D6. The total is the number of turns the Warriors have to find the mechanism that disables these ancient defences. From now on, whenever the Warriors enter a new board section, whatever else happens there, they may also search for the mechanism. To stop it, the Warriors must declare which single Warrior is searching, then take a Warrior counter at random. If the counter belongs to the chosen Warrior, the mechanism has been found and deactivated. If the Warriors do not find it in time and are still in the Catacombs, they are sealed in forever and may not even roll on the Escaping Table in the Adventure Book.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-the-pit-of-eternity" name="The Pit of Eternity">
+    <rules>The ground collapses and a great rift opens up. Place a Pit of Despair template anywhere on the board within the lantern light. Any model covered by the template is sucked down and destroyed on a roll of 6 on 1D6. Models not sucked down must be placed at the pit's edge. Each Warrior may look into the pit once, as long as he stands next to it and does nothing else for a whole turn. Roll 1D6 for each Warrior who looks. 1: the fumes overcome him and he must roll 1D6 and add Toughness; on 7 or less he permanently loses 1D3 Wounds. 2-4: he is transfixed by the pulsing depths and may do nothing until a 6 is rolled in the Power Phase; Monsters attacking him in hand-to-hand combat gain +2 to hit. 5: he reaches in and immediately gains a piece of objective room treasure. 6: he glimpses all consciousness and permanently gains +1 Luck.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-curse-of-years" name="Curse of Years">
+    <rules>The Warriors realise that mysterious time has worked its way with them. Each Warrior rolls 1D6. 1: he is now old and grey and must deduct -1 from either Strength or Toughness, and also lose 1D6 from his Starting Wounds. 2-5: he has aged a little, but not enough to affect his fighting ability. 6: time has run backwards and he is returned to the first flush of youth, gaining +1 Strength or Toughness, plus an extra 1D6 Wounds.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-laughter-of-the-damned" name="Laughter of the Damned">
+    <rules>An insidious spell causes the Warriors to break into uncontrollable laughter. From now on, at the start of every turn after the Power dice has been rolled, each Warrior must roll 1D6 and add Toughness. If the score is 6 or less, that Warrior is at -1 to all of his rolls for that turn. If a Warrior ever rolls a natural 6, the spell is broken for him completely, unless of course it is cast on him again.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="cot-death-rot-fungus" name="Death Rot Fungus">
+    <rules>One of the Warriors disturbs grotesque fungus on the floor, sending up a cloud of infectious spores. Draw a Warrior counter to see who stepped on it. That Warrior and any other Warrior in an adjacent square to him have their Movement, Strength and to hit rolls reduced by -1 for the rest of the dungeon. This can only be reversed by a magic potion or a healing spell.</rules>
+    <special>No treasure is gained for this Event.</special>
+    <treasure>false</treasure>
+  </event>
+
+</events>

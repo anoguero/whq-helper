@@ -33,7 +33,7 @@
     <armor>2</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
 
@@ -51,7 +51,7 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-magic-resistance">Magic Resistance 5+ (Ring)</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-goblin" level="2" />
     </special>
   </monster>
@@ -71,8 +71,8 @@
     <special>
       <rule id="rpb-magic-dispel">Magic Dispel 5+</rule>
       <rule id="rpb-magic-resistance">Magic Resistance 4+ (Ring)</rule>
-      <rule id="rpb-magic-item">Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-item">Magic Item</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-goblin" level="3" />
     </special>
   </monster>
@@ -214,7 +214,7 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-tattoos">Tattoos 5+</rule>
     </special>
   </monster>
@@ -233,8 +233,8 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-ignore-blows">Ignore Blows 6+</rule>
-      <rule id="rpb-magic-item">Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-item">Magic Item</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-tattoos">Tattoos 4+</rule>
     </special>
   </monster>
@@ -253,8 +253,8 @@
     <damage>3D6</damage>
     <special>
       <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-magic-items">2 x Magic Items</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-item">2 x Magic Items</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-tattoos">Tattoos 3+</rule>
     </special>
   </monster>
@@ -310,8 +310,8 @@
     <armor>3</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-armour">Magic Armour</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-ring-of-magical-protection">Ring of Magical Protection</rule>
       <rule id="rpb-see-rulebook">See rulebook for special rules.</rule>
     </special>

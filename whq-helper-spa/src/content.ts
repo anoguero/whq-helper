@@ -7,11 +7,13 @@ import type {
   Monster,
   MonsterEntry,
   Rule,
+  TableRefEntry,
   TableKind,
   TableModel
 } from './types';
 import { getXmlOverride } from './contentOverrides';
 import { loadContentTranslations, translateContent } from './contentTranslations';
+import { buildUserContentXmlDocuments } from './userContent';
 
 interface ContentManifest {
   xmlFiles: string[];
@@ -130,8 +132,21 @@ function parseEventEntry(node: Element): EventEntry {
   };
 }
 
+function parseTableRefEntry(node: Element): TableRefEntry {
+  const level = parseLevel(getAttribute(node, 'level'));
+  const targetLevelRaw = getAttribute(node, 'targetLevel');
+  return {
+    kind: 'tableRef',
+    tableName: getAttribute(node, 'name'),
+    level,
+    targetLevel: targetLevelRaw ? parseLevel(targetLevelRaw) : level,
+    times: Math.max(1, Number.parseInt(getAttribute(node, 'times'), 10) || 1),
+    ambiences: parseAmbiences(getAttribute(node, 'ambiences'))
+  };
+}
+
 function parseTable(node: Element): TableModel {
-  const monsters: Array<MonsterEntry | GroupEntry> = [];
+  const monsters: Array<MonsterEntry | GroupEntry | TableRefEntry> = [];
   const events: EventEntry[] = [];
 
   for (const child of Array.from(node.children)) {
@@ -139,6 +154,8 @@ function parseTable(node: Element): TableModel {
       monsters.push(parseMonsterEntry(child));
     } else if (child.tagName === 'event') {
       events.push(parseEventEntry(child));
+    } else if (child.tagName === 'tableRef') {
+      monsters.push(parseTableRefEntry(child));
     } else if (child.tagName === 'group') {
       const groupEntries = Array.from(child.children)
         .filter((member) => member.tagName === 'monster')
@@ -243,9 +260,12 @@ export async function loadContent(language: LanguageCode): Promise<ContentReposi
   };
 
   const parser = new DOMParser();
+  const sources = [
+    ...manifest.xmlFiles.map((path) => ({ path, override: getXmlOverride(path) })),
+    ...buildUserContentXmlDocuments().map((entry) => ({ path: entry.path, override: entry.xml }))
+  ];
 
-  for (const path of manifest.xmlFiles) {
-    const override = getXmlOverride(path);
+  for (const { path, override } of sources) {
     let xml = override ?? '';
     if (!override) {
       const response = await fetch(path);

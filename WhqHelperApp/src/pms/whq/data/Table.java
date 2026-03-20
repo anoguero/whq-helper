@@ -3,6 +3,8 @@ package pms.whq.data;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -13,6 +15,7 @@ import pms.whq.util.XMLUtil;
 public class Table implements EventList {
 
   private static final TableDrawService DRAW_SERVICE = new TableDrawService();
+  private static final Map<String, Table> TABLE_REGISTRY = new ConcurrentHashMap<>();
 
   private String name;
   private String kind;
@@ -41,7 +44,7 @@ public class Table implements EventList {
 
   @Override
   public void addEntry(Object entry) {
-    if (entry instanceof MonsterEntry || entry instanceof List<?>) {
+    if (entry instanceof MonsterEntry || entry instanceof List<?> || entry instanceof TableReferenceEntry) {
       monsters.add(entry);
     } else if (entry instanceof EventEntry) {
       events.add(entry);
@@ -86,6 +89,8 @@ public class Table implements EventList {
       monsters.add(entryList);
     } else if ("monster".equals(type)) {
       monsters.add(nodeToEntry(node));
+    } else if ("tableRef".equals(type)) {
+      monsters.add(new TableReferenceEntry(node));
     } else if ("event".equals(type)) {
       events.add(nodeToEntry(node));
     }
@@ -147,5 +152,19 @@ public class Table implements EventList {
 
   public void setActive(boolean active) {
     this.active = active;
+  }
+
+  public static void registerAll(Map<String, Table> tables) {
+    TABLE_REGISTRY.clear();
+    if (tables != null) {
+      TABLE_REGISTRY.putAll(tables);
+    }
+  }
+
+  public static Table findRegistered(String name) {
+    if (name == null || name.isBlank()) {
+      return null;
+    }
+    return TABLE_REGISTRY.get(name);
   }
 }

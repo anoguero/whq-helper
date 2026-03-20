@@ -35,7 +35,7 @@
     <special>
       <rule id="rpb-fear">Fear 10</rule>
       <rule id="rpb-magic-items">2 x Magic Items</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-regenerate">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="3" />
     </special>
@@ -54,11 +54,11 @@
     <damage>6D6</damage>
     <special>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
+      <rule id="cot-undead-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
       <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
-      <rule id="rpb-magic-item">3 x Magic Items</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-item">3 x Magic Items</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-terror">Terror 14</rule>
       <rule id="rpb-regenerate">Regenerate 2</rule>
       <magic id="rpb-chaos" level="2" />
@@ -113,9 +113,9 @@
     <damage>3D6</damage>
     <special>
       <rule id="rpb-fear">Fear 7</rule>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-item">Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-armour">Magic Armour</rule>
+      <rule id="cot-undead-magic-item">Magic Item</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-tomb-rot">Tomb Rot (1D6)</rule>
     </special>
   </monster>
@@ -133,7 +133,7 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-regenerate">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="1" />
     </special>
@@ -153,8 +153,8 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
-      <rule id="rpb-magic-item">2 x Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-item">2 x Magic Item</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-regenerate">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="2" />
     </special>
@@ -175,8 +175,8 @@
     <special>
       <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
       <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
-      <rule id="rpb-magic-item">2 x Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-item">2 x Magic Item</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-regenerate">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="3" />
     </special>
@@ -198,8 +198,8 @@
       <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
       <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
       <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
-      <rule id="rpb-magic-item">4 x Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-item">4 x Magic Item</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-regenerate">Regenerate 2</rule>
       <magic id="rpb-necroantic" level="4" />
     </special>
@@ -332,9 +332,9 @@
       <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
       <rule id="rpb-fly">Fly</rule>
       <rule id="rpb-vampire">Vampire</rule>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-item">2 x Magic Items</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-armour">Magic Armour</rule>
+      <rule id="cot-undead-magic-item">2 x Magic Items</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-necromantic" level="4" />
     </special>
   </monster>
@@ -368,8 +368,8 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-fear">Fear 8</rule>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="cot-undead-magic-armour">Magic Armour</rule>
+      <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
 </monsters>

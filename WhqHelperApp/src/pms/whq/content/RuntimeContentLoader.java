@@ -2,6 +2,8 @@ package pms.whq.content;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -73,6 +75,7 @@ public class RuntimeContentLoader {
             repository.tables().put(table.getName(), table);
           }
         });
+    Table.registerAll(repository.tables());
   }
 
   private void loadMonsters(ContentRepository repository, ContentTranslations translations) {
@@ -175,6 +178,12 @@ public class RuntimeContentLoader {
     if (files == null) {
       return;
     }
+
+    Arrays.sort(
+        files,
+        Comparator.comparing(
+                (File file) -> !file.getName().toLowerCase().startsWith("userdefined-"))
+            .thenComparing(file -> file.getName().toLowerCase()));
 
     for (File file : files) {
       loadNodesFromFile(file, rootName, nodeConsumer);

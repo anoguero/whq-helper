@@ -1,5 +1,6 @@
 import { loadContentTranslations, translateContent } from './contentTranslations';
 import type { CardType, DungeonCard, LanguageCode, ObjectiveRoomAdventure } from './types';
+import { buildUserContentXmlDocuments, loadUserDungeonCards } from './userContent';
 
 const DUNGEON_CARDS_STORAGE_KEY = 'whq_helper_spa_dungeon_cards_v1';
 const DEFAULT_ENVIRONMENT = 'The Old World';
@@ -129,6 +130,22 @@ function parseAdventuresXml(xmlText: string): ObjectiveRoomAdventure[] {
   return result;
 }
 
+function mergeAdventuresWithBaseline(
+  baselineAdventures: ObjectiveRoomAdventure[],
+  userAdventures: ObjectiveRoomAdventure[]
+): ObjectiveRoomAdventure[] {
+  const merged = new Map<string, ObjectiveRoomAdventure>();
+
+  for (const adventure of baselineAdventures) {
+    merged.set(`${adventure.objectiveRoomName.trim().toUpperCase()}::${adventure.id.trim().toUpperCase()}`, adventure);
+  }
+  for (const adventure of userAdventures) {
+    merged.set(`${adventure.objectiveRoomName.trim().toUpperCase()}::${adventure.id.trim().toUpperCase()}`, adventure);
+  }
+
+  return Array.from(merged.values());
+}
+
 function cardsFromStorage(): DungeonCard[] | null {
   try {
     const raw = localStorage.getItem(DUNGEON_CARDS_STORAGE_KEY);
@@ -189,9 +206,15 @@ export class DungeonCardStore {
     ]);
 
     const baselineCards = parseDungeonCardsXml(dungeonXml);
+    const userCards = loadUserDungeonCards().map((card) => normalizeCard(card));
+    const contentCards = mergeCardsWithBaseline(baselineCards, userCards);
+    const userAdventureXml =
+      buildUserContentXmlDocuments().find((entry) => entry.path === '/userdefined/adventures/userdefined-objective-room-adventures.xml')
+        ?.xml ?? '';
+    const userAdventures = userAdventureXml ? parseAdventuresXml(userAdventureXml) : [];
     const persisted = cardsFromStorage();
-    this.cards = persisted ? mergeCardsWithBaseline(baselineCards, persisted) : baselineCards;
-    this.adventures = parseAdventuresXml(adventuresXml);
+    this.cards = persisted ? mergeCardsWithBaseline(contentCards, persisted) : contentCards;
+    this.adventures = mergeAdventuresWithBaseline(parseAdventuresXml(adventuresXml), userAdventures);
     saveCardsToStorage(this.cards);
   }
 
@@ -343,6 +366,10 @@ export class DungeonCardStore {
       }
       return a.id.localeCompare(b.id, undefined, { sensitivity: 'base' });
     });
+  }
+
+  loadAllAdventures(): ObjectiveRoomAdventure[] {
+    return this.adventures.map((adventure) => this.translateAdventure(adventure));
   }
 }
 

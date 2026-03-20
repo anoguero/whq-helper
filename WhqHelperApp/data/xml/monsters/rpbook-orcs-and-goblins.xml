@@ -31,7 +31,7 @@
     <armor>2</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
   <monster id="rpb-goblin-big-boss" 
@@ -48,7 +48,7 @@
     <armor>2</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-magic-resistance">Magic Resistance 5+ (Ring)</rule>
     </special>
   </monster>
@@ -166,7 +166,7 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
   <monster id="rpb-orc-big-boss" factions="orcs" name="Orc Big Boss" plural="Orc Big Bosses">
@@ -183,8 +183,8 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-ignore-pain">Ignore Pain 6+</rule>
-      <rule id="rpb-magic-armour">Magic Armor</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-armour">Magic Armor</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
   <monster id="rpb-orc-war-boss" factions="orcs" name="Orc War Boss" plural="Orc War Bosses">
@@ -201,9 +201,9 @@
     <damage>2D6/3D6(5+)</damage>
     <special>
       <rule id="rpb-ignore-pain">Ignore Pain 5+</rule>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-items">2 x Magic Items</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-armour">Magic Armour</rule>
+      <rule id="lotol-orc-magic-item">2 x Magic Items</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
   <monster id="rpb-black-orc" factions="orcs" name="Black Orc" plural="Black Orcs">
@@ -251,7 +251,7 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>  
   <monster id="rpb-black-orc-big-boss" 
@@ -268,8 +268,8 @@
     <armor>3</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-armour">Magic Armour</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>  
   <monster id="rpb-savage-orc" factions="orcs" name="Savage Orc" plural="Savage Orcs">
@@ -303,7 +303,7 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-orc" level="1" />
     </special>
   </monster>
@@ -322,7 +322,7 @@
     <damage>1D6/2D6(5+)</damage>
     <special>
       <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-orc" level="3" />
     </special>
   </monster>
@@ -342,8 +342,8 @@
     <special>
       <rule id="rpb-magic-dispel">Magic Dispel 5+</rule>
       <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
-      <rule id="rpb-magic-item">Magic Item</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-item">Magic Item</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-orc" level="3" />
     </special>
   </monster>
@@ -362,7 +362,7 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
-      <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-tattoos">Tattoos 5+</rule>
       <magic id="rpb-orc" level="1" />
     </special>

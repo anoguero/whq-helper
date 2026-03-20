@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	      xsi:noNamespaceSchemaLocation='whq-events-schema.xsd'>
+
+  <event id="lotol-challenge" name="Challenge!">
+    <flavor>A massive Orc Big'Un strides into the room and bellows, "Which wun of yooz iz gonna fight me, Skullbasha?"</flavor>
+    <rules>Skullbasha carries the Sword of Malediction, a special blade that nullifies magic. One of the Warriors can fight Skullbasha in single combat, or they can all attack him as normal. If one Warrior accepts the challenge, the two combatants fight until one is reduced to 0 Wounds. If Skullbasha wins, he takes one of that Warrior's Treasure cards, preferably a magic weapon, and struts off. If the Warrior wins, he may take Skullbasha's magic sword. While the single combat is in progress, no unexpected events occur. If any other Warrior intervenes in the duel, or if all the Warriors attack Skullbasha together, he immediately calls for help. Roll on the Minions Table to see who turns up, then fight as normal. In that case the Warriors get no treasure for completing the event and cannot take the Sword of Malediction because it has been broken during the fight. The Warriors only meet Skullbasha once during any adventure. If this event is generated a second time, ignore it and roll again on this table. Skullbasha: Move 4, Weapon Skill 4, Strength 4, Toughness 5, Attacks 1, Gold 120, Damage Special. He has Wounds equal to 10 plus 1 per battle-level of the challenged Warrior. He hits on 2, 3, 3, 4, 4, 4, 4, 4, 5, 5 against Weapon Skill 1-10. His damage is 1D6+4 against Novices, 2D6+4 against Champions, 3D6+4 against Heroes and 4D6+4 against Lords.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-idol-of-gork" name="Idol of Gork">
+    <flavor>In a niche in the wall is a small, ferocious-looking golden statue of an unfamiliar but distinctly Orcish deity.</flavor>
+    <rules>Draw a Warrior counter to see which Warrior steps forward to take the statue, then roll 1D6. 1-2: the statue is cursed. The Warrior loses a Luck counter if he has one. If he has no Luck left he permanently loses 2 Wounds from his starting Wounds score, then immediately puts the statue back. 3-4: a furious Orcish voice repeats "'Eadbutt!" and an unseen attacker repeatedly smashes the Warrior about the head. He drops the statue and suffers 1D6 Wounds plus 1 Wound per battle-level, with no deductions at all. When the attacks stop, the statue is back in its alcove. 5-6: the statue is really made of gold and is worth 500 gold. Until the end of the adventure, however, whenever the Warriors encounter Orcs, Goblins or other greenskins, the Monsters are not placed according to the One-on-One rule. Instead, as many as possible attack the Warrior carrying the idol as they try to wrest it back. Any remaining Monsters are placed as usual. If that Warrior is reduced to 0 Wounds, then when he is healed the statue is gone, taken back to its rightful place.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-lights-out" name="Lights Out!">
+    <flavor>Bogoff the Snotling scuttles into view, bites the leader's hand, grabs the lantern and runs off with it.</flavor>
+    <rules>Place Bogoff on the board as far away from the Warriors as possible while not leaving any of them in the dark. At the start of every Monsters' Phase Bogoff moves as far away from the Warriors as possible while still keeping them in the lantern light. He keeps this game up until he is hit, at which point he drops the lantern and runs off. If another event occurs while this is going on, Bogoff simply stays out of trouble and resumes afterwards. Bogoff can move through any square, even if occupied by a Warrior or Monster, and is never pinned. Because of his small size and speed, he dodges all hits, including missile attacks, on 4+. Even a successful hit is only a glancing blow: he just drops the lantern and runs. Because of Skabnoze's potion, Bogoff is temporarily immune to magic and cannot be killed by spells, even ones that automatically hit. Each turn while Bogoff has the lantern, if a 1 is rolled in the Power Phase he blows it out. The dungeon is plunged into darkness and each Warrior must roll 1D6 and add Willpower. Any who score less than 7 are completely lost and may do nothing except defend themselves or heal themselves. Any who score 7 or more may move and fight as normal, but suffer -2 to hit. Each Warrior must make this Willpower check at the start of every turn until the lantern is found and relit. Once Bogoff has blown the lantern out, he drops it and legs it. The Warriors find and relight it if the Wizard rolls a 5 or 6 in the Power Phase.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-boar-know-wotz" name="Boar Know Wotz">
+    <flavor>One of the Warriors slips in a foul mess on the floor: he has trodden in something a war boar has left behind.</flavor>
+    <rules>Take a Warrior counter. That Warrior has slipped flat on his face. As the Warriors look around, they realise that this whole area is covered in muck. They are hard pressed to stay on their feet. If any Monsters turn up, all the Warriors are at -1 to hit for as long as they stay on this board section, as they slide around in the pungent mire.</rules>
+    <special>Take another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-orcy-treasure-hoard" name="Orcy Treasure Hoard">
+    <flavor>The Warriors stumble across a pile of bones, gold and other jumbled oddments and start rooting around in the dirt.</flavor>
+    <rules>Roll 1D6. 1-2: they spend a fruitless hour searching and get thoroughly filthy. Nothing else happens, but roll 4 dice to represent the passing of time. For each die that comes up 1, take another Event card. 3-4: the Warriors find some gold, resolved as per the gold rules in the Warhammer Quest Roleplay Book. 5-6: the Warriors find some valuable items in the dirt. Each Warrior takes a Treasure card. However, they make enough noise to attract trouble. Take an Event card now. If it is not Monsters, shuffle it back into the deck and take another until Monsters do turn up. The maximum number arrive, and they ambush the engrossed Warriors.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-squiglitz" name="Squiglitz!">
+    <flavor>A horde of smelly, squeaking fungoid creatures drops on the Warriors from the roof of the cave.</flavor>
+    <rules>These tiny cave dwellers are distant relatives of cave squigs and they have very sharp teeth. Each Warrior is attacked by 6 Squiglitz plus 2 per battle-level of the Warriors. Each Warrior makes a normal damage roll against the Squiglitz attacking him, and every Wound caused kills one Squiglit. Each surviving Squiglit bites its Warrior for 2 Wounds, with no modifiers at all. This continues each turn until no Squiglitz are left alive. Each dead Squiglit is worth 5 gold.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-da-evil-eye" name="Da' Evil Eye">
+    <flavor>The ceiling above the Warriors is carved into the snarling face of a massive Orc, and its eyes suddenly glow red.</flavor>
+    <rules>Tendrils of green smoke issue from the face's mouth and then a beam of Orcy energy shoots from its eyes, striking at the Warriors. In turn, each player takes a Warrior counter from the cup without looking and places it face down. When all the counters are out, each player turns his over. If a player picked his own Warrior, he has nimbly avoided the energy blast. If not, that Warrior is engulfed in a corona of blazing magic and suffers 1D3 Wounds per battle-level, with no deductions.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-spider-bite" name="Spider Bite">
+    <flavor>One of the Warriors suddenly feels a sharp pain in the back of his neck and dislodges a tiny red spider.</flavor>
+    <rules>Take one Warrior counter to see who has been bitten, and another to see which Warrior is the self-proclaimed spider expert. The expert gives the bitten Warrior a cursory glance and declares that it definitely is not poisonous. The bitten Warrior must then roll 1D6. 1-3: the spider was poisonous after all. The Warrior suffers 2D6 Wounds with no deductions and is at -1 Strength until he takes a healing potion. Magic may heal the Wounds, but not the Strength loss. 4-5: the bite contains a slow-acting agent that attacks the nervous system. The next time the Wizard rolls a 1 in the Power Phase the Warrior immediately collapses to the floor, immobile. For that turn he may do nothing at all. On the next turn he may get up again, but all his characteristics except Wounds have been reduced to 1. Each turn, they all increase by 1 until they return to normal. 6: the spider toxin speeds up the Warrior's metabolism. For the rest of the adventure, the Warrior has +1 Attacks.</rules>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-kruimch" name="Kruimch!">
+    <flavor>With a deep rumbling sound, the ceiling starts to fall in.</flavor>
+    <rules>Any Warriors standing next to a wall are hit by falling rubble and suffer 1D6 Wounds plus 1 Wound per battle-level. Any Warriors in the middle of the room are safe. As the dust clears, a secret door is revealed. Place a door on an empty wall and put 1D6 shuffled spare Dungeon cards behind it. When the Warriors reach the last card in that mini deck and resolve any event there, they each gain a Treasure card. The Warriors do not have to explore the secret door if they do not wish to.</rules>
+    <special>Roll 1D6. On a score of 1, 2 or 3 draw another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-map" name="Map">
+    <flavor>Wedged between two bricks in the wall, the Warriors find a faded map.</flavor>
+    <rules>Roll 1D6. 1: the map is bait for a clever trap and appears to show the location of a huge treasure hoard. Keep this card. The next time the Wizard rolls a 1 in the Power Phase, instead of taking one Event card the Warriors must take 1D6 Event cards. 2: the map misleads the Warriors. Add another three Dungeon cards to the top of the current pile. 3-4: the map shows the next dungeon room the Warriors enter and marks a hidden treasure. On completing the event in that next room, the Warriors take an extra item of Dungeon Room treasure. Keep this card nearby to remind you. 5: the map shows a route back to civilisation. If the Warriors keep it, it knocks two weeks off their journey time when they next travel back to a Settlement. 6: although badly faded, the map may still prove useful. The next time the Warriors come to a T-junction and the Dungeon cards are split, the leader may look at the top 1D3 cards of each pile. Keep this card nearby to remind you and discard it immediately when used.</rules>
+    <special>Take another Event card immediately.</special>
+    <treasure>false</treasure>
+  </event>
+
+  <event id="lotol-spore-fungus" name="Spore Fungus">
+    <flavor>An incautious move kicks up a cloud of luminescent orange spores from the floor.</flavor>
+    <rules>Each Warrior on this board section must roll 1D6. 1: the spores are soporific and put the Warrior to sleep until the Wizard rolls a 5 or 6 in the Power Phase. Monsters will not attack a sleeping Warrior unless all the other Warriors are sleeping or dead, in which case they can kill him automatically. 2: the spores are toxic and cause 1D6 Wounds plus 1 Wound per battle-level, not modified for Toughness or armour. 3: the spores cause a sneezing fit. During the following combat the Warrior loses 1 Attack and suffers -1 to all rolls to hit. 4: the spores have no effect at all, and the Warrior even finds the smell rather pleasant. 5: the spores have curative properties and heal 1D6 Wounds plus 1 Wound per battle-level. 6: the spores are magical and increase the Warrior's Strength by +1 for the rest of the adventure. Roll 1D6. On a 6, this Strength bonus is permanent.</rules>
+    <special>Take another Event card immediately. If it does not reveal Monsters, resolve the event and turn over the next card until some Monsters do turn up.</special>
+    <treasure>false</treasure>
+  </event>
+
+</events>

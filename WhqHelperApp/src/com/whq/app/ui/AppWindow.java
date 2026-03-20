@@ -57,13 +57,17 @@ import pms.whq.content.ContentRepository;
 import pms.whq.data.MonsterEntry;
 import pms.whq.data.MonsterGroup;
 import pms.whq.data.Table;
+import pms.whq.data.TableReferenceEntry;
 import pms.whq.data.TableKind;
+import pms.whq.game.TableDrawService;
 import pms.whq.state.AppState;
 import pms.whq.state.AdventureAmbience;
 import pms.whq.swt.CardFactory;
 import pms.whq.swt.EventContentEditorDialog;
 
 public class AppWindow {
+    private static final TableDrawService TABLE_DRAW_SERVICE = new TableDrawService();
+
     private record ObjectiveMonsterDifficulty(String labelKey, int[] offsets) {
     }
 
@@ -1844,6 +1848,10 @@ public class AppWindow {
         if (entry instanceof MonsterEntry monsterEntry) {
             return selectedAmbience.matches(monsterEntry.ambiences);
         }
+        if (entry instanceof TableReferenceEntry tableReferenceEntry) {
+            return tableReferenceEntry.ambiences.isEmpty()
+                    || selectedAmbience.matches(tableReferenceEntry.ambiences);
+        }
         if (entry instanceof MonsterGroup group) {
             if (group.isEmpty()) {
                 return false;
@@ -1861,6 +1869,9 @@ public class AppWindow {
     private int entryLevel(Object entry) {
         if (entry instanceof MonsterEntry monsterEntry) {
             return monsterEntry.level;
+        }
+        if (entry instanceof TableReferenceEntry tableReferenceEntry) {
+            return tableReferenceEntry.level;
         }
         if (entry instanceof MonsterGroup group) {
             return group.level;
@@ -1903,7 +1914,11 @@ public class AppWindow {
         if (entries.isEmpty()) {
             return null;
         }
-        return entries.get(new Random().nextInt(entries.size()));
+        Object selected = entries.get(new Random().nextInt(entries.size()));
+        if (selected instanceof TableReferenceEntry tableReferenceEntry) {
+            return TABLE_DRAW_SERVICE.resolveEntry(tableReferenceEntry);
+        }
+        return selected;
     }
 
     private List<Object> generateObjectiveRoomMonsterEntries(ContentRepository repository, int dungeonLevel) {

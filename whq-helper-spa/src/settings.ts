@@ -24,6 +24,23 @@ const DEFAULT_SETTINGS: AppSettings = {
   tableActive: {}
 };
 
+function detectBrowserLanguage(): AppSettings['language'] {
+  const candidates = typeof navigator === 'undefined' ? [] : [...(navigator.languages ?? []), navigator.language ?? ''];
+  for (const candidate of candidates) {
+    const normalized = candidate.trim().toLowerCase();
+    if (!normalized) {
+      continue;
+    }
+    if (normalized.startsWith('es')) {
+      return 'ES';
+    }
+    if (normalized.startsWith('en')) {
+      return 'EN';
+    }
+  }
+  return DEFAULT_SETTINGS.language;
+}
+
 function parseBoolean(value: string | undefined, fallback: boolean): boolean {
   if (!value) {
     return fallback;
@@ -142,8 +159,12 @@ export async function loadSettings(): Promise<AppSettings> {
     // Ignore and keep defaults.
   }
 
+  const hasConfiguredLanguage = typeof fromCfg.language === 'string' || typeof fromStorage.language === 'string';
+  const defaultLanguage = hasConfiguredLanguage ? DEFAULT_SETTINGS.language : detectBrowserLanguage();
+
   const merged: AppSettings = {
     ...DEFAULT_SETTINGS,
+    language: defaultLanguage,
     ...fromCfg,
     ...fromStorage,
     tableActive: {

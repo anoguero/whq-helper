@@ -72,6 +72,14 @@
     </xsd:sequence>
     <xsd:attribute name="level" type="xsd:integer" />
   </xsd:complexType>
+
+  <xsd:complexType name="tableRefType">
+    <xsd:attribute name="name" type="xsd:string" />
+    <xsd:attribute name="level" type="xsd:integer" />
+    <xsd:attribute name="targetLevel" type="xsd:integer" />
+    <xsd:attribute name="times" type="xsd:positiveInteger" />
+    <xsd:attribute name="ambiences" type="ambiencesType" />
+  </xsd:complexType>
   
   <xsd:complexType name="tableType">
     <xsd:sequence maxOccurs="unbounded" minOccurs="1">
@@ -79,6 +87,7 @@
         <xsd:element name="monster" type="monsterType" />
         <xsd:element name="event" type="eventType" />
         <xsd:element name="group" type="groupType" />
+        <xsd:element name="tableRef" type="tableRefType" />
       </xsd:choice>
     </xsd:sequence>
     <xsd:attribute name="name" type="xsd:string" />

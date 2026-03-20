@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
+  <table name="Lair of the Orc Lord Dungeon Events">
+    <event id="lotol-challenge" />
+    <event id="lotol-idol-of-gork" />
+    <event id="lotol-idol-of-gork" />
+    <event id="lotol-lights-out" />
+    <event id="lotol-lights-out" />
+    <event id="lotol-lights-out" />
+    <event id="lotol-boar-know-wotz" />
+    <event id="lotol-boar-know-wotz" />
+    <event id="lotol-boar-know-wotz" />
+    <event id="lotol-boar-know-wotz" />
+    <event id="lotol-orcy-treasure-hoard" />
+    <event id="lotol-orcy-treasure-hoard" />
+    <event id="lotol-orcy-treasure-hoard" />
+    <event id="lotol-orcy-treasure-hoard" />
+    <event id="lotol-orcy-treasure-hoard" />
+    <event id="lotol-squiglitz" />
+    <event id="lotol-squiglitz" />
+    <event id="lotol-squiglitz" />
+    <event id="lotol-squiglitz" />
+    <event id="lotol-squiglitz" />
+    <event id="lotol-squiglitz" />
+    <event id="lotol-da-evil-eye" />
+    <event id="lotol-da-evil-eye" />
+    <event id="lotol-da-evil-eye" />
+    <event id="lotol-da-evil-eye" />
+    <event id="lotol-da-evil-eye" />
+    <event id="lotol-spider-bite" />
+    <event id="lotol-spider-bite" />
+    <event id="lotol-spider-bite" />
+    <event id="lotol-spider-bite" />
+    <event id="lotol-kruimch" />
+    <event id="lotol-kruimch" />
+    <event id="lotol-kruimch" />
+    <event id="lotol-map" />
+    <event id="lotol-map" />
+    <event id="lotol-spore-fungus" />
+  </table>
+</tables>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:noNamespaceSchemaLocation='whq-rules-schema.xsd'>
+  <rule id="cot-undead-magic-weapon" name="UNDEAD MAGIC WEAPONS">When playing an Undead adventure and an Undead Monster has a magic weapon, use the following Undead Magic Weapons table. 
+  * 1 Dread Blade: any Warrior standing adjacent to the wielder at the end of the turn suffers 3 Fatal Wounds with no deductions. 
+  * 2 Chaos Tomb Blade: each time a Warrior is reduced to zero Wounds by this blade, roll 1D6; on a 1 he permanently loses 1D3 Wounds. 
+  * 3 Blade of Resurrection: keep track of the Wounds caused by this weapon; for every 10 Wounds caused, one Skeleton Warrior armed with a sword is created and placed using the normal rules, able to attack in the next Monsters' Phase. 
+  * 4 Grave Ripper: each hit ignores 1D6 points of armour, and on a roll of 6 one randomly determined piece of armour worn by the target is destroyed. 
+  * 5 Axes of Nagashizzar: the wielder gains +1 Attack; when a Warrior is reduced to zero Wounds by one of the axes, roll 1D6. On 1 he is dead and cannot be healed by any means, on 2-3 he permanently loses 1D6 Wounds, on 4 he permanently loses 1 Toughness, on 5 he permanently loses 1 Strength, and on 6 he suffers no additional effect. 
+  * 6 Flail of Skulls: on a natural 6 to hit, the Warrior takes an extra 2D6 Wounds with no deductions.</rule>
+  <rule id="cot-undead-magic-item" name="UNDEAD MAGIC ITEMS">When playing an Undead adventure and an Undead Monster has a magic item, use the following Undead Magic Items table. 
+  * 1 Staff of Flaming Death: gives the Monster the equivalent of Breathe Fire (3). 
+  * 2 Skull Staff: only a magic-using Monster may have this item, otherwise reroll. The bearer may force Warriors to reroll any Resist Magic or Dispel Magic attempts, and magic items used against the wielder have no effect on a D6 roll of 6, though limited-use items are still expended. 
+  * 3 The Cursed Books of Har-Ak-Iman: any Warrior adjacent to the bearer suffers -1 to hand-to-hand and missile to hit rolls, and all Warrior spells cast on the same board section cost +1 Power. 
+  * 4 Bracelet of Khemri: any hand-to-hand attack against the bearer is deflected on a 6 and has no effect, in addition to any other abilities the Monster already has. 
+  * 5 Amulet of Helsnicht: at the start of each Monsters' Phase roll 1D6. On 1-2 nothing happens, on 3-4 the bearer creates 1D6 Skeletons placed immediately using the normal rules and able to attack that Phase, on 5 the bearer heals 2D6 Wounds up to its Starting Wounds, and on 6 it may immediately cast a single Necromantic spell. 
+  * 6 Staff of Osiris: any Warrior standing next to the bearer at the start of the Monsters' Phase is hit on 4, 5 or 6 by an attack with Strength equal to that Warrior's battle-level.</rule>
+  <rule id="cot-undead-magic-armour" name="UNDEAD MAGIC ARMOUR">When playing an Undead adventure and an Undead Monster has magic armour, use the following Undead Magic Armour table. 
+  * 1 The Blighted Shield: the Monster gains +1 Toughness, and any spell cast at the bearer is reflected back at the caster on a D6 roll of 6. 
+  * 2 The Helm of Krell: all Warriors are at -1 to hit the wearer with hand-to-hand and missile attacks; any Warrior who rolls a 1 to hit is seized by madness and may do nothing for a whole turn, and Monsters are at +1 to hit that Warrior. 
+  * 3 Armour of Warding: the Monster gains Magic Resistance (4). 
+  * 4 Armour of Blight: the Monster gains Regenerate (2), in addition to any abilities it already possesses. 
+  * 5 Breastplate of Numas: when the wearer is reduced to zero Wounds, roll 1D6. On 5 or 6 it is not dead and instead has 1D6 Wounds remaining; only on 4 or less does it finally die. 
+  * 6 The Cursed Armour of Quatar: the Monster loses 1 Attack but gains +3D6 Starting Wounds; no Monster may ever have less than 1 Attack.</rule>
+  <rule id="cot-carrion-attack" name="CARRION ATTACK">Each time a Carrion makes a successful hit, roll twice for damage, using 1D6 + 3 each time, and apply both results to the Warrior.</rule>
+  <rule id="cot-grimoire-necris" name="GRIMOIRE NECRIS">The Grimoire Necris is a source of great necromantic power. If the Dread King is standing next to it and is not pinned, he rerolls spell results of 1 when determining which Necromantic spell he casts. If Gunther Laranscheld starts the Monsters' Phase next to the Grimoire and is not pinned, he may attempt to cast a Necromantic spell on a D6 roll of 4 or more.</rule>
+  <rule id="cot-luthor-special-attack" name="SPECIAL ATTACK">Whenever Luthor appears, he makes his attacks immediately after being placed. Then roll 1D6. On a 1 he stays and fights as normal. On 2 or more he vanishes into the darkness and is removed from the board. If he has vanished, every later Unexpected Event also triggers a fresh Luthor attack. If Luthor is in play when Gunther Laranscheld appears, place Luthor next to him and he stays automatically.</rule>
+  <rule id="cot-minions" name="MINIONS">Gunther Laranscheld is always protected by Undead guards. When an encounter or event says he appears with Minions, roll 1D6 on the following table: 1 one Tomb Guardian; 2-3 1D6 Skeletons armed with spears; 4 1D6 Zombies; 5 1D6 Ghouls; 6 1D6 Skeletons armed with swords.</rule>
+  <rule id="cot-pestilential-breath" name="PESTILENTIAL BREATH">When a Zombie Dragon attacks, roll 1D6 to see how many Warriors are affected by its cloud of corrosive gas. If the score is greater than the number of living Warriors, all living Warriors are affected. Each affected Warrior suffers 3D6 Wounds with no deductions for armour. Any Warrior reduced to 0 Wounds by this attack also suffers the Zombie Dragon's Plague and loses 1 Toughness when healed back to life.</rule>
+</rules>
