@@ -101,12 +101,6 @@
                                         <resource>
                                             <directory>${project.basedir}</directory>
                                             <includes>
-                                                <include>settings.cfg</include>
-                                            </includes>
-                                        </resource>
-                                        <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
                                                 <include>data/**</include>
                                             </includes>
                                         </resource>

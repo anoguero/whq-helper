@@ -42,6 +42,10 @@ public final class FontResources {
     }
 
     FontData[] available = device.getFontList(null, true);
+    if (available == null || available.length == 0) {
+      return fallback;
+    }
+
     List<String> expanded = new ArrayList<>();
     if (candidates != null) {
       for (String candidate : candidates) {
