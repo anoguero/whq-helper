@@ -22,7 +22,7 @@ if (-not (Test-Path $WindowsSwtJar)) {
 
 Push-Location $ProjectRoot
 try {
-    mvn -q -Pwindows-dist -DskipTests clean package
+    mvn -q -Pwindows-dist -DskipTests package
     if ($LASTEXITCODE -ne 0) {
         throw "Ha fallado la construcción Maven del bundle Windows."
     }

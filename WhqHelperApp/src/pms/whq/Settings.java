@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Properties;
@@ -216,40 +215,14 @@ public final class Settings {
       return;
     }
 
-    Path path = resolveDirectoryPath(value);
-    if (path == null || !Files.isDirectory(path)) {
-      path = baseDir.resolve(defaultRelativeDirectory(key)).normalize();
+    Path path = Path.of(value);
+    if (!path.isAbsolute()) {
+      path = baseDir.resolve(path).normalize();
+    } else {
+      path = path.normalize();
     }
 
     settings.setProperty(key, appendSeparator(path.toString()));
-  }
-
-  private static Path resolveDirectoryPath(String value) {
-    if (value == null || value.isBlank()) {
-      return null;
-    }
-
-    Path path = Path.of(value);
-    if (!path.isAbsolute()) {
-      return baseDir.resolve(path).normalize();
-    }
-    return path.normalize();
-  }
-
-  private static String defaultRelativeDirectory(String key) {
-    return switch (key) {
-      case MONSTER_DIR -> "data/xml/monsters";
-      case EVENT_DIR -> "data/xml/events";
-      case TRAVEL_DIR -> "data/xml/travel";
-      case SETTLEMENT_DIR -> "data/xml/settlement";
-      case TABLE_DIR -> "data/xml/tables";
-      case RULES_DIR -> "data/xml/rules";
-      case IMG_DIR -> "data/graphics";
-      case MONSTER_IMG_DIR -> "data/graphics/monsters";
-      case EVENT_IMG_DIR -> "data/graphics/events";
-      case FONT_DIR -> "data/fonts";
-      default -> "";
-    };
   }
 
   private static String appendSeparator(String path) {

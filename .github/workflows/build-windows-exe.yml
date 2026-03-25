@@ -47,3 +47,10 @@ jobs:
             WhqHelperApp/target/windows-package/*.exe
             WhqHelperApp/target/windows-package/**/*.exe
           if-no-files-found: error
+
+      - name: Upload full Windows package directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: whq-helper-windows-package
+          path: WhqHelperApp/target/windows-package/**
+          if-no-files-found: error
