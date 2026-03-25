@@ -15,10 +15,8 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
   - banda inferior con tipo (`DUNGEON ROOM`, `OBJECTIVE ROOM`, `CORRIDOR`, `SPECIAL`).
 - Repositorio XML de cartas de mazmorra (`data/xml/dungeon/dungeon-cards.xml`) como fuente principal de mantenimiento.
 - Nuevo campo de datos `environment` en cada carta (por defecto: `The Old World`).
-- Migración automática desde `data/whq-cards.db` si existe una base SQLite legacy y todavía no se ha creado el XML.
 - Dependencias de terceros mínimas:
-  - SWT,
-  - sqlite-jdbc solo para migración legacy desde `whq-cards.db`.
+  - SWT.
 
 ## Estructura
 
@@ -44,7 +42,7 @@ Comandos:
 mvn -q clean compile
 java --enable-native-access=ALL-UNNAMED \
   -Djava.library.path=./lib/native/linux-x86_64 \
-  -cp "target/classes:./lib/org.eclipse.swt.gtk.linux.x86_64-3.127.0.jar:./lib/sqlite-jdbc-3.49.1.0.jar" \
+  -cp "target/classes:./lib/org.eclipse.swt.gtk.linux.x86_64-3.127.0.jar" \
   com.whq.app.WhqCardRendererApp
 ```
 
@@ -93,7 +91,6 @@ windows-input/
   whq-helper-app-1.0.0.jar
   settings.cfg
   lib/
-    sqlite-jdbc-3.49.1.0.jar
     org.eclipse.swt.win32.win32.x86_64-3.127.0.jar
   data/
     xml/
@@ -185,7 +182,7 @@ Cada carta guarda:
 - `id`, `name`, `type`, `environment`, `copyCount`, `enabled`
 - `description`, `rules`, `tileImagePath`
 
-Si el XML no existe al arrancar, la app intenta migrarlo desde `data/whq-cards.db`. Si tampoco hay datos legacy, crea un conjunto de ejemplo.
+Si el XML no existe al arrancar, la app crea un conjunto de ejemplo.
 
 ## Personalización
 

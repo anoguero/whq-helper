@@ -28,7 +28,6 @@ import org.w3c.dom.NodeList;
 
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
-import com.whq.app.storage.legacy.LegacyDungeonCardMigrator;
 
 public class XmlDungeonCardStore implements DungeonCardStore {
     private static final String DEFAULT_ENVIRONMENT = "The Old World";
@@ -43,7 +42,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     private final Path userXmlPath;
     private final Path schemaPath;
     private final DocumentBuilderFactory parserFactory;
-    private final LegacyDungeonCardMigrator legacyMigrator;
 
     public XmlDungeonCardStore(Path projectRoot) {
         this.projectRoot = projectRoot.toAbsolutePath().normalize();
@@ -53,7 +51,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         this.schemaPath = this.projectRoot.resolve(SCHEMA_PATH);
         this.parserFactory = DocumentBuilderFactory.newInstance();
         this.parserFactory.setNamespaceAware(true);
-        this.legacyMigrator = new LegacyDungeonCardMigrator(this.projectRoot);
     }
 
     @Override
@@ -316,16 +313,8 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             return;
         }
 
-        List<DungeonCard> cards = loadLegacyCards();
-        if (cards.isEmpty()) {
-            cards = defaultCards();
-        }
         ensureSchemaExists();
-        writeBaseCards(cards);
-    }
-
-    private List<DungeonCard> loadLegacyCards() {
-        return legacyMigrator.loadLegacyCards();
+        writeBaseCards(defaultCards());
     }
 
     private void ensureSchemaExists() throws DungeonCardStorageException {

@@ -23,6 +23,9 @@ if (-not (Test-Path $WindowsSwtJar)) {
 Push-Location $ProjectRoot
 try {
     mvn -q -Pwindows-dist -DskipTests package
+    if ($LASTEXITCODE -ne 0) {
+        throw "Ha fallado la construcción Maven del bundle Windows."
+    }
 
     $MainJarPath = Join-Path $WindowsInputDir $MainJar
     if (-not (Test-Path $MainJarPath)) {
@@ -44,6 +47,9 @@ try {
     )
 
     & jpackage @JPackageArgs
+    if ($LASTEXITCODE -ne 0) {
+        throw "Ha fallado jpackage al generar el instalador Windows."
+    }
 } finally {
     Pop-Location
 }
