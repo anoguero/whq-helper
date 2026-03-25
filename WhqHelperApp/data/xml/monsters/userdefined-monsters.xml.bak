@@ -13,8 +13,6 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="fight-on-death">Fight on Death</rule>
-      <rule id="rpb-ambush-magic" param="11">AMBUSH, MAGIC 11</rule>
       <magic id="slaanesh" level="1"/>
     </special>
   </monster>

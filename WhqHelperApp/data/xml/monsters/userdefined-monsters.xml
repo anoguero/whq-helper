@@ -13,7 +13,7 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <magic id="slaanesh" level="1"/>
+      <rule id="rpb-ambush" param="5+">AMBUSH 5+</rule>
     </special>
   </monster>
 </monsters>
