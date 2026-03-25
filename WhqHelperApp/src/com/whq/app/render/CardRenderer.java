@@ -6,14 +6,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Display;
 
 import com.whq.app.model.DungeonCard;
-import com.whq.app.ui.FontResources;
 
 public class CardRenderer {
     private static final int TITLE_FONT_BASE = 56;
@@ -36,9 +35,6 @@ public class CardRenderer {
 
     public CardRenderer(Device device, Path projectRoot) {
         this.device = device;
-        if (device instanceof Display display) {
-            FontResources.loadBundledFonts(display, projectRoot);
-        }
         this.template = new Image(device, projectRoot.resolve("resources/dungeon-card-template.png").toString());
 
         Rectangle templateBounds = template.getBounds();
@@ -49,19 +45,19 @@ public class CardRenderer {
         this.tileRenderer = new DungeonTileRenderer(device, projectRoot);
 
         this.titleFont = createBestFont(
-                new String[] {"Caslon Antique", "Casablanca Antique", "Cinzel", "Trajan Pro", "Times New Roman", "Serif"},
+                new String[] {"Casablanca Antique", "Cinzel", "Trajan Pro", "Times New Roman", "Serif"},
                 layout.scaledFont(TITLE_FONT_BASE),
                 SWT.BOLD);
         this.descriptionFont = createBestFont(
-                new String[] {"Book Antiqua", "Newtext Bk BT", "Georgia", "Times New Roman", "Serif"},
+                new String[] {"Newtext Bk BT", "Georgia", "Times New Roman", "Serif"},
                 layout.scaledFont(DESC_FONT_BASE),
                 SWT.BOLD | SWT.ITALIC);
         this.rulesFont = createBestFont(
-                new String[] {"Book Antiqua", "Newtext Bk BT", "Trebuchet MS", "Garamond", "Arial", "Sans"},
+                new String[] {"Newtext Bk BT", "Trebuchet MS", "Garamond", "Arial", "Sans"},
                 layout.scaledFont(RULES_FONT_BASE),
                 SWT.NORMAL);
         this.typeFont = createBestFont(
-                new String[] {"Copperplate Gothic Bold", "Copperplate", "Trebuchet MS", "Verdana", "Arial", "Sans"},
+                new String[] {"Copperplate", "Trebuchet MS", "Verdana", "Arial", "Sans"},
                 layout.scaledFont(TYPE_FONT_BASE),
                 SWT.BOLD);
     }
@@ -136,10 +132,17 @@ public class CardRenderer {
     }
 
     private Font createBestFont(String[] preferredNames, int pixelHeight, int style) {
-        String selected = FontResources.pickAvailableFont(
-                device,
-                preferredNames[preferredNames.length - 1],
-                preferredNames);
+        String selected = preferredNames[preferredNames.length - 1];
+        for (String name : preferredNames) {
+            FontData probe = new FontData(name, pixelHeight, style);
+            Font font = new Font(device, probe);
+            String actualName = font.getFontData()[0].getName();
+            font.dispose();
+            if (actualName.equalsIgnoreCase(name)) {
+                selected = name;
+                break;
+            }
+        }
         return new Font(device, selected, pixelHeight, style);
     }
 
