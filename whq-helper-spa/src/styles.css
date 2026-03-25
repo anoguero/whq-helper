@@ -506,6 +506,21 @@ button:hover {
   flex: 1;
 }
 
+#ucRuleParameters {
+  display: grid;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #5a452c;
+}
+
+.dashboard-parameter-heading {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #d8c3a5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .dashboard-inline-checkbox {
   padding-top: 28px;
 }

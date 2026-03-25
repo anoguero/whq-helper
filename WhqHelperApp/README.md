@@ -56,6 +56,102 @@ Si no tienes acceso a internet, usa modo offline:
 
 El proyecto ya incluye los JAR necesarios en `lib/` para evitar descargas de dependencias.
 
+## Empaquetado para Windows
+
+La opción recomendada para este proyecto es generar un bundle de aplicación y, sobre ese bundle, crear el ejecutable con `jpackage`.
+
+Motivo:
+
+- la app SWT usa datos y recursos editables en disco (`data/`, `resources/`, `settings.cfg`),
+- el contenido XML no debe quedar enterrado dentro del JAR si quieres seguir editándolo, hacer backups o permitir contenido de usuario,
+- `jpackage` genera un `.exe` o `.msi` con runtime de Java incluido, sin pedir Java preinstalado al usuario final.
+
+### Preparación
+
+Añade el JAR de SWT para Windows en:
+
+- `lib/org.eclipse.swt.win32.win32.x86_64-3.127.0.jar`
+
+No hace falta copiar DLL de SWT aparte en esta estrategia: el JAR de SWT ya contiene sus binarios nativos.
+
+### Generar el bundle de entrada para Windows
+
+Desde `WhqHelperApp/`:
+
+```bash
+mvn -Pwindows-dist -DskipTests package
+```
+
+Esto genera:
+
+- `target/windows-input/`: directorio listo para `jpackage`
+
+El contenido de `target/windows-input/` queda así:
+
+```text
+windows-input/
+  whq-helper-app-1.0.0.jar
+  settings.cfg
+  lib/
+    sqlite-jdbc-3.49.1.0.jar
+    org.eclipse.swt.win32.win32.x86_64-3.127.0.jar
+  data/
+    xml/
+    graphics/
+    fonts/
+  resources/
+    ...
+```
+
+### Generar `.exe` o `.msi`
+
+Este paso debe ejecutarse en Windows con JDK 17+:
+
+```powershell
+./scripts/package-windows.ps1
+```
+
+Opciones:
+
+```powershell
+./scripts/package-windows.ps1 -Type app-image
+./scripts/package-windows.ps1 -Type exe
+./scripts/package-windows.ps1 -Type msi
+```
+
+Salida:
+
+- `target/windows-package/`
+
+## Cómo quedan los XML en el ejecutable
+
+Los XML no se empaquetan dentro del JAR principal.
+
+Se copian como ficheros normales dentro del bundle de aplicación:
+
+- `data/xml/monsters/*.xml`
+- `data/xml/events/*.xml`
+- `data/xml/travel/*.xml`
+- `data/xml/settlement/*.xml`
+- `data/xml/tables/*.xml`
+- `data/xml/dungeon/*.xml`
+
+Cuando `jpackage` genera la imagen Windows, esos ficheros quedan junto al resto del contenido de la app dentro del área `app/` del paquete generado. En tiempo de ejecución la aplicación resuelve su base no por directorio de trabajo, sino por la ubicación real del JAR empaquetado.
+
+Implicación práctica:
+
+- el ejecutable puede leer y escribir los XML,
+- puedes distribuir XML de serie en la instalación,
+- los ficheros `userdefined-*.xml` y `*.bak` siguen funcionando,
+- no necesitas descomprimir nada en cada arranque.
+
+Si quisieras un diseño todavía más limpio para despliegue, puedes separar:
+
+- XML base en el bundle instalado,
+- XML editables del usuario en `%APPDATA%/WHQ Helper/`
+
+Pero eso requeriría adaptar el código de carga/guardado. La configuración actual mantiene el comportamiento existente y es la opción más segura para este proyecto.
+
 Alternativa sin Maven:
 
 ```bash

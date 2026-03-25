@@ -60,6 +60,10 @@ public final class CardFactory {
     return shell;
   }
 
+  public static Composite createTreasureCardPreview(Composite parent, Event event) {
+    return new TreasureCardComposite(parent, event);
+  }
+
   public static Shell createEventCard(Shell parent, Event event, int cardWidth, int cardHeight) {
     String title = event == null ? I18n.t("card.event.defaultName") : nullSafe(event.name);
     Shell shell = createBaseCardShell(parent, title, cardWidth, cardHeight);

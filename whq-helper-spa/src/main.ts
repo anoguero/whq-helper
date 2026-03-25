@@ -993,26 +993,77 @@ function joinCsv(values: string[]): string {
   return values.join(', ');
 }
 
-function parseRuleLinks(value: string): Record<string, string> {
-  const result: Record<string, string> = {};
-  for (const line of value.split(/\r?\n/)) {
-    const separator = line.indexOf('=');
-    if (separator < 0) {
-      continue;
-    }
-    const key = line.slice(0, separator).trim();
-    const text = line.slice(separator + 1).trim();
-    if (key && text) {
-      result[key] = text;
-    }
-  }
-  return result;
+function formatRuleLinks(links: Record<string, { text: string; parameter: string }>): string {
+  return Object.entries(links)
+    .map(([key, value]) => {
+      const text = value?.text ?? '';
+      const parameters = (value as { parameters?: string[] } | undefined)?.parameters ?? [];
+      const parameter = value?.parameter?.trim?.() ?? '';
+      const suffix = parameters.length > 1 ? ` [${parameters.join(' | ')}]` : parameter ? ` [${parameter}]` : '';
+      return `${text} (${key})${suffix}`;
+    })
+    .join('\n');
 }
 
-function formatRuleLinks(links: Record<string, string>): string {
-  return Object.entries(links)
-    .map(([key, value]) => `${key}=${value}`)
-    .join('\n');
+function buildSpecialRuleText(name: string, parameters: string[], parameterFormat = ''): string {
+  const normalizedName = name?.trim?.() ?? '';
+  const normalizedParameters = parameters.map((value) => value?.trim?.() ?? '');
+  const normalizedFormat = parameterFormat?.trim?.() ?? '';
+  if (normalizedParameters.every((value) => !value)) {
+    return normalizedName;
+  }
+  if (normalizedFormat) {
+    let rendered = normalizedFormat.replaceAll('{name}', normalizedName);
+    rendered = rendered.replaceAll('{param}', normalizedParameters[0] ?? '');
+    normalizedParameters.forEach((value, index) => {
+      rendered = rendered.replaceAll(`{${index}}`, value);
+    });
+    return rendered.trim();
+  }
+  return `${normalizedName} ${normalizedParameters[0] ?? ''}`.trim();
+}
+
+function inferRuleParameters(name: string, text: string, parameterFormat = ''): string[] {
+  const normalizedName = name?.trim?.() ?? '';
+  const normalizedText = text?.trim?.() ?? '';
+  const normalizedFormat = parameterFormat?.trim?.() ?? '';
+  if (!normalizedName || !normalizedText) {
+    return [];
+  }
+  if (normalizedFormat) {
+    const source = normalizedFormat.replaceAll('{name}', normalizedName);
+    const captureRegex = /(\{(?:\d+|param)\})/g;
+    const parts = source.split(captureRegex).filter(Boolean);
+    const placeholders = parts.filter((part) => /^\{(?:\d+|param)\}$/.test(part));
+    if (placeholders.length > 0) {
+      const pattern = parts
+        .map((part) => (/^\{(?:\d+|param)\}$/.test(part) ? '(.*?)' : part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
+        .join('');
+      const match = new RegExp(`^${pattern}$`, 'i').exec(normalizedText);
+      if (match) {
+        const values: string[] = [];
+        placeholders.forEach((placeholder, index) => {
+          const targetIndex = placeholder === '{param}' ? 0 : Number.parseInt(placeholder.slice(1, -1), 10);
+          values[targetIndex] = match[index + 1]?.trim?.() ?? '';
+        });
+        return values;
+      }
+    }
+  }
+  if (!normalizedText.toLowerCase().startsWith(normalizedName.toLowerCase())) {
+    return [];
+  }
+  return [normalizedText.slice(normalizedName.length).trim()];
+}
+
+function ruleParameterLabels(rule?: Pick<Rule, 'parameterName' | 'parameterNames'> | undefined): string[] {
+  if (!rule) {
+    return [];
+  }
+  if (rule.parameterNames?.length) {
+    return rule.parameterNames;
+  }
+  return rule.parameterName ? [rule.parameterName] : [];
 }
 
 function treasureUsersToFlags(users: string): Record<'B' | 'D' | 'E' | 'W', boolean> {
@@ -1053,9 +1104,17 @@ function nextUserDungeonCardId(): number {
   return Math.max(0, ...fromCards, ...fromUserItems) + 1;
 }
 
+function isHiddenManagedTreasureTable(item: UserContentItem): boolean {
+  return (
+    item.kind === 'table' &&
+    (item.data.name.trim() === 'userdefined-treasure' || item.data.name.trim() === 'userdefined-objective-treasure')
+  );
+}
+
 function dashboardItemsByKind(kind: UserContentKind): UserContentItem[] {
   return loadUserContentItems()
     .filter((item) => item.kind === kind)
+    .filter((item) => !isHiddenManagedTreasureTable(item))
     .sort((left, right) => left.title.localeCompare(right.title, undefined, { sensitivity: 'base' }));
 }
 
@@ -1163,8 +1222,10 @@ function parseMonsterTableSpecial(node: Element): Pick<MonsterEntry, 'special' |
     if (child.tagName === 'rule') {
       const id = (child.getAttribute('id') ?? '').trim();
       const text = child.textContent?.trim() ?? '';
+      const parameter = (child.getAttribute('param') ?? '').trim();
+      const parameters = parameter ? [parameter] : [];
       if (id && text) {
-        result.specialLinks[id] = text;
+        result.specialLinks[id] = { text, parameter, parameters };
       }
     } else if (child.tagName === 'magic') {
       result.magicType = (child.getAttribute('id') ?? '').trim();
@@ -1242,8 +1303,12 @@ function serializeMonsterOnlyTable(name: string, entries: Array<MonsterEntry | G
     if (entry.special.trim()) {
       lines.push(`${indent}  <text>${escapeHtml(entry.special.trim())}</text>`);
     }
-    for (const [id, text] of Object.entries(entry.specialLinks)) {
-      lines.push(`${indent}  <rule id="${escapeHtml(id)}">${escapeHtml(text)}</rule>`);
+    for (const [id, link] of Object.entries(entry.specialLinks)) {
+      const attrs = [`id="${escapeHtml(id)}"`];
+      if (link.parameter.trim()) {
+        attrs.push(`param="${escapeHtml(link.parameter.trim())}"`);
+      }
+      lines.push(`${indent}  <rule ${attrs.join(' ')}>${escapeHtml(link.text)}</rule>`);
     }
     if (entry.magicType.trim()) {
       lines.push(`${indent}  <magic id="${escapeHtml(entry.magicType.trim())}" level="${Math.max(0, entry.magicLevel)}" />`);
@@ -2090,7 +2155,29 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
   if (!editor) {
     return;
   }
-  const data = item.data as UserRuleData;
+  const rawData = item.data as Partial<UserRuleData>;
+  const sourceRule = repository.rules.get(item.sourceId ?? rawData.id ?? '');
+  const rawParameterNames = rawData.parameterNames as string[] | string | undefined;
+  const parameterNames = Array.isArray(rawParameterNames)
+    ? (rawParameterNames.length > 0 ? rawParameterNames : sourceRule?.parameterNames ?? [])
+    : typeof rawParameterNames === 'string'
+      ? (() => {
+          const values = rawParameterNames
+            .split(',')
+            .map((value: string) => value.trim())
+            .filter(Boolean);
+          return values.length > 0 ? values : sourceRule?.parameterNames ?? [];
+        })()
+      : sourceRule?.parameterNames ?? [];
+  const data: UserRuleData = {
+    id: rawData.id ?? '',
+    type: rawData.type === 'magic' ? 'magic' : 'rule',
+    name: rawData.name ?? '',
+    text: rawData.text ?? '',
+    parameterName: rawData.parameterName || sourceRule?.parameterName || '',
+    parameterNames,
+    parameterFormat: rawData.parameterFormat || sourceRule?.parameterFormat || ''
+  };
   editor.innerHTML = `
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
@@ -2114,6 +2201,9 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
             </select>
           </label>
           <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.parameterName')}<input id="ucParameterName" value="${escapeHtml(data.parameterName)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.parameterNames')}<input id="ucParameterNames" value="${escapeHtml((data.parameterNames ?? []).join(', '))}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.parameterFormat')}<input id="ucParameterFormat" value="${escapeHtml(data.parameterFormat)}"></label>
           <label>${t(settings.language, 'contentDashboard.field.text')}<textarea id="ucText" rows="12">${escapeHtml(data.text)}</textarea></label>
         </div>
         <div class="dashboard-xml-panel">
@@ -2143,6 +2233,12 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
           id: editor.querySelector<HTMLInputElement>('#ucId')?.value ?? '',
           type: (editor.querySelector<HTMLSelectElement>('#ucType')?.value as UserRuleData['type']) ?? 'rule',
           name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+          parameterName: editor.querySelector<HTMLInputElement>('#ucParameterName')?.value ?? '',
+          parameterNames: (editor.querySelector<HTMLInputElement>('#ucParameterNames')?.value ?? '')
+            .split(',')
+            .map((value) => value.trim())
+            .filter(Boolean),
+          parameterFormat: editor.querySelector<HTMLInputElement>('#ucParameterFormat')?.value ?? '',
           text: editor.querySelector<HTMLTextAreaElement>('#ucText')?.value ?? ''
         }
       });
@@ -2177,6 +2273,12 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
         id: editor.querySelector<HTMLInputElement>('#ucId')?.value ?? '',
         type: (editor.querySelector<HTMLSelectElement>('#ucType')?.value as UserRuleData['type']) ?? 'rule',
         name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+        parameterName: editor.querySelector<HTMLInputElement>('#ucParameterName')?.value ?? '',
+        parameterNames: (editor.querySelector<HTMLInputElement>('#ucParameterNames')?.value ?? '')
+          .split(',')
+          .map((value) => value.trim())
+          .filter(Boolean),
+        parameterFormat: editor.querySelector<HTMLInputElement>('#ucParameterFormat')?.value ?? '',
         text: editor.querySelector<HTMLTextAreaElement>('#ucText')?.value ?? ''
       }
     };
@@ -2193,13 +2295,54 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
   if (!editor) {
     return;
   }
-  const data = item.data as UserMonsterData;
+  const rawData = item.data as Partial<UserMonsterData>;
+  const data: UserMonsterData = {
+    id: rawData.id ?? '',
+    name: rawData.name ?? '',
+    plural: rawData.plural ?? '',
+    factions: Array.isArray(rawData.factions) ? rawData.factions : [],
+    move: rawData.move ?? '',
+    weaponskill: rawData.weaponskill ?? '',
+    ballisticskill: rawData.ballisticskill ?? '',
+    strength: rawData.strength ?? '',
+    toughness: rawData.toughness ?? '',
+    wounds: rawData.wounds ?? '',
+    initiative: rawData.initiative ?? '',
+    attacks: rawData.attacks ?? '',
+    gold: rawData.gold ?? '',
+    armor: rawData.armor ?? '',
+    damage: rawData.damage ?? '1D6',
+    special: rawData.special ?? '',
+    specialLinks: (rawData.specialLinks as UserMonsterData['specialLinks']) ?? {},
+    magicType: rawData.magicType ?? '',
+    magicLevel: rawData.magicLevel ?? 0
+  };
   const factionOptions = availableMonsterFactions();
   const ruleOptions = availableMonsterRules();
   const magicOptions = availableMagicRules();
   const damageOptions = ['S', ...Array.from({ length: 10 }, (_, index) => `${index + 1}D6`)];
+  const ballisticSkillOptions = ['-', 'S', 'A', '1+', '2+', '3+', '4+', '5+', '6+'];
   const selectedFactions = [...data.factions];
-  const selectedRuleLinks = { ...data.specialLinks };
+  const selectedRuleLinks = Object.fromEntries(
+    Object.entries(data.specialLinks).map(([id, link]) => {
+      const rule = ruleOptions.find((entry) => entry.id === id);
+      const normalizedLink =
+        typeof link === 'string'
+          ? { text: link, parameter: '', parameters: [] }
+          : {
+              text: link?.text ?? '',
+              parameter: link?.parameter ?? '',
+              parameters: link?.parameters ?? (link?.parameter ? [link.parameter] : [])
+            };
+      const parameters =
+        normalizedLink.parameters.length > 0
+          ? normalizedLink.parameters
+          : ruleParameterLabels(rule).length > 0
+            ? inferRuleParameters(rule!.name, normalizedLink.text, rule?.parameterFormat)
+            : [];
+      return [id, { text: normalizedLink.text, parameter: parameters[0] ?? normalizedLink.parameter, parameters }];
+    })
+  );
 
   editor.innerHTML = renderDashboardEditorShell(
     t(settings.language, 'contentDashboard.category.monster'),
@@ -2217,7 +2360,16 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
       </div>
       <label>${t(settings.language, 'contentDashboard.field.move')}<input id="ucMove" value="${escapeHtml(data.move)}"></label>
       <label>${t(settings.language, 'contentDashboard.field.weaponSkill')}<input id="ucWeaponSkill" value="${escapeHtml(data.weaponskill)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.ballisticSkill')}<input id="ucBallisticSkill" value="${escapeHtml(data.ballisticskill)}"></label>
+      <label>${t(settings.language, 'contentDashboard.field.ballisticSkill')}
+        <select id="ucBallisticSkill">
+          ${ballisticSkillOptions
+            .map(
+              (skill) =>
+                `<option value="${skill}" ${data.ballisticskill === skill || (!data.ballisticskill && skill === '-') ? 'selected' : ''}>${skill}</option>`
+            )
+            .join('')}
+        </select>
+      </label>
       <label>${t(settings.language, 'contentDashboard.field.strength')}<input id="ucStrength" value="${escapeHtml(data.strength)}"></label>
       <label>${t(settings.language, 'contentDashboard.field.toughness')}<input id="ucToughness" value="${escapeHtml(data.toughness)}"></label>
       <label>${t(settings.language, 'contentDashboard.field.wounds')}<input id="ucWounds" value="${escapeHtml(data.wounds)}"></label>
@@ -2236,14 +2388,21 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
         </select>
       </label>
       <label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="5">${escapeHtml(data.special)}</textarea></label>
-      <label>${t(settings.language, 'contentDashboard.field.specialLinks')}<textarea id="ucSpecialLinks" rows="5" readonly>${escapeHtml(formatRuleLinks(selectedRuleLinks))}</textarea></label>
+      <label>${t(settings.language, 'contentDashboard.field.specialLinks')}
+        <select id="ucSpecialLinks" size="6">
+          ${Object.entries(selectedRuleLinks)
+            .map(([id, link]) => `<option value="${escapeHtml(id)}">${escapeHtml(formatRuleLinks({ [id]: link }))}</option>`)
+            .join('')}
+        </select>
+      </label>
       <div class="dashboard-inline-actions">
         <select id="ucRuleSelect">
-          ${ruleOptions.map((rule) => `<option value="${escapeHtml(rule.id)}">${escapeHtml(rule.name)}</option>`).join('')}
+          ${ruleOptions.map((rule) => `<option value="${escapeHtml(rule.id)}">${escapeHtml(rule.name)} (${escapeHtml(rule.id)})</option>`).join('')}
         </select>
         <button type="button" id="ucAddRuleBtn">+</button>
         <button type="button" id="ucRemoveRuleBtn">-</button>
       </div>
+      <div id="ucRuleParameters"></div>
       <label>${t(settings.language, 'contentDashboard.field.magicType')}
         <select id="ucMagicType">
           <option value=""></option>
@@ -2258,15 +2417,98 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
   bindDashboardCommonActions(container, item);
   const form = editor.querySelector<HTMLFormElement>('form');
   const factionsInput = editor.querySelector<HTMLInputElement>('#ucFactions');
-  const specialLinksInput = editor.querySelector<HTMLTextAreaElement>('#ucSpecialLinks');
+  const ruleSelect = editor.querySelector<HTMLSelectElement>('#ucRuleSelect');
+  const specialLinksInput = editor.querySelector<HTMLSelectElement>('#ucSpecialLinks');
+  const ruleParametersContainer = editor.querySelector<HTMLElement>('#ucRuleParameters');
   const xmlPreview = editor.querySelector<HTMLTextAreaElement>('.dashboard-xml-preview textarea');
+  let selectedLinkedRuleId = ruleSelect?.value ?? '';
+  let selectedRuleDraftId = ruleSelect?.value ?? '';
+  let selectedRuleDraftParameters: string[] = [];
+  const currentRuleParameters = (): string[] =>
+    Array.from(editor.querySelectorAll<HTMLInputElement>('.uc-rule-parameter'))
+      .sort((a, b) => Number.parseInt(a.dataset.index ?? '0', 10) - Number.parseInt(b.dataset.index ?? '0', 10))
+      .map((input) => input.value ?? '');
+  const loadDraftParametersForRule = (ruleId: string): string[] => {
+    const rule = ruleOptions.find((entry) => entry.id === ruleId);
+    if (!rule) {
+      return [];
+    }
+    const linkedRule = selectedRuleLinks[ruleId];
+    if (!linkedRule) {
+      return Array.from({ length: ruleParameterLabels(rule).length }, () => '');
+    }
+    const linkedParameters =
+      linkedRule.parameters.length > 0
+        ? linkedRule.parameters
+        : linkedRule.parameter
+          ? [linkedRule.parameter]
+          : inferRuleParameters(rule.name, linkedRule.text, rule.parameterFormat);
+    const expectedLength = ruleParameterLabels(rule).length;
+    return Array.from({ length: expectedLength }, (_, index) => linkedParameters[index] ?? '');
+  };
+  const syncDraftRuleSelection = (ruleId: string) => {
+    selectedRuleDraftId = ruleId;
+    selectedRuleDraftParameters = loadDraftParametersForRule(ruleId);
+  };
+  const renderRuleParameterFields = () => {
+    const ruleId = selectedRuleDraftId || ruleSelect?.value || '';
+    const rule = ruleOptions.find((entry) => entry.id === ruleId);
+    const labels = ruleParameterLabels(rule);
+    if (ruleParametersContainer) {
+      if (labels.length === 0) {
+        ruleParametersContainer.innerHTML = '';
+        return;
+      }
+      const heading = `<div class="dashboard-parameter-heading">${escapeHtml(
+        t(settings.language, 'contentDashboard.field.ruleParameter')
+      )}</div>`;
+      const values = Array.from({ length: labels.length }, (_, index) => selectedRuleDraftParameters[index] ?? '');
+      ruleParametersContainer.innerHTML =
+        heading +
+        labels
+          .map(
+            (label, index) =>
+              `<label>${escapeHtml(label)}<input class="uc-rule-parameter" data-index="${index}" value="${escapeHtml(values[index] ?? '')}" placeholder="${escapeHtml(
+                label || t(settings.language, 'contentDashboard.field.ruleParameter')
+              )}"></label>`
+          )
+          .join('');
+      ruleParametersContainer.querySelectorAll<HTMLInputElement>('.uc-rule-parameter').forEach((input) =>
+        input.addEventListener('input', () => {
+          const selectedRuleId = selectedRuleDraftId || ruleSelect?.value || '';
+          const selectedRule = ruleOptions.find((entry) => entry.id === selectedRuleId);
+          if (selectedRule && selectedRuleLinks[selectedRule.id]) {
+            const parameters = currentRuleParameters();
+            selectedRuleDraftParameters = [...parameters];
+            selectedRuleLinks[selectedRule.id] = {
+              text: buildSpecialRuleText(selectedRule.name, parameters, selectedRule.parameterFormat),
+              parameter: parameters[0] ?? '',
+              parameters
+            };
+            refreshSelections(false);
+            return;
+          }
+          selectedRuleDraftParameters = currentRuleParameters();
+        })
+      );
+    }
+  };
 
-  const refreshSelections = () => {
+  const refreshSelections = (rerenderParameters = true) => {
     if (factionsInput) {
       factionsInput.value = joinCsv(selectedFactions);
     }
     if (specialLinksInput) {
-      specialLinksInput.value = formatRuleLinks(selectedRuleLinks);
+      const currentSelection = selectedLinkedRuleId && selectedRuleLinks[selectedLinkedRuleId] ? selectedLinkedRuleId : '';
+      specialLinksInput.innerHTML = Object.entries(selectedRuleLinks)
+        .map(([id, link]) => `<option value="${escapeHtml(id)}" ${currentSelection === id ? 'selected' : ''}>${escapeHtml(formatRuleLinks({ [id]: link }))}</option>`)
+        .join('');
+    }
+    if (ruleSelect && selectedRuleDraftId) {
+      ruleSelect.value = selectedRuleDraftId;
+    }
+    if (rerenderParameters) {
+      renderRuleParameterFields();
     }
     if (xmlPreview) {
       xmlPreview.value = userContentItemXml({
@@ -2278,7 +2520,7 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
           factions: [...selectedFactions],
           move: editor.querySelector<HTMLInputElement>('#ucMove')?.value ?? '',
           weaponskill: editor.querySelector<HTMLInputElement>('#ucWeaponSkill')?.value ?? '',
-          ballisticskill: editor.querySelector<HTMLInputElement>('#ucBallisticSkill')?.value ?? '',
+          ballisticskill: editor.querySelector<HTMLSelectElement>('#ucBallisticSkill')?.value ?? '-',
           strength: editor.querySelector<HTMLInputElement>('#ucStrength')?.value ?? '',
           toughness: editor.querySelector<HTMLInputElement>('#ucToughness')?.value ?? '',
           wounds: editor.querySelector<HTMLInputElement>('#ucWounds')?.value ?? '',
@@ -2314,28 +2556,65 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
   });
 
   editor.querySelector<HTMLButtonElement>('#ucAddRuleBtn')?.addEventListener('click', () => {
-    const value = editor.querySelector<HTMLSelectElement>('#ucRuleSelect')?.value ?? '';
+    const value = selectedRuleDraftId || ruleSelect?.value || '';
     const rule = ruleOptions.find((entry) => entry.id === value);
-    if (rule && !selectedRuleLinks[rule.id]) {
-      selectedRuleLinks[rule.id] = rule.name;
+    if (rule) {
+      const parameters = ruleParameterLabels(rule).length > 0 ? [...selectedRuleDraftParameters] : [];
+      selectedRuleLinks[rule.id] = {
+        text: buildSpecialRuleText(rule.name, parameters, rule.parameterFormat),
+        parameter: parameters[0] ?? '',
+        parameters
+      };
+      selectedLinkedRuleId = rule.id;
       refreshSelections();
     }
   });
 
   editor.querySelector<HTMLButtonElement>('#ucRemoveRuleBtn')?.addEventListener('click', () => {
-    const value = editor.querySelector<HTMLSelectElement>('#ucRuleSelect')?.value ?? '';
+    const value =
+      specialLinksInput?.value ||
+      selectedRuleDraftId ||
+      ruleSelect?.value ||
+      '';
     if (selectedRuleLinks[value]) {
       delete selectedRuleLinks[value];
+      selectedLinkedRuleId = '';
+      if (selectedRuleDraftId === value) {
+        selectedRuleDraftParameters = loadDraftParametersForRule(selectedRuleDraftId);
+      }
       refreshSelections();
     }
   });
 
-  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
-    field.addEventListener('input', refreshSelections);
-    field.addEventListener('change', refreshSelections);
+  ruleSelect?.addEventListener('change', () => {
+    const ruleId = ruleSelect.value ?? '';
+    syncDraftRuleSelection(ruleId);
+    selectedLinkedRuleId = selectedRuleLinks[ruleId] ? ruleId : '';
+    renderRuleParameterFields();
+    refreshSelections(false);
+  });
+  specialLinksInput?.addEventListener('change', () => {
+    const ruleId = specialLinksInput.value;
+    selectedLinkedRuleId = ruleId;
+    if (ruleSelect && ruleId) {
+      ruleSelect.value = ruleId;
+    }
+    syncDraftRuleSelection(ruleId);
+    renderRuleParameterFields();
+    refreshSelections(false);
   });
 
-  refreshSelections();
+  form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
+    if (field.classList.contains('uc-rule-parameter') || field.id === 'ucRuleSelect' || field.id === 'ucSpecialLinks') {
+      return;
+    }
+    field.addEventListener('input', () => refreshSelections());
+    field.addEventListener('change', () => refreshSelections());
+  });
+
+  syncDraftRuleSelection(selectedRuleDraftId);
+  renderRuleParameterFields();
+  refreshSelections(false);
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -2349,7 +2628,7 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
         factions: [...selectedFactions],
         move: editor.querySelector<HTMLInputElement>('#ucMove')?.value ?? '',
         weaponskill: editor.querySelector<HTMLInputElement>('#ucWeaponSkill')?.value ?? '',
-        ballisticskill: editor.querySelector<HTMLInputElement>('#ucBallisticSkill')?.value ?? '',
+        ballisticskill: editor.querySelector<HTMLSelectElement>('#ucBallisticSkill')?.value ?? '-',
         strength: editor.querySelector<HTMLInputElement>('#ucStrength')?.value ?? '',
         toughness: editor.querySelector<HTMLInputElement>('#ucToughness')?.value ?? '',
         wounds: editor.querySelector<HTMLInputElement>('#ucWounds')?.value ?? '',

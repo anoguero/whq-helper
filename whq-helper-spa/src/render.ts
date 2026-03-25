@@ -54,11 +54,11 @@ function buildSpecialLinks(
     });
   };
 
-  const addSpecials = (specials: Record<string, string>) => {
+  const addSpecials = (specials: Record<string, { text: string; parameter: string }>) => {
     const entries = Object.entries(specials);
-    entries.forEach(([id, text], index) => {
+    entries.forEach(([id, link], index) => {
       const punctuation = index < entries.length - 1 ? '; ' : '.';
-      links.push({ id, text: `${text}${punctuation}`, tooltip: buildRuleTooltip(id, rules) });
+      links.push({ id, text: `${link.text}${punctuation}`, tooltip: buildRuleTooltip(id, rules) });
     });
   };
 

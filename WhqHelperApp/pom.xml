@@ -11,9 +11,12 @@
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.basedir></project.basedir>
-        <swt.local.jar>${project.basedir}/lib/org.eclipse.swt.gtk.linux.x86_64-3.127.0.jar</swt.local.jar>
-        <sqlite.local.jar>${project.basedir}/lib/sqlite-jdbc-3.49.1.0.jar</sqlite.local.jar>
+        <swt.version>3.127.0</swt.version>
+        <sqlite.version>3.49.1.0</sqlite.version>
+        <swt.platform.id>gtk.linux.x86_64</swt.platform.id>
+        <swt.local.jar>${project.basedir}/lib/org.eclipse.swt.${swt.platform.id}-${swt.version}.jar</swt.local.jar>
+        <sqlite.local.jar>${project.basedir}/lib/sqlite-jdbc-${sqlite.version}.jar</sqlite.local.jar>
+        <windows.input.dir>${project.build.directory}/windows-input</windows.input.dir>
     </properties>
 
     <dependencies>
@@ -26,14 +29,14 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.49.1.0</version>
+            <version>${sqlite.version}</version>
             <scope>system</scope>
             <systemPath>${sqlite.local.jar}</systemPath>
         </dependency>
         <dependency>
             <groupId>org.eclipse.platform</groupId>
-            <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
-            <version>3.127.0</version>
+            <artifactId>org.eclipse.swt.${swt.platform.id}</artifactId>
+            <version>${swt.version}</version>
             <scope>system</scope>
             <systemPath>${swt.local.jar}</systemPath>
         </dependency>
@@ -59,6 +62,84 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.2</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.whq.app.WhqCardRendererApp</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>windows-dist</id>
+            <properties>
+                <swt.platform.id>win32.win32.x86_64</swt.platform.id>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>stage-windows-input</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${windows.input.dir}</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>
+                                                <include>${project.build.finalName}.jar</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>settings.cfg</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>data/**</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>resources/**</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}/lib</directory>
+                                            <targetPath>lib</targetPath>
+                                            <includes>
+                                                <include>sqlite-jdbc-${sqlite.version}.jar</include>
+                                                <include>org.eclipse.swt.${swt.platform.id}-${swt.version}.jar</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

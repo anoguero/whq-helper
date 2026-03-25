@@ -7,6 +7,7 @@ import type {
   Monster,
   MonsterEntry,
   Rule,
+  SpecialRuleLink,
   TableRefEntry,
   TableKind,
   TableModel
@@ -39,13 +40,13 @@ function getChildValue(node: Element, childName: string): string {
 
 function parseSpecial(node: Element): {
   special: string;
-  specialLinks: Record<string, string>;
+  specialLinks: Record<string, SpecialRuleLink>;
   magicType: string;
   magicLevel: number;
 } {
   const result = {
     special: '',
-    specialLinks: {} as Record<string, string>,
+    specialLinks: {} as Record<string, SpecialRuleLink>,
     magicType: '',
     magicLevel: 0
   };
@@ -59,8 +60,10 @@ function parseSpecial(node: Element): {
     if (child.tagName === 'rule') {
       const id = getAttribute(child, 'id').trim();
       const text = child.textContent?.trim() ?? '';
+      const parameter = getAttribute(child, 'param').trim();
+      const parameters = parameter ? [parameter] : [];
       if (id && text) {
-        result.specialLinks[id] = text;
+        result.specialLinks[id] = { text, parameter, parameters };
       }
     } else if (child.tagName === 'magic') {
       result.magicType = getAttribute(child, 'id').trim();
@@ -242,7 +245,13 @@ function parseRule(node: Element, translations: Map<string, string>): Rule {
     type: node.tagName,
     id,
     name: translateContent(translations, `rule.${id}.name`, getAttribute(node, 'name')),
-    text: translateContent(translations, `rule.${id}.text`, node.textContent?.trim() ?? '')
+    text: translateContent(translations, `rule.${id}.text`, node.textContent?.trim() ?? ''),
+    parameterName: getAttribute(node, 'parameterName').trim(),
+    parameterNames: getAttribute(node, 'parameterNames')
+      .split(',')
+      .map((value) => value.trim())
+      .filter(Boolean),
+    parameterFormat: getAttribute(node, 'parameterFormat').trim()
   };
 }
 
@@ -285,7 +294,13 @@ export async function loadContent(language: LanguageCode): Promise<ContentReposi
       for (const node of Array.from(root.children)) {
         if (node.tagName === 'rule' || node.tagName === 'magic') {
           const parsed = parseRule(node, translations);
-          repository.rules.set(parsed.id, parsed);
+          const existing = repository.rules.get(parsed.id);
+          repository.rules.set(parsed.id, {
+            ...parsed,
+            parameterName: parsed.parameterName || existing?.parameterName || '',
+            parameterNames: parsed.parameterNames.length > 0 ? parsed.parameterNames : existing?.parameterNames ?? [],
+            parameterFormat: parsed.parameterFormat || existing?.parameterFormat || ''
+          });
         }
       }
       continue;

@@ -8,7 +8,7 @@ import com.whq.app.ui.AppWindow;
 
 public class WhqCardRendererApp {
     public static void main(String[] args) {
-        Path projectRoot = Path.of("").toAbsolutePath();
+        Path projectRoot = AppPaths.resolveAppHome();
         Display display = new Display();
 
         try {
