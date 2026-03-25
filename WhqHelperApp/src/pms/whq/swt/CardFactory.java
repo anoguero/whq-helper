@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.FontResources;
 
 import pms.whq.data.Event;
 import pms.whq.data.Monster;
@@ -67,8 +68,23 @@ public final class CardFactory {
   public static Shell createEventCard(Shell parent, Event event, int cardWidth, int cardHeight) {
     String title = event == null ? I18n.t("card.event.defaultName") : nullSafe(event.name);
     Shell shell = createBaseCardShell(parent, title, cardWidth, cardHeight);
-    CardComposite card = new CardComposite(shell, title, getEventBadge(event), CardStyle.CLASSIC_EVENT);
+    createEventCardContents(shell, event, getEventBadge(event), isTravelOrSettlementEvent(event));
+    return shell;
+  }
 
+  public static Composite createEventCardPreview(Composite parent, Event event) {
+    return createEventCardContents(parent, event, getEventBadge(event), isTravelOrSettlementEvent(event));
+  }
+
+  public static Composite createEventCardPreview(
+      Composite parent, Event event, String badge, boolean travelOrSettlementStyle) {
+    return createEventCardContents(parent, event, badge, travelOrSettlementStyle);
+  }
+
+  private static Composite createEventCardContents(
+      Composite parent, Event event, String badge, boolean travelOrSettlementStyle) {
+    String title = event == null ? I18n.t("card.event.defaultName") : nullSafe(event.name);
+    CardComposite card = new CardComposite(parent, title, badge, CardStyle.CLASSIC_EVENT);
     Composite content = card.getContent();
     content.setLayout(new GridLayout(1, false));
 
@@ -114,7 +130,7 @@ public final class CardFactory {
         });
     updateScrolledContentSize(bodyScroll, body);
 
-    if (!isTravelOrSettlementEvent(event)) {
+    if (!travelOrSettlementStyle) {
       Composite bottomBar = new Composite(content, SWT.NONE);
       bottomBar.setLayoutData(new GridData(SWT.FILL, SWT.END, true, false));
       bottomBar.setLayout(new FillLayout());
@@ -131,7 +147,7 @@ public final class CardFactory {
       }
     }
 
-    return shell;
+    return card;
   }
 
   public static Shell createAdventureMissionCard(
@@ -196,8 +212,30 @@ public final class CardFactory {
       int cardHeight) {
 
     Shell shell = createBaseCardShell(parent, titleText, cardWidth, cardHeight);
-    CardComposite card = new CardComposite(shell, titleText, "M", CardStyle.CLASSIC_EVENT);
+    createMonsterCardContents(shell, monster, titleText, altSpecials, appendSpecials, rules, monsterImage);
+    return shell;
+  }
 
+  public static Composite createMonsterCardPreview(
+      Composite parent,
+      Monster monster,
+      String titleText,
+      SpecialContainer altSpecials,
+      boolean appendSpecials,
+      Map<String, Rule> rules,
+      Image monsterImage) {
+    return createMonsterCardContents(parent, monster, titleText, altSpecials, appendSpecials, rules, monsterImage);
+  }
+
+  private static Composite createMonsterCardContents(
+      Composite parent,
+      Monster monster,
+      String titleText,
+      SpecialContainer altSpecials,
+      boolean appendSpecials,
+      Map<String, Rule> rules,
+      Image monsterImage) {
+    CardComposite card = new CardComposite(parent, titleText, "M", CardStyle.CLASSIC_EVENT);
     Composite content = card.getContent();
     content.setLayout(new GridLayout(1, false));
     Color bg = card.getCardBackground();
@@ -207,7 +245,7 @@ public final class CardFactory {
     Font bodyFont = createNamedFont(content, 10, SWT.NORMAL, "Newtext Bk BT", "Times New Roman");
     Font bodyBoldFont = createNamedFont(content, 10, SWT.BOLD, "Newtext Bk BT", "Times New Roman");
     Image goldCoin = loadCardImage(content, TREASURE_COIN_PATH);
-    shell.addDisposeListener(
+    parent.addDisposeListener(
         event -> {
           statsLabelFont.dispose();
           statsValueFont.dispose();
@@ -362,7 +400,7 @@ public final class CardFactory {
     goldValue.setBackground(bg);
     goldValue.setFont(bodyBoldFont);
 
-    return shell;
+    return card;
   }
 
   private static Shell createBaseCardShell(Shell parent, String title, int cardWidth, int cardHeight) {
@@ -517,7 +555,10 @@ public final class CardFactory {
   }
 
   private static String formatToughness(Monster monster) {
-    if (monster.armor != null && !"-".equals(monster.armor) && !"S".equals(monster.toughness) && !"S".equals(monster.armor)) {
+	if (monster.toughness.isEmpty()) {
+		return "";
+	}
+    if (monster.armor != null && !monster.armor.isEmpty() && !"-".equals(monster.armor) && !"S".equals(monster.toughness) && !"S".equals(monster.armor)) {
     	int totalToughness = Integer.parseInt(monster.toughness) + Integer.parseInt(monster.armor);
       return nullSafe(monster.toughness) + " (" + totalToughness + ")";
     }
@@ -697,15 +738,7 @@ public final class CardFactory {
 
   private static Font createNamedFont(Composite base, int height, int style, String... names) {
     String fallback = base.getFont().getFontData()[0].getName();
-    String selected = fallback;
-    if (names != null) {
-      for (String name : names) {
-        if (!isBlank(name)) {
-          selected = name;
-          break;
-        }
-      }
-    }
+    String selected = FontResources.pickAvailableFont(base.getDisplay(), fallback, names);
     return new Font(base.getDisplay(), selected, Math.max(8, height), style);
   }
 
@@ -1402,7 +1435,14 @@ public final class CardFactory {
 
       FontData baseData = getFont().getFontData()[0];
       if (this.style == CardStyle.CLASSIC_EVENT) {
-        titleFont = new Font(getDisplay(), "Casablanca Antique", Math.max(13, baseData.getHeight() + 5), SWT.BOLD);
+        titleFont =
+            createNamedFont(
+                this,
+                Math.max(13, baseData.getHeight() + 5),
+                SWT.BOLD,
+                "Caslon Antique",
+                "Casablanca Antique",
+                baseData.getName());
         circleFont = new Font(getDisplay(), baseData.getName(), Math.max(11, baseData.getHeight() + 1), SWT.BOLD);
         parchmentTop = new Color(getDisplay(), 242, 235, 210);
         parchmentBottom = new Color(getDisplay(), 216, 203, 170);
