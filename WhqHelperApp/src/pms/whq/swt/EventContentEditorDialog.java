@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import com.whq.app.adventure.ObjectiveRoomAdventure;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepositoryException;
 import com.whq.app.adventure.XmlObjectiveRoomAdventureRepository;
+import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
@@ -56,10 +57,25 @@ import pms.whq.xml.XmlContentService.TableEntry;
 import pms.whq.xml.XmlContentService.TableFileModel;
 import pms.whq.xml.XmlContentService.TableGroupMember;
 import pms.whq.data.Event;
+import pms.whq.data.Monster;
+import pms.whq.data.Rule;
+import pms.whq.data.SpecialContainer;
 
 public final class EventContentEditorDialog {
   private static final int HEADER_BUTTON_COLUMNS = 9;
   private static final double TREASURE_CARD_ASPECT_RATIO = 847d / 1264d;
+  private static final String RULE_NAME_SUFFIX = ".name";
+  private static final String RULE_TEXT_SUFFIX = ".text";
+  private static final String RULE_PARAMETER_NAME_SUFFIX = ".parameterName";
+  private static final String RULE_PARAMETER_NAMES_SUFFIX = ".parameterNames";
+  private static final String RULE_PARAMETER_FORMAT_SUFFIX = ".parameterFormat";
+  private static final String EVENT_NAME_SUFFIX = ".name";
+  private static final String EVENT_FLAVOR_SUFFIX = ".flavor";
+  private static final String EVENT_RULES_SUFFIX = ".rules";
+  private static final String EVENT_SPECIAL_SUFFIX = ".special";
+  private static final String MONSTER_NAME_SUFFIX = ".name";
+  private static final String MONSTER_PLURAL_SUFFIX = ".plural";
+  private static final String MONSTER_SPECIAL_SUFFIX = ".special";
 
   private final Shell parent;
   private final Path projectRoot;
@@ -78,10 +94,12 @@ public final class EventContentEditorDialog {
   }
 
   public void open() {
-    Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+    Shell dialog =
+        new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE | SWT.MAX);
     dialog.setText(I18n.t("dialog.contentEditor.title"));
     dialog.setLayout(new GridLayout(1, false));
     dialog.setSize(1440, 920);
+    dialog.setMaximized(true);
 
     SashForm layout = new SashForm(dialog, SWT.HORIZONTAL);
     layout.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -164,7 +182,8 @@ public final class EventContentEditorDialog {
 
     org.eclipse.swt.widgets.List itemList = new org.eclipse.swt.widgets.List(sash, SWT.BORDER | SWT.V_SCROLL);
 
-    Composite details = new Composite(sash, SWT.NONE);
+    SashForm contentSash = new SashForm(sash, SWT.HORIZONTAL);
+    Composite details = new Composite(contentSash, SWT.NONE);
     details.setLayout(new GridLayout(1, false));
     sash.setWeights(new int[] {28, 72});
 
@@ -214,13 +233,14 @@ public final class EventContentEditorDialog {
     rulesData.heightHint = 120;
     rulesText.setLayoutData(rulesData);
 
-    Group previewGroup = new Group(details, SWT.NONE);
+    Group previewGroup = new Group(contentSash, SWT.NONE);
     previewGroup.setText(I18n.t("dashboard.preview.title"));
     previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
     previewGroup.setLayout(new GridLayout(1, false));
 
     Canvas previewCanvas = new Canvas(previewGroup, SWT.DOUBLE_BUFFERED | SWT.BORDER);
     previewCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    contentSash.setWeights(new int[] {65, 35});
 
     CardRenderer renderer = new CardRenderer(dialog.getDisplay(), projectRoot);
     dialog.addDisposeListener(event -> renderer.dispose());
@@ -420,21 +440,24 @@ public final class EventContentEditorDialog {
     details.setLayout(new GridLayout(2, false));
     sash.setWeights(new int[] {30, 70});
 
+    new Label(details, SWT.NONE).setText(I18n.t("editor.objectiveAdventures.label.objectiveRoom") + ":");
     Combo objectiveRoomCombo = new Combo(details, SWT.DROP_DOWN | SWT.READ_ONLY);
     objectiveRoomCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-    new Label(details, SWT.NONE).setText("");
-    new Label(details, SWT.NONE).setText("Objective room:");
-    Text nameText = createLabeledText(details, "Nombre/Name:");
-    Text idText = createLabeledText(details, "ID:");
+    Text nameText = createLabeledText(details, I18n.t("editor.objectiveAdventures.label.name") + ":");
+    Text idText = createLabeledText(details, I18n.t("editor.objectiveAdventures.label.id") + ":");
     idText.setEditable(false);
-    new Label(details, SWT.NONE).setText("Generica/Generic:");
+    new Label(details, SWT.NONE).setText(I18n.t("editor.objectiveAdventures.label.generic") + ":");
     Button genericCheck = new Button(details, SWT.CHECK);
-    new Label(details, SWT.NONE).setText("Flavor:");
+    Label flavorLabel = new Label(details, SWT.NONE);
+    flavorLabel.setText(I18n.t("editor.objectiveAdventures.label.flavor") + ":");
+    flavorLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
     StyledText flavorText = new StyledText(details, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
     GridData flavorData = new GridData(SWT.FILL, SWT.FILL, true, true);
     flavorData.heightHint = 110;
     flavorText.setLayoutData(flavorData);
-    new Label(details, SWT.NONE).setText("Rules:");
+    Label rulesLabel = new Label(details, SWT.NONE);
+    rulesLabel.setText(I18n.t("editor.objectiveAdventures.label.rules") + ":");
+    rulesLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
     StyledText rulesText = new StyledText(details, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
     GridData rulesData = new GridData(SWT.FILL, SWT.FILL, true, true);
     rulesData.heightHint = 150;
@@ -659,8 +682,9 @@ public final class EventContentEditorDialog {
             return;
           }
           try {
+            EditableContentTranslations translations = loadEditableTranslations();
             entries.clear();
-            entries.addAll(service.loadRules(files.get(fileIndex)));
+            entries.addAll(applyRuleTranslations(service.loadRules(files.get(fileIndex)), translations));
             refreshList.run();
             clearForm.run();
           } catch (Exception ex) {
@@ -715,10 +739,13 @@ public final class EventContentEditorDialog {
           }
           try {
             List<RuleEntry> updatedEntries = new ArrayList<>(entries);
-            updatedEntries.remove(index);
+            RuleEntry removedEntry = updatedEntries.remove(index);
             service.saveRules(selectedFile(fileCombo, files), updatedEntries);
+            EditableContentTranslations translations = loadEditableTranslations();
+            removeRuleTranslations(translations, removedEntry.id);
+            translations.save();
             entries.clear();
-            entries.addAll(updatedEntries);
+            entries.addAll(applyRuleTranslations(updatedEntries, translations));
             refreshList.run();
             clearForm.run();
             notifySaved();
@@ -752,8 +779,11 @@ public final class EventContentEditorDialog {
               updatedEntries.add(entry);
             }
             service.saveRules(selectedFile(fileCombo, files), updatedEntries);
+            EditableContentTranslations translations = loadEditableTranslations();
+            putRuleTranslations(translations, entry);
+            translations.save();
             entries.clear();
-            entries.addAll(updatedEntries);
+            entries.addAll(applyRuleTranslations(updatedEntries, translations));
             refreshList.run();
             selectById(itemList, entries, entry.id);
             notifySaved();
@@ -941,8 +971,7 @@ public final class EventContentEditorDialog {
     sash.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
     org.eclipse.swt.widgets.List itemList = new org.eclipse.swt.widgets.List(sash, SWT.BORDER | SWT.V_SCROLL);
-    Composite contentArea = new Composite(sash, SWT.NONE);
-    contentArea.setLayout(new GridLayout(treasureFieldsVisible ? 2 : 1, false));
+    SashForm contentArea = new SashForm(sash, SWT.HORIZONTAL);
     Composite details = new Composite(contentArea, SWT.NONE);
     details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
     details.setLayout(new GridLayout(2, false));
@@ -968,6 +997,18 @@ public final class EventContentEditorDialog {
     GridData rulesData = new GridData(SWT.FILL, SWT.FILL, true, true);
     rulesData.heightHint = 210;
     rulesText.setLayoutData(rulesData);
+
+    Label specialLabel = new Label(details, SWT.NONE);
+    specialLabel.setText(I18n.t("editor.events.label.special") + ":");
+    StyledText specialText = new StyledText(details, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+    GridData specialData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    specialData.heightHint = 120;
+    specialLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
+    specialText.setLayoutData(specialData);
+    specialLabel.setVisible(treasureCheckVisible);
+    specialText.setVisible(treasureCheckVisible);
+    ((GridData) specialLabel.getLayoutData()).exclude = !treasureCheckVisible;
+    ((GridData) specialText.getLayoutData()).exclude = !treasureCheckVisible;
 
     Label goldValueLabel = new Label(details, SWT.NONE);
     goldValueLabel.setText(I18n.t("editor.events.label.goldValue") + ":");
@@ -1025,25 +1066,22 @@ public final class EventContentEditorDialog {
     treasureCheck.setLayoutData(treasureCheckData);
     treasureCheck.setVisible(treasureCheckVisible);
 
-    Composite treasurePreviewViewport = null;
-    Composite treasurePreviewHost = null;
-    if (treasureFieldsVisible) {
-      Group previewGroup = new Group(contentArea, SWT.NONE);
-      previewGroup.setText(I18n.t("dashboard.preview.title"));
-      previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-      previewGroup.setLayout(new FillLayout());
-      treasurePreviewViewport = new Composite(previewGroup, SWT.NONE);
-      treasurePreviewViewport.setLayout(null);
-      treasurePreviewHost = new Composite(treasurePreviewViewport, SWT.NONE);
-      treasurePreviewHost.setLayout(new FillLayout());
-    }
+    Group previewGroup = new Group(contentArea, SWT.NONE);
+    previewGroup.setText(I18n.t("dashboard.preview.title"));
+    previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    previewGroup.setLayout(new FillLayout());
+    Composite cardPreviewViewport = new Composite(previewGroup, SWT.NONE);
+    cardPreviewViewport.setLayout(null);
+    Composite cardPreviewHost = new Composite(cardPreviewViewport, SWT.NONE);
+    cardPreviewHost.setLayout(new FillLayout());
+    contentArea.setWeights(new int[] {65, 35});
 
     java.util.List<Path> files = new ArrayList<>();
     java.util.List<EventEntry> entries = new ArrayList<>();
     final int[] selectedIndex = new int[] {-1};
     final String[] selectedEntryId = new String[] {""};
-    final Composite previewViewport = treasurePreviewViewport;
-    final Composite previewHost = treasurePreviewHost;
+    final Composite previewViewport = cardPreviewViewport;
+    final Composite previewHost = cardPreviewHost;
 
     Runnable refreshId =
         () ->
@@ -1052,34 +1090,50 @@ public final class EventContentEditorDialog {
                     ? buildEventLikeId(nameText.getText(), treasureFieldsVisible, objectiveTreasurePreview)
                     : selectedEntryId[0]);
 
-    Runnable refreshTreasurePreview =
+    Runnable refreshCardPreview =
         () -> {
-          if (!treasureFieldsVisible || previewHost == null || previewHost.isDisposed()) {
+          if (previewHost == null || previewHost.isDisposed()) {
             return;
           }
           for (org.eclipse.swt.widgets.Control child : previewHost.getChildren()) {
             child.dispose();
           }
-          CardFactory.createTreasureCardPreview(previewHost, toPreviewTreasureEvent(
-              nameText.getText(),
-              flavorText.getText(),
-              rulesText.getText(),
-              goldValueText.getText(),
-              buildTreasureUsers(barbarianCheck, dwarfCheck, elfCheck, wizardCheck),
-              objectiveTreasurePreview));
+          if (treasureFieldsVisible) {
+            CardFactory.createTreasureCardPreview(
+                previewHost,
+                toPreviewTreasureEvent(
+                    nameText.getText(),
+                    flavorText.getText(),
+                    rulesText.getText(),
+                    goldValueText.getText(),
+                    buildTreasureUsers(barbarianCheck, dwarfCheck, elfCheck, wizardCheck),
+                    objectiveTreasurePreview));
+          } else {
+            Event previewEvent =
+                toPreviewEventLike(
+                    nameText.getText(),
+                    flavorText.getText(),
+                    rulesText.getText(),
+                    specialText.getText(),
+                    treasureCheckVisible && treasureCheck.getSelection(),
+                    fileDirectory);
+            CardFactory.createEventCardPreview(
+                previewHost,
+                previewEvent,
+                previewEventBadge(fileDirectory),
+                isTravelOrSettlementDirectory(fileDirectory));
+          }
           layoutTreasurePreview(previewViewport, previewHost);
           previewHost.layout(true, true);
         };
 
-    if (previewViewport != null) {
-      previewViewport.addControlListener(
-          new ControlAdapter() {
-            @Override
-            public void controlResized(ControlEvent event) {
-              layoutTreasurePreview(previewViewport, previewHost);
-            }
-          });
-    }
+    previewViewport.addControlListener(
+        new ControlAdapter() {
+          @Override
+          public void controlResized(ControlEvent event) {
+            layoutTreasurePreview(previewViewport, previewHost);
+          }
+        });
 
     Runnable refreshList =
         () -> {
@@ -1097,6 +1151,7 @@ public final class EventContentEditorDialog {
           nameText.setText("");
           flavorText.setText("");
           rulesText.setText("");
+          specialText.setText("");
           goldValueText.setText("");
           barbarianCheck.setSelection(false);
           dwarfCheck.setSelection(false);
@@ -1104,7 +1159,7 @@ public final class EventContentEditorDialog {
           wizardCheck.setSelection(false);
           treasureCheck.setSelection(false);
           refreshId.run();
-          refreshTreasurePreview.run();
+          refreshCardPreview.run();
         };
 
     Runnable loadSelectedToForm =
@@ -1119,11 +1174,12 @@ public final class EventContentEditorDialog {
           nameText.setText(safe(entry.name));
           flavorText.setText(safe(entry.flavor));
           rulesText.setText(safe(entry.rules));
+          specialText.setText(safe(entry.special));
           goldValueText.setText(safe(entry.goldValue));
           applyTreasureUsers(entry.users, barbarianCheck, dwarfCheck, elfCheck, wizardCheck);
           treasureCheck.setSelection(entry.treasure);
           refreshId.run();
-          refreshTreasurePreview.run();
+          refreshCardPreview.run();
         };
 
     Runnable loadFile =
@@ -1133,9 +1189,16 @@ public final class EventContentEditorDialog {
             return;
           }
           try {
+            EditableContentTranslations translations = loadEditableTranslations();
             entries.clear();
             List<EventEntry> loadedEntries = service.loadEvents(files.get(fileIndex));
-            entries.addAll(filterVisibleEvents(files.get(fileIndex), loadedEntries, entryFilter, treasureFieldsVisible, objectiveTreasurePreview));
+            entries.addAll(
+                filterVisibleEvents(
+                    files.get(fileIndex),
+                    applyEventTranslations(loadedEntries, translations),
+                    entryFilter,
+                    treasureFieldsVisible,
+                    objectiveTreasurePreview));
             refreshList.run();
             clearForm.run();
           } catch (Exception ex) {
@@ -1172,14 +1235,16 @@ public final class EventContentEditorDialog {
     itemList.addListener(SWT.Selection, event -> loadSelectedToForm.run());
     newButton.addListener(SWT.Selection, event -> clearForm.run());
     nameText.addModifyListener(event -> refreshId.run());
-    nameText.addModifyListener(event -> refreshTreasurePreview.run());
-    flavorText.addModifyListener(event -> refreshTreasurePreview.run());
-    rulesText.addModifyListener(event -> refreshTreasurePreview.run());
-    goldValueText.addModifyListener(event -> refreshTreasurePreview.run());
-    barbarianCheck.addListener(SWT.Selection, event -> refreshTreasurePreview.run());
-    dwarfCheck.addListener(SWT.Selection, event -> refreshTreasurePreview.run());
-    elfCheck.addListener(SWT.Selection, event -> refreshTreasurePreview.run());
-    wizardCheck.addListener(SWT.Selection, event -> refreshTreasurePreview.run());
+    nameText.addModifyListener(event -> refreshCardPreview.run());
+    flavorText.addModifyListener(event -> refreshCardPreview.run());
+    rulesText.addModifyListener(event -> refreshCardPreview.run());
+    specialText.addModifyListener(event -> refreshCardPreview.run());
+    goldValueText.addModifyListener(event -> refreshCardPreview.run());
+    barbarianCheck.addListener(SWT.Selection, event -> refreshCardPreview.run());
+    dwarfCheck.addListener(SWT.Selection, event -> refreshCardPreview.run());
+    elfCheck.addListener(SWT.Selection, event -> refreshCardPreview.run());
+    wizardCheck.addListener(SWT.Selection, event -> refreshCardPreview.run());
+    treasureCheck.addListener(SWT.Selection, event -> refreshCardPreview.run());
 
     deleteButton.addListener(
         SWT.Selection,
@@ -1195,15 +1260,18 @@ public final class EventContentEditorDialog {
           try {
             Path file = selectedFile(fileCombo, files);
             List<EventEntry> updatedEntries = new ArrayList<>(entries);
-            updatedEntries.remove(index);
+            EventEntry removedEntry = updatedEntries.remove(index);
             List<EventEntry> entriesToSave = mergeVisibleEvents(file, updatedEntries, entryFilter);
             if (entriesToSave.isEmpty()) {
               showWarning(dialog, I18n.t("editor.message.lastEntry"));
               return;
             }
-            entries.clear();
-            entries.addAll(updatedEntries);
             service.saveEvents(file, entriesToSave);
+            EditableContentTranslations translations = loadEditableTranslations();
+            removeEventTranslations(translations, removedEntry.id);
+            translations.save();
+            entries.clear();
+            entries.addAll(applyEventTranslations(updatedEntries, translations));
             refreshList.run();
             clearForm.run();
             notifySaved();
@@ -1225,7 +1293,7 @@ public final class EventContentEditorDialog {
           entry.name = nameText.getText().trim();
           entry.flavor = flavorText.getText().trim();
           entry.rules = rulesText.getText().trim();
-          entry.special = "";
+          entry.special = treasureCheckVisible ? specialText.getText().trim() : "";
           entry.goldValue = treasureFieldsVisible ? goldValueText.getText().trim() : "";
           entry.users =
               treasureFieldsVisible
@@ -1243,10 +1311,14 @@ public final class EventContentEditorDialog {
               updatedEntries.add(entry);
             }
             service.saveEvents(file, mergeVisibleEvents(file, updatedEntries, entryFilter));
+            EditableContentTranslations translations = loadEditableTranslations();
+            putEventTranslations(translations, entry);
+            translations.save();
             entries.clear();
-            entries.addAll(updatedEntries);
+            entries.addAll(applyEventTranslations(updatedEntries, translations));
             refreshList.run();
             selectById(itemList, entries, entry.id);
+            refreshCardPreview.run();
             notifySaved();
             showInfo(dialog, I18n.t("editor.message.saved"));
           } catch (Exception ex) {
@@ -1268,6 +1340,8 @@ public final class EventContentEditorDialog {
             showError(dialog, ex);
           }
         });
+
+    refreshCardPreview.run();
   }
 
   private void createTablesTab(TabFolder tabs, Shell dialog) {
@@ -1767,7 +1841,17 @@ public final class EventContentEditorDialog {
     details.setLayout(new GridLayout(1, false));
     sash.setWeights(new int[] {30, 70});
 
-    Group attributes = new Group(details, SWT.NONE);
+    SashForm contentArea = new SashForm(details, SWT.HORIZONTAL);
+    contentArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+    Composite formColumn = new Composite(contentArea, SWT.NONE);
+    formColumn.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    GridLayout formColumnLayout = new GridLayout(1, false);
+    formColumnLayout.marginWidth = 0;
+    formColumnLayout.marginHeight = 0;
+    formColumn.setLayout(formColumnLayout);
+
+    Group attributes = new Group(formColumn, SWT.NONE);
     attributes.setText(I18n.t("editor.monsters.group.attributes"));
     attributes.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
     GridLayout attrsLayout = new GridLayout(4, false);
@@ -1813,7 +1897,7 @@ public final class EventContentEditorDialog {
     damageCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
     damageCombo.setText("1D6");
 
-    Group specialGroup = new Group(details, SWT.NONE);
+    Group specialGroup = new Group(formColumn, SWT.NONE);
     specialGroup.setText(I18n.t("editor.monsters.group.special"));
     specialGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
     specialGroup.setLayout(new GridLayout(2, false));
@@ -1870,6 +1954,16 @@ public final class EventContentEditorDialog {
     specialRuleParamsLayout.marginHeight = 0;
     specialRuleParams.setLayout(specialRuleParamsLayout);
 
+    Group previewGroup = new Group(contentArea, SWT.NONE);
+    previewGroup.setText(I18n.t("dashboard.preview.title"));
+    previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    previewGroup.setLayout(new FillLayout());
+    Composite previewViewport = new Composite(previewGroup, SWT.NONE);
+    previewViewport.setLayout(null);
+    Composite previewHost = new Composite(previewViewport, SWT.NONE);
+    previewHost.setLayout(new FillLayout());
+    contentArea.setWeights(new int[] {65, 35});
+
     java.util.List<Path> files = new ArrayList<>();
     java.util.List<MonsterEntry> entries = new ArrayList<>();
     final int[] selectedIndex = new int[] {-1};
@@ -1885,6 +1979,7 @@ public final class EventContentEditorDialog {
     final Runnable[] updateSelectedSpecialRule = new Runnable[1];
     final String[] selectedLinkedRuleId = new String[] {""};
     final String[] selectedRuleDraftId = new String[] {""};
+    final Map<String, Rule> previewRules = new LinkedHashMap<>();
 
     Runnable refreshList =
         () -> {
@@ -1916,6 +2011,57 @@ public final class EventContentEditorDialog {
             specialRulesText.select(indexToSelect);
           }
         };
+
+    Runnable refreshMonsterPreview =
+        () -> {
+          if (previewHost.isDisposed()) {
+            return;
+          }
+          for (Control child : previewHost.getChildren()) {
+            child.dispose();
+          }
+          Monster previewMonster =
+              toPreviewMonster(
+                  idText.getText(),
+                  nameText.getText(),
+                  pluralText.getText(),
+                  selectedFactions,
+                  moveText.getText(),
+                  wsText.getText(),
+                  bsCombo.getText(),
+                  strengthText.getText(),
+                  toughnessText.getText(),
+                  woundsText.getText(),
+                  initiativeText.getText(),
+                  attacksText.getText(),
+                  goldText.getText(),
+                  armorText.getText(),
+                  damageCombo.getText());
+          SpecialContainer previewSpecials =
+              toPreviewMonsterSpecials(
+                  specialText.getText(),
+                  selectedSpecialRules,
+                  selectedRuleId(magicRuleCombo, availableMagicRules),
+                  magicLevelSpinner.getSelection());
+          CardFactory.createMonsterCardPreview(
+              previewHost,
+              previewMonster,
+              safe(nameText.getText()).trim().isBlank() ? I18n.t("editor.monsters.label.name") : nameText.getText().trim(),
+              previewSpecials,
+              false,
+              previewRules,
+              null);
+          layoutTreasurePreview(previewViewport, previewHost);
+          previewHost.layout(true, true);
+        };
+
+    previewViewport.addControlListener(
+        new ControlAdapter() {
+          @Override
+          public void controlResized(ControlEvent event) {
+            layoutTreasurePreview(previewViewport, previewHost);
+          }
+        });
 
     Runnable refreshSelectedRuleParameter =
         () -> {
@@ -2040,6 +2186,7 @@ public final class EventContentEditorDialog {
           refreshFactionText.run();
           refreshSpecialRuleText.run();
           refreshSelectedRuleParameter.run();
+          refreshMonsterPreview.run();
         };
 
     Runnable loadSelectedToForm =
@@ -2071,7 +2218,7 @@ public final class EventContentEditorDialog {
           armorText.setText(safe(entry.armor));
           damageCombo.setText(safe(entry.damage).isBlank() ? "1D6" : safe(entry.damage));
           MonsterSpecialEditorState specialState = parseMonsterSpecialEditorState(entry.specialEntriesRaw);
-          specialText.setText(specialState.plainText());
+          specialText.setText(localizedMonsterSpecial(entry.id, specialState.plainText()));
           selectedSpecialRules.clear();
           selectedSpecialRules.putAll(specialState.ruleLinks());
           selectedLinkedRuleId[0] = "";
@@ -2085,6 +2232,7 @@ public final class EventContentEditorDialog {
           refreshFactionText.run();
           refreshSpecialRuleText.run();
           refreshSelectedRuleParameter.run();
+          refreshMonsterPreview.run();
         };
 
     Runnable loadFile =
@@ -2094,8 +2242,9 @@ public final class EventContentEditorDialog {
             return;
           }
           try {
+            EditableContentTranslations translations = loadEditableTranslations();
             entries.clear();
-            entries.addAll(service.loadMonsters(files.get(fileIndex)));
+            entries.addAll(applyMonsterTranslations(service.loadMonsters(files.get(fileIndex)), translations));
             refreshList.run();
             clearForm.run();
           } catch (Exception ex) {
@@ -2115,6 +2264,7 @@ public final class EventContentEditorDialog {
       availableRules.addAll(loadAvailableMonsterRules());
       for (RuleEntry rule : availableRules) {
         specialRuleCombo.add(ruleDisplayLabel(rule));
+        previewRules.put(rule.id, toPreviewRule(rule));
       }
       if (specialRuleCombo.getItemCount() > 0) {
         specialRuleCombo.select(0);
@@ -2125,6 +2275,7 @@ public final class EventContentEditorDialog {
       magicRuleCombo.add("");
       for (RuleEntry rule : availableMagicRules) {
         magicRuleCombo.add(ruleDisplayLabel(rule));
+        previewRules.put(rule.id, toPreviewRule(rule));
       }
       magicRuleCombo.select(0);
       for (Path file : files) {
@@ -2154,6 +2305,20 @@ public final class EventContentEditorDialog {
     itemList.addListener(SWT.Selection, event -> loadSelectedToForm.run());
     newButton.addListener(SWT.Selection, event -> clearForm.run());
     nameText.addModifyListener(event -> refreshMonsterId.run());
+    nameText.addModifyListener(event -> refreshMonsterPreview.run());
+    pluralText.addModifyListener(event -> refreshMonsterPreview.run());
+    woundsText.addModifyListener(event -> refreshMonsterPreview.run());
+    moveText.addModifyListener(event -> refreshMonsterPreview.run());
+    wsText.addModifyListener(event -> refreshMonsterPreview.run());
+    bsCombo.addListener(SWT.Selection, event -> refreshMonsterPreview.run());
+    strengthText.addModifyListener(event -> refreshMonsterPreview.run());
+    toughnessText.addModifyListener(event -> refreshMonsterPreview.run());
+    initiativeText.addModifyListener(event -> refreshMonsterPreview.run());
+    attacksText.addModifyListener(event -> refreshMonsterPreview.run());
+    goldText.addModifyListener(event -> refreshMonsterPreview.run());
+    armorText.addModifyListener(event -> refreshMonsterPreview.run());
+    damageCombo.addListener(SWT.Selection, event -> refreshMonsterPreview.run());
+    specialText.addModifyListener(event -> refreshMonsterPreview.run());
     addFactionButton.addListener(
         SWT.Selection,
         event -> {
@@ -2161,6 +2326,7 @@ public final class EventContentEditorDialog {
           if (!faction.isEmpty() && !selectedFactions.contains(faction)) {
             selectedFactions.add(faction);
             refreshFactionText.run();
+            refreshMonsterPreview.run();
           }
         });
     removeFactionButton.addListener(
@@ -2169,6 +2335,7 @@ public final class EventContentEditorDialog {
           String faction = factionCombo.getText().trim();
           selectedFactions.removeIf(existing -> existing.equalsIgnoreCase(faction));
           refreshFactionText.run();
+          refreshMonsterPreview.run();
         });
     addSpecialRuleButton.addListener(
         SWT.Selection,
@@ -2184,12 +2351,14 @@ public final class EventContentEditorDialog {
           selectedLinkedRuleId[0] = rule.id;
           refreshSpecialRuleText.run();
           refreshSelectedRuleParameter.run();
+          refreshMonsterPreview.run();
         });
     clearMagicButton.addListener(
         SWT.Selection,
         event -> {
           magicRuleCombo.select(0);
           magicLevelSpinner.setSelection(0);
+          refreshMonsterPreview.run();
         });
     removeSpecialRuleButton.addListener(
         SWT.Selection,
@@ -2202,6 +2371,7 @@ public final class EventContentEditorDialog {
           selectedLinkedRuleId[0] = "";
           refreshSpecialRuleText.run();
           refreshSelectedRuleParameter.run();
+          refreshMonsterPreview.run();
         });
     specialRuleCombo.addListener(
         SWT.Selection,
@@ -2214,6 +2384,7 @@ public final class EventContentEditorDialog {
             refreshSpecialRuleText.run();
           }
           refreshSelectedRuleParameter.run();
+          refreshMonsterPreview.run();
         });
     specialRulesText.addListener(
         SWT.Selection,
@@ -2229,10 +2400,13 @@ public final class EventContentEditorDialog {
               specialRuleCombo.select(i);
               selectedRuleDraftId[0] = id;
               refreshSelectedRuleParameter.run();
+              refreshMonsterPreview.run();
               break;
             }
           }
         });
+    magicRuleCombo.addListener(SWT.Selection, event -> refreshMonsterPreview.run());
+    magicLevelSpinner.addListener(SWT.Selection, event -> refreshMonsterPreview.run());
 
     deleteButton.addListener(
         SWT.Selection,
@@ -2251,10 +2425,13 @@ public final class EventContentEditorDialog {
           }
           try {
             List<MonsterEntry> updatedEntries = new ArrayList<>(entries);
-            updatedEntries.remove(index);
+            MonsterEntry removedEntry = updatedEntries.remove(index);
             service.saveMonsters(selectedFile(fileCombo, files), updatedEntries);
+            EditableContentTranslations translations = loadEditableTranslations();
+            removeMonsterTranslations(translations, removedEntry.id);
+            translations.save();
             entries.clear();
-            entries.addAll(updatedEntries);
+            entries.addAll(applyMonsterTranslations(updatedEntries, translations));
             refreshList.run();
             clearForm.run();
             notifySaved();
@@ -2304,10 +2481,14 @@ public final class EventContentEditorDialog {
               updatedEntries.add(entry);
             }
             service.saveMonsters(selectedFile(fileCombo, files), updatedEntries);
+            EditableContentTranslations translations = loadEditableTranslations();
+            putMonsterTranslations(translations, entry, specialText.getText());
+            translations.save();
             entries.clear();
-            entries.addAll(updatedEntries);
+            entries.addAll(applyMonsterTranslations(updatedEntries, translations));
             refreshList.run();
             selectById(itemList, entries, entry.id);
+            refreshMonsterPreview.run();
             notifySaved();
             showInfo(dialog, I18n.t("editor.message.saved"));
           } catch (Exception ex) {
@@ -2329,6 +2510,8 @@ public final class EventContentEditorDialog {
             showError(dialog, ex);
           }
         });
+
+    refreshMonsterPreview.run();
   }
 
   private static Text createLabeledText(Composite parent, String label) {
@@ -2601,10 +2784,11 @@ public final class EventContentEditorDialog {
 
   private List<RuleEntry> loadAvailableMonsterRules() throws Exception {
     List<RuleEntry> rules = new ArrayList<>();
+    EditableContentTranslations translations = loadEditableTranslations();
     for (Path file : service.listRuleFiles()) {
       for (RuleEntry rule : service.loadRules(file)) {
         if (!"magic".equalsIgnoreCase(safe(rule.type))) {
-          rules.add(rule);
+          rules.add(applyRuleTranslation(rule, translations));
         }
       }
     }
@@ -2616,10 +2800,11 @@ public final class EventContentEditorDialog {
 
   private List<RuleEntry> loadAvailableMonsterMagicRules() throws Exception {
     List<RuleEntry> rules = new ArrayList<>();
+    EditableContentTranslations translations = loadEditableTranslations();
     for (Path file : service.listRuleFiles()) {
       for (RuleEntry rule : service.loadRules(file)) {
         if ("magic".equalsIgnoreCase(safe(rule.type))) {
-          rules.add(rule);
+          rules.add(applyRuleTranslation(rule, translations));
         }
       }
     }
@@ -2942,6 +3127,257 @@ public final class EventContentEditorDialog {
     event.users = safe(users).trim();
     event.treasure = true;
     return event;
+  }
+
+  private Event toPreviewEventLike(
+      String name, String flavor, String rules, String special, boolean treasure, Path fileDirectory) {
+    Event event = new Event();
+    event.id = "userdefined-event-preview";
+    event.name = safe(name).trim();
+    event.flavor = isTravelOrSettlementDirectory(fileDirectory) ? null : safe(flavor).trim();
+    event.rules = safe(rules).trim();
+    event.special = isTravelOrSettlementDirectory(fileDirectory) ? null : safe(special).trim();
+    event.goldValue = "";
+    event.users = "";
+    event.treasure = treasure;
+    return event;
+  }
+
+  private boolean isTravelOrSettlementDirectory(Path fileDirectory) {
+    Path normalizedDirectory = fileDirectory == null ? null : fileDirectory.toAbsolutePath().normalize();
+    return normalizedDirectory != null
+        && (normalizedDirectory.equals(service.getTravelDirectory().toAbsolutePath().normalize())
+            || normalizedDirectory.equals(service.getSettlementDirectory().toAbsolutePath().normalize()));
+  }
+
+  private String previewEventBadge(Path fileDirectory) {
+    Path normalizedDirectory = fileDirectory == null ? null : fileDirectory.toAbsolutePath().normalize();
+    if (normalizedDirectory != null
+        && normalizedDirectory.equals(service.getSettlementDirectory().toAbsolutePath().normalize())) {
+      return "SE";
+    }
+    if (normalizedDirectory != null
+        && normalizedDirectory.equals(service.getTravelDirectory().toAbsolutePath().normalize())) {
+      return "TR";
+    }
+    return "EV";
+  }
+
+  private static Monster toPreviewMonster(
+      String id,
+      String name,
+      String plural,
+      List<String> factions,
+      String move,
+      String weaponSkill,
+      String ballisticSkill,
+      String strength,
+      String toughness,
+      String wounds,
+      String initiative,
+      String attacks,
+      String gold,
+      String armor,
+      String damage) {
+    Monster monster = new Monster();
+    monster.id = safe(id).trim();
+    monster.name = safe(name).trim();
+    monster.plural = safe(plural).trim();
+    monster.factions = new ArrayList<>(factions);
+    monster.move = safe(move).trim();
+    monster.weaponskill = safe(weaponSkill).trim();
+    monster.ballisticskill = safe(ballisticSkill).trim();
+    monster.strength = safe(strength).trim();
+    monster.toughness = safe(toughness).trim();
+    monster.wounds = safe(wounds).trim();
+    monster.initiative = safe(initiative).trim();
+    monster.attacks = safe(attacks).trim();
+    monster.gold = safe(gold).trim();
+    monster.armor = safe(armor).trim();
+    monster.damage = safe(damage).trim();
+    return monster;
+  }
+
+  private static SpecialContainer toPreviewMonsterSpecials(
+      String plainText,
+      Map<String, MonsterSpecialRuleLink> ruleLinks,
+      String magicType,
+      int magicLevel) {
+    SpecialContainer preview = new SpecialContainer() {};
+    preview.special = safe(plainText).trim();
+    preview.specialLinks = new LinkedHashMap<>();
+    for (Map.Entry<String, MonsterSpecialRuleLink> entry : ruleLinks.entrySet()) {
+      preview.specialLinks.put(entry.getKey(), buildSpecialRuleText(entry.getValue().name(), entry.getValue().parameters(), entry.getValue().parameterFormat()));
+    }
+    preview.magicType = safe(magicType).trim();
+    preview.magicLevel = magicLevel;
+    return preview;
+  }
+
+  private static Rule toPreviewRule(RuleEntry entry) {
+    Rule rule = new Rule();
+    rule.id = safe(entry.id);
+    rule.name = safe(entry.name);
+    rule.text = safe(entry.text);
+    rule.type = safe(entry.type);
+    return rule;
+  }
+
+  private EditableContentTranslations loadEditableTranslations() {
+    return EditableContentTranslations.load(projectRoot, I18n.getLanguage());
+  }
+
+  private static List<RuleEntry> applyRuleTranslations(
+      List<RuleEntry> entries, EditableContentTranslations translations) {
+    List<RuleEntry> localized = new ArrayList<>();
+    for (RuleEntry entry : entries) {
+      localized.add(applyRuleTranslation(entry, translations));
+    }
+    return localized;
+  }
+
+  private static RuleEntry applyRuleTranslation(RuleEntry entry, EditableContentTranslations translations) {
+    RuleEntry localized = copyRuleEntry(entry);
+    localized.name = translations.t(ruleTranslationKey(localized.id, RULE_NAME_SUFFIX), localized.name);
+    localized.text = translations.t(ruleTranslationKey(localized.id, RULE_TEXT_SUFFIX), localized.text);
+    localized.parameterName =
+        translations.t(ruleTranslationKey(localized.id, RULE_PARAMETER_NAME_SUFFIX), localized.parameterName);
+    localized.parameterNames =
+        translations.t(ruleTranslationKey(localized.id, RULE_PARAMETER_NAMES_SUFFIX), localized.parameterNames);
+    localized.parameterFormat =
+        translations.t(ruleTranslationKey(localized.id, RULE_PARAMETER_FORMAT_SUFFIX), localized.parameterFormat);
+    return localized;
+  }
+
+  private static void putRuleTranslations(EditableContentTranslations translations, RuleEntry entry) {
+    translations.put(ruleTranslationKey(entry.id, RULE_NAME_SUFFIX), entry.name);
+    translations.put(ruleTranslationKey(entry.id, RULE_TEXT_SUFFIX), entry.text);
+    translations.put(ruleTranslationKey(entry.id, RULE_PARAMETER_NAME_SUFFIX), entry.parameterName);
+    translations.put(ruleTranslationKey(entry.id, RULE_PARAMETER_NAMES_SUFFIX), entry.parameterNames);
+    translations.put(ruleTranslationKey(entry.id, RULE_PARAMETER_FORMAT_SUFFIX), entry.parameterFormat);
+  }
+
+  private static void removeRuleTranslations(EditableContentTranslations translations, String ruleId) {
+    translations.remove(ruleTranslationKey(ruleId, RULE_NAME_SUFFIX));
+    translations.remove(ruleTranslationKey(ruleId, RULE_TEXT_SUFFIX));
+    translations.remove(ruleTranslationKey(ruleId, RULE_PARAMETER_NAME_SUFFIX));
+    translations.remove(ruleTranslationKey(ruleId, RULE_PARAMETER_NAMES_SUFFIX));
+    translations.remove(ruleTranslationKey(ruleId, RULE_PARAMETER_FORMAT_SUFFIX));
+  }
+
+  private static List<EventEntry> applyEventTranslations(
+      List<EventEntry> entries, EditableContentTranslations translations) {
+    List<EventEntry> localized = new ArrayList<>();
+    for (EventEntry entry : entries) {
+      EventEntry copy = copyEventEntry(entry);
+      copy.name = translations.t(eventTranslationKey(copy.id, EVENT_NAME_SUFFIX), copy.name);
+      copy.flavor = translations.t(eventTranslationKey(copy.id, EVENT_FLAVOR_SUFFIX), copy.flavor);
+      copy.rules = translations.t(eventTranslationKey(copy.id, EVENT_RULES_SUFFIX), copy.rules);
+      copy.special = translations.t(eventTranslationKey(copy.id, EVENT_SPECIAL_SUFFIX), copy.special);
+      localized.add(copy);
+    }
+    return localized;
+  }
+
+  private static void putEventTranslations(EditableContentTranslations translations, EventEntry entry) {
+    translations.put(eventTranslationKey(entry.id, EVENT_NAME_SUFFIX), entry.name);
+    translations.put(eventTranslationKey(entry.id, EVENT_FLAVOR_SUFFIX), entry.flavor);
+    translations.put(eventTranslationKey(entry.id, EVENT_RULES_SUFFIX), entry.rules);
+    translations.put(eventTranslationKey(entry.id, EVENT_SPECIAL_SUFFIX), entry.special);
+  }
+
+  private static void removeEventTranslations(EditableContentTranslations translations, String eventId) {
+    translations.remove(eventTranslationKey(eventId, EVENT_NAME_SUFFIX));
+    translations.remove(eventTranslationKey(eventId, EVENT_FLAVOR_SUFFIX));
+    translations.remove(eventTranslationKey(eventId, EVENT_RULES_SUFFIX));
+    translations.remove(eventTranslationKey(eventId, EVENT_SPECIAL_SUFFIX));
+  }
+
+  private static List<MonsterEntry> applyMonsterTranslations(
+      List<MonsterEntry> entries, EditableContentTranslations translations) {
+    List<MonsterEntry> localized = new ArrayList<>();
+    for (MonsterEntry entry : entries) {
+      MonsterEntry copy = copyMonsterEntry(entry);
+      copy.name = translations.t(monsterTranslationKey(copy.id, MONSTER_NAME_SUFFIX), copy.name);
+      copy.plural = translations.t(monsterTranslationKey(copy.id, MONSTER_PLURAL_SUFFIX), copy.plural);
+      localized.add(copy);
+    }
+    return localized;
+  }
+
+  private String localizedMonsterSpecial(String monsterId, String fallback) {
+    return loadEditableTranslations().t(monsterTranslationKey(monsterId, MONSTER_SPECIAL_SUFFIX), fallback);
+  }
+
+  private static void putMonsterTranslations(
+      EditableContentTranslations translations, MonsterEntry entry, String specialText) {
+    translations.put(monsterTranslationKey(entry.id, MONSTER_NAME_SUFFIX), entry.name);
+    translations.put(monsterTranslationKey(entry.id, MONSTER_PLURAL_SUFFIX), entry.plural);
+    translations.put(monsterTranslationKey(entry.id, MONSTER_SPECIAL_SUFFIX), specialText);
+  }
+
+  private static void removeMonsterTranslations(EditableContentTranslations translations, String monsterId) {
+    translations.remove(monsterTranslationKey(monsterId, MONSTER_NAME_SUFFIX));
+    translations.remove(monsterTranslationKey(monsterId, MONSTER_PLURAL_SUFFIX));
+    translations.remove(monsterTranslationKey(monsterId, MONSTER_SPECIAL_SUFFIX));
+  }
+
+  private static RuleEntry copyRuleEntry(RuleEntry source) {
+    RuleEntry copy = new RuleEntry();
+    copy.type = safe(source.type);
+    copy.id = safe(source.id);
+    copy.name = safe(source.name);
+    copy.text = safe(source.text);
+    copy.parameterName = safe(source.parameterName);
+    copy.parameterNames = safe(source.parameterNames);
+    copy.parameterFormat = safe(source.parameterFormat);
+    return copy;
+  }
+
+  private static EventEntry copyEventEntry(EventEntry source) {
+    EventEntry copy = new EventEntry();
+    copy.id = safe(source.id);
+    copy.name = safe(source.name);
+    copy.flavor = safe(source.flavor);
+    copy.rules = safe(source.rules);
+    copy.special = safe(source.special);
+    copy.goldValue = safe(source.goldValue);
+    copy.users = safe(source.users);
+    copy.treasure = source.treasure;
+    return copy;
+  }
+
+  private static MonsterEntry copyMonsterEntry(MonsterEntry source) {
+    MonsterEntry copy = new MonsterEntry();
+    copy.id = safe(source.id);
+    copy.name = safe(source.name);
+    copy.plural = safe(source.plural);
+    copy.factions = safe(source.factions);
+    copy.wounds = safe(source.wounds);
+    copy.move = safe(source.move);
+    copy.weaponSkill = safe(source.weaponSkill);
+    copy.ballisticSkill = safe(source.ballisticSkill);
+    copy.strength = safe(source.strength);
+    copy.toughness = safe(source.toughness);
+    copy.initiative = safe(source.initiative);
+    copy.attacks = safe(source.attacks);
+    copy.gold = safe(source.gold);
+    copy.armor = safe(source.armor);
+    copy.damage = safe(source.damage);
+    copy.specialEntriesRaw = safe(source.specialEntriesRaw);
+    return copy;
+  }
+
+  private static String ruleTranslationKey(String id, String suffix) {
+    return "rule." + safe(id).trim() + suffix;
+  }
+
+  private static String eventTranslationKey(String id, String suffix) {
+    return "event." + safe(id).trim() + suffix;
+  }
+
+  private static String monsterTranslationKey(String id, String suffix) {
+    return "monster." + safe(id).trim() + suffix;
   }
 
   private static String buildEventLikeId(String name, boolean treasureFieldsVisible, boolean objectiveTreasurePreview) {

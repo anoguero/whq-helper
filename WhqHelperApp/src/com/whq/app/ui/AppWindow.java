@@ -113,7 +113,6 @@ public class AppWindow {
     private Label overviewSettingsBodyLabel;
     private Button newDungeonButton;
     private Button openEventDecksButton;
-    private Button maintenanceButton;
     private Button contentEditorButton;
 
     private MenuItem playMenuItem;
@@ -121,11 +120,9 @@ public class AppWindow {
     private MenuItem contentMenuItem;
     private MenuItem eventCardsMenuItem;
     private MenuItem optionsMenuItem;
-    private MenuItem helpMenuItem;
 
     private final LocalizedUiAction newDungeonAction;
     private final LocalizedUiAction openEventDecksAction;
-    private final LocalizedUiAction maintenanceAction;
     private final LocalizedUiAction eventContentEditorAction;
     private final LocalizedUiAction importCsvAction;
     private final LocalizedUiAction exportAllCsvAction;
@@ -138,7 +135,6 @@ public class AppWindow {
     private final LocalizedUiAction dungeonDefaultsAction;
     private final LocalizedUiAction spanishLanguageAction;
     private final LocalizedUiAction englishLanguageAction;
-    private final LocalizedUiAction aboutAction;
 
     public AppWindow(Display display, Path projectRoot) {
         this.display = display;
@@ -150,7 +146,6 @@ public class AppWindow {
         this.localizedActions = new ArrayList<>();
         this.newDungeonAction = registerAction(LocalizedUiAction.push("menu.item.newDungeon", this::openNewDungeonDialog));
         this.openEventDecksAction = registerAction(LocalizedUiAction.push("menu.item.openEventDecks", this::openEventDecks));
-        this.maintenanceAction = registerAction(LocalizedUiAction.push("menu.item.maintenance", this::openCardMaintenanceDialog));
         this.eventContentEditorAction = registerAction(LocalizedUiAction.push("menu.item.contentEditor", this::openEventContentEditor));
         this.importCsvAction = registerAction(LocalizedUiAction.push("menu.item.importCsv", this::handleImportCsv));
         this.exportAllCsvAction = registerAction(LocalizedUiAction.push(
@@ -186,9 +181,6 @@ public class AppWindow {
                 "menu.item.english",
                 () -> setLanguageAndPersist(Language.EN),
                 () -> I18n.getLanguage() == Language.EN));
-        this.aboutAction = registerAction(LocalizedUiAction.push(
-                "menu.item.about",
-                () -> getOrCreateEventDeckApp().showAbout(shell)));
     }
 
     public void open() {
@@ -253,7 +245,6 @@ public class AppWindow {
         contentMenuItem = new MenuItem(menuBar, SWT.CASCADE);
         Menu contentMenu = new Menu(shell, SWT.DROP_DOWN);
         contentMenuItem.setMenu(contentMenu);
-        createActionMenuItem(contentMenu, SWT.PUSH, maintenanceAction);
         createActionMenuItem(contentMenu, SWT.PUSH, eventContentEditorAction);
         new MenuItem(contentMenu, SWT.SEPARATOR);
         createActionMenuItem(contentMenu, SWT.PUSH, importCsvAction);
@@ -277,11 +268,6 @@ public class AppWindow {
         new MenuItem(optionsMenu, SWT.SEPARATOR);
         createActionMenuItem(optionsMenu, SWT.RADIO, spanishLanguageAction);
         createActionMenuItem(optionsMenu, SWT.RADIO, englishLanguageAction);
-
-        helpMenuItem = new MenuItem(menuBar, SWT.CASCADE);
-        Menu helpMenu = new Menu(shell, SWT.DROP_DOWN);
-        helpMenuItem.setMenu(helpMenu);
-        createActionMenuItem(helpMenu, SWT.PUSH, aboutAction);
 
         refreshLocalizedTexts();
     }
@@ -372,7 +358,6 @@ public class AppWindow {
         contentMenuItem.setText(I18n.t("menu.content"));
         eventCardsMenuItem.setText(I18n.t("menu.eventCards"));
         optionsMenuItem.setText(I18n.t("menu.options"));
-        helpMenuItem.setText(I18n.t("menu.help"));
         refreshLocalizedActions();
 
         if (heroTitleLabel != null && !heroTitleLabel.isDisposed()) {
@@ -455,7 +440,6 @@ public class AppWindow {
 
         newDungeonButton = createHeroButton(actionRow, newDungeonAction);
         openEventDecksButton = createHeroButton(actionRow, openEventDecksAction);
-        maintenanceButton = createHeroButton(actionRow, maintenanceAction);
         contentEditorButton = createHeroButton(actionRow, eventContentEditorAction);
 
         heroArtCanvas = new Canvas(heroSection, SWT.DOUBLE_BUFFERED);
@@ -1278,25 +1262,25 @@ public class AppWindow {
         try {
             environments = cardStore.loadEnvironments();
         } catch (DungeonCardStorageException ex) {
-            showError("Nueva Mazmorra", "No se han podido cargar los entornos: " + ex.getMessage());
+            showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadEnvironments") + ex.getMessage());
             return;
         }
 
         if (environments.isEmpty()) {
-            showInfo("Nueva Mazmorra", "No hay cartas disponibles para configurar una mazmorra.");
+            showInfo(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.info.noCards"));
             return;
         }
 
         Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
-        dialog.setText("Nueva Mazmorra");
+        dialog.setText(I18n.t("dialog.newDungeon.title"));
         dialog.setBackground(theme.shellBackground);
         dialog.setLayout(new GridLayout(1, false));
         dialog.setSize(980, 820);
 
         createDialogHeader(
                 dialog,
-                "Nueva Mazmorra",
-                "Configura el entorno, la sala objetivo y el tamaño del mazo con la misma presentación de tablero que el resto de la aplicación.");
+                I18n.t("dialog.newDungeon.title"),
+                I18n.t("dialog.newDungeon.subtitle"));
 
         ScrolledComposite scroll = new ScrolledComposite(dialog, SWT.V_SCROLL);
         scroll.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -1316,7 +1300,7 @@ public class AppWindow {
         formPanel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
         Label environmentLabel = new Label(formPanel, SWT.NONE);
-        environmentLabel.setText("Entorno:");
+        environmentLabel.setText(I18n.t("dialog.newDungeon.environment"));
         styleDarkLabel(environmentLabel, false);
         environmentLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1329,7 +1313,7 @@ public class AppWindow {
         environmentCombo.select(0);
 
         Label objectiveRoomLabel = new Label(formPanel, SWT.NONE);
-        objectiveRoomLabel.setText("Habitación objetivo:");
+        objectiveRoomLabel.setText(I18n.t("dialog.newDungeon.objectiveRoom"));
         styleDarkLabel(objectiveRoomLabel, false);
         objectiveRoomLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1340,7 +1324,7 @@ public class AppWindow {
         objectiveRoomCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
         Label missionLabel = new Label(formPanel, SWT.NONE);
-        missionLabel.setText("Mision:");
+        missionLabel.setText(I18n.t("dialog.newDungeon.mission"));
         styleDarkLabel(missionLabel, false);
         missionLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1351,7 +1335,7 @@ public class AppWindow {
         missionCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
         Label ambienceLabel = new Label(formPanel, SWT.NONE);
-        ambienceLabel.setText("Ambientacion:");
+        ambienceLabel.setText(I18n.t("dialog.newDungeon.ambience"));
         styleDarkLabel(ambienceLabel, false);
         ambienceLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1364,7 +1348,7 @@ public class AppWindow {
         ambienceCombo.select(0);
 
         Label levelLabel = new Label(formPanel, SWT.NONE);
-        levelLabel.setText("Nivel de mazmorra:");
+        levelLabel.setText(I18n.t("dialog.newDungeon.level"));
         styleDarkLabel(levelLabel, false);
         levelLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1376,7 +1360,7 @@ public class AppWindow {
         levelSpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
         Label deckSizeLabel = new Label(formPanel, SWT.NONE);
-        deckSizeLabel.setText("Tamaño del mazo de aventura:");
+        deckSizeLabel.setText(I18n.t("dialog.newDungeon.deckSize"));
         styleDarkLabel(deckSizeLabel, false);
         deckSizeLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1391,7 +1375,7 @@ public class AppWindow {
         deckSizeSpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
         Label roomCountLabel = new Label(formPanel, SWT.NONE);
-        roomCountLabel.setText("Número de habitaciones:");
+        roomCountLabel.setText(I18n.t("dialog.newDungeon.roomCount"));
         styleDarkLabel(roomCountLabel, false);
         roomCountLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
@@ -1405,14 +1389,14 @@ public class AppWindow {
         Label helpText = new Label(formPanel, SWT.WRAP);
         GridData helpData = new GridData(SWT.FILL, SWT.TOP, true, false, 4, 1);
         helpText.setLayoutData(helpData);
-        helpText.setText("El número de habitaciones debe ser menor que el tamaño total del mazo de aventura.");
+        helpText.setText(I18n.t("dialog.newDungeon.help"));
         styleDarkLabel(helpText, false);
 
         Composite missionPanel = createDarkPanel(content, 1);
         missionPanel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
         Label missionRulesLabel = new Label(missionPanel, SWT.NONE);
-        missionRulesLabel.setText("Reglas especiales:");
+        missionRulesLabel.setText(I18n.t("dialog.newDungeon.specialRules"));
         styleDarkLabel(missionRulesLabel, false);
         missionRulesLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
 
@@ -1560,7 +1544,7 @@ public class AppWindow {
                     startButton.setEnabled(false);
                 }
             } catch (ObjectiveRoomAdventureRepositoryException ex) {
-                showError("Nueva Mazmorra", "No se han podido cargar las aventuras: " + ex.getMessage());
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadAdventures") + ex.getMessage());
                 missionRulesText.setText("");
                 startButton.setEnabled(false);
             }
@@ -1572,7 +1556,7 @@ public class AppWindow {
             try {
                 objectiveRooms = cardStore.loadObjectiveRoomsByEnvironment(environment);
             } catch (DungeonCardStorageException ex) {
-                showError("Nueva Mazmorra", "No se han podido cargar las salas objetivo: " + ex.getMessage());
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadObjectiveRooms") + ex.getMessage());
                 objectiveRooms = List.of();
             }
 
@@ -1590,7 +1574,7 @@ public class AppWindow {
                 startButton.setEnabled(false);
                 missionCombo.removeAll();
                 missionRulesText.setText("");
-                showInfo("Nueva Mazmorra", "No hay habitaciones objetivo para el entorno seleccionado.");
+                showInfo(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.info.noObjectiveRooms"));
             }
         };
 
@@ -1608,22 +1592,22 @@ public class AppWindow {
 
         startButton.addListener(SWT.Selection, event -> {
             if (objectiveRoomCombo.getSelectionIndex() < 0) {
-                showError("Nueva Mazmorra", "Debes seleccionar una habitación objetivo.");
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.selectObjectiveRoom"));
                 return;
             }
             if (missionCombo.getSelectionIndex() < 0) {
-                showError("Nueva Mazmorra", "Debes seleccionar una mision.");
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.selectMission"));
                 return;
             }
             String selectedObjectiveName = objectiveRoomCombo.getText();
             DungeonCard objectiveRoom = objectiveByName.get(selectedObjectiveName);
             if (objectiveRoom == null) {
-                showError("Nueva Mazmorra", "No se ha podido resolver la habitación objetivo seleccionada.");
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.resolveObjectiveRoom"));
                 return;
             }
             ObjectiveRoomAdventure selectedAdventure = adventureByName.get(missionCombo.getText());
             if (selectedAdventure == null) {
-                showError("Nueva Mazmorra", "No se ha podido resolver la mision seleccionada.");
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.resolveMission"));
                 return;
             }
 
@@ -1650,7 +1634,7 @@ public class AppWindow {
                         selectedLevel,
                         selectedEnvironment);
             } catch (IllegalArgumentException ex) {
-                showError("Nueva Mazmorra", ex.getMessage());
+                showError(I18n.t("dialog.newDungeon.title"), ex.getMessage());
             }
         });
 
@@ -1672,14 +1656,13 @@ public class AppWindow {
             int deckSize,
             int dungeonRoomCount) {
         if (deckSize < 2) {
-            throw new IllegalArgumentException("El mazo debe tener al menos 2 cartas.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.deckTooSmall"));
         }
         if (dungeonRoomCount < 1) {
-            throw new IllegalArgumentException("Debe haber al menos una carta de habitación.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.noRoomCards"));
         }
         if (dungeonRoomCount > deckSize - 1) {
-            throw new IllegalArgumentException(
-                    "El número de habitaciones debe ser menor que el tamaño total del mazo.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.roomCountTooLarge"));
         }
 
         List<DungeonCard> environmentCards = cards.stream()
@@ -1689,8 +1672,7 @@ public class AppWindow {
                 .collect(Collectors.toList());
 
         if (!objectiveRoom.isEnabled() || objectiveRoom.getCopyCount() <= 0) {
-            throw new IllegalArgumentException(
-                    "La habitación objetivo seleccionada no está habilitada o no tiene copias disponibles.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.objectiveRoomUnavailable"));
         }
 
         List<DungeonCard> dungeonRoomPool = environmentCards.stream()
@@ -1698,12 +1680,10 @@ public class AppWindow {
                 .collect(Collectors.toList());
         int availableDungeonRoomCopies = dungeonRoomPool.stream().mapToInt(DungeonCard::getCopyCount).sum();
         if (availableDungeonRoomCopies <= 0) {
-            throw new IllegalArgumentException(
-                    "No hay cartas de tipo DUNGEON ROOM para el entorno seleccionado.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.noDungeonRoomCards"));
         }
         if (dungeonRoomCount > availableDungeonRoomCopies) {
-            throw new IllegalArgumentException(
-                    "No hay suficientes copias habilitadas de cartas DUNGEON ROOM para ese número de habitaciones.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.notEnoughDungeonRoomCopies"));
         }
 
         List<DungeonCard> corridorAndSpecialPool = environmentCards.stream()
@@ -1712,12 +1692,10 @@ public class AppWindow {
         int fillerCount = deckSize - dungeonRoomCount - 1;
         int availableFillerCopies = corridorAndSpecialPool.stream().mapToInt(DungeonCard::getCopyCount).sum();
         if (fillerCount > 0 && availableFillerCopies <= 0) {
-            throw new IllegalArgumentException(
-                    "No hay cartas de pasillo/especiales para completar el mazo en el entorno seleccionado.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.noFillerCards"));
         }
         if (fillerCount > availableFillerCopies) {
-            throw new IllegalArgumentException(
-                    "No hay suficientes copias habilitadas de cartas de pasillo/especial para completar el mazo.");
+            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.notEnoughFillerCopies"));
         }
 
         Random random = new Random();
@@ -1963,7 +1941,7 @@ public class AppWindow {
             int selectedLevel,
             String environment) {
         Shell simulator = new Shell(shell, SWT.SHELL_TRIM | SWT.RESIZE);
-        simulator.setText("Simulador de Mazo de Mazmorra");
+        simulator.setText(I18n.t("dialog.adventureSimulator.title"));
         simulator.setBackground(theme.shellBackground);
         simulator.setLayout(new GridLayout(1, false));
         simulator.setSize(1380, 920);
@@ -1982,7 +1960,7 @@ public class AppWindow {
 
         createDialogHeader(
                 simulator,
-                "Simulador de Mazo de Mazmorra",
+                I18n.t("dialog.adventureSimulator.title"),
                 buildAdventureSimulatorSubtitle(selectedAdventure, selectedAmbience, selectedLevel));
 
         Composite body = new Composite(simulator, SWT.NONE);
@@ -1999,14 +1977,13 @@ public class AppWindow {
         deckArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
         Label deckTitle = new Label(deckArea, SWT.NONE);
-        deckTitle.setText("Montones del mazo");
+        deckTitle.setText(I18n.t("dialog.adventureSimulator.deckPiles"));
         styleDarkLabel(deckTitle, true);
         deckTitle.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
         Label deckHint = new Label(deckArea, SWT.WRAP);
         deckHint.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-        deckHint.setText(
-                "Pulsa sobre la carta trasera para revelar la carta superior. Botón derecho para dividir el mazo en varios montones.");
+        deckHint.setText(I18n.t("dialog.adventureSimulator.deckHint"));
         styleDarkLabel(deckHint, false);
 
         Label deckStatus = new Label(deckArea, SWT.WRAP);
@@ -2027,12 +2004,12 @@ public class AppWindow {
         revealArea.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
         Label revealTitle = new Label(revealArea, SWT.NONE);
-        revealTitle.setText("Carta revelada");
+        revealTitle.setText(I18n.t("dialog.adventureSimulator.revealedCard"));
         styleParchmentLabel(revealTitle, true);
         revealTitle.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
         Label revealStatus = new Label(revealArea, SWT.WRAP);
-        revealStatus.setText("Selecciona una carta del histórico para renderizarla.");
+        revealStatus.setText(I18n.t("dialog.adventureSimulator.revealStatus"));
         revealStatus.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
         styleParchmentLabel(revealStatus, false);
 
@@ -2044,7 +2021,7 @@ public class AppWindow {
             if (state.selectedCard == null) {
                 event.gc.setForeground(theme.ink);
                 event.gc.setFont(theme.bodyFont);
-                event.gc.drawText("Pulsa en un montón para extraer carta y selecciónala en su histórico.", 18, 18, true);
+                event.gc.drawText(I18n.t("dialog.adventureSimulator.revealCanvasHint"), 18, 18, true);
                 return;
             }
 
@@ -2062,11 +2039,10 @@ public class AppWindow {
 
             if (state.piles.size() <= 1) {
                 int remaining = state.piles.isEmpty() ? 0 : state.piles.get(0).size();
-                deckStatus.setText("Montón único. Cartas restantes: " + remaining + ".");
+                deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.singlePileStatus"), remaining));
             } else {
                 int remaining = state.piles.stream().mapToInt(List::size).sum();
-                deckStatus.setText("Mazo dividido en " + state.piles.size()
-                        + " montones (" + remaining + " cartas).");
+                deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.multiPileStatus"), state.piles.size(), remaining));
             }
 
             for (int i = 0; i < state.piles.size(); i++) {
@@ -2079,7 +2055,7 @@ public class AppWindow {
 
                 Label pileLabel = new Label(pileBox, SWT.CENTER);
                 pileLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-                pileLabel.setText("Montón " + (pileIndex + 1) + " (" + pile.size() + " cartas)");
+                pileLabel.setText(String.format(I18n.t("dialog.adventureSimulator.pileLabel"), pileIndex + 1, pile.size()));
                 pileLabel.setBackground(theme.panelBackground);
                 pileLabel.setForeground(theme.mist);
                 pileLabel.setFont(theme.sectionTitleFont);
@@ -2100,7 +2076,7 @@ public class AppWindow {
                         event.gc.setForeground(theme.mist);
                         event.gc.setFont(theme.bodyFont);
                         event.gc.drawRectangle(10, 10, area.width - 20, area.height - 20);
-                        event.gc.drawText("Sin cartas", area.width / 2 - 28, area.height / 2 - 8, true);
+                        event.gc.drawText(I18n.t("dialog.adventureSimulator.noCards"), area.width / 2 - 28, area.height / 2 - 8, true);
                         return;
                     }
 
@@ -2113,7 +2089,7 @@ public class AppWindow {
                 pileCanvas.addListener(SWT.MouseDown, event -> {
                     if (event.button == 1) {
                         if (pile.isEmpty()) {
-                            showInfo("Simulador de mazo", "El montón " + (pileIndex + 1) + " está vacío.");
+                            showInfo(I18n.t("dialog.adventureSimulator.title"), String.format(I18n.t("dialog.adventureSimulator.info.emptyPile"), pileIndex + 1));
                             return;
                         }
 
@@ -2122,7 +2098,7 @@ public class AppWindow {
                         pileHistory.add(0, drawn);
                         state.selectedCard = drawn;
                         state.selectedPile = pileIndex;
-                        revealStatus.setText("Carta seleccionada: " + drawn.getName() + " (Montón " + (pileIndex + 1) + ")");
+                        revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), drawn.getName(), pileIndex + 1));
                         revealCanvas.redraw();
                         refreshSimulatorUi[0].run();
                     }
@@ -2135,8 +2111,8 @@ public class AppWindow {
                     int pileSize = pile.size();
                     if (pileSize < 2) {
                         showInfo(
-                                "Simulador de mazo",
-                                "El montón " + (pileIndex + 1) + " no tiene suficientes cartas para dividirse.");
+                                I18n.t("dialog.adventureSimulator.title"),
+                                String.format(I18n.t("dialog.adventureSimulator.info.notEnoughToSplit"), pileIndex + 1));
                         return;
                     }
 
@@ -2148,7 +2124,7 @@ public class AppWindow {
                     state.histories = splitSelectedPileHistories(state.histories, pileIndex, requestedPiles);
                     state.selectedCard = null;
                     state.selectedPile = -1;
-                    revealStatus.setText("Mazo dividido. Selecciona una carta del histórico para renderizarla.");
+                    revealStatus.setText(I18n.t("dialog.adventureSimulator.splitStatus"));
                     revealCanvas.redraw();
                     refreshSimulatorUi[0].run();
                 });
@@ -2180,7 +2156,7 @@ public class AppWindow {
 
                 Label historyLabel = new Label(pileBox, SWT.NONE);
                 historyLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-                historyLabel.setText("Histórico de cartas extraídas");
+                historyLabel.setText(I18n.t("dialog.adventureSimulator.history"));
                 historyLabel.setBackground(theme.panelBackground);
                 historyLabel.setForeground(theme.parchment);
                 historyLabel.setFont(theme.bodyFont);
@@ -2208,8 +2184,7 @@ public class AppWindow {
                     DungeonCard selectedHistoryCard = history.get(selectedIndex);
                     state.selectedCard = selectedHistoryCard;
                     state.selectedPile = pileIndex;
-                    revealStatus.setText(
-                            "Carta seleccionada: " + selectedHistoryCard.getName() + " (Montón " + (pileIndex + 1) + ")");
+                    revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), selectedHistoryCard.getName(), pileIndex + 1));
                     revealCanvas.redraw();
                 });
 
@@ -2236,7 +2211,7 @@ public class AppWindow {
 
         if (showMissionButton) {
             org.eclipse.swt.widgets.Button missionButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
-            missionButton.setText("Mostrar Mision");
+            missionButton.setText(I18n.t("button.showMission"));
             styleActionButton(missionButton);
             missionButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
             missionButton.addListener(SWT.Selection, event -> openAdventureMissionDialog(selectedAdventure));
@@ -2337,21 +2312,21 @@ public class AppWindow {
 
     private Integer askPileCount(Shell parent, int maxCards) {
         Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-        dialog.setText("Dividir mazo");
+        dialog.setText(I18n.t("dialog.splitDeck.title"));
         dialog.setBackground(theme.shellBackground);
         dialog.setLayout(new GridLayout(1, false));
         dialog.setSize(520, 360);
 
         createDialogHeader(
                 dialog,
-                "Dividir mazo",
-                "Elige en cuántos montones quieres repartir el montón seleccionado.");
+                I18n.t("dialog.splitDeck.title"),
+                I18n.t("dialog.splitDeck.subtitle"));
 
         Composite formPanel = createDarkPanel(dialog, 2);
         formPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
         Label countLabel = new Label(formPanel, SWT.NONE);
-        countLabel.setText("Número de montones:");
+        countLabel.setText(I18n.t("dialog.splitDeck.count"));
         styleDarkLabel(countLabel, false);
         countLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 

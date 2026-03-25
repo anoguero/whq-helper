@@ -11,7 +11,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Pattern;
@@ -49,6 +48,7 @@ public final class WhqUiTheme {
 
   public WhqUiTheme(Display display, Path projectRoot) {
     this.display = display;
+    FontResources.loadBundledFonts(display, projectRoot);
 
     shellBackground = color(20, 15, 12);
     panelBackground = color(36, 28, 22);
@@ -64,7 +64,7 @@ public final class WhqUiTheme {
 
     heroTitleFont =
         font(
-            new String[] {"Cinzel Decorative", "Cinzel", "Book Antiqua", "Times New Roman", "Serif"},
+            new String[] {"Caslon Antique", "Cinzel Decorative", "Cinzel", "Book Antiqua", "Times New Roman", "Serif"},
             26,
             SWT.BOLD);
     heroSubtitleFont =
@@ -74,7 +74,7 @@ public final class WhqUiTheme {
             SWT.NORMAL);
     sectionTitleFont =
         font(
-            new String[] {"Cinzel", "Book Antiqua", "Georgia", "Serif"},
+            new String[] {"Copperplate Gothic Bold", "Cinzel", "Book Antiqua", "Georgia", "Serif"},
             14,
             SWT.BOLD);
     bodyFont =
@@ -84,7 +84,7 @@ public final class WhqUiTheme {
             SWT.NORMAL);
     statFont =
         font(
-            new String[] {"Cinzel", "Book Antiqua", "Georgia", "Serif"},
+            new String[] {"Copperplate Gothic Bold", "Cinzel", "Book Antiqua", "Georgia", "Serif"},
             10,
             SWT.BOLD);
 
@@ -354,22 +354,11 @@ public final class WhqUiTheme {
   }
 
   private Font font(String[] candidates, int height, int style) {
-    String name = pickFont(candidates);
+    String fallback = display.getSystemFont().getFontData()[0].getName();
+    String name = FontResources.pickAvailableFont(display, fallback, candidates);
     Font font = new Font(display, name, height, style);
     fonts.add(font);
     return font;
-  }
-
-  private String pickFont(String[] candidates) {
-    FontData[] available = display.getFontList(null, true);
-    for (String candidate : candidates) {
-      for (FontData data : available) {
-        if (candidate.equalsIgnoreCase(data.getName())) {
-          return data.getName();
-        }
-      }
-    }
-    return display.getSystemFont().getFontData()[0].getName();
   }
 
   private Color color(int r, int g, int b) {

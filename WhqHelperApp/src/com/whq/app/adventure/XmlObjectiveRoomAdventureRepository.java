@@ -25,6 +25,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.whq.app.i18n.ContentTranslations;
+import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
 
@@ -106,6 +107,9 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
             List<ObjectiveRoomAdventure> userAdventures = loadUserAdventuresRaw();
             upsertAdventure(userAdventures, adventure);
             writeUserAdventures(userAdventures);
+            EditableContentTranslations translations = EditableContentTranslations.load(projectRoot, I18n.getLanguage());
+            putAdventureTranslations(translations, adventure);
+            translations.save();
         } catch (Exception ex) {
             throw new ObjectiveRoomAdventureRepositoryException("No se ha podido guardar la aventura del usuario.", ex);
         }
@@ -121,6 +125,9 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
                 throw new ObjectiveRoomAdventureRepositoryException("Solo se pueden eliminar aventuras definidas por el usuario.");
             }
             writeUserAdventures(userAdventures);
+            EditableContentTranslations translations = EditableContentTranslations.load(projectRoot, I18n.getLanguage());
+            removeAdventureTranslations(translations, objectiveRoomName, adventureId);
+            translations.save();
         } catch (ObjectiveRoomAdventureRepositoryException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -325,6 +332,25 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         normalized = normalized.replaceAll("[^a-z0-9]+", "-");
         normalized = normalized.replaceAll("^-+|-+$", "");
         return normalized;
+    }
+
+    private void putAdventureTranslations(EditableContentTranslations translations, ObjectiveRoomAdventure adventure) {
+        String baseKey = adventureTranslationBaseKey(adventure.objectiveRoomName(), adventure.id());
+        translations.put(baseKey + ".name", adventure.name());
+        translations.put(baseKey + ".flavor", adventure.flavorText());
+        translations.put(baseKey + ".rules", adventure.rulesText());
+    }
+
+    private void removeAdventureTranslations(EditableContentTranslations translations, String objectiveRoomName, String adventureId) {
+        String baseKey = adventureTranslationBaseKey(objectiveRoomName, adventureId);
+        translations.remove(baseKey + ".name");
+        translations.remove(baseKey + ".flavor");
+        translations.remove(baseKey + ".rules");
+    }
+
+    private String adventureTranslationBaseKey(String objectiveRoomName, String adventureId) {
+        String roomKey = normalizeTranslationKey(objectiveRoomName);
+        return "adventure." + roomKey + "." + normalize(adventureId).toLowerCase(Locale.ROOT);
     }
 
     private ObjectiveRoomAdventure buildGenericAdventure(String objectiveRoomName, ContentTranslations translations) {
