@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.FontResources;
 
 import pms.whq.data.Event;
 import pms.whq.data.Monster;
@@ -737,15 +738,7 @@ public final class CardFactory {
 
   private static Font createNamedFont(Composite base, int height, int style, String... names) {
     String fallback = base.getFont().getFontData()[0].getName();
-    String selected = fallback;
-    if (names != null) {
-      for (String name : names) {
-        if (!isBlank(name)) {
-          selected = name;
-          break;
-        }
-      }
-    }
+    String selected = FontResources.pickAvailableFont(base.getDisplay(), fallback, names);
     return new Font(base.getDisplay(), selected, Math.max(8, height), style);
   }
 
@@ -1442,7 +1435,14 @@ public final class CardFactory {
 
       FontData baseData = getFont().getFontData()[0];
       if (this.style == CardStyle.CLASSIC_EVENT) {
-        titleFont = new Font(getDisplay(), "Casablanca Antique", Math.max(13, baseData.getHeight() + 5), SWT.BOLD);
+        titleFont =
+            createNamedFont(
+                this,
+                Math.max(13, baseData.getHeight() + 5),
+                SWT.BOLD,
+                "Caslon Antique",
+                "Casablanca Antique",
+                baseData.getName());
         circleFont = new Font(getDisplay(), baseData.getName(), Math.max(11, baseData.getHeight() + 1), SWT.BOLD);
         parchmentTop = new Color(getDisplay(), 242, 235, 210);
         parchmentBottom = new Color(getDisplay(), 216, 203, 170);
