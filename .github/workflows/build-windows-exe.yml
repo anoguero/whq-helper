@@ -1,0 +1,56 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "WhqHelperApp/**"
+      - ".github/workflows/build-windows-exe.yml"
+  workflow_dispatch:
+
+jobs:
+  build-windows-exe:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Download SWT for Windows
+        run: |
+          $swtVersion = "3.127.0"
+          $target = "lib/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
+          $url = "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.win32.win32.x86_64/$swtVersion/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
+          New-Item -ItemType Directory -Force -Path "lib" | Out-Null
+          Invoke-WebRequest -Uri $url -OutFile $target
+
+      - name: Build EXE
+        run: ./scripts/package-windows.ps1 -Type exe
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: whq-helper-windows-exe
+          path: |
+            WhqHelperApp/target/windows-package/*.exe
+            WhqHelperApp/target/windows-package/**/*.exe
+          if-no-files-found: error
+
+      - name: Upload full Windows package directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: whq-helper-windows-package
+          path: WhqHelperApp/target/windows-package/**
+          if-no-files-found: error

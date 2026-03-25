@@ -123,6 +123,22 @@ Salida:
 
 - `target/windows-package/`
 
+### Generación automática en GitHub Actions
+
+El repositorio incluye el workflow:
+
+- `.github/workflows/build-windows-exe.yml`
+
+Comportamiento:
+
+- se ejecuta en cada `push` a `main`,
+- usa un runner Windows,
+- descarga en CI el JAR `org.eclipse.swt.win32.win32.x86_64-3.127.0.jar`,
+- ejecuta `./scripts/package-windows.ps1 -Type exe`,
+- publica el `.exe` y el directorio completo de `target/windows-package/` como artefactos del workflow.
+
+Esto te permite desarrollar en Linux y delegar el empaquetado final de Windows a GitHub.
+
 ## Cómo quedan los XML en el ejecutable
 
 Los XML no se empaquetan dentro del JAR principal.
