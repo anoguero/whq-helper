@@ -7,6 +7,7 @@ import type {
   MonsterEntry,
   ObjectiveRoomAdventure,
   Rule,
+  SpecialRuleLink,
   TableKind,
   TableModel,
   TableRefEntry
@@ -56,6 +57,9 @@ export interface UserRuleData {
   type: 'rule' | 'magic';
   name: string;
   text: string;
+  parameterName: string;
+  parameterNames?: string[];
+  parameterFormat: string;
 }
 
 export interface UserMonsterData {
@@ -75,7 +79,7 @@ export interface UserMonsterData {
   armor: string;
   damage: string;
   special: string;
-  specialLinks: Record<string, string>;
+  specialLinks: Record<string, SpecialRuleLink>;
   magicType: string;
   magicLevel: number;
 }
@@ -171,13 +175,24 @@ function ensurePrefixedId(value: string, prefix: string, fallback: string): stri
   return `${prefix}${normalized.replace(/^userdefined-/, '')}`;
 }
 
-function normalizeStringMap(value: Record<string, string>): Record<string, string> {
-  const result: Record<string, string> = {};
-  for (const [key, text] of Object.entries(value)) {
+function normalizeSpecialRuleLinks(value: Record<string, string | SpecialRuleLink>): Record<string, SpecialRuleLink> {
+  const result: Record<string, SpecialRuleLink> = {};
+  for (const [key, rawValue] of Object.entries(value ?? {})) {
     const normalizedKey = key.trim();
-    const normalizedText = text.trim();
+    const normalizedText = (typeof rawValue === 'string' ? rawValue : rawValue?.text ?? '').trim();
+    const normalizedParameter = (typeof rawValue === 'string' ? '' : rawValue?.parameter ?? '').trim();
+    const normalizedParameters =
+      typeof rawValue === 'string'
+        ? normalizedParameter
+          ? [normalizedParameter]
+          : []
+        : (rawValue?.parameters ?? []).map((value) => value.trim()).filter(Boolean);
     if (normalizedKey && normalizedText) {
-      result[normalizedKey] = normalizedText;
+      result[normalizedKey] = {
+        text: normalizedText,
+        parameter: normalizedParameter || normalizedParameters[0] || '',
+        parameters: normalizedParameters.length > 0 ? normalizedParameters : normalizedParameter ? [normalizedParameter] : []
+      };
     }
   }
   return result;
@@ -201,14 +216,105 @@ function parseTableName(xml: string): { name: string; kind: TableKind } | null {
   };
 }
 
+function parseEventIdsFromTableXml(xml: string): string[] {
+  const doc = new DOMParser().parseFromString(xml, 'text/xml');
+  if (doc.querySelector('parsererror')) {
+    return [];
+  }
+  const table = Array.from(doc.documentElement.children).find((node) => node.tagName === 'table');
+  if (!table) {
+    return [];
+  }
+  return Array.from(table.children)
+    .filter((node) => node.tagName === 'event')
+    .map((node) => (node.getAttribute('id') ?? '').trim())
+    .filter(Boolean);
+}
+
+function serializeEventTableXml(name: string, kind: TableKind, eventIds: string[]): string {
+  const attrs = [`name="${escapeXml(name)}"`];
+  if (kind !== 'dungeon') {
+    attrs.push(`kind="${escapeXml(kind)}"`);
+  }
+  return [
+    '<?xml version="1.0"?>',
+    '<tables>',
+    `  <table ${attrs.join(' ')}>`,
+    ...eventIds.map((eventId) => `    <event id="${escapeXml(eventId)}" />`),
+    '  </table>',
+    '</tables>'
+  ].join('\n');
+}
+
+function ensureManagedTreasureTable(
+  items: UserContentItem[],
+  name: string,
+  eventId: string,
+  updatedAt: string
+): void {
+  const tableIndex = items.findIndex((item) => item.kind === 'table' && item.data.name.trim() === name);
+  if (tableIndex >= 0) {
+    const table = normalizeUserContentItem(items[tableIndex] as UserTableItem) as UserTableItem;
+    const ids = parseEventIdsFromTableXml(table.data.xml);
+    if (!ids.includes(eventId)) {
+      ids.push(eventId);
+      table.data = {
+        ...table.data,
+        name,
+        kind: 'treasure',
+        xml: serializeEventTableXml(name, 'treasure', ids)
+      };
+      table.title = name;
+      table.updatedAt = updatedAt;
+      items[tableIndex] = table;
+    }
+    return;
+  }
+
+  items.push({
+    uid: createUserContentUid('table'),
+    kind: 'table',
+    mode: 'new',
+    title: name,
+    updatedAt,
+    data: {
+      name,
+      kind: 'treasure',
+      xml: serializeEventTableXml(name, 'treasure', [eventId])
+    }
+  });
+}
+
+function removeEventFromManagedTreasureTable(items: UserContentItem[], name: string, eventId: string): void {
+  const tableIndex = items.findIndex((item) => item.kind === 'table' && item.data.name.trim() === name);
+  if (tableIndex < 0) {
+    return;
+  }
+  const table = normalizeUserContentItem(items[tableIndex] as UserTableItem) as UserTableItem;
+  const ids = parseEventIdsFromTableXml(table.data.xml).filter((id) => id !== eventId);
+  if (ids.length === 0) {
+    items.splice(tableIndex, 1);
+    return;
+  }
+  table.data = {
+    ...table.data,
+    name,
+    kind: 'treasure',
+    xml: serializeEventTableXml(name, 'treasure', ids)
+  };
+  table.title = name;
+  table.updatedAt = nowIso();
+  items[tableIndex] = table;
+}
+
 function serializeSpecial(
   special: string,
-  specialLinks: Record<string, string>,
+  specialLinks: Record<string, SpecialRuleLink>,
   magicType: string,
   magicLevel: number,
   indent: string
 ): string {
-  const links = Object.entries(normalizeStringMap(specialLinks));
+  const links = Object.entries(normalizeSpecialRuleLinks(specialLinks));
   const safeSpecial = special.trim();
   const safeMagicType = magicType.trim();
   const hasContent = safeSpecial || links.length > 0 || safeMagicType;
@@ -220,8 +326,15 @@ function serializeSpecial(
   if (safeSpecial) {
     lines.push(`${indent}  <text>${escapeXml(safeSpecial)}</text>`);
   }
-  for (const [id, text] of links) {
-    lines.push(`${indent}  <rule id="${escapeXml(id)}">${escapeXml(text)}</rule>`);
+  for (const [id, link] of links) {
+    const attrs = [`id="${escapeXml(id)}"`];
+    const parameters = link.parameters?.map((value) => value.trim()).filter(Boolean) ?? [];
+    if (parameters.length === 1) {
+      attrs.push(`param="${escapeXml(parameters[0])}"`);
+    } else if (!parameters.length && link.parameter.trim()) {
+      attrs.push(`param="${escapeXml(link.parameter.trim())}"`);
+    }
+    lines.push(`${indent}  <rule ${attrs.join(' ')}>${escapeXml(link.text)}</rule>`);
   }
   if (safeMagicType) {
     lines.push(`${indent}  <magic id="${escapeXml(safeMagicType)}" level="${Math.max(0, magicLevel)}" />`);
@@ -261,7 +374,17 @@ function serializeEvent(item: UserEventData): string {
 }
 
 function serializeRule(item: UserRuleData): string {
-  return `  <${item.type} id="${escapeXml(item.id.trim())}" name="${escapeXml(item.name.trim())}">${escapeXml(item.text.trim())}</${item.type}>`;
+  const attrs = [`id="${escapeXml(item.id.trim())}"`, `name="${escapeXml(item.name.trim())}"`];
+  if (item.parameterName.trim()) {
+    attrs.push(`parameterName="${escapeXml(item.parameterName.trim())}"`);
+  }
+  if ((item.parameterNames ?? []).length > 0) {
+    attrs.push(`parameterNames="${escapeXml(item.parameterNames!.join(', '))}"`);
+  }
+  if ((item.parameterFormat ?? '').trim()) {
+    attrs.push(`parameterFormat="${escapeXml(item.parameterFormat.trim())}"`);
+  }
+  return `  <${item.type} ${attrs.join(' ')}>${escapeXml(item.text.trim())}</${item.type}>`;
 }
 
 function serializeMonster(item: UserMonsterData): string {
@@ -419,10 +542,13 @@ function normalizeEventData(kind: UserContentKind, data: UserEventData, mode: Us
 function normalizeRuleData(data: UserRuleData, mode: UserContentMode): UserRuleData {
   return {
     ...data,
-    id: mode === 'modified' ? data.id.trim() : ensurePrefixedId(data.id || data.name, 'userdefined-rule-', 'rule'),
+    id: mode === 'modified' ? (data.id ?? '').trim() : ensurePrefixedId(data.id || data.name || '', 'userdefined-rule-', 'rule'),
     type: data.type === 'magic' ? 'magic' : 'rule',
-    name: data.name.trim(),
-    text: data.text.trim()
+    name: (data.name ?? '').trim(),
+    text: (data.text ?? '').trim(),
+    parameterName: (data.parameterName ?? '').trim(),
+    parameterNames: (data.parameterNames ?? []).map((value) => value.trim()).filter(Boolean),
+    parameterFormat: (data.parameterFormat ?? '').trim()
   };
 }
 
@@ -431,26 +557,26 @@ function normalizeMonsterData(data: UserMonsterData, mode: UserContentMode): Use
     ...data,
     id:
       mode === 'modified'
-        ? data.id.trim()
-        : ensurePrefixedId(data.id || data.name, 'userdefined-monster-', 'monster'),
-    name: data.name.trim(),
-    plural: data.plural.trim(),
-    factions: data.factions.map((value) => value.trim()).filter(Boolean),
-    move: data.move.trim(),
-    weaponskill: data.weaponskill.trim(),
-    ballisticskill: data.ballisticskill.trim(),
-    strength: data.strength.trim(),
-    toughness: data.toughness.trim(),
-    wounds: data.wounds.trim(),
-    initiative: data.initiative.trim(),
-    attacks: data.attacks.trim(),
-    gold: data.gold.trim(),
-    armor: data.armor.trim(),
-    damage: data.damage.trim(),
-    special: data.special.trim(),
-    specialLinks: normalizeStringMap(data.specialLinks),
-    magicType: data.magicType.trim(),
-    magicLevel: Math.max(0, Math.trunc(data.magicLevel))
+        ? (data.id ?? '').trim()
+        : ensurePrefixedId(data.id || data.name || '', 'userdefined-monster-', 'monster'),
+    name: (data.name ?? '').trim(),
+    plural: (data.plural ?? '').trim(),
+    factions: (data.factions ?? []).map((value) => value.trim()).filter(Boolean),
+    move: (data.move ?? '').trim(),
+    weaponskill: (data.weaponskill ?? '').trim(),
+    ballisticskill: (data.ballisticskill ?? '').trim(),
+    strength: (data.strength ?? '').trim(),
+    toughness: (data.toughness ?? '').trim(),
+    wounds: (data.wounds ?? '').trim(),
+    initiative: (data.initiative ?? '').trim(),
+    attacks: (data.attacks ?? '').trim(),
+    gold: (data.gold ?? '').trim(),
+    armor: (data.armor ?? '').trim(),
+    damage: (data.damage ?? '').trim(),
+    special: (data.special ?? '').trim(),
+    specialLinks: normalizeSpecialRuleLinks(data.specialLinks ?? {}),
+    magicType: (data.magicType ?? '').trim(),
+    magicLevel: Math.max(0, Math.trunc(data.magicLevel ?? 0))
   };
 }
 
@@ -508,12 +634,32 @@ export function upsertUserContentItem(item: UserContentItem): UserContentItem[] 
   } else {
     items.push(normalized);
   }
+
+  if (normalized.mode === 'new' && (normalized.kind === 'treasure' || normalized.kind === 'objectiveTreasure')) {
+    ensureManagedTreasureTable(
+      items,
+      normalized.kind === 'objectiveTreasure' ? 'userdefined-objective-treasure' : 'userdefined-treasure',
+      normalized.data.id,
+      normalized.updatedAt
+    );
+  }
+
   saveUserContentItems(items);
   return items;
 }
 
 export function deleteUserContentItem(uid: string): UserContentItem[] {
-  const items = loadUserContentItems().filter((item) => item.uid !== uid);
+  const allItems = loadUserContentItems();
+  const removed = allItems.find((item) => item.uid === uid) ?? null;
+  const items = allItems.filter((item) => item.uid !== uid);
+  if (removed?.mode === 'new' && (removed.kind === 'treasure' || removed.kind === 'objectiveTreasure')) {
+    const normalized = normalizeUserContentItem(removed) as UserTreasureItem | UserObjectiveTreasureItem;
+    removeEventFromManagedTreasureTable(
+      items,
+      normalized.kind === 'objectiveTreasure' ? 'userdefined-objective-treasure' : 'userdefined-treasure',
+      normalized.data.id
+    );
+  }
   saveUserContentItems(items);
   return items;
 }
@@ -750,7 +896,10 @@ export function createDefaultRule(): UserRuleData {
     id: '',
     type: 'rule',
     name: '',
-    text: ''
+    text: '',
+    parameterName: '',
+    parameterNames: [],
+    parameterFormat: ''
   };
 }
 
@@ -762,7 +911,7 @@ export function createDefaultMonster(): UserMonsterData {
     factions: [],
     move: '4',
     weaponskill: '3',
-    ballisticskill: '4',
+    ballisticskill: '4+',
     strength: '3',
     toughness: '3',
     wounds: '1',
@@ -837,7 +986,10 @@ export function mapRuleToUserData(rule: Rule): UserRuleData {
     id: rule.id,
     type: rule.type === 'magic' ? 'magic' : 'rule',
     name: rule.name,
-    text: rule.text
+    text: rule.text,
+    parameterName: rule.parameterName,
+    parameterNames: rule.parameterNames,
+    parameterFormat: rule.parameterFormat
   };
 }
 

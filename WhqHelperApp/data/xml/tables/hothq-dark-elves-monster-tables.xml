@@ -113,7 +113,7 @@
       <monster id="hothq-ogre-mercenary" number="1-3" ambiences="dark-elves" level="3" />
       <monster id="rpb-dark-elf-naggaroth-black-guard" number="1-6" ambiences="dark-elves" level="3">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress">Guards (Dark Elf Sorceress)</rule>
         </special>
       </monster>
     </group>
@@ -143,7 +143,7 @@
       <monster id="hothq-ogre-mercenary" number="3" ambiences="dark-elves" level="4" />
       <monster id="hothq-black-ark-corsair" number="6" ambiences="dark-elves" level="4">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress">Guards (Dark Elf Sorceress)</rule>
         </special>
       </monster>
     </group>
@@ -198,7 +198,7 @@
       <monster id="hothq-ogre-mercenary" number="3" ambiences="dark-elves" level="5" />
       <monster id="hothq-black-ark-corsair" number="6" ambiences="dark-elves" level="5">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress">Guards (Dark Elf Sorceress)</rule>
         </special>
       </monster>
     </group>
@@ -246,7 +246,7 @@
       <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="5" />
       <monster id="rpb-beastman" number="3-8" ambiences="dark-elves" level="5">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress">Guards (Dark Elf Sorceress)</rule>
         </special>
       </monster>
       <monster id="rpb-beastman-champion" number="1-3" ambiences="dark-elves" level="5" />
@@ -285,7 +285,7 @@
       <monster id="hothq-cold-one-knight" number="1-6" ambiences="dark-elves" level="6" />
       <monster id="hothq-dark-elf-naggaroth-black-guard-champion" number="12" ambiences="dark-elves" level="6">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress Champion)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress Champion">Guards (Dark Elf Sorceress Champion)</rule>
         </special>
       </monster>
     </group>
@@ -366,7 +366,7 @@
       <monster id="hothq-dark-elf-sorceress" number="1" ambiences="dark-elves" level="7" />
       <monster id="rpb-beastman" number="8" ambiences="dark-elves" level="7">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress">Guards (Dark Elf Sorceress)</rule>
         </special>
       </monster>
       <monster id="rpb-beastman-champion" number="3" ambiences="dark-elves" level="7" />
@@ -377,7 +377,7 @@
       <monster id="hothq-cold-one-knight" number="6" ambiences="dark-elves" level="7" />
       <monster id="hothq-dark-elf-naggaroth-black-guard-champion" number="12" ambiences="dark-elves" level="7">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress Champion)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress Champion">Guards (Dark Elf Sorceress Champion)</rule>
         </special>
       </monster>
       <monster id="hothq-harpy" number="9" ambiences="dark-elves" level="7" />
@@ -574,7 +574,7 @@
       <monster id="hothq-bloodshade" number="12" ambiences="dark-elves" level="9" />
       <monster id="rpb-dark-elf-hero" number="6" ambiences="dark-elves" level="9">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Master Sorceress)</rule>
+          <rule id="rpb-guards" param="Dark Elf Master Sorceress">Guards (Dark Elf Master Sorceress)</rule>
         </special>
       </monster>
     </group>
@@ -672,7 +672,7 @@
       <monster id="hothq-dark-elf-sorceress-lord" number="1" ambiences="dark-elves" level="10" />
       <monster id="rpb-dark-elf-hero" number="12" ambiences="dark-elves" level="10">
         <special append="true">
-          <rule id="rpb-guards">Guards (Dark Elf Sorceress Lord)</rule>
+          <rule id="rpb-guards" param="Dark Elf Sorceress Lord">Guards (Dark Elf Sorceress Lord)</rule>
         </special>
       </monster>
       <monster id="hothq-witch-elf-murderess" number="6" ambiences="dark-elves" level="10" />

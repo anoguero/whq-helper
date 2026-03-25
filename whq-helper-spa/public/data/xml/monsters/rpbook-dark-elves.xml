@@ -7,7 +7,7 @@
     <wounds>6</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>6</initiative>
@@ -16,9 +16,9 @@
     <armor>1</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Crossbows (Str 4)</rule>
-      <rule id="rpb-dodge">Dodge 6+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-armed-with" param="Crossbows (Str 4)">Armed with Crossbows (Str 4)</rule>
+      <rule id="rpb-dodge" param="6+">Dodge 6+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
     </special>
   </monster>
   <monster id="rpb-dark-elf-champion" factions="darkelves" name="Dark Elf Champion" 
@@ -26,7 +26,7 @@
     <wounds>14</wounds>
     <move>5</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>7</initiative>
@@ -35,8 +35,8 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-dodge">Dodge 6+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-dodge" param="6+">Dodge 6+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
@@ -44,7 +44,7 @@
     <wounds>25</wounds>
     <move>5</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>8</initiative>
@@ -53,9 +53,9 @@
     <armor>4</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-dodge">Dodge 4+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-dodge" param="4+">Dodge 4+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
@@ -64,7 +64,7 @@
     <wounds>34</wounds>
     <move>5</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>9</initiative>
@@ -73,9 +73,9 @@
     <armor>4</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-dodge">Dodge 4+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-dodge" param="4+">Dodge 4+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">2 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
@@ -86,7 +86,7 @@
     <wounds>12</wounds>
     <move>5</move>
     <weaponskill>9</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>10</initiative>
@@ -95,10 +95,10 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic 5+</rule>
-      <rule id="rpb-assassinate">Assassinate 6+</rule>
-      <rule id="rpb-dodge">Dodge 5+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-ambush-magic" param="5+">Ambush, Magic 5+</rule>
+      <rule id="rpb-assassinate" param="6+">Assassinate 6+</rule>
+      <rule id="rpb-dodge" param="5+">Dodge 5+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
       <rule id="rpb-weeping-blade">Weeping Blades</rule>
     </special>
   </monster>
@@ -107,7 +107,7 @@
     <wounds>15</wounds>
     <move>5</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>7</initiative>
@@ -116,9 +116,9 @@
     <armor>2</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Crossbow (Str 5)</rule>
+      <rule id="rpb-armed-with" param="Crossbow (Str 5)">Armed with Crossbow (Str 5)</rule>
       <rule id="rpb-beast-handler">Beast Handler</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
     </special>
   </monster>
   <monster id="rpb-dark-elf-sorcerer" factions="darkelves" name="Dark Elf Sorcerer" 
@@ -126,7 +126,7 @@
     <wounds>12</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <initiative>7</initiative>
@@ -135,8 +135,8 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-hate">Hate Elves</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <magic id="rpb-dark-elf" level="1" />
     </special>
@@ -146,7 +146,7 @@
     <wounds>20</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>7</initiative>
@@ -155,8 +155,8 @@
     <armor>1</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-hate">Hate Elves</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-dark-elf" level="2" />
@@ -167,7 +167,7 @@
     <wounds>30</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>8</initiative>
@@ -176,9 +176,9 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-hate">Hate Elves</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-item">2 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-dark-elf" level="3" />
@@ -189,7 +189,7 @@
     <wounds>41</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>9</initiative>
@@ -198,10 +198,10 @@
     <armor>3</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 3+</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="3+">Magic Resistance 3+</rule>
       <rule id="rpb-magic-item">3 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-dark-elf" level="4" />
@@ -213,7 +213,7 @@
     <wounds>6</wounds>
     <move>5</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>7</initiative>
@@ -222,16 +222,16 @@
     <armor>2</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Halberds</rule>
+      <rule id="rpb-armed-with" param="Halberds">Armed with Halberds</rule>
       <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
     </special>
   </monster>
   <monster id="rpb-witch-elf" factions="darkelves" name="Witch Elf" plural="Witch Elves">
     <wounds>11</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>6</initiative>
@@ -240,8 +240,8 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-frenzy">Frenzy 4+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-frenzy" param="4+">Frenzy 4+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
     </special>
   </monster>
   <monster id="rpb-witch-elf-champion" factions="darkelves" name="Witch Elf Champion" 
@@ -249,7 +249,7 @@
     <wounds>13</wounds>
     <move>5</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>7</initiative>
@@ -258,8 +258,8 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-frenzy">Frenzy 3+</rule>
-      <rule id="rpb-hate">Hate Elves</rule>
+      <rule id="rpb-frenzy" param="3+">Frenzy 3+</rule>
+      <rule id="rpb-hate" param="Elves">Hate Elves</rule>
     </special>
   </monster>
 </monsters>

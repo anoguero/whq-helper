@@ -46,7 +46,7 @@ final class DungeonTileRenderer {
     private Image loadImage(String relativePath) {
         return imageCache.computeIfAbsent(relativePath, key -> {
             Path path = projectRoot.resolve(key).normalize();
-            if (!Files.exists(path)) {
+            if (!Files.exists(path) || key.isEmpty()) {
                 return null;
             }
             return new Image(device, path.toString());

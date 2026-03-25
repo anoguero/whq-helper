@@ -1,33 +1,31 @@
-<?xml version="1.0"?>
-
-<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
-  <monster id="rpb-giant" factions="orcs chaos" name="Giant" plural="Giants">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-monster-schema.xsd">
+  <monster factions="orcs chaos" id="rpb-giant" name="Giant" plural="Giants">
+    <wounds>64</wounds>
     <move>6</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>7</strength>
     <toughness>6</toughness>
-    <wounds>64</wounds>
     <initiative>3</initiative>
     <attacks>S</attacks>
     <gold>2000</gold>
     <armor>5</armor>
     <damage>5D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 11</rule>
+      <rule id="rpb-fear" param="11">Fear 11</rule>
       <rule id="rpb-giant-attacks">Giant Attacks</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 10</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="10">Ignore Pain 10</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
     </special>
   </monster>
-  <monster id="rpb-bull-centaur" factions="chaosdwarves" name="Bull Centaur" plural="Bull Centaurs">
+  <monster factions="chaosdwarves" id="rpb-bull-centaur" name="Bull Centaur" plural="Bull Centaurs">
     <wounds>12</wounds>
     <move>8</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>3</initiative>
@@ -36,16 +34,15 @@
     <armor>2</armor>
     <damage>1D6/2D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 5</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
     </special>
   </monster>
-  <monster id="rpb-bull-centaur-champion" factions="chaosdwarves" name="Bull Centaur Champion"
-           plural="Bull Centaur Champions">
+  <monster factions="chaosdwarves" id="rpb-bull-centaur-champion" name="Bull Centaur Champion" plural="Bull Centaur Champions">
     <wounds>23</wounds>
     <move>8</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>4</initiative>
@@ -54,19 +51,18 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 7</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-bull-centaur-hero" factions="chaosdwarves" name="Bull Centaur Hero"
-           plural="Bull Centaur Heroes">
+  <monster factions="chaosdwarves" id="rpb-bull-centaur-hero" name="Bull Centaur Hero" plural="Bull Centaur Heroes">
     <wounds>32</wounds>
     <move>8</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>5</initiative>
@@ -75,19 +71,18 @@
     <armor>3</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 7</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">2 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-bull-centaur-lord" factions="chaosdwarves" name="Bull Centaur Lord"
-           plural="Bull Centaur Lords">
+  <monster factions="chaosdwarves" id="rpb-bull-centaur-lord" name="Bull Centaur Lord" plural="Bull Centaur Lords">
     <wounds>42</wounds>
     <move>8</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>6</initiative>
@@ -96,21 +91,20 @@
     <armor>3</armor>
     <damage>4D6/5D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 7</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">3 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-wild-cave-squig" 
-           factions="orcs" name="Wild Cave Squig" plural="Wild Cave Squigs">
+  <monster factions="orcs" id="rpb-wild-cave-squig" name="Wild Cave Squig" plural="Wild Cave Squigs">
+    <wounds>3</wounds>
     <move>S</move>
     <weaponskill>4</weaponskill>
     <ballisticskill>-</ballisticskill>
     <strength>5</strength>
     <toughness>3</toughness>
-    <wounds>3</wounds>
     <initiative>5</initiative>
     <attacks>2</attacks>
     <gold>200</gold>
@@ -121,14 +115,13 @@
       <rule id="rpb-wild-squig-attack">Wild Squig Attack</rule>
     </special>
   </monster>
-  <monster id="rpb-trained-cave-squig"
-           factions="orcs" name="Trained Cave Squig" plural="Trained Cave Squigs">
+  <monster factions="orcs" id="rpb-trained-cave-squig" name="Trained Cave Squig" plural="Trained Cave Squigs">
+    <wounds>3</wounds>
     <move>S</move>
     <weaponskill>4</weaponskill>
     <ballisticskill>-</ballisticskill>
     <strength>5</strength>
     <toughness>3</toughness>
-    <wounds>3</wounds>
     <initiative>5</initiative>
     <attacks>2</attacks>
     <gold>200</gold>
@@ -138,29 +131,28 @@
       <rule id="rpb-never-pinned">Never Pinned</rule>
     </special>
   </monster>
-  <monster id="rpb-centaur" factions="chaos beastmen" name="Centaur" plural="Centaurs">
+  <monster factions="chaos beastmen" id="rpb-centaur" name="Centaur" plural="Centaurs">
+    <wounds>12</wounds>
     <move>8</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
-    <wounds>12</wounds>
     <initiative>3</initiative>
     <attacks>2</attacks>
     <gold>300</gold>
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Bow (Str 4)</rule>
-      <rule id="rpb-fear">Fear 4</rule>
+      <rule id="rpb-armed-with" param="Bow (Str 4)">Armed with Bow (Str 4)</rule>
+      <rule id="rpb-fear" param="4">Fear 4</rule>
     </special>
   </monster>
-  <monster id="rpb-centaur-champion" factions="chaos beastmen" name="Centaur Champion" 
-           plural="Centaur Champions">
+  <monster factions="chaos beastmen" id="rpb-centaur-champion" name="Centaur Champion" plural="Centaur Champions">
     <wounds>27</wounds>
     <move>8</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>5</strength>
     <toughness>3</toughness>
     <initiative>4</initiative>
@@ -169,17 +161,17 @@
     <armor>2</armor>
     <damage>2D6/3D6(5+)</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Bow (Str 7)</rule>
-      <rule id="rpb-fear">Fear 8</rule>
+      <rule id="rpb-armed-with" param="Bow (Str 7)">Armed with Bow (Str 7)</rule>
+      <rule id="rpb-fear" param="8">Fear 8</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-centaur-hero" factions="chaos beastmen" name="Centaur Hero" plural="Centaur Heroes">
+  <monster factions="chaos beastmen" id="rpb-centaur-hero" name="Centaur Hero" plural="Centaur Heroes">
     <wounds>40</wounds>
     <move>8</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>5</initiative>
@@ -188,14 +180,14 @@
     <armor>4</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Bow (Str 8)</rule>
-      <rule id="rpb-fear">Fear 9</rule>
+      <rule id="rpb-armed-with" param="Bow (Str 8)">Armed with Bow (Str 8)</rule>
+      <rule id="rpb-fear" param="9">Fear 9</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-chimera" factions="chaos undead darkelves" name="Chimera" plural="Chimera">
+  <monster factions="chaos undead darkelves" id="rpb-chimera" name="Chimera" plural="Chimera">
     <wounds>60</wounds>
     <move>6</move>
     <weaponskill>4</weaponskill>
@@ -208,15 +200,15 @@
     <armor>3</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="rpb-breathe-fire">Breath Fire 4 (Ambush A)</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-breathe-fire" param="4 (Ambush A)">Breathe Fire 4 (Ambush A)</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-sting">Sting (3D6)</rule>
-      <rule id="rpb-terror">Terror 11</rule>
+      <rule id="rpb-sting" param="3D6">Sting (3D6)</rule>
+      <rule id="rpb-terror" param="11">Terror 11</rule>
     </special>
   </monster>
-  <monster id="rpb-cockatrice" factions="chaos beastmen darkelves" name="Cockatrice" plural="Cockatrices">
+  <monster factions="chaos beastmen darkelves" id="rpb-cockatrice" name="Cockatrice" plural="Cockatrices">
     <wounds>26</wounds>
     <move>4</move>
     <weaponskill>3</weaponskill>
@@ -229,16 +221,16 @@
     <armor>-</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 10</rule>
+      <rule id="rpb-fear" param="10">Fear 10</rule>
       <rule id="rpb-fly">Fly</rule>
       <rule id="rpb-petrify">Petrify</rule>
     </special>
   </monster>
-  <monster id="rpb-dragon-ogre" factions="chaos beastmen" name="Dragon Ogre" plural="Dragon Ogres">
+  <monster factions="chaos beastmen" id="rpb-dragon-ogre" name="Dragon Ogre" plural="Dragon Ogres">
     <wounds>40</wounds>
     <move>6</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>2</initiative>
@@ -247,15 +239,14 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 8</rule>
+      <rule id="rpb-fear" param="8">Fear 8</rule>
     </special>
   </monster>
-  <monster id="rpb-dragon-ogre-champion" factions="chaos beastmen" name="Dragon Ogre Champion" 
-           plural="Dragon Ogre Champions">
+  <monster factions="chaos beastmen" id="rpb-dragon-ogre-champion" name="Dragon Ogre Champion" plural="Dragon Ogre Champions">
     <wounds>44</wounds>
     <move>6</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>6</strength>
     <toughness>5</toughness>
     <initiative>3</initiative>
@@ -264,17 +255,16 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-">Fear 8</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
+      <rule id="rpb-fear" param="8">FEAR 8</rule>
     </special>
   </monster>
-  <monster id="rpb-dragon-ogre-hero" factions="chaos beastmen" name="Dragon Ogre Hero" 
-           plural="Dragon Ogre Heroes">
+  <monster factions="chaos beastmen" id="rpb-dragon-ogre-hero" name="Dragon Ogre Hero" plural="Dragon Ogre Heroes">
     <wounds>53</wounds>
     <move>6</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>6</strength>
     <toughness>6</toughness>
     <initiative>4</initiative>
@@ -283,13 +273,13 @@
     <armor>2</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 9</rule>
+      <rule id="rpb-fear" param="9">Fear 9</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-dragon" name="Dragon" plural="Dragons">
+  <monster factions="" id="rpb-dragon" name="Dragon" plural="Dragons">
     <wounds>74</wounds>
     <move>6</move>
     <weaponskill>6</weaponskill>
@@ -304,14 +294,14 @@
     <special>
       <rule id="rpb-dragon-breath">Dragon Breath (Ambush, Magic A)</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-terror">Terror 12</rule>
-      <rule id="rpb-treasure-horde">Treasure Horde +0</rule>
+      <rule id="rpb-terror" param="12">Terror 12</rule>
+      <rule id="rpb-treasure-hoard" param="0">TREASURE HOARD +0</rule>
     </special>
   </monster>
-  <monster id="rpb-great-dragon" name="Great Dragon" plural="Great Dragons">
+  <monster factions="" id="rpb-great-dragon" name="Great Dragon" plural="Great Dragons">
     <wounds>84</wounds>
     <move>6</move>
     <weaponskill>7</weaponskill>
@@ -326,16 +316,15 @@
     <special>
       <rule id="rpb-dragon-breath">Dragon Breath (Ambush, Magic A)</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-ignore-blows" param="4+">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-terror">Terror 13</rule>
-      <rule id="rpb-treasure-horde">Treasure Horde +1</rule>
-      <magic id="rpb-chaos" level="1" />
+      <rule id="rpb-terror" param="13">Terror 13</rule>
+      <rule id="rpb-treasure-hoard" param="1">TREASURE HOARD +1</rule>
+      <magic id="rpb-chaos" level="1"/>
     </special>
   </monster>
-  <monster id="rpb-emperor-dragon" name="Emperor Dragon" 
-           plural="Emperor Dragons">
+  <monster factions="" id="rpb-emperor-dragon" name="Emperor Dragon" plural="Emperor Dragons">
     <wounds>94</wounds>
     <move>6</move>
     <weaponskill>8</weaponskill>
@@ -350,21 +339,21 @@
     <special>
       <rule id="rpb-dragon-breath">Dragon Breath (Ambush, Magic A)</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 3D6</rule>
+      <rule id="rpb-ignore-blows" param="4+">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain" param="3D6">Ignore Pain 3D6</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-terror">Terror 14</rule>
-      <rule id="rpb-treasure-horde">Treasure Horde +2</rule>
-      <magic id="rpb-chaos" level="2" />
+      <rule id="rpb-terror" param="14">Terror 14</rule>
+      <rule id="rpb-treasure-hoard" param="2">TREASURE HOARD +2</rule>
+      <magic id="rpb-chaos" level="2"/>
     </special>
   </monster>
-  <monster id="rpb-giant-bat" name="Giant Bat" plural="Giant Bats">
+  <monster factions="" id="rpb-giant-bat" name="Giant Bat" plural="Giant Bats">
+    <wounds>1</wounds>
     <move>8</move>
     <weaponskill>2</weaponskill>
     <ballisticskill>-</ballisticskill>
     <strength>2</strength>
     <toughness>2</toughness>
-    <wounds>1</wounds>
     <initiative>-</initiative>
     <attacks>1</attacks>
     <gold>15</gold>
@@ -375,13 +364,13 @@
       <rule id="rpb-fly">Fly</rule>
     </special>
   </monster>
-  <monster id="rpb-giant-rat" name="Giant Rat" plural="Giant Rats">
+  <monster factions="" id="rpb-giant-rat" name="Giant Rat" plural="Giant Rats">
+    <wounds>1</wounds>
     <move>6</move>
     <weaponskill>2</weaponskill>
     <ballisticskill>-</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
-    <wounds>1</wounds>
     <initiative>4</initiative>
     <attacks>1</attacks>
     <gold>25</gold>
@@ -391,40 +380,39 @@
       <rule id="rpb-deathleap">Deathleap</rule>
     </special>
   </monster>
-  <monster id="rpb-giant-scorpion" 
-           name="Giant Scorpion" plural="Giant Scorpions">
+  <monster factions="" id="rpb-giant-scorpion" name="Giant Scorpion" plural="Giant Scorpions">
+    <wounds>20</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
     <ballisticskill>-</ballisticskill>
     <strength>5</strength>
     <toughness>6</toughness>
-    <wounds>20</wounds>
     <initiative>1</initiative>
     <attacks>2</attacks>
     <gold>450</gold>
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-sting">Sting (2D6)</rule>
+      <rule id="rpb-sting" param="2D6">Sting (2D6)</rule>
     </special>
   </monster>
-  <monster id="rpb-giant-spider" name="Giant Spider" plural="Giant Spiders">
+  <monster factions="" id="rpb-giant-spider" name="Giant Spider" plural="Giant Spiders">
+    <wounds>1</wounds>
     <move>6</move>
     <weaponskill>2</weaponskill>
     <ballisticskill>-</ballisticskill>
     <strength>S</strength>
     <toughness>2</toughness>
-    <wounds>1</wounds>
     <initiative>-</initiative>
     <attacks>1</attacks>
     <gold>15</gold>
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-web">Web (1D3)</rule>
+      <rule id="rpb-web" param="1D3">Web (1D3)</rule>
     </special>
   </monster>
-  <monster id="rpb-gigantic-spider" name="Gigantic Spider" plural="Gigantic Spiders">
+  <monster factions="" id="rpb-gigantic-spider" name="Gigantic Spider" plural="Gigantic Spiders">
     <wounds>20</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
@@ -437,14 +425,14 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-web">Web (1D6)</rule>
+      <rule id="rpb-web" param="1D6">Web (1D6)</rule>
     </special>
   </monster>
-  <monster id="rpb-gorgon" factions="chaos beastmen" name="Gorgon" plural="Gorgons">
+  <monster factions="chaos beastmen" id="rpb-gorgon" name="Gorgon" plural="Gorgons">
     <wounds>35</wounds>
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>5</initiative>
@@ -453,11 +441,11 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 8</rule>
+      <rule id="rpb-fear" param="8">Fear 8</rule>
       <rule id="rpb-petrify">Petrify</rule>
     </special>
   </monster>
-  <monster id="rpb-great-taurus" factions="chaosdwarves" name="Great Taurus" plural="Great Tauri">
+  <monster factions="chaosdwarves" id="rpb-great-taurus" name="Great Taurus" plural="Great Tauri">
     <wounds>50</wounds>
     <move>6</move>
     <weaponskill>6</weaponskill>
@@ -469,9 +457,9 @@
     <gold>2250</gold>
     <armor>3</armor>
     <damage>4D6</damage>
-    <special></special>
+    <special/>
   </monster>
-  <monster id="rpb-griffon" name="Griffon" plural="Griffons">
+  <monster factions="" id="rpb-griffon" name="Griffon" plural="Griffons">
     <wounds>52</wounds>
     <move>6</move>
     <weaponskill>5</weaponskill>
@@ -486,10 +474,10 @@
     <special>
       <rule id="rpb-breathe-fire">Breathe Fire</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-terror">Terror 10</rule>
+      <rule id="rpb-terror" param="10">Terror 10</rule>
     </special>
   </monster>
-  <monster id="rpb-hippogriff" name="Hippogriff" plural="Hippogriffs">
+  <monster factions="" id="rpb-hippogriff" name="Hippogriff" plural="Hippogriffs">
     <wounds>55</wounds>
     <move>8</move>
     <weaponskill>5</weaponskill>
@@ -503,10 +491,10 @@
     <damage>3D6/4D6(5+)</damage>
     <special>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-terror">Terror 10</rule>
+      <rule id="rpb-terror" param="10">Terror 10</rule>
     </special>
   </monster>
-  <monster id="rpb-hydra" factions="chaos darkelves" name="Hydra" plural="Hydras">
+  <monster factions="chaos darkelves" id="rpb-hydra" name="Hydra" plural="Hydras">
     <wounds>70</wounds>
     <move>6</move>
     <weaponskill>3</weaponskill>
@@ -519,16 +507,16 @@
     <armor>3</armor>
     <damage>4D6</damage>
     <special>
-      <rule id="rpb-breathe-fire">Breathe Fire 4 (Ambush A)</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-breathe-fire" param="4 (Ambush A)">Breathe Fire 4 (Ambush A)</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
-      <rule id="rpb-terror-11">Terror 11</rule>
+      <rule id="rpb-terror" param="11">Terror 11</rule>
     </special>
   </monster>
-  <monster id="rpb-lammasu" factions="chaos undead chaosdwarves" name="Lammasu" plural="Lammasus">
+  <monster factions="chaos undead chaosdwarves" id="rpb-lammasu" name="Lammasu" plural="Lammasus">
     <wounds>50</wounds>
     <move>6</move>
     <weaponskill>6</weaponskill>
@@ -542,12 +530,12 @@
     <damage>4D6</damage>
     <special>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-sorcerous-exhalation">Sorcerous Exhalation</rule>
-      <rule id="rpb-terror">Terror 10</rule>
+      <rule id="rpb-terror" param="10">Terror 10</rule>
     </special>
   </monster>
-  <monster id="rpb-manticore" factions="chaos undead darkelves" name="Manticore" plural="Manticore">
+  <monster factions="chaos undead darkelves" id="rpb-manticore" name="Manticore" plural="Manticore">
     <wounds>50</wounds>
     <move>6</move>
     <weaponskill>6</weaponskill>
@@ -561,15 +549,15 @@
     <damage>4D6</damage>
     <special>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-manticore-sting">Maticore Sting (Ambush, Magic A)</rule>
-      <rule id="rpb-terror">Terror 11</rule>
+      <rule id="rpb-manticore-sting" param="Ambush, Magic A">Manticore Sting (Ambush, Magic A)</rule>
+      <rule id="rpb-terror" param="11">Terror 11</rule>
     </special>
   </monster>
-  <monster id="rpb-minotaur" factions="chaos beastmen" name="Minotaur" plural="Minotaurs">
+  <monster factions="chaos beastmen" id="rpb-minotaur" name="Minotaur" plural="Minotaurs">
     <wounds>15</wounds>
     <move>6</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>3</initiative>
@@ -578,15 +566,14 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
     </special>
   </monster>
-  <monster id="rpb-minotaur-champion" factions="chaos beastmen" name="Minotaur Champion"
-           plural="Minotaur Champions">
+  <monster factions="chaos beastmen" id="rpb-minotaur-champion" name="Minotaur Champion" plural="Minotaur Champions">
     <wounds>34</wounds>
     <move>6</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>4</initiative>
@@ -595,15 +582,15 @@
     <armor>1</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
-  <monster id="rpb-minotaur-hero" factions="chaos beastmen" name="Minotaur Hero" plural="Minotaur Heroes">
+  <monster factions="chaos beastmen" id="rpb-minotaur-hero" name="Minotaur Hero" plural="Minotaur Heroes">
     <wounds>48</wounds>
     <move>6</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>5</initiative>
@@ -612,28 +599,28 @@
     <armor>2</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 9</rule>
+      <rule id="rpb-fear" param="9">Fear 9</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-magic-item">2 x Magic Item</rule>
     </special>
   </monster>
-  <monster id="rpb-ogre" factions="chaos" name="Ogre" plural="Ogres">
+  <monster factions="chaos" id="rpb-ogre" name="Ogre" plural="Ogres">
+    <wounds>13</wounds>
     <move>6</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
-    <wounds>13</wounds>
     <initiative>3</initiative>
     <attacks>2</attacks>
     <gold>400</gold>
     <armor>0</armor>
     <damage>1D6/2D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
     </special>
   </monster>
-  <monster id="rpb-rat-ogre" factions="skaven" name="Rat Ogre" plural="Rat Ogres">
+  <monster factions="skaven" id="rpb-rat-ogre" name="Rat Ogre" plural="Rat Ogres">
     <wounds>20</wounds>
     <move>6</move>
     <weaponskill>4</weaponskill>
@@ -646,14 +633,14 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
     </special>
   </monster>
-  <monster id="rpb-troll" factions="chaos orcs" name="Troll" plural="Trolls">
+  <monster factions="chaos orcs" id="rpb-troll" name="Troll" plural="Trolls">
     <wounds>30</wounds>
     <move>6</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>6</ballisticskill>
+    <ballisticskill>6+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>1</initiative>
@@ -662,16 +649,16 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 6</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <rule id="rpb-vomit">Vomit</rule>
     </special>
   </monster>
-  <monster id="rpb-stone-troll" factions="chaos orcs" name="Stone Troll" plural="Stone Trolls">
+  <monster factions="chaos orcs" id="rpb-stone-troll" name="Stone Troll" plural="Stone Trolls">
     <wounds>25</wounds>
     <move>6</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>6</ballisticskill>
+    <ballisticskill>6+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>1</initiative>
@@ -680,12 +667,12 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 6</rule>
-      <rule id="rpb-magic-drain">Magic Drain 6+</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
+      <rule id="rpb-magic-drain" param="6+">Magic Drain 6+</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
     </special>
   </monster>
-  <monster id="rpb-warhound" factions="chaos darkelves" name="Warhound" plural="Warhounds">
+  <monster factions="chaos darkelves" id="rpb-warhound" name="Warhound" plural="Warhounds">
     <wounds>6</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
@@ -702,7 +689,7 @@
       <rule id="rpb-gang-up">Gang Up</rule>
     </special>
   </monster>
-  <monster id="rpb-wyvern" factions="chaos orcs" name="Wyvern" plural="Wyverns">
+  <monster factions="chaos orcs" id="rpb-wyvern" name="Wyvern" plural="Wyverns">
     <wounds>46</wounds>
     <move>6</move>
     <weaponskill>5</weaponskill>
@@ -717,12 +704,12 @@
     <special>
       <rule id="rpb-drag-and-rend">Drag and Rend</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 6</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="6">Ignore Pain 6</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
-      <rule id="rpb-sting">Sting (3D6)</rule>
-      <rule id="rpb-terror">Terror 10</rule>
+      <rule id="rpb-sting" param="3D6">Sting (3D6)</rule>
+      <rule id="rpb-terror" param="10">Terror 10</rule>
     </special>
   </monster>
 </monsters>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-rules-schema.xsd">
+  <magic id="slaanesh" name="Slaanesh">Slaanesh magic description</magic>
+  <rule id="fight-on-death" name="Fight on Death" parameterName="rating">This model fight on dead</rule>
+</rules>

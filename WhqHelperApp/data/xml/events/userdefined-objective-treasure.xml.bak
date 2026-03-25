@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-events-schema.xsd">
+  <event id="attrocious-mace" name="Attrocious Mace">
+    <flavor>You find an amazingly enormous mace with terrible runes.</flavor>
+    <rules>This mace is so amazing it grants an extra D6 damage on each hit.</rules>
+    <goldValue>1500G</goldValue>
+    <users>BD</users>
+    <treasure>true</treasure>
+  </event>
+</events>

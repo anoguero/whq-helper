@@ -5,11 +5,20 @@ export interface Rule {
   name: string;
   text: string;
   type: string;
+  parameterName: string;
+  parameterNames: string[];
+  parameterFormat: string;
+}
+
+export interface SpecialRuleLink {
+  text: string;
+  parameter: string;
+  parameters: string[];
 }
 
 export interface SpecialData {
   special: string;
-  specialLinks: Record<string, string>;
+  specialLinks: Record<string, SpecialRuleLink>;
   magicType: string;
   magicLevel: number;
 }

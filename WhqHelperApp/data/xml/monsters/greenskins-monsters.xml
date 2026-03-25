@@ -5,7 +5,7 @@
   <monster id="rpb-greenskin-big-un" factions="orcs" name="Big'Un" plural="Big'Uns">
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>9</wounds>
@@ -15,7 +15,7 @@
     <armor>2</armor>
     <damage>1D6/2D6(5+)</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Hand Weapons</rule>
+      <rule id="rpb-armed-with" param="Hand Weapons">Armed with Hand Weapons</rule>
       <rule id="rpb-eadbutt">'Eadbutt</rule>
     </special>
   </monster>
@@ -23,7 +23,7 @@
   <monster id="rpb-greenskin-mince-goblin-boss" factions="orcs" name="Mince Goblin Boss" plural="Mince Goblin Bosses">
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <wounds>9</wounds>
@@ -40,7 +40,7 @@
   <monster id="rpb-greenskin-goblin-shaman-champion" factions="orcs" name="Goblin Shaman Champion" plural="Goblin Shaman Champions">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>12</wounds>
@@ -50,7 +50,7 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+ (Ring)</rule>
+      <rule id="rpb-magic-resistance" param="5+ (Ring)">Magic Resistance 5+ (Ring)</rule>
       <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-goblin" level="2" />
     </special>
@@ -59,7 +59,7 @@
   <monster id="rpb-greenskin-goblin-shaman-lord" factions="orcs" name="Goblin Shaman Lord" plural="Goblin Shaman Lords">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <wounds>19</wounds>
@@ -69,8 +69,8 @@
     <armor>-</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 5+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+ (Ring)</rule>
+      <rule id="rpb-magic-dispel" param="5+">Magic Dispel 5+</rule>
+      <rule id="rpb-magic-resistance" param="4+ (Ring)">Magic Resistance 4+ (Ring)</rule>
       <rule id="lotol-orc-magic-item">Magic Item</rule>
       <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-goblin" level="3" />
@@ -80,7 +80,7 @@
   <monster id="rpb-greenskin-goblin-wolf-rider" factions="orcs" name="Goblin Wolf Rider" plural="Goblin Wolf Riders">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>2</wounds>
@@ -91,7 +91,7 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-rider">Rider</rule>
-      <rule id="rpb-armed-with">Armed with Bows (Str 1)</rule>
+      <rule id="rpb-armed-with" param="Bows (Str 1)">Armed with Bows (Str 1)</rule>
     </special>
   </monster>
 
@@ -108,7 +108,7 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-frenzy">Frenzy 6+</rule>
+      <rule id="rpb-frenzy" param="6+">Frenzy 6+</rule>
       <rule id="rpb-rider">Rider</rule>
     </special>
   </monster>
@@ -116,7 +116,7 @@
   <monster id="rpb-greenskin-goblin-spider-rider" factions="orcs" name="Goblin Spider Rider" plural="Goblin Spider Riders">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>2</wounds>
@@ -127,14 +127,14 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-rider">Rider</rule>
-      <rule id="rpb-armed-with">Armed with Spears (Fight in Ranks)</rule>
+      <rule id="rpb-armed-with" param="Spears (Fight in Ranks)">Armed with Spears (Fight in Ranks)</rule>
     </special>
   </monster>
 
   <monster id="rpb-greenskin-goblin-squig-rider" factions="orcs" name="Goblin Squig Rider" plural="Goblin Squig Riders">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>2</wounds>
@@ -169,7 +169,7 @@
   <monster id="rpb-greenskin-orc-boar-boy" factions="orcs" name="Orc Boar Boy" plural="Orc Boar Boyz">
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <wounds>5</wounds>
@@ -180,7 +180,7 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-rider">Rider</rule>
-      <rule id="rpb-armed-with">Armed with Swords or Spears (Fight in Ranks)</rule>
+      <rule id="rpb-armed-with" param="Swords or Spears (Fight in Ranks)">Armed with Swords or Spears (Fight in Ranks)</rule>
     </special>
   </monster>
 
@@ -204,7 +204,7 @@
   <monster id="rpb-greenskin-savage-orc-boss" factions="orcs" name="Savage Orc Boss" plural="Savage Orc Bosses">
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>19</wounds>
@@ -215,14 +215,14 @@
     <damage>2D6</damage>
     <special>
       <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-tattoos">Tattoos 5+</rule>
+      <rule id="rpb-tattoos" param="5+">Tattoos 5+</rule>
     </special>
   </monster>
 
   <monster id="rpb-greenskin-savage-orc-big-boss" factions="orcs" name="Savage Orc Big Boss" plural="Savage Orc Big Bosses">
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <wounds>27</wounds>
@@ -232,17 +232,17 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-ignore-blows">Ignore Blows 6+</rule>
+      <rule id="rpb-ignore-blows" param="6+">Ignore Blows 6+</rule>
       <rule id="lotol-orc-magic-item">Magic Item</rule>
       <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-tattoos">Tattoos 4+</rule>
+      <rule id="rpb-tattoos" param="4+">Tattoos 4+</rule>
     </special>
   </monster>
 
   <monster id="rpb-greenskin-savage-orc-warlord" factions="orcs" name="Savage Orc Warlord" plural="Savage Orc Warlords">
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <wounds>34</wounds>
@@ -252,17 +252,17 @@
     <armor>-</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
       <rule id="lotol-orc-magic-item">2 x Magic Items</rule>
       <rule id="lotol-orc-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-tattoos">Tattoos 3+</rule>
+      <rule id="rpb-tattoos" param="3+">Tattoos 3+</rule>
     </special>
   </monster>
 
   <monster id="rpb-greenskin-skabnoze-orc-shaman" factions="orcs" name="Skabnoze Orc Shaman" plural="Skabnoze Orc Shamans">
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>5</toughness>
     <wounds>15</wounds>
@@ -272,7 +272,7 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
       <rule id="rpb-ring-of-magical-protection">Ring of Magical Protection</rule>
       <rule id="rpb-see-rulebook">See rulebook for special rules.</rule>
       <magic id="rpb-orc" level="1" />
@@ -282,7 +282,7 @@
   <monster id="rpb-greenskin-gorgut-orc-boss" factions="orcs" name="Gorgut Orc Boss" plural="Gorgut Orc Bosses">
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>15</wounds>
@@ -300,7 +300,7 @@
   <monster id="rpb-greenskin-gorgut-orc-big-boss" factions="orcs" name="Gorgut Orc Big Boss" plural="Gorgut Orc Big Bosses">
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <wounds>25</wounds>
@@ -320,7 +320,7 @@
   <monster id="rpb-greenskin-gubbinz" factions="orcs" name="Gubbinz" plural="Gubbinz">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>2</toughness>
     <wounds>1</wounds>

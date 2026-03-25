@@ -1,8 +1,6 @@
-<?xml version="1.0"?>
-
-<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	        xsi:noNamespaceSchemaLocation='whq-monster-schema.xsd'>
-  <monster id="cot-carrion" factions="undead" name="Carrion" plural="Carrion">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-monster-schema.xsd">
+  <monster factions="undead" id="cot-carrion" name="Carrion" plural="Carrions">
     <wounds>10</wounds>
     <move>8</move>
     <weaponskill>3</weaponskill>
@@ -16,11 +14,11 @@
     <damage>1D6</damage>
     <special>
       <rule id="cot-carrion-attack">Carrion Attack (Ambush, Magic A)</rule>
-      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
       <rule id="rpb-fly">Fly</rule>
     </special>
   </monster>
-  <monster id="cot-dread-king" factions="undead" name="The Dread King" plural="Dread Kings">
+  <monster factions="undead" id="cot-dread-king" name="The Dread King" plural="Dread Kings">
     <wounds>34</wounds>
     <move>6</move>
     <weaponskill>1</weaponskill>
@@ -33,15 +31,15 @@
     <armor>3</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="cot-undead-magic-item">3 x Magic Items</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
-      <magic id="rpb-necromantic" level="3" />
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
+      <magic id="rpb-necromantic" level="3"/>
     </special>
   </monster>
-  <monster id="cot-gunther-laranscheld" factions="undead" name="Gunther Laranscheld" plural="Gunther Laranscheld">
+  <monster factions="undead" id="cot-gunther-laranscheld" name="Gunther Laranscheld" plural="Gunther Laranscheld">
     <wounds>15</wounds>
     <move>4</move>
     <weaponskill>4</weaponskill>
@@ -56,10 +54,10 @@
     <special>
       <rule id="cot-grimoire-necris">Grimoire Necris</rule>
       <rule id="cot-minions">Minions</rule>
-      <magic id="rpb-necromantic" level="1" />
+      <magic id="rpb-necromantic" level="1"/>
     </special>
   </monster>
-  <monster id="cot-luthor" factions="undead" name="Luthor" plural="Luthor">
+  <monster factions="undead" id="cot-luthor" name="Luthor" plural="Luthor">
     <wounds>8</wounds>
     <move>4</move>
     <weaponskill>3</weaponskill>
@@ -72,11 +70,11 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-ignore-blows">Ignore Blows 6+</rule>
+      <rule id="rpb-ignore-blows" param="6+">Ignore Blows 6+</rule>
       <rule id="cot-luthor-special-attack">Special Attack</rule>
     </special>
   </monster>
-  <monster id="cot-zombie-dragon" factions="undead" name="Zombie Dragon" plural="Zombie Dragons">
+  <monster factions="undead" id="cot-zombie-dragon" name="Zombie Dragon" plural="Zombie Dragons">
     <wounds>75</wounds>
     <move>6</move>
     <weaponskill>4</weaponskill>
@@ -90,12 +88,12 @@
     <damage>6D6</damage>
     <special>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-ignore-blows" param="4+">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
       <rule id="cot-pestilential-breath">Pestilential Breath (Ambush, Magic A)</rule>
       <rule id="rpb-plague">Plague</rule>
-      <rule id="rpb-terror">Terror 13</rule>
+      <rule id="rpb-terror" param="13">Terror 13</rule>
     </special>
   </monster>
 </monsters>

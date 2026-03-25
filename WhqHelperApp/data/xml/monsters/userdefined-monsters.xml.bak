@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<monsters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-monster-schema.xsd">
+  <monster factions="chaos" id="chaos-thug" name="Chaos Thug" plural="Chaos Thugs">
+    <wounds>7</wounds>
+    <move>4</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>3+</ballisticskill>
+    <strength>3</strength>
+    <toughness>3</toughness>
+    <initiative>3</initiative>
+    <attacks>1</attacks>
+    <gold>50</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <rule id="fight-on-death">Fight on Death</rule>
+      <rule id="rpb-ambush-magic" param="11">AMBUSH, MAGIC 11</rule>
+      <magic id="slaanesh" level="1"/>
+    </special>
+  </monster>
+</monsters>

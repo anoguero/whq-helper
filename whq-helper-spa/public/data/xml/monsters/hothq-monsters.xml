@@ -17,11 +17,11 @@
     <special>
       <rule id="hothq-breathes-smoke">Breathes Smoke (Ambush, Magic A)</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-terror">Terror 12</rule>
-      <rule id="rpb-treasure-hoard">Treasure Hoard +0</rule>
+      <rule id="rpb-terror" param="12">Terror 12</rule>
+      <rule id="rpb-treasure-hoard" param="+0">Treasure Hoard +0</rule>
     </special>
   </monster>
   <monster id="hothq-cave-dragon" factions="chaos darkelves" name="Cave Dragon" plural="Cave Dragons">
@@ -37,8 +37,8 @@
     <armor>3</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="hothq-breathes-noxious-vapour">Breathes Noxious Vapour 4+</rule>
-      <rule id="rpb-fear">Fear 10</rule>
+      <rule id="hothq-breathes-noxious-vapour" param="4+">Breathes Noxious Vapour 4+</rule>
+      <rule id="rpb-fear" param="10">Fear 10</rule>
       <rule id="rpb-fly">Fly</rule>
       <rule id="rpb-plague">Plague</rule>
     </special>
@@ -56,8 +56,8 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 6</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <rule id="rpb-vomit">Vomit</rule>
     </special>
   </monster>
@@ -76,11 +76,11 @@
     <special>
       <rule id="hothq-breathes-smoke">Breathes Smoke (Ambush, Magic A)</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 3D6</rule>
+      <rule id="rpb-ignore-blows" param="4+">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain" param="3D6">Ignore Pain 3D6</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-terror">Terror 14</rule>
-      <rule id="rpb-treasure-hoard">Treasure Hoard +2</rule>
+      <rule id="rpb-terror" param="14">Terror 14</rule>
+      <rule id="rpb-treasure-hoard" param="+2">Treasure Hoard +2</rule>
       <magic id="rpb-chaos" level="2" />
     </special>
   </monster>
@@ -99,11 +99,11 @@
     <special>
       <rule id="hothq-breathes-smoke">Breathes Smoke (Ambush, Magic A)</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 4+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-ignore-blows" param="4+">Ignore Blows 4+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-terror">Terror 13</rule>
-      <rule id="rpb-treasure-hoard">Treasure Hoard +1</rule>
+      <rule id="rpb-terror" param="13">Terror 13</rule>
+      <rule id="rpb-treasure-hoard" param="+1">Treasure Hoard +1</rule>
       <magic id="rpb-chaos" level="1" />
     </special>
   </monster>
@@ -120,7 +120,7 @@
     <armor>-</armor>
     <damage>2D6/3D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
     </special>
   </monster>
   <monster id="hothq-ogre-mercenary-champion" factions="chaos darkelves" name="Ogre Mercenary Champion" plural="Ogre Mercenary Champions">
@@ -136,7 +136,7 @@
     <armor>1</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
     </special>
   </monster>
@@ -154,8 +154,8 @@
     <damage>2D6</damage>
     <special>
       <rule id="hothq-slimy-skin">Slimy Skin</rule>
-      <rule id="rpb-fear">Fear 6</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
     </special>
   </monster>
 </monsters>

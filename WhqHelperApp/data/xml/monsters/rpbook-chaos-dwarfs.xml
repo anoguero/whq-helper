@@ -6,7 +6,7 @@
     <wounds>8</wounds>
     <move>3</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <initiative>2</initiative>
@@ -15,7 +15,7 @@
     <armor>2</armor>
     <damage>1D6/2D6(6+)</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
     </special>
   </monster>
   <monster id="rpb-chaos-dwarf-blunderbuss" 
@@ -24,7 +24,7 @@
     <wounds>8</wounds>
     <move>3</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <initiative>2</initiative>
@@ -33,8 +33,8 @@
     <armor>1</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Blunderbuss</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-armed-with" param="Blunderbuss">Armed with Blunderbuss</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
     </special>
   </monster>
   <monster id="rpb-chaos-dwarf-champion" factions="chaosdwarves" name="Chaos Dwarf Champion" 
@@ -42,7 +42,7 @@
     <wounds>16</wounds>
     <move>3</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>3</initiative>
@@ -51,7 +51,7 @@
     <armor>2</armor>
     <damage>2D6/3D6(5+)</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
@@ -62,7 +62,7 @@
     <wounds>33</wounds>
     <move>3</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>5</initiative>
@@ -71,7 +71,7 @@
     <armor>3</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">2 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
@@ -82,7 +82,7 @@
     <wounds>8</wounds>
     <move>3</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>6</toughness>
     <initiative>3</initiative>
@@ -91,9 +91,9 @@
     <armor>2</armor>
     <damage>1D6/2D6(6+)</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
-      <rule id="rpb-protection-ring">Protection Ring (+1 T)</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
+      <rule id="rpb-protection-ring" param="+1 T">Protection Ring (+1 T)</rule>
       <magic id="rpb-chaos-dwarf" level="1" />
     </special>
   </monster>
@@ -103,7 +103,7 @@
     <wounds>26</wounds>
     <move>3</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>4</initiative>
@@ -112,8 +112,8 @@
     <armor>3</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-armour">Magic Armour; Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-chaos-dwarf" level="3" />
@@ -124,7 +124,7 @@
     <wounds>40</wounds>
     <move>3</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>5</initiative>
@@ -133,8 +133,8 @@
     <armor>3</armor>
     <damage>3D6/4D6(5+)</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 3+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="3+">Magic Resistance 3+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">3 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>

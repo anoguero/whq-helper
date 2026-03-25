@@ -6,7 +6,7 @@
            factions="skaven" name="Skaven Clanrat" plural="Skaven Clanrats">
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>3</wounds>
@@ -22,7 +22,7 @@
     <wounds>11</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>5</initiative>
@@ -40,7 +40,7 @@
     <wounds>20</wounds>
     <move>5</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>6</initiative>
@@ -49,7 +49,7 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-dodge" param="5+">Dodge 5+</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
     </special>
@@ -59,7 +59,7 @@
     <wounds>5</wounds>
     <move>6</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>5</initiative>
@@ -76,7 +76,7 @@
     <wounds>7</wounds>
     <move>6</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>5</initiative>
@@ -86,8 +86,8 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-ambush">Ambush A</rule>
-      <rule id="rpb-assassinate">Assassinate 6+</rule>
-      <rule id="rpb-dodge">Dodge 5+</rule>
+      <rule id="rpb-assassinate" param="6+">Assassinate 6+</rule>
+      <rule id="rpb-dodge" param="5+">Dodge 5+</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
     </special>
   </monster>
@@ -96,7 +96,7 @@
     <wounds>32</wounds>
     <move>6</move>
     <weaponskill>8</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>10</initiative>
@@ -105,10 +105,10 @@
     <armor>-</armor>
     <damage>4D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
-      <rule id="rpb-assassinate">Assassinate 4+</rule>
-      <rule id="rpb-dodge">Dodge 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
+      <rule id="rpb-assassinate" param="4+">Assassinate 4+</rule>
+      <rule id="rpb-dodge" param="4+">Dodge 4+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
     </special>
@@ -118,7 +118,7 @@
     <wounds>3</wounds>
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>4</initiative>
@@ -127,7 +127,7 @@
     <armor>1</armor>
     <damage>S</damage>
     <special>
-      <rule id="rpb-warfire-thrower">Armed with Warpfire Thrower (Missile Troops)</rule>
+      <rule id="rpb-skaven-firethrower">Armed with Warpfire Thrower (Missile Troops)</rule>
     </special>
   </monster>
   <monster id="rpb-skaven-jezzail" factions="skaven" name="Skaven Jezzail" 
@@ -135,7 +135,7 @@
     <wounds>6</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>4</initiative>
@@ -152,7 +152,7 @@
     <wounds>75</wounds>
     <move>8</move>
     <weaponskill>8</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>8</strength>
     <toughness>7</toughness>
     <initiative>10</initiative>
@@ -161,15 +161,15 @@
     <armor>6</armor>
     <damage>6D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
       <rule id="rpb-doom-glaive">Armed with Doom Glaive</rule>
-      <rule id="rpb-dodge">Dodge 3+</rule>
-      <rule id="rpb-frenzy">Frenzy 5+</rule>
-      <rule id="rpb-greater-daemon">Greater Daemon 14</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 6</rule>
+      <rule id="rpb-dodge" param="3+">Dodge 3+</rule>
+      <rule id="rpb-frenzy" param="5+">Frenzy 5+</rule>
+      <rule id="rpb-greater-daemon" param="14">Greater Daemon 14</rule>
+      <rule id="rpb-ignore-pain" param="6">Ignore Pain 6</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-skitterleap">Skitterleap</rule>
       <magic id="rpb-skaven" level="4" />
     </special>
@@ -178,7 +178,7 @@
            factions="skaven" name="Skaven Stormvermin" plural="Skaven Stormvermin">
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>5</wounds>
@@ -195,7 +195,7 @@
     <wounds>10</wounds>
     <move>5</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>5</initiative>
@@ -204,7 +204,7 @@
     <armor>1</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-armed-with">Armed with Halberds</rule>
+      <rule id="rpb-armed-with" param="Halberds">Armed with Halberds</rule>
       <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
     </special>
   </monster>   
@@ -213,7 +213,7 @@
     <wounds>30</wounds>
     <move>5</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>7</initiative>
@@ -222,8 +222,8 @@
     <armor>3</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-dodge">Dodge 5+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-dodge" param="5+">Dodge 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
@@ -243,7 +243,7 @@
     <armor>-</armor>
     <damage>S</damage>
     <special>
-      <rule id="rpb-plague-censers">Armed with plague censers</rule>
+      <rule id="rpb-skaven-plague-censer">Armed with plague censers</rule>
     </special>
   </monster>
   <monster id="rpb-skaven-plague-monk" factions="skaven" name="Skaven Plague Monk" 
@@ -251,7 +251,7 @@
     <wounds>5</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <initiative>4</initiative>
@@ -260,7 +260,7 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-frenzy">Frenzy 5+</rule>
+      <rule id="rpb-frenzy" param="5+">Frenzy 5+</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
     </special>
   </monster>
@@ -270,7 +270,7 @@
     <wounds>23</wounds>
     <move>5</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>6</initiative>
@@ -279,8 +279,8 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
-      <rule id="rpb-frenzy">Frenzy 4+</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
+      <rule id="rpb-frenzy" param="4+">Frenzy 4+</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
     </special>
@@ -290,7 +290,7 @@
     <wounds>30</wounds>
     <move>5</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>7</initiative>
@@ -300,13 +300,13 @@
     <damage>2D6</damage>
     <special>
       <rule id="rpb-death-fog">Death Fog</rule>
-      <rule id="rpb-dodge">Dodge 3+</rule>
-      <rule id="rpb-frenzy">Frenzy 3+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 3+</rule>
+      <rule id="rpb-dodge" param="3+">Dodge 3+</rule>
+      <rule id="rpb-frenzy" param="3+">Frenzy 3+</rule>
+      <rule id="rpb-magic-resistance" param="3+">Magic Resistance 3+</rule>
       <rule id="rpb-magic-item">3 x Magic Items</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
-      <rule id="rpb-terror">Terror 10</rule>
+      <rule id="rpb-terror" param="10">Terror 10</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
     </special>
   </monster>
@@ -315,7 +315,7 @@
     <wounds>4</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>4</initiative>
@@ -324,7 +324,7 @@
     <armor>-</armor>
     <damage>S</damage>
     <special>
-      <rule id="rpb-poison-wind-globes">Armed with poison wind globes</rule>
+      <rule id="rpb-skaven-poison-globes">Armed with poison wind globes</rule>
     </special>
   </monster>
   <monster id="rpb-skaven-warlock" factions="skaven" name="Skaven Warlock" 
@@ -332,7 +332,7 @@
     <wounds>15</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <initiative>5</initiative>
@@ -341,8 +341,8 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-dodge">Dodge 5+</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 6+</rule>
+      <rule id="rpb-dodge" param="5+">Dodge 5+</rule>
+      <rule id="rpb-magic-dispel" param="6+">Magic Dispel 6+</rule>
       <magic id="rpb-skaven" level="1" />
     </special>
   </monster>  
@@ -351,7 +351,7 @@
     <wounds>18</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>5</initiative>
@@ -360,8 +360,8 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 5+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-dispel" param="5+">Magic Dispel 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-weeping-blade">Weeping Blade</rule>
       <magic id="rpb-skaven" level="2" />
@@ -372,7 +372,7 @@
     <wounds>30</wounds>
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>6</initiative>
@@ -381,7 +381,7 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-item">3 x Magic Items</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-skaven" level="3" />
@@ -392,7 +392,7 @@
     <wounds>43</wounds>
     <move>5</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>7</initiative>
@@ -401,8 +401,8 @@
     <armor>-</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-item">4 x Magic Items</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
       <magic id="rpb-skaven" level="4" />

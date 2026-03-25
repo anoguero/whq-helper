@@ -16,7 +16,7 @@
   
   <xsd:simpleType name="ballisticSkillType">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="([0-9])*|Auto|-|S" />
+      <xsd:pattern value="([0-9]+\+)|A|-|S" />
     </xsd:restriction>
   </xsd:simpleType>
   
@@ -36,6 +36,7 @@
     <xsd:simpleContent>
       <xsd:extension base="xsd:string">
         <xsd:attribute name="id" type="xsd:string"/>
+        <xsd:attribute name="param" type="xsd:string"/>
       </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>

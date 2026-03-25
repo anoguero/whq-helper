@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<objectiveRoomAdventures xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-adventures-schema.xsd">
+  <objectiveRoom name="VALLEY OF BONES">
+    <adventure generic="false" id="busca-al-monstruo" name="BUSCA AL MONSTRUO">
+      <flavor>Os mandan a buscar a un monstruo del desierto</flavor>
+      <rules>Estas son las reglas fantasticas</rules>
+    </adventure>
+  </objectiveRoom>
+</objectiveRoomAdventures>

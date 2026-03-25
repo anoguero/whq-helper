@@ -70,7 +70,7 @@ Snotlings do not switch attacks unless their target dies, and will fight until k
   <monster id="od-goblin-archer" name="Goblin Archer" plural="Goblin Archers">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>2</wounds>
@@ -86,7 +86,7 @@ Before fighting the Night Goblin archers, take another Event card.</text></speci
            name="Goblin Spearman" plural="Goblin Spearmen">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>2</wounds>
@@ -101,7 +101,7 @@ Goblins armed with spears may attack from 2 squares away, even past intervening 
   <monster id="od-skaven" name="Skaven" plural="Skaven">
     <move>5</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>3</wounds>
@@ -115,7 +115,7 @@ Goblins armed with spears may attack from 2 squares away, even past intervening 
   <monster id="od-orc" name="Orc" plural="Orcs">
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <wounds>3</wounds>
@@ -129,7 +129,7 @@ Goblins armed with spears may attack from 2 squares away, even past intervening 
   <monster id="od-orc-archer" name="Orc Archer" plural="Orc Archers">
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <wounds>3</wounds>
@@ -143,7 +143,7 @@ Goblins armed with spears may attack from 2 squares away, even past intervening 
   <monster id="od-minotaur-solo" name="Minotaur" plural="Minotaurs">
     <move>6</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>15</wounds>
@@ -158,7 +158,7 @@ Before fighting the Minotaur, take another Event card.  If this is an Event, res
   <monster id="od-minotaur" name="Minotaur" plural="Minotaurs">
     <move>6</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>15</wounds>

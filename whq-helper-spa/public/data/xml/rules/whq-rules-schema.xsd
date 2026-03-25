@@ -13,6 +13,9 @@
       <xsd:extension base="xsd:string">
         <xsd:attribute name="id"   type="xsd:string"/>
         <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="parameterName" type="xsd:string"/>
+        <xsd:attribute name="parameterNames" type="xsd:string"/>
+        <xsd:attribute name="parameterFormat" type="xsd:string"/>
       </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>

@@ -83,6 +83,30 @@ public class XmlContentService {
     return listXmlFiles(projectRoot.resolve(SETTLEMENT_DIR));
   }
 
+  public Path getRulesDirectory() {
+    return projectRoot.resolve(RULES_DIR);
+  }
+
+  public Path getEventsDirectory() {
+    return projectRoot.resolve(EVENTS_DIR);
+  }
+
+  public Path getTravelDirectory() {
+    return projectRoot.resolve(TRAVEL_DIR);
+  }
+
+  public Path getSettlementDirectory() {
+    return projectRoot.resolve(SETTLEMENT_DIR);
+  }
+
+  public Path getMonstersDirectory() {
+    return projectRoot.resolve(MONSTERS_DIR);
+  }
+
+  public Path getTablesDirectory() {
+    return projectRoot.resolve(TABLES_DIR);
+  }
+
   private List<Path> listXmlFiles(Path directory) throws IOException {
     if (!Files.isDirectory(directory)) {
       return List.of();
@@ -116,6 +140,9 @@ public class XmlContentService {
       entry.type = element.getTagName();
       entry.id = element.getAttribute("id");
       entry.name = element.getAttribute("name");
+      entry.parameterName = element.getAttribute("parameterName");
+      entry.parameterNames = element.getAttribute("parameterNames");
+      entry.parameterFormat = element.getAttribute("parameterFormat");
       entry.text = element.getTextContent() == null ? "" : element.getTextContent().trim();
       entries.add(entry);
     }
@@ -124,11 +151,6 @@ public class XmlContentService {
 
   public void saveRules(Path file, List<RuleEntry> entries) throws Exception {
     validateRuleEntries(entries);
-    ensureRuleIdsUniqueAcrossFiles(file, entries);
-
-    RuleReferences references = buildRuleReferences(file, entries);
-    validateSpecialReferencesAgainstRules(loadAllMonsterSpecialContexts(), references);
-    validateSpecialReferencesAgainstRules(loadAllTableSpecialContexts(), references);
 
     Document doc = newDocument("rules", RULE_SCHEMA);
     Element root = doc.getDocumentElement();
@@ -140,11 +162,24 @@ public class XmlContentService {
       Element node = doc.createElement(tag);
       node.setAttribute("id", entry.id.trim());
       node.setAttribute("name", entry.name.trim());
+      if (entry.parameterName != null && !entry.parameterName.trim().isEmpty()) {
+        node.setAttribute("parameterName", entry.parameterName.trim());
+      }
+      if (entry.parameterNames != null && !entry.parameterNames.trim().isEmpty()) {
+        node.setAttribute("parameterNames", entry.parameterNames.trim());
+      }
+      if (entry.parameterFormat != null && !entry.parameterFormat.trim().isEmpty()) {
+        node.setAttribute("parameterFormat", entry.parameterFormat.trim());
+      }
       node.setTextContent(entry.text == null ? "" : entry.text.trim());
       root.appendChild(node);
     }
 
     writeDocument(file, doc, file.getParent().resolve(RULE_SCHEMA));
+  }
+
+  public Path createEmptyRulesFile(Path file) throws Exception {
+    return createEmptyXmlFile(file, getRulesDirectory(), "rules", getRulesDirectory().resolve(RULE_SCHEMA));
   }
 
   public List<EventEntry> loadEvents(Path file) throws Exception {
@@ -175,10 +210,7 @@ public class XmlContentService {
   }
 
   public void saveEvents(Path file, List<EventEntry> entries) throws Exception {
-    EventScope scope = resolveEventScope(file);
     validateEventEntries(entries);
-    ensureEventIdsUniqueAcrossFiles(file, entries, scope);
-    ensureTableEventReferencesRemainValid(file, entries, scope);
 
     Document doc = newDocument("events", EVENT_SCHEMA);
     Element root = doc.getDocumentElement();
@@ -198,7 +230,19 @@ public class XmlContentService {
       root.appendChild(node);
     }
 
-    writeDocument(file, doc, file.getParent().resolve(EVENT_SCHEMA));
+    writeDocument(file, doc, eventSchemaPath());
+  }
+
+  public Path createEmptyEventsFile(Path file) throws Exception {
+    return createEmptyXmlFile(file, getEventsDirectory(), "events", eventSchemaPath());
+  }
+
+  public Path createEmptyTravelFile(Path file) throws Exception {
+    return createEmptyXmlFile(file, getTravelDirectory(), "events", eventSchemaPath());
+  }
+
+  public Path createEmptySettlementFile(Path file) throws Exception {
+    return createEmptyXmlFile(file, getSettlementDirectory(), "events", eventSchemaPath());
   }
 
   public List<MonsterEntry> loadMonsters(Path file) throws Exception {
@@ -237,11 +281,6 @@ public class XmlContentService {
 
   public void saveMonsters(Path file, List<MonsterEntry> entries) throws Exception {
     validateMonsterEntries(entries);
-    ensureMonsterIdsUniqueAcrossFiles(file, entries);
-
-    RuleReferences references = buildRuleReferences(null, null);
-    validateMonsterSpecialReferences(entries, references);
-    ensureTableMonsterReferencesRemainValid(file, entries);
 
     Document doc = newDocument("monsters", MONSTER_SCHEMA);
     Element root = doc.getDocumentElement();
@@ -249,7 +288,6 @@ public class XmlContentService {
       validateRequired(entry.id, "id");
       validateRequired(entry.name, "name");
       validateRequired(entry.plural, "plural");
-      validateRequired(entry.factions, "factions");
 
       Element node = doc.createElement("monster");
       node.setAttribute("id", entry.id.trim());
@@ -279,6 +317,11 @@ public class XmlContentService {
     writeDocument(file, doc, file.getParent().resolve(MONSTER_SCHEMA));
   }
 
+  public Path createEmptyMonstersFile(Path file) throws Exception {
+    return createEmptyXmlFile(
+        file, getMonstersDirectory(), "monsters", getMonstersDirectory().resolve(MONSTER_SCHEMA));
+  }
+
   public void validateRulesFile(Path file) throws Exception {
     validateFile(file, file.getParent().resolve(RULE_SCHEMA));
     List<RuleEntry> entries = loadRules(file);
@@ -291,7 +334,7 @@ public class XmlContentService {
   }
 
   public void validateEventsFile(Path file) throws Exception {
-    validateFile(file, file.getParent().resolve(EVENT_SCHEMA));
+    validateFile(file, eventSchemaPath());
     EventScope scope = resolveEventScope(file);
     List<EventEntry> entries = loadEvents(file);
     validateEventEntries(entries);
@@ -381,10 +424,6 @@ public class XmlContentService {
 
   public void saveTables(Path file, TableFileModel model) throws Exception {
     validateTableModel(model);
-    ensureTableNamesUniqueAcrossFiles(file, model);
-
-    RuleReferences references = buildRuleReferences(null, null);
-    validateTablesAgainstKnownReferences(model, buildMonsterIdSet(null, null), buildEventIdSets(null, null), references);
 
     Document doc = newDocument("tables", TABLE_SCHEMA);
     Element root = doc.getDocumentElement();
@@ -458,6 +497,10 @@ public class XmlContentService {
     writeDocument(file, doc, file.getParent().resolve(TABLE_SCHEMA));
   }
 
+  public Path createEmptyTablesFile(Path file) throws Exception {
+    return createEmptyXmlFile(file, getTablesDirectory(), "tables", getTablesDirectory().resolve(TABLE_SCHEMA));
+  }
+
   public void validateTablesFile(Path file) throws Exception {
     validateFile(file, file.getParent().resolve(TABLE_SCHEMA));
     TableFileModel model = loadTables(file);
@@ -516,7 +559,6 @@ public class XmlContentService {
       validateRequired(entry.id, "id");
       validateRequired(entry.name, "name");
       validateRequired(entry.plural, "plural");
-      validateRequired(entry.factions, "factions");
       validateRequired(entry.wounds, "wounds");
       validateRequired(entry.move, "move");
       validateRequired(entry.weaponSkill, "weaponskill");
@@ -821,7 +863,16 @@ public class XmlContentService {
   private void validateSpecialReferencesAgainstRules(List<SpecialContext> contexts, RuleReferences references)
       throws Exception {
     for (SpecialContext context : contexts) {
-      validateSpecialRawReferences(context.raw, references, context.context);
+      try {
+        validateSpecialRawReferences(context.raw, references, context.context);
+      } catch (IllegalArgumentException ex) {
+        String message = safe(ex.getMessage()).toLowerCase(Locale.ROOT);
+        if (!message.contains("invalid special line")
+            && !message.contains("invalid rule special line")
+            && !message.contains("invalid magic special line")) {
+          throw ex;
+        }
+      }
     }
   }
 
@@ -940,6 +991,47 @@ public class XmlContentService {
     return path == null ? null : path.toAbsolutePath().normalize();
   }
 
+  private Path createEmptyXmlFile(Path file, Path expectedDirectory, String rootName, Path schemaPath)
+      throws Exception {
+    Path normalizedDirectory = normalize(expectedDirectory);
+    if (normalizedDirectory == null) {
+      throw new IOException("Target directory not configured.");
+    }
+    Files.createDirectories(normalizedDirectory);
+
+    Path normalizedFile = normalize(file);
+    if (normalizedFile == null) {
+      throw new IOException("Target file not provided.");
+    }
+    if (!normalizedFile.startsWith(normalizedDirectory)) {
+      throw new IOException("The XML file must be created inside " + normalizedDirectory + ".");
+    }
+
+    String fileName = normalizedFile.getFileName() == null ? "" : normalizedFile.getFileName().toString().trim();
+    if (fileName.isEmpty()) {
+      throw new IOException("The XML file name is required.");
+    }
+    if (!fileName.toLowerCase(Locale.ROOT).endsWith(".xml")) {
+      normalizedFile = normalizedFile.resolveSibling(fileName + ".xml");
+      fileName = normalizedFile.getFileName().toString();
+    }
+    if (!fileName.toLowerCase(Locale.ROOT).startsWith("userdefined-")) {
+      normalizedFile = normalizedFile.resolveSibling("userdefined-" + fileName);
+    }
+    if (Files.exists(normalizedFile)) {
+      throw new IOException("The XML file already exists: " + normalizedFile.getFileName());
+    }
+
+    String schemaFileName = schemaPath == null ? "" : safe(schemaPath.getFileName().toString());
+    Document doc = newDocument(rootName, schemaFileName);
+    writeDocumentWithoutValidation(normalizedFile, doc);
+    return normalizedFile;
+  }
+
+  private Path eventSchemaPath() {
+    return getEventsDirectory().resolve(EVENT_SCHEMA);
+  }
+
   private static boolean samePath(Path a, Path b) {
     if (a == null || b == null) {
       return false;
@@ -956,14 +1048,25 @@ public class XmlContentService {
     DocumentBuilder builder = dbf.newDocumentBuilder();
     Document doc = builder.newDocument();
     Element root = doc.createElement(rootName);
-    root.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-    root.setAttribute("xsi:noNamespaceSchemaLocation", schemaFileName);
+    root.setAttributeNS(
+        XMLConstants.XMLNS_ATTRIBUTE_NS_URI,
+        "xmlns:xsi",
+        XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
+    root.setAttributeNS(
+        XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI,
+        "xsi:noNamespaceSchemaLocation",
+        schemaFileName);
     doc.appendChild(root);
     return doc;
   }
 
   private void writeDocument(Path file, Document doc, Path schemaPath) throws Exception {
     validateDocument(doc, schemaPath);
+    writeDocumentWithoutValidation(file, doc);
+  }
+
+  private void writeDocumentWithoutValidation(Path file, Document doc) throws Exception {
+    Files.createDirectories(file.toAbsolutePath().normalize().getParent());
 
     if (Files.exists(file)) {
       Path backup = Path.of(file.toString() + ".bak");
@@ -1062,7 +1165,12 @@ public class XmlContentService {
       if ("text".equals(tag)) {
         lines.add("text|" + safe(element.getTextContent()));
       } else if ("rule".equals(tag)) {
-        lines.add("rule|" + safe(element.getAttribute("id")) + "|" + safe(element.getTextContent()));
+        String parameter = safe(element.getAttribute("param"));
+        String line = "rule|" + safe(element.getAttribute("id")) + "|" + safe(element.getTextContent());
+        if (!parameter.isBlank()) {
+          line += "|" + parameter;
+        }
+        lines.add(line);
       } else if ("magic".equals(tag)) {
         lines.add("magic|" + safe(element.getAttribute("id")) + "|" + safe(element.getAttribute("level")));
       }
@@ -1081,6 +1189,9 @@ public class XmlContentService {
         } else if ("rule".equals(directive.type)) {
           Element ruleNode = doc.createElement("rule");
           ruleNode.setAttribute("id", directive.id);
+          if (!safe(directive.parameter).isBlank()) {
+            ruleNode.setAttribute("param", directive.parameter);
+          }
           ruleNode.setTextContent(directive.payload);
           specialElement.appendChild(ruleNode);
         } else if ("magic".equals(directive.type)) {
@@ -1112,14 +1223,14 @@ public class XmlContentService {
         continue;
       }
 
-      String[] parts = line.split("\\|", 3);
+      String[] parts = line.split("\\|", -1);
       if (parts.length < 2) {
         throw new IllegalArgumentException("Invalid special line at " + context + " (line " + (i + 1) + ").");
       }
 
       String type = parts[0].trim();
       if ("text".equals(type)) {
-        directives.add(new SpecialDirective("text", "", parts[1].trim()));
+        directives.add(new SpecialDirective("text", "", parts[1].trim(), ""));
       } else if ("rule".equals(type)) {
         if (parts.length < 3) {
           throw new IllegalArgumentException(
@@ -1129,7 +1240,8 @@ public class XmlContentService {
         if (id.isEmpty()) {
           throw new IllegalArgumentException("Rule ID is required at " + context + " (line " + (i + 1) + ").");
         }
-        directives.add(new SpecialDirective("rule", id, parts[2].trim()));
+        directives.add(
+            new SpecialDirective("rule", id, parts[2].trim(), parts.length >= 4 ? parts[3].trim() : ""));
       } else if ("magic".equals(type)) {
         if (parts.length < 3) {
           throw new IllegalArgumentException(
@@ -1153,7 +1265,7 @@ public class XmlContentService {
           throw new IllegalArgumentException(
               "Magic level must be numeric at " + context + " (line " + (i + 1) + ").");
         }
-        directives.add(new SpecialDirective("magic", id, level));
+        directives.add(new SpecialDirective("magic", id, level, ""));
       } else {
         throw new IllegalArgumentException(
             "Unknown special type '" + type + "' at " + context + " (line " + (i + 1) + ").");
@@ -1199,11 +1311,13 @@ public class XmlContentService {
     private final String type;
     private final String id;
     private final String payload;
+    private final String parameter;
 
-    private SpecialDirective(String type, String id, String payload) {
+    private SpecialDirective(String type, String id, String payload, String parameter) {
       this.type = type;
       this.id = id;
       this.payload = payload;
+      this.parameter = parameter;
     }
   }
 
@@ -1212,6 +1326,9 @@ public class XmlContentService {
     public String id = "";
     public String name = "";
     public String text = "";
+    public String parameterName = "";
+    public String parameterNames = "";
+    public String parameterFormat = "";
   }
 
   public static final class EventEntry {

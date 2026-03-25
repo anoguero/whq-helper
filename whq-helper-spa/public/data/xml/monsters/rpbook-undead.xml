@@ -15,16 +15,16 @@
     <armor>-</armor>
     <damage>S</damage>
     <special>
-      <rule id="rpb-chill">Chill 1</rule>
-      <rule id="rpb-ethereal">Ethereal -1</rule>
-      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-chill" param="1">Chill 1</rule>
+      <rule id="rpb-ethereal" param="-1">Ethereal -1</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
     </special>
   </monster>
   <monster id="rpb-liche" factions="undead" name="Liche" plural="Liches">
     <wounds>40</wounds>
     <move>4</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>6</initiative>
@@ -33,10 +33,10 @@
     <armor>-</armor>
     <damage>4D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 10</rule>
-      <rule id="rpb-magic-items">2 x Magic Items</rule>
+      <rule id="rpb-fear" param="10">Fear 10</rule>
+      <rule id="cot-undead-magic-item">2 x Magic Items</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="3" />
     </special>
   </monster>
@@ -44,7 +44,7 @@
     <wounds>63</wounds>
     <move>6</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>7</strength>
     <toughness>6</toughness>
     <initiative>4</initiative>
@@ -55,12 +55,12 @@
     <special>
       <rule id="rpb-large-monster">Large Monster</rule>
       <rule id="cot-undead-magic-armour">Magic Armour</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="cot-undead-magic-item">3 x Magic Items</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-terror">Terror 14</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-terror" param="14">Terror 14</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <magic id="rpb-chaos" level="2" />
       <magic id="rpb-necromantic" level="3" />
     </special>
@@ -78,8 +78,8 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-break:">Break</rule>
-      <rule id="rpb-fear">Fear 4</rule>
+      <rule id="rpb-break">Break</rule>
+      <rule id="rpb-fear" param="4">Fear 4</rule>
     </special>
   </monster>
   <monster id="rpb-mummy" factions="undead" name="Mummy" plural="Mummies">
@@ -95,8 +95,8 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 7</rule>
-      <rule id="rpb-tomb-rot">Tomb Rot (1D3)</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
+      <rule id="rpb-tomb-rot" param="1D3">Tomb Rot (1D3)</rule>
     </special>
   </monster>
   <monster id="rpb-tomb-king" factions="undead" name="Tomb King" plural="Tomb Kings">
@@ -112,18 +112,18 @@
     <armor>2</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
       <rule id="cot-undead-magic-armour">Magic Armour</rule>
       <rule id="cot-undead-magic-item">Magic Item</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-tomb-rot">Tomb Rot (1D6)</rule>
+      <rule id="rpb-tomb-rot" param="1D6">Tomb Rot (1D6)</rule>
     </special>
   </monster>
   <monster id="rpb-necromancer" factions="undead" name="Necromancer" plural="Necromancers">
     <wounds>25</wounds>
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>3</initiative>
@@ -132,9 +132,9 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="1" />
     </special>
   </monster>
@@ -143,7 +143,7 @@
     <wounds>29</wounds>
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>4</initiative>
@@ -152,10 +152,10 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="cot-undead-magic-item">2 x Magic Item</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="2" />
     </special>
   </monster>
@@ -164,7 +164,7 @@
     <wounds>34</wounds>
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>5</initiative>
@@ -173,11 +173,11 @@
     <armor>3</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="cot-undead-magic-item">2 x Magic Item</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
       <magic id="rpb-necromantic" level="3" />
     </special>
   </monster>
@@ -186,7 +186,7 @@
     <wounds>39</wounds>
     <move>4</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>6</initiative>
@@ -195,19 +195,19 @@
     <armor>4</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="cot-undead-magic-item">4 x Magic Item</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-regenerate">Regenerate 2</rule>
-      <magic id="rpb-necroantic" level="4" />
+      <rule id="rpb-regenerate" param="2">Regenerate 2</rule>
+      <magic id="rpb-necromantic" level="4" />
     </special>
   </monster>
   <monster id="rpb-skeleton" factions="undead" name="Skeleton" plural="Skeletons">
     <move>4</move>
     <weaponskill>2</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <wounds>5</wounds>
@@ -218,15 +218,15 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 3) or [4-6] Swords</rule>
-      <rule id="rpb-fear">Fear 5</rule>
-      <rule id="rpb-regenerate">Regenerate 1</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
+      <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
     </special>
   </monster>
   <monster id="rpb-tomb-guardian" factions="undead" name="Tomb Guardian" plural="Tomb Guardians">
     <wounds>15</wounds>
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>6</ballisticskill>
+    <ballisticskill>6+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>2</initiative>
@@ -235,8 +235,8 @@
     <armor>1</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 5</rule>
-      <rule id="rpb-regenerate">Regenerate 1</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
+      <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
     </special>
   </monster>
   <monster id="rpb-zombie" factions="undead" name="Zombie" plural="Zombies">
@@ -252,7 +252,7 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 3</rule>
+      <rule id="rpb-fear" param="3">Fear 3</rule>
     </special>
   </monster>
   <monster id="rpb-wraith" factions="undead" name="Wraith" plural="Wraiths">
@@ -268,16 +268,16 @@
     <armor>-</armor>
     <damage>S</damage>
     <special>
-      <rule id="rpb-chill">Chill 2</rule>
-      <rule id="rpb-ethereal">Ethereal -1</rule>
-      <rule id="rpb-terror">Terror 8</rule>
+      <rule id="rpb-chill" param="2">Chill 2</rule>
+      <rule id="rpb-ethereal" param="-1">Ethereal -1</rule>
+      <rule id="rpb-terror" param="8">Terror 8</rule>
     </special>
   </monster>
   <monster id="rpb-vampire-count" factions="undead" name="Vampire Count" plural="Vampire Counts">
     <wounds>30</wounds>
     <move>6</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>7</strength>
     <toughness>6</toughness>
     <initiative>8</initiative>
@@ -286,9 +286,9 @@
     <armor>3</armor>
     <damage>2D6/3D6(5+)</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-vampire">Vampire</rule>
       <magic id="rpb-necromantic" level="2" />
     </special>
@@ -297,7 +297,7 @@
     <wounds>42</wounds>
     <move>6</move>
     <weaponskill>8</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>7</strength>
     <toughness>6</toughness>
     <initiative>9</initiative>
@@ -306,9 +306,9 @@
     <armor>3</armor>
     <damage>3D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-vampire">Vampire</rule>
       <magic id="rpb-necromantic" level="3" />
     </special>
@@ -318,7 +318,7 @@
     <wounds>38</wounds>
     <move>6</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>6</strength>
     <toughness>5</toughness>
     <initiative>8</initiative>
@@ -327,9 +327,9 @@
     <armor>4</armor>
     <damage>4D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-fly">Fly</rule>
       <rule id="rpb-vampire">Vampire</rule>
       <rule id="cot-undead-magic-armour">Magic Armour</rule>
@@ -351,7 +351,7 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
     </special>
   </monster>
   <monster id="rpb-wight-lord" factions="undead" name="Wight Lord" plural="Wight Lords">
@@ -367,7 +367,7 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-fear">Fear 8</rule>
+      <rule id="rpb-fear" param="8">Fear 8</rule>
       <rule id="cot-undead-magic-armour">Magic Armour</rule>
       <rule id="cot-undead-magic-weapon">Magic Weapon</rule>
     </special>

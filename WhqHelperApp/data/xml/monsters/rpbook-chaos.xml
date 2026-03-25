@@ -6,7 +6,7 @@
     <wounds>6</wounds>
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>4</toughness>
     <initiative>3</initiative>
@@ -15,7 +15,7 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-throw">Throw Spears (Str 3)</rule>
+      <rule id="rpb-throw" param="Spears (Str 3)">Throw Spears (Str 3)</rule>
     </special>
   </monster>
   <monster id="rpb-beastman-champion" factions="chaos beastmen" name="Beastman Champion" 
@@ -23,7 +23,7 @@
     <wounds>30</wounds>
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>3</ballisticskill>
+    <ballisticskill>3+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <initiative>4</initiative>
@@ -33,14 +33,14 @@
     <damage>1D6/2D6(5+)</damage>
     <special>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-throw">Throw Spears (Str 8)</rule>
+      <rule id="rpb-throw" param="Spears (Str 8)">Throw Spears (Str 8)</rule>
     </special>
   </monster>
   <monster id="rpb-beastman-hero" factions="chaos beastmen" name="Beastman Hero" plural="Beastman Heroes">
     <wounds>34</wounds>
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>5</initiative>
@@ -51,14 +51,14 @@
     <special>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-throw">Throw Spears (Str 9)</rule>
+      <rule id="rpb-throw" param="Spears (Str 9)">Throw Spears (Str 9)</rule>
     </special>
   </monster>
   <monster id="rpb-beastman-lord" factions="chaos beastmen" name="Beastman Lord" plural="Beastman Lords">
     <wounds>47</wounds>
     <move>4</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>5</initiative>
@@ -70,7 +70,7 @@
       <rule id="rpb-magic-armour">Magic Armor</rule>
       <rule id="rpb-magic-item">2 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-throw">Throw Spears (Str 10)</rule>
+      <rule id="rpb-throw" param="Spears (Str 10)">Throw Spears (Str 10)</rule>
     </special>
   </monster>
   <monster id="rpb-beastman-shaman" factions="chaos beastmen" name="Beastman Shaman" 
@@ -78,7 +78,7 @@
     <wounds>26</wounds>
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>5</ballisticskill>
+    <ballisticskill>5+</ballisticskill>
     <strength>3</strength>
     <toughness>5</toughness>
     <initiative>4</initiative>
@@ -96,7 +96,7 @@
     <wounds>34</wounds>
     <move>4</move>
     <weaponskill>4</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>4</initiative>
@@ -114,7 +114,7 @@
            plural="Chaos Warriors">
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>4</toughness>
     <wounds>12</wounds>
@@ -130,7 +130,7 @@
     <wounds>15</wounds>
     <move>4</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>7</initiative>
@@ -147,7 +147,7 @@
     <wounds>30</wounds>
     <move>4</move>
     <weaponskill>8</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>8</initiative>
@@ -165,7 +165,7 @@
     <wounds>35</wounds>
     <move>4</move>
     <weaponskill>9</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>9</initiative>
@@ -184,7 +184,7 @@
     <wounds>15</wounds>
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>4</strength>
     <toughness>5</toughness>
     <initiative>6</initiative>
@@ -193,11 +193,11 @@
     <armor>1</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-parry">Parry 5+</rule>
+      <rule id="rpb-parry" param="5+">Parry 5+</rule>
       <magic id="rpb-chaos" level="1" />
     </special>
   </monster>
@@ -206,7 +206,7 @@
     <wounds>31</wounds>
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>1</ballisticskill>
+    <ballisticskill>1+</ballisticskill>
     <strength>5</strength>
     <toughness>5</toughness>
     <initiative>8</initiative>
@@ -215,12 +215,12 @@
     <armor>1</armor>
     <damage>4D6</damage>
     <special>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-magic-armour">Magic Armour</rule>
       <rule id="rpb-magic-item">3 x Magic Item</rule>
       <rule id="rpb-magic-weapon">Magic Weapon</rule>
-      <rule id="rpb-parry">Parry 5+</rule>
+      <rule id="rpb-parry" param="5+">Parry 5+</rule>
       <magic id="rpb-chaos" level="3" />
     </special>
   </monster>
@@ -246,7 +246,7 @@
     <wounds>7</wounds>
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>6</initiative>
@@ -256,8 +256,8 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-hellblade">Armed with Hellblade</rule>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
     </special>
   </monster>
   <monster id="rpb-juggernaut-of-khorne" factions="chaos" name="Juggernaut of Khorne" 
@@ -274,9 +274,9 @@
     <armor>2</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 7</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 5+</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
+      <rule id="rpb-magic-resistance" param="5+">Magic Resistance 5+</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
     </special>
   </monster>
@@ -284,7 +284,7 @@
     <wounds>125</wounds>
     <move>6</move>
     <weaponskill>10</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>8</strength>
     <toughness>7</toughness>
     <initiative>8</initiative>
@@ -297,11 +297,11 @@
       <rule id="rpb-daemon-whip">Armed with Daemon Whip</rule>
       <rule id="rpb-drain-power">Drain Power</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-greater-daemon">Greater Daemon 14</rule>
-      <rule id="rpb-ignore-blows">Ignore Blow 3+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 12</rule>
+      <rule id="rpb-greater-daemon" param="14">Greater Daemon 14</rule>
+      <rule id="rpb-ignore-blows" param="3+">Ignore Blows 3+</rule>
+      <rule id="rpb-ignore-pain" param="12">Ignore Pain 12</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-magic-drain">Magic Drain 5+</rule>
+      <rule id="rpb-magic-drain" param="5+">Magic Drain 5+</rule>
     </special>
   </monster>
   <monster id="rpb-daemonette-of-slaanesh" factions="chaos" name="Daemonette of Slaanesh"
@@ -309,7 +309,7 @@
     <wounds>15</wounds>
     <move>4</move>
     <weaponskill>6</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>6</initiative>
@@ -319,9 +319,9 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-ambush">Ambush 5+</rule>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 6</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
     </special>
   </monster>
   <monster id="rpb-fiend-of-slaanesh" factions="chaos" name="Fiend of Slaanesh" 
@@ -339,8 +339,8 @@
     <damage>1D6</damage>
     <special>
       <rule id="rpb-aura-of-slaanesh">Aura of Slaanesh</rule>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 6</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
     </special>
   </monster>
   <monster id="rpb-keeper-of-secrets" factions="chaos" name="Keeper of Secrets" 
@@ -348,7 +348,7 @@
     <wounds>84</wounds>
     <move>6</move>
     <weaponskill>9</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>7</strength>
     <toughness>7</toughness>
     <initiative>7</initiative>
@@ -357,15 +357,15 @@
     <armor>4</armor>
     <damage>6D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic 2+</rule>
+      <rule id="rpb-ambush-magic" param="2+">Ambush, Magic 2+</rule>
       <rule id="rpb-aura-of-slaanesh">Aura of Slaanesh</rule>
-      <rule id="rpb-greater-daemon">Greater Daemon 13</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-greater-daemon" param="13">Greater Daemon 13</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
       <rule id="rpb-magic">Chaos Magic 4</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-never-pinned">Never Pinned</rule>
     </special>
   </monster>
@@ -374,7 +374,7 @@
     <wounds>9</wounds>
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>6</initiative>
@@ -383,8 +383,8 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 5</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="5">Fear 5</rule>
       <rule id="rpb-plague">Plague</rule>
     </special>
   </monster>
@@ -402,7 +402,7 @@
     <armor>-</armor>
     <damage>2D6</damage>
     <special>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
       <rule id="rpb-paralysis">Paralysis</rule>
       <rule id="rpb-plague">Plague</rule>
       <rule id="rpb-slime-trail">Slime Trail</rule>
@@ -412,7 +412,7 @@
     <wounds>2</wounds>
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>4</initiative>
@@ -422,8 +422,8 @@
     <damage>S</damage>
     <special>
       <rule id="rpb-ambush">Ambush A</rule>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 4</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="4">Fear 4</rule>
       <rule id="rpb-gang-up">Gang Up</rule>
       <rule id="rpb-plague">Plague</rule>
     </special>
@@ -433,7 +433,7 @@
     <wounds>100</wounds>
     <move>4</move>
     <weaponskill>7</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>7</strength>
     <toughness>8</toughness>
     <initiative>4</initiative>
@@ -442,13 +442,13 @@
     <armor>4</armor>
     <damage>6D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic 5+</rule>
-      <rule id="rpb-greater-daemon">Greater Daemon 13</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 10</rule>
+      <rule id="rpb-ambush-magic" param="5+">Ambush, Magic 5+</rule>
+      <rule id="rpb-greater-daemon" param="13">Greater Daemon 13</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="10">Ignore Pain 10</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
-      <rule id="rpb-magic-dispel">Magic Dispel 4+</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 4+</rule>
+      <rule id="rpb-magic-dispel" param="4+">Magic Dispel 4+</rule>
+      <rule id="rpb-magic-resistance" param="4+">Magic Resistance 4+</rule>
       <rule id="rpb-plague">Plague</rule>
       <rule id="rpb-stream-of-corruption">Stream of Corruption</rule>
       <magic id="rpb-chaos" level="4" />
@@ -459,7 +459,7 @@
     <wounds>17</wounds>
     <move>9</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>5</strength>
     <toughness>4</toughness>
     <initiative>4</initiative>
@@ -468,11 +468,11 @@
     <armor>-</armor>
     <damage>S</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic 5+</rule>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 7</rule>
+      <rule id="rpb-ambush-magic" param="5+">Ambush, Magic 5+</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="7">Fear 7</rule>
       <rule id="rpb-flamer-of-tzeentch-attack">Flamer of Tzeentch Attack</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
     </special>
   </monster>
   <monster id="rpb-pink-horror-of-tzeentch" factions="chaos" name="Pink Horror of Tzeentch"
@@ -480,7 +480,7 @@
     <wounds>8</wounds>
     <move>4</move>
     <weaponskill>5</weaponskill>
-    <ballisticskill>2</ballisticskill>
+    <ballisticskill>2+</ballisticskill>
     <strength>4</strength>
     <toughness>3</toughness>
     <initiative>6</initiative>
@@ -489,9 +489,9 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 6</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="6">Fear 6</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
       <rule id="rpb-die-blue-horrors">Die -> Blue Horrors</rule>
     </special>
   </monster>
@@ -500,7 +500,7 @@
     <wounds>4</wounds>
     <move>4</move>
     <weaponskill>3</weaponskill>
-    <ballisticskill>4</ballisticskill>
+    <ballisticskill>4+</ballisticskill>
     <strength>3</strength>
     <toughness>3</toughness>
     <initiative>7</initiative>
@@ -509,9 +509,9 @@
     <armor>-</armor>
     <damage>1D6</damage>
     <special>
-      <rule id="rpb-daemonic">Daemonic -1</rule>
-      <rule id="rpb-fear">Fear 4</rule>
-      <rule id="rpb-magic-resistance">Magic Resistance 6+</rule>
+      <rule id="rpb-daemonic" param="-1">Daemonic -1</rule>
+      <rule id="rpb-fear" param="4">Fear 4</rule>
+      <rule id="rpb-magic-resistance" param="6+">Magic Resistance 6+</rule>
     </special>
   </monster>
   <monster id="rpb-lord-of-change" factions="chaos" name="Lord of Change" 
@@ -519,7 +519,7 @@
     <wounds>75</wounds>
     <move>8</move>
     <weaponskill>9</weaponskill>
-    <ballisticskill>Auto</ballisticskill>
+    <ballisticskill>A</ballisticskill>
     <strength>7</strength>
     <toughness>7</toughness>
     <initiative>10</initiative>
@@ -528,11 +528,11 @@
     <armor>4</armor>
     <damage>6D6</damage>
     <special>
-      <rule id="rpb-ambush-magic">Ambush, Magic A</rule>
-      <rule id="rpb-greater-daemon">Greater Daemon 13</rule>
+      <rule id="rpb-ambush-magic" param="A">Ambush, Magic A</rule>
+      <rule id="rpb-greater-daemon" param="13">Greater Daemon 13</rule>
       <rule id="rpb-fly">Fly</rule>
-      <rule id="rpb-ignore-blows">Ignore Blows 5+</rule>
-      <rule id="rpb-ignore-pain">Ignore Pain 7</rule>
+      <rule id="rpb-ignore-blows" param="5+">Ignore Blows 5+</rule>
+      <rule id="rpb-ignore-pain" param="7">Ignore Pain 7</rule>
       <rule id="rpb-large-monster">Large Monster</rule>
       <rule id="rpb-magic-source">Magic Source</rule>
       <rule id="rpb-magic-item">3 x Magic Item</rule>

@@ -161,7 +161,7 @@
       <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="3" />
       <monster id="rpb-hobgoblin" number="12" ambiences="orcs-goblins chaos-dwarves" level="3" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Sorcerer">Guards (Chaos Dwarf Sorcerer)</rule>
         </special>
       </monster>
     </group>
@@ -205,7 +205,7 @@
       <monster id="rpb-necromancer" number="1" ambiences="undead" level="4" />
       <monster id="rpb-skeleton" number="2-12" ambiences="undead" level="4" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer)</rule>
+          <rule id="rpb-guards" param="Necromancer">Guards (Necromancer)</rule>
         </special>
       </monster>
       <monster id="rpb-wight" number="1-6" ambiences="undead" level="4" />
@@ -217,7 +217,7 @@
       <monster id="rpb-skaven-assassin" number="1-6" ambiences="skaven" level="4" />
       <monster id="rpb-skaven-stormvermin-champion" number="4-9" ambiences="skaven" level="4" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Skaven Warlock)</rule>
+          <rule id="rpb-guards" param="Skaven Warlock">Guards (Skaven Warlock)</rule>
         </special>
       </monster>
       <monster id="rpb-skaven-chieftain" number="1" ambiences="skaven" level="4" />
@@ -254,7 +254,7 @@
       <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="4" />
       <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="4" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Sorcerer">Guards (Chaos Dwarf Sorcerer)</rule>
         </special>
       </monster>
     </group>
@@ -292,7 +292,7 @@
       <monster id="rpb-necromancer" number="1" ambiences="undead" level="4" />
       <monster id="rpb-skeleton" number="2-12" ambiences="undead" level="4" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer)</rule>
+          <rule id="rpb-guards" param="Necromancer">Guards (Necromancer)</rule>
         </special>
       </monster>
       <monster id="rpb-wight" number="1-6" ambiences="undead" level="4" />
@@ -314,7 +314,7 @@
       <monster id="rpb-skaven-assassin" number="1-6" ambiences="skaven" level="4" />
       <monster id="rpb-skaven-stormvermin-champion" number="4-9" ambiences="skaven" level="4" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Skaven Warlock)</rule>
+          <rule id="rpb-guards" param="Skaven Warlock">Guards (Skaven Warlock)</rule>
         </special>
       </monster>
       <monster id="rpb-skaven-chieftain" number="1" ambiences="skaven" level="4" />
@@ -356,7 +356,7 @@
       <monster id="rpb-ghost" number="1-6" ambiences="undead" level="5" />
       <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer)</rule>
+          <rule id="rpb-guards" param="Necromancer">Guards (Necromancer)</rule>
         </special>
       </monster>
     </group>
@@ -381,7 +381,7 @@
       <monster id="rpb-orc-shaman" number="1" ambiences="orcs-goblins" level="5" />
       <monster id="rpb-black-orc-champion" number="1-6" ambiences="orcs-goblins chaos-dwarves" level="5" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Orc Shaman)</rule>
+          <rule id="rpb-guards" param="Orc Shaman">Guards (Orc Shaman)</rule>
         </special>
       </monster>
       <monster id="rpb-orc-big-boss" number="1" ambiences="orcs-goblins" level="5" />
@@ -406,7 +406,7 @@
       <monster id="rpb-beastman-shaman" number="1" ambiences="chaos" level="5" />
       <monster id="rpb-beastman" number="3-8" ambiences="chaos" level="5" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-guards" param="Beastman Shaman">Guards (Beastman Shaman)</rule>
         </special>
       </monster>
       <monster id="rpb-beastman-champion" number="1-3" ambiences="chaos" level="5" />
@@ -426,7 +426,7 @@
       <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="5" />
       <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="5" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Sorcerer">Guards (Chaos Dwarf Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-chaos-dwarf-sorcerer" number="1" ambiences="chaos-dwarves" level="5" />
@@ -444,7 +444,7 @@
       <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="5" />
       <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="5" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Sorcerer">Guards (Chaos Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-chaos-warrior" number="1-6" ambiences="chaos" level="5" />
@@ -481,7 +481,7 @@
       <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="6" />
       <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Sorcerer">Guards (Chaos Dwarf Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-bull-centaur-hero" number="1" ambiences="chaos-dwarves" level="6" />
@@ -496,7 +496,7 @@
       <monster id="rpb-bull-centaur" number="3" ambiences="chaos-dwarves" level="6" />
       <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Master Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Master Sorcerer">Guards (Chaos Dwarf Master Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-bull-centaur-champion" number="1" ambiences="chaos-dwarves" level="6" />
@@ -505,7 +505,7 @@
       <monster id="rpb-skaven-warlock-champion" number="1" ambiences="skaven" level="6" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Skaven Warlock Champion)</rule>
+          <rule id="rpb-guards" param="Skaven Warlock Champion">Guards (Skaven Warlock Champion)</rule>
         </special>
       </monster>
       <monster id="rpb-skaven-plague-priest" number="1" ambiences="skaven" level="6" />
@@ -522,7 +522,7 @@
       <monster id="rpb-ghost" number="6" ambiences="undead" level="6" />
       <monster id="rpb-wight" number="6" ambiences="undead" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+          <rule id="rpb-guards" param="Necromancer Champion">Guards (Necromancer Champion)</rule>
         </special>
       </monster>
     </group>
@@ -535,7 +535,7 @@
       <monster id="rpb-beastman-shaman" number="1" ambiences="chaos" level="6" />
       <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-guards" param="Beastman Shaman">Guards (Beastman Shaman)</rule>
         </special>
       </monster>
       <monster id="rpb-beastman-lord" number="1" ambiences="chaos" level="6" />
@@ -585,7 +585,7 @@
       <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="6" />
       <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Sorcerer">Guards (Chaos Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-chaos-warrior" number="6" ambiences="chaos" level="6" />
@@ -609,7 +609,7 @@
     <group level="6">
       <monster id="rpb-orc-big-boss" number="1-6" ambiences="orcs-goblins" level="6" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Orc Shaman Champion)</rule>
+          <rule id="rpb-guards" param="Orc Shaman Champion">Guards (Orc Shaman Champion)</rule>
         </special>
       </monster>
       <monster id="rpb-orc-shaman-champion" number="1" ambiences="orcs-goblins" level="6" />
@@ -651,7 +651,7 @@
       <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="7" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="1-3" ambiences="skaven" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Skaven Grey Seer)</rule>
+          <rule id="rpb-guards" param="Skaven Grey Seer">Guards (Skaven Grey Seer)</rule>
         </special>
       </monster>
       <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="7" />
@@ -672,7 +672,7 @@
       <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="7" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="1-3" ambiences="skaven" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Skaven Master Warlock)</rule>
+          <rule id="rpb-guards" param="Skaven Master Warlock">Guards (Skaven Master Warlock)</rule>
         </special>
       </monster>
     </group>
@@ -680,7 +680,7 @@
       <monster id="rpb-chaos-dwarf-master-sorcerer" number="1" ambiences="chaos-dwarves" level="7" />
       <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Master Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Master Sorcerer">Guards (Chaos Dwarf Master Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-chaos-champion" number="4" ambiences="chaos" level="7" />
@@ -698,8 +698,8 @@
       <monster id="rpb-beastman-shaman" number="2" ambiences="chaos" level="7" />
       <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" >
         <special append="false">
-          <rule id="rpb-armed-with">Armed with Crossbow (Str 7)</rule>
-          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-armed-with" param="Crossbow (Str 7)">Armed with Crossbow (Str 7)</rule>
+          <rule id="rpb-guards" param="Beastman Shaman">Guards (Beastman Shaman)</rule>
           <rule id="rpb-magic-weapon">Magic Weapon</rule>
         </special>
       </monster>
@@ -710,7 +710,7 @@
       <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="7" />
       <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Sorcerer">Guards (Chaos Sorcerer)</rule>
         </special>
       </monster>
       <monster id="rpb-chaos-warrior" number="6" ambiences="chaos" level="7" />
@@ -720,7 +720,7 @@
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="7" />
       <monster id="rpb-wight" number="6" ambiences="undead" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+          <rule id="rpb-guards" param="Necromancer Champion">Guards (Necromancer Champion)</rule>
         </special>
       </monster>
       <monster id="rpb-wraith" number="3" ambiences="undead" level="7" />
@@ -734,8 +734,8 @@
       <monster id="rpb-beastman-shaman" number="2" ambiences="chaos" level="7" />
       <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="7" >
         <special append="false">
-          <rule id="rpb-armed-with">Armed with Crossbow (Str 7)</rule>
-          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-armed-with" param="Crossbow (Str 7)">Armed with Crossbow (Str 7)</rule>
+          <rule id="rpb-guards" param="Beastman Shaman">Guards (Beastman Shaman)</rule>
           <rule id="rpb-magic-weapon">Magic Weapon</rule>
         </special>
       </monster>
@@ -746,7 +746,7 @@
       <monster id="rpb-orc-shaman-champion" number="1" ambiences="orcs-goblins" level="7" />
       <monster id="rpb-black-orc-champion" number="2-12" ambiences="orcs-goblins chaos-dwarves" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Orc Shaman Champion)</rule>
+          <rule id="rpb-guards" param="Orc Shaman Champion">Guards (Orc Shaman Champion)</rule>
         </special>
       </monster>
       <monster id="rpb-black-orc-big-boss" number="1" ambiences="orcs-goblins chaos-dwarves" level="7" />
@@ -811,7 +811,7 @@
       <monster id="rpb-chaos-sorcerer" number="1-3" ambiences="chaos" level="7" />
       <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Master Chaos Sorcerer">Guards (Master Chaos Sorcerer)</rule>
         </special>      
       </monster>
     </group>
@@ -819,7 +819,7 @@
       <monster id="rpb-master-necromancer" number="1" ambiences="undead" level="7" />
       <monster id="rpb-wight" number="6" ambiences="undead" level="7" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Necromancer)</rule>
+          <rule id="rpb-guards" param="Master Necromancer">Guards (Master Necromancer)</rule>
         </special>      
       </monster>
       <monster id="rpb-wraith" number="3" ambiences="undead" level="7" />
@@ -850,7 +850,7 @@
       <monster id="rpb-skaven-grey-seer" number="1" ambiences="skaven" level="8" />
       <monster id="rpb-skaven-plague-priest" number="3" ambiences="skaven" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+          <rule id="rpb-guards" param="Grey Seer">Guards (Grey Seer)</rule>
         </special>      
       </monster>
       <monster id="rpb-skaven-assassin" number="6" ambiences="skaven" level="8" />
@@ -878,7 +878,7 @@
       <monster id="rpb-mummy" number="6" ambiences="undead" level="8" />
       <monster id="rpb-tomb-king" number="3" ambiences="undead" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Lord)</rule>
+          <rule id="rpb-guards" param="Necromancer Lord">Guards (Necromancer Lord)</rule>
         </special>      
       </monster>
     </group>
@@ -890,7 +890,7 @@
       <monster id="rpb-chaos-sorcerer" number="1" ambiences="chaos" level="8" />
       <monster id="rpb-chaos-champion" number="1-6" ambiences="chaos" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Champion)</rule>
+          <rule id="rpb-guards" param="Chaos Champion">Guards (Chaos Champion)</rule>
         </special>      
       </monster>
       <monster id="rpb-chaos-hero" number="1" ambiences="chaos" level="8" />
@@ -900,7 +900,7 @@
       <monster id="rpb-beastman-shaman-champion" number="2" ambiences="chaos" level="8" />
       <monster id="rpb-beastman-champion" number="6" ambiences="chaos" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Beastman Shaman Champions)</rule>
+          <rule id="rpb-guards" param="Beastman Shaman Champions">Guards (Beastman Shaman Champions)</rule>
         </special>      
       </monster>
       <monster id="rpb-beastman-lord" number="2" ambiences="chaos" level="8" />
@@ -909,7 +909,7 @@
       <monster id="rpb-master-chaos-sorcerer" number="1" ambiences="chaos" level="8" />
       <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Master Chaos Sorcerer">Guards (Master Chaos Sorcerer)</rule>
         </special>      
       </monster>
       <monster id="rpb-chaos-hero" number="1" ambiences="chaos" level="8" />
@@ -920,7 +920,7 @@
       <monster id="rpb-skaven-plague-priest" number="6" ambiences="skaven" level="8" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+          <rule id="rpb-guards" param="Grey Seer">Guards (Grey Seer)</rule>
         </special>      
       </monster>
     </group>
@@ -933,7 +933,7 @@
       <monster id="rpb-orc-shaman-champion" number="1" ambiences="orcs-goblins" level="8" />
       <monster id="rpb-black-orc-champion" number="2-12" ambiences="orcs-goblins chaos-dwarves" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Orc Shaman Lord)</rule>
+          <rule id="rpb-guards" param="Orc Shaman Lord">Guards (Orc Shaman Lord)</rule>
         </special>      
       </monster>
       <monster id="rpb-black-orc-big-boss" number="1" ambiences="orcs-goblins chaos-dwarves" level="8" />
@@ -950,7 +950,7 @@
       <monster id="rpb-liche" number="1" ambiences="undead" level="8" />
       <monster id="rpb-skeleton" number="12" ambiences="undead" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Liche)</rule>
+          <rule id="rpb-guards" param="Liche">Guards (Liche)</rule>
         </special>      
       </monster>
       <monster id="rpb-wight" number="6" ambiences="undead" level="8" />
@@ -960,7 +960,7 @@
       <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="8" />
       <monster id="rpb-chaos-dwarf-blunderbuss" number="6" ambiences="chaos-dwarves" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Sorcerer Lord)</rule>
+          <rule id="rpb-guards" param="Sorcerer Lord">Guards (Sorcerer Lord)</rule>
         </special>      
       </monster>
       <monster id="rpb-bull-centaur-hero" number="1-3" ambiences="chaos-dwarves" level="8" />
@@ -974,7 +974,7 @@
       <monster id="rpb-beastman-shaman" number="1" ambiences="chaos" level="8" />
       <monster id="rpb-beastman-champion" number="6" ambiences="chaos" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Shaman)</rule>
+          <rule id="rpb-guards" param="Shaman">Guards (Shaman)</rule>
         </special>      
       </monster>
       <monster id="rpb-centaur-champion" number="1" ambiences="chaos" level="8" />
@@ -990,7 +990,7 @@
       <monster id="rpb-chaos-dwarf-master-sorcerer" number="1" ambiences="chaos-dwarves" level="8" />
       <monster id="rpb-chaos-dwarf-blunderbuss" number="8" ambiences="chaos-dwarves" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Sorcerer)</rule>
+          <rule id="rpb-guards" param="Master Sorcerer">Guards (Master Sorcerer)</rule>
         </special>      
       </monster>
       <monster id="rpb-centaur-champion" number="4" ambiences="chaos" level="8" />
@@ -1011,7 +1011,7 @@
       <monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" />
       <monster id="rpb-skeleton" number="12" ambiences="undead" level="8" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Lord)</rule>
+          <rule id="rpb-guards" param="Necromancer Lord">Guards (Necromancer Lord)</rule>
         </special>      
       </monster>
       <monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="8" />
@@ -1036,7 +1036,7 @@
       <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="9" />
       <monster id="rpb-chaos-dwarf" number="8" ambiences="chaos-dwarves" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Chaos Dwarf Sorcerer)</rule>
+          <rule id="rpb-guards" param="Chaos Dwarf Sorcerer">Guards (Chaos Dwarf Sorcerer)</rule>
         </special>      
       </monster>
       <monster id="rpb-bull-centaur-hero" number="3" ambiences="chaos-dwarves" level="9" />
@@ -1078,12 +1078,12 @@
       <monster id="rpb-liche" number="1" ambiences="undead" level="9" />
       <monster id="rpb-skeleton" number="12" ambiences="undead" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Liche)</rule>
+          <rule id="rpb-guards" param="Liche">Guards (Liche)</rule>
         </special>      
       </monster>
       <monster id="rpb-wight" number="6" ambiences="undead" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Lord)</rule>
+          <rule id="rpb-guards" param="Necromancer Lord">Guards (Necromancer Lord)</rule>
         </special>      
       </monster>
       <monster id="rpb-wraith" number="3" ambiences="undead" level="9" />
@@ -1092,7 +1092,7 @@
       <monster id="rpb-skaven-grey-seer" number="1" ambiences="skaven" level="9" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+          <rule id="rpb-guards" param="Grey Seer">Guards (Grey Seer)</rule>
         </special>      
       </monster>
       <monster id="rpb-skaven-plague-priest" number="2" ambiences="skaven" level="9" />
@@ -1135,7 +1135,7 @@
       <monster id="rpb-beastman-shaman" number="2" ambiences="chaos" level="9" />
       <monster id="rpb-beastman-champion" number="3" ambiences="chaos" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Beastman Shaman)</rule>
+          <rule id="rpb-guards" param="Beastman Shaman">Guards (Beastman Shaman)</rule>
         </special>      
       </monster>
       <monster id="rpb-beastman-lord" number="2" ambiences="chaos" level="9" />
@@ -1162,7 +1162,7 @@
       <monster id="rpb-chaos-dwarf-sorcerer-lord" number="1" ambiences="chaos-dwarves" level="9" />
       <monster id="rpb-bull-centaur-champion" number="3" ambiences="chaos-dwarves" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Sorcerer Lord)</rule>
+          <rule id="rpb-guards" param="Sorcerer Lord">Guards (Sorcerer Lord)</rule>
         </special>      
       </monster>
       <monster id="rpb-chaos-dwarf-lord" number="3" ambiences="chaos-dwarves" level="9" />
@@ -1172,7 +1172,7 @@
       <monster id="rpb-master-chaos-sorcerer" number="2" ambiences="chaos" level="9" />
       <monster id="rpb-chaos-champion" number="6" ambiences="chaos" level="9" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Master Chaos Sorcerer">Guards (Master Chaos Sorcerer)</rule>
         </special>      
       </monster>
       <monster id="rpb-chaos-hero" number="1-6" ambiences="chaos" level="9" />
@@ -1206,7 +1206,7 @@
       <monster id="rpb-master-chaos-sorcerer" number="2" ambiences="chaos" level="10" />
       <monster id="rpb-centaur-champion" number="3" ambiences="chaos" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Master Chaos Sorcerer">Guards (Master Chaos Sorcerer)</rule>
         </special>      
       </monster>
       <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="10" />
@@ -1228,7 +1228,7 @@
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="10" />
       <monster id="rpb-mummy" number="4" ambiences="undead" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+          <rule id="rpb-guards" param="Necromancer Champion">Guards (Necromancer Champion)</rule>
         </special>      
       </monster>
       <monster id="rpb-wraith" number="3" ambiences="undead" level="10" />
@@ -1249,7 +1249,7 @@
       <monster id="rpb-skaven-grey-seer" number="2" ambiences="skaven" level="10" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+          <rule id="rpb-guards" param="Grey Seer">Guards (Grey Seer)</rule>
         </special>      
       </monster>
       <monster id="rpb-skaven-deathmaster-assassin" number="3" ambiences="skaven" level="10" />
@@ -1267,7 +1267,7 @@
       <monster id="rpb-master-chaos-sorcerer" number="2" ambiences="chaos" level="10" />
       <monster id="rpb-centaur-champion" number="3" ambiences="chaos" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Master Chaos Sorcerer)</rule>
+          <rule id="rpb-guards" param="Master Chaos Sorcerer">Guards (Master Chaos Sorcerer)</rule>
         </special>      
       </monster>
       <monster id="rpb-centaur-hero" number="1" ambiences="chaos" level="10" />
@@ -1277,7 +1277,7 @@
       <monster id="rpb-liche" number="1" ambiences="undead" level="10" />
       <monster id="rpb-wight" number="6" ambiences="undead" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Liche)</rule>
+          <rule id="rpb-guards" param="Liche">Guards (Liche)</rule>
         </special>              
       </monster>
       <monster id="rpb-wraith" number="3" ambiences="undead" level="10" />
@@ -1289,7 +1289,7 @@
       <monster id="rpb-lammasu" number="1" ambiences="chaos undead chaos-dwarves" level="10" />
       <monster id="rpb-bull-centaur-hero" number="3" ambiences="chaos-dwarves" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Sorcerer Lord)</rule>
+          <rule id="rpb-guards" param="Sorcerer Lord">Guards (Sorcerer Lord)</rule>
         </special>              
       </monster>
       <monster id="rpb-bull-centaur-lord" number="1" ambiences="chaos-dwarves" level="10" />
@@ -1299,7 +1299,7 @@
       <monster id="rpb-skaven-grey-seer" number="2" ambiences="skaven" level="10" />
       <monster id="rpb-skaven-warpfire-thrower-team" number="3" ambiences="skaven" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Grey Seer)</rule>
+          <rule id="rpb-guards" param="Grey Seer">Guards (Grey Seer)</rule>
         </special>              
       </monster>
       <monster id="rpb-skaven-deathmaster-assassin" number="3" ambiences="skaven" level="10" />
@@ -1310,7 +1310,7 @@
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="10" />
       <monster id="rpb-mummy" number="4" ambiences="undead" level="10" >
         <special append="true">
-          <rule id="rpb-guards">Guards (Necromancer Champion)</rule>
+          <rule id="rpb-guards" param="Necromancer Champion">Guards (Necromancer Champion)</rule>
         </special>              
       </monster>
       <monster id="rpb-wraith" number="4" ambiences="undead" level="10" />
