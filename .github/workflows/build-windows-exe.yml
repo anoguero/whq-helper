@@ -31,10 +31,10 @@ jobs:
       - name: Download SWT for Windows
         run: |
           $swtVersion = "3.127.0"
-          $target = "lib/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
-          $url = "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.win32.win32.x86_64/$swtVersion/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
+          $swtTarget = "lib/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
+          $swtUrl = "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.win32.win32.x86_64/$swtVersion/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
           New-Item -ItemType Directory -Force -Path "lib" | Out-Null
-          Invoke-WebRequest -Uri $url -OutFile $target
+          Invoke-WebRequest -Uri $swtUrl -OutFile $swtTarget
 
       - name: Build EXE
         run: ./scripts/package-windows.ps1 -Type exe
