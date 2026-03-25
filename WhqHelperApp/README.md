@@ -89,7 +89,6 @@ El contenido de `target/windows-input/` queda así:
 ```text
 windows-input/
   whq-helper-app-1.0.0.jar
-  settings.cfg
   lib/
     org.eclipse.swt.win32.win32.x86_64-3.127.0.jar
   data/
@@ -132,7 +131,7 @@ Comportamiento:
 - usa un runner Windows,
 - descarga en CI el JAR `org.eclipse.swt.win32.win32.x86_64-3.127.0.jar`,
 - ejecuta `./scripts/package-windows.ps1 -Type exe`,
-- publica el `.exe` y el directorio completo de `target/windows-package/` como artefactos del workflow.
+- publica el `.exe` como artefacto del workflow.
 
 Esto te permite desarrollar en Linux y delegar el empaquetado final de Windows a GitHub.
 
