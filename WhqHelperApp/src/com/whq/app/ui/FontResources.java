@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 
@@ -41,11 +42,6 @@ public final class FontResources {
       return fallback;
     }
 
-    FontData[] available = device.getFontList(null, true);
-    if (available == null || available.length == 0) {
-      return fallback;
-    }
-
     List<String> expanded = new ArrayList<>();
     if (candidates != null) {
       for (String candidate : candidates) {
@@ -53,15 +49,69 @@ public final class FontResources {
       }
     }
 
-    for (String candidate : expanded) {
+    String fromLists = findFontInDeviceLists(device, expanded);
+    if (fromLists != null) {
+      return fromLists;
+    }
+
+    String fromProbe = probeFontCreation(device, expanded);
+    if (fromProbe != null) {
+      return fromProbe;
+    }
+
+    String normalizedFallback = normalizeFontName(fallback);
+    if (normalizedFallback != null) {
+      String probedFallback = probeFontCreation(device, List.of(fallback));
+      if (probedFallback != null && normalizedFallback.equals(normalizeFontName(probedFallback))) {
+        return probedFallback;
+      }
+    }
+
+    return fallback;
+  }
+
+  private static String findFontInDeviceLists(Device device, List<String> candidates) {
+    String fromScalable = findFontInList(device.getFontList(null, true), candidates);
+    if (fromScalable != null) {
+      return fromScalable;
+    }
+    return findFontInList(device.getFontList(null, false), candidates);
+  }
+
+  private static String findFontInList(FontData[] available, List<String> candidates) {
+    if (available == null || available.length == 0) {
+      return null;
+    }
+
+    for (String candidate : candidates) {
       for (FontData data : available) {
-        if (candidate.equalsIgnoreCase(data.getName())) {
+        if (fontNamesMatch(candidate, data.getName())) {
           return data.getName();
         }
       }
     }
 
-    return fallback;
+    return null;
+  }
+
+  private static String probeFontCreation(Device device, List<String> candidates) {
+    for (String candidate : candidates) {
+      Font probe = null;
+      try {
+        probe = new Font(device, candidate, 12, 0);
+        FontData[] data = probe.getFontData();
+        if (data != null && data.length > 0 && fontNamesMatch(candidate, data[0].getName())) {
+          return data[0].getName();
+        }
+      } catch (RuntimeException ignored) {
+        // Ignore probe failures and continue trying other candidates.
+      } finally {
+        if (probe != null && !probe.isDisposed()) {
+          probe.dispose();
+        }
+      }
+    }
+    return null;
   }
 
   private static boolean isSupportedFontFile(Path path) {
@@ -93,5 +143,22 @@ public final class FontResources {
       default -> {
       }
     }
+  }
+
+  private static boolean fontNamesMatch(String left, String right) {
+    String normalizedLeft = normalizeFontName(left);
+    String normalizedRight = normalizeFontName(right);
+    return normalizedLeft != null && normalizedLeft.equals(normalizedRight);
+  }
+
+  private static String normalizeFontName(String value) {
+    if (value == null || value.isBlank()) {
+      return null;
+    }
+    return value
+        .toLowerCase(Locale.ROOT)
+        .replace(" ", "")
+        .replace("-", "")
+        .replace("_", "");
   }
 }
