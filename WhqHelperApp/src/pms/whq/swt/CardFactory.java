@@ -1,5 +1,7 @@
 package pms.whq.swt;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ import org.eclipse.swt.widgets.Shell;
 import com.whq.app.i18n.I18n;
 import com.whq.app.ui.FontResources;
 
+import pms.whq.Settings;
 import pms.whq.data.Event;
 import pms.whq.data.Monster;
 import pms.whq.data.Rule;
@@ -45,7 +48,9 @@ public final class CardFactory {
   private static final int TITLE_HEIGHT = 40;
   private static final int TYPE_CIRCLE_SIZE = 32;
   private static final String TREASURE_TEMPLATE_PATH = "resources/treasure-card-template.png";
-  private static final String TREASURE_COIN_PATH = "data/graphics/gold.png";
+  private static final String TREASURE_COIN_PATH = "data/graphics/coin.png";
+  private static final String TREASURE_COIN_FALLBACK_PATH = "data/graphics/gold.png";
+  private static final String TREASURE_COIN_LEGACY_FALLBACK_PATH = "data/graphics/coin.jpg";
   private static final String EVENT_PAPER_TEXTURE_PATH = "data/graphics/paper-bg.gif";
   private static final int TREASURE_BASE_WIDTH = 847;
   private static final int TREASURE_BASE_HEIGHT = 1264;
@@ -746,8 +751,39 @@ public final class CardFactory {
     if (isBlank(relativePath)) {
       return null;
     }
+
+    Path baseDir = Settings.getBaseDir();
+    if (baseDir != null) {
+      Image image = loadCardImageFromPath(base, baseDir.resolve(relativePath).normalize());
+      if (image != null) {
+        return image;
+      }
+
+      if (TREASURE_COIN_PATH.equals(relativePath)) {
+        image = loadCardImageFromPath(base, baseDir.resolve(TREASURE_COIN_FALLBACK_PATH).normalize());
+        if (image != null) {
+          return image;
+        }
+        image = loadCardImageFromPath(base, baseDir.resolve(TREASURE_COIN_LEGACY_FALLBACK_PATH).normalize());
+        if (image != null) {
+          return image;
+        }
+      }
+    }
+
     try {
       return new Image(base.getDisplay(), relativePath);
+    } catch (RuntimeException ex) {
+      return null;
+    }
+  }
+
+  private static Image loadCardImageFromPath(Composite base, Path path) {
+    if (path == null || !Files.exists(path)) {
+      return null;
+    }
+    try {
+      return new Image(base.getDisplay(), path.toString());
     } catch (RuntimeException ex) {
       return null;
     }

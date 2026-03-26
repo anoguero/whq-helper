@@ -122,6 +122,10 @@ public final class Settings {
     save();
   }
 
+  public static Path getBaseDir() {
+    return baseDir;
+  }
+
   public static Language getLanguage() {
     String value = settings.getProperty(LANGUAGE);
     if (value == null || value.isBlank()) {

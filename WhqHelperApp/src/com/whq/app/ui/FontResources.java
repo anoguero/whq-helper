@@ -84,7 +84,10 @@ public final class FontResources {
 
     candidates.add(candidate);
     switch (candidate.toLowerCase(Locale.ROOT)) {
-      case "casablanca antique" -> candidates.add("Caslon Antique");
+      case "casablanca antique" -> {
+        candidates.add("CasablancaAntique");
+        candidates.add("Caslon Antique");
+      }
       case "newtext bk bt" -> candidates.add("Book Antiqua");
       case "copperplate" -> candidates.add("Copperplate Gothic Bold");
       default -> {
