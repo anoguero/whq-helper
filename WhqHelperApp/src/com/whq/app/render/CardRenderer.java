@@ -49,7 +49,7 @@ public class CardRenderer {
         this.tileRenderer = new DungeonTileRenderer(device, projectRoot);
 
         this.titleFont = createBestFont(
-                new String[] {"Caslon Antique", "Casablanca Antique", "Cinzel", "Trajan Pro", "Times New Roman", "Serif"},
+                new String[] {"CasablancaAntique", "Casablanca Antique", "Caslon Antique", "Cinzel", "Trajan Pro", "Times New Roman", "Serif"},
                 layout.scaledFont(TITLE_FONT_BASE),
                 SWT.BOLD);
         this.descriptionFont = createBestFont(

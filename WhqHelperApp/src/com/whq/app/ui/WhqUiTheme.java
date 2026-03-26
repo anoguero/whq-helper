@@ -64,7 +64,7 @@ public final class WhqUiTheme {
 
     heroTitleFont =
         font(
-            new String[] {"Caslon Antique", "Cinzel Decorative", "Cinzel", "Book Antiqua", "Times New Roman", "Serif"},
+            new String[] {"CasablancaAntique", "Casablanca Antique", "Caslon Antique", "Cinzel Decorative", "Cinzel", "Book Antiqua", "Times New Roman", "Serif"},
             26,
             SWT.BOLD);
     heroSubtitleFont =

@@ -43,7 +43,8 @@ try {
         "--main-class", "com.whq.app.WhqCardRendererApp",
         "--app-version", $Version,
         "--vendor", "WHQ Helper",
-        "--java-options", "--enable-native-access=ALL-UNNAMED"
+        "--java-options", "--enable-native-access=ALL-UNNAMED",
+        "--win-shortcut"
     )
 
     & jpackage @JPackageArgs
