@@ -17,14 +17,14 @@
     <monster id="cot-luthor" number="1" ambiences="undead" level="1" />
     <monster id="cot-luthor" number="1" ambiences="undead" level="1" />
     <monster id="cot-luthor" number="1" ambiences="undead" level="1" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -36,37 +36,37 @@
     <monster id="rpb-gigantic-spider" number="1" ambiences="undead" level="1" />
     <monster id="rpb-ghoul" number="2-12" ambiences="undead" level="1" />
     <monster id="rpb-ghoul" number="2-12" ambiences="undead" level="1" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="1" />
+    <monster id="rpb-zombie" number="4-9" ambiences="undead" level="1" />
     <monster id="rpb-wight" number="1-3" ambiences="undead" level="1" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -79,7 +79,7 @@
     <monster id="cot-carrion" number="1-3" ambiences="undead" level="1" />
     <monster id="rpb-mummy" number="1-3" ambiences="undead" level="1" />
     <monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="1" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="1">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="1">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -104,14 +104,14 @@
     <monster id="cot-luthor" number="1" ambiences="undead" level="2" />
     <monster id="cot-luthor" number="1" ambiences="undead" level="2" />
     <monster id="cot-luthor" number="1" ambiences="undead" level="2" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -123,37 +123,37 @@
     <monster id="rpb-gigantic-spider" number="1" ambiences="undead" level="2" />
     <monster id="rpb-ghoul" number="2-12" ambiences="undead" level="2" />
     <monster id="rpb-ghoul" number="2-12" ambiences="undead" level="2" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="2" />
+    <monster id="rpb-zombie" number="4-9" ambiences="undead" level="2" />
     <monster id="rpb-wight" number="1-3" ambiences="undead" level="2" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
         <rule id="rpb-regenerate" param="1">Regenerate 1</rule>
       </special>
     </monster>
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -166,7 +166,7 @@
     <monster id="cot-carrion" number="1-3" ambiences="undead" level="2" />
     <monster id="rpb-mummy" number="1-3" ambiences="undead" level="2" />
     <monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="2" />
-    <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="2">
+    <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="2">
       <special append="false">
         <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
         <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -179,39 +179,39 @@
 
   <table name="Catacombs of Terror Monsters - Level 3" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 6" level="3" targetLevel="6" times="1" ambiences="undead" />
-    <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="3" />
-    <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="3" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="3" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="3" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="3" />
-    <monster id="cot-carrion" number="1D6" ambiences="undead" level="3" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="3" />
-    <monster id="rpb-gigantic-spider" number="1D3+1" ambiences="undead" level="3" />
+    <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="3" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="3" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="3" />
+    <monster id="cot-carrion" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="3" />
+    <monster id="rpb-gigantic-spider" number="2-4" ambiences="undead" level="3" />
     <group level="3">
       <monster id="cot-luthor" number="1" ambiences="undead" level="3" />
-      <monster id="cot-carrion" number="1D6" ambiences="undead" level="3" />
+      <monster id="cot-carrion" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="cot-luthor" number="1" ambiences="undead" level="3" />
-      <monster id="cot-carrion" number="1D6" ambiences="undead" level="3" />
+      <monster id="cot-carrion" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="cot-luthor" number="1" ambiences="undead" level="3" />
-      <monster id="cot-carrion" number="1D6" ambiences="undead" level="3" />
+      <monster id="cot-carrion" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="cot-luthor" number="1" ambiences="undead" level="3" />
-      <monster id="cot-carrion" number="1D6" ambiences="undead" level="3" />
+      <monster id="cot-carrion" number="1-6" ambiences="undead" level="3" />
     </group>
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="3" />
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="3" />
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="3" />
-    <monster id="rpb-wight" number="1D6" ambiences="undead" level="3" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="3" />
+    <monster id="rpb-wight" number="1-6" ambiences="undead" level="3" />
     <monster id="rpb-mummy" number="1-3" ambiences="undead" level="3" />
     <group level="3">
       <monster id="rpb-necromancer" number="1" ambiences="undead" level="3" />
       <monster id="rpb-ghoul" number="2-12" ambiences="undead" level="3" />
-      <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="3">
+      <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="3">
         <special append="false">
           <rule id="rpb-fight-in-ranks">Fight in Ranks</rule>
           <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -223,22 +223,22 @@
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="3" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="3" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="3" />
-    <monster id="rpb-wraith" number="1D6" ambiences="undead" level="3" />
+    <monster id="rpb-wraith" number="1-6" ambiences="undead" level="3" />
     <group level="3">
       <monster id="rpb-zombie" number="2-12" ambiences="undead" level="3" />
-      <monster id="rpb-mummy" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-mummy" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="3" />
-      <monster id="rpb-wight" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="3" />
-      <monster id="rpb-wight" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="3" />
-      <monster id="rpb-wight" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-wight" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="3" />
@@ -261,7 +261,7 @@
     </group>
     <group level="3">
       <monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="3" />
-      <monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="3">
+      <monster id="rpb-skeleton" number="4-9" ambiences="undead" level="3">
         <special append="false">
           <rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule>
           <rule id="rpb-fear" param="5">Fear 5</rule>
@@ -273,182 +273,182 @@
     <group level="3">
       <monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="3" />
       <monster id="rpb-wight" number="1-3" ambiences="undead" level="3" />
-      <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="3" />
       <monster id="rpb-wight" number="1-3" ambiences="undead" level="3" />
-      <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="3" />
     </group>
     <group level="3">
       <monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="3" />
       <monster id="rpb-wight" number="1-3" ambiences="undead" level="3" />
-      <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="3" />
+      <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="3" />
     </group>
     <tableRef name="Catacombs of Terror Monsters - Level 6" level="3" targetLevel="6" times="1" ambiences="undead" />
   </table>
 
   <table name="Catacombs of Terror Monsters - Level 4" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 6" level="4" targetLevel="6" times="1" ambiences="undead" />
-    <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="4" />
-    <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="4" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="4" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="4" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="4" />
-    <monster id="cot-carrion" number="1D6" ambiences="undead" level="4" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="4" />
-    <monster id="rpb-gigantic-spider" number="1D3+1" ambiences="undead" level="4" />
-    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="4" /></group>
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="4" />
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="4" />
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="4" />
-    <monster id="rpb-wight" number="1D6" ambiences="undead" level="4" />
+    <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="4" />
+    <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="4" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="4" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="4" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="4" />
+    <monster id="cot-carrion" number="1-6" ambiences="undead" level="4" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="4" />
+    <monster id="rpb-gigantic-spider" number="2-4" ambiences="undead" level="4" />
+    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-luthor" number="1" ambiences="undead" level="4" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="4" /></group>
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="4" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="4" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="4" />
+    <monster id="rpb-wight" number="1-6" ambiences="undead" level="4" />
     <monster id="rpb-mummy" number="1-3" ambiences="undead" level="4" />
-    <group level="4"><monster id="rpb-necromancer" number="1" ambiences="undead" level="4" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="4" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="4"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster></group>
+    <group level="4"><monster id="rpb-necromancer" number="1" ambiences="undead" level="4" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="4" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="4"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster></group>
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="4" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="4" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="4" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="4" />
-    <monster id="rpb-wraith" number="1D6" ambiences="undead" level="4" />
-    <group level="4"><monster id="rpb-zombie" number="2-12" ambiences="undead" level="4" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="4" /></group>
+    <monster id="rpb-wraith" number="1-6" ambiences="undead" level="4" />
+    <group level="4"><monster id="rpb-zombie" number="2-12" ambiences="undead" level="4" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="4" /></group>
     <group level="4"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="4" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="4"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="4" /></group>
     <group level="4"><monster id="cot-carrion" number="1-3" ambiences="undead" level="4" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="4" /></group>
     <group level="4"><monster id="cot-carrion" number="1-3" ambiences="undead" level="4" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="4"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-guardian" number="1-3" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="4" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="4" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="4" /></group>
-    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="4" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="4"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-guardian" number="1-3" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="4" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="4" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="4" /></group>
+    <group level="4"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="4" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="4" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="4" /></group>
     <tableRef name="Catacombs of Terror Monsters - Level 6" level="4" targetLevel="6" times="1" ambiences="undead" />
   </table>
 
   <table name="Catacombs of Terror Monsters - Level 5" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 6" level="5" targetLevel="6" times="1" ambiences="undead" />
-    <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="5" />
-    <monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="5" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="5" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="5" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="5" />
-    <monster id="cot-carrion" number="1D6" ambiences="undead" level="5" />
-    <monster id="rpb-ghost" number="1D6+2" ambiences="undead" level="5" />
-    <monster id="rpb-gigantic-spider" number="1D3+1" ambiences="undead" level="5" />
-    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="5" /></group>
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="5" />
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="5" />
-    <monster id="rpb-mummy" number="1D6" ambiences="undead" level="5" />
-    <monster id="rpb-wight" number="1D6" ambiences="undead" level="5" />
+    <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="5" />
+    <monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="5" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="5" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="5" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="5" />
+    <monster id="cot-carrion" number="1-6" ambiences="undead" level="5" />
+    <monster id="rpb-ghost" number="3-8" ambiences="undead" level="5" />
+    <monster id="rpb-gigantic-spider" number="2-4" ambiences="undead" level="5" />
+    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-luthor" number="1" ambiences="undead" level="5" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="5" /></group>
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="5" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="5" />
+    <monster id="rpb-mummy" number="1-6" ambiences="undead" level="5" />
+    <monster id="rpb-wight" number="1-6" ambiences="undead" level="5" />
     <monster id="rpb-mummy" number="1-3" ambiences="undead" level="5" />
-    <group level="5"><monster id="rpb-necromancer" number="1" ambiences="undead" level="5" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="5" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="5"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster></group>
+    <group level="5"><monster id="rpb-necromancer" number="1" ambiences="undead" level="5" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="5" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="5"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster></group>
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="5" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="5" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="5" />
     <monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="5" />
-    <monster id="rpb-wraith" number="1D6" ambiences="undead" level="5" />
-    <group level="5"><monster id="rpb-zombie" number="2-12" ambiences="undead" level="5" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="5" /></group>
+    <monster id="rpb-wraith" number="1-6" ambiences="undead" level="5" />
+    <group level="5"><monster id="rpb-zombie" number="2-12" ambiences="undead" level="5" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="5" /></group>
     <group level="5"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="5" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="5"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="5" /></group>
     <group level="5"><monster id="cot-carrion" number="1-3" ambiences="undead" level="5" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="5" /></group>
     <group level="5"><monster id="cot-carrion" number="1-3" ambiences="undead" level="5" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="5"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-guardian" number="1-3" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="5" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="5" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="5" /></group>
-    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="5" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="5"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Bows (Str 4) or [4-6] Swords</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-guardian" number="1-3" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="5" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="5" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="5" /></group>
+    <group level="5"><monster id="cot-gunther-laranscheld" number="1" ambiences="undead" level="5" /><monster id="rpb-wight" number="1-3" ambiences="undead" level="5" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="5" /></group>
     <tableRef name="Catacombs of Terror Monsters - Level 6" level="5" targetLevel="6" times="1" ambiences="undead" />
   </table>
 
   <table name="Catacombs of Terror Monsters - Level 6" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 8" level="6" targetLevel="8" times="1" ambiences="undead" />
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="6" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="6"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="6" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="6" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="6" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="6" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="6" /><monster id="cot-carrion" number="3" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-wraith" number="3-5" ambiences="undead" level="6" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="6"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="6" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="6" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="6" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="6" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="4-9" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="4-9" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="6" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="6"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="6"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="6"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="6"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="6" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="6" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="6" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-wight" number="6" ambiences="undead" level="6" /></group>
     <group level="6"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="6" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="6"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-wight" number="6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="6" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="6" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
-    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="6" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="6" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="6" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
+    <group level="6"><monster id="rpb-necromancer" number="1" ambiences="undead" level="6" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="6" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="6" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="6" /></group>
     <tableRef name="Catacombs of Terror Monsters - Level 8" level="6" targetLevel="8" times="1" ambiences="undead" />
   </table>
 
   <table name="Catacombs of Terror Monsters - Level 7" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 8" level="7" targetLevel="8" times="1" ambiences="undead" />
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="7" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="7"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="7" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="7" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="7" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-wraith" number="1D3+2" ambiences="undead" level="7" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-tomb-king" number="1" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="7" /><monster id="cot-carrion" number="3" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-wraith" number="3-5" ambiences="undead" level="7" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="7"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="7" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="7" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="7" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-wraith" number="3-5" ambiences="undead" level="7" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="4-9" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-zombie" number="4-9" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="6" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="7"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="1D6+3" ambiences="undead" level="7"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="7"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="4-9" ambiences="undead" level="7"><special append="false"><rule id="rpb-fight-in-ranks">Fight in Ranks</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="6" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="6" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="6" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-wight" number="6" ambiences="undead" level="7" /></group>
     <group level="7"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="7" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="7"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-wight" number="6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="7" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="7" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
-    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="7" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer-champion" number="1" ambiences="undead" level="7" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="7" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
+    <group level="7"><monster id="rpb-necromancer" number="1" ambiences="undead" level="7" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="7" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="7" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="7" /></group>
     <tableRef name="Catacombs of Terror Monsters - Level 8" level="7" targetLevel="8" times="1" ambiences="undead" />
   </table>
 
   <table name="Catacombs of Terror Monsters - Level 8" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 9" level="8" targetLevel="9" times="1" ambiences="undead" />
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="10" ambiences="undead" level="8"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D3+2" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="10" ambiences="undead" level="8"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D3+2" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="10" ambiences="undead" level="8"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3-5" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="10" ambiences="undead" level="8"><special append="false"><rule id="rpb-armed-with-choice">Armed with [1-3] Swords or [4-6] Bows (Str 4)</rule><rule id="rpb-fear" param="5">Fear 5</rule><rule id="rpb-regenerate" param="1">Regenerate 1</rule></special></monster><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3-5" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-tomb-king" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /></group>
     <group level="8"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="3" ambiences="undead" level="8" /><monster id="cot-carrion" number="6" ambiences="undead" level="8" /></group>
     <monster id="cot-zombie-dragon" number="1" ambiences="undead" level="8" />
     <group level="8"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" /><monster id="rpb-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="8" /><monster id="rpb-zombie" number="2-12" ambiences="undead" level="8" /></group>
@@ -465,55 +465,55 @@
     <monster id="cot-zombie-dragon" number="1" ambiences="undead" level="8" />
     <monster id="cot-zombie-dragon" number="1" ambiences="undead" level="8" />
     <monster id="cot-zombie-dragon" number="1" ambiences="undead" level="8" />
-    <group level="8"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" /><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" /><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" /><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="8" /><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="8" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /></group>
     <monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="8" />
-    <group level="8"><monster id="cot-carrion" number="6" ambiences="undead" level="8" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="cot-carrion" number="6" ambiences="undead" level="8" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-necromancer-champion" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /></group>
-    <group level="8"><monster id="rpb-master-necromancer" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="cot-carrion" number="6" ambiences="undead" level="8" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="cot-carrion" number="6" ambiences="undead" level="8" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-necromancer-champion" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /></group>
+    <group level="8"><monster id="rpb-master-necromancer" number="2" ambiences="undead" level="8" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="8" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="8" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="8" /></group>
     <tableRef name="Catacombs of Terror Monsters - Level 9" level="8" targetLevel="9" times="1" ambiences="undead" />
   </table>
 
   <table name="Catacombs of Terror Monsters - Level 9" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 9" level="9" targetLevel="9" times="2" ambiences="undead" />
     <monster id="rpb-liche-king" number="1" ambiences="undead" level="9" />
-    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wight" number="6" ambiences="undead" level="9" /><monster id="cot-carrion" number="6" ambiences="undead" level="9" /></group>
     <monster id="cot-zombie-dragon" number="1" ambiences="undead" level="9" />
-    <group level="9"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="9" /><monster id="rpb-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="9" /><monster id="rpb-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-zombie" number="4-9" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-vampire-count" number="1" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="9" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="9" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="1D6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-liche" number="1" ambiences="undead" level="9" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="1-6" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="6" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="6" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="9" /><monster id="rpb-wraith" number="6" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-manticore" number="S (mounts)" ambiences="undead" level="9" /></group>
     <group level="9"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-manticore" number="S (mounts)" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="9" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="9" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
-    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-3" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="9" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="9" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="9" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
+    <group level="9"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="9" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="9" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="9" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="9" /></group>
     <monster id="rpb-liche-king" number="1" ambiences="undead" level="9" />
     <tableRef name="Catacombs of Terror Monsters - Level 9" level="9" targetLevel="9" times="2" ambiences="undead" />
   </table>
@@ -521,37 +521,37 @@
   <table name="Catacombs of Terror Monsters - Level 10" kind="dungeon">
     <tableRef name="Catacombs of Terror Monsters - Level 10" level="10" targetLevel="10" times="2" ambiences="undead" />
     <monster id="rpb-liche-king" number="1" ambiences="undead" level="10" />
-    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="2-12" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-tomb-king" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wight" number="6" ambiences="undead" level="10" /><monster id="cot-carrion" number="6" ambiences="undead" level="10" /></group>
     <monster id="cot-zombie-dragon" number="1" ambiences="undead" level="10" />
-    <group level="10"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="10" /><monster id="rpb-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-zombie" number="1D6+3" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="10" /><monster id="rpb-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-zombie" number="4-9" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="6" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-vampire-count" number="1" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="10" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-wight-lord" number="1" ambiences="undead" level="10" /><monster id="cot-zombie-dragon" number="1" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="1D6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-liche" number="1" ambiences="undead" level="10" /><monster id="rpb-vampire-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="1-6" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="6" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="6" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-vampire-count" number="1" ambiences="undead" level="10" /><monster id="rpb-wraith" number="6" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-manticore" number="S (mounts)" ambiences="undead" level="10" /></group>
     <group level="10"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-manticore" number="S (mounts)" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="10" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-wight-lord" number="1D3" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /><monster id="cot-carrion" number="1D6" ambiences="undead" level="10" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
-    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight" number="1D6" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1D6" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1D6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-vampire-lord-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-3" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="10" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-wight-lord" number="1-3" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /><monster id="cot-carrion" number="1-6" ambiences="undead" level="10" /><monster id="rpb-ghoul" number="2-12" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-necromancer-lord" number="1" ambiences="undead" level="10" /><monster id="rpb-wight-lord" number="2" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /><monster id="rpb-skeleton" number="2-12" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
+    <group level="10"><monster id="rpb-master-necromancer" number="1" ambiences="undead" level="10" /><monster id="rpb-wight" number="1-6" ambiences="undead" level="10" /><monster id="rpb-tomb-guardian" number="1-6" ambiences="undead" level="10" /><monster id="rpb-mummy" number="1-6" ambiences="undead" level="10" /></group>
     <monster id="rpb-liche-king" number="1" ambiences="undead" level="10" />
     <tableRef name="Catacombs of Terror Monsters - Level 10" level="10" targetLevel="10" times="2" ambiences="undead" />
   </table>
