@@ -105,14 +105,9 @@ public class AppWindow {
     private Label browserHintLabel;
     private Label previewTitleLabel;
     private Label previewHintLabel;
-    private Label overviewEventsTitleLabel;
-    private Label overviewEventsBodyLabel;
-    private Label overviewDungeonTitleLabel;
-    private Label overviewDungeonBodyLabel;
-    private Label overviewSettingsTitleLabel;
-    private Label overviewSettingsBodyLabel;
     private Button newDungeonButton;
     private Button openEventDecksButton;
+    private Button activateTablesButton;
     private Button contentEditorButton;
 
     private MenuItem playMenuItem;
@@ -210,7 +205,6 @@ public class AppWindow {
         mainPanel.setLayout(mainLayout);
 
         buildHeroSection(mainPanel);
-        buildOverviewSection(mainPanel);
         refreshDashboardStats();
         refreshLocalizedTexts();
 
@@ -366,24 +360,6 @@ public class AppWindow {
         if (heroSubtitleLabel != null && !heroSubtitleLabel.isDisposed()) {
             heroSubtitleLabel.setText(I18n.t("dashboard.hero.subtitle"));
         }
-        if (overviewEventsTitleLabel != null && !overviewEventsTitleLabel.isDisposed()) {
-            overviewEventsTitleLabel.setText(I18n.t("dashboard.overview.events.title"));
-        }
-        if (overviewEventsBodyLabel != null && !overviewEventsBodyLabel.isDisposed()) {
-            overviewEventsBodyLabel.setText(I18n.t("dashboard.overview.events.body"));
-        }
-        if (overviewDungeonTitleLabel != null && !overviewDungeonTitleLabel.isDisposed()) {
-            overviewDungeonTitleLabel.setText(I18n.t("dashboard.overview.dungeon.title"));
-        }
-        if (overviewDungeonBodyLabel != null && !overviewDungeonBodyLabel.isDisposed()) {
-            overviewDungeonBodyLabel.setText(I18n.t("dashboard.overview.dungeon.body"));
-        }
-        if (overviewSettingsTitleLabel != null && !overviewSettingsTitleLabel.isDisposed()) {
-            overviewSettingsTitleLabel.setText(I18n.t("dashboard.overview.settings.title"));
-        }
-        if (overviewSettingsBodyLabel != null && !overviewSettingsBodyLabel.isDisposed()) {
-            overviewSettingsBodyLabel.setText(getOverviewSettingsText());
-        }
 
         refreshDashboardStats();
         refreshEventCardsMenuState();
@@ -440,6 +416,7 @@ public class AppWindow {
 
         newDungeonButton = createHeroButton(actionRow, newDungeonAction);
         openEventDecksButton = createHeroButton(actionRow, openEventDecksAction);
+        activateTablesButton = createHeroButton(actionRow, activateTablesAction);
         contentEditorButton = createHeroButton(actionRow, eventContentEditorAction);
 
         heroArtCanvas = new Canvas(heroSection, SWT.DOUBLE_BUFFERED);
@@ -448,56 +425,6 @@ public class AppWindow {
         artData.heightHint = 230;
         heroArtCanvas.setLayoutData(artData);
         heroArtCanvas.addPaintListener(event -> theme.paintHeroBanner(event.gc, heroArtCanvas.getClientArea()));
-    }
-
-    private void buildOverviewSection(Composite parent) {
-        Composite overviewSection = new Composite(parent, SWT.DOUBLE_BUFFERED);
-        overviewSection.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        overviewSection.setBackground(theme.shellBackground);
-        GridLayout overviewLayout = new GridLayout(3, true);
-        overviewLayout.marginWidth = 0;
-        overviewLayout.marginHeight = 0;
-        overviewLayout.horizontalSpacing = 16;
-        overviewLayout.verticalSpacing = 16;
-        overviewSection.setLayout(overviewLayout);
-
-        Label[] eventsCard = createOverviewCard(overviewSection);
-        overviewEventsTitleLabel = eventsCard[0];
-        overviewEventsBodyLabel = eventsCard[1];
-
-        Label[] dungeonCard = createOverviewCard(overviewSection);
-        overviewDungeonTitleLabel = dungeonCard[0];
-        overviewDungeonBodyLabel = dungeonCard[1];
-
-        Label[] settingsCard = createOverviewCard(overviewSection);
-        overviewSettingsTitleLabel = settingsCard[0];
-        overviewSettingsBodyLabel = settingsCard[1];
-    }
-
-    private Label[] createOverviewCard(Composite parent) {
-        Composite card = new Composite(parent, SWT.DOUBLE_BUFFERED);
-        card.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        card.setBackground(theme.panelBackgroundAlt);
-        GridLayout cardLayout = new GridLayout(1, false);
-        cardLayout.marginWidth = 16;
-        cardLayout.marginHeight = 16;
-        cardLayout.verticalSpacing = 10;
-        card.setLayout(cardLayout);
-        card.addPaintListener(event -> theme.paintDarkPanel(event.gc, card.getClientArea()));
-
-        Label titleLabel = new Label(card, SWT.WRAP);
-        titleLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-        titleLabel.setBackground(theme.panelBackgroundAlt);
-        titleLabel.setForeground(theme.mist);
-        titleLabel.setFont(theme.sectionTitleFont);
-
-        Label bodyLabel = new Label(card, SWT.WRAP);
-        bodyLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        bodyLabel.setBackground(theme.panelBackgroundAlt);
-        bodyLabel.setForeground(theme.parchment);
-        bodyLabel.setFont(theme.bodyFont);
-
-        return new Label[] {titleLabel, bodyLabel};
     }
 
     private Button createHeroButton(Composite parent, LocalizedUiAction action) {
@@ -752,26 +679,6 @@ public class AppWindow {
         if (availabilityStatsLabel != null && !availabilityStatsLabel.isDisposed()) {
             availabilityStatsLabel.setText(String.format(I18n.t("dashboard.stats.enabled"), enabled));
         }
-    }
-
-    private String getOverviewSettingsText() {
-        boolean asDeck;
-        if (eventDeckApp != null && !eventDeckApp.isDisposed()) {
-            asDeck = eventDeckApp.isSimulateDeckMode();
-        } else {
-            asDeck = AppState.loadFromSettings().deckMode().isDeck();
-        }
-
-        String mode = I18n.t(asDeck ? "menu.item.simulateDeck" : "menu.item.simulateTable");
-        String language = I18n.t(I18n.getLanguage() == Language.EN ? "menu.item.english" : "menu.item.spanish");
-
-        return String.format(
-                I18n.t("dashboard.overview.settings.body"),
-                mode,
-                Settings.getSettingAsInt(Settings.EVENT_PROBABILITY),
-                Settings.getSettingAsInt(Settings.TREASURE_GOLD_PROBABILITY),
-                Settings.countActiveTableSettings(),
-                language);
     }
 
     private void setLanguageAndPersist(Language language) {

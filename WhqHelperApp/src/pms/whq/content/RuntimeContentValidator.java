@@ -8,12 +8,14 @@ import pms.whq.data.EventEntry;
 import pms.whq.data.MonsterEntry;
 import pms.whq.data.Table;
 import pms.whq.data.TableKind;
+import pms.whq.data.TableReferenceEntry;
 
 public class RuntimeContentValidator {
 
   public void pruneInvalidTableEntries(ContentRepository repository, Consumer<ContentIssue> issueConsumer) {
     for (Table table : repository.tables().values()) {
-      pruneInvalidEntries(table.getEntries(), table, repository, issueConsumer);
+      pruneInvalidEntries(table.getMonsterEntries(), table, repository, issueConsumer);
+      pruneInvalidEntries(table.getEventEntries(), table, repository, issueConsumer);
     }
   }
 
@@ -40,6 +42,18 @@ public class RuntimeContentValidator {
                       + tableName
                       + "], the monster with id ["
                       + monsterEntry.id
+                      + "] could not be found. This entry will be removed from the table."));
+          iterator.remove();
+        }
+      } else if (entry instanceof TableReferenceEntry tableReferenceEntry) {
+        if (!repository.tables().containsKey(tableReferenceEntry.tableName)) {
+          issueConsumer.accept(
+              new ContentIssue(
+                  "Table Reference Not Found",
+                  "While loading table ["
+                      + tableName
+                      + "], the referenced table ["
+                      + tableReferenceEntry.tableName
                       + "] could not be found. This entry will be removed from the table."));
           iterator.remove();
         }
