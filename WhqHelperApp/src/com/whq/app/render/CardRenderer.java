@@ -53,11 +53,11 @@ public class CardRenderer {
                 layout.scaledFont(TITLE_FONT_BASE),
                 SWT.BOLD);
         this.descriptionFont = createBestFont(
-                new String[] {"Book Antiqua", "Newtext Bk BT", "Georgia", "Times New Roman", "Serif"},
+                new String[] {"Newtext Bk BT", "Book Antiqua", "Georgia", "Times New Roman", "Serif"},
                 layout.scaledFont(DESC_FONT_BASE),
                 SWT.BOLD | SWT.ITALIC);
         this.rulesFont = createBestFont(
-                new String[] {"Book Antiqua", "Newtext Bk BT", "Trebuchet MS", "Garamond", "Arial", "Sans"},
+                new String[] {"Newtext Bk BT", "Book Antiqua", "Trebuchet MS", "Garamond", "Arial", "Sans"},
                 layout.scaledFont(RULES_FONT_BASE),
                 SWT.NORMAL);
         this.typeFont = createBestFont(
