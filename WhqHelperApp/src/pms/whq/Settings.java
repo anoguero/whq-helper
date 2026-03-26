@@ -113,6 +113,14 @@ public final class Settings {
     return Boolean.parseBoolean(getSetting(setting));
   }
 
+  public static boolean getSettingAsBool(String setting, boolean defaultValue) {
+    String value = getSetting(setting);
+    if (value == null) {
+      return defaultValue;
+    }
+    return Boolean.parseBoolean(value);
+  }
+
   public static void setSetting(String setting, String value) {
     settings.setProperty(setting, value);
   }

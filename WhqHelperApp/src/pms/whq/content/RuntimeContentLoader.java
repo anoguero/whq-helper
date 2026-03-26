@@ -71,7 +71,7 @@ public class RuntimeContentLoader {
           if ("table".equals(node.getNodeName())) {
             Table table = new Table(node);
             String settingName = table.getName() + ".active";
-            table.setActive(Settings.getSettingAsBool(settingName));
+            table.setActive(Settings.getSettingAsBool(settingName, true));
             repository.tables().put(table.getName(), table);
           }
         });

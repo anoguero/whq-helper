@@ -21,8 +21,12 @@ import pms.whq.data.Event;
 import pms.whq.data.EventEntry;
 import pms.whq.data.Monster;
 import pms.whq.data.MonsterEntry;
+import pms.whq.data.TableReferenceEntry;
+import pms.whq.game.TableDrawService;
 
 public class CardWindowManager {
+
+  private static final TableDrawService TABLE_DRAW_SERVICE = new TableDrawService();
 
   private final Display display;
   private final List<Shell> currentCards = new ArrayList<>();
@@ -36,6 +40,19 @@ public class CardWindowManager {
   }
 
   public void showCard(Shell parent, Object entry, ContentRepository contentRepository) {
+    if (entry instanceof TableReferenceEntry tableReferenceEntry) {
+      Object resolved = TABLE_DRAW_SERVICE.resolveEntry(tableReferenceEntry);
+      if (resolved == null) {
+        SwtDialogs.showWarning(
+            parent,
+            "Table Reference Not Resolved",
+            "Unable to resolve referenced table: " + tableReferenceEntry.tableName);
+        return;
+      }
+      showCard(parent, resolved, contentRepository);
+      return;
+    }
+
     if (entry instanceof List<?> nestedList) {
       for (Object nested : nestedList) {
         showCard(parent, nested, contentRepository);
