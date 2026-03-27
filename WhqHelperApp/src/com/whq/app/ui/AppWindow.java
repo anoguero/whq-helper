@@ -135,6 +135,7 @@ public class AppWindow {
         this.display = display;
         this.projectRoot = projectRoot;
         this.shell = new Shell(display);
+        AppIcon.apply(this.shell, projectRoot);
         this.cardStore = new XmlDungeonCardStore(projectRoot);
         this.objectiveRoomAdventureRepository = new XmlObjectiveRoomAdventureRepository(projectRoot);
         this.csvService = new CardCsvService();
@@ -693,6 +694,7 @@ public class AppWindow {
 
     private void openDungeonDefaultsDialog() {
         Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+        AppIcon.inherit(dialog, shell);
         dialog.setText(I18n.t("dialog.dungeonDefaults.title"));
         dialog.setBackground(theme.shellBackground);
         dialog.setLayout(new GridLayout(1, false));
@@ -849,6 +851,7 @@ public class AppWindow {
 
     private void openCardMaintenanceDialog() {
         Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+        AppIcon.inherit(dialog, shell);
         dialog.setText(I18n.t("dialog.maintenance.title"));
         dialog.setLayout(new GridLayout(2, true));
         dialog.setSize(980, 620);
@@ -1179,6 +1182,7 @@ public class AppWindow {
         }
 
         Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+        AppIcon.inherit(dialog, shell);
         dialog.setText(I18n.t("dialog.newDungeon.title"));
         dialog.setBackground(theme.shellBackground);
         dialog.setLayout(new GridLayout(1, false));
@@ -1848,6 +1852,7 @@ public class AppWindow {
             int selectedLevel,
             String environment) {
         Shell simulator = new Shell(shell, SWT.SHELL_TRIM | SWT.RESIZE);
+        AppIcon.inherit(simulator, shell);
         simulator.setText(I18n.t("dialog.adventureSimulator.title"));
         simulator.setBackground(theme.shellBackground);
         simulator.setLayout(new GridLayout(1, false));
@@ -2219,6 +2224,7 @@ public class AppWindow {
 
     private Integer askPileCount(Shell parent, int maxCards) {
         Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+        AppIcon.inherit(dialog, parent);
         dialog.setText(I18n.t("dialog.splitDeck.title"));
         dialog.setBackground(theme.shellBackground);
         dialog.setLayout(new GridLayout(1, false));
@@ -2283,6 +2289,7 @@ public class AppWindow {
 
     private Integer askAdditionalCardCount(Shell parent, int maxCards) {
         Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+        AppIcon.inherit(dialog, parent);
         dialog.setText(I18n.t("button.addCardsToDeck"));
         dialog.setBackground(theme.shellBackground);
         dialog.setLayout(new GridLayout(1, false));

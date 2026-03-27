@@ -9,7 +9,7 @@ public enum AdventureAmbience {
   CHAOS("chaos", "Chaos"),
   UNDEAD("undead", "Undead"),
   SKAVEN("skaven", "Skaven"),
-  ORCS_GOBLINS("orcs-goblins", "Orcs & Goblins"),
+  ORCS("orcs", "Orcs"),
   CHAOS_DWARVES("chaos-dwarves", "Chaos Dwarves"),
   DARK_ELVES("dark-elves", "Dark Elves");
 
@@ -53,6 +53,9 @@ public enum AdventureAmbience {
       return GENERIC;
     }
     String normalized = value.trim().toLowerCase(Locale.ROOT);
+    if ("orcs-goblins".equals(normalized)) {
+      normalized = "orcs";
+    }
     for (AdventureAmbience ambience : values()) {
       if (ambience.storageValue.equals(normalized)) {
         return ambience;

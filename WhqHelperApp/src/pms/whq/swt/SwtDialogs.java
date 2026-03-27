@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.AppIcon;
 
 public final class SwtDialogs {
 
@@ -36,6 +37,7 @@ public final class SwtDialogs {
 
   public static String promptForText(Shell parent, String title, String message, String initialValue) {
     Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+    AppIcon.inherit(dialog, parent);
     dialog.setText(title);
     dialog.setLayout(new GridLayout(1, false));
 

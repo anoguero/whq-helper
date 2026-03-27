@@ -15,9 +15,14 @@ $MainJar = "$ArtifactId-$Version.jar"
 $WindowsInputDir = Join-Path $ProjectRoot "target/windows-input"
 $OutputDir = Join-Path $ProjectRoot "target/windows-package"
 $WindowsSwtJar = Join-Path $ProjectRoot "lib/org.eclipse.swt.win32.win32.x86_64-3.127.0.jar"
+$WindowsIcon = Join-Path $ProjectRoot "resources/logo.ico"
 
 if (-not (Test-Path $WindowsSwtJar)) {
     throw "Falta el JAR de SWT para Windows: $WindowsSwtJar"
+}
+
+if (-not (Test-Path $WindowsIcon)) {
+    throw "Falta el icono Windows de la aplicación: $WindowsIcon"
 }
 
 Push-Location $ProjectRoot
@@ -43,6 +48,7 @@ try {
         "--main-class", "com.whq.app.WhqCardRendererApp",
         "--app-version", $Version,
         "--vendor", "WHQ Helper",
+        "--icon", $WindowsIcon,
         "--java-options", "--enable-native-access=ALL-UNNAMED",
         "--win-shortcut"
     )
