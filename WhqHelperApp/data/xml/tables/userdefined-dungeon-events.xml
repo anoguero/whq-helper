@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-tables-schema.xsd"/>
+<tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-tables-schema.xsd">
+  <table name="My Monsters">
+    <group level="1">
+      <monster ambiences="orcs chaos" id="rpb-black-orc" number="1-6"/>
+      <monster ambiences="orcs chaos" id="chaos-thug" number="1-6"/>
+    </group>
+  </table>
+</tables>

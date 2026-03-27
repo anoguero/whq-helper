@@ -489,7 +489,7 @@ export function getAdventureAmbiences(language: LanguageCode): Array<{ value: st
     { value: 'chaos', label: 'Chaos' },
     { value: 'undead', label: 'Undead' },
     { value: 'skaven', label: 'Skaven' },
-    { value: 'orcs-goblins', label: 'Orcs & Goblins' },
+    { value: 'orcs', label: 'Orcs' },
     { value: 'chaos-dwarves', label: 'Chaos Dwarves' },
     { value: 'dark-elves', label: 'Dark Elves' }
   ];

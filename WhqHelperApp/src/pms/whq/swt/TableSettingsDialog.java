@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.ScrollBar;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.AppIcon;
 
 import pms.whq.data.Table;
 
@@ -43,6 +44,7 @@ public class TableSettingsDialog {
 
   public boolean open() {
     Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+    AppIcon.inherit(dialog, parent);
     dialog.setText(I18n.t("dialog.tableSettings.title"));
     GridLayout dialogLayout = new GridLayout(1, false);
     dialogLayout.marginWidth = 10;

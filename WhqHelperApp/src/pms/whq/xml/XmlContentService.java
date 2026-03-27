@@ -388,6 +388,7 @@ public class XmlContentService {
           entry.type = "monster";
           entry.id = entryElement.getAttribute("id");
           entry.number = entryElement.getAttribute("number");
+          entry.level = entryElement.getAttribute("level");
           entry.ambiences = entryElement.getAttribute("ambiences");
           entry.specialRaw = specialNodeToRaw(entryElement);
           table.entries.add(entry);
@@ -400,6 +401,7 @@ public class XmlContentService {
         } else if ("group".equals(tag)) {
           TableEntry groupEntry = new TableEntry();
           groupEntry.type = "group";
+          groupEntry.level = entryElement.getAttribute("level");
           NodeList monsters = entryElement.getChildNodes();
           for (int k = 0; k < monsters.getLength(); k++) {
             Node monsterNode = monsters.item(k);
@@ -447,6 +449,9 @@ public class XmlContentService {
           Element monster = doc.createElement("monster");
           monster.setAttribute("id", entry.id.trim());
           monster.setAttribute("number", entry.number.trim());
+          if (entry.level != null && !entry.level.trim().isEmpty()) {
+            monster.setAttribute("level", entry.level.trim());
+          }
           if (entry.ambiences != null && !entry.ambiences.trim().isEmpty()) {
             monster.setAttribute("ambiences", entry.ambiences.trim());
           }
@@ -469,6 +474,9 @@ public class XmlContentService {
             throw new IllegalArgumentException("Group entries require at least one member.");
           }
           Element group = doc.createElement("group");
+          if (entry.level != null && !entry.level.trim().isEmpty()) {
+            group.setAttribute("level", entry.level.trim());
+          }
           for (TableGroupMember member : entry.groupMembers) {
             validateRequired(member.id, "group.member.id");
             validateRequired(member.number, "group.member.number");
@@ -1375,6 +1383,7 @@ public class XmlContentService {
     public String type = "monster";
     public String id = "";
     public String number = "";
+    public String level = "";
     public String ambiences = "";
     public String specialRaw = "";
     public List<TableGroupMember> groupMembers = new ArrayList<>();

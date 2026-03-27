@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.AppIcon;
 
 import pms.whq.Settings;
 import pms.whq.data.Rule;
@@ -58,6 +59,7 @@ public class RuleDialog {
 
   private void createShell() {
     shell = new Shell(parent, SWT.DIALOG_TRIM | SWT.RESIZE);
+    AppIcon.inherit(shell, parent);
     shell.setLayout(new GridLayout(1, false));
 
     title = new Label(shell, SWT.WRAP);

@@ -3,30 +3,30 @@
 <tables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation='whq-tables-schema.xsd'>
   <table name="Original Event Deck">
-    <monster id="od-giant-bat" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
-    <monster id="od-giant-rat" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
-    <monster id="od-giant-spider" number="2-12" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" level="1" />
-    <monster id="od-snotling" number="2-12" ambiences="orcs-goblins" level="1" />
-    <monster id="od-goblin-archer" number="6" ambiences="orcs-goblins" level="1" />
-    <monster id="od-goblin-spearman" number="6" ambiences="orcs-goblins" level="1" />
+    <monster id="od-giant-bat" number="2-12" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" level="1" />
+    <monster id="od-giant-rat" number="2-12" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" level="1" />
+    <monster id="od-giant-spider" number="2-12" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" level="1" />
+    <monster id="od-snotling" number="2-12" ambiences="orcs" level="1" />
+    <monster id="od-goblin-archer" number="6" ambiences="orcs" level="1" />
+    <monster id="od-goblin-spearman" number="6" ambiences="orcs" level="1" />
     <group level="1">
-      <monster id="od-goblin-archer" number="1-6" ambiences="orcs-goblins" level="1" />
-      <monster id="od-goblin-spearman" number="1-6" ambiences="orcs-goblins" level="1" />
+      <monster id="od-goblin-archer" number="1-6" ambiences="orcs" level="1" />
+      <monster id="od-goblin-spearman" number="1-6" ambiences="orcs" level="1" />
     </group>
     <monster id="od-skaven" number="2-12" ambiences="skaven" level="1" />
-    <monster id="od-orc" number="6" ambiences="orcs-goblins" level="1" />
+    <monster id="od-orc" number="6" ambiences="orcs" level="1" />
     <group level="1">
-      <monster id="od-orc" number="1-6" ambiences="orcs-goblins" level="1" />
-      <monster id="od-orc-archer" number="1-6" ambiences="orcs-goblins" level="1" />
+      <monster id="od-orc" number="1-6" ambiences="orcs" level="1" />
+      <monster id="od-orc-archer" number="1-6" ambiences="orcs" level="1" />
     </group>
     <monster id="od-minotaur-solo" number="1" ambiences="chaos" level="1" />
     <monster id="od-minotaur" number="1-3" ambiences="chaos" level="1" />
     <event id="od-old-bones" ambiences="undead" />
-    <event id="od-scorpions" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" />
-    <event id="od-encounter" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" />
-    <event id="od-trap" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" />
-    <event id="od-dead-body" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" />
-    <event id="od-portcullis" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" />
-    <event id="od-cave-in" ambiences="chaos undead skaven orcs-goblins chaos-dwarves dark-elves" />
+    <event id="od-scorpions" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" />
+    <event id="od-encounter" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" />
+    <event id="od-trap" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" />
+    <event id="od-dead-body" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" />
+    <event id="od-portcullis" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" />
+    <event id="od-cave-in" ambiences="chaos undead skaven orcs chaos-dwarves dark-elves" />
   </table>
 </tables>

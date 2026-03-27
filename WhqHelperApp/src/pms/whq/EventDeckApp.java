@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.WhqUiTheme;
 
 import pms.whq.content.ContentRepository;
@@ -48,6 +49,7 @@ public class EventDeckApp {
   private final DeckWindowController controller;
   private final CardWindowManager cardWindowManager;
   private final Map<String, Image> previewImages;
+  private final Path projectRoot;
 
   private Shell shell;
   private Composite buttonRow;
@@ -107,6 +109,7 @@ public class EventDeckApp {
   public EventDeckApp(Display display, Path projectRoot) {
     this.display = display;
     Path normalizedProjectRoot = projectRoot.toAbsolutePath().normalize();
+    this.projectRoot = normalizedProjectRoot;
     this.theme = new WhqUiTheme(display, normalizedProjectRoot);
     this.cardWindowManager = new CardWindowManager(display);
     this.previewImages = new TreeMap<>();
@@ -140,6 +143,7 @@ public class EventDeckApp {
 
   private void layoutMainWindow() {
     shell = new Shell(display);
+    AppIcon.apply(shell, projectRoot);
     shell.setText(I18n.t("event.window.title"));
     shell.setBackground(theme.shellBackground);
     shell.setLayout(new GridLayout(1, false));
@@ -541,6 +545,7 @@ public class EventDeckApp {
   public void openEventProbabilitySettings(Shell parent) {
     Shell owner = resolveParent(parent);
     Shell dialog = new Shell(owner, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+    AppIcon.inherit(dialog, owner);
     dialog.setText(I18n.t("dialog.probability.title"));
     dialog.setLayout(new GridLayout(2, false));
 

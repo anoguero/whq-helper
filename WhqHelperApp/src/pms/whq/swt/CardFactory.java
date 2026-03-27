@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.FontResources;
 
 import pms.whq.Settings;
@@ -410,6 +411,7 @@ public final class CardFactory {
 
   private static Shell createBaseCardShell(Shell parent, String title, int cardWidth, int cardHeight) {
     Shell shell = new Shell(parent.getDisplay(), SWT.SHELL_TRIM | SWT.RESIZE);
+    AppIcon.inherit(shell, parent);
     shell.setText(isBlank(title) ? "Card" : title);
     shell.setLayout(new FillLayout());
 

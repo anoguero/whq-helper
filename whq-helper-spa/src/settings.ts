@@ -56,6 +56,11 @@ function parseNumber(value: string | undefined, fallback: number): number {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 
+function normalizeAdventureAmbience(value: string | undefined): string {
+  const normalized = value?.trim() || '';
+  return normalized === 'orcs-goblins' ? 'orcs' : normalized;
+}
+
 function decodeJavaPropertyKey(rawKey: string): string {
   return rawKey.replace(/\\ /g, ' ').replace(/\\:/g, ':').replace(/\\=/g, '=');
 }
@@ -107,7 +112,7 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
       DEFAULT_SETTINGS.treasureGoldProbability
     ),
     language,
-    adventureAmbience: props.get('AdventureAmbience')?.trim() || DEFAULT_SETTINGS.adventureAmbience,
+    adventureAmbience: normalizeAdventureAmbience(props.get('AdventureAmbience')) || DEFAULT_SETTINGS.adventureAmbience,
     objectiveMonsterEasyWeight: parseNumber(
       props.get('ObjectiveMonsterEasyWeight'),
       DEFAULT_SETTINGS.objectiveMonsterEasyWeight
@@ -182,6 +187,7 @@ export async function loadSettings(): Promise<AppSettings> {
   merged.objectiveMonsterHardWeight = Math.max(0, merged.objectiveMonsterHardWeight);
   merged.objectiveMonsterVeryHardWeight = Math.max(0, merged.objectiveMonsterVeryHardWeight);
   merged.objectiveMonsterExtremeWeight = Math.max(0, merged.objectiveMonsterExtremeWeight);
+  merged.adventureAmbience = normalizeAdventureAmbience(merged.adventureAmbience) || DEFAULT_SETTINGS.adventureAmbience;
 
   return merged;
 }

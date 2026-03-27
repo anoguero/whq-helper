@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import com.whq.app.i18n.I18n;
+import com.whq.app.ui.AppIcon;
 
 public final class AboutDialog {
 
@@ -18,6 +19,7 @@ public final class AboutDialog {
 
   public static void open(Shell parent, Image image) {
     Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+    AppIcon.inherit(dialog, parent);
     dialog.setText(I18n.t("dialog.about.title"));
     dialog.setLayout(new GridLayout(1, false));
 

@@ -19,7 +19,7 @@
       <xsd:enumeration value="chaos"/>
       <xsd:enumeration value="undead"/>
       <xsd:enumeration value="skaven"/>
-      <xsd:enumeration value="orcs-goblins"/>
+      <xsd:enumeration value="orcs"/>
       <xsd:enumeration value="chaos-dwarves"/>
       <xsd:enumeration value="dark-elves"/>
     </xsd:restriction>
