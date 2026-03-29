@@ -135,6 +135,93 @@ Comportamiento:
 
 Esto te permite desarrollar en Linux y delegar el empaquetado final de Windows a GitHub.
 
+## Empaquetado para Linux
+
+`jpackage` no genera `AppImage` directamente. Para Linux, el flujo correcto es:
+
+1. generar una `app-image` con `jpackage`,
+2. convertir esa imagen a `AppImage` con `appimagetool`.
+
+### Preparación
+
+Asegúrate de tener disponible:
+
+- `lib/org.eclipse.swt.gtk.linux.x86_64-3.127.0.jar`
+- `appimagetool`
+
+### Generar `app-image` o `AppImage`
+
+Desde `WhqHelperApp/`:
+
+```bash
+./scripts/package-linux.sh app-image
+./scripts/package-linux.sh appimage
+```
+
+Salida:
+
+- `target/linux-package/WHQ Helper/`: app-image de `jpackage`
+- `target/linux-package/*.AppImage`: ejecutable portable para Linux
+
+### Generación automática en GitHub Actions
+
+El repositorio incluye:
+
+- `.github/workflows/build-linux-appimage.yml`
+
+Comportamiento:
+
+- se ejecuta en cada `push` a `main`,
+- usa un runner Linux,
+- descarga el JAR SWT de Linux y `appimagetool`,
+- genera el `AppImage`,
+- publica el `AppImage` como artefacto.
+
+## Empaquetado para macOS
+
+Para macOS, `jpackage` sí puede generar directamente la aplicación `.app`. También he dejado el script listo para `dmg` o `pkg`, aunque la salida más útil para probar es la `.app`.
+
+### Preparación
+
+Asegúrate de tener disponible el JAR SWT de la arquitectura de destino:
+
+- Intel: `lib/org.eclipse.swt.cocoa.macosx.x86_64-3.127.0.jar`
+- Apple Silicon: `lib/org.eclipse.swt.cocoa.macosx.aarch64-3.127.0.jar`
+
+### Generar `.app`, `.dmg` o `.pkg`
+
+Desde `WhqHelperApp/` y ejecutando en macOS:
+
+```bash
+./scripts/package-macos.sh app-image
+./scripts/package-macos.sh dmg
+./scripts/package-macos.sh pkg
+```
+
+Salida:
+
+- `target/macos-package/`
+
+El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `resources/logo.png`.
+
+### Generación automática en GitHub Actions
+
+El repositorio incluye:
+
+- `.github/workflows/build-macos-app.yml`
+
+Comportamiento:
+
+- se ejecuta en cada `push` a `main`,
+- construye dos variantes: Intel (`macos-13`) y Apple Silicon (`macos-14`),
+- descarga en CI el JAR SWT correcto para cada arquitectura,
+- ejecuta `./scripts/package-macos.sh app-image`,
+- publica cada `.app` como artefacto independiente.
+
+Nota:
+
+- las `.app` generadas en CI no quedan firmadas ni notarizadas; para distribución pública en macOS necesitarás `codesign` y notarización de Apple.
+
 ## Cómo quedan los XML en el ejecutable
 
 Los XML no se empaquetan dentro del JAR principal.

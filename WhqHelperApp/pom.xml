@@ -15,6 +15,8 @@
         <swt.platform.id>gtk.linux.x86_64</swt.platform.id>
         <swt.local.jar>${project.basedir}/lib/org.eclipse.swt.${swt.platform.id}-${swt.version}.jar</swt.local.jar>
         <windows.input.dir>${project.build.directory}/windows-input</windows.input.dir>
+        <linux.input.dir>${project.build.directory}/linux-input</linux.input.dir>
+        <macos.input.dir>${project.build.directory}/macos-input</macos.input.dir>
     </properties>
 
     <dependencies>
@@ -91,6 +93,114 @@
                                 </goals>
                                 <configuration>
                                     <outputDirectory>${windows.input.dir}</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>
+                                                <include>${project.build.finalName}.jar</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>data/**</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>resources/**</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}/lib</directory>
+                                            <targetPath>lib</targetPath>
+                                            <includes>
+                                                <include>org.eclipse.swt.${swt.platform.id}-${swt.version}.jar</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>linux-dist</id>
+            <properties>
+                <swt.platform.id>gtk.linux.x86_64</swt.platform.id>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>stage-linux-input</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${linux.input.dir}</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>
+                                                <include>${project.build.finalName}.jar</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>data/**</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>resources/**</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.basedir}/lib</directory>
+                                            <targetPath>lib</targetPath>
+                                            <includes>
+                                                <include>org.eclipse.swt.${swt.platform.id}-${swt.version}.jar</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>macos-dist</id>
+            <properties>
+                <swt.platform.id>cocoa.macosx.x86_64</swt.platform.id>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <executions>
+                            <execution>
+                                <id>stage-macos-input</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${macos.input.dir}</outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>${project.build.directory}</directory>

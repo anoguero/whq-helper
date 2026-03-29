@@ -1,0 +1,53 @@
+name: Build Linux AppImage
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "WhqHelperApp/**"
+      - ".github/workflows/build-linux-appimage.yml"
+  workflow_dispatch:
+
+jobs:
+  build-linux-appimage:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Download SWT for Linux
+        run: |
+          swt_version="3.127.0"
+          swt_target="lib/org.eclipse.swt.gtk.linux.x86_64-${swt_version}.jar"
+          swt_url="https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.gtk.linux.x86_64/${swt_version}/org.eclipse.swt.gtk.linux.x86_64-${swt_version}.jar"
+          mkdir -p lib
+          curl -fsSL "$swt_url" -o "$swt_target"
+
+      - name: Download appimagetool
+        run: |
+          mkdir -p tools
+          curl -fsSL "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -o tools/appimagetool
+          chmod +x tools/appimagetool
+
+      - name: Build AppImage
+        run: APPIMAGETOOL="$PWD/tools/appimagetool" ./scripts/package-linux.sh appimage
+
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: whq-helper-linux-appimage
+          path: WhqHelperApp/target/linux-package/*.AppImage
+          if-no-files-found: error

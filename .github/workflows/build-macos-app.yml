@@ -1,0 +1,62 @@
+name: Build macOS App
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "WhqHelperApp/**"
+      - ".github/workflows/build-macos-app.yml"
+  workflow_dispatch:
+
+jobs:
+  build-macos-app:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-13
+            swt_platform_id: cocoa.macosx.x86_64
+            artifact_name: whq-helper-macos-app-x64
+          - runner: macos-14
+            swt_platform_id: cocoa.macosx.aarch64
+            artifact_name: whq-helper-macos-app-arm64
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Download SWT for macOS
+        run: |
+          swt_version="3.127.0"
+          swt_platform_id="${{ matrix.swt_platform_id }}"
+          swt_target="lib/org.eclipse.swt.${swt_platform_id}-${swt_version}.jar"
+          swt_url="https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.${swt_platform_id}/${swt_version}/org.eclipse.swt.${swt_platform_id}-${swt_version}.jar"
+          mkdir -p lib
+          curl -fsSL "$swt_url" -o "$swt_target"
+
+      - name: Build macOS app bundle
+        env:
+          SWT_PLATFORM_ID: ${{ matrix.swt_platform_id }}
+        run: ./scripts/package-macos.sh app-image
+
+      - name: Upload macOS app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: |
+            WhqHelperApp/target/macos-package/*.app
+            WhqHelperApp/target/macos-package/**/*.app
+          if-no-files-found: error
