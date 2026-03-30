@@ -17,9 +17,11 @@ jobs:
         include:
           - runner: macos-13
             swt_platform_id: cocoa.macosx.x86_64
+            java_architecture: x64
             artifact_name: whq-helper-macos-app-x64
           - runner: macos-14
             swt_platform_id: cocoa.macosx.aarch64
+            java_architecture: aarch64
             artifact_name: whq-helper-macos-app-arm64
     runs-on: ${{ matrix.runner }}
     defaults:
@@ -36,6 +38,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+          architecture: ${{ matrix.java_architecture }}
           cache: maven
 
       - name: Download SWT for macOS
