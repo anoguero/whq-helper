@@ -1,0 +1,201 @@
+name: Release Desktop Apps
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Download SWT for Windows
+        run: |
+          $swtVersion = "3.127.0"
+          $swtTarget = "lib/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
+          $swtUrl = "https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.win32.win32.x86_64/$swtVersion/org.eclipse.swt.win32.win32.x86_64-$swtVersion.jar"
+          New-Item -ItemType Directory -Force -Path "lib" | Out-Null
+          Invoke-WebRequest -Uri $swtUrl -OutFile $swtTarget
+
+      - name: Build Windows EXE
+        run: ./scripts/package-windows.ps1 -Type exe
+
+      - name: Stage Windows release asset
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $version = $tag.TrimStart("v")
+          $exe = Get-ChildItem "target/windows-package" -Recurse -Filter *.exe | Select-Object -First 1
+          if (-not $exe) {
+              throw "No se ha generado ningún instalador EXE para Windows."
+          }
+          New-Item -ItemType Directory -Force -Path "target/release-assets" | Out-Null
+          Copy-Item $exe.FullName "target/release-assets/WHQ-Helper-$version-windows-x64.exe"
+
+      - name: Upload Windows release asset
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-windows-x64
+          path: WhqHelperApp/target/release-assets/WHQ-Helper-*-windows-x64.exe
+          if-no-files-found: error
+
+  build-linux:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Download SWT for Linux
+        run: |
+          swt_version="3.127.0"
+          swt_target="lib/org.eclipse.swt.gtk.linux.x86_64-${swt_version}.jar"
+          swt_url="https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.gtk.linux.x86_64/${swt_version}/org.eclipse.swt.gtk.linux.x86_64-${swt_version}.jar"
+          mkdir -p lib
+          curl -fsSL "$swt_url" -o "$swt_target"
+
+      - name: Download appimagetool
+        run: |
+          mkdir -p tools
+          curl -fsSL "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -o tools/appimagetool
+          chmod +x tools/appimagetool
+
+      - name: Build Linux AppImage
+        run: APPIMAGETOOL="$PWD/tools/appimagetool" ./scripts/package-linux.sh appimage
+
+      - name: Stage Linux release asset
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          appimage="$(find target/linux-package -maxdepth 1 -name '*.AppImage' | head -n 1)"
+          if [[ -z "$appimage" ]]; then
+            echo "No se ha generado ningún AppImage para Linux." >&2
+            exit 1
+          fi
+          mkdir -p target/release-assets
+          cp "$appimage" "target/release-assets/WHQ-Helper-${version}-linux-x86_64.AppImage"
+
+      - name: Upload Linux release asset
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-linux-x86_64
+          path: WhqHelperApp/target/release-assets/WHQ-Helper-*-linux-x86_64.AppImage
+          if-no-files-found: error
+
+  build-macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            swt_platform_id: cocoa.macosx.x86_64
+            java_architecture: x64
+            asset_suffix: macos-x64
+          - runner: macos-15
+            swt_platform_id: cocoa.macosx.aarch64
+            java_architecture: aarch64
+            asset_suffix: macos-arm64
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          architecture: ${{ matrix.java_architecture }}
+          cache: maven
+
+      - name: Download SWT for macOS
+        run: |
+          swt_version="3.127.0"
+          swt_platform_id="${{ matrix.swt_platform_id }}"
+          swt_target="lib/org.eclipse.swt.${swt_platform_id}-${swt_version}.jar"
+          swt_url="https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.${swt_platform_id}/${swt_version}/org.eclipse.swt.${swt_platform_id}-${swt_version}.jar"
+          mkdir -p lib
+          curl -fsSL "$swt_url" -o "$swt_target"
+
+      - name: Build macOS DMG
+        env:
+          SWT_PLATFORM_ID: ${{ matrix.swt_platform_id }}
+        run: ./scripts/package-macos.sh dmg
+
+      - name: Stage macOS release asset
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          dmg="$(find target/macos-package -maxdepth 1 -name '*.dmg' | head -n 1)"
+          if [[ -z "$dmg" ]]; then
+            echo "No se ha generado ningún DMG para macOS." >&2
+            exit 1
+          fi
+          mkdir -p target/release-assets
+          cp "$dmg" "target/release-assets/WHQ-Helper-${version}-${{ matrix.asset_suffix }}.dmg"
+
+      - name: Upload macOS release asset
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.asset_suffix }}
+          path: WhqHelperApp/target/release-assets/WHQ-Helper-*-${{ matrix.asset_suffix }}.dmg
+          if-no-files-found: error
+
+  publish-release:
+    runs-on: ubuntu-latest
+    needs:
+      - build-windows
+      - build-linux
+      - build-macos
+    steps:
+      - name: Download release assets
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: release-*
+          merge-multiple: true
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" dist/* --clobber
+          else
+            gh release create "$tag" dist/* \
+              --title "$tag" \
+              --generate-notes
+          fi
