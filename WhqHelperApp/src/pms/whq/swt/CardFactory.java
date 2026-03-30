@@ -350,6 +350,8 @@ public final class CardFactory {
     Composite specialInner = new Composite(specialScroll, SWT.NONE);
     specialInner.setLayout(new GridLayout(1, false));
     specialInner.setBackground(bg);
+    RuleDialog ruleDialog = new RuleDialog(content.getShell());
+    parent.addDisposeListener(event -> ruleDialog.dispose());
 
     String specialText = buildSpecialText(monster, altSpecials, appendSpecials);
     if (!specialText.isEmpty()) {
@@ -367,10 +369,7 @@ public final class CardFactory {
       link.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
       link.setBackground(bg);
       link.setFont(bodyBoldFont);
-      String tooltip = buildRuleTooltip(entry.id, rules);
-      if (!tooltip.isEmpty()) {
-        link.setToolTipText(tooltip);
-      }
+      link.addListener(SWT.Selection, event -> openRuleDialog(ruleDialog, nullSafe(event.text), rules));
     }
 
     specialScroll.setContent(specialInner);
@@ -718,22 +717,15 @@ public final class CardFactory {
     return new Font(base.getDisplay(), resized);
   }
 
-  private static String buildRuleTooltip(String id, Map<String, Rule> rules) {
-    if (isBlank(id) || rules == null) {
-      return "";
+  private static void openRuleDialog(RuleDialog dialog, String id, Map<String, Rule> rules) {
+    if (dialog == null || isBlank(id) || rules == null) {
+      return;
     }
     Rule rule = rules.get(id);
     if (rule == null || isBlank(rule.text)) {
-      return "";
+      return;
     }
-    String title = nullSafe(rule.name);
-    if ("magic".equals(rule.type) && !title.isEmpty()) {
-      title += " Magic";
-    }
-    if (title.isEmpty()) {
-      return rule.text;
-    }
-    return title + "\n\n" + rule.text;
+    dialog.showRule(rule);
   }
 
   private static String xmlEscape(String value) {
