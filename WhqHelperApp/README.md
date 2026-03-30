@@ -222,6 +222,31 @@ Nota:
 
 - las `.app` generadas en CI no quedan firmadas ni notarizadas; para distribución pública en macOS necesitarás `codesign` y notarización de Apple.
 
+### Publicación de releases
+
+El repositorio incluye además:
+
+- `.github/workflows/release-desktop-apps.yml`
+
+Comportamiento:
+
+- se ejecuta al hacer `push` de un tag con formato `v*`,
+- construye y publica en una GitHub Release:
+- Windows `EXE`
+- Linux `AppImage`
+- macOS `DMG` Intel y Apple Silicon
+
+Flujo recomendado:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+La release quedará publicada en:
+
+- `https://github.com/<owner>/<repo>/releases/latest`
+
 ## Cómo quedan los XML en el ejecutable
 
 Los XML no se empaquetan dentro del JAR principal.
