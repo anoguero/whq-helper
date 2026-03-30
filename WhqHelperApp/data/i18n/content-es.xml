@@ -648,7 +648,7 @@
   <entry key="event.lm-city-31-false-accusation.name">Falsa acusación</entry>
   <entry key="event.lm-city-31-false-accusation.rules">Mientras estudia las armas expuestas en la herrería local, tu guerrero siente una mano enguantada de acero sobre su hombro. Es el Mariscal de la Guardia, y tu guerrero está acusado de un crimen que no cometió. Tu guerrero es arrestado y queda a merced de los tribunales. Debe tirar una vez en cada tabla siguiente para ver de qué delito se le acusa y cuál es su sentencia. 1D6 Crimen 1 Alboroto 2 Robo 3 Falsificación 4 Incendio 5 Traición 6 Asesinato. 1D6 Sentencia 1 Inocente 2 Una severa advertencia 3 Multa de 1000 de oro 4 Pierde una extremidad* 5 10 años de cárcel** 6 Muerte por, tira en la tabla de método de ejecución. 1D6 Método de ejecución 1 Quemado 2 Decapitación 3 Empalamiento 4 Ahogamiento 5 Tortura 6 Pelotón de fusilamiento. *Pierde una extremidad. Las autoridades deciden amputar una de las extremidades de tu guerrero como castigo. Puedes elegir cuál. Si pierde una pierna, el Movimiento de tu guerrero se reduce a la mitad y su tirada para escapar de la inmovilización pasa a ser siempre 6+. Si alguna vez pierde la otra pierna, no podrá moverse en absoluto. Si pierde una mano, sufre -2 a todas las tiradas para impactar y nunca podrá usar armas de proyectiles ni lanzar hechizos. Si alguna vez pierde la otra mano, no podrá luchar en absoluto. **10 años de cárcel. Esto significa, en la práctica, que tu guerrero queda fuera de la partida, igual que si es &apos;sentenciado a muerte por...&apos;. Sin embargo, al comienzo de cada aventura a partir de ahora, tira 1D6. Con un resultado de 5 o 6, tu guerrero escapa, junto con todo su equipo, y puede reunirse con sus compañeros. Comprar tu libertad. Si la sentencia es 4, 5 o 6, el guerrero arrestado, y otros guerreros, pueden sobornar a los guardias y a los funcionarios del tribunal para evitar el castigo. El coste se calcula sumando todas las tiradas hechas en las tablas de Crimen, Sentencia y Método de ejecución, y multiplicando el resultado por 100. Esa es la cantidad de oro que costará que tu guerrero quede libre e ileso.</entry>
   <entry key="event.lm-city-32-wrestler.name">Luchador</entry>
-  <entry key="event.lm-city-32-wrestler.rules">&quot;The Slammer&quot; ha llegado a la ciudad y acepta a todos los aspirantes en un combate de lucha &quot;amistoso&quot;. Presumiendo de un historial perfecto, el nórdico apuesta 500 piezas de oro a cualquiera del público que lo derrote en combate desarmado. Animado por la multitud, tu guerrero acepta el desafío. Tira 2D6 y aplica su modificador de cervecería, consulta el reglamento de tu guerrero. Consulta el resultado en la tabla siguiente. 2-3 En los primeros segundos, The Slammer levanta a tu guerrero y lo estrella contra el suelo. El repugnante golpe provoca un estremecimiento entre la multitud. Poco después, tu guerrero es retirado sobre una tabla de madera. No solo pierde 500 piezas de oro, sino que The Slammer se queda además con un objeto de Tesoro que tu guerrero llevara, determinado al azar. 4-5 Tras una hábil maniobra, The Slammer atrapa a tu guerrero en un abrazo de oso que se siente, bueno, exactamente como si lo estuviera estrujando un oso. Con los ojos desorbitados, tu guerrero se rinde antes de perder el conocimiento. Con las costillas terriblemente magulladas y el orgullo aún peor, pierde 500 de oro. 6-8 Después de 15 minutos agotadores de forcejeos y revolcones por el barro, el combate termina en empate. Tu guerrero no obtiene nada salvo la satisfacción de haber aguantado más que la mayoría y no perder más que unos cuantos dientes. 9+ Con toda la furia concentrada de un halfling hambriento en una pastelería, tu guerrero se enfrenta de lleno a The Slammer. Tras varios minutos de combate intenso, mide a su rival y derriba al nórdico. De pie, triunfante, en medio de una multitud que lo vitorea, tu guerrero se sacude el polvo antes de marcharse con 500 piezas de oro más en el bolsillo.</entry>
+  <entry key="event.lm-city-32-wrestler.rules">&quot;The Slammer&quot; ha llegado a la ciudad y acepta a todos los aspirantes en un combate de lucha &quot;amistoso&quot;. Presumiendo de un historial perfecto, el nórdico apuesta 500 piezas de oro a cualquiera del público que lo derrote en combate desarmado. Animado por la multitud, tu guerrero acepta el desafío. Tira 2D6 y aplica su modificador de cervecería, tal y como indique el reglamento de tu guerrero. Consulta el resultado en la tabla siguiente. 2-3 En los primeros segundos, The Slammer levanta a tu guerrero y lo estrella contra el suelo. El repugnante golpe provoca un estremecimiento en la multitud. Poco después, tu guerrero es retirado sobre una tabla de madera. No solo pierde 500 piezas de oro, sino que The Slammer se queda además con un objeto de Tesoro que tu guerrero lleve, determinado al azar. 4-5 Tras una hábil maniobra, The Slammer atrapa a tu guerrero en un abrazo de oso que se siente, bueno, exactamente como si lo estrujara un oso. Con los ojos desorbitados, tu guerrero se rinde antes de perder el conocimiento. Con las costillas terriblemente magulladas y el orgullo aún peor, pierde 500 monedas de oro. 6-8 Después de 15 minutos agotadores de forcejeos y revolcones por el barro, el combate termina en empate. Tu guerrero no obtiene nada salvo la satisfacción de haber aguantado más que la mayoría y no perder más que unos cuantos dientes. 9+ Con toda la furia concentrada de un halfling hambriento en una pastelería, tu guerrero se enfrenta de lleno a The Slammer. Tras varios minutos de combate intenso, mide a su rival y derriba al nórdico. De pie, triunfante, en medio de una multitud que lo vitorea, tu guerrero se sacude el polvo antes de marcharse con 500 piezas de oro más en el bolsillo.</entry>
   <entry key="event.lm-city-33-uneventful-day.name">Día sin incidentes</entry>
   <entry key="event.lm-city-33-uneventful-day.rules">Día sin incidentes. Sin efectos especiales.</entry>
   <entry key="event.lm-city-34-robbery.name">Robo</entry>
@@ -711,157 +711,63 @@ Heridas permanentemente.</entry>
   <entry key="event.lm-outskirts-12-uneventful-day.name">Día sin incidentes</entry>
   <entry key="event.lm-outskirts-12-uneventful-day.rules">Día sin incidentes. Sin efectos especiales.</entry>
   <entry key="event.lm-outskirts-13-bandits.name">Bandidos</entry>
-  <entry key="event.lm-outskirts-13-bandits.rules">En un acto de venganza por la pérdida de uno de sus líderes, un grupo
-de feroces bandidos emergen de las colinas a caballo, atacando
-y saquear a los campesinos indefensos fuera del Asentamiento.
-El guerrero debe tirar 1D6 en la siguiente tabla:
-1
-Tu guerrero pronto será el objetivo de los bandidos que
-dominarlos por pura cantidad. Se roban todo
-su oro y 1D3 elementos del tesoro (tu elección)
-antes de que los soldados del asentamiento puedan conducirlos
-de regreso a las colinas.
-2-3 El ataque pilla a todos por sorpresa y, a pesar
-los mejores esfuerzos del Guerrero para defender sus pertenencias,
-los bandidos se llevan un objeto del tesoro (tu
-elección).
-4-5 Tu guerrero se esconde detrás de las tiendas improvisadas, en silencio.
-cortando a los bandidos mientras pasan.
-Llegan los soldados y recompensan a tu guerrero con 1D6x25.
-oro por ayudar a defender a los habitantes del asentamiento.
-6
-Con un salto espectacular desde un techo de paja, tu guerrero
-ataca al bandido más grande y poderoso del grupo,
-matándolo directamente. Los atacantes sin líder son fácilmente
-derrotados por los soldados del Asentamiento. El Asentamiento
-Los líderes recompensan a tu guerrero con 1D6x50 de oro por su
-papel en la lucha y se les permite la entrada al
-Asentamiento.</entry>
+  <entry key="event.lm-outskirts-13-bandits.rules">En un acto de venganza por la pérdida de uno de sus líderes, un grupo de feroces bandidos emerge de las colinas a caballo, saqueando a los campesinos indefensos de fuera del Asentamiento. Tu guerrero debe tirar 1D6 en la siguiente tabla:
+
+1 Tu guerrero se convierte enseguida en el objetivo de los bandidos, que lo reducen por pura superioridad numérica. Le roban todo el oro y 1D3 objetos de Tesoro, a tu elección, antes de que los soldados del Asentamiento logren hacerlos retroceder hacia las colinas.
+
+2-3 El ataque pilla a todos por sorpresa y, pese a los esfuerzos de tu guerrero por proteger sus pertenencias, los bandidos se llevan un objeto de Tesoro, a tu elección.
+
+4-5 Tu guerrero se oculta tras las tiendas improvisadas y va acuchillando en silencio a los bandidos mientras pasan a caballo. Cuando llegan los soldados del Asentamiento, lo recompensan con 1D6x25 monedas de oro por ayudar a defender a los habitantes.
+
+6 Con un salto espectacular desde un techo de paja, tu guerrero se abalanza sobre el bandido más grande y peligroso del grupo y lo mata en el acto. Sin líder, los atacantes son derrotados con facilidad por los soldados del Asentamiento. Los dirigentes lo recompensan con 1D6x50 monedas de oro por su papel en la lucha y le permiten entrar en el Asentamiento.</entry>
   <entry key="event.lm-outskirts-14-an-adventure.name">¡Una aventura!</entry>
   <entry key="event.lm-outskirts-14-an-adventure.rules">¡Consulta el Libro de Aventuras Definitivo para determinar en qué hazaña podrían participar los Guerreros a continuación!</entry>
   <entry key="event.lm-outskirts-15-argil-s-magic-emporium.name">Emporio Mágico de Argil</entry>
-  <entry key="event.lm-outskirts-15-argil-s-magic-emporium.rules">Argil Fend le petter, un desaliñado proveedor ambulante de ungüentos
-y ungüentos, ha instalado una tienda aquí para pasar el día. Tu guerrero
-Puede comprar productos de Argil siguiendo todas las reglas normales.
-de visitar un comerciante en el asentamiento.
-Costo
-ARTÍCULO
-Valores
-Descripción
-comprar
-5
-Cura 1D3 heridas.
-25g
-linimento
-tónico
-6
-50g
-Cura 1D6 heridas.
-100g
-Restaura 1 punto a cualquier
-6
-bálsamo
-Estadística que anteriormente
-sido reducido por cualquier motivo.
-150g
-Cura al guerrero al máximo.
-10
-Elaboración casera
-175g
-Le da a tu guerrero el doble
-mercurio
-Ataca durante 1 turno.
-Al usar cualquiera de los elementos de Argil, tira 1D6. Si la puntuación es 1 tu
-El guerrero pierde 1 herida permanentemente y el objeto no tiene efecto.
-Si la puntuación es 2 o 3, tu Guerrero pierde 1 Herida permanentemente.
-pero el ítem funciona como se indica. Con una puntuación de 4, 5 o 6 el ítem
-funciona como se indica sin efectos secundarios.</entry>
+  <entry key="event.lm-outskirts-15-argil-s-magic-emporium.rules">Argil Fendlepetter, un desastrado vendedor ambulante de ungüentos y pócimas, ha montado aquí su tenderete por hoy. Tu guerrero puede comprar los artículos de Argil siguiendo todas las reglas normales para visitar a un Comerciante en el Asentamiento.
+
+Tónico de linimento: 25 monedas de oro, disponibilidad 5. Cura 1D3 Heridas.
+
+Bálsamo: 50 monedas de oro, disponibilidad 6. Cura 1D6 Heridas.
+
+Bálsamo restaurador: 100 monedas de oro, disponibilidad 6. Restaura 1 punto a cualquier Característica que haya sido reducida previamente por cualquier motivo.
+
+Brebaje casero: 150 monedas de oro, disponibilidad 10. Cura por completo al guerrero.
+
+Azogue: 175 monedas de oro. Otorga a tu guerrero el doble de Ataques durante 1 Turno.
+
+Cuando uses cualquiera de los artículos de Argil, tira 1D6:
+
+1 Tu guerrero pierde 1 Herida de forma permanente y el objeto no tiene efecto.
+
+2-3 Tu guerrero pierde 1 Herida de forma permanente, pero el objeto funciona según lo indicado.
+
+4-6 El objeto funciona según lo indicado y no causa efectos secundarios.</entry>
   <entry key="event.lm-outskirts-16-beggars.name">mendigos</entry>
-  <entry key="event.lm-outskirts-16-beggars.rules">Tu guerrero no puede ocultar su estatura heroica y docenas de
-Los campesinos pronto los rodean pidiendo dinero y comida.
-que la mitad de todas las provisiones que llevaban se han ido
-(redondeado hacia abajo) ¡y son 1D6x20 encendedores dorados!
-3</entry>
+  <entry key="event.lm-outskirts-16-beggars.rules">Tu guerrero no puede ocultar su porte heroico y pronto decenas de campesinos lo rodean pidiéndole comida y dinero. Antes de darse cuenta, descubre que ha perdido la mitad de todas las Provisiones que llevaba, redondeando hacia abajo, y además tiene 1D6x20 monedas de oro menos.</entry>
   <entry key="event.lm-outskirts-21-bard.name">Bardo</entry>
-  <entry key="event.lm-outskirts-21-bard.rules">Un juglar completamente vestido de color que se dirige hacia el
-t gates se da cuenta de tu guerrero. con una mirada de
-Liquidación
-reconocimiento
-1 se acerca emocionado a tu Guerrero, en voz alta
-rasgueando su instrumento y cantando una balada sobre tu
-Hazañas del Guerrero. Tira 1D6 a continuación:
-1-2 Mientras el poeta lírico relata todos los interesantes
-hazañas de tu guerrero, una pequeña multitud se reúne a tu alrededor,
-con entusiasmo. Un joven lánguido de repente arremete, apuñalando
-¡tu guerrero con una daga venenosa!
-ser descendiente de un criminal que una vez fue tu guerrero
-llevados a la justicia. Los campos jóvenes son rápidamente sometidos
-por los otros campesinos y tu héroe es llevado a una sabia
-hombre que logra eliminar gran parte del veneno.
-La vida del Guerrero se salva pero debe deducir 1 herida de
-sus Heridas Iniciales puntúan permanentemente.
-3-6 La música del bardo se centra en todo el bien de tu guerrero.
-¡Hechos y heroísmos! Pronto tu guerrero será acosado por el
-el resto del día dando bendiciones y permitiendo que
-Desdichados de besarles las botas y tocarles el sudor.
-pañuelo empapado.</entry>
+  <entry key="event.lm-outskirts-21-bard.rules">Un juglar vestido con ropas llamativas que se dirige hacia las puertas del Asentamiento se fija en tu guerrero. Con gesto de reconocimiento, se le acerca emocionado, rasgueando su instrumento y cantando una balada sobre sus hazañas. Tira 1D6:
+
+1-2 Mientras el poeta relata las gestas de tu guerrero, una pequeña multitud se reúne a su alrededor con entusiasmo. De repente, un joven bravucón se lanza sobre él y lo apuñala con una daga envenenada. Resulta ser descendiente de un criminal que tu guerrero llevó ante la justicia tiempo atrás. Los demás campesinos reducen enseguida al agresor y tu héroe es llevado ante un sabio que consigue extraer gran parte del veneno. La vida de tu guerrero se salva, pero debe restar 1 Herida de forma permanente a su puntuación de Heridas Iniciales.
+
+3-6 La canción del bardo se centra en todas las buenas obras y heroicidades de tu guerrero. Pronto se ve rodeado de admiradores durante el resto del día, impartiendo bendiciones y permitiendo que los desdichados le besen las botas y toquen su pañuelo empapado en sudor.</entry>
   <entry key="event.lm-outskirts-22-hay-wagon.name">carro de heno</entry>
-  <entry key="event.lm-outskirts-22-hay-wagon.rules">Tu Guerrero ve un carro lleno de heno entrar por el
-Puertas de asentamiento, presumiblemente para alimentar a los distintos animales.
-En el interior. Se puede ver un segundo carro de heno acercándose desde un
-distancia y tu Guerrero tiene la loca idea de que podría
-posiblemente escabullirse dentro del vagón para volver a entrar
-el Asentamiento. Si tu Guerrero decide hacerlo, tira 1D6 en el
-tabla a continuación:
-1
-¡Herido! Cuando el carro llega a la Puerta del Asentamiento,
-es detenido por los guardias que comienzan a apuñalar a sus
-espadas al azar en el montón de heno. Como una de las espadas
-Los empujones penetran el estómago de tu guerrero, lo dejan salir.
-¡un llanto espeluznante! Tira otro 1D6 y si el puntaje es
-a1, tu guerrero expira en el acto y es eliminado
-del juego. En cualquier otro puntaje sobreviven
-aunque deberán deducir 1 Herida permanentemente de
-su puntuación de Heridas Iniciales. Tus Guerreros gastan
-los siguientes 1D6 días en la cárcel, se le multa con 100 de oro y se le echa.
-retirarse del Acuerdo.
-2-3 ¡Atrapado! Un guardia de la puerta observador ve la
-pie que sobresale parcialmente del heno. Tu guerrero es
-arrancado del carro y arrojado a una celda de prisión por
-1D3días. Se refinan 1o0 de oro antes de ser arrojados
-4-5 ¡Inadvertido! El carro de heno atraviesa las puertas
-con tu guerrero escondido en el heno y nadie es el
-¡Más sabio! Unos momentos después de que se detenga, tu guerrero salta
-fuera desapercibido. Tu guerrero ahora puede seguir al
-reglas normales para permanecer en un Asentamiento.
-6
-¡Descubierto! Tu guerrero se esconde en el carro de heno y
-entra al Acuerdo sin ser notado. Cuando sienten
-¡El carro está estacionado frente a la cárcel! De pie junto a
-Tu guerrero es el capitán de la guardia que los vigila.
-sospechosamente.&quot;¡No es hora de secuestrar!&quot; él resopla.&quot;Esto
-El heno debe ser entregado a los corrales de animales&quot;. el
-El capitán le entrega a su Guerrero 1D6x10 monedas de oro y
-¡Los envía en camino! Tu guerrero ahora puede seguirte.
-todas las reglas normales para permanecer en un Acuerdo.
-4</entry>
+  <entry key="event.lm-outskirts-22-hay-wagon.rules">Tu guerrero ve entrar por las puertas del Asentamiento un carro cargado de heno, probablemente destinado a alimentar a los animales del interior. A lo lejos se acerca un segundo carro de heno y a tu guerrero se le ocurre la disparatada idea de esconderse dentro para colarse en el Asentamiento. Si decide hacerlo, tira 1D6:
+
+1 ¡Herido! Cuando el carro llega a la puerta, los guardias lo detienen y empiezan a clavar sus espadas al azar en el heno. Una de ellas atraviesa el vientre de tu guerrero y le arranca un grito espeluznante. Tira otro 1D6; con un 1, muere en el acto y queda eliminado de la partida. Con cualquier otro resultado sobrevive, pero debe restar 1 Herida de forma permanente a sus Heridas Iniciales. Pasa los siguientes 1D6 días en la cárcel, recibe una multa de 100 monedas de oro y es arrojado de nuevo fuera del Asentamiento.
+
+2-3 ¡Atrapado! Un atento guardia de la puerta ve el pie de tu guerrero asomando entre el heno. Lo arrastran fuera del carro y lo meten en una celda durante 1D3 días. Le imponen una multa de 100 monedas de oro antes de echarlo de nuevo fuera del Asentamiento.
+
+4-5 ¡Inadvertido! El carro atraviesa las puertas con tu guerrero oculto entre el heno y nadie sospecha nada. Unos instantes después de que el carro se detenga, tu guerrero salta fuera sin ser visto. A partir de ese momento puede seguir todas las reglas normales para permanecer en un Asentamiento.
+
+6 ¡Descubierto! Tu guerrero entra escondido en el carro sin ser detectado, pero cuando cree que ya es seguro moverse descubre que el vehículo se ha detenido frente a la cárcel. A su lado está el capitán de la guardia, que lo mira con suspicacia. &quot;Nada de echarse la siesta&quot;, gruñe. &quot;Ese heno tiene que llevarse a los corrales&quot;. El capitán le entrega 1D6x10 monedas de oro y lo pone a trabajar. Después, tu guerrero puede seguir las reglas normales para permanecer en un Asentamiento.</entry>
   <entry key="event.lm-outskirts-23-outbreak.name">Brote</entry>
-  <entry key="event.lm-outskirts-23-outbreak.rules">Hay un brote de Fiebre del Tirano y tu Guerrero rápidamente
-queda postrado en cama, su cara se pone roja y dolorosamente
-hinchados. Deben tirar 1D6 al comienzo de cada día en el
-siguiente tabla añadiendo +1 a la puntuación cada vez subsiguiente
-(recordando la Regla de 1 y 6).
-1
-La fiebre ha empeorado y su
-El guerrero sólo puede gemir de dolor, incapaz de abandonar su cama.
-Tu guerrero sufre-1 por fuerza o dureza (tu
-elección) para la próxima Aventura. Si su Fuerza o
-La dureza siempre llega a cero, están muertos.
-2-5 La fiebre sube y tu guerrero está postrado en cama.
-su choza improvisada. Mientras está acostado, tu guerrero no
-6
-La fiebre desaparece y tu guerrero vuelve a la normalidad al
-el final del día.</entry>
+  <entry key="event.lm-outskirts-23-outbreak.rules">Hay un brote de Fiebre del Tirano y tu guerrero cae enseguida postrado en cama. El rostro se le enrojece y se le hincha dolorosamente. Debe tirar 1D6 al comienzo de cada día en la siguiente tabla, sumando +1 a la tirada cada vez posterior, recordando la Regla del 1 y del 6:
+
+1 La fiebre empeora y tu guerrero solo puede gemir de dolor, incapaz de levantarse de la cama. Sufre -1 a Fuerza o Resistencia, a tu elección, durante la próxima Aventura. Si su Fuerza o Resistencia llega alguna vez a 0, muere.
+
+2-5 La fiebre se dispara y tu guerrero permanece postrado en su mísera choza improvisada. Mientras esté así, no puede hacer nada más ese día.
+
+6 La fiebre remite y tu guerrero vuelve a la normalidad al final del día.</entry>
   <entry key="event.lm-outskirts-24-horse-thief.name">ladrón de caballos</entry>
   <entry key="event.lm-outskirts-24-horse-thief.rules">Mientras tu guerrero está ocupado haciendo sus necesidades en un turno
 letrina, un ladrón de caballos se lleva su montura. Si tu guerrero
@@ -869,251 +775,103 @@ tiene un caballo, márcalo en tu Hoja de Registro de Aventuras
 con cualquier cosa que estuviera adjunta, como un carrito. si tu
 El guerrero no tiene monturas, por lo que lo trata como un día sin incidentes.</entry>
   <entry key="event.lm-outskirts-25-riot.name">Disturbio</entry>
-  <entry key="event.lm-outskirts-25-riot.rules">Avivados por las palabras de algunos descontentos, los humildes habitantes
-que viven fuera del Acuerdo están hartos de su
-situación empobrecida. Una pequeña reunión ha estallado en una
-peligrosos disturbios que enfrentan a los campesinos contra la vigilancia local.
-1D6 en la siguiente tabla:
-1
-Tu guerrero es arrestado y acusado de incitar disturbios
-Ellos (o sus compañeros) deben pagar 1D6x200 de oro en
-multas y sobornos para aclarar el asunto. Si no pueden
-pagar son ahorcados en el centro del Asentamiento en
-1D6díascomoadvertenciaalosotrosvagabundosAfuera
-las puertas.
-Tu guerrero es golpeado terriblemente por la Guardia y
-2-3 arrojados a la cárcel. Deben pagar 1D6x100 de oro.
-no pueden pagar deben pasar los próximos 1D6 días en la cárcel
-4-5 Uniéndose a los alborotadores, tu guerrero avanza con paso firme hacia
-el asentamiento donde la multitud enojada exige una muestra
-sustento, agua potable y acceso a atención médica.
-tratamiento. Los funcionarios del Acuerdo finalmente aceptan
-un compromiso y cada campesino, incluido su guerrero,
-Se le dan 1D3 provisiones, 1D3 vendas y 1D6x5 oro.
-6
-Organizando a los alborotadores, tu guerrero marcha con la manada.
-de campesinos al Acuerdo exigiendo cumplir
-con altos funcionarios. Las aterrorizadas autoridades se reúnen rápidamente
-las demandas de tu Guerrero y los campesinos son
-acceso a alimentos, agua potable e instalaciones médicas.
-Los campesinos y tu guerrero alcanzan cada uno 1D6
-Provisiones y vendas 1D6. Tu guerrero también
-recibe 1D6x50 de oro en pago como negociador y
-para evitar que los campesinos utilicen la violencia para resolver
-el asunto.
-SE</entry>
+  <entry key="event.lm-outskirts-25-riot.rules">Azuzados por las palabras de unos pocos agitadores, los humildes habitantes que viven fuera del Asentamiento se hartan por fin de su miseria. Una pequeña concentración degenera en un disturbio peligroso entre los campesinos y la Guardia local. Tira 1D6:
+
+1 Tu guerrero es arrestado y acusado de incitar el disturbio. Él, o sus compañeros, debe pagar 1D6x200 monedas de oro en multas y sobornos para arreglar el asunto. Si no pueden pagar, es ahorcado en el centro del Asentamiento en 1D6 días como advertencia para los demás vagabundos de fuera de las puertas.
+
+2-3 Tu guerrero es brutalmente apaleado por la Guardia y arrojado a la cárcel. Debe pagar 1D6x100 monedas de oro. Si no puede, pasará los próximos 1D6 días en prisión.
+
+4-5 Uniéndose a los alborotadores, tu guerrero entra resueltamente en el Asentamiento mientras la multitud exige comida suficiente, agua limpia y acceso a tratamiento médico. Las autoridades terminan aceptando un compromiso y cada campesino, incluido tu guerrero, recibe 1D3 Provisiones, 1D3 Vendas y 1D6x5 monedas de oro.
+
+6 Organizando a los amotinados, tu guerrero encabeza la marcha de campesinos hacia el Asentamiento para exigir una reunión con los altos cargos. Las aterrorizadas autoridades satisfacen rápidamente sus demandas y los campesinos obtienen acceso a comida, agua potable e instalaciones médicas. Los campesinos y tu guerrero reciben cada uno 1D6 Provisiones y 1D6 Vendas. Además, tu guerrero obtiene 1D6x50 monedas de oro como pago por actuar como negociador y evitar que la revuelta terminara en violencia.</entry>
   <entry key="event.lm-outskirts-26-the-black-tiger.name">El tigre negro</entry>
-  <entry key="event.lm-outskirts-26-the-black-tiger.rules">Un criminal enmascarado, el Tigre Negro, se cuela en la casa de tu guerrero.
-campamento improvisado en medio de la noche. Él roba del
-rico y da a los pobres. Si tu guerrero tiene más de 1oo
-oro, el forajido roba la mitad. Si tu Guerrero tiene menos de 100
-oro, el forajido no hace nada. Si tu guerrero no tiene oro en absoluto,
-El Tigre Negro desliza 100 piezas de oro en el bolso de tu Guerrero.
-En cualquier caso, el forajido deja un trozo de pergamino con una
-La huella de la pata de tigre en el pecho de tu guerrero que encuentran en el
-mañana al despertar.
-Nota: si el Cazarrecompensas obtiene este Evento, lo hará inmediatamente.
-un nuevo Outlaw que sigue todas las reglas normales. Este forajido también
-tiene la habilidad Vanish 5+ además de cualquier otra. (Ver el
-Revisión de Bounty Hunter por Littlemonk).</entry>
+  <entry key="event.lm-outskirts-26-the-black-tiger.rules">Un criminal enmascarado, el Tigre Negro, se cuela en el campamento improvisado de tu guerrero en mitad de la noche. Roba a los ricos y da a los pobres. Si tu guerrero tiene más de 100 monedas de oro, el forajido le roba la mitad. Si tiene menos de 100 monedas de oro, el Tigre Negro no hace nada. Si tu guerrero no tiene nada de oro, el Tigre Negro desliza 100 monedas de oro en su bolsa. En cualquier caso, el forajido deja sobre el pecho de tu guerrero un pedazo de pergamino con la huella de una garra de tigre, que este encuentra por la mañana al despertar.
+
+Nota: si el Cazarrecompensas obtiene este Evento, genera inmediatamente un nuevo Forajido siguiendo las reglas normales. Este Forajido también tiene la habilidad Desvanecerse 5+ además de cualquier otra que posea. Consulta la revisión del Cazarrecompensas de Littlemonk.</entry>
   <entry key="event.lm-outskirts-31-bad-omen.name">Mal presagio</entry>
-  <entry key="event.lm-outskirts-31-bad-omen.rules">Tu guerrero vislumbra continuamente un gato negro merodeando
-cerca de ellos. Otros en los alrededores también lo notan y juran que es un
-mal presagio. Tu guerrero está tan perturbado por la situación que
-Aventura.</entry>
+  <entry key="event.lm-outskirts-31-bad-omen.rules">Tu guerrero no deja de entrever a un gato negro merodeando cerca de él. Otros en los alrededores también lo ven y juran que se trata de un mal presagio. Tu guerrero queda tan turbado por ello que sufre -1 Suerte durante la próxima Aventura.</entry>
   <entry key="event.lm-outskirts-32-wizard-s-apprentice.name">Aprendiz de mago</entry>
-  <entry key="event.lm-outskirts-32-wizard-s-apprentice.rules">A altas horas de la noche, tu Guerrero es testigo de cómo un hombre delgado y frágil es
-agredido por un grupo de matones. Corriendo en su ayuda tu
-El guerrero defiende a los atacantes que se dispersan en la noche.
-El hombre jadea mientras la sangre brota de una herida abierta.
-su cabeza. Por el aspecto de su ropa y pertenencias, el joven
-El hombre parece ser un aprendiz de mago. Fartoo está demasiado herido para ser
-Curado con vendas, tu guerrero solo puede salvarlo si le dan
-la poción curativa.
-Si tu guerrero lo hace, el aprendiz le recompensará.
-lanzando un poderoso hechizo que aumenta permanentemente uno de
-1 1D6 para ver cuál
-Características del Guerrero. rodar
-tu
-La característica se ve afectada:
-Iniciativa
-1
-4
-Habilidad con armas
-fuerza de voluntad
-2
-5
-fuerza
-3
-suerte
-Dureza
-6
-Si tu Guerrero no tiene poción curativa, el joven aprendiz
-caduca...</entry>
+  <entry key="event.lm-outskirts-32-wizard-s-apprentice.rules">Bien entrada la noche, tu guerrero presencia cómo un hombre delgado y enfermizo es agredido por un grupo de matones. Corriendo en su ayuda, ahuyenta a los atacantes, que se dispersan en la oscuridad. El hombre jadea mientras la sangre mana de una herida abierta en la cabeza. Por su ropa y sus pertenencias, parece ser un aprendiz de mago. Está demasiado malherido para curarse con vendas; tu guerrero solo puede salvarlo si le entrega una Poción Curativa.
+
+Si tu guerrero lo hace, el aprendiz le paga el favor lanzando un poderoso hechizo que aumenta permanentemente una de sus Características. Tira 1D6 para ver cuál:
+
+1 Iniciativa
+
+2 Voluntad
+
+3 Fuerza
+
+4 Habilidad de Armas
+
+5 Suerte
+
+6 Resistencia
+
+Si tu guerrero no tiene una Poción Curativa, el joven aprendiz expira.</entry>
   <entry key="event.lm-outskirts-33-uneventful-day.name">Día sin incidentes</entry>
   <entry key="event.lm-outskirts-33-uneventful-day.rules">Día sin incidentes. Sin efectos especiales.</entry>
   <entry key="event.lm-outskirts-34-curse.name">Maldición</entry>
-  <entry key="event.lm-outskirts-34-curse.rules">en un parche de malezas y flores muertas adyacente a un crudo
-vivienda. Una vieja bruja emerge inmediatamente gritando y
-gritando que tu Guerrera ha destruido sus lirios perfectos.
-Señala con el dedo a tu guerrero y lo maldice.
-malévolamente antes de regresar a su morada. Tu guerrero debe
-¡Estoy deduciendo inmediatamente 1 punto de suerte de forma permanente!</entry>
+  <entry key="event.lm-outskirts-34-curse.rules">Tu guerrero se adentra por accidente en un parche de hierbajos y flores muertas junto a una choza miserable. Al instante aparece una vieja bruja gritando que ha destruido sus lirios perfectos. Le apunta con el dedo y lo maldice con malevolencia antes de regresar a su guarida. Tu guerrero debe restar inmediatamente 1 punto de Suerte de forma permanente.</entry>
   <entry key="event.lm-outskirts-35-an-adventure.name">¡Una aventura!</entry>
   <entry key="event.lm-outskirts-35-an-adventure.rules">¡Consulta el Libro de Aventuras Definitivo para determinar en qué hazaña podrían participar los Guerreros a continuación!</entry>
   <entry key="event.lm-outskirts-36-animal-rampage.name">Alboroto animal</entry>
-  <entry key="event.lm-outskirts-36-animal-rampage.rules">atacando a los campesinos. Tu Guerrero debe tirar 2D6. Este es el
-número de animales que los atacan. Tira otros 1D6 y suma
-el nivel de batalla de tu guerrero, siendo la puntuación la cantidad de comodines
-animales que mata tu guerrero. Si queda algún animal, tu guerrero
-se lesiona la mano en la escaramuza y sufre-1 Armas matan por
-la próxima aventura.</entry>
+  <entry key="event.lm-outskirts-36-animal-rampage.rules">Una manada de animales salvajes está atacando a los campesinos. Tu guerrero debe tirar 2D6; ese es el número de animales que los están acosando. Tira después 1D6 y suma el Nivel de Batalla de tu guerrero; el resultado indica cuántos animales mata. Si queda alguno con vida, tu guerrero se lesiona la mano en la refriega y sufre -1 Habilidad de Armas durante la próxima Aventura.</entry>
   <entry key="event.lm-outskirts-41-stench.name">Hedor</entry>
-  <entry key="event.lm-outskirts-41-stench.rules">El olor a orina y excrementos es particularmente abrumador.
-segunda vez durante su estancia en este Acuerdo, entonces serán
-tan asqueados por el olor que sufren-1 Fuerza para el
-próxima aventura.</entry>
+  <entry key="event.lm-outskirts-41-stench.rules">El hedor a orina y excrementos es particularmente insoportable. Si es la segunda vez durante su estancia en este Asentamiento que tu guerrero sufre este Evento, queda tan asqueado por el olor que sufre -1 Fuerza durante la próxima Aventura.</entry>
   <entry key="event.lm-outskirts-42-famished.name">Famélico</entry>
-  <entry key="event.lm-outskirts-42-famished.rules">Tu guerrero debe comer una provisión u otro alimento que esté
-llevando para mantener su salud y fuerza. Si no tienen
-comida, tu Guerrero sufre - 1 Fuerza en la próxima Aventura.</entry>
+  <entry key="event.lm-outskirts-42-famished.rules">Tu guerrero debe consumir una Provisión u otro alimento que lleve encima para mantener la salud y las fuerzas. Si no tiene comida, sufre -1 Fuerza durante la próxima Aventura.</entry>
   <entry key="event.lm-outskirts-43-uneventful-day.name">Día sin incidentes</entry>
   <entry key="event.lm-outskirts-43-uneventful-day.rules">Día sin incidentes. Sin efectos especiales.</entry>
   <entry key="event.lm-outskirts-44-collapse.name">Colapsar</entry>
-  <entry key="event.lm-outskirts-44-collapse.rules">En medio de la noche, un muro se derrumba sobre la espalda de tu Guerrero.
-hacer cambio de leva p. Las piernas de tu guerrero están gravemente heridas y
-no pueden viajar durante 1D3 días y deben permanecer fuera del
-puertas del Asentamiento. Además sufren-1Movimientopor
-la próxima aventura. Mientras esté herido, tu guerrero no tiene</entry>
+  <entry key="event.lm-outskirts-44-collapse.rules">En mitad de la noche, un muro se derrumba sobre el campamento improvisado de tu guerrero. La pierna de tu guerrero queda gravemente herida y no puede viajar durante 1D3 días, por lo que debe permanecer fuera de las puertas del Asentamiento. Además, sufre -1 Movimiento durante la próxima Aventura. Mientras siga herido, no tiene que pagar Gastos de Vida.</entry>
   <entry key="event.lm-outskirts-45-spirit.name">Espíritu</entry>
-  <entry key="event.lm-outskirts-45-spirit.rules">El espíritu de un druida aparece frente a tu guerrero tarde a la
-noche y los acusa de destruir el follaje sagrado durante
-su reciente viaje al Acuerdo. Él exige que su
-El guerrero hace las paces plantando un árbol o un arbusto en un lugar sombreado.
-arboleda. Tu guerrero sufre -1 Suerte hasta que lo haga.
-1D3 días para hacer las paces y tu Guerrero debe tirar por
-5</entry>
+  <entry key="event.lm-outskirts-45-spirit.rules">El espíritu de un druida aparece ante tu guerrero en plena noche y lo acusa de haber destruido follaje sagrado durante su reciente viaje al Asentamiento. Exige que repare su falta plantando un árbol o un arbusto en una arboleda umbría. Tu guerrero sufre -1 Suerte hasta que lo haga. Tarda 1D3 días en expiar su culpa y, mientras lo hace, debe seguir tirando Gastos de Vida con normalidad.</entry>
   <entry key="event.lm-outskirts-46-noble.name">Noble</entry>
-  <entry key="event.lm-outskirts-46-noble.rules">Un noble influyente y su séquito galopan por
-hacia las puertas del Asentamiento y pronto una pequeña multitud se
-les bloquearon el paso para pedir comida y monedas. el noble
-Inexplicablemente ve a tu guerrero entre la multitud y señala con un
-fingeratthem.Roll1D6 uno de la siguiente tabla:
-1
-El noble está extremadamente irritado porque la multitud ha
-lo detuve. Es obvio para él que tu guerrero,
-Ser corpulento y fuerte en comparación con los frágiles mendigos, es
-el que está a cargo. Él dirige a sus guardias para que rodeen
-tu Guerrero agresivamente y los arrastran al frente
-de los nobles para una paliza severa. Tu guerrero debe
-deducir 1 de su puntuación de Heridas Iniciales
-permanentemente.
-2
-Los nobles codiciosos miran a uno de tus guerreros.
-Atesora (determinado al azar) y envía sus esclavos
-para obtenerlo. Bajo pena de muerte, tu Guerrero de mala gana
-entrega el artículo.
-3
-El noble sospecha de tu guerrero y pide la
-Vigila para detenerlos e interrogarlos. Para 1D3
-Días, tu guerrero es asado y golpeado hasta que finalmente
-ser multado con 1D6x10 de oro por holgazanear (tu Guerrero
-Debo vender artículos o equipos si es necesario).
-4
-Entre todos los miserables mendigos el compasivo
-El noble te ha elegido como destinatario de 1D6x10 de oro.
-5
-Thenoble observa atentamente que su guerrero puede ser de
-algún uso para una tarea particularmente importante.
-contratarlos por el día, pagándoles 1D6x20 de oro para
-cuide su caballo mientras esté en el Acuerdo. Además,
-tu guerrero puede visitar cualquier ubicación que no haya sido previamente visitada.
-visitado durante esta estancia en el Acuerdo y deberá pagar
-Vivir los gastos con normalidad. Tu guerrero regresa
-6
-El noble grita tu nombre y te hace señas.
-Familiarizado con sus recientes y heroicas empresas, desea
-Para donar 1D6x100 de oro a tu causa. Si tu Guerrero
-no se le permitió participar en el Acuerdo por ningún motivo,
-reprende al mando de vigilancia y a los funcionarios del acuerdo
-Quien me disculpa de inmediato con su Guerrero por cualquier
-malentendidos y permitirles el reingreso.
-Trate esto como una nueva visita al Acuerdo y su
-El guerrero puede visitar comerciantes y ubicaciones especiales incluso
-lo habían hecho previamente en este Acuerdo.</entry>
+  <entry key="event.lm-outskirts-46-noble.rules">Un noble influyente y su séquito cabalgan hacia las puertas del Asentamiento cuando una pequeña multitud les corta el paso pidiendo comida y monedas. Inexplicablemente, el noble ve a tu guerrero entre la multitud y lo señala con el dedo. Tira 1D6:
+
+1 El noble está furioso porque la muchedumbre lo ha detenido. Para él resulta obvio que tu guerrero, más corpulento y fuerte que los mendigos famélicos, es quien está al mando. Ordena a sus guardias que lo rodeen y lo arrastren ante él para darle una paliza ejemplar. Tu guerrero debe restar 1 punto de forma permanente a sus Heridas Iniciales.
+
+2 El noble codicioso posa la vista sobre uno de los objetos de Tesoro de tu guerrero, determinado al azar, y envía a sus lacayos a arrebatárselo. Bajo amenaza de muerte, tu guerrero se ve obligado a entregarlo.
+
+3 El noble sospecha de tu guerrero y llama a la Guardia para que lo detenga e interrogue. Durante 1D3 días, tu guerrero es hostigado y golpeado hasta que finalmente recibe una multa de 1D6x10 monedas de oro por vagabundear, vendiendo Equipo o Tesoro si hace falta. Después lo arrojan otra vez fuera de las puertas del Asentamiento.
+
+4 De entre todos los miserables mendigos, el noble compasivo ha elegido a tu guerrero para regalarle 1D6x10 monedas de oro.
+
+5 El noble observa con interés que tu guerrero podría servirle para una tarea de cierta importancia. Le ofrece contratarlo por un día, pagándole 1D6x20 monedas de oro para que cuide su caballo dentro del Asentamiento. Además, tu guerrero puede visitar cualquier Localización que no hubiera visitado todavía durante esta estancia y debe pagar Gastos de Vida con normalidad. Al final del día vuelve fuera de las puertas.
+
+6 El noble llama a tu guerrero por su nombre y le hace señas para que se acerque. Conocedor de sus recientes hazañas heroicas, desea donar 1D6x100 monedas de oro a su causa. Si a tu guerrero se le había prohibido la entrada al Asentamiento por cualquier motivo, el noble reprende al capitán de la guardia y a los funcionarios locales, que se disculpan de inmediato y le permiten volver a entrar. Puedes tratarlo como una nueva visita al Asentamiento y tu guerrero puede visitar Comerciantes y Localizaciones Especiales aunque ya lo hubiera hecho en esta misma estancia.</entry>
   <entry key="event.lm-outskirts-51-pests.name">Plagas</entry>
-  <entry key="event.lm-outskirts-51-pests.rules">Los traviesos animales salvajes se cuelan en el campamento de tu guerrero y
-roba algunas de las posesiones de tu guerrero. Tira 1D6 para ver qué
-han tomado:
-1
-Un objeto del tesoro (determinado al azar).
-2
-Una poción (determinada al azar).
-3
-Una cuerda.
-4
-Un vendaje.
-5
-Una disposición.
-Nada.
-6
-Si el Guerrero tiene tal objeto, debe descartarlo.
-no lo tienen, no hacen nada. En cualquier caso, tira de nuevo. Si
-Tira menos que tu primera puntuación para ver qué robó el animal, el
-El animal también robó el segundo artículo, y pronto. Tan pronto como
-tiras el mismo número otra vez o más, dejas de tirar.
-6</entry>
+  <entry key="event.lm-outskirts-51-pests.rules">Unos animales salvajes traviesos se cuelan en el campamento de tu guerrero y le birlan algunas pertenencias. Tira 1D6 para ver qué se llevan:
+
+1 Un objeto de Tesoro, determinado al azar.
+
+2 Una Poción, determinada al azar.
+
+3 Una Cuerda.
+
+4 Una Venda.
+
+5 Una Provisión.
+
+6 Nada.
+
+Si el guerrero posee ese objeto, debe descartarlo. Si no lo tiene, no ocurre nada. En cualquier caso, vuelve a tirar. Si obtienes un resultado inferior al primero, significa que los animales también han robado ese segundo objeto, y así sucesivamente. En cuanto saques el mismo número otra vez o uno mayor, deja de tirar.</entry>
   <entry key="event.lm-outskirts-52-an-adventure.name">¡Una aventura!</entry>
   <entry key="event.lm-outskirts-52-an-adventure.rules">¡Consulta el Libro de Aventuras Definitivo para determinar en qué hazaña podrían participar los Guerreros a continuación!</entry>
-  <entry key="event.lm-outskirts-53-pet-dog.name">perro mascota</entry>
-  <entry key="event.lm-outskirts-53-pet-dog.rules">Tu guerrero es adoptado por un perro pequeño. Lo sigue y luego emerge una vez completada la aventura para colmar de adoración a su nuevo amo. Rueda sobre la tabla de eventos de perros (página 24) para ver exactamente qué tipo de canino se ha adherido a ti. Tu guerrero puede matar al perro si quieres, pero sería algo cruel y despiadado y les costará 1.000 de oro pagar un entierro decente para el perro. Si tu guerrero ya tiene un perro como mascota, vuelve a tirar en esta tabla. De lo contrario, nómbralo y anótalo en tu Hoja de registro de aventuras del guerrero.</entry>
-  <entry key="event.lm-outskirts-54-lepers.name">leprosos</entry>
-  <entry key="event.lm-outskirts-54-lepers.rules">Los leprosos que piden comida abordan a tu guerrero. Los leprosos
-acércate a tu guerrero todos los días hasta que tu guerrero les dé
-comida, hasta que tu Guerrero parta hacia la próxima Aventura, o hasta
-tu Guerrero contrae su horrible aflicción.
-Cada día los leprosos se acercan a pedir comida, tu Guerrero
-debes tirar 2D6. Si ambos dados arrojan el mismo número, tu
-Guerrero ha contraído su asquerosa enfermedad y sufre-1
-Movimiento desde ahora hasta el final de la próxima Aventura.</entry>
-  <entry key="event.lm-outskirts-55-madman.name">Loco</entry>
-  <entry key="event.lm-outskirts-55-madman.rules">Un lunático trastornado se acerca a tu guerrero y se lanza hacia adelante.
-¡con un cuchillo! Tu Guerrero le asesta un golpe mortal en un acto claro
-de autodefensa. Hurgando en la casa del difunto
-pertenencias, tu guerrero se da cuenta de que el collar del hombre lleva
-la cresta del Duque Hilderwhelm. Monthsago, el sobrino del Duque
-Se rumoreaba que había desaparecido y ¡este debe ser él! Tira 1D6 para
-mira el resultado de las acciones de tu Guerrero:
-1
-Las autoridades están furiosas y acusan a tu Guerrero de
-¡asesinato! Son encarcelados y programados para ser
-ejecutado en 10 días. Al final de cada día que
-pases, incluido este, tira 1D6. Si el resultado es un 6,
-significa que un testigo del incidente se ha presentado
-para exonerar a tu Guerrero. Tu Guerrero entonces
-inmediatamente escoltado fuera de las puertas del Asentamiento.
-ningún testigo se presenta al final del décimo día,
-tu guerrero es decapitado en el centro del
-Acuerdo ante una multitud grande y burlona.
-2-3 Para evitar cualquier vergüenza pública sobre su
-Estado de ánimo del sobrino fallecido, Duke Hilderwhelm
-hace que arresten a tu guerrero por cargos falsos.
-Sólo retirará los cargos si su guerrero acepta pagar.
-afinar y guardar silencio sobre todo el incidente. Estos
-las negociaciones toman 1D6 días y le cuestan a su guerrero
-1D6x50oro. Si tu Guerrero no tiene la cantidad
-(después de vender cualquier Equipo o Tesoro para cubrir el
-costo) entonces el Duque toma todo el oro que tengan y
-retira los cargos.
-4-5 El influyente duque Hilder tiene su guerrero.
-arrestado alegando que su guerrero mató a su sobrino
-durante el aduel. Tu guerrero pasa 3 días en la cárcel mientras
-Las autoridades determinan si el duelo fue apropiado.
-6
-Duque Hilderwhelm, muy consciente de la
-estadomentaldeteriorado,pagaatuGuerrero1D6x100
-Gold guardará silencio sobre todo el incidente.
-SE</entry>
+  <entry key="event.lm-outskirts-53-pet-dog.name">Perro mascota</entry>
+  <entry key="event.lm-outskirts-53-pet-dog.rules">Tu guerrero es adoptado por un perro pequeño. Lo sigue a todas partes, merodeando entre las sombras mientras dura la lucha, y reaparece al terminar la aventura para colmar de adoración a su nuevo amo. Tira en la Tabla de Evento de Perro Mascota, página 24, para ver qué clase de can se le ha pegado. Tu guerrero puede matar al perro si quieres, pero sería una crueldad despiadada y le costará 1.000 monedas de oro pagar un entierro digno para el animal. Si tu guerrero ya tiene un perro mascota, vuelve a tirar en esta tabla. Si no, ponle nombre y anótalo en su Hoja de Registro de Aventuras.</entry>
+  <entry key="event.lm-outskirts-54-lepers.name">Leprosos</entry>
+  <entry key="event.lm-outskirts-54-lepers.rules">Un grupo de leprosos mendicantes aborda a tu guerrero pidiéndole comida. Los leprosos se le acercarán cada día hasta que les dé algo de comer, hasta que parta hacia la siguiente Aventura o hasta que contraiga su horrible dolencia. Cada día que se acerquen a suplicar alimento, tu guerrero debe tirar 2D6. Si ambos dados muestran el mismo resultado, ha contraído la enfermedad y sufre -1 Movimiento desde ese momento hasta el final de la próxima Aventura.</entry>
+  <entry key="event.lm-outskirts-55-madman.name">Lunático</entry>
+  <entry key="event.lm-outskirts-55-madman.rules">Un lunático trastornado se acerca a tu guerrero y se abalanza sobre él con un cuchillo. Tu guerrero le asesta un golpe mortal en un claro acto de legítima defensa. Al registrar las pertenencias del difunto, descubre que el collar del hombre lleva la cresta del duque Hilderwhelm. Hace meses corría el rumor de que el sobrino del duque había desaparecido, y todo indica que se trata de él. Tira 1D6 para ver el resultado de las acciones de tu guerrero:
+
+1 Las autoridades montan en cólera y acusan a tu guerrero de asesinato. Lo encarcelan y fijan su ejecución para dentro de 10 días. Al final de cada día que pase, incluido este, tira 1D6. Si sacas un 6, aparece un testigo del incidente que exonera a tu guerrero y este es escoltado inmediatamente fuera de las puertas del Asentamiento. Si no aparece ningún testigo antes de acabar el décimo día, tu guerrero es decapitado en el centro del Asentamiento ante una multitud numerosa y vociferante.
+
+2-3 Para evitar cualquier vergüenza pública sobre el estado mental de su sobrino fallecido, el duque Hilderwhelm manda arrestar a tu guerrero con cargos falsos. Solo retirará la acusación si tu guerrero acepta pagar una multa y guardar silencio sobre todo el asunto. Estas negociaciones duran 1D6 días y le cuestan 1D6x50 monedas de oro. Si no tiene esa cantidad, tras vender Equipo o Tesoro para cubrir el coste, el duque se queda con todo el oro que lleve y retira igualmente los cargos.
+
+4-5 El influyente duque Hilderwhelm hace arrestar a tu guerrero alegando que mató a su sobrino durante un duelo. Tu guerrero pasa 3 días en la cárcel mientras las autoridades determinan si el duelo fue legítimo.
+
+6 El duque Hilderwhelm, muy consciente del deteriorado estado mental de su sobrino, paga a tu guerrero 1D6x100 monedas de oro para que guarde silencio sobre el incidente.</entry>
   <entry key="event.lm-outskirts-56-uneventful-day.name">Día sin incidentes</entry>
   <entry key="event.lm-outskirts-56-uneventful-day.rules">Día sin incidentes. Sin efectos especiales.</entry>
   <entry key="event.lm-outskirts-61-mysterious-priest.name">Sacerdote misterioso</entry>
@@ -1170,14 +928,7 @@ extrañoune.OnceperAdventureyourGuerreromay
 utilizar el poder dentro de la piedra que les permite
 añade 1D6 adicional a su Fuerza para un Combate.</entry>
   <entry key="event.lm-outskirts-62-healer.name">Curador</entry>
-  <entry key="event.lm-outskirts-62-healer.rules">Un curandero está pasando por los campamentos improvisados fuera del
-Acuerdos que ofrecen curar cualquier enfermedad sin coste alguno. rodar
-1D6 y si la puntuación es 5 o 6, el sanador realmente tiene la
-poder para curar y restaura 1 punto a una Característica (tu
-elección) que ha sido previamente reducida por cualquier motivo (como
-como veneno, etc.). En cualquier otro aspecto, el sanador bendice tu
-Guerrero lamiendo su pulgar y luego frotándolo sobre tu
-La frente del Guerrero antes de seguir adelante.</entry>
+  <entry key="event.lm-outskirts-62-healer.rules">Un curandero está recorriendo los campamentos improvisados de fuera del Asentamiento, ofreciendo curar dolencias sin cobrar nada. Tira 1D6. Si sacas 5 o 6, el sanador realmente posee el don de curar y restaura 1 punto a una Característica, a tu elección, que hubiera sido reducida previamente por cualquier motivo, como por veneno. Con cualquier otro resultado, el curandero se limita a bendecir a tu guerrero, se humedece el pulgar con saliva y le frota la frente antes de seguir su camino.</entry>
   <entry key="event.lm-outskirts-63-heavy-rains.name">Fuertes lluvias</entry>
   <entry key="event.lm-outskirts-63-heavy-rains.rules">Una fuerte lluvia bombardea el asentamiento. sin lugar a
 el aguacero constante, tu guerrero
@@ -1185,34 +936,17 @@ buscar refugio de
 desarrolla una tos terrible y seca. Durante la próxima mazmorra,
 tu guerrero sufre -1 de golpe hasta que beba una poción curativa.</entry>
   <entry key="event.lm-outskirts-64-young-whelp.name">Cachorro joven</entry>
-  <entry key="event.lm-outskirts-64-young-whelp.rules">Tu guerrero atrapa a un joven pilluelo que intenta robarle el bolso.
-El niño afirma que es huérfano y se mantiene a sí mismo y a sus hijos.
-hermana y suplica misericordia. Si tu guerrero lo libera, tira 1D6:
-1-2 El joven desdeñoso promete NUNCA, NUNCA
-roba de nuevo y se aleja corriendo. Los miedos de tu guerrero son
-confirmado cuando meten la mano en su mochila y
-descubre que falta un elemento (determinado
-aleatoriamente).
-3-6 El niño cae de rodillas en un agradecimiento abrumador.
-Antes de partir le da a tu guerrero un pedazo de
-pergamino que le quitó a un comerciante en el
-Acuerdo, explicando que de todos modos no pueden leer.
-es la ubicación de un alijo secreto de oro valorado en 1D6x100
-oro. Si los Guerreros derrotan a todos los Monstruos en el
-Sala de objetivos durante la próxima aventura, tu
-El guerrero puede reclamar este tesoro.
-Si tu guerrero lo entrega al Watchroll1D6:
-1-3 El pobre muchacho no puede soportar la fuerte paliza.
-recibe de las autoridades y muere, dejando a su hermana
-cuidarse a sí misma. Según las leyes y costumbres locales
-Tu guerrero ahora es responsable del bienestar de la niña.
-De ahora en adelante, cada vez que tu Guerrero alcance un
-Acuerdo, deben enviar 1D6x50 oro para su vida
-gastos.
-4-6 El niño insolente ha sido una gran amenaza y el
-Watch ha estado intentando detener al joven cachorro.
-forthepastmonth.YourGuerreroisgiven 1D6x25gold
-por atrapar al pilluelo problemático.</entry>
+  <entry key="event.lm-outskirts-64-young-whelp.rules">Tu guerrero atrapa a un joven pilluelo intentando robarle la bolsa. El chico asegura ser huérfano y mantener él solo a su hermana, y suplica clemencia. Si tu guerrero lo deja marchar, tira 1D6:
+
+1-2 El mocoso insolente promete que NUNCA JAMÁS volverá a robar y sale corriendo. Los temores de tu guerrero se confirman cuando mete la mano en su mochila y descubre que le falta un objeto, determinado al azar.
+
+3-6 El muchacho cae de rodillas, desbordado de gratitud. Antes de partir le entrega a tu guerrero un trozo de pergamino que robó a un mercader del Asentamiento, explicando que total, él no sabe leer. En él figura la localización de un escondrijo secreto con 1D6x100 monedas de oro. Si los Guerreros derrotan a todos los Monstruos de la Sala Objetivo en la próxima aventura, tu guerrero puede reclamar ese tesoro.
+
+Si tu guerrero lo entrega a la Guardia, tira 1D6:
+
+1-3 El pobre chico no soporta la tremenda paliza que recibe de las autoridades y muere, dejando a su hermana a su suerte. Según las leyes y costumbres locales, tu guerrero pasa a ser responsable del bienestar de la niña. A partir de ahora, cada vez que alcance un Asentamiento, deberá enviar 1D6x50 monedas de oro para sus gastos de manutención.
+
+4-6 El pilluelo insolente ha sido una auténtica pesadilla y la Guardia llevaba un mes intentando atraparlo. Tu guerrero recibe 1D6x25 monedas de oro por capturar al problemático granuja.</entry>
   <entry key="event.lm-outskirts-65-an-adventure.name">¡Una aventura!</entry>
   <entry key="event.lm-outskirts-65-an-adventure.rules">¡Consulta el Libro de Aventuras Definitivo para determinar en qué hazaña podrían participar los Guerreros a continuación!</entry>
   <entry key="event.lm-outskirts-66-admittance.name">Entrada</entry>
@@ -1283,34 +1017,15 @@ sus manos desnudas. Cuando sacan a la bestia,
 El alfarero está eufórico porque nada resultó dañado.
 paga a tu guerrero 1D6x25 de oro por sus servicios.</entry>
   <entry key="event.lm-town-35-witchcraft.name">Brujería</entry>
-  <entry key="event.lm-town-35-witchcraft.rules">Tu guerrero es acusado de brujería y perseguido.
-las calles por una multitud enojada. Tira 1D6 en la siguiente tabla
-(el Cazador de Brujas puede añadir +1 a su puntuación):
-1-3 Tu guerrero escapa saltando por encima del asentamiento.
-pared y en el agua sucia del foso. Arrojado con
-huevos y frutas, se tambalean hacia el fondo
-reglas (página 3).
-4-5 Tu guerrero se agacha por un callejón lateral y escapa, pero
-¡De ahora en adelante deberás usar un disfraz cuando estés en público!
-Tu guerrero se vuelve enojado contra la multitud, exigiendo
-6
-explicación. Gritando al líder de la mafia, ellos
-establecer su autoridad sobre la multitud, que tímidamente
-regresa a sus chozas, deteniéndote solo para darle a tu guerrero
-1o0 de oro como forma de compensación.</entry>
-  <entry key="event.lm-town-36-pet-dog.name">perro mascota</entry>
-  <entry key="event.lm-town-36-pet-dog.rules">Tu guerrero es adoptado por un perro pequeño. Lo sigue a todas partes.
-En todas partes, acechando en las sombras mientras continúa la lucha.
-y luego emerger después de completar la aventura para ducharse
-su nuevo amo con adoración.RollonthePetDogEventTable
-(página 24) para ver exactamente qué tipo de canino se ha adherido
-sí mismo para ti.
-Tu guerrero puede matar al perro si quieres, pero sería mejor.
-Algo cruel y despiadado que hacer y les costará 1.000 de oro.
-¡Para pagar un entierro decente para el perro!
-Si tu guerrero ya tiene un perro como mascota, ignora este evento y
-tira de nuevo en la tabla de Eventos de la ciudad. Si no, nómbralo y anótalo.
-anota en tu Hoja de Registro de Aventuras del Guerrero.</entry>
+  <entry key="event.lm-town-35-witchcraft.rules">Tu guerrero es acusado de brujería y perseguido por las calles por una muchedumbre enfurecida. Tira 1D6 en la siguiente tabla. El Cazador de Brujas puede sumar +1 a su tirada:
+
+1-3 Tu guerrero escapa saltando por encima de la muralla del Asentamiento y cayendo en las aguas inmundas del foso. Cubierto de huevos y fruta podrida, logra salir por el otro lado y acaba Fuera de las Puertas. Consulta esas reglas.
+
+4-5 Tu guerrero se escurre por un callejón lateral y logra escapar, pero a partir de ahora tendrá que usar disfraz cuando salga en público.
+
+6 Tu guerrero se encara furioso con la multitud y exige una explicación. Gritando al cabecilla del populacho, logra imponer su autoridad y la turba se retira avergonzada a sus chozas, no sin antes darle 100 monedas de oro como compensación.</entry>
+  <entry key="event.lm-town-36-pet-dog.name">Perro mascota</entry>
+  <entry key="event.lm-town-36-pet-dog.rules">Tu guerrero es adoptado por un perro pequeño. Lo sigue a todas partes, merodeando entre las sombras mientras dura la lucha, y vuelve a aparecer al terminar la aventura para colmar de adoración a su nuevo amo. Tira en la Tabla de Evento de Perro Mascota para ver qué tipo de can se le ha pegado. Tu guerrero puede matar al perro si quieres, pero sería una acción cruel y despiadada y le costará 1.000 monedas de oro pagar un entierro digno para el animal. Si tu guerrero ya tiene un perro mascota, ignora este evento y vuelve a tirar en la tabla de Eventos de Villa. Si no, ponle nombre y anótalo en su Hoja de Registro de Aventuras.</entry>
   <entry key="event.lm-town-41-fooled.name">Engañado</entry>
   <entry key="event.lm-town-41-fooled.rules">Tu Guerrero compra un objeto que resulta ser una falsificación sin valor. Si tu Guerrero ya había comprado algo en este Asentamiento, debe descartar la compra más reciente, pues era falsa y no vale nada. Si aún no había realizado ninguna compra durante esta estancia, trátalo como un Día sin incidentes.</entry>
   <entry key="event.lm-town-42-inheritance.name">Herencia</entry>
@@ -1320,7 +1035,15 @@ anota en tu Hoja de Registro de Aventuras del Guerrero.</entry>
   <entry key="event.lm-town-44-steam-bath.name">Baño de vapor</entry>
   <entry key="event.lm-town-44-steam-bath.rules">Tu Guerrero pasa el resto del día en la embriagadora atmósfera de un baño de vapor, sudando los excesos de la noche anterior en la taberna. Sale sintiéndose mucho más sano y vigoroso que en mucho tiempo. Añade permanentemente +1 a su puntuación de Heridas Iniciales.</entry>
   <entry key="event.lm-town-45-overturned-cart.name">Carro volcado</entry>
-  <entry key="event.lm-town-45-overturned-cart.rules">Tu guerrero escucha un fuerte grito pidiendo ayuda alrededor del carro que se ha volcado y está aplastando a un niño local. Tu guerrero corre para intentar empujar el carro fuera del joven. Tira 1D6 y suma la fuerza de tu guerrero, luego busca el resultado a continuación: 6 o ¡Cuando tu guerrero levanta el carro, pierde su agarre! menos ¡El carro cae sobre el niño, mutilándolo! La familia del niño exige restitución por el accidente y tu Guerrero debe renunciar a la mitad de su oro o ser enviado a prisión durante 1D6 semanas. Si tu Guerrero no tiene oro, debe darle a la familia 1D3 Objetos del Tesoro (tu elección). 7 Tu guerrero logra mover el carro, pero el niño resulta herido en el proceso. Tu guerrero se siente tan terrible por la situación que le dan 1D6x50 de oro para cubrir el costo del tratamiento médico. 8-9 Tu guerrero mueve el pesado carro lo suficiente como para que alguien pueda sacar al niño, salvando así su vida. Su padre, un comerciante local, está muy agradecido de darle a tu guerrero 1D6x50 de oro. 10+ En una hazaña heroica, tu guerrero saca el enorme carro del niño y éste escapa ileso. Los espectadores aplauden animadamente y la familia del niño, que son nobles ricos, le da a tu guerrero 1D6x100 de oro y un objeto del tesoro de la sala de mazmorra, ¡ingratitud!</entry>
+  <entry key="event.lm-town-45-overturned-cart.rules">Tu guerrero oye un fuerte grito pidiendo ayuda a la vuelta de la esquina y, al acudir, descubre que un carro se ha volcado y está aplastando a un muchacho del pueblo. Corre a intentar apartarlo del niño. Tira 1D6 y suma la Fuerza de tu guerrero; consulta el resultado:
+
+6 o menos Cuando tu guerrero alza el carro, pierde el agarre. El carro vuelve a caer sobre el muchacho, dejándolo mutilado. La familia exige reparación por el accidente y tu guerrero debe entregar la mitad de su oro o ser enviado a prisión durante 1D6 semanas. Si no tiene oro, debe dar a la familia 1D3 objetos de Tesoro, a tu elección.
+
+7 Tu guerrero logra mover el carro, pero el niño resulta herido en el proceso. Tu guerrero se siente tan mal por ello que entrega 1D6x50 monedas de oro para pagar el tratamiento médico.
+
+8-9 Tu guerrero mueve el pesado carro lo suficiente para que alguien pueda sacar al niño, salvándole la vida. Su padre, un mercader local, se muestra enormemente agradecido y le entrega 1D6x50 monedas de oro.
+
+10+ En una hazaña heroica, tu guerrero aparta el enorme carro y el muchacho escapa ileso. Los espectadores prorrumpen en vítores y la familia del niño, que resulta ser de nobles acaudalados, entrega a tu guerrero 1D6x100 monedas de oro y un objeto de Tesoro de Sala de Mazmorra en agradecimiento.</entry>
   <entry key="event.lm-town-46-sword-for-sale.name">Espada en venta</entry>
   <entry key="event.lm-town-46-sword-for-sale.rules">Al pasar por un bazar, tu Guerrero se fija en una joven que vende una espada de magnífico aspecto. La mujer afirma que se trata de un tesoro familiar transmitido de generación en generación, pero la pobreza la obliga a venderla. Un comprador interesado se cierne sobre el hombro de tu Guerrero y deja claro que la comprará si él no lo hace. El precio es 1D6x100 monedas de oro. Si tu Guerrero decide comprarla, tira 1D6: 1 La espada funciona como una espada normal del Armero, pero está tan mal forjada que la primera vez que el Guerrero saque un 1 natural para impactar en combate, la hoja se rompe y debe descartarse. 2 La espada funciona como una espada normal del Armero, pero es pesada y está mal equilibrada: su portador sufre -1 Iniciativa mientras la empuñe. 3 La espada es en realidad una Espada Rúnica de Bronce y otorga +2 Iniciativa. 4 La espada es en realidad una Espada del Poder y da +1 Fuerza al portador. 5 La espada es en realidad una Hoja de Cobre Saltarina y da +1 Ataque al portador. 6 La espada es en realidad la Espada de Heartseeker y, una vez por Turno, tu Guerrero puede repetir la tirada de cualquiera de sus ataques fallidos.</entry>
   <entry key="event.lm-town-51-beggars.name">mendigos</entry>
@@ -1369,58 +1092,61 @@ suministros en esta tienda para el día. Esta tarea les otorga 35 de oro.</entry
   <entry key="event.lm-town-62-runaway.name">Fugitivo</entry>
   <entry key="event.lm-town-62-runaway.rules">Mientras camina por la calle principal, tu Guerrero oye un alboroto a la vuelta de la esquina. Un momento después, un enorme toro desbocado carga por la calle, destrozando puestos y sembrando el pánico. Tu Guerrero puede esconderse en un callejón y dejarlo pasar, o intentar detener al animal enfurecido. Si se esconde y deja pasar al toro, tira 1D6: 1-3 Tu Guerrero se oculta en las sombras esperando a que pase el peligro. Al asomarse por la esquina, un atracador le golpea con una barra metálica en la cabeza. Cuando recupera el sentido, su bolsa pesa 100 de oro menos. 4-6 Tras esperar nerviosamente unos minutos, tu Guerrero ve al toro alejarse rugiendo por una calle lateral. El peligro ha pasado y puede continuar con sus asuntos. Si tu Guerrero intenta detener al toro, tira 1D6: 1-2 Tu Guerrero aparta a los transeúntes y se planta ante la bestia con la espada desenvainada. El toro duda un instante y luego lo atropella brutalmente antes de seguir su camino. La multitud también lo pisotea al salir corriendo tras el animal, dejándolo dolorido en mitad de la calle. 3-4 Un único golpe de espada abate al toro. La multitud aclama a tu Guerrero y lo colma con 100 de oro, pero enseguida aparece el enfurecido dueño del animal, que le exige 150 de oro: era su semental premiado, y quería que lo detuvieran, no que lo mataran. 5-6 Tu Guerrero fulmina al toro con la mirada y la bestia se detiene resoplando y arañando el suelo. Le echa una cuerda al cuello y lo conduce de vuelta al establo. La multitud prorrumpe en vítores y le entrega 150 de oro.</entry>
   <entry key="event.lm-town-63-jealous-adventurer.name">Aventurero celoso</entry>
-  <entry key="event.lm-town-63-jealous-adventurer.rules">Sin que ellos lo sepan, tu guerrero está siendo observado y
-seguido por un joven. El extraño es un aventurero fracasado.
-y anhela la fama y la gloria que parece tener tu Guerrero.
-obtenido. Decide sabotear celosamente la habilidad de tu guerrero.
-logros.
-En la siguiente mazmorra queda claro que alguien ha
-alertó a los habitantes sobre la llegada de los Guerreros. Cada vez que un
-Ocurre un evento inesperado que revela monstruos, debes tirar
-1D6. Con una puntuación de 1 a 3, debes tirar dos veces en la Tabla de Monstruos.
-con la cantidad mínima de monstruos que llegan.
-4-6 tiras sólo una vez en la Mesa de Monstruos como de costumbre, pero el
-Llega el número máximo de monstruos.</entry>
-  <entry key="event.lm-town-64-join-the-watch.name">Únase a la guardia</entry>
+  <entry key="event.lm-town-63-jealous-adventurer.rules">Sin saberlo, tu guerrero está siendo observado y seguido por un joven. El extraño es un aventurero fracasado que ansía la fama y la gloria que, al parecer, tu guerrero sí ha conseguido. Consumido por la envidia, decide sabotear sus logros.
+
+En la siguiente mazmorra queda claro que alguien ha alertado a sus moradores de la llegada de los Guerreros. Cada vez que se produzca un Evento Inesperado que revele Monstruos, tira 1D6:
+
+1-3 Debes tirar dos veces en la Tabla de Monstruos, con la cantidad mínima de enemigos en cada resultado.
+
+4-6 Tira una sola vez en la Tabla de Monstruos, como de costumbre, pero llega el número máximo de Monstruos.</entry>
+  <entry key="event.lm-town-64-join-the-watch.name">Únete a la guardia</entry>
   <entry key="event.lm-town-64-join-the-watch.rules">El Capitán de la Guardia se fija en tu Guerrero como un recluta prometedor y, como anda escaso de efectivos, lo recluta a la fuerza durante una semana. Tu Guerrero puede intentar librarse haciendo una donación de 2D6x10 de oro a los fondos de la Guardia, o unirse. Si se une, no tiene que pagar Gastos de Vida durante esa semana y gana 20 de oro de salario. Sin embargo, mientras esté sirviendo en la Guardia no tendrá tiempo de visitar comerciantes ni Localizaciones Especiales.</entry>
   <entry key="event.lm-town-65-salesman.name">Vendedor</entry>
   <entry key="event.lm-town-65-salesman.rules">Un vendedor ha montado un puesto a las puertas de una posada vendiendo Agua Bendita. Asegura a tu Guerrero que protege de los malos espíritus e incluso puede destruir a los no muertos. Puedes comprar hasta 1D6 viales de Agua Bendita al precio de 1D6x50 de oro cada uno. Después de la compra, el vendedor recoge y desaparece en la posada. Tira por cada vial adquirido: con 1 o 2, el frasco no contiene más que agua normal y es inútil. Con cualquier otro resultado, el vial contiene auténtica Agua Bendita, purificada y bendecida por un sacerdote. Si se bebe, quien la tome queda protegido por un aura mágica durante 1 Turno y todos los ataques de Monstruos No Muertos contra él causan solo la mitad del Daño normal, redondeando hacia abajo. Si se arroja contra un Monstruo No Muerto, tira usando tu Habilidad de Proyectiles: cada impacto exitoso causa 1D6 Heridas sin modificadores de ningún tipo.</entry>
   <entry key="event.lm-town-66-an-adventure.name">¡Una aventura!</entry>
   <entry key="event.lm-town-66-an-adventure.rules">¡Consulta el Libro de Aventuras Definitivo para determinar en qué hazaña podrían participar los Guerreros a continuación!</entry>
   <entry key="event.lm-travel-act-of-nature-11-12-avalanche.name">Avalancha</entry>
-  <entry key="event.lm-travel-act-of-nature-11-12-avalanche.rules">El camino hacia el acuerdo lleva a los Guerreros entre dos
-Grandes montañas cubiertas de nieve. Al llegar al cañón, el
-Los guerreros se encuentran con una pequeña aldea. Los lugareños notifican
-Guerreros cuya ruta más allá ha sido cortada por un reciente
-avalancha. El viaje de los Guerreros termina cuando pierden toda esperanza
-de llegar a un pueblo o ciudad.</entry>
+  <entry key="event.lm-travel-act-of-nature-11-12-avalanche.rules">El camino hacia el Asentamiento conduce a los Guerreros entre dos grandes montañas cubiertas de nieve. Al llegar al desfiladero se encuentran con una pequeña aldea. Los lugareños les informan de que la ruta más allá ha quedado cortada por una avalancha reciente. El viaje de los Guerreros termina aquí, pues pierden toda esperanza de alcanzar una villa o una ciudad.</entry>
   <entry key="event.lm-travel-act-of-nature-13-14-quake.name">Terremoto</entry>
-  <entry key="event.lm-travel-act-of-nature-13-14-quake.rules">El terreno se abre frente a los Guerreros, creando una
-intransitables chasmmanymiles de largo. Los Guerreros tienen tres
-opciones:
-a)
-Abandonar cualquier esperanza que tengan de llegar a un Acuerdo,
-en cuyo caso deben pasar directamente al siguiente
-Aventura.
-b)
-Regrese a las cuevas que acaban de dejar y comience su
-viajar de nuevo desde cero tomando una ruta diferente.
-c)
-Use cualquier longitud de cuerda que tengan para cruzar
-abismo. Si cruzan el abismo con una cuerda, pueden
-no llevar consigo caballos, carros, etc., y deberá
-deséchelos una vez que hayan llegado de forma segura al
-otro lado.</entry>
+  <entry key="event.lm-travel-act-of-nature-13-14-quake.rules">La tierra se abre ante los Guerreros, creando una sima intransitable que se extiende a lo largo de muchas millas. Los Guerreros tienen tres opciones:
+
+a) Abandonar toda esperanza de llegar a un Asentamiento; en ese caso, deben pasar directamente a la siguiente Aventura.
+
+b) Regresar a las cuevas que acaban de dejar y comenzar de nuevo su viaje desde cero por una ruta distinta.
+
+c) Usar cualquier longitud de cuerda que lleven para cruzar la sima. Si la cruzan con cuerda, no podrán llevar consigo caballos, carros y similares, y además deberán descartar la cuerda una vez hayan alcanzado con seguridad el otro lado.</entry>
   <entry key="event.lm-travel-act-of-nature-15-16-heatwave.name">Ola de calor</entry>
   <entry key="event.lm-travel-act-of-nature-15-16-heatwave.rules">Esta región sufre una ola de calor sin precedentes y los Guerreros solo pueden viajar de noche, lo que añade 2 semanas a su viaje. Al comienzo de cada semana hasta que alcancen un Asentamiento, cada Guerrero debe tirar 1D6. Si obtiene un 1, debe restar 1 Herida de su puntuación de Heridas Iniciales de forma permanente. Si alguna vez llega a 0 Heridas Iniciales, muere y queda eliminado de la partida.</entry>
   <entry key="event.lm-travel-act-of-nature-21-22-tornado.name">Tornado</entry>
-  <entry key="event.lm-travel-act-of-nature-21-22-tornado.rules">Los Guerreros están descansando cuando un tornado atraviesa su campamento por sorpresa. Los vientos son feroces y deben luchar para no salir despedidos. Tira 1D6 por cada Guerrero y consulta la tirada más baja en la siguiente tabla. Si dos o más Guerreros empatan, vuelve a tirar entre ellos para determinar a la víctima. 1 Incapaz de resistir, tu Guerrero es alzado por los aires y se estrella contra el suelo. Sus compañeros deben llevarlo hasta un lugar seguro, lo que añade 1 semana al viaje. Cuando lleguen a su destino, el Guerrero deberá pagar 10 monedas de oro para ser curado. Si no puede pagarlas, el sanador se queda con todo su oro y además con un objeto de Equipo o Tesoro como pago. 2 Aferrándose desesperadamente a una gran roca, tu Guerrero solo logra salvarse aligerando su bolsa. Pierde 1D6x50 monedas de oro. 3-6 Tu Guerrero resiste los vientos aulladores, pero una de sus armas sale despedida de sus manos. Descarta un arma de tu elección.</entry>
+  <entry key="event.lm-travel-act-of-nature-21-22-tornado.rules">Los Guerreros descansan cuando un tornado atraviesa su campamento de improviso. Los vientos son feroces y deben luchar para no ser absorbidos y lanzados por los aires. Tira 1D6 por cada Guerrero y consulta el resultado más bajo en la siguiente tabla para ver qué le ocurre al Guerrero que haya obtenido esa puntuación. Si dos o más Guerreros empatan, vuelve a tirar entre ellos hasta determinar a la víctima:
+
+1 Incapaz de resistir, tu guerrero es alzado por los aires y se estrella contra el suelo. Los demás deben llevarlo hasta un lugar seguro, lo que añade 1 semana al viaje. En cuanto el grupo llegue a su destino, el guerrero herido deberá pagar 100 monedas de oro para curarse. Si no puede pagarlas, el sanador se queda con todo el oro que lleve y además con un objeto de Equipo o Tesoro como pago.
+
+2 Aferrándose desesperadamente a una gran roca, tu guerrero solo consigue mantenerse en el suelo aligerando su bolsa en 1D6x50 monedas de oro.
+
+3-6 Tu guerrero resiste los vientos aulladores, pero paga el precio: una de sus armas sale despedida de sus manos. Descarta una de sus armas, a tu elección.</entry>
   <entry key="event.lm-travel-act-of-nature-23-24-plague.name">Plaga</entry>
-  <entry key="event.lm-travel-act-of-nature-23-24-plague.rules">Los Guerreros llegan a un gran pueblo presa de una plaga terrible. Todos los caminos, salvo aquel por el que han llegado, están bloqueados. Su viaje termina aquí y ya no pueden seguir directamente hacia la siguiente Aventura, aunque sí pueden quedarse en el pueblo enfermo. Si los Guerreros se quedan, usa las reglas normales de Asentamiento para determinar lo que hacen allí, pero cada vez que un Guerrero haga una tirada en cualquier tabla por cualquier motivo deberá tirar además 1D6 en la siguiente tabla: 1 El Guerrero contrae la plaga y sufre -1 Fuerza durante la próxima Aventura. 2 El Guerrero contrae la plaga y sufre -1 Resistencia durante la próxima Aventura. 3-6 El Guerrero no se ve afectado. Una vez que un Guerrero haya sacado 1 o 2 en esta tabla, no necesita volver a tirar en ella durante el resto de su estancia en el pueblo apestado.</entry>
+  <entry key="event.lm-travel-act-of-nature-23-24-plague.rules">Los Guerreros llegan a una gran villa presa de una plaga terrible. Todos los caminos, salvo aquel por el que han entrado, están bloqueados. Su viaje termina aquí y ahora deben o bien pasar directamente a la siguiente Aventura o bien quedarse en la villa apestada. Si se quedan, usa las reglas normales de Asentamiento para determinar lo que hacen allí, pero cada vez que un Guerrero haga una tirada en cualquier tabla por cualquier motivo, deberá tirar además 1D6 en la siguiente tabla:
+
+1 El Guerrero contrae la plaga y sufre -1 Fuerza durante la próxima Aventura.
+
+2 El Guerrero contrae la plaga y sufre -1 Resistencia durante la próxima Aventura.
+
+3-6 El Guerrero no se ve afectado, por ahora.
+
+Una vez que un Guerrero haya sacado 1 o 2 en esta tabla, no necesita volver a tirar en ella durante el resto de su estancia en la villa apestada.</entry>
   <entry key="event.lm-travel-act-of-nature-25-26-volcanic-eruption.name">Erupción volcánica</entry>
   <entry key="event.lm-travel-act-of-nature-25-26-volcanic-eruption.rules">Mientras cruzan un paso de montaña, los Guerreros se estremecen al oír una explosión atronadora. Del cielo comienzan a caer fragmentos de lava fundida. Mientras la zona se llena de fuego volcánico y ceniza, los Guerreros deben huir para no asfixiarse. Cada Guerrero debe tirar 1D6 y sumar su Resistencia y Armadura. Si el resultado es menor de 8, queda gravemente escaldado y quemado y debe restar 1 Herida de su puntuación de Heridas Iniciales de forma permanente. Además, el grupo debe abandonar la zona, lo que añade 1 semana a su viaje.</entry>
   <entry key="event.lm-travel-act-of-nature-31-32-famine.name">Hambruna</entry>
-  <entry key="event.lm-travel-act-of-nature-31-32-famine.rules">Durante su viaje, los Guerreros atraviesan tierras asoladas por el hambre y la sequía. Como héroes dignos que son, cada Guerrero entrega algo a los campesinos necesitados. Tira 1D6 por cada Guerrero en la siguiente tabla: 1-2 Tu Guerrero entrega un objeto de Tesoro a los campesinos. 3 Tu Guerrero dona 100 monedas de oro a los pobres. 4-5 Tu Guerrero dona 1D6x10 monedas de oro a los pobres. 6 Conmovido por su generosidad, el anciano del pueblo saca de su casa una espada cuidadosamente envuelta y se la entrega a tu Guerrero a cambio de 1D6x50 monedas de oro. La hoja es una espada afilada y causa +1D3 Heridas adicionales cada vez que hiere a un Monstruo. Sin embargo, nunca puede venderse, pues cualquier intento de deshacerse de ella hace que regrese misteriosamente al pueblo. Si más de un jugador obtiene un 6, roba un contador de Guerrero para determinar quién recibe la espada y vuelve a tirar por los demás.</entry>
+  <entry key="event.lm-travel-act-of-nature-31-32-famine.rules">En sus viajes, los Guerreros atraviesan tierras malditas por el hambre y la sequía. Como héroes dignos que son, cada Guerrero entrega parte de sus riquezas a los campesinos empobrecidos. Tira 1D6 por cada Guerrero en la siguiente tabla:
+
+1-2 Tu guerrero entrega un objeto de Tesoro a los campesinos.
+
+3 Tu guerrero dona 100 monedas de oro a los pobres.
+
+4-5 Tu guerrero dona 1D6x10 monedas de oro.
+
+6 Conmovido por su bondad y preocupación, el anciano del pueblo saca de su casa una espada cuidadosamente envuelta y se la entrega a tu guerrero a cambio de 1D6x50 monedas de oro. La hoja es una Espada Afilada y causa +1D3 Heridas cada vez que hiere a un Monstruo. Sin embargo, la espada nunca puede venderse: cualquier intento de deshacerse de ella hace que regrese misteriosamente al pueblo. Si más de un jugador obtiene un 6, roba un contador de Guerrero para determinar quién recibe la espada y vuelve a tirar por los demás.</entry>
   <entry key="event.lm-travel-act-of-nature-33-34-forest-fire.name">incendio forestal</entry>
   <entry key="event.lm-travel-act-of-nature-33-34-forest-fire.rules">Un enorme incendio forestal está fuera de control en esta zona. el
 Los guerreros deben pasar una semana más en su viaje mientras
@@ -1428,46 +1154,23 @@ sortear el incendio.</entry>
   <entry key="event.lm-travel-act-of-nature-35-36-lightning.name">Rayo</entry>
   <entry key="event.lm-travel-act-of-nature-35-36-lightning.rules">Mientras los Guerreros montan el campamento en la cima de una colina, una tormenta se reúne sobre ellos. El cielo se ennegrece, truena y un relámpago cae del firmamento para golpear a uno de los Guerreros en la cabeza. Tira 1D6 por cada Guerrero. El que saque la puntuación más baja es alcanzado por el rayo, que funde su armadura. Pierde dos piezas de armadura, por ejemplo un escudo y un casco. Si no tiene dos piezas, la armadura que lleve queda destruida y el relámpago además prende fuego a su ropa. Llegará al siguiente Asentamiento chamuscado, andrajoso y deberá comprar ropa y botas nuevas.</entry>
   <entry key="event.lm-travel-act-of-nature-41-42-flood.name">Inundación</entry>
-  <entry key="event.lm-travel-act-of-nature-41-42-flood.rules">El tiempo ha estado mal últimamente y la tierra está formando millas.
-alrededor se ha inundado, creando un lago intransitable. Los guerreros
-¿Pueden abandonar cualquier esperanza que tengan de alcanzar sus objetivos?
-destino, en cuyo caso deberán pasar directamente al siguiente
-Aventúrate o paga 20 de oro cada uno a un barquero para que los lleve
-a través de la obstrucción.</entry>
+  <entry key="event.lm-travel-act-of-nature-41-42-flood.rules">El tiempo ha sido nefasto últimamente y las tierras de millas a la redonda se han inundado, formando un lago intransitable. Los Guerreros pueden abandonar toda esperanza de llegar a su destino, en cuyo caso deben pasar directamente a la siguiente Aventura, o pagar 20 monedas de oro cada uno a un barquero para que los lleve al otro lado.</entry>
   <entry key="event.lm-travel-act-of-nature-43-44-hailstorm.name">Granizada</entry>
-  <entry key="event.lm-travel-act-of-nature-43-44-hailstorm.rules">Trozos de hielo del tamaño de huevos de pájaro bombardean a los Guerreros mientras
-caminan por el camino. Huyen para cubrirse en ruinas
-cabaña, pero en su prisa, cada guerrero deja caer un objeto de
-Tesoro de la sala de la mazmorra. Cuando la tormenta finalmente termine
-Los guerreros recuperan el objeto. Tira 1D6 para que cada guerrero vea
-en qué estado se encuentra el artículo:
-1-3 El granizo ha dañado el artículo sin posibilidad de reparación. Deséchalo
-inmediatamente.
-4-6 El artículo no ha sufrido daños por el granizo.</entry>
+  <entry key="event.lm-travel-act-of-nature-43-44-hailstorm.rules">Pedazos de hielo del tamaño de huevos de ave bombardean a los Guerreros mientras avanzan por el camino. Huyen a refugiarse en una cabaña ruinosa, pero en la prisa cada Guerrero deja caer un objeto de Tesoro de Sala de Mazmorra. Cuando por fin termina la tormenta, recuperan el objeto. Tira 1D6 por cada Guerrero para ver en qué estado se encuentra:
+
+1-3 El granizo ha destrozado el objeto sin remedio. Debe descartarse inmediatamente.
+
+4-6 El objeto no ha sufrido daños.</entry>
   <entry key="event.lm-travel-act-of-nature-45-46-drought.name">Sequía</entry>
-  <entry key="event.lm-travel-act-of-nature-45-46-drought.rules">Los días se vuelven cada vez más calurosos y no llueve del
-cielo. Los pozos de agua están vacíos al llegar y los arroyos tienen
-secado en el área circundante. Cada Guerrero debe tirar 1D6
-a continuación:
-1
-Tu guerrero está muy deshidratado y tiene la garganta
-Se siente como un fuego furioso. Se derrumban a menudo y sus
-los acompañantes deben llevarlos con frecuencia, sumando así 1
-semana al viaje (acumulativo con otros Guerreros
-resultado total 1 y 2). Además, el Guerrero debe
-resta 1 herida permanentemente de su valor inicial
-Las heridas puntúan permanentemente.
-2
-Tu guerrero hace todo lo que puede para caminar
-adelante pero ralentiza el grupo por 1 semana
-(acumulativo con otros Guerreros que obtienen resultados 1 y 2).
-3-5 Tu guerrero ocasionalmente se siente abrumado. aunque
-adelante.
-6
-Tu guerrero quiere continuar. cuando ellos
-Cuando emergen de la sequía, son mucho más fuertes. tu
-El guerrero añade permanentemente +1 a sus heridas iniciales.
-puntuación!</entry>
+  <entry key="event.lm-travel-act-of-nature-45-46-drought.rules">Los días se vuelven cada vez más abrasadores y no cae una sola gota de lluvia. Los pozos aparecen secos al llegar y los arroyos se han evaporado por toda la región. Cada Guerrero debe tirar 1D6:
+
+1 Tu guerrero está gravemente deshidratado y siente la garganta como si le ardiera por dentro. Se desploma con frecuencia y sus compañeros tienen que cargar con él, lo que añade 1 semana al viaje, acumulativa con otros Guerreros que obtengan resultado 1 o 2. Además, el Guerrero debe restar 1 Herida de forma permanente a sus Heridas Iniciales.
+
+2 Tu guerrero hace todo lo posible por seguir adelante, pero ralentiza al grupo. Añade 1 semana al viaje, acumulativa con otros Guerreros que obtengan 1 o 2.
+
+3-5 Tu guerrero se ve superado en ocasiones. Aunque está reseco y con la piel abrasada, continúa avanzando.
+
+6 Tu guerrero se obliga a seguir adelante por pura voluntad. Cuando por fin dejan atrás la sequía, emerge de ella más duro que antes. Añade permanentemente +1 a sus Heridas Iniciales.</entry>
   <entry key="event.lm-travel-act-of-nature-51-52-blizzard.name">Ventisca</entry>
   <entry key="event.lm-travel-act-of-nature-51-52-blizzard.rules">Una tormenta de nieve aúlla por toda la tierra, envolviendo todo de blanco.
 Sin estar preparados, los Guerreros quedan atrapados en un frío amargo.
@@ -1492,9 +1195,7 @@ viaje de una semana.</entry>
   <entry key="event.lm-travel-act-of-nature-61-62-dense-fog.name">Niebla densa</entry>
   <entry key="event.lm-travel-act-of-nature-61-62-dense-fog.rules">Mientras los Guerreros cruzan una cresta escarpada, una niebla espesa cae rápidamente sobre la zona. Si deciden rodearla, deben añadir 1 semana a su viaje. Si optan por seguir avanzando a través de la niebla, tira 1D6 en la siguiente tabla: 1 Los Guerreros salen de la cresta envuelta en bruma frente a un pueblo y descubren que han estado viajando en la dirección equivocada. Su viaje termina. 2 Uno de los Guerreros, determinado al azar, está a punto de caer por la cresta. Otro lo salva, pero una de las pertenencias del primero, a tu elección, se precipita al barranco y se pierde. Vuelve a tirar en esta tabla. 3-4 La niebla es tan espesa que los Guerreros avanzan con extrema cautela por la cresta. Vuelve a tirar en esta tabla. 5 La niebla acaba por disiparse y los Guerreros logran cruzar la cresta sin más incidentes. 6 Los Guerreros cruzan la cresta y, cuando la niebla se levanta, ven una ciudad a lo lejos. Pueden quedarse allí o continuar hacia su destino original.</entry>
   <entry key="event.lm-travel-act-of-nature-63-64-glorious-weather.name">Tiempo glorioso</entry>
-  <entry key="event.lm-travel-act-of-nature-63-64-glorious-weather.rules">El sol brilla sobre campos de trigo dorado y todo está bien.
-el mundo. Habiendo caminado muchos kilómetros y muchos días
-En un reino sombrío e inhóspito, los Guerreros deciden tomarlo.</entry>
+  <entry key="event.lm-travel-act-of-nature-63-64-glorious-weather.rules">El sol brilla sobre campos de trigo dorado y el mundo parece, por una vez, estar en paz. Tras haber caminado durante muchas millas y muchos días por parajes sombríos e inhóspitos, los Guerreros deciden tomárselo con calma y disfrutar del paisaje, añadiendo 1 semana a su viaje.</entry>
   <entry key="event.lm-travel-act-of-nature-65-66-storm.name">Tormenta</entry>
   <entry key="event.lm-travel-act-of-nature-65-66-storm.rules">Una tormenta azota el campamento de los Guerreros y destroza sus tiendas y equipo bajo un aguacero torrencial. Cada Guerrero pierde un objeto de Tesoro, elegido al azar.</entry>
   <entry key="event.lm-travel-encounter-11-12-mystic.name">Místico</entry>
@@ -1798,25 +1499,20 @@ Los Guerreros pueden sobornar al capitán para que libere a sus
 camarada y dejándolos seguir su camino. El soborno
 asciende a 150 de oro de cada uno de los restantes
 Guerreros.</entry>
-  <entry key="event.lm-travel-event-45-46-which-road.name">cual camino</entry>
-  <entry key="event.lm-travel-event-45-46-which-road.rules">El camino se divide en dos ante los Guerreros. un camino lleva a
-su destino elegido, pero desde su mapa es imposible
-di cuál. ¿Toman la bifurcación de la izquierda o la de la derecha?
-Una vez que los jugadores hayan acordado qué camino tomarán los Guerreros,
-tira 1D6 en la siguiente tabla:
-1-3 Los Guerreros eligieron el camino correcto y pueden continuar
-en su viaje.
-4-6 Los guerreros tomaron la ruta equivocada y terminaron en dupata.
-pequeño pueblo, terminando su viaje prematuramente.</entry>
+  <entry key="event.lm-travel-event-45-46-which-road.name">¿Qué camino?</entry>
+  <entry key="event.lm-travel-event-45-46-which-road.rules">El camino se divide en dos ante los Guerreros. Uno conduce a su destino elegido, pero por el mapa es imposible saber cuál. ¿Toman el desvío de la izquierda o el de la derecha? Una vez que los jugadores se hayan puesto de acuerdo, tira 1D6:
+
+1-3 Los Guerreros eligen la ruta correcta y pueden continuar su viaje.
+
+4-6 Los Guerreros escogen el camino equivocado y terminan en una pequeña aldea, dando por concluido su viaje antes de tiempo.</entry>
   <entry key="event.lm-travel-event-51-52-ceremony.name">Ceremonia</entry>
-  <entry key="event.lm-travel-event-51-52-ceremony.rules">Los Guerreros escuchan sonidos extraños detrás de unas grandes rocas y cuando investigan se dan cuenta de que han interrumpido una ceremonia sagrada que estaba celebrando un grupo de fieles. Tira 1D6 para ver la reacción de los adoradores: Los adoradores están furiosos porque su ceremonia ha sido interrumpida por personas ajenas. Comenzaron a cantar una maldición sobre los guerreros, ahuyentándolos del área. La próxima vez que cada Guerrero obtenga un &apos;6&apos; en una tirada de 1D6, deberá tratarlo como un &apos;1&apos;. 5-6 ¡Los adoradores están extasiados al ver a los Guerreros y afirman que sus oraciones han sido contestadas! ¡Insisten en presentar cada elemento guerrero de Dungeon Room Treasure!</entry>
+  <entry key="event.lm-travel-event-51-52-ceremony.rules">Los Guerreros oyen sonidos extraños detrás de unos grandes peñascos y, al investigar, descubren que han interrumpido una ceremonia sagrada celebrada por un grupo de adoradores. Tira 1D6 para ver cómo reaccionan:
+
+1-4 Los adoradores montan en cólera porque unos forasteros han interrumpido su ceremonia. Empiezan a entonar una maldición sobre los Guerreros, expulsándolos de la zona. La próxima vez que cada Guerrero saque un &apos;6&apos; en una tirada de 1D6, deberá tratarlo como si fuera un &apos;1&apos;.
+
+5-6 Los adoradores se muestran extasiados al ver a los Guerreros y afirman que sus plegarias han sido escuchadas. Insisten en entregar a cada Guerrero un objeto de Tesoro de Sala de Mazmorra.</entry>
   <entry key="event.lm-travel-event-53-54-double-back.name">Volver sobre sus pasos</entry>
-  <entry key="event.lm-travel-event-53-54-double-back.rules">Para ver el sol, los Guerreros emergen a un claro lúgubre. en
-frente a ellos hay una entrada a una cueva en una pared rocosa escarpada. Después de un
-estudio del momento, lo reconocen como la salida misma por la cual
-¡Salieron de la mazmorra!
-Los Guerreros han logrado recuperarse
-¡donde comenzaron y ahora deben partir de nuevo!</entry>
+  <entry key="event.lm-travel-event-53-54-double-back.rules">Tras muchos días de viaje a través de una maleza tan densa que apenas podían ver el sol, los Guerreros emergen a un claro sombrío. Frente a ellos hay la entrada de una cueva en una pared rocosa escarpada. Tras unos instantes de observación, la reconocen como la misma salida por la que abandonaron la mazmorra. Los Guerreros han logrado regresar al punto de partida y ahora deben emprender el viaje de nuevo desde cero.</entry>
   <entry key="event.lm-travel-event-55-56-mage-battle.name">Batalla de magos</entry>
   <entry key="event.lm-travel-event-55-56-mage-battle.rules">A medida que los Guerreros se acercan a las afueras de una aldea abandonada,
 se dan cuenta de que están invadiendo la zona de combate de
@@ -1874,23 +1570,15 @@ su viaje.
 sin pérdida de tiempo.
 18</entry>
   <entry key="event.lm-travel-event-63-64-ransom.name">Rescate</entry>
-  <entry key="event.lm-travel-event-63-64-ransom.rules">Los Guerreros llegan al borde del geofagully cuando un jinete enmascarado
-se acerca desde el otro lado. Confundir a los Guerreros con
-representante del barón local, exige que arrojen
-sobrerescate de 2D6 x 100 de oro (acepta elementos del Tesoro
-de igual valor) ¡o matará a la hija del barón!
-Si los Guerreros pagan el rescate deben tirar 1D6 en la tirada
-tabla a continuación:
-1-4 El jinete enmascarado agarra el oro y sale
-vista. ..
-5-6 Themaskedrider agarra el oro y le dice a los Guerreros
-donde podrán encontrar a la hija del barón viva y
-bueno. Cuando lleguen al siguiente asentamiento, el barón será
-muy agradecido de tener a su hija de regreso sana y salva
-que les paga a los Guerreros el doble de lo que pagaron
-el jinete enmascarado.
-Si los Guerreros no pagan el rescate, cuando lleguen al
-siguiente Asentamiento, deben tirar 1D6 en la siguiente tabla:
+  <entry key="event.lm-travel-event-63-64-ransom.rules">Los Guerreros llegan al borde de una hondonada cuando un jinete enmascarado se acerca desde el otro lado. Confundiéndolos con representantes del barón local, exige que le lancen un rescate de 2D6x100 monedas de oro, aceptando también objetos de Tesoro por el mismo valor, o matará a la hija del barón.
+
+Si los Guerreros pagan el rescate, deben tirar 1D6:
+
+1-4 El jinete enmascarado agarra el oro y desaparece de vista.
+
+5-6 El jinete enmascarado recoge el oro y les dice a los Guerreros dónde pueden encontrar a la hija del barón, sana y salva. Cuando lleguen al siguiente Asentamiento, el barón estará tan agradecido de recuperarla que pagará a los Guerreros el doble de lo que entregaron al secuestrador.
+
+Si los Guerreros no pagan el rescate, cuando lleguen al siguiente Asentamiento deben tirar 1D6:
 Los Guerreros son arrestados por el Barón después de algunos
 Los lugareños juran que vieron a los Guerreros hablando con los
 jinete enmascarado. Cuando aparece el cadáver de su hija
@@ -2051,13 +1739,7 @@ En el siguiente Acuerdo, los Guerreros son recompensados con
 oro que se distribuye entre todos los Guerreros
 uniformemente.</entry>
   <entry key="event.lm-travel-place-21-22-garden.name">Jardín</entry>
-  <entry key="event.lm-travel-place-21-22-garden.rules">Los Guerreros notan una pequeña puerta de madera justo al lado del camino principal.
-lo que conduce a un jardín de lujo lleno de verduras maduras. el
-Los guerreros cargan sus mochilas con los abundantes cultivos que crecen en
-thegardenandeatwell durante varios días después. lleno de
-Con renovado vigor, los Guerreros pueden viajar a un ritmo más rápido
-y así reducir el tiempo de viaje en una semana.
-19</entry>
+  <entry key="event.lm-travel-place-21-22-garden.rules">Los Guerreros descubren una pequeña puerta de madera justo al borde del camino principal, que da acceso a un exuberante jardín lleno de verduras maduras. Los Guerreros llenan sus mochilas con las abundantes cosechas y comen bien durante varios días. Repletos de energías renovadas, pueden avanzar a mejor ritmo y reducen el tiempo de viaje en 1 semana.</entry>
   <entry key="event.lm-travel-place-23-24-encampment.name">Campamento</entry>
   <entry key="event.lm-travel-place-23-24-encampment.rules">Los Guerreros se encuentran con el campamento de un pequeño grupo de
 soldados que están siendo desplegados en una provincia cercana. ellos
@@ -2376,11 +2058,7 @@ por 1D3 x 100 piezas de oro cada una.
 Si ninguno de los Guerreros obtiene 8 o más, entonces los pájaros gigantes
 regresa agresivamente, obligándolos a continuar su camino.</entry>
   <entry key="event.lm-travel-structure-or-object-33-34-bad-map.name">Mal mapa</entry>
-  <entry key="event.lm-travel-structure-or-object-33-34-bad-map.rules">El viaje de los Guerreros ha terminado, pero el Acuerdo en el que estaban
-hacia el que se dirige resulta estar mal marcado en el mapa, y es
-littlemorethanahamlet. Los Guerreros pueden quedarse allí de todos modos
-y comprar equipos, etc., pero debe comprobar la disponibilidad de los artículos en cuanto a
-un pueblo.</entry>
+  <entry key="event.lm-travel-structure-or-object-33-34-bad-map.rules">El viaje de los Guerreros ha terminado, pero el Asentamiento al que se dirigían está mal señalado en el mapa y no resulta ser más que una simple aldea. Los Guerreros pueden quedarse allí de todos modos y comprar equipo y demás, pero deberán comprobar la disponibilidad de objetos como si estuvieran en una Aldea.</entry>
   <entry key="event.lm-travel-structure-or-object-35-36-monolith.name">Monolito</entry>
   <entry key="event.lm-travel-structure-or-object-35-36-monolith.rules">En medio del bosque, los Guerreros se encuentran con un enorme
 monolito de piedra; su origen desconocido y su propósito
@@ -2394,48 +2072,17 @@ todavía ocurre con una tirada de 1. Sólo un guerrero puede usar esta habilidad
 cualquier momento, no es acumulativo. Una vez utilizada, esta habilidad es
 ido para siempre.</entry>
   <entry key="event.lm-travel-structure-or-object-41-42-damaged-wagon.name">Vagón Dañado</entry>
-  <entry key="event.lm-travel-structure-or-object-41-42-damaged-wagon.rules">Los guerreros se encuentran con un carro averiado que parece
-han sido descartados al costado del camino. Los guerreros pueden
-intentar arreglar el vagón y usarlo para reducir su tiempo de viaje
-al próximo Acuerdo.
-1
-Por mucho que lo intenten. los Guerreros no pueden
-conseguir que la pila de restos funcione como el vagón
-una vez fue. Los Guerreros dedican mucho tiempo y energía
-tratando de repararlo que su tiempo de viaje se extiende por
-dos semanas.
-2
-Thewagon resulta ser más problemático de lo que vale la pena.
-y los Guerreros apropiadamente lo abandonan al lado del
-camino. El tiempo dedicado a intentar solucionarlo añade una semana a
-su viaje.
-3-4 Los Guerreros logran poner operativo el vagón
-pero se descompone repetidamente y los Guerreros salvan
-tiempo en su viaje esta semana. Para cada adicional
-semana que viajan con el carro, los Guerreros deben rodar
-fora Travelling Hazard como normal, pero también debe continuar
-esta tabla hasta que obtengan un resultado diferente.
-5
-Los guerreros pueden arreglar el carro y su viaje.
-¡el tiempo para el próximo Acuerdo se reduce en una semana!
-Desafortunadamente, el carro se desmorona justo cuando llegan.
-las puertas del asentamiento. No hay posibilidad de repararlo
-y debe ser desechado inmediatamente.
-6
-Los Guerreros restauran el vagón en excelentes condiciones.
-El tiempo de viaje hasta el siguiente Asentamiento se reduce en
-¡dos semanas!
-Los Guerreros pueden quedarse con el carro como propio y
-eliminarán 2 semanas de su viaje a cualquier Acuerdo.
-Pero mientras lo tengan, deberán tirar 1D6 cada uno.
-momento en que lleguen a un acuerdo. Si la puntuación es un 6, el
-El propietario del vagón ha desechado la basura y el
-Los guerreros ya no tienen que rodar hacia el carro cuando
-llegar a un acuerdo. Pero si el resultado es 1, el carro
-fue reportado robado y autoridades arrestan a los Guerreros
-por robo. Son encarcelados por 1D3 días y
-Multado con 1D6 x 25 de oro a cada uno y el vagón es devuelto a su lugar.
-legítimo propietario.</entry>
+  <entry key="event.lm-travel-structure-or-object-41-42-damaged-wagon.rules">Los Guerreros se topan con un carro averiado que parece haber sido abandonado al borde del camino. Pueden intentar repararlo y usarlo para reducir el tiempo de viaje hasta el siguiente Asentamiento:
+
+1 Por mucho que lo intenten, los Guerreros son incapaces de hacer que el montón de restos vuelva a funcionar como el carro que una vez fue. Invierten tanto tiempo y esfuerzo en repararlo que su tiempo de viaje se alarga en 2 semanas.
+
+2 El carro da más problemas de los que vale la pena soportar y los Guerreros lo abandonan correctamente al borde del camino. El tiempo perdido intentando arreglarlo añade 1 semana a su viaje.
+
+3-4 Los Guerreros logran poner el carro en marcha, pero se avería una y otra vez y no les permite ahorrar tiempo esta semana. Por cada semana adicional que viajen con él, deben tirar un Peligro de Viaje con normalidad y además volver a tirar en esta tabla hasta obtener un resultado distinto.
+
+5 Los Guerreros consiguen reparar el carro y el tiempo de viaje hasta el siguiente Asentamiento se reduce en 1 semana. Por desgracia, el carro se desmorona justo cuando alcanzan las puertas del Asentamiento. No hay forma de repararlo otra vez y debe descartarse inmediatamente.
+
+6 Los Guerreros restauran el carro en excelentes condiciones. El tiempo de viaje hasta el siguiente Asentamiento se reduce en 2 semanas. Los Guerreros pueden quedárselo como propio y reducirá en 2 semanas el viaje hacia cualquier Asentamiento. Pero mientras lo conserven, deberán tirar 1D6 cada vez que lleguen a uno. Si el resultado es 6, significa que el auténtico propietario ha renunciado ya a recuperarlo y los Guerreros no tendrán que volver a tirar por el carro al llegar a un Asentamiento. Pero si el resultado es 1, el carro había sido denunciado como robado y las autoridades arrestan a los Guerreros por hurto. Son encarcelados durante 1D3 días, multados con 1D6x25 monedas de oro cada uno y el carro es devuelto a su legítimo dueño.</entry>
   <entry key="event.lm-travel-structure-or-object-43-44-death-note.name">Aviso de muerte</entry>
   <entry key="event.lm-travel-structure-or-object-43-44-death-note.rules">Desplomados contra el tronco de un viejo árbol se encuentran los tristes restos de
 un guerrero una vez orgulloso con una nota arrugada aferrada a su frío,
@@ -3476,7 +3123,7 @@ Deséchelo inmediatamente.
   <entry key="event.lm-treasure-dungeon-icon-of-direction.flavor">Este icono le da al guerrero un impresionante sentido de dirección incluso en las profundidades de la mazmorra más oscura.</entry>
   <entry key="event.lm-treasure-dungeon-icon-of-direction.goldValue">200G</entry>
   <entry key="event.lm-treasure-dungeon-icon-of-direction.name">Icono de dirección</entry>
-  <entry key="event.lm-treasure-dungeon-icon-of-direction.rules">Si el Guerrero que lleva este icono huye de la mazmorra, puede hacer dos tiradas en la tabla de Escapar de la mazmorra y elegir el mejor resultado. Además, si el portador es el líder con Linterna y un Evento (RPG: o Travelling Hazard) indica que está perdido, tira 1D6. Si la puntuación es 3, 4, 5 o 6, pueden ignorarla. PERMANENTE</entry>
+  <entry key="event.lm-treasure-dungeon-icon-of-direction.rules">Si el Guerrero que lleva este icono huye de la mazmorra, puede hacer dos tiradas en la tabla de Escapar de la mazmorra y elegir el mejor resultado. Además, si el portador es el líder con Linterna y un Evento (RPG: o Peligro de Viaje) indica que está perdido, tira 1D6. Si la puntuación es 3, 4, 5 o 6, pueden ignorarla. PERMANENTE</entry>
   <entry key="event.lm-treasure-dungeon-icon-of-direction.users">BDEW</entry>
   <entry key="event.lm-treasure-dungeon-icon-of-obliteration.flavor">Este ícono enjoyado irradia una gran energía destructiva.</entry>
   <entry key="event.lm-treasure-dungeon-icon-of-obliteration.goldValue">200G</entry>
@@ -4802,7 +4449,7 @@ Deséchelo inmediatamente.
   <entry key="event.lm-treasure-objective-orb-of-divination.flavor">Extrañas imágenes destellan dentro de este cristal y los Guerreros juran que se vislumbraron a sí mismos.</entry>
   <entry key="event.lm-treasure-objective-orb-of-divination.goldValue">1500G</entry>
   <entry key="event.lm-treasure-objective-orb-of-divination.name">Orbe de adivinación</entry>
-  <entry key="event.lm-treasure-objective-orb-of-divination.rules">Un guerrero puede usar este orbe para ver qué hay más allá de cada puerta en la sección del tablero actual. Esto incluye robar cartas de mazmorra o evento y, como resultado, rodar en cualquier mesa o subtabla. Si los Guerreros eligen entrar en esas nuevas Secciones del Tablero, deben tirar 1D6. Si la puntuación es 1, el orbe estaba equivocado y los Guerreros deben interactuar con la Sección del Tablero nuevamente. Si la puntuación es 2, 3, 4, 5 o 6, entonces el orbe fue exacto y deben jugarlo como se predijo. USAR UNA VEZ POR AVENTURA</entry>
+  <entry key="event.lm-treasure-objective-orb-of-divination.rules">Un guerrero puede usar este orbe para ver qué hay más allá de cada puerta en la sección actual del tablero. Esto incluye robar cartas de Mazmorra o de Evento y, como resultado, tirar en cualquier tabla o subtabla necesaria. Si los Guerreros eligen entrar en esas nuevas Secciones del Tablero, deben tirar 1D6. Si la puntuación es 1, el orbe estaba equivocado y los Guerreros deben interactuar con la Sección del Tablero de nuevo. Si la puntuación es 2, 3, 4, 5 o 6, el orbe fue exacto y deben jugar esa sección tal y como fue predicha. USAR UNA VEZ POR AVENTURA</entry>
   <entry key="event.lm-treasure-objective-orb-of-divination.users">BDEW</entry>
   <entry key="event.lm-treasure-objective-pistol-and-shot.flavor">Ubicada dentro de una caja de madera grabada, esta pistola parece tan cara como mortal.</entry>
   <entry key="event.lm-treasure-objective-pistol-and-shot.goldValue">1000G</entry>
