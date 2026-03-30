@@ -72,4 +72,5 @@ coverage/
 settings.cfg
 *.bak
 userdefined-*
-
+**/ad/*
+**/at/*
