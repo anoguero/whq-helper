@@ -15,11 +15,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - runner: macos-13
+          - runner: macos-15-intel
             swt_platform_id: cocoa.macosx.x86_64
             java_architecture: x64
             artifact_name: whq-helper-macos-app-x64
-          - runner: macos-14
+          - runner: macos-15
             swt_platform_id: cocoa.macosx.aarch64
             java_architecture: aarch64
             artifact_name: whq-helper-macos-app-arm64

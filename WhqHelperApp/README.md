@@ -213,7 +213,7 @@ El repositorio incluye:
 Comportamiento:
 
 - se ejecuta en cada `push` a `main`,
-- construye dos variantes: Intel (`macos-13`) y Apple Silicon (`macos-14`),
+- construye dos variantes: Intel (`macos-15-intel`) y Apple Silicon (`macos-15`),
 - descarga en CI el JAR SWT correcto para cada arquitectura,
 - ejecuta `./scripts/package-macos.sh app-image`,
 - publica cada `.app` como artefacto independiente.
