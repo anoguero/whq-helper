@@ -67,3 +67,9 @@ tmp/
 temp/
 .tmp/
 coverage/
+
+# Local app files
+settings.cfg
+*.bak
+userdefined-*
+
