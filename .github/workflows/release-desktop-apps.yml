@@ -192,10 +192,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="${GITHUB_REF_NAME}"
-          if gh release view "$tag" >/dev/null 2>&1; then
-            gh release upload "$tag" dist/* --clobber
+          repo="${GITHUB_REPOSITORY}"
+          if gh release view "$tag" --repo "$repo" >/dev/null 2>&1; then
+            gh release upload "$tag" dist/* --clobber --repo "$repo"
           else
             gh release create "$tag" dist/* \
+              --repo "$repo" \
               --title "$tag" \
               --generate-notes
           fi
