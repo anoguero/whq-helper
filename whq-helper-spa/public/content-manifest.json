@@ -2,6 +2,7 @@
   "xmlFiles": [
     "/data/xml/adventures/original-objective-room-adventures.xml",
     "/data/xml/dungeon/dungeon-cards.xml",
+    "/data/xml/locations/locations.xml",
     "/data/xml/events/gpt-events.xml",
     "/data/xml/events/lm-treasure-events.xml",
     "/data/xml/events/main-gold.xml",
@@ -46,6 +47,7 @@
     "/data/xml/tables/rpbook-travel-event-table.xml",
     "/data/xml/tables/rpbook-treasure-tables.xml",
     "/data/xml/travel/lm-travel-events.xml",
-    "/data/xml/travel/rpbook-travel-events.xml"
+    "/data/xml/travel/rpbook-travel-events.xml",
+    "/data/xml/warriors/original-warriors.xml"
   ]
 }

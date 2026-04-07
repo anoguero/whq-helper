@@ -1,39 +1,46 @@
 import './styles.css';
 
-import { getAdventureAmbiences, t, tf } from './i18n';
+import { getAdventureAmbiences, getSettlementTypes, t, tf } from './i18n';
 import { findAnyEvent, loadContent, loadContentManifest } from './content';
 import { applyTableActiveState, buildDecks, getMonsterNumber } from './deck';
 import { loadSettings, saveSettings } from './settings';
-import { renderEventCard, renderMonsterCard } from './render';
+import { renderEventCard, renderMonsterCard, renderSettlementLocationCard } from './render';
 import { DungeonCardStore, downloadCsv, exportCardsToCsv, importCardsFromCsvFile } from './dungeonStore';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
 import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
+import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from './counterAssets';
 import { getXmlOverride, removeXmlOverride, saveXmlOverride } from './contentOverrides';
 import {
   createDefaultDungeonCard,
   createDefaultEvent,
   createDefaultMonster,
   createDefaultObjectiveRoomAdventure,
+  createDefaultLocation,
   createDefaultRule,
   createDefaultTable,
+  createDefaultWarrior,
   createUserContentUid,
   deleteUserContentItem,
   loadUserContentItems,
   mapDungeonCardToUserData,
   mapEventToUserData,
+  mapLocationToUserData,
   mapMonsterToUserData,
   mapObjectiveRoomAdventureToUserData,
   mapRuleToUserData,
   mapTableToUserData,
+  mapWarriorToUserData,
   parseTableMetadata,
   type UserContentItem,
   type UserContentKind,
   type UserDungeonCardData,
   type UserEventData,
+  type UserLocationData,
   type UserMonsterData,
   type UserObjectiveRoomAdventureData,
   type UserRuleData,
   type UserTableData,
+  type UserWarriorData,
   upsertUserContentItem,
   userContentItemXml
 } from './userContent';
@@ -49,8 +56,11 @@ import type {
   MonsterEntry,
   ObjectiveRoomAdventure,
   Rule,
+  SettlementLocation,
+  SettlementType,
   TableRefEntry,
-  TableModel
+  TableModel,
+  WarriorDefinition
 } from './types';
 
 interface DeckMeta {
@@ -136,6 +146,7 @@ let zIndexCounter = 20;
 const CARD_WINDOW_WIDTH = 320;
 const CARD_WINDOW_HEIGHT = 500;
 const CARD_WINDOW_GAP = 14;
+const WARRIOR_COUNTER_CASCADE = 28;
 
 interface DashboardCategoryMeta {
   kind: UserContentKind;
@@ -152,13 +163,18 @@ const DASHBOARD_CATEGORIES: DashboardCategoryMeta[] = [
   { kind: 'rule', titleKey: 'contentDashboard.category.rule' },
   { kind: 'monster', titleKey: 'contentDashboard.category.monster' },
   { kind: 'table', titleKey: 'contentDashboard.category.table' },
-  { kind: 'objectiveRoomAdventure', titleKey: 'contentDashboard.category.objectiveRoomAdventure' }
+  { kind: 'objectiveRoomAdventure', titleKey: 'contentDashboard.category.objectiveRoomAdventure' },
+  { kind: 'warrior', titleKey: 'contentDashboard.category.warrior' },
+  { kind: 'location', titleKey: 'contentDashboard.category.location' }
 ];
 
 let activeDashboardItemUid: string | null = null;
 const DASHBOARD_CREATE_PREFIX = 'create:';
 let dashboardDraftItem: UserContentItem | null = null;
 let dashboardOpen = false;
+let warriorCounterAvailableIds = new Set<string>();
+let warriorCounterOpenIds = new Set<string>();
+let warriorCounterCascadeIndex = 0;
 
 type EventTableKind = 'dungeon' | 'travel' | 'settlement';
 
@@ -166,10 +182,53 @@ function clampProbability(value: number): number {
   return Math.max(0, Math.min(100, value));
 }
 
+function syncPartySize(): void {
+  settings.partyWarriors = settings.partyWarriors.filter((id, index, array) => !!repository.warriors.get(id) && array.indexOf(id) === index);
+  if (settings.partyWarriors.length === 0) {
+    settings.partyWarriors = ['warrior-barbarian', 'warrior-dwarf', 'warrior-elf', 'warrior-wizard'].filter((id) =>
+      repository.warriors.has(id)
+    );
+  }
+  if (settings.partyWarriors.length === 0) {
+    settings.partyWarriors = Array.from(repository.warriors.keys()).slice(0, 4);
+  }
+  settings.partySize = Math.max(1, settings.partyWarriors.length);
+}
+
+function resetWarriorCounterPool(): void {
+  warriorCounterAvailableIds = new Set(settings.partyWarriors);
+  warriorCounterOpenIds = new Set<string>();
+  warriorCounterCascadeIndex = 0;
+}
+
+function warriorDisplayLabel(warrior: WarriorDefinition): string {
+  return `${warrior.name} (${warrior.race})`;
+}
+
+function locationVisitorLabel(visitorId: string): string {
+  if (visitorId === 'all') {
+    return t(settings.language, 'settlement.type.any');
+  }
+  return repository.warriors.get(visitorId)?.name ?? visitorId;
+}
+
+function settlementTypeLabel(type: SettlementType): string {
+  return t(settings.language, `settlement.type.${type}`);
+}
+
+function normalizeSettlementLocationType(value: string): SettlementType {
+  if (value === 'city' || value === 'town' || value === 'village' || value === 'outskirts' || value === 'special') {
+    return value;
+  }
+  return 'any';
+}
+
 async function applyLanguageChange(language: LanguageCode): Promise<void> {
   settings.language = language;
   await Promise.all([dungeonStore.setLanguage(language)]);
   repository = await loadContent(language);
+  syncPartySize();
+  resetWarriorCounterPool();
   saveSettings(settings);
   render();
 }
@@ -192,6 +251,8 @@ function createAppShell(language: LanguageCode): void {
           <p>${t(language, 'deck.window.subtitle')}</p>
           <div class="hero-actions">
             <button type="button" id="newDungeonBtn">${t(language, 'deck.newDungeon')}</button>
+            <button type="button" id="newSettlementBtn">${t(language, 'deck.newSettlement')}</button>
+            <button type="button" id="warriorCountersBtn">${t(language, 'deck.warriorCounters')}</button>
             <button type="button" id="tileConfigBtn">${t(language, 'deck.configureTiles')}</button>
             <button type="button" id="contentDashboardBtn">${t(language, 'deck.contentCreation')}</button>
           </div>
@@ -201,6 +262,7 @@ function createAppShell(language: LanguageCode): void {
       <section class="controls" id="controls"></section>
       <section class="deck-toggles" id="deckToggles"></section>
       <section class="decks" id="decks"></section>
+      <section id="settlementSimulatorPanel" class="simulator-panel" hidden></section>
       <section id="simulatorPanel" class="simulator-panel" hidden></section>
       <section class="windows" id="windows"></section>
 
@@ -216,6 +278,7 @@ function createAppShell(language: LanguageCode): void {
       </dialog>
 
       <dialog id="newDungeonDialog" class="table-dialog wide-dialog"></dialog>
+      <dialog id="partyDialog" class="table-dialog wide-dialog"></dialog>
       <dialog id="missionDialog" class="table-dialog"></dialog>
       <dialog id="maintenanceDialog" class="table-dialog wide-dialog"></dialog>
       <dialog id="treasureSearchDialog" class="table-dialog ultra-dialog"></dialog>
@@ -227,6 +290,14 @@ function createAppShell(language: LanguageCode): void {
 function wireHeroActions(): void {
   document.querySelector<HTMLButtonElement>('#newDungeonBtn')?.addEventListener('click', () => {
     openNewDungeonDialog();
+  });
+
+  document.querySelector<HTMLButtonElement>('#newSettlementBtn')?.addEventListener('click', () => {
+    openSettlementSimulatorPanel();
+  });
+
+  document.querySelector<HTMLButtonElement>('#warriorCountersBtn')?.addEventListener('click', () => {
+    drawWarriorCounter();
   });
 
   document.querySelector<HTMLButtonElement>('#tileConfigBtn')?.addEventListener('click', () => {
@@ -265,10 +336,13 @@ function buildControls(): void {
       </select>
     </label>
 
-    <label>
-      ${t(settings.language, 'controls.partySize')}
-      <input id="partySizeInput" type="number" min="1" max="12" value="${settings.partySize}">
-    </label>
+    <div class="party-summary-control">
+      <span class="party-summary-label">${t(settings.language, 'controls.partyMembers')}</span>
+      <strong>${settings.partyWarriors
+        .map((id) => repository.warriors.get(id)?.name ?? id)
+        .join(', ')}</strong>
+      <small>${tf(settings.language, 'party.size', { count: settings.partySize })}</small>
+    </div>
 
     <label>
       ${t(settings.language, 'controls.eventProbability')}
@@ -292,6 +366,7 @@ function buildControls(): void {
     </fieldset>
 
     <div class="control-actions">
+      <button type="button" id="setPartyBtn">${t(settings.language, 'controls.setParty')}</button>
       <button type="button" id="activateTablesBtn">${t(settings.language, 'menu.item.activateTables')}</button>
       <button type="button" id="closeCardsBtn">${t(settings.language, 'menu.item.closeAllCards')}</button>
     </div>
@@ -305,12 +380,6 @@ function buildControls(): void {
   controls.querySelector<HTMLSelectElement>('#ambienceSelect')?.addEventListener('change', (event) => {
     settings.adventureAmbience = (event.target as HTMLSelectElement).value;
     rebuildDecks();
-  });
-
-  controls.querySelector<HTMLInputElement>('#partySizeInput')?.addEventListener('change', (event) => {
-    const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    settings.partySize = Math.max(1, Number.isFinite(value) ? value : settings.partySize);
-    saveSettings(settings);
   });
 
   controls.querySelector<HTMLInputElement>('#eventProbabilityInput')?.addEventListener('change', (event) => {
@@ -336,6 +405,10 @@ function buildControls(): void {
     closeAllOpenCards();
   });
 
+  controls.querySelector<HTMLButtonElement>('#setPartyBtn')?.addEventListener('click', () => {
+    openPartyDialog();
+  });
+
   controls.querySelector<HTMLButtonElement>('#activateTablesBtn')?.addEventListener('click', () => {
     openTableDialog();
   });
@@ -343,6 +416,265 @@ function buildControls(): void {
 
 function closeAllOpenCards(): void {
   document.querySelector<HTMLElement>('#windows')!.innerHTML = '';
+}
+
+function openPartyDialog(): void {
+  const dialog = document.querySelector<HTMLDialogElement>('#partyDialog');
+  if (!dialog) {
+    return;
+  }
+  const available = Array.from(repository.warriors.values()).sort((left, right) =>
+    left.name.localeCompare(right.name, undefined, { sensitivity: 'base' })
+  );
+  const selected = [...settings.partyWarriors];
+
+  const renderPartyDialog = (): void => {
+    dialog.innerHTML = `
+      <form method="dialog" class="party-dialog">
+        <h2>${t(settings.language, 'party.title')}</h2>
+        <div class="party-dialog-layout">
+          <section>
+            <label>${t(settings.language, 'party.available')}
+              <select id="partyAvailableSelect">
+                ${available
+                  .map((warrior) => `<option value="${escapeHtml(warrior.id)}">${escapeHtml(warriorDisplayLabel(warrior))}</option>`)
+                  .join('')}
+              </select>
+            </label>
+            <div class="dashboard-inline-actions">
+              <button type="button" id="partyAddBtn">+</button>
+              <button type="button" id="partyRemoveBtn">-</button>
+            </div>
+          </section>
+          <section>
+            <label>${t(settings.language, 'party.selected')}
+              <select id="partySelectedList" size="10">
+                ${selected
+                  .map((warriorId) => {
+                    const warrior = repository.warriors.get(warriorId);
+                    const label = warrior ? warriorDisplayLabel(warrior) : warriorId;
+                    return `<option value="${escapeHtml(warriorId)}">${escapeHtml(label)}</option>`;
+                  })
+                  .join('')}
+              </select>
+            </label>
+            <p class="party-dialog-size">${tf(settings.language, 'party.size', { count: selected.length })}</p>
+          </section>
+        </div>
+        <menu>
+          <button value="cancel">${t(settings.language, 'dialog.button.cancel')}</button>
+          <button type="button" id="partySaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </menu>
+      </form>
+    `;
+
+    dialog.querySelector<HTMLButtonElement>('#partyAddBtn')?.addEventListener('click', () => {
+      const warriorId = dialog.querySelector<HTMLSelectElement>('#partyAvailableSelect')?.value ?? '';
+      if (warriorId && !selected.includes(warriorId)) {
+        selected.push(warriorId);
+        renderPartyDialog();
+      }
+    });
+
+    dialog.querySelector<HTMLButtonElement>('#partyRemoveBtn')?.addEventListener('click', () => {
+      const warriorId = dialog.querySelector<HTMLSelectElement>('#partySelectedList')?.value ?? '';
+      const index = selected.indexOf(warriorId);
+      if (index >= 0) {
+        selected.splice(index, 1);
+        renderPartyDialog();
+      }
+    });
+
+    dialog.querySelector<HTMLButtonElement>('#partySaveBtn')?.addEventListener('click', () => {
+      if (selected.length === 0) {
+        window.alert(t(settings.language, 'party.selectAtLeastOne'));
+        return;
+      }
+      settings.partyWarriors = [...selected];
+      syncPartySize();
+      resetWarriorCounterPool();
+      saveSettings(settings);
+      buildControls();
+      dialog.close();
+    });
+  };
+
+  renderPartyDialog();
+  dialog.showModal();
+}
+
+function openWarriorCounterWindow(warrior: WarriorDefinition): void {
+  const container = document.querySelector<HTMLElement>('#windows');
+  if (!container) {
+    return;
+  }
+  const src = resolveCounterAsset(warrior.counterPath);
+  const windowEl = document.createElement('article');
+  windowEl.className = 'card-window warrior-counter-window';
+  const width = 200;
+  const height = 240;
+  const maxCols = Math.max(1, Math.floor((window.innerWidth - 48) / (width + WARRIOR_COUNTER_CASCADE)));
+  const col = warriorCounterCascadeIndex % maxCols;
+  const row = Math.floor(warriorCounterCascadeIndex / maxCols);
+  warriorCounterCascadeIndex += 1;
+  windowEl.style.left = `${32 + col * WARRIOR_COUNTER_CASCADE}px`;
+  windowEl.style.top = `${32 + row * WARRIOR_COUNTER_CASCADE}px`;
+  windowEl.style.width = `${width}px`;
+  windowEl.style.height = `${height}px`;
+  windowEl.style.zIndex = `${zIndexCounter++}`;
+  windowEl.innerHTML = `
+    <button class="close-window" type="button">x</button>
+    <div class="warrior-counter-card">
+      <img src="${escapeHtml(src)}" alt="${escapeHtml(warrior.name)}" />
+      <div class="warrior-counter-name"><span>${escapeHtml(warrior.name)}</span></div>
+    </div>
+  `;
+  const closeButton = windowEl.querySelector<HTMLButtonElement>('.close-window');
+  closeButton?.addEventListener('click', () => windowEl.remove());
+  windowEl.addEventListener('mousedown', () => {
+    windowEl.style.zIndex = `${zIndexCounter++}`;
+  });
+  const observer = new MutationObserver(() => {
+    if (!document.body.contains(windowEl)) {
+      warriorCounterAvailableIds.add(warrior.id);
+      warriorCounterOpenIds.delete(warrior.id);
+      observer.disconnect();
+    }
+  });
+  observer.observe(container, { childList: true });
+  makeCardWindowDraggable(windowEl);
+  container.appendChild(windowEl);
+}
+
+function drawWarriorCounter(): void {
+  const availableIds = [...warriorCounterAvailableIds].filter((id) => settings.partyWarriors.includes(id) && !warriorCounterOpenIds.has(id));
+  if (availableIds.length === 0) {
+    window.alert(t(settings.language, 'warriorCounter.noneLeft'));
+    return;
+  }
+  const selectedId = availableIds[Math.floor(Math.random() * availableIds.length)] ?? '';
+  const warrior = repository.warriors.get(selectedId);
+  if (!warrior) {
+    return;
+  }
+  warriorCounterAvailableIds.delete(selectedId);
+  warriorCounterOpenIds.add(selectedId);
+  openWarriorCounterWindow(warrior);
+}
+
+function settlementLocationsForType(type: SettlementType): SettlementLocation[] {
+  return Array.from(repository.locations.values())
+    .filter((location) => type === 'any' || location.availableTypes.includes(type))
+    .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
+}
+
+function openSettlementSimulatorPanel(): void {
+  const panel = document.querySelector<HTMLElement>('#settlementSimulatorPanel');
+  if (!panel) {
+    return;
+  }
+  let currentType: SettlementType = 'any';
+  let selectedLocationId = settlementLocationsForType(currentType)[0]?.id ?? '';
+
+  const renderSettlement = (): void => {
+    const locations = settlementLocationsForType(currentType);
+    if (!locations.some((location) => location.id === selectedLocationId)) {
+      selectedLocationId = locations[0]?.id ?? '';
+    }
+    const selected = locations.find((location) => location.id === selectedLocationId) ?? null;
+    panel.innerHTML = `
+      <section class="simulator-layout settlement-inline-layout">
+        <header>
+          <h2>${t(settings.language, 'settlement.title')}</h2>
+          <p>${t(settings.language, 'deck.settlement.subtitle')}</p>
+        </header>
+        <section class="settlement-layout">
+          <div class="settlement-left">
+            <section class="settlement-top">
+              <article class="deck settlement-settlement-deck">
+              <label style="width: 100%; color: beige;">${t(settings.language, 'settlement.type')}
+                <select id="settlementTypeSelect" style="width: 100%">
+                  ${getSettlementTypes(settings.language)
+                    .map((entry) => `<option value="${entry.value}" ${entry.value === currentType ? 'selected' : ''}>${escapeHtml(entry.label)}</option>`)
+                    .join('')}
+                </select>
+              </label>
+              <label style="width: 100%; color: beige;">${t(settings.language, 'settlement.locations')}
+                <select id="settlementLocationList" size="12" style="width: 100%">
+                  ${
+                    locations.length > 0
+                      ? locations
+                          .map((location) => `<option value="${escapeHtml(location.id)}" ${location.id === selectedLocationId ? 'selected' : ''}>${escapeHtml(location.name)}</option>`)
+                          .join('')
+                      : `<option value="">${escapeHtml(t(settings.language, 'settlement.noLocations'))}</option>`
+                  }
+                </select>
+              </label>
+              </article>
+            </section>
+            <section class="settlement-bottom">
+              <article class="deck settlement-settlement-deck">
+                <button type="button" class="deck-button" id="settlementDrawBtn">
+                  <img src="/data/graphics/settlement.png" alt="${escapeHtml(t(settings.language, 'deck.settlement.title'))}" />
+                  <span>${t(settings.language, 'button.clickHere')}</span>
+                </button>
+                <small>${decks.settlement.size()} ${t(settings.language, 'controls.entries')}</small>
+                <div class="dashboard-inline-actions">
+                  <button type="button" class="secondary-button" id="settlementCloseCardsBtn">${t(settings.language, 'menu.item.closeAllCards')}</button>
+                  <button type="button" class="secondary-button" id="closeSettlementPanelBtn">${t(settings.language, 'dialog.button.close')}</button>
+                </div>
+              </article>
+            </section>
+          </div>
+          <div class="settlement-preview">
+            ${
+              selected
+                ? renderSettlementLocationCard(selected, selected.visitors.map((visitor) => locationVisitorLabel(visitor)))
+                : `<p>${escapeHtml(t(settings.language, 'settlement.noLocations'))}</p>`
+            }
+          </div>
+        </section>
+      </section>
+    `;
+
+    panel.querySelector<HTMLSelectElement>('#settlementTypeSelect')?.addEventListener('change', (event) => {
+      currentType = normalizeSettlementLocationType((event.currentTarget as HTMLSelectElement).value);
+      renderSettlement();
+    });
+    panel.querySelector<HTMLSelectElement>('#settlementLocationList')?.addEventListener('change', (event) => {
+      selectedLocationId = (event.currentTarget as HTMLSelectElement).value;
+      renderSettlement();
+    });
+    panel.querySelector<HTMLButtonElement>('#settlementDrawBtn')?.addEventListener('click', () => {
+      drawFromDeck('settlement');
+      const entries = panel.querySelector<HTMLElement>('.settlement-settlement-deck small');
+      if (entries) {
+        entries.textContent = `${decks.settlement.size()} ${t(settings.language, 'controls.entries')}`;
+      }
+    });
+    panel.querySelector<HTMLButtonElement>('#settlementCloseCardsBtn')?.addEventListener('click', () => {
+      closeAllOpenCards();
+    });
+    panel.querySelector<HTMLButtonElement>('#closeSettlementPanelBtn')?.addEventListener('click', () => {
+      closeSettlementSimulatorPanel();
+    });
+  };
+
+  panel.hidden = false;
+  panel.classList.add('active');
+  document.body.classList.add('settlement-panel-active');
+  renderSettlement();
+}
+
+function closeSettlementSimulatorPanel(): void {
+  const panel = document.querySelector<HTMLElement>('#settlementSimulatorPanel');
+  if (!panel) {
+    return;
+  }
+  panel.hidden = true;
+  panel.classList.remove('active');
+  panel.innerHTML = '';
+  document.body.classList.remove('settlement-panel-active');
 }
 
 function getActiveTreasureEvents(): EventModel[] {
@@ -1092,6 +1424,7 @@ function readFileAsDataUrl(file: File): Promise<string> {
 async function refreshRuntimeContent(): Promise<void> {
   await dungeonStore.init(settings.language);
   repository = await loadContent(settings.language);
+  syncPartySize();
   refreshDungeonCards();
   rebuildDecks();
 }
@@ -1456,6 +1789,18 @@ function dashboardSourceOptions(kind: UserContentKind): Array<{ id: string; labe
         label: `${adventure.objectiveRoomName} - ${adventure.name} (${adventure.id})`
       }));
   }
+  if (kind === 'warrior') {
+    return Array.from(repository.warriors.values()).map((warrior) => ({
+      id: warrior.id,
+      label: `${warrior.name} (${warrior.id})`
+    }));
+  }
+  if (kind === 'location') {
+    return Array.from(repository.locations.values()).map((location) => ({
+      id: location.id,
+      label: `${location.name} (${location.id})`
+    }));
+  }
   return Array.from(repository.tables.values()).map((table) => ({ id: table.name, label: table.name }));
 }
 
@@ -1479,6 +1824,10 @@ function createBlankDashboardItem(kind: UserContentKind): UserContentItem {
       return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultTable() };
     case 'objectiveRoomAdventure':
       return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultObjectiveRoomAdventure() };
+    case 'warrior':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultWarrior() };
+    case 'location':
+      return { uid, kind, mode: 'new', title: '', updatedAt, data: createDefaultLocation() };
   }
 }
 
@@ -1532,6 +1881,14 @@ function createModifiedDashboardItem(kind: UserContentKind, sourceId: string): U
             data: mapObjectiveRoomAdventureToUserData(source)
           }
         : null;
+    }
+    case 'warrior': {
+      const source = repository.warriors.get(sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapWarriorToUserData(source) } : null;
+    }
+    case 'location': {
+      const source = repository.locations.get(sourceId);
+      return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapLocationToUserData(source) } : null;
     }
   }
 }
@@ -3225,6 +3582,360 @@ function renderObjectiveRoomAdventureEditor(
   });
 }
 
+function renderWarriorEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'warrior' }>): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserWarriorData;
+  editor.innerHTML = `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${t(settings.language, 'contentDashboard.category.warrior')}</h2>
+          <p>${contentDashboardSubtitle(item)}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body event-editor-layout">
+        <div class="dashboard-form">
+          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.race')}<input id="ucRace" value="${escapeHtml(data.race)}"></label>
+          <div class="dashboard-tile-upload">
+            <label>${t(settings.language, 'contentDashboard.field.counterPath')}<input id="ucCounterPath" value="${escapeHtml(getCounterAssetDisplayName(data.counterPath))}" readonly></label>
+            <div class="dashboard-inline-actions">
+              <button type="button" id="ucUploadCounterBtn">${t(settings.language, 'contentDashboard.uploadCounter')}</button>
+              <input id="ucCounterFile" type="file" accept="image/*" hidden>
+            </div>
+          </div>
+          <label>${t(settings.language, 'contentDashboard.field.rulesPath')}<input id="ucRulesPath" value="${escapeHtml(data.rulesPath)}"></label>
+        </div>
+        <div class="dashboard-preview-column">
+          <section class="dashboard-card-preview warrior-counter-preview">
+            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <div id="ucWarriorPreview"></div>
+          </section>
+          <section class="dashboard-xml-panel">
+            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <div id="ucXmlPanel" hidden>
+              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+    </form>
+  `;
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const counterInput = editor.querySelector<HTMLInputElement>('#ucCounterPath');
+  const counterFile = editor.querySelector<HTMLInputElement>('#ucCounterFile');
+  const preview = editor.querySelector<HTMLElement>('#ucWarriorPreview');
+  const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+  const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+  const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+
+  const buildDraftWarrior = (): UserWarriorData => ({
+    ...data,
+    name: editor.querySelector<HTMLInputElement>('#ucName')?.value ?? '',
+    race: editor.querySelector<HTMLInputElement>('#ucRace')?.value ?? '',
+    counterPath: counterInput?.dataset.counterPath ?? data.counterPath,
+    rulesPath: editor.querySelector<HTMLInputElement>('#ucRulesPath')?.value ?? ''
+  });
+
+  const refreshPreview = (): void => {
+    const draft = buildDraftWarrior();
+    if (preview) {
+      const warrior = {
+        id: draft.id || 'preview-warrior',
+        name: draft.name || t(settings.language, 'contentDashboard.category.warrior'),
+        race: draft.race,
+        counterPath: draft.counterPath,
+        rulesPath: draft.rulesPath
+      };
+      preview.innerHTML = `
+        <div class="warrior-counter-card">
+          <img src="${escapeHtml(resolveCounterAsset(warrior.counterPath))}" alt="${escapeHtml(warrior.name)}" />
+          <div class="warrior-counter-name"><span>${escapeHtml(warrior.name)}</span></div>
+        </div>
+      `;
+    }
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({ ...item, data: draft });
+    }
+  };
+
+  toggleXmlButton?.addEventListener('click', () => {
+    if (!xmlPanel) {
+      return;
+    }
+    xmlPanel.hidden = !xmlPanel.hidden;
+    toggleXmlButton.textContent = xmlPanel.hidden
+      ? t(settings.language, 'contentDashboard.showXml')
+      : t(settings.language, 'contentDashboard.hideXml');
+  });
+  editor.querySelector<HTMLButtonElement>('#ucUploadCounterBtn')?.addEventListener('click', () => counterFile?.click());
+  counterFile?.addEventListener('change', async () => {
+    const file = counterFile.files?.[0];
+    if (!file) {
+      return;
+    }
+    const dataUrl = await readFileAsDataUrl(file);
+    saveCounterAsset(file.name, dataUrl);
+    if (counterInput) {
+      counterInput.value = file.name;
+      counterInput.dataset.counterPath = file.name;
+    }
+    refreshPreview();
+  });
+  form?.querySelectorAll<HTMLInputElement>('input').forEach((field) => {
+    if (field.id === 'ucCounterFile') {
+      return;
+    }
+    field.addEventListener('input', refreshPreview);
+    field.addEventListener('change', refreshPreview);
+  });
+  if (counterInput) {
+    counterInput.dataset.counterPath = data.counterPath;
+  }
+  refreshPreview();
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: buildDraftWarrior()
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
+function renderLocationEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'location' }>): void {
+  const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
+  if (!editor) {
+    return;
+  }
+  const data = item.data as UserLocationData;
+  const state: UserLocationData = {
+    ...data,
+    availableTypes: [...data.availableTypes],
+    visitors: [...data.visitors]
+  };
+
+  const buildDraftLocation = (): SettlementLocation => ({
+    id: state.id || 'preview-location',
+    name: state.name,
+    availableTypes: [...state.availableTypes],
+    description: state.description,
+    visitors: [...state.visitors],
+    rules: state.rules
+  });
+
+  const renderTypeOptions = (): void => {
+    const typeSelect = editor.querySelector<HTMLSelectElement>('#ucLocationTypeSelect');
+    const typesList = editor.querySelector<HTMLSelectElement>('#ucLocationTypesList');
+    if (typeSelect) {
+      typeSelect.innerHTML = getSettlementTypes(settings.language)
+        .filter((entry) => entry.value !== 'any' && !state.availableTypes.includes(entry.value as SettlementType))
+        .map((entry) => `<option value="${escapeHtml(entry.value)}">${escapeHtml(entry.label)}</option>`)
+        .join('');
+    }
+    if (typesList) {
+      typesList.innerHTML = state.availableTypes
+        .map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(settlementTypeLabel(type))}</option>`)
+        .join('');
+    }
+  };
+
+  const renderVisitorOptions = (): void => {
+    const visitorSelect = editor.querySelector<HTMLSelectElement>('#ucVisitorSelect');
+    const visitorsList = editor.querySelector<HTMLSelectElement>('#ucVisitorsList');
+    if (visitorSelect) {
+      visitorSelect.innerHTML = [
+        { id: 'all', label: 'All' },
+        ...Array.from(repository.warriors.values())
+          .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }))
+          .map((warrior) => ({ id: warrior.id, label: warrior.name }))
+      ]
+        .filter((entry) => !state.visitors.includes(entry.id))
+        .map((entry) => `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.label)}</option>`)
+        .join('');
+    }
+    if (visitorsList) {
+      visitorsList.innerHTML = state.visitors
+        .map((visitor) => `<option value="${escapeHtml(visitor)}">${escapeHtml(locationVisitorLabel(visitor))}</option>`)
+        .join('');
+    }
+  };
+
+  const refreshPreview = (): void => {
+    const draftLocation = buildDraftLocation();
+    const visitorLabels = draftLocation.visitors.map((visitor) => locationVisitorLabel(visitor));
+    const preview = editor.querySelector<HTMLElement>('#ucLocationPreview');
+    const xmlPreview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
+    if (preview) {
+      preview.innerHTML = renderSettlementLocationCard(draftLocation, visitorLabels);
+    }
+    if (xmlPreview) {
+      xmlPreview.value = userContentItemXml({ ...item, data: state });
+    }
+  };
+
+  editor.innerHTML = `
+    <form class="dashboard-editor-shell">
+      <header class="dashboard-editor-header">
+        <div>
+          <h2>${t(settings.language, 'contentDashboard.category.location')}</h2>
+          <p>${contentDashboardSubtitle(item)}</p>
+        </div>
+        <div class="dashboard-editor-actions">
+          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+        </div>
+      </header>
+      <div class="dashboard-editor-body event-editor-layout">
+        <div class="dashboard-form">
+          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(state.name)}"></label>
+          <label>${t(settings.language, 'contentDashboard.field.description')}<textarea id="ucDescription" rows="5">${escapeHtml(state.description)}</textarea></label>
+          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="10">${escapeHtml(state.rules)}</textarea></label>
+          <div class="dashboard-selector-block">
+            <label>${t(settings.language, 'contentDashboard.field.availableTypeOption')}
+              <select id="ucLocationTypeSelect"></select>
+            </label>
+            <div class="dashboard-inline-actions">
+              <button type="button" id="ucAddLocationTypeBtn">+</button>
+              <button type="button" id="ucRemoveLocationTypeBtn">-</button>
+            </div>
+            <label>${t(settings.language, 'contentDashboard.field.availableTypes')}
+              <select id="ucLocationTypesList" size="5"></select>
+            </label>
+          </div>
+          <div class="dashboard-selector-block">
+            <label>${t(settings.language, 'contentDashboard.field.availableVisitorOption')}
+              <select id="ucVisitorSelect"></select>
+            </label>
+            <div class="dashboard-inline-actions">
+              <button type="button" id="ucAddVisitorBtn">+</button>
+              <button type="button" id="ucRemoveVisitorBtn">-</button>
+            </div>
+            <label>${t(settings.language, 'contentDashboard.field.visitors')}
+              <select id="ucVisitorsList" size="6"></select>
+            </label>
+          </div>
+        </div>
+        <div class="dashboard-preview-column">
+          <section class="dashboard-card-preview settlement-location-preview">
+            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <div id="ucLocationPreview"></div>
+          </section>
+          <section class="dashboard-xml-panel">
+            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <div id="ucXmlPanel" hidden>
+              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                <textarea id="ucXmlPreview" rows="18" readonly></textarea>
+              </label>
+            </div>
+          </section>
+        </div>
+      </div>
+    </form>
+  `;
+
+  bindDashboardCommonActions(container, item);
+  const form = editor.querySelector<HTMLFormElement>('form');
+  const xmlPanel = editor.querySelector<HTMLElement>('#ucXmlPanel');
+  const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
+  toggleXmlButton?.addEventListener('click', () => {
+    if (!xmlPanel) {
+      return;
+    }
+    xmlPanel.hidden = !xmlPanel.hidden;
+    toggleXmlButton.textContent = xmlPanel.hidden
+      ? t(settings.language, 'contentDashboard.showXml')
+      : t(settings.language, 'contentDashboard.hideXml');
+  });
+
+  editor.querySelector<HTMLInputElement>('#ucName')?.addEventListener('input', (event) => {
+    state.name = (event.currentTarget as HTMLInputElement).value;
+    refreshPreview();
+  });
+  editor.querySelector<HTMLTextAreaElement>('#ucDescription')?.addEventListener('input', (event) => {
+    state.description = (event.currentTarget as HTMLTextAreaElement).value;
+    refreshPreview();
+  });
+  editor.querySelector<HTMLTextAreaElement>('#ucRules')?.addEventListener('input', (event) => {
+    state.rules = (event.currentTarget as HTMLTextAreaElement).value;
+    refreshPreview();
+  });
+  editor.querySelector<HTMLButtonElement>('#ucAddLocationTypeBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucLocationTypeSelect')?.value as SettlementType;
+    if (value && !state.availableTypes.includes(value)) {
+      state.availableTypes.push(value);
+      renderTypeOptions();
+      refreshPreview();
+    }
+  });
+  editor.querySelector<HTMLButtonElement>('#ucRemoveLocationTypeBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucLocationTypesList')?.value as SettlementType;
+    const index = state.availableTypes.indexOf(value);
+    if (index >= 0) {
+      state.availableTypes.splice(index, 1);
+      renderTypeOptions();
+      refreshPreview();
+    }
+  });
+  editor.querySelector<HTMLButtonElement>('#ucAddVisitorBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucVisitorSelect')?.value ?? '';
+    if (value && !state.visitors.includes(value)) {
+      state.visitors.push(value);
+      renderVisitorOptions();
+      refreshPreview();
+    }
+  });
+  editor.querySelector<HTMLButtonElement>('#ucRemoveVisitorBtn')?.addEventListener('click', () => {
+    const value = editor.querySelector<HTMLSelectElement>('#ucVisitorsList')?.value ?? '';
+    const index = state.visitors.indexOf(value);
+    if (index >= 0) {
+      state.visitors.splice(index, 1);
+      renderVisitorOptions();
+      refreshPreview();
+    }
+  });
+
+  renderTypeOptions();
+  renderVisitorOptions();
+  refreshPreview();
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const nextItem: UserContentItem = {
+      ...item,
+      updatedAt: new Date().toISOString(),
+      data: {
+        ...state,
+        availableTypes: [...state.availableTypes],
+        visitors: [...state.visitors]
+      }
+    };
+    upsertUserContentItem(nextItem);
+    activeDashboardItemUid = nextItem.uid;
+    dashboardDraftItem = null;
+    await refreshRuntimeContent();
+    renderContentDashboard(container);
+  });
+}
+
 function renderDashboardEditor(container: HTMLElement): void {
   const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
   if (!editor) {
@@ -3266,6 +3977,14 @@ function renderDashboardEditor(container: HTMLElement): void {
   }
   if (item.kind === 'objectiveRoomAdventure') {
     renderObjectiveRoomAdventureEditor(container, item);
+    return;
+  }
+  if (item.kind === 'warrior') {
+    renderWarriorEditor(container, item);
+    return;
+  }
+  if (item.kind === 'location') {
+    renderLocationEditor(container, item);
     return;
   }
   renderTableEditor(container, item);
@@ -4127,6 +4846,7 @@ function rebuildDecks(): void {
 }
 
 function render(): void {
+  syncPartySize();
   createAppShell(settings.language);
   wireHeroActions();
   buildControls();
@@ -4139,6 +4859,8 @@ async function bootstrap(): Promise<void> {
   settings = await loadSettings();
   await Promise.all([dungeonStore.init(settings.language)]);
   repository = await loadContent(settings.language);
+  syncPartySize();
+  resetWarriorCounterPool();
   settings.dungeonActive = false;
 
   applyTableActiveState(repository, settings);

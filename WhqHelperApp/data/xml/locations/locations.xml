@@ -1,0 +1,2305 @@
+<?xml version='1.0' encoding='utf-8'?>
+<locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="whq-locations-schema.xsd">
+  <location id="location-enfermeria">
+    <name>Enfermería</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Ya sea un erudito religioso, un curtido médico o un viejo ermitaño, el curandero local ofrece asistencia médica tanto a la gente del pueblo como a los viajeros de paso.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Cada vez que un Aventurero se queda a cero Heridas, ya sea por un ataque, hechizo, trampa u otro motivo, y recupera una Herida o más, sufrirá una Lesión o Secuela por esa experiencia cercana a la muerte. Su cuerpo o su mente quedarán marcados con lesiones de mayor gravedad.
+
+El Aventurero deberá robar una carta de Lesión o Secuela al azar, donde se explica la nueva penalización. La acumulación de estas secuelas puede causar la muerte si algún atributo llega a cero.
+
+Una lesión o secuela no puede eliminarse con pociones, vendas o provisiones. En su lugar, debe ser tratada en la Enfermería de un Asentamiento, pagando una cantidad de monedas y permaneciendo aquí el número de días indicado.
+
+La Enfermería también restablece las deducciones permanentes en atributos causadas por Parálisis, Plaga, Petrificar o Veneno a cambio de 50 monedas y 2 días.</rules>
+  </location>
+  <location id="location-establos">
+    <name>Establos</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Los viajeros pueden dejar a su corcel en los establos. Allí serán alimentados y bien cuidados hasta partir a su próxima aventura.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Pago obligatorio por día:
+Perro x2
+Mula +1
+Caballo +2
+Caballo de Guerra +3
+
+Si estás utilizando animales de monta procedentes de continentes o países remotos, puedes llevarlos al Viejo Mundo contigo, pero pagando un plus por el transporte del animal. Deberás multiplicar 2D6 por el valor referenciado en cada caso para saber cuánto cuesta llevarlo contigo.
+
+Pago obligatorio por día para monturas exóticas:
+Caballo Salvaje de Kislev +2
+Gélido de Lustria +2
+Camello de Arabia +3
+Elefante de Lustria +10</rules>
+  </location>
+  <location id="location-prision">
+    <name>Prisión</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Te recordamos que cada asentamiento tiene sus propias leyes... ¡Compórtate, viajero, o se hará justicia!</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Es una localización del asentamiento donde los Aventureros pueden terminar encarcelados durante un número de días determinado como solución a eventos de asentamiento, peleas en tabernas u otras reglas.
+
+Mientras un Aventurero esté en prisión no tiene que pagar gastos diarios en el asentamiento ni debe preocuparse por los eventos del asentamiento o los eventos catastróficos que puedan suceder.</rules>
+  </location>
+  <location id="location-puertas-de-acceso">
+    <name>Puertas de Acceso</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Cada Aventurero que se quede fuera de los muros del asentamiento está a merced de la tempestad, monstruos o las criaturas más salvajes, entre otros peligros.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>A veces, los Peligros de Viaje o los Eventos Catastróficos indican a los Aventureros que pasan directamente a la siguiente aventura. También es posible que todos sean “Expulsados” del Asentamiento.
+
+Si tienen ya una aventura predefinida o el Posadero les ha encomendado alguna, parten de inmediato a la misma; pero en caso contrario, si les expulsan, deben tirar D66 en “Aventuras Inmediatas” para saber cuál es la misión a realizar.
+
+Consulta las páginas del Libro de Aventuras Definitivo de Littlemonk para conocer la aventura y sus reglas especiales.
+
+Los Aventureros pueden encontrar estas aventuras las menos gratificantes y/o las más peligrosas, pero no tienen alternativa.</rules>
+  </location>
+  <location id="location-taberna">
+    <name>Taberna</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Llena de gente extraña e interesantes viajeros, es el lugar perfecto para conocer historias y meterse en líos.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>La Taberna es la única localización que los Aventureros pueden encontrar automáticamente en cualquier tipo de Asentamiento, incluidas las Aldeas.
+
+Cualquier Aventurero excepto el Bailarín Guerrero puede visitar la Taberna. El Bárbaro, el Enano y otros Aventureros igual de duros no sufren penalizadores en la tabla. Cuando un Aventurero entra en la Taberna debe tirar 2D6 y consultar el resultado. Si es un Elfo, resta 4; si es un Hechicero, resta 3; si es un Sacerdote Guerrero o un Explorador Elfo, resta 2. Cualquier resultado inferior a 2 se considera un 2.
+
+2. Mientras el Aventurero se toma una cerveza, Ragnar el Terrible le vende el supuesto Talismán de Erik por 500 monedas de oro. El talismán es una falsificación. Si el Aventurero no dispone de 500 monedas, entrega todo su oro y además un objeto de tesoro para compensar.
+
+3. El Aventurero acaba muy borracho y pierde 1D6 x 100 monedas de oro.
+
+4. Griswold el Loco apuesta 200 monedas a que el Aventurero no resistirá un combate contra su manada de lobos. Si acepta, 1D3 clientes se unen a la apuesta. Tira 1D6:
+1. El Aventurero vence, pero Griswold se queda todas las apuestas para compensar la pérdida de sus animales.
+2-3. El Aventurero escapa del pozo de lucha, pero pierde la apuesta.
+4-6. El Aventurero hace picadillo a los lobos y cobra todas las apuestas.
+
+5. Rogar el Bizco vende una pócima milagrosa por 100 monedas de oro o un objeto de tesoro, arma o armadura. Cuando el Aventurero la beba tira 1D6:
+1-2. No tiene más efecto que provocar náuseas.
+3-5. El Aventurero entra en Furia Asesina hasta que todos los monstruos estén muertos.
+6. Recupera 1D6 Heridas.
+
+6. Un artista local le hace al Aventurero un tatuaje que representa una cabeza de Orco con sus propios rasgos y la leyenda “Amor de Orco”.
+
+7. El Aventurero vence en un concurso de pulsos. A partir de ahora, cada vez que intente comprar en una tienda de esta Población tira 1D6:
+1-2. Le cierran la puerta en las narices.
+3-6. Le venden todo a mitad de precio.
+
+8. Un veterano Bárbaro de Norsca enseña al Aventurero a cubrirse con grasa animal para resultar resbaladizo. Una vez por aventura puede utilizar este truco para evitar un golpe que, de otro modo, le habría herido.
+
+9. Los Cantores del Matadero, unos juglares de Erengad, le enseñan al Aventurero una estrofa de “Ella era la única hija del Emperador”. Una vez por aventura puede elegir un monstruo sobre el tablero cuyo valor no supere 300 monedas y tirar 1D6; con 5 o 6 el monstruo muere de un derrame cerebral.
+
+10. El Aventurero termina una noche de bebida siendo el último en pie y aligera los bolsillos del resto de clientes. Consigue (1D6 + 2) x 100 monedas de oro.
+
+11. Un kislevita borracho enseña al Aventurero a hacerse el muerto. Una vez por aventura puede tumbar su miniatura. Mientras finja estar muerto y quede otro Aventurero en pie, ningún monstruo le atacará hasta que se incorpore o no quede ningún otro Aventurero en pie.
+
+12. Un fornido mercenario de Marienburgo enseña al Aventurero a luchar con dos armas a la vez. Una vez por aventura puede efectuar +1 Ataque.
+
+El libro añade además una variante ampliada de Tabernas con refinamiento, peleas de taberna y una tabla extensa de resultados opcionales. Si quieres usar esa versión, se superpone a esta tabla básica.</rules>
+  </location>
+  <location id="location-alquimista">
+    <name>Alquimista</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>¿Necesitas oro de una forma desesperante? El alquimista local puede serte de ayuda con este problema...</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>El laboratorio del Alquimista es un lugar muy curioso, lleno de vapores nocivos y frascos de cristal burbujeantes. Su principal ocupación consiste en convertir metales innobles en oro, y cualquier Aventurero puede recurrir a sus servicios.
+
+El Alquimista toma cualquier artículo sin usar de equipo o una carta de tesoro e intenta transmutarlo. Desecha el objeto o la carta, tira tantos dados como quieras, suma el resultado y multiplica el total por 50. Esa será la cantidad de oro obtenida.
+
+Si en cualquiera de los dados sale un 1, la transmutación fracasa por completo y el objeto se convierte en un charco de lodo.
+
+El Alquimista se queda con la mitad del oro obtenido. Si no consigue nada, no cobra nada.</rules>
+  </location>
+  <location id="location-fabricante-de-armaduras">
+    <name>Fabricante de Armaduras</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Cuero, cotas de malla, armaduras de placas... Aquí encontrarás toda la protección necesaria para sobrevivir a tu próxima aventura.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Cota de Malla. Stock 6+. Compra 500. Venta 150. +2 Resistencia y -1 Movimiento.
+
+Armadura Ligera. Stock 7+. Compra 1000. Venta 350. +2 Resistencia.
+
+Armadura Pesada. Stock 8+. Compra 4000. Venta 1100. +3 Resistencia y -1 Movimiento, excepto para Enanos.
+
+Armadura de Placas. Stock 10+. Compra 8000. Venta 2000. +4 Resistencia. No se puede usar con armas a dos manos.
+
+Escudo. Stock 4+. Compra 300. Venta 75. +1 Resistencia. Si se usa con arma a dos manos, proporciona +2 Resistencia y -1 Movimiento. Si el enemigo obtiene el mismo resultado para impactar que el necesario, el golpe queda anulado.
+
+Pavés. Stock 9+. Compra 550. Venta 150. +2 Resistencia y -1 Movimiento.
+
+Capacete. Stock 7+. Compra 500. Venta 150. +1 Resistencia.
+
+Yelmo. Stock 5+. Compra 1000. Venta 300. +1 Resistencia. Se destruye al primer golpe en la cabeza.
+
+Armadura de Cuero. Stock 5+. Compra 40. Venta 20. +1 Resistencia. Se destruye al primer golpe en la cabeza.
+
+Casquete. Stock 4+. Compra 100. Venta 12. +1 Resistencia. Permite ignorar las reglas de quedar a 0 Heridas.</rules>
+  </location>
+  <location id="location-armas-de-fuego">
+    <name>Armas de Fuego</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Las mejores armas de fuego de la región están a la venta aquí, junto con la pólvora y la munición necesarias para hacerlas funcionar.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Ristra de Pistolas (2). Stock 10+. Compra 3000. Venta 600. Requiere pólvora y munición. Cada pistola debe recargarse tras disparar. Fuerza 6. Alcance 6 casillas. Puedes disparar dos veces por turno, pero después debes esperar un turno para recargar debido al tremendo estampido. No se puede usar en combate cuerpo a cuerpo. Manos 1.
+
+Mosquete. Stock 11+. Compra 2000. Venta 700. Causa una penalización de -1 a Fuerza, Resistencia y Movimiento mientras se porta. Fuerza 8. Si se ignora la penalización, la Fuerza del disparo pasa a 10. No se puede usar en combate cuerpo a cuerpo. Manos 2.
+
+Munición. Stock 4+. Compra 100.
+
+Pólvora. Stock 4+. Compra 100. Se consume una unidad cada vez que se usa una pistola o un mosquete durante una aventura.</rules>
+  </location>
+  <location id="location-armeria">
+    <name>Armería</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Equípate con el arma adecuada para enfrentarte tanto a alimañas como a gigantes. Aquí se vende acero para toda clase de Aventureros.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Daga. Stock 4+. Compra 75. Venta 20. Fuerza 1. Arrojadiza; se recupera al final del combate.
+
+Cimitarra. Stock 4+. Compra 100. Venta 15.
+
+Espada. Stock 5+. Compra 200. Venta 15. El daño causado es 1D6 + Fuerza del Aventurero.
+
+Espada Larga. Stock 7+. Compra 300. Venta 20. +1 Fuerza.
+
+Mandoble. Stock 8+. Compra 700. Venta 35. +4 Fuerza, +1 Ataques y -1 Iniciativa. No permite usar escudo.
+
+Hacha. Stock 4+. Compra 150. Venta 15. El daño causado es 1D6 + Fuerza del Aventurero.
+
+Hacha Ancha. Stock 4+. Compra 500. Venta 50. +2 Fuerza. No permite usar escudo.
+
+Hacha de Batalla. Stock 7+. Compra 300. Venta 35. +1 Fuerza. Permite combatir en filas.
+
+Hachón. Stock 8+. Compra 500. Venta 60. +2 Fuerza. No permite usar escudo.
+
+Lanza. Stock 4+. Compra 200. Venta 20. Arrojadiza. Con 4+ se recupera tras el combate. +1 Iniciativa. Permite combatir en filas.
+
+Martillo. Stock 10+. Compra 300. Venta 35.
+
+Martillo de Guerra. Stock 10+. Compra 400. Venta 100. Si sacas un 6 al impactar, causas 1D6 Heridas adicionales.
+
+Maza. Stock 9+. Compra 200. Venta 50. +1 Fuerza. Si impactas, puedes dejar aturdido al enemigo.
+
+Varas Arrojadizas. Stock 9+. Compra 250. Venta 100. +2 Fuerza y +2 a las tiradas para impactar.
+
+Espada de Metal. Stock 8+. Compra 1000. Venta 300. Si impactas, el objetivo no puede añadir el bono de los escudos a su Resistencia.
+
+Alabarda. Stock 7+. Compra 250. Venta 75. +1 Fuerza. No puedes usar escudo. Permite combatir en filas.</rules>
+  </location>
+  <location id="location-banco">
+    <name>Banco</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>¿Estás cansado de llevar encima todo tu oro y tesoros? Quizá sea buen momento de abrirte una nueva cuenta en el banco para tener todo a salvo.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Cualquiera puede visitar el Banco y, a diferencia de otras Localizaciones Especiales, puede encontrarse en cualquier tipo de Población, incluidas las Aldeas.
+
+Un Aventurero puede:
+- Abrir una cuenta.
+- Verificar una cuenta.
+- Sacar dinero.
+- Ingresar dinero.
+- Contratar cajas de seguridad.
+
+a) Abrir una cuenta. Cuesta 10 monedas de oro y exige dejar un depósito mínimo de 100 monedas. Solo puede haber una cuenta por cada Aventurero.
+
+b) Verificar una cuenta. Tira 1D6 y suma +1 si estás en un Pueblo o +2 si estás en una Ciudad.
+1-2. ¡El Banco ha sido robado, o peor! Tira 2D6 en la Tabla de Robos y Catástrofes:
+2. El Banco afirma no tener registro de ti ni de tu cuenta. Todo el dinero se ha perdido y la cuenta desaparece.
+3. Una mala inversión ha hecho que tu cuenta pierda la mitad del dinero.
+4-6. Un incendio ha dañado la sucursal. Tu cuenta sigue intacta, pero no puedes retirar ni ingresar dinero en esta Población.
+7-9. Un desconocido ha desviado fondos de tu cuenta. Pierdes 1D6 x 50 monedas de oro.
+10+. Las malas gestiones del Banco le obligan a usar tu dinero para pagar deudas. Pierdes 10 monedas de oro por cada mil ingresadas, redondeando hacia arriba.
+
+3-6. Tu cuenta ha crecido con los intereses. Tira 1D6:
+1. Tu cuenta gana 1D6 x 10 monedas de oro.
+2. Tu cuenta gana 1D6 x 20 monedas de oro.
+3. Tu cuenta gana 20 monedas de oro por cada mil que tenías ingresadas, redondeando hacia arriba.
+4. Tu cuenta gana 1D6 x 50 monedas de oro.
+5-6. Tu cuenta gana 1D6 x 100 monedas de oro.
+
+c) Sacar dinero. Una vez verificada la cuenta, el Aventurero puede retirar la cantidad que quiera mientras no exceda el saldo. Si la deja con menos de 50 monedas, debe sacar todo y la cuenta se borra.
+
+d) Ingresar dinero. Una vez verificada la cuenta, el Aventurero puede ingresar cualquier cantidad.
+
+e) Cajas de seguridad. Cada caja cuesta 25 monedas de oro y puede almacenar hasta cinco objetos de tesoro. No hay límite de cajas por Aventurero. Los objetos pueden meterse o sacarse cada vez que visites el Banco, pero mientras estén dentro no pueden usarse. Lo único que afecta a una caja de seguridad es un resultado de 4-6 en la Tabla de Robos y Catástrofes; en ese caso la caja sigue intacta, pero no se puede acceder a ella en esa sucursal.
+
+Si un Aventurero muere, otro Aventurero puede recoger el contenido de su cuenta y de sus cajas de seguridad, pero la cuenta y la caja desaparecen después.</rules>
+  </location>
+  <location id="location-barrio-elfico">
+    <name>Barrio Élfico</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Visita a tus parientes y comercia por armas y el equipo más exquisito de todo el lugar. Es la localización ideal para que los elfos encuentren artículos propios de su pueblo.</description>
+    <visitors>
+      <visitor>elf</visitor>
+      <visitor>wardancer</visitor>
+      <visitor>elf-ranger</visitor>
+    </visitors>
+    <rules>Mientras no se les niegue el acceso, solo los personajes élficos pueden visitar el Barrio Élfico: Elfo, Bailarín Guerrero y Elfo Explorador. Los Elfos niegan el acceso a quien no sea de su raza.
+
+Objetos élficos y coste:
+Arco Élfico. Coste 2.000. Disponible 10.
+Armadura Élfica. Coste 3.000. Disponible 10.
+Botas Élficas. Coste 100. Disponible 7.
+Capa Élfica. Coste 100. Disponible 7.
+Cuerda Élfica. Coste 75. Disponible 2.
+Escudo Élfico. Coste 700. Disponible 8.
+1D6+2 Flechas Certeras. Coste 20. Disponible 8.
+Hierbas Curativas. Coste 1D6 x 100. Disponible 2.
+1D6 Pan del Camino. Coste 10. Disponible 2.
+Yelmo Élfico. Coste 1.000. Disponible 8.
+
+Arco Élfico: mientras es usado por un Elfo, el arco tiene tanta Fuerza como su portador y puede realizar tantos disparos por turno como Ataques tenga el portador. Solo puede ser usado por un Elfo.
+
+Armadura Élfica: el portador aumenta en +1 su Resistencia. Además, si cualquiera de los dados de Heridas que tire el Monstruo es un 1 o un 2 natural, ignora ese dado al resolver el daño del ataque.
+
+Capa Élfica: cada vez que tu Aventurero es golpeado llevando una Capa Élfica puede ignorar la primera Herida causada por el golpe. Tira 1D6 cada vez que la capa absorba un golpe; con un 1, la capa se rasga y queda inutilizada. Solo un Elfo puede vestir esta capa y aguanta un golpe por turno.
+
+Escudo Élfico: mientras un Elfo utilice un Escudo Élfico, el Aventurero puede ignorar el primer golpe infligido en cada turno, a menos que la tirada para Impactar sea un 6 natural, en cuyo caso el escudo no tiene efecto. Solo puede usarse por un Elfo.
+
+Flechas Certeras: añaden +1 al Impactar en las tiradas de proyectil. Cada flecha sirve para un solo disparo. Las Flechas Certeras solo sirven para los Elfos; si son utilizadas por cualquier otro Aventurero se comportan como flechas normales.
+
+Pan del Camino: cada unidad restaura 1 Herida al Aventurero que lo consume. Al finalizar la aventura, si sobra Pan del Camino, tira 1D6; con un 1 se pone malo y debe tirarse, de 2 a 6 puede conservarse para la siguiente aventura.
+
+Botas Élficas: mientras el Elfo lleva puestas estas botas añadirá +1 a su Movimiento. Solo pueden ser llevadas por un Elfo. El encantamiento permanece durante una aventura.
+
+Yelmo Élfico: mientras es llevado por un Elfo, el Aventurero suma +1 a su Resistencia. Además, cuando es golpeado puede elegir si desvía el golpe con la cabeza. Tira 1D6:
+1. El Yelmo Élfico absorbe todo el daño del golpe, pero se destruye en el proceso.
+2-4. El golpe se resuelve normalmente; el yelmo no resulta dañado. Añade +1 Resistencia como indica la descripción.
+5-6. El golpe rebota en el Yelmo Élfico y no causa ningún daño.
+
+Cuerda Élfica: después de usarla tira 1D6; con un 1 la cuerda se rompe y debe desecharse. Solo un Elfo puede usar la Cuerda Élfica.
+
+Hierbas Curativas: al pagar 1D6 x 100 MO, el Elfo consigue bastantes hierbas como para hacer 1D6 Pociones de Curación, cada una de las cuales sana 1D6 Heridas.
+
+Maestro Armero Élfico: mientras está en el Barrio Élfico el Elfo puede visitar al Maestro Armero. Los Elfos llevan miles de años trabajando los metales y pueden reparar armaduras, cascos y escudos más desvencijados. El coste de las reparaciones es de 1D6 x 100 MO. Cada artículo debe tirarse y pagarse por separado. Una vez el oro está pagado, tira 1D6: con un resultado de 2+ el objeto se ha reparado y se usa de nuevo; con un 1, la armadura es irreparable y el dinero de la reparación se pierde.</rules>
+  </location>
+  <location id="location-casa-de-apuestas">
+    <name>Casa de Apuestas</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Desde el antro más cutre hasta la mansión más exclusiva, las casas de apuestas tienen una sola finalidad: desplumar al visitante o enriquecerle más que a cualquier noble en muy poco tiempo.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>En todos los Asentamientos hay una Casa de Apuestas y no existe ninguna restricción para visitarla. Cada visita consume un día.
+
+Declara qué cantidad de oro vas a jugar, con un máximo de 200 monedas de oro por visita, y tira 1D6:
+
+1. Tu Aventurero tiene una mala noche y pierde 1D6 veces su apuesta original. Si no tiene suficiente dinero, la casa se quedará con su objeto de más valor.
+2-5. Has pasado un día agradable; no pierdes nada y no ganas nada.
+6. La suerte está con tu Aventurero y gana rápidamente 1D6 veces su apuesta original en monedas de oro.</rules>
+  </location>
+  <location id="location-campos-de-entrenamiento">
+    <name>Campos de Entrenamiento</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Nuestro campamento está equipado con todo lo necesario para convertirte en el mejor Héroe y el más fuerte. Apúntate hoy mismo durante una semana completa de entrenamiento.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Un Aventurero debe dedicar una semana completa a entrenarse para subir de Nivel de Combate. Mientras esté aquí, el Aventurero no podrá visitar ninguna localización especial ni adquirir equipo. Tampoco pagará gastos diarios, ya que en el coste de entrenarse se incluye la comida y el alojamiento. Tampoco debe tirar en la Tabla de Eventos de Asentamiento.
+
+El oro representa mucho más que monedas físicas; también es la medida de lo bien que avanzas, ya que cuanto más oro, más podrás subir de Nivel de Combate. Subir de Nivel de Combate implica mejorar atributos permanentes como Heridas, Daño, Fuerza o Resistencia, lograr nuevas habilidades y escalar en la posición social.
+
+Consulta la Tabla de Niveles de tu Aventurero para averiguar el coste económico, así como las mejoras que obtendrás.</rules>
+  </location>
+  <location id="location-escuela-de-lucha">
+    <name>Escuela de Lucha</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Sudor, sangre y arena. Localización ideal para mejorar tus habilidades y ejercitar los músculos.</description>
+    <visitors>
+      <visitor>pit-fighter</visitor>
+      <visitor>barbarian</visitor>
+      <visitor>slayer</visitor>
+      <visitor>dwarf</visitor>
+      <visitor>chaos-warrior</visitor>
+    </visitors>
+    <rules>Un Luchador de Pozo, un Bárbaro, un Enano Matador, un Enano o un Guerrero del Caos pueden visitar la Escuela de Lucha una vez por Asentamiento. La Escuela de Lucha es una Localización Especial, pero puede encontrarse con una tirada de 6+ en lugar de 7+.
+
+Si encuentras una Escuela de Lucha, tira 2D6 y consulta la siguiente tabla. Un Luchador de Pozo debe añadir +1 a su tirada:
+
+2. Los gladiadores y entrenadores se ríen de tu Aventurero y le propinan una paliza vergonzosa. Tu Aventurero se marcha con mucha prisa, abandonando de inmediato el Asentamiento. No tires hoy en la Tabla de Eventos del Asentamiento.
+
+3. Los luchadores retan a tu Aventurero a una buena competición de lucha libre. Brutus el Grande entra en la sala y los dos lucháis a brazo partido durante unos minutos. Tira 1D6 y añade tu Fuerza. Si consigues un resultado de 7 o más, vences a Brutus el Grande y ganas 1D6 x 10 monedas de oro en la apuesta. Si fallas, deberás pasar los siguientes 1D6 días limpiando los aseos de la Escuela como pago por perder. No es necesario tirar por eventos en Población durante este tiempo.
+
+4. Uno de los luchadores coge un arma de las tuyas, determinada aleatoriamente, incluyendo armas mágicas. Si no eres capaz de asustarlo, con un resultado de 7 o más en 1D6 + tu Nivel de Combate, él se queda con el objeto. Descártalo inmediatamente.
+
+5. Un veterano viejo y canoso te enseña un truco para escapar del agarre de tu oponente. Puedes añadir la habilidad “Agacharte y Esquivar” al repertorio de movimientos de tu Aventurero. Esta habilidad permite a tu Aventurero destrabarse automáticamente y puede usarse una vez por aventura.
+
+6. Te han regalado unos guanteletes especiales de combate, que puedes utilizar una vez por aventura. Durante un único turno, puedes dar puñetazos a tus enemigos, haciéndoles bajar la guardia, y así obtienes un +1 para impactarles en cualquier ataque cuerpo a cuerpo.
+
+7. El entrenamiento adicional que recibes mejora tu destreza y aumenta tu Resistencia. Puedes añadir +1 a tu total de Heridas permanentemente.
+
+8. Aprendes unas cuantas habilidades y trucos que podrán ser utilizados en el futuro. Obtienes 1 punto adicional de entrenamiento, que podrás gastar cuando subas al siguiente Nivel de Combate. Un Aventurero que no sea Luchador de Pozo obtiene un +1 en un atributo a su elección durante la siguiente aventura.
+
+9. Los otros luchadores de la escuela te invitan a luchar en el foso. Debes tirar 1D6 y añadir tu Habilidad de Armas o tu Fuerza, lo que prefieras. Si el resultado total es 7 o más, habrás ganado el combate y recibes 1D6 x 50 monedas de oro. Si pierdes, tendrás que pagar 1D6 x 50 monedas de oro y no podrás visitar ninguna localización al día siguiente.
+
+10. Te enseñan una maniobra especial que consiste en girar tus armas siguiendo una combinación letal. Puedes utilizar este ataque una vez por aventura, en lugar de uno de tus ataques normales. Puedes tirar para Impactar una vez contra cada Monstruo que esté en una casilla adyacente a la de tu Aventurero. Cualquier impacto se resuelve de la manera normal, pero no puede haber Barridos Letales.
+
+11. Un viejo amigo tuyo está visitando la Escuela de Lucha. Ha sido afortunado en algunos combates recientes y ha pagado por su libertad. En un gesto de generosidad, se ofrece a pagar 2D6 x 20 monedas de oro de tu deuda total. Un Aventurero que no sea Luchador de Pozo añadirá esa cantidad de oro a su oro total y saldrá corriendo antes de que el viejo amigo se dé cuenta de su error.
+
+12. Te ofrecen asistir a un gran curso de instrucción intensiva sobre una forma especial de combatir. Si pagas 1D6 x 100 monedas de oro, pasarás los siguientes 1D6 días en la Escuela de Lucha. Ganas 1D6 puntos adicionales de entrenamiento, que podrás gastar cuando vayas a subir al siguiente Nivel de Combate. Cualquier Héroe que no sea Luchador de Pozo obtiene permanentemente +1 a su Habilidad de Armas, o +1 a su Iniciativa, o +1 a sus Ataques, o +1 a su Habilidad de Proyectiles, a tu elección.
+
+13. Al ir caminando por un patio interior, recibes un gran golpe. Te han partido una botella en la cabeza y pierdes el conocimiento. Al despertar, ves a tu ex-maestro delante de ti y a cuatro de sus gorilas a tu alrededor. Si aún tienes una deuda pendiente con él, te atan y te arrojan a la parte trasera de un carromato. Te llevará 2D6 días escapar, y durante este tiempo los otros miembros del grupo deben decidir si te esperan o se van. Tira 1D6 en la siguiente tabla. Si has pagado menos de tu Nivel de Combate x 500 MO, resta -1:
+1. Tu ex-maestro está muy enfadado contigo y te quita todo tu oro y todas tus pertenencias. Calcula el valor de todas las cosas que se lleva y divídelo a la mitad. Resta el resultado de tu deuda total.
+2. Tu ex-maestro está muy enfadado contigo y exige que le hagas algún pago de la deuda. Se llevará la mitad de todo el oro que ganes durante la siguiente aventura. Debes vender también todos los tesoros que encuentres durante la siguiente aventura y darle la mitad de los beneficios. Resta esa cantidad de tu deuda total después de la siguiente aventura.
+3. Tu ex-maestro se lleva la mitad de tu oro actual y lo desquita de tu deuda total.
+4+. Tira 1D6 por cada objeto de tesoro y equipo que tu Aventurero tenga. Con un resultado de 1 o 2, tu ex-maestro se queda con él y resta 1D6 x 50 monedas de oro de tu deuda total.</rules>
+  </location>
+  <location id="location-gremio-de-enanos">
+    <name>Gremio de Enanos</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Para obtener los mayores conocimientos en ingeniería y armería, visita a los maestros gremiales enanos. Aquí podrás comprar objetos especiales o forjar runas en tus hachas.</description>
+    <visitors>
+      <visitor>dwarf</visitor>
+    </visitors>
+    <rules>Solo los Enanos pueden visitar el Gremio de Maestros Enanos, siempre que no les nieguen el acceso.
+
+Objetos enanos y coste:
+Ganzúas. Coste 200. Disponible 7.
+1D6 Bombas. Coste 100. Disponible 8.
+1D6 Bolsas de Polvo Cegador. Coste 75. Disponible 8.
+1D6 Pan de Piedra Enano. Coste 30. Disponible 2.
+
+Ganzúas: permiten abrir cualquier cerradura que no sea mágica o cuyas reglas no digan lo contrario. Tira 1D6:
+4-6. La cerradura se abre.
+2-3. La cerradura se resiste de momento, aunque el Aventurero puede intentarlo de nuevo en el próximo turno.
+1. Las ganzúas se parten y quedan inservibles.
+Solo hay disponible un juego de ganzúas en cada Gremio de Maestros Enanos.
+
+Bomba: puede arrojarse en cualquier momento y afecta a un área de 2 x 2 casillas. Cualquier miniatura en el área sufre 1D6 Heridas sin modificadores por Resistencia o Armadura. Tu Aventurero puede comprar cualquier número de Bombas siempre que estén disponibles.
+
+Polvo Cegador: puede encenderse en cualquier momento para confundir a los enemigos. Después de que haya explotado, cualquier Aventurero que todavía no haya combatido en este turno recibe un ataque adicional. Tu Aventurero puede comprar cualquier número de bolsitas siempre que estén disponibles.
+
+Pan de Piedra Enano: nadie excepto un Enano se deleitaría rompiéndose los dientes con este bocado. Si decide comer de este pan no podrá realizar nada durante su turno, ni siquiera moverse. Al final de la Fase de Aventureros recobrará 1D6 Heridas. Una vez el Enano ha tirado el dado para ver cuánto Pan de Piedra hay disponible debe comprarlo todo; de lo contrario será expulsado del Gremio.
+
+El Maestro Rúnico: mientras el Enano visita el Gremio de Maestros Enanos, puede hacer una visita a un Grabador de Runas para grabar una sola runa en su hacha. Esto cuesta 1D6+2 x 100 MO. Para determinar la runa exacta inscrita tira 1D6:
+1. Runa Mágica. El arma se trata como mágica para siempre.
+2. Runa de Golpe. El arma ignora 1 punto de Armadura al determinar el daño.
+3. Runa de Restauración. Mientras el Enano maneja esta arma, el portador recupera 1 Herida automáticamente por turno. Si el Aventurero queda reducido a 0 Heridas, la runa deja de funcionar hasta que recupere al menos 1 Herida.
+4. Runa de Golpe Certero. Siempre que sea manejada por un Enano, esta runa permite repetir la tirada del dado de Daño con el resultado más bajo si el Aventurero lo desea. Las runas múltiples de este tipo no permiten repetir más de un dado.
+5. Runa de Destrucción. Permite doblar el número de Ataques una vez por aventura.
+6. Runa de Muerte. Una vez por aventura puedes tirar un extra de 2D6 al tirar para Herir.
+
+Solo puede grabarse runas en Hachas. Si una misma arma tiene más de una runa idéntica grabada, los efectos son acumulativos. Dos Runas de Muerte, por ejemplo, pueden utilizarse dos veces por aventura o causar un extra de daño de 4D6 si se utilizan en el mismo golpe. Antes de lanzar los dados para golpear, el Aventurero debe declarar que está usando una runa. Si falla el golpe, la runa se gasta. Un arma solo puede tener grabadas un máximo de dos runas iguales por nivel de combate del Enano, hasta un máximo de 10 runas en total sean iguales o no. Un Enano de Nivel 5 podrá tener 10 runas grabadas y puede grabar tantas hachas como quiera y disponga.</rules>
+  </location>
+  <location id="location-gremio-de-hechiceros">
+    <name>Gremio de Hechiceros</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Repleto de libros, pergaminos y criaturas enjauladas, el Gremio de Hechiceros sólo acoge a aquellos usuarios de la magia imperial.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>elf-ranger</visitor>
+    </visitors>
+    <rules>Al llegar a un Pueblo o una Ciudad, el Hechicero y el Explorador Elfo, si posee como mínimo un hechizo, pueden visitar el Gremio de Hechiceros si lo encuentran, en busca de consejo y probablemente ayuda mágica para su próxima aventura.
+
+Honorarios:
+Los Hechiceros del Gremio cobran unos honorarios de 1D6 x 50 MO por cualquier petición de ayuda o consulta que se les solicite. Si el Hechicero no posee suficiente dinero para pagar estos honorarios, deberá abandonar inmediatamente el recinto del Gremio y no podrá hacer nada más ese mismo día.
+
+La Petición:
+Una vez pagados los honorarios, tira 1D6 en la siguiente tabla. El número indicado para el tipo de asentamiento señala cuántas tiradas puede efectuar el Hechicero en la Tabla del Gremio de Hechiceros:
+1-2. Pueblo: 1. Ciudad: 2.
+3-5. Pueblo: 2. Ciudad: 2.
+6. Pueblo: 3. Ciudad: 3.
+
+Tabla del Gremio de Hechiceros. Tira 2D6:
+2-3. Nada. Los esfuerzos del Hechicero son en vano y no consigue nada.
+4. Tesoro de los Condenados. Una vez en cualquier momento de la próxima aventura, el Hechicero puede doblar la cantidad de MO que recibe por matar a un Monstruo.
+5. Guía. Una vez, en cualquier momento de la próxima aventura, el Hechicero podrá Impactar automáticamente en un ataque, pero este no causará Barrido Letal.
+6. Curación. Una vez, en cualquier momento de la próxima aventura, el Hechicero podrá recurrir a la Magia para curarse a sí mismo. Tira 1D6+2 para determinar las Heridas que recupera.
+7. Corte Mortal. Elige una de las armas del Hechicero. Una vez, en cualquier momento de la próxima aventura en la que el Hechicero utilice esa arma, causará +1D6 Heridas.
+8. Fuerza de Gigante. Una vez, en cualquier momento de la próxima aventura, el Hechicero sumará +1D6 puntos a su Fuerza durante todo un turno.
+9. Resistencia de Dragón. Una vez, en cualquier momento de la próxima aventura, el Hechicero sumará +1D6 puntos a su Resistencia durante todo un turno.
+10. Rapidez. Una vez, en cualquier momento de la próxima aventura, el Hechicero sumará +2 puntos a su Movimiento y podrá destrabarse automáticamente.
+11. Constitución de Ogro. El Hechicero sumará permanentemente de 1 a 3 Heridas a su atributo. Tira 1D6: 1-2 = 1 Herida; 3-5 = 2 Heridas; 6 = 3 Heridas.
+12. Engañar a la Muerte. La próxima vez que el Hechicero quede reducido a 0 Heridas, este hechizo hará rebotar el golpe que le cause la muerte, desviándolo sin causarle Herida alguna.
+
+Anota todas las habilidades conseguidas en la hoja de control del Aventurero. Si al finalizar la siguiente aventura no se han utilizado, se perderán.
+
+Pociones Mágicas:
+Mientras visita el Gremio de Hechiceros, el Aventurero puede adquirir pociones mágicas. El Hechicero debe declarar su intención antes de saber cuántas habrá disponibles y cuál será su coste. El coste total de las pociones será de 1D6 x 100 MO. Por este dinero, el Hechicero conseguirá 1D6 pociones. Cualquier Aventurero puede tomar alguna de estas pociones. Si un mismo Aventurero toma más de una poción a la vez, sus efectos serán acumulativos, pero si toma más de una dosis del mismo tipo, no se potenciarán sus efectos. Para determinar el efecto de cada poción, tira 1D6:
+1. Poción de Fuerza. Aumenta en +1 la Fuerza del Aventurero durante un turno.
+2. Poción de Resistencia. Aumenta en +1 la Resistencia del Aventurero durante un turno.
+3. Poción de Combate. Aumenta en +1 los Ataques del Aventurero durante un turno.
+4. Poción de Velocidad. Aumenta en +1D6 el Movimiento del Aventurero y permite destrabarse automáticamente durante un turno.
+5. Poción Insustancial. El Aventurero se convierte temporalmente en etéreo, por lo que no puede ser trabado, no puede atacar ni ser atacado, ni puede utilizar hechizos durante un turno.
+6. Poción de Vuelo. El Aventurero podrá volar como si tuviera un Movimiento de 1D6+2, atravesando obstáculos. Además no podrá ser trabado en combate. Si al final de su turno está en contacto con un Monstruo podrá atacarle.
+
+Además de aplicar los efectos de la Poción de Fuerza o de la Poción de Resistencia, tira 1D6. Si obtienes un 6, el modificador de +1 a Fuerza o Resistencia se aplicará durante el resto de la partida.
+
+Báculo del Hechicero:
+Mientras se encuentra en el Gremio, un Hechicero puede intentar adquirir un Báculo de Hechicero por 500 MO. Para determinar si hay alguno disponible debe tirarse 1D6. Si se obtiene un 4, 5 o 6, el Hechicero podrá adquirirlo. Un Hechicero solo puede poseer un Báculo de Hechicero a la vez.
+El Hechicero puede usar el Báculo en combate cuerpo a cuerpo, aplicando un modificador de -1 a la tirada para Impactar. Un impacto de Báculo causa 1D6 + la Fuerza del Hechicero de Heridas. Además, el Báculo puede utilizarse defensivamente aumentando en +1 la Resistencia del Hechicero.
+Un Báculo de Hechicero es inherentemente mágico, lo que permite al Hechicero, una vez por aventura, utilizarlo en la Fase de Poder para repetir la tirada para determinar los Puntos de Poder conseguidos. Un Báculo de Hechicero dispone de 1D6 Puntos de Poder almacenados en su interior. El Hechicero puede utilizar estos puntos como si fueran suyos propios, pero una vez utilizados no se recuperan hasta que se recargue el Báculo en la Fuente del Poder.
+
+Fuente del Poder:
+El Hechicero puede recargar su Báculo de Hechicero mientras se encuentre en el Gremio de Hechiceros sumergiéndolo en la Fuente del Poder. El coste de recargar el Báculo es de 1D6 x 100 MO. En este proceso el Báculo recarga 1D6 Puntos de Poder. En ningún caso el Báculo podrá acumular más de 6 Puntos de Poder.
+
+Cambiando Hechizos:
+Mientras el Mago visita el Gremio de Hechiceros, puede intentar cambiar los hechizos que tiene memorizados entrando en un estado de catalepsia próximo al coma profundo. Tira 1D6:
+1-3. El Mago no borra ni puede sustituir ningún Hechizo y debe empezar la próxima aventura con los que tiene. Al final de la próxima aventura puede intentarlo de nuevo.
+4-5. El Mago borra un Hechizo con éxito de su mente y puede descartar un hechizo y reemplazarlo por otro del mazo de Cartas de Hechizo.
+6. El Mago consigue borrar de su mente todos los hechizos anteriores y puede sustituirlos por otros de las tarjetas de hechizo. No es necesario que se deshaga de todos; puede elegir los que crea conveniente.
+
+Si el Hechicero consigue borrar de su mente uno o más hechizos y reemplazarlos por otros para la próxima aventura, tira 1D6:
+1-2. El Hechicero no aprende un nuevo hechizo a tiempo y tendrá un hechizo menos en el siguiente subterráneo. Podrá intentarlo de nuevo al final de la próxima aventura.
+3-5. El Mago tiene éxito en sus estudios. Baraja las cartas de Hechizo del mismo tipo, Ataque, Defensa o Curación, y reparte una al jugador del Hechicero. Este es el nuevo hechizo del Mago y reemplaza la tarjeta descartada.
+6. A través de una investigación cuidadosa y laboriosa, el Hechicero localiza y aprende el hechizo preciso que le hace falta para la próxima aventura. El jugador Mago puede elegir cualquier hechizo del mismo tipo para reemplazar el que ha descartado.</rules>
+  </location>
+  <location id="location-torre-de-guardia">
+    <name>Torre de Guardia</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Pasa el día ganando monedas de oro, no gastándolas. Apúntate en la Guardia y protege a los ciudadanos del Imperio.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Tira 1D6:
+
+1. El día parece eternizarse. Durante tu turno, el capitán te sorprende dormido. Como castigo no cobras salario y pierdes todos tus Méritos.
+
+2. No hay nada que informar al capitán, pero cumples con tu deber. Recibes 1D6 monedas. Si eres miembro de la Guardia Imperial, recibes 2D6 monedas.
+
+3-4. Un duro día de trabajo. Tu Aventurero se retira por hoy y cobra 1D6 x 2 monedas. Si es miembro de la Guardia Imperial, cobra 2D6 x 2 monedas.
+
+5. Surge una trifulca en el Asentamiento, pero controlas heroicamente la situación. Recibes 1D6 x 5 monedas. Si eres miembro de la Guardia Imperial, recibes 2D6 x 5 monedas.
+
+6. Un enjambre de Ratas Gigantes infesta a los mercaderes locales, pero acabas con la plaga. El capitán toma nota de tus esfuerzos. Anota un Mérito en tu hoja de registro y recibes 1D6 x 10 monedas. Si eres miembro de la Guardia Imperial, recibes 2D6 x 10 monedas.
+
+Guardia Imperial:
+Cuando un Aventurero tenga 3 Méritos en su hoja de registro, asciende a miembro oficial de la Guardia Imperial. Borra los Méritos y anota tu nueva categoría. A partir de entonces, el precio de las armas siempre vale la mitad.
+
+El inconveniente es que los miembros de la Guardia Imperial deben visitar la Torre de Guardia una vez por Asentamiento, si es posible.
+
+Si eres miembro de la Guardia Imperial, los siguientes Eventos de Asentamiento se alteran:
+21. Lucha (+1 al resultado).
+43. Alistamiento (debes participar).
+46. Toro Suelto (+2 al resultado).
+51. Crimen (ahora es Día sin incidentes).
+64. Brujería (ahora es Día sin incidentes).
+
+Los Eventos de Asentamiento del Caballero Bretoniano siempre tienen prioridad.</rules>
+  </location>
+  <location id="location-mercader">
+    <name>Mercader</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>El mercado local siempre es un lugar ideal para comprar cuerdas, vendas, botas nuevas y otras provisiones para el viaje.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Cuerda. Stock 5+. Compra 30. Venta 5. Permite escapar de pozos. Tira 1D6 tras usarla; con un 1, se rompe.
+
+1D6 Vendas. Stock 7+. Compra 50. Venta 5. Cada venda recupera 1D3 Heridas. Al terminar la aventura no pueden guardarse.
+
+1D6 Provisiones. Stock 5+. Compra 50. Sin venta. Cada provisión recupera 3 Heridas. Al terminar la aventura no pueden guardarse.
+
+1D6 Estacas. Stock 7+. Compra 100. Venta 10. Una estaca puede atrancar una puerta. Solo puede usarse una vez por aventura y requiere superar un chequeo de Fuerza con 9+.
+
+1D6 Barriles de Cerveza. Stock 5+. Compra 50. Sin venta. Conceden +1 a la tirada de Poder durante un turno. Si un Hechicero bebe, no podrá lanzar conjuros durante 2 turnos.
+
+Ropas de calidad. Stock 6+. Compra 50. Venta 20.
+
+Botas. Stock 4+. Compra 20. Venta 10.
+
+Piedra del Trance. Stock 7+. Compra 300. Venta 75.</rules>
+  </location>
+  <location id="location-templo">
+    <name>Templo</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Los templos son las piedras angulares de toda religión activa; en ellos se celebra la magia ritual según los ritos y prácticas de la deidad a la que están dedicados.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Tu Aventurero puede rezar a los Dioses por 50 monedas de oro. Los efectos duran una sola aventura. Tira 1D6:
+
+1-2. Los Dioses no escuchan tus plegarias.
+
+3. Tu Aventurero puede doblar su número de ataques durante un turno.
+
+4. Tu Aventurero puede sumar +3 a una tirada para impactar.
+
+5. Tu Aventurero puede ignorar las Heridas sufridas a causa de un ataque.
+
+6. Tu Aventurero puede tirar 1D6 adicional al determinar el daño causado por un ataque.
+
+Ciertos Aventureros tienen su templo específico con beneficios adicionales.</rules>
+  </location>
+  <location id="location-la-autoridad">
+    <name>La Autoridad</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Siempre existe la posibilidad de que seas reconocido por la Guardia y arrojado a las celdas cuando visites un Asentamiento.</description>
+    <visitors>
+      <visitor>outlaw</visitor>
+    </visitors>
+    <rules>Cuando visites una Aldea tira 1D6. En Pueblos y Ciudades tira 2D6. Siempre que salga un 1 en cualquiera de los dados, el Forajido es reconocido por la ley y puede ser ajusticiado. Tira 1D6 y consulta la siguiente tabla:
+
+1. ¡Que lo cuelguen! Eres llevado a la horca y ejecutado por el mariscal de la ciudad. Mueres, salvo que gastes Suerte.
+
+2-4. No me has visto, ¿de acuerdo? Logras evitar un final trágico sobornando a un Guardia. Pagas un 10% de tus monedas, te quita los grilletes y te deja escapar.
+
+5. Fuga temeraria. En una lucha desesperada con los Guardias, te lanzas desde un pretil elevado para huir. Tira 1D6; con 1 o 2 te lesionas y comienzas la próxima aventura con 1D3 Heridas Iniciales menos. Si eres Bandido Enmascarado, puedes repetir la tirada.
+
+6. Tengo un plan magnífico. Gracias a tu astucia y a un uso espectacular de tu equipo de ganzúas, escapas al caer la noche.</rules>
+  </location>
+  <location id="location-los-bajos-fondos">
+    <name>Los Bajos Fondos</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Mientras estés en un Asentamiento puedes realizar tantos robos como desees, pero más te vale que no te pillen.</description>
+    <visitors>
+      <visitor>halfling-thief</visitor>
+    </visitors>
+    <rules>1) Elige una Tienda o Localización Especial que tenga artículos. Si no encuentras el sitio, puedes elegir otro. Cada objetivo solo puede ser robado una vez por Asentamiento.
+
+2) El Halfling Ladrón puede visitar al Soplón de los Bajos Fondos para escuchar rumores.
+
+3) Puedes planificar el robo.
+
+El Soplón:
+En cada visita consigues información sobre rumores y seguridad del objetivo. Si no te gusta la información, puedes elegir otra tienda. Los resultados de cada tienda se mantienen.
+
+Tabla de rumores:
+1-2. No tienen nada que robar. Hay escasez de material en ese lugar.
+3-5. Tienen de todo. Puedes robar normalmente.
+6. El lugar está repleto de mercancías. +1 a la tirada de Stock si robas un artículo.
+
+Tabla de guardias:
+1. El lugar está junto a los Guardias. No puedes robar ahí.
+2. Hay cerraduras. -1 a la tirada de Robo.
+3-5. Hay lugares más fáciles, pero también más difíciles. Puedes robar sin modificadores.
+6. Sería más fácil si lo dejan en la plaza. +1 a la tirada de Robo.
+
+Planificación:
+Para mejorar las posibilidades de éxito, el Halfling puede pasar varios días preparando el golpe. El máximo de días es el Nivel de Batalla. Los días pueden repartirse entre varios robos, pero siempre deben ser consecutivos y durante ellos no puede hacer nada más. Por cada día tira 1D6; cada 6 natural concede un +1 acumulativo a la tirada de Robo.
+
+Comienza el robo:
+El último día de la planificación dejas el plan cerrado para delinquir. También puedes intentarlo sin planificar. En primer lugar tira 1D6; con un 1, los rumores eran falsos. Tira de nuevo en la tabla de rumores para conocer la realidad. Si resulta que la Guardia está allí, debes abortar el robo.
+
+Robar en tiendas:
+Realizas una tirada de Stock con -4. Si entras en la tienda con el único propósito de robar, sufres un -1 adicional. No hay límite al número de artículos que puedes intentar robar, pero solo 1 o un lote de 1D6 de cada tipo.
+
+Tabla de Robo:
+1. Te pillan con las manos en la masa.
+2-3. Sales con las manos vacías, pero libre.
+4. Puedes robar 1 artículo.
+5. Puedes robar 1D3 artículos.
+6. Puedes robar 1D6 artículos.
+
+Para robar un artículo debes superar la tirada de Stock. No hay límite de intentos, pero si sacas un 1, la Guardia te atrapa. Si el Halfling falla la tirada de Stock al robar, también puede ser capturado.
+
+Reventa del objeto robado:
+El artículo robado se puede vender a otros Héroes o en el mercado negro. Tira 1D6:
+1. La Guardia local irrumpe en la venta.
+2. Malvendes por el 10% del precio.
+3-4. Consigues venderlo por el 50% de su valor.
+5. Ganas el 75% de su precio normal.
+6. Logras venderlo por su valor total.
+
+¡Te han pillado!:
+Para escapar debes sacar 8+ en 1D6 + Iniciativa. Si no lo consigues, tira 1D6:
+1. Eres enviado a los Tribunales.
+2. Eres apaleado y expulsado de la Ciudad.
+3. Pierdes 1 Herida permanente.
+4. Te echan del Asentamiento.
+5. Pagas una multa de 2D6 x 100 monedas.
+6. Pagas 1D6 x 100 monedas.
+
+Te llevan como reo al juzgado:
+El Halfling Ladrón no puede hacer nada durante los próximos 1D6 días. El último día será juzgado. Tira 1D6:
+
+Tabla de Crimen:
+1. Ser un Halfling.
+2. Intento de robo.
+3. Robo.
+4. Gran ladrón.
+5. Adquisición ilegal.
+6. Robo con intención.
+
+Tabla de Sentencia:
+1. Inocente y libre, pero todo es confiscado.
+2. Recibes una severa advertencia y quedas libre.
+3. Multa de 1000 monedas. Si no pagas, quedas expulsado de la Ciudad.
+4. Castigo físico. El juez ordena que no olvides jamás lo ocurrido. Tira 1D6:
+1. Pierdes una oreja, un dedo u otro apéndice no vital.
+2-4. Pierdes una pierna: -1 Movimiento, -2 Iniciativa y la regla Destra con 6 en la próxima aventura.
+5-6. Pierdes una mano: -1 para impactar.
+5. Prisión de 1D6 x 5 años. El Héroe queda fuera de juego, aunque si al inicio de cualquier aventura sacas 5+, habrá escapado y podrá volver a jugar.
+6. ¡Muerte! Tira 1D6 en la Tabla de Ejecución, salvo que utilices un punto de Suerte.
+
+Las sentencias pueden evitarse si los Aventureros sobornan al juez. Deben pagar la suma de los resultados x 100. Si no lo hacen, el Halfling abandona el Asentamiento.
+
+Tabla de Ejecución:
+1. Decapitación.
+2. Horca.
+3. Ahogamiento.
+4. Hoguera.
+5. Tortura.
+6. Hambre.</rules>
+  </location>
+  <location id="location-bar-del-muelle">
+    <name>Bar del Muelle</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Aquí te reúnes con otros marineros para intercambiar historias o entrenar, siempre con algo de ron a mano.</description>
+    <visitors>
+      <visitor>sea-wolf</visitor>
+    </visitors>
+    <rules>El Lobo de Mar gasta aquí 1D6 x 10 monedas y puede:
+
+a) Entrenar para subir de nivel.
+b) Escuchar noticias y relatos de piratas.
+c) Beber ron con los marineros borrachos.
+d) Comprar artículos de la Marina de Guerra. Roba su Carta de Localización Especial.
+
+Noticias:
+El Lobo de Mar recibe noticias sobre la próxima aventura. Tira 1D6:
+1-2. Nada que no sepas ya.
+3-4. Un determinado tesoro podrá ser encontrado solo por el Lobo de Mar en la próxima aventura. Podrás elegirlo cuando robes una carta de tesoro adicional.
+5. Te entregan un mapa con el mejor camino para llegar al asentamiento más cercano tras la siguiente Mazmorra. Reduce el viaje en 2 semanas.
+6. La siguiente aventura será especialmente peligrosa, así que el Lobo de Mar recibe una Poción Curativa.
+
+El marinero borracho:
+El Lobo de Mar siempre puede intentar conseguir información de los marineros borrachos que frecuentan las tabernas del muelle. Si lo deseas, puedes buscar a uno durante tu estancia. Tira 1D6:
+1-3. El borracho solo balbucea tonterías y pierdes el tiempo.
+4. El marinero se ha encontrado con gentes extrañas de lejano oriente y ha visto fantásticos trucos con espadas. Te enseñan una técnica impresionante. Durante la próxima aventura ganas 1D3 Ataques.
+5. Te enseñan una canción de mar conmovedora. Todos los Héroes recuperan 1D3 Heridas en la próxima aventura.
+6. Te muestran otra canción de mar, desesperante, que hace que 1D3 Monstruos de la misma sección pierdan 1D6 + 1 Heridas sin modificar.</rules>
+  </location>
+  <location id="location-bienvenida">
+    <name>¡Bienvenida!</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Cada vez que accedas a un Asentamiento debes tirar 1D6 + Reputación y consultar esta carta para saber la bienvenida que recibes.</description>
+    <visitors>
+      <visitor>bounty-hunter</visitor>
+    </visitors>
+    <rules>Cada vez que accedas a un Asentamiento tira 1D6 + Reputación y consulta el resultado.
+
+Los primeros resultados de la tabla original no son completamente legibles en la fuente escaneada y deberán revisarse sobre el material original.
+
+5 o menos. La gente del pueblo ni te conoce como un gran Caza Recompensas.
+
+6-9. Algunos te reconocen y avisan al resto. Cada vez que entres en una tienda tira 1D6; con un 6 cualquier objeto cuesta la mitad.
+
+10. El Caza Recompensas se encuentra con un pequeño comité de bienvenida en las afueras de la ciudad. Tira 1D6 + Reputación. Con 7 o más, la gente del pueblo te teme y no tienes que pagar Gastos Diarios mientras permanezcas en el Asentamiento. Con un 1 natural, los ciudadanos te expulsan.
+
+11-12. Los habitantes te miran perplejos. No pagas Gastos Diarios y las tiendas te venden los objetos a mitad de precio si sacas 9+ en una tirada de 1D6 + Reputación al entrar en cada tienda.
+
+13 o más. Los criminales huyen a tu llegada. No pagas Gastos Diarios y, agradecidos por librarles de maleantes, los habitantes te pagan 1D6 x 50 monedas.</rules>
+  </location>
+  <location id="location-bodega-cerveceria">
+    <name>Bodega/Cervecería</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Destilan bebidas alcohólicas, especialmente cervezas enanas de importación para todo el Viejo Mundo, aunque no son aptas para cualquier atrevido.</description>
+    <visitors>
+      <visitor>dwarf</visitor>
+      <visitor>brewmaster-dwarf</visitor>
+    </visitors>
+    <rules>La cervecería no compra bebidas de segunda mano, por eso no hay precio de venta. El Maestro Cervecero solo puede llevar un barril de cada tipo para rellenar sus barriles vacíos.
+
+Cada barril contiene 1D3 tragos. Si al determinarlo salen dobles, contiene 2D3 tragos. La Gran Premier Bugman solo contiene un único trago.
+
+Cervezas originales:
+Reserva Especial. Stock 4+. Compra 150. Durante un turno obtienes +3 Ataques e ignoras Miedo y Terror durante todo un combate.
+
+Bugman XXXXX. Stock 5+. Compra 200. Cura 1D6 Heridas. Después tira 1D6: con 1 quedas mareado durante un turno; con 6 recuperas 100 Heridas.
+
+Cervezas especiales:
+Cerveza de Champiñón. Stock 4+. Compra 250. Cualquier Monstruo adyacente sufre 2D6 Heridas sin modificar.
+
+Volcano Fuego. Stock 8+. Compra 350. El Enano entra en Frenesí hasta el final del combate y dobla sus Ataques.
+
+Nórdica Original. Stock 8+. Compra 250. Durante un turno obtienes 1D6 Ataques y +1 Fuerza.
+
+Reserva Licántropa. Stock 9+. Compra 400. Durante una ronda de combate golpeas primero y obtienes +1 Ataques y +1 Movimiento.
+
+La Gota Dorada. Stock 9+. Compra 500. Si sacas un 6 al impactar, infliges 1D6 Heridas adicionales.
+
+Gran Premier Bugman. Stock 10+. Compra 600. Cura 100 Heridas. Después tira 1D6: con 1 pierdes 1 Ataque hasta el final del combate; con 6 obtienes además +1 Resistencia.</rules>
+  </location>
+  <location id="location-borrachera">
+    <name>¡Borrachera!</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Terminar la visita a un Asentamiento con una gran borrachera es de lo más normal para un Maestro Cervecero.</description>
+    <visitors>
+      <visitor>brewmaster-dwarf</visitor>
+    </visitors>
+    <rules>Invitarás a cada Aventurero y cada uno podrá aceptar o rechazar. Una vez hayan decidido, tira 2D6 en la tabla siguiente, suma el número total de Aventureros participantes y añade los modificadores de Taberna de cada uno.
+
+5 o menos. Los Aventureros despiertan con dolor de cabeza y con 1D6 x 100 monedas menos cada uno.
+
+6-9. Después de la tercera taberna, el Maestro Cervecero localiza un bar de mala muerte en una zona indudablemente cutre de la ciudad. Se desencadena una gran reyerta y uno de los Aventureros se lesiona. Cada Aventurero debe tirar 2D6 y aplicar su modificador de Taberna. El Aventurero con la puntuación más baja sufre -1 Resistencia en la siguiente aventura.
+
+10-13. Tras una noche gloriosa de consumo y juegos de azar, despertáis con 1D6 x 50 monedas adicionales y un objeto de tesoro cada uno. No podéis hacer nada al día siguiente: estáis ocupados vomitando.
+
+14 o más. Una cogorza de proporciones épicas. Un camarero de una tasca local queda tan impresionado que entrega 3 barriles de cerveza a cada uno y 1D6 x 100 monedas por haber convertido su taberna en una fiesta brutal. En la siguiente aventura sois inmunes a Miedo y Terror, y cada uno gana +1 Herida Inicial permanentemente.</rules>
+  </location>
+  <location id="location-capilla-del-grial">
+    <name>Capilla del Grial</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Te informan del paradero de una Capilla del Grial, situada a las afueras del Asentamiento, en la lejanía de un olvidado bosque.</description>
+    <visitors>
+      <visitor>bretonnian-knight</visitor>
+    </visitors>
+    <rules>Tira 1D6 para saber qué descubre el Caballero Bretoniano:
+
+1-3. No encuentras nada.
+4. Lago Sagrado.
+5. Antigua Capilla del Grial en ruinas.
+6. Capilla del Grial.
+
+Bonus por Renombre:
+Escaso +0
+Modesto +1
+Extendido +2
+Legendario +3
+
+4. Lago Sagrado
+Llegas a un Lago Sagrado, en lo más profundo del bosque. En esta localización podrás hacer dos acciones, aplicando los bonus por Renombre:
+
+a) Pasar 1D6 días para ver si aparece la Dama del Lago. Necesitas un 6+ al tirar 1D6 con los bonus. Si lo logras, ganas +1 a un Atributo para la siguiente aventura.
+
+b) Bendecir tu espada en el Lago. Requiere un 6+ al tirar 1D6 con los bonus:
+1. Bendición Mágica
+2. Bendición del Filo
+3. Bendición de Protección
+4. Bendición de Fortuna
+5. Bendición de Destierro
+6. Bendición de Justicia
+
+Las Bendiciones pueden perderse si te quedas sin Puntos de Honor.
+
+5. Antigua Capilla del Grial en ruinas
+Tira 1D6 para saber los días que tardas en llegar y 1D6 para ver qué hay:
+1-3. Nada.
+4. Monstruo. Supera un chequeo de Fuerza; si lo logras ganas oro, si fallas pierdes Puntos de Honor.
+5. Hallas equipo o tesoros relacionados con la estancia.
+6. Descubres una nueva Mazmorra.
+
+6. La Capilla del Grial
+Primero haces un donativo de 1D6 x 50 monedas y cumples penitencia durante 1D3 días para purificarte. Cada día de penitencia tira 1D6; con 4+ recuperas los Puntos de Honor que perdiste en la última aventura. Después podrás:
+
+a) Solicitar consejo al Caballero Ermitaño. Requiere un 6+ al tirar 1D6 con los bonus. Si lo logras, vuelve a tirar 1D6:
+1. Mensaje encriptado
+2. Punto débil
+3. Mapa Mazmorra
+4. La Bestia
+5. El Tesoro
+6. La Reliquia
+
+b) Solicitar ayuda a las Damaselas del Grial. Con un 4+ al tirar 1D6 recuperas 1 Atributo perdido de forma permanente. Otro Aventurero puede hacer lo mismo si paga su propio donativo, pero si sale un 1 las Damaselas os expulsan a ambos. Si no estás herido, puedes pedir ayuda para la siguiente aventura. Tira 1D6:
+1. Desafío de la Dama
+2-4. Poción Vigorizante
+5. +1 Resistencia
+6. +1 Fuerza</rules>
+  </location>
+  <location id="location-casa-del-guardia">
+    <name>Casa del Guardia</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Allá donde haya gente habrá crímenes, y tras ellos siempre habrá un Cazarrecompensas. La Casa del Guardia es el lugar ideal para hacer justicia, cobrar la recompensa y buscar la siguiente presa.</description>
+    <visitors>
+      <visitor>bounty-hunter</visitor>
+    </visitors>
+    <rules>a) Tabla Recompensa
+Si has matado o capturado al Forajido en la aventura anterior, tira 1D6:
+
+1. El Forajido que has traído para ajusticiar no es el buscado. Debes pagarle 1D6 x 100 monedas.
+
+2. El Forajido es inocente de algunos de sus crímenes mientras le buscabas. Resta 1D6 crímenes al azar y ajusta el valor de su recompensa. Si resulta inocente de todo, aplica el resultado 1.
+
+3-4. Te pagan por un trabajo bien hecho.
+
+5. Añade 1D3 crímenes desde que lo buscas y aumenta su valor.
+
+6. Añade 1D6 crímenes desde que lo buscas y aumenta todavía más su valor.
+
+b) Cartel de “Se Busca”
+Tras obtener la recompensa, busca cualquier cartel nuevo de “Se Busca”. Tira 1D6:
+
+1. Alguien más ha cazado a uno de los Forajidos que perseguías. Aparta un marcador de Forajido y quítalo de tu lista de “Se Busca”.
+
+2. No hay nuevos carteles de “Se Busca”.
+
+3-5. El Caza Recompensas encuentra otro cartel de “Se Busca”. Genera al Forajido como siempre.
+
+6. Hay 1D3 carteles más de “Se Busca”. Genera a los nuevos Forajidos como siempre.</rules>
+  </location>
+  <location id="location-casa-del-noble">
+    <name>Casa del Noble</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Todos los habitantes te dirán lo mismo sobre la Casa del Noble: es un lugar de riquezas, de alto poder y que contiene un conocimiento increíble, además de estar repleto de la clásica arrogancia de los Elfos.</description>
+    <visitors>
+      <visitor>elf-ranger</visitor>
+    </visitors>
+    <rules>En primer lugar debes tirar 1D6 y, si sale un 1, estás obligado a comprar un objeto de valor sin igual. Vuelve a tirar 1D6:
+1. Seda de Ulthuan, 2000 monedas.
+2. Joya de Isla Dragón, 1500 monedas.
+3. Especias de Arabia, 1000 monedas.
+4. Vino de Bretonia, 750 monedas.
+5. Carnes de Tilea, 500 monedas.
+6. Vasijas de Lustria, 300 monedas.
+
+a) Enterarse de noticias. Tira 1D6:
+1. No hay nada interesante que aprender.
+2. +1 en la tabla de entrenadores al subir de Nivel de Combate.
+3. Recibes un mapa de la próxima aventura. Puedes elegir ser el líder.
+4. Ataques x2 durante un turno contra un Monstruo en la siguiente aventura.
+5. Al terminar la siguiente aventura ganas un tesoro de 5D6 x 100 monedas, que puedes compartir o no.
+6. Podrás reclamar una carta de tesoro en la próxima aventura, aunque no te toque.
+
+b) Solicitar consejo al Señor de la Casa Noble, pagando 1D6 x 100 monedas.
+
+Si eres un Hechicero, tira 1D6:
+1. Una vez en la siguiente aventura, puedes intentar lanzar un hechizo extra.
+2. En un turno de la próxima aventura, +1 a la tirada en la Fase de Poder.
+3. En un turno de la próxima aventura, +1 a tu Resistencia.
+4. Durante la siguiente aventura, puedes usar 2 veces la Corona Guerra Tirano.
+5. Una vez en la siguiente aventura, puedes lanzar un hechizo extra sin importar su poder.
+6. Una vez en la siguiente aventura, mejoras el efecto de un hechizo con 1D6.
+
+Si eres un Caballero, tira 1D6:
+1. Una vez en la siguiente aventura, tienes un ataque extra.
+2. +1 Suerte para la próxima aventura.
+3. Puedes realizar otra tirada extra en la tabla de noticias con un +1.
+4. Durante la siguiente aventura, puedes usar 2 veces la Corona Guerra Tirano.
+5. En un turno de la siguiente aventura, tus Ataques tendrán un +1 para impactar.
+6. Una vez en la siguiente aventura, tienes +2 Fuerza en un solo ataque que impacte.</rules>
+  </location>
+  <location id="location-castillo-del-baron">
+    <name>Castillo del Barón</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>En lo más alto está el sueño de todo Bretoniano: un gran castillo de piedra y la ocasión de visitar a la nobleza, salvadora de todos los Caballeros.</description>
+    <visitors>
+      <visitor>bretonnian-knight</visitor>
+    </visitors>
+    <rules>El castillo se presenta a las afueras del asentamiento, elevado sobre una colina. Allí se celebran audiencias, torneos y desafíos para los Caballeros Bretonianos. Consulta tu tabla de Renombre para determinar el resultado.
+
+Eventos en el Castillo del Barón:
+Acceso denegado. El tosco guardián te mira de arriba abajo y exclama: “¡Lárgate, bribón de baja estofa!”. Vuelve al Asentamiento y pierde 1 punto de Renombre.
+
+Desafío y lucha. Otros Caballeros del Reino te desafían a un duelo. Si rechazas el desafío, pierdes 1 punto de Renombre. Esta escena se interpreta como un torneo de caballeros que te desafían. Sigue las reglas especiales del manual correspondientes a los torneos y duelos de caballería.
+
+En los resultados más altos puedes ser admitido ante el Barón, obtener una Recompensa Especial, ganar Renombre adicional o sufrir las consecuencias de un fracaso si deshonras a la nobleza local.</rules>
+  </location>
+  <location id="location-taberna-del-maestro">
+    <name>Taberna del Maestro</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Esta taberna propone una gran selección de ricas y sabrosas cervezas. Solo para entendidos.</description>
+    <visitors>
+      <visitor>brewmaster-dwarf</visitor>
+    </visitors>
+    <rules>Dentro de esta Localización Especial el Aventurero podrá:
+
+a) Beber en la Tasca con Enanos.
+1. Tras tomar un gran sorbo de cerveza, te desplomas en el suelo inconsciente.
+2-3. Te metes en un torneo para ver quién bebe más en menos tiempo. El número de rondas es 1D3 + 2. Para superar la primera ronda tira 1D6 + Resistencia y saca 6+. Cada ronda posterior sube a 7+, 8+, etc. Si pierdes, pagas 100 monedas. Si ganas, obtienes 100 monedas por ronda superada y 50 más por la última.
+4-5. Un antiguo Maestro Cervecero te coge aprecio y te ofrece un trago. Tira 1D6 + Resistencia. Si sacas 9+, obtienes +1 Resistencia para la próxima aventura y ganas 1 Herida Inicial para siempre.
+6. Aceptas un desafío para ver quién se bebe antes la Cerveza Volcano. Tira 2D6 + Resistencia. Si sale 12+, un herrero rúnico te inscribe una runa en el hacha gratis, impresionado por tu hazaña.
+7+. Un Maestro Cervecero venerable te regala una jarra mágica que nunca se vacía. Puedes verter una de tus cervezas originales en la jarra y beberla hasta 1D6 veces por aventura.
+
+b) Comprar en la Bodega / Cervecería.
+Roba su Carta de Localización Especial.
+
+c) Visitar la Fábrica de Cerveza.
+Puedes presentar tus creaciones al Señor de la Taberna para su degustación. Tira 1D6 + número de ingredientes especiales encontrados + número de días de fermentación:
+1-3. Te echan y devuelves las ganancias obtenidas en las competiciones, pero puedes quedarte las compras.
+4-7. Te llena uno de tus barriles originales.
+8-10. Te regala una mula Beercart. No se derrumba al llegar al Asentamiento, es fiel y no puede ser robada, aunque cuesta 2 monedas extra por día.
+11+. Todo el oro gastado en la Bodega es devuelto. Además, te dan un barril de Cerveza Premier Bugman como regalo.</rules>
+  </location>
+  <location id="location-circulo-sagrado">
+    <name>Círculo Sagrado</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Hay muchos círculos de piedras verticales en todo el Viejo Mundo, desde piedras toscamente labradas y levantadas por tribus prehumanas hasta menhires elegantemente tallados y con joyas incrustadas de los Altos Elfos.</description>
+    <visitors>
+      <visitor>jade-wizard</visitor>
+      <visitor>druid</visitor>
+    </visitors>
+    <rules>Tu Aventurero realiza un ritual por 50 monedas de oro. El resultado dura solo para la siguiente aventura. Tira 1D6:
+
+1. No ocurre nada.
+
+2. Pronosticas buen tiempo para el siguiente viaje. Cualquier Evento relacionado con un temporal se trata como una semana sin incidentes.
+
+3. Puedes disipar automáticamente un hechizo enemigo.
+
+4. Podrás repetir una vez la tirada de la Fase de Poder. Si vuelve a salir un 1, añade tu Nivel de Combate al resultado, aunque el Evento ocurre igualmente.
+
+5. Un solo impacto que recibas podrá ser ignorado.
+
+6. El Druida elige uno de los beneficios anteriores.</rules>
+  </location>
+  <location id="location-cocinas">
+    <name>Cocinas</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Deliciosos olores a cerdo asado, patatas asadas y tartas de cereza flotan por las cocinas.</description>
+    <visitors>
+      <visitor>halfling-thief</visitor>
+    </visitors>
+    <rules>Tira 2D6:
+
+2. Haces de Chef Halfling, así que trabajas 1D6 días y ganas 10 monedas por día.
+
+3. Te regalan 1D3 Raciones de comida, que curan 1D6 Heridas a cualquier Halfling.
+
+4. Recibes una buena bolsa de alimentos con 1D6 Empanadas de Cerdo, 1D6 Manzanas y una tarta de frutas. Cada alimento cura 1 Herida.
+
+5. Un Chef te enseña algunos trucos. Las raciones de comida Halfling curan 1 Herida extra en la siguiente aventura.
+
+6. Te regalan una mochila de piel con 1D6 Provisiones para tu próxima aventura.
+
+7. Ganas un talismán que te da 1 punto de Suerte para la siguiente aventura.
+
+8. Te obsequian con una Bellota Mágica que puedes lanzar a un Monstruo si superas una tirada de HP. Roba su carta.
+
+9. Te muestran un mapa hacia el Místico Arbusto de Bayas. Tardas 1D6 días en encontrarlo y luego tira 1D6:
+1. No lo encuentras y te decepcionas.
+2-6. Logras 1D6 Bayas; cada una cura 1D6 Heridas a cualquier Aventurero.
+
+10. Unos parientes Halfling lejanos te regalan un objeto de gran valor. Roba 1 carta de Tesoro de Estancia Objetivo.
+
+11. Recibes una página del libro de recetas del legendario Bobbins Huggo. Para prepararla debes renunciar a un alimento. Tira 1D6 y roba la carta correspondiente:
+1. Chocolate Supremo
+2. Pudding Sorpresa
+3. Muerte por Chocolate
+4. Potaje de Gusanos
+5. Pastel Restitutivo
+6. Postre Especial
+
+12. Te obsequian con un pequeño bote de pepinillos que cura todas las Heridas a cualquier Halfling.
+
+Cualquier alimento que ganes debe usarse en la siguiente aventura o se pudrirá.</rules>
+  </location>
+  <location id="location-comerciante-armas">
+    <name>Comerciante Armas</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Una tienda especializada en armas para los Cazadores de Recompensas más famosos del Imperio. Con este armamento tus presas caerán sin duda.</description>
+    <visitors>
+      <visitor>bounty-hunter</visitor>
+    </visitors>
+    <rules>Equipo disponible para el Cazarecompensas:
+
+Virotes para Ballesta. Stock 3+. Precio 25. Duran una aventura.
+
+Buena munición. Stock 8+. Precio 200. Si se utilizan y superas una tirada de recarga, los virotes podrán usarse para una segunda aventura.
+
+Seis tiros. Stock 10+. Precio 500. 3 virotes por disparo, para una aventura.
+
+Ballesta de repetición de fuego rápido. Stock 11+. Precio 5000. +1 Ataques y +1 al Cazar. Usa virotes por disparo, para una aventura. No puede usarse en combate. Puede disparar 6 veces por combate, por lo que necesita la carga de “Seis tiros”.
+
+Hoja oculta. Stock 9+. Precio 500. Si no es revelada, tienes +1 a las tiradas para impactar y ganas +1 Ataques contra quien te ataque.
+
+Capa de Oscuridad. Stock 10+. Precio 750. Los Monstruos tienen un -1 para impactarte.
+
+Grilletes. Stock 9+. Precio 600. El Forajido capturado no se escapa si sacas 3+ en 1D6 al derrotarlo.</rules>
+  </location>
+  <location id="location-capilla-del-convento">
+    <name>Capilla del Convento</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Mientras una Hermana de Sigmar o un Sacerdote Guerrero estén en un Convento de la Merced, pueden visitar la principal Capilla del Convento para rezar a Sigmar mediante rituales y ceremonias antiguas.</description>
+    <visitors>
+      <visitor>warrior-priest</visitor>
+      <visitor>sister-of-sigmar</visitor>
+    </visitors>
+    <rules>Debes realizar un donativo de 1D6 x 100 monedas. Suma +1 al resultado si eres Hermana de la Merced o +2 si eres Hermana Superiora. Tira 2D6:
+
+2-4. Nada.
+5. Una sola vez en la siguiente aventura te podrás destrabar automáticamente.
+6. Plegaria automática para la siguiente aventura que cura 1D6 Heridas a un Aventurero.
+7. +1 HA en la siguiente aventura.
+8. Elige un arma o armadura, que se considera mágica.
+9. En la siguiente aventura puedes intercambiar un tesoro que no puedas usar por el de otro Aventurero, el cual acabarás donando al Convento si sale un 1 al tirar 1D6.
+10. Elige un arma que será mágica y para la siguiente aventura causa 1 Herida extra por Nivel de Combate contra No Muertos y Caos.
+11. +1 Resistencia en la siguiente aventura.
+12. Elige un arma que será mágica y causa 1 Herida extra por Nivel de Combate contra No Muertos y Caos. El efecto puede ser acumulativo.
+13+. +1 Herida Inicial permanente.</rules>
+  </location>
+  <location id="location-convento-de-la-merced">
+    <name>Convento de la Merced</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de textos sagrados y artefactos, siempre abierto, pero solo para la hermandad.</description>
+    <visitors>
+      <visitor>warrior-priest</visitor>
+      <visitor>sister-of-sigmar</visitor>
+    </visitors>
+    <rules>Siempre es la primera visita y debes donar un 10% del oro que lleves encima. El donativo cuenta para el coste de subir de nivel. En su interior no pagas Gastos Diarios, pero tiras en la Tabla de Eventos de Asentamiento.
+
+Un Sacerdote Guerrero solo accederá si además dona una carta de tesoro elegida por las Hermanas y saca 7+ al tirar 1D6 + Iniciativa. Podrá visitar a la Abadesa con un -2 al resultado y rezar en la Capilla Principal.
+
+a) Visitar a la Abadesa. Tira 1D6:
+0. Te expulsa.
+1. No te ofrece nada, es indiferente a ti.
+2. +1 a la tirada de Daño al usar una Bendición de Sigmar.
+3. La siguiente vez que subas de nivel, tiras un dado extra para determinar la Plegaria o Don recibidos.
+4. Te rocía con Agua Bendita. +1D6 Heridas Iniciales temporales en la siguiente aventura.
+5. Elige entre Asistencia o Abrir Cofre de Plata.
+6. Elige entre Asistencia, Cofre de Plata o Cofre de Oro.
+
+Asistencia. Tira 2D6 + Nivel de Batalla y revisa si estás en Aldea, Pueblo o Ciudad. En cada tipo: Sacerdotisa -1, Profetisa +1.
+
+Viales Sagrados. Tira 2D6:
+1-2. Pelea
+3-4. Fuerza
+5-6. Resistencia
+7-9. Agua Bendita
+10-11. Rejuvenecimiento
+12-13. Restauración
+
+Objetos Sagrados. Tira 2D6:
+1-2. Pulseras Obstrucción
+3-4. Manto Liberación
+5-6. Amuleto Piedra
+7. Guantes de Agravios
+8-9. Diadema Hierro Fortificada
+10-11. Honda Seda Encantada
+12-13. Anillo Deflector Justicia
+
+Mentor. Tira 2D6:
+1-2. Mano de Sigmar
+3-4. Obstaculizar Enemigo
+5-6. Disparo extraordinario
+7-9. Rechazar
+10-11. Latigazo
+12-13. Bombardear
+
+Abrir Cofre de Plata:
+1D6 Vendas. Donación 50. Stock 5+
+Bolas de Acero. Donación 150. Stock 4+
+Honda. Donación 75. Stock 4+
+Martillo de Guerra. Donación 300. Stock 7+
+Látigo de Acero. Donación 500. Stock 8+
+Peto Misericordia. Donación 500. Stock 7+
+Cofia y Corona. Donación 500. Stock 8+
+Polainas Acero. Donación 500. Stock 9+
+Símbolo Sagrado. Donación 750. Stock 6+
+
+Abrir Cofre de Oro:
+2D6 Canicas Benditas. Donación 200. Stock 7+
+Maza Resolución. Donación 750. Stock 9+
+Flagelo Inmunidad. Donación 1000. Stock 13+
+Martillo de Sonja. Donación 2000. Stock 15+
+Rodela Condena. Donación 1000. Stock 11+
+Guanteletes Sagrados. Donación 1500. Stock 13+
+Yelmo de Merced. Donación 2000. Stock 15+
+
+b) Visitar la Capilla Principal.
+Roba su Carta de Asentamiento.</rules>
+  </location>
+  <location id="location-campamento-silvano">
+    <name>Campamento Silvano</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Colonias de Elfos Silvanos habitan en pequeños campamentos, más allá del Bosque de Athel Loren.</description>
+    <visitors>
+      <visitor>wardancer</visitor>
+    </visitors>
+    <rules>Tira 1D6 para ver si das con el Campamento:
+
+1. Pierdes 1D6 días buscando para nada. Puedes entrar al Asentamiento y buscar a tus compañeros o esperarles fuera.
+
+2-3. Llegas al Campamento y vuelves al Asentamiento tras 2D6 días.
+
+4-5. Llegas al Campamento y vuelves al Asentamiento tras 1D6 días.
+
+6. Descubres un campamento justo antes de llegar al Asentamiento. Puedes quedarte y volver en un día.
+
+Si durante un viaje sale “Semana Tranquila”, el Bailarín Guerrero puede hallar rastros del Campamento si saca un 6 al tirar 1D6.
+
+Cada día en Campamento de los Elfos Silvanos:
+Gastos diarios: 2D6.
+Eventos diarios: tira 1D6.
+
+1. Tienes noticias sobre un asalto en el Bosque de Loren. Orión ordena volver ya. Tira 1D6:
+1. Aunque defendiste bien el bosque, has sufrido graves heridas. Mueres bajo el Roble Eterno de Athel Loren, en el regazo de Ariel.
+2-3. Pierdes 1D3 Heridas Iniciales.
+4-6. Pierdes 1 Herida Inicial.
+
+2-5. Tras llegar al Bosque de Loren, el ataque ha sido evitado y el viaje ha sido en vano. Regresas para reunirte con el grupo. Te dan 2D6 Panes del Camino Élficos, pero al llegar consumiste otros 2D6; anota si te quedan.
+
+6. Derrotas al líder en combate singular. Recibes 1 carta de Tesoro de Estancia Subterránea.
+
+2. En el Campamento hubo una emboscada y has perdido conocidos y familiares. Aquí termina tu visita. Ahora debes matar a (2D6 + Nivel de Combate) criaturas de la raza atacante para cumplir tu venganza. Mientras dure, ganas el doble de oro, pero todo cuesta el doble de precio. Tira 1D6 para determinar la raza atacante:
+1. Pieles Verdes
+2. No Muertos
+3. Skaven
+4. Caos
+5. Elfos Oscuros
+6. Enanos del Caos
+
+3-4. Te reciben con los brazos abiertos y solo pagas como gastos diarios 1D6.
+
+5. El Campamento está sumido en el caos ante el robo de un preciado objeto. Tira 1D6:
+1. Espada
+2. Pergamino
+3. Arco
+4. Yelmo
+5. Poción
+6. Anillo Mágico
+
+Si otro Aventurero gana ese tipo de objeto, debes pagar por él igualmente y te recompensarán con 1D6:
+1-2. Nunca más te cobran gastos diarios.
+3-5. 1D3 cartas de Tesoro de Estancia Subterránea y precios del campamento a la mitad.
+6. Puedes escoger una de tus dos Espadas de Orión y tirar los dados en la Tabla de Aspectos.
+
+6. Te obsequian con 1D6 x 100 monedas.</rules>
+  </location>
+  <location id="location-elfos-silvanos-antiguos">
+    <name>Elfos Silvanos Antiguos</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Los Antiguos son los seres que forman el Consejo de Sabios. Es la primera parada obligatoria en el Campamento y después podrás comprar grandes artilugios.</description>
+    <visitors>
+      <visitor>wardancer</visitor>
+    </visitors>
+    <rules>Equipo disponible:
+
+Amuleto de Suerte. Disponible para Bailarín Guerrero y Explorador Elfo. Stock 8+. Precio 1000. +1 Suerte extra permanente.
+
+Elixir de Orión. Disponible para Bailarín Guerrero y Explorador Elfo. Stock 8+. Precio 300. El elixir cura 1D6 Heridas y solo puede ser usado una vez entre aventuras. Si ambos pares se suman, los Impares restan Heridas.
+
+Vara de Ariel. Disponible para Bailarín Guerrero. Stock 10+. Precio 500. Un druidismo salvaje la recorre; quien la porta se mueve entre las zarzas como si no estuvieran.
+
+Flauta de Isha. Disponible para Bailarín Guerrero. Stock 9+. Precio 750. Un solo uso por aventura. Al tocarla, los Monstruos deben sacar 6+ en Fase de Poder. No afecta a los Elfos.
+
+Tambor de Kurnous. Disponible para Bailarín Guerrero. Stock 9+. Precio 750. Durante toda una sección de tablero no podrá hacerse ninguna tirada de Fase de Poder. Además, suma +1 acumulativo por turno en la Fase de Poder.</rules>
+  </location>
+  <location id="location-comerciante-elfo-silvano">
+    <name>Comerciante Elfo Silvano</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>El mejor equipo creado por los Elfos Silvanos para defender los bosques y los alrededores del Campamento frente a Athel Loren.</description>
+    <visitors>
+      <visitor>wardancer</visitor>
+    </visitors>
+    <rules>Para saber si disponen del objeto que el Bailarín Guerrero quiere, debe obtener un resultado igual o superior a 10 en 2D6. Cualquier Aventurero de otra raza tira 1D6.
+
+Equipo:
+1D6 Hierbas Curativas. Stock 5+. Precio 50 la unidad. Si se toma en pie, cura 2D6 Heridas; si no, el Maestro Herbolario crea 1D6 pociones.
+
+Cuerda Élfica. Stock 3+. Precio 75. Tras su uso, tira 1D6; se rompe con un 1.
+
+Botas Étnicas. Stock 6+. Precio 100. Te haces invisible durante un combate completo, pero apareces de nuevo al atacar, al final del combate o si evitas un Evento durante un Viaje.
+
+Capa de Ocultación. Stock 6+. Precio 750.
+
+1D6 Pan del Camino. Stock 3+. Precio 10 la unidad. Recupera 1D6 Heridas y no se pudre; es usado por los Elfos Silvanos.</rules>
+  </location>
+  <location id="location-maestro-de-espadas">
+    <name>Maestro de Espadas</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Un experto que mantiene viva la tradición ancestral de la metalurgia y la forja de espadas, técnica pasada de generación en generación desde que los Altos Elfos dominaban el mundo. Las espadas fabricadas por estos Elfos Silvanos no tienen comparación alguna.</description>
+    <visitors>
+      <visitor>wardancer</visitor>
+    </visitors>
+    <rules>Si pierdes una de tus Espadas de Orión, debes encontrar a un Maestro de Espadas.
+
+Si el Bailarín Guerrero encuentra a un Maestro de Espadas, podrá reemplazar una espada que haya perdido si obtiene 4+ en una tirada de 1D6.
+
+El Bailarín Guerrero tendrá que hacer una tirada por cada espada que haya perdido. Nunca podrá tener más de dos Espadas de Orión. La nueva espada será igual a una de Nivel 1 con las que el Bailarín Guerrero empieza el juego.
+
+No cuestan dinero, pero a partir de ese momento el Bailarín Guerrero será conocido como un “Pierde Espadas”, y la vergüenza por la pérdida de su espada, concedida por Orión en persona, nunca le abandonará mientras viva. Así que hará todo lo posible por no perder sus armas jamás.</rules>
+  </location>
+  <location id="location-espiritu-salvaje">
+    <name>Espíritu Salvaje</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Una criatura inmortal tatuada y llena de marcas de su estirpe, con aspecto temible y majestuoso. Es el maestro de la Danza de la Muerte.</description>
+    <visitors>
+      <visitor>wardancer</visitor>
+    </visitors>
+    <rules>Primero debes hacer un donativo de 1D6 x 100 monedas a los Elfos Silvanos; ellos te dirán dónde apareció el Espíritu. Tira 2D6; si sacas 7+, el Espíritu Salvaje aparece. Solo puedes intentar ver al Espíritu una vez por cada visita al Campamento. La Cacería Salvaje dura 1D3 días, durante los cuales el Aventurero no puede visitar otros sitios ni tirar en la Tabla de Eventos.
+
+Tatuajes de Batalla:
+Cada vez que aparezcan Monstruos, tira 1D6:
+1. No tiras más dados al salir Monstruos.
+2-5. Hay tatuajes, pero no causan efecto.
+6. El Aventurero causa miedo a los Monstruos y estos tienen -1 para impactarle.
+
+Manantial de Ariel:
+El primer Claro Sagrado es el Manantial de Ariel. Desde ese momento, sus espadas son mágicas contra Demonios y No Muertos. Una vez visitado, podrá conocer otros Claros Sagrados.
+
+Claros Sagrados:
+En la Cacería Salvaje podrás visitar otros claros. Tira 1D6:
+1-2. No llegas a ningún Claro Sagrado.
+3-4. Encuentras un Claro Sagrado y una de tus espadas gana un Aspecto.
+5-6. Encuentras un Claro Sagrado y dos de tus espadas ganan un Aspecto.
+
+Aspectos de las Espadas de Orión:
+Nunca necesitarás buscar el Manantial de nuevo, a no ser que pierdas tus Espadas de Orión. Si sacas un 3-6 en el Manantial, tira 1D6 por cada espada. Una espada solo puede tener un Aspecto:
+
+1. Aspecto de Roble: +1 Resistencia. Si ambas espadas tienen este aspecto, +3 Resistencia.
+2. Aspecto de Sauce: Esquivar Golpe 6+. Si ambas espadas lo tienen, 5+.
+3. Aspecto de Sol: los Monstruos tienen -1 para impactarte; si ambas lo tienen, -2.
+4. Aspecto de Tierra: cualquier golpe causa Heridas extra. Novato +1, Campeón +2, Héroe +3, Señor +4.
+5. Aspecto de Viento: +Ataques. Hasta Campeón +1, Héroe +2, Señor +3.
+6. Aspecto de Agua: si pierdes Heridas, tira 1D6. Con 5+ recuperas 1D6 Heridas; si ambas espadas lo tienen, añade +1 al resultado del primer 1D6.</rules>
+  </location>
+  <location id="location-tienda-foot-locker">
+    <name>Tienda Foot Locker</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>La tienda deportiva “Foot Locker” es el paraíso de los amantes del Blood Bowl. Aquí encontrarás equipo pensado para correr, placar y arrollar a cualquiera que se cruce en tu camino.</description>
+    <visitors>
+      <visitor>ex-blood-bowl-player</visitor>
+    </visitors>
+    <rules>A excepción de las Vendas Atléticas, jamás puedes tener más de uno de los artículos normales que aquí se venden. No es necesario tirar dados para comprobar si hay stock y, además de esta localización, debes tener a mano la carta de Objetos Especiales del Foot Locker.
+
+Equipo normal:
+- Botella Gat-Ork-ade, 150 monedas. Un uso por aventura. Tira 1D6: con 1-2 se agota; con 3-6 puedes seguir usándola. Elige entre +1 Fuerza en un combate, +2 Fuerza en un combate o doblar tu Movimiento durante 1D3 turnos.
+- Pelota de football con pinchos, 1000 monedas. Impacta con una tirada propia y causa 1D6 Heridas sin modificar. No se aplica el +1 habitual del equipo para impactar. La pelota se recupera al final del combate.
+- Zapatillas con clavos, 500 monedas. Conceden un movimiento extra o distancia adicional cada turno. Tus ataques impactan con un -1, pero causan 1D6 + Fuerza.
+- Vendas Atléticas, 200 monedas. Recuperan 1D6 Heridas al Ex-Jugador de Blood Bowl y no se pudren nunca.
+- Peto de Blood Bowl, 250 monedas. +1 Resistencia Inicial.
+- Hombreras con pinchos, 250 monedas. Puedes seguir haciendo el Blitz en línea recta mientras te quede Movimiento.
+
+Objetos especiales:
+La carta de objetos especiales del Foot Locker contiene una tabla D66 de artículos raros. Entre ellos hay botas, hombreras, pelotas, guantes, runas y otros artilugios ligados al Blood Bowl que mejoran movimiento, placaje, armadura, ataques o daño. Usa esa tabla cuando una regla te permita obtener uno de esos objetos especiales.</rules>
+  </location>
+  <location id="location-gremio-de-asesinos">
+    <name>Gremio de Asesinos</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>“¿Contraseña?” “Tus armas. Ahora.” “No. No puedes verlo.” “Tenemos un objetivo para ti...” El Gremio es el lugar donde el Asesino obtiene noticias, consejos y encargos especialmente discretos.</description>
+    <visitors>
+      <visitor>assassin</visitor>
+    </visitors>
+    <rules>Mientras estés en el Gremio, el Asesino debe abonar una cuota de 1D6 x 150 monedas. Después tira 1D6:
+
+1. La información es escasa y el Asesino no aprende nada.
+
+2. Un viejo amigo acaba de regresar y ha aprendido técnicas nuevas. La próxima vez que ganes una habilidad, puedes repetir la tirada.
+
+3. Otro criminal ha visitado muchas guaridas de monstruos de la zona y te facilita un mapa de la mazmorra. Si lo deseas, puedes ser el líder en la siguiente aventura.
+
+4. El Asesino se entera de que varios monstruos han estado causando estragos en una mazmorra cercana. Una vez durante la próxima aventura, podrás evitar un ataque de Emboscada y los Aventureros atacarán primero. Además, el Asesino obtiene un 20% más de oro por cada monstruo que mate.
+
+5. Un miembro del Gremio te advierte de la presencia de un Monstruo Arcano. Si el enemigo final de la siguiente mazmorra muere, el Asesino roba para sí una Carta de Tesoro de Estancia Subterránea.
+
+6. El Gran Maestro te asigna una misión de asesinato especial. Elige un monstruo de la próxima mazmorra; el Asesino ganará el doble de oro cuando ese enemigo muera.</rules>
+  </location>
+  <location id="location-gremio-cazarrecompensas">
+    <name>Gremio del Cazador de Brujas</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>¡Cuidado! El Gremio de los Cazadores de Brujas es una fuerte institución con voz y voto en cualquier parte del Asentamiento. Sus puertas sólo están abiertas para los suyos.</description>
+    <visitors>
+      <visitor>witch-hunter</visitor>
+    </visitors>
+    <rules>Dentro de esta localización el Cazador de Brujas puede:
+
+a) Recargar los usos de cada amuleto pagando 1D6 x 50 monedas. Después tira 1D6:
+1. Pierdes el amuleto.
+2. La recarga no tiene efecto, pero conservas el amuleto.
+3-5. El amuleto se recarga; tira 1D6 para saber cuántos usos tiene.
+6. El amuleto queda con 6 cargas y además recibes otro amuleto adicional; tira 1D6 para determinar cuál.
+
+b) Entrenar para subir de Nivel de Combate. Puedes tirar dos veces en la Tabla de Beneficios de entrenar, o pagar por ayuda para intentar una única tirada adicional. Para recibir ayuda tira 1D6 y obtén el resultado indicado:
+Nivel 1: 3+, coste 200.
+Nivel 2: 3+, coste 400.
+Nivel 3: 3+, coste 600.
+Nivel 4: 4+, coste 1000.
+Nivel 5: 4+, coste 1500.
+Nivel 6: 4+, coste 2000.
+Nivel 7: 4+, coste 3000.
+Nivel 8: 4+, coste 3500.
+Nivel 9: 4+, coste 4000.
+Nivel 10: 5+, coste 5000.
+
+Tabla de Beneficios de entrenar o lograr ayuda. Tira 1D6:
+1. Ganas 1D6 Puntos de Fe extra.
+2. Objetos y equipo. Tira 2D6: Balas de plata, 1D6 Bombas, Amuleto de Poder, Ganzúas, Puños de Hierro, Cuchillas de Puntería, 1D3 Polvo Cegador, Cuerda y Gancho, Capa del Engaño, Libro Sagrado o Anillo de Protección.
+3. Pociones y elixires. Tira 1D6: Curación, Agua Bendita, Elixir contra No Muertos, Elixir contra el Caos, Elixir contra Demonios o Luz de la Valentía.
+4. Artefactos y símbolos. Tira 1D6: Cáliz de Vida, Espejo de Condenados, Libro Hoschenfels, Talismán de Khardoz, Amuleto de Charadris o Icono de Ghalamuk.
+5. Invocaciones. Tira 1D6: Maldición No Muertos, Maldición Vampiros, Azote del Caos, Disipar Magia, Azote de Demonios o Maldición Gran Demonio.
+6. Habilidades. Tira 1D6: Esquivar, Golpe Sucio, Ataque Instintivo, Venganza, Opresor o Golpe Asesino.
+
+Consulta las páginas de tu Libro o las Cartas del Aventurero para conocer las reglas de cada resultado.</rules>
+  </location>
+  <location id="location-luigi-o-salvatore">
+    <name>Luigi &amp; Salvatore</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>El cartel de la entrada lo deja claro: “Fabricantes de finas armas y artículos de calidad para la aristocracia”. Desde 2034, Luigi &amp; Salvatore abastecen a duques, barones y nobles con gusto por el lujo.</description>
+    <visitors>
+      <visitor>imperial-noble</visitor>
+    </visitors>
+    <rules>Luigi &amp; Salvatore es una tienda reservada para duques y barones. Antes de entrar debes deshacerte de cualquier cosa comprada en otro lugar, incluidos animales. En L&amp;S siempre hay stock, pero no compran objetos de segunda mano, así que aquí no puedes vender nada.
+
+Cuando vayas a comprar, tira 2D6:
+2-3. Deciden que no mereces el artículo. Abandonas el local disgustado.
+4-10. Luigi &amp; Salvatore cobran el precio normal.
+11. Te cobran 1D6 x 50 monedas adicionales.
+12. Doblan los precios. Si no tienes dinero suficiente, te expulsan y abandonas el Asentamiento por vergüenza.
+
+Equipo disponible:
+- Ropas Finas, 100 monedas. Mejoran notablemente tu presencia social y tus chequeos de estilo o etiqueta.
+- Estoque, 400 monedas. Arma ligera y elegante, pensada para duelos.
+- Trabuco, 2500 monedas. Arma de fuego aparatosa y devastadora a corta distancia.
+- Pistola de Duelo, 1500 monedas. Arma fina para nobles; requiere recarga entre disparos.
+- Rosario de Rubíes, 900 monedas. +2 Resistencia y muestra el blasón de una familia importante.
+- Peto Adornado, 500 monedas. +1 Resistencia.
+- 1D6 Vendajes de Perlas, 750 monedas. Cada venda recupera 3 Heridas; con un 6 al usarla, la venda se rompe.
+- Vino Frío Gran Reserva, 200 monedas. Cada trago mejora temporalmente tus capacidades, aunque puede acarrear efectos indeseables.
+- Pólvora y Perdigones, 150 monedas. Munición suficiente para una aventura completa, salvo para el Trabuco.
+- Balas de Plata, 250 monedas. Munición especial, considerada mágica.
+- Espuelas de Plata, 100 monedas. Mejoran el control sobre la montura.
+- Botas de Montar, 100 monedas. Te permiten cabalgar con mayor soltura y elegancia.
+
+Algunos artículos de la carta son difíciles de leer en el material original; si se usan en partida conviene contrastarlos con la imagen antes de aplicarlos literalmente.</rules>
+  </location>
+  <location id="location-mercado-de-pulgas">
+    <name>Mercado de Forajidos</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>En lo más profundo de las bulliciosas calles del Asentamiento se esconde un oscuro y sigiloso mundo que opera fuera de la ley.</description>
+    <visitors>
+      <visitor>outlaw</visitor>
+    </visitors>
+    <rules>Hay tres tipos de comercios y sólo puedes visitar uno por día:
+
+1) Comerciante de Armas. Vende el mismo equipo que un Maestro Armero y una Arquería, pero con un 10% de descuento y todo bajo un mismo techo.
+2) Comerciante de Equipos.
+3) Mercado Negro.
+
+Comerciante de Equipos:
+- Brújula. Stock 5+. Compra 40. Venta 10.
+- Provisiones. Stock 5+. Compra 30. Venta 7,5.
+- Botas de repuesto. Stock 6+. Compra 40. Venta 10.
+- Cuerdas. Stock 8+. Compra 25. Venta 5.
+- Barriles de cerveza. Stock 8+. Compra 200. Venta 50. Dura un turno; si el Mago bebe, no conjura en 2 turnos.
+
+Mercado Negro:
+- Espada Colmillo. Stock 10+. Compra 650. Venta 70. Causa 1 Herida adicional e ignora la armadura.
+- Botas Punta Acero. Stock 8+. Compra 500. Venta 20.
+- Daga. Stock 8+. Compra 750. Venta 35. Ataque adicional al impactar con 6.
+- Ballesta Repetición. Stock 11+. Compra 1250. Venta 300. Hace dos disparos por turno.
+- Disfraz. Stock 8+. Compra 300. Venta 60. Repite el resultado 1 si eres detectado por guardias en ciudad.
+- Piedra Curativa. Stock 6+. Compra 200. Venta 10. Cura igual que la del Gremio de Enanos.
+- Polvo Cegador. Stock 9+. Compra 75 por 1D3. Venta 75.
+- Veneno para Armas. Stock 9+. Compra 250 por 1D3. Venta 10. Se aplica a armas CaC y añade 1 Herida extra al impactar.
+
+Usa los perfiles del equipo normal del juego para todo aquello que aquí no se detalle expresamente.</rules>
+  </location>
+  <location id="location-montanas-rocosas">
+    <name>Montañas Rocosas</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Estas enormes masas de roca situadas en las afueras son el patio de recreo perfecto para seres más grandes que los humanos.</description>
+    <visitors>
+      <visitor>ogre</visitor>
+    </visitors>
+    <rules>Un Ogro siempre paga el doble de los gastos de subsistencia. No es por lujo: simplemente no es muy astuto y muchas veces duerme aquí o en Establos.
+
+Estríctamente hablando, hay muchos lugares que el Ogro no debería visitar, pero nadie le detiene. Por ello puede intentar visitar cualquier localización que le apetezca. Tira 1D6 al entrar:
+
+1-3. Sin querer, pero sabiendo molestar, evita que los negocios funcionen con normalidad. Se pasa el día “ayudando”, no gana nada y vuelve con una sonrisa satisfecha. Si visita el Gremio de Hechiceros, tira 1D6; con 1-3 molesta tanto que lo convierten en sapo durante 3 días, durante los cuales no puede hacer nada más.
+
+4-6. Sólo puede intentar una cosa o hacer una compra dentro de la Localización Especial, y parece que le sale bien, aunque a mayor coste. Por ejemplo, en el Gremio de Enanos, si saca 5+ podría grabarse una runa en su arma o en el pecho. También puede intentar encontrar una armadura élfica, aunque la tirada de stock es 12 y cuesta 6000 monedas.</rules>
+  </location>
+  <location id="location-soledad">
+    <name>Soledad</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Lejos del mundanal ruido de los Asentamientos, puedes estar en soledad y en plena comunión con la naturaleza.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>amber-wizard</visitor>
+      <visitor>shaman</visitor>
+    </visitors>
+    <rules>En vez de visitar el templo, un Chamán puede sentarse fuera del asentamiento en comunión con sus deidades. Esto llevará 1D6 días, tiempo en el que no tendrá Eventos de Asentamiento ni pagará gastos diarios. Tira 2D6:
+
+2-4. Tus oraciones no son respondidas.
+5. Obtienes un pequeño beneficio de experiencia y ganas +1 punto de Maná Innato, pero solo para la próxima aventura.
+6-8. Estás elevado por la soledad y ganas +2 puntos de Maná Innato, pero solo para la próxima aventura.
+9. Durante la próxima aventura ganas +1D6 Maná Innato extra.
+10. Logras un don especial de tu deidad y obtienes un extra de 1D6 Maná Innato.
+11. Durante la siguiente mazmorra puedes invocar un hechizo sin gastar maná.
+12. Te vinculas a tu deidad directamente. Pasas los próximos 1D6 días recuperándote, pero ganas de inmediato un hechizo más y +1D6 de Maná Innato.</rules>
+  </location>
+  <location id="location-santuario-de-asuryan">
+    <name>Santuario de Asuryan</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Aquí los Elfos pueden venerar y rezar al más grande de los dioses élficos, al que honrar con grandes ofrendas.</description>
+    <visitors>
+      <visitor>lord-of-aenarion</visitor>
+    </visitors>
+    <rules>Al llegar a esta Localización Especial debes realizar una donación de 2D6 x 120 monedas. Tira 1D6 + Puntos de Sangre y consulta la tabla:
+
+20 o más. Vences la Maldición de Khaine para siempre, aunque tardas 1D6 días en recuperarte. El Trance de Batalla deja de afectarte, no puedes elegirlo y puedes ignorar cualquier aumento futuro de tus Puntos de Sangre. Tampoco vuelves a tirar dado en los Barrios Élficos.
+
+19-18. Asuryan te libera de tu carga durante la próxima aventura. No mueves los contadores de Trance hacia el lado azul tras combatir si sacas 3+ al tirar 1D6. Además, pierdes 1 Punto de Sangre.
+
+17-16. Recuperas 1 Herida cada turno en el que no hagas nada durante la próxima aventura.
+
+15-14. Ves una pequeña puerta que da a una antesala. En su interior hay 1 Carta de Tesoro de Estancia Objetivo.
+
+13-12. La imagen de un gran artefacto se fija en tu mente. Debes llevar ese tesoro a Asuryan para aliviar tu carga. Si lo logras, pierdes 1D6 Puntos de Sangre.
+
+11-9. Tira 1D6; ese será el número de veces que puedes sustituir un contador de Trance de Batalla en la próxima aventura. Debes aceptar el segundo resultado.
+
+8-6. Durante un turno de la siguiente aventura tienes +1 Fuerza.
+
+5-2. Durante un turno de la siguiente aventura eres inmune a Miedo y Terror.
+
+1 a 2. No eres digno de Asuryan.
+3. La siguiente aventura empiezas con -1D6 Heridas.
+4 a 6. Durante la siguiente aventura tienes -1 Fuerza.
++7 o más. Pierdes 1D3 Heridas Iniciales de forma permanente y eres expulsado del Asentamiento.</rules>
+  </location>
+  <location id="location-templo-de-khaine">
+    <name>Templo de Khaine</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Este santuario es un lugar de reunión para todos los adoradores del Dios del Asesinato.</description>
+    <visitors>
+      <visitor>lord-of-aenarion</visitor>
+    </visitors>
+    <rules>Al llegar a esta Localización Especial debes realizar un sacrificio. Tira 1D6 y, con un 1, pierdes 1 Herida Inicial. Después tira 1D6 + Puntos de Sangre y consulta esta tabla:
+
+20 o más. Sientes como si tu cuerpo estuviese envuelto en llamas. Tira 1D6 + Resistencia; si el resultado es 7 o menos, pierdes 1 Herida Inicial permanente.
+
+1-6. Khaine no se impresiona por tus súplicas y te ignora.
+
+7-9. Khaine se digna a concederte una bendición. Ganas 1 Herida Inicial permanente.
+
+10-11. Tu vínculo con Khaine mejora. Ganas 1 Punto de Sangre y vuelves a tirar en esta tabla.
+
+12-14. Te obsesionas con la sed de sangre y la guerra. Ganas +1 HA y +1 Punto de Sangre permanentes.
+
+15-17. Durante la siguiente aventura tienes la regla especial Frenesí 6+.
+
+18-19. Eres hijo de Khaine, el Dios del Asesinato, que ha robado tu alma y tu autocontrol. Sufres -1 de FV permanente. Cuando llegues al Barrio Élfico tendrás un bonificador extra de 1D6.
+
+20 o más adicional. Eres la Marioneta de Khaine. Ganas +1 Punto de Entrenamiento y tira como si hubieras subido de Nivel de Combate. Ya no interactúas de forma normal ni entras en más Asentamientos. Tu alma pertenece a Khaine.
+
+Si tus Puntos de Sangre vuelven a 0 o menos, podrás actuar como siempre. Mientras tanto, cada turno tira 1D6 y, con un 1 y siempre que no haya monstruos, atacas a un Aventurero al azar.</rules>
+  </location>
+  <location id="location-templo-de-sigmar">
+    <name>Templo de Sigmar</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Ahora es el momento de orar, de adorar a nuestro Señor de la luz. Ahora es el momento de alabar a Sigmar.</description>
+    <visitors>
+      <visitor>warrior-priest</visitor>
+    </visitors>
+    <rules>Dentro de esta Localización Especial el Aventurero debe realizar un donativo de 2D6 x 50 monedas de oro. Todo el dinero donado debes anotarlo en tu hoja de Aventurero, pues podrás deducirlo del coste de subir de Nivel de Combate en el futuro. Después tira 2D6:
+
+2. Tras un día de meditación, el Sacerdote se siente inspirado.
+
+3-4. El Martillo de Guerra es mágico durante la siguiente aventura y, en un solo impacto, podrá causar 1D6 de Daño extra.
+
+5. +1 Herida Inicial permanente.
+
+6. El Martillo de Guerra es mágico durante la siguiente aventura y, una sola vez, podrás usar esta bendición antes de efectuar un ataque. Todas las heridas que causes serán curadas.
+
+7. Durante la siguiente aventura, el Sacerdote puede elegir tirar un dado extra al usar el Anillo de Jade para curarse. El turno siguiente no podrá usarlo.
+
+8. Tu arma es mágica y ganas +1 Resistencia en la siguiente aventura.
+
+9. Tu arma es mágica y, en la siguiente aventura, causas un Daño extra de 1D6 + Nivel de Combate al impactar con un 6.
+
+10. El Sacerdote Guerrero elige al azar una bendición que podrá usar una vez con éxito, y luego la pierde.
+
+11. Durante la próxima aventura puedes elegir entre +1 HA, +1 Resistencia o +1 Fuerza.
+
+12. Durante la próxima aventura puedes sumar +1 a cualquiera de tus Atributos.</rules>
+  </location>
+  <location id="location-templo-del-caos">
+    <name>Templo del Caos</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El atractivo del Caos es el poder y la inmortalidad. No son pocos los locos que están dispuestos a arriesgarse, si es necesario, para ganar las recompensas del Caos.</description>
+    <visitors>
+      <visitor>chaos-warrior</visitor>
+    </visitors>
+    <rules>Dentro de esta Localización Especial el Aventurero debe realizar un donativo de 2D6 x 10 monedas como ofrenda. Después tira 1D6:
+
+1. Ganas 2 Atributos del Caos; consulta la tabla correspondiente del Libro del Aventurero.
+
+2. Ganas 1 Atributo del Caos; consulta la tabla correspondiente del Libro del Aventurero.
+
+3. Tus oraciones no tienen respuesta.
+
+4. Debes elegir un Atributo del Caos de tu perfil para que sea sustituido por otro al azar.
+
+5. +1 Herida Inicial permanente.
+
+6. El Guerrero del Caos se arrodilla ante sus dioses y puede fusionar 2 objetos de igual tipo. Tira 1D6:
+1. Pierdes un objeto al azar y el otro se mantiene igual.
+2-3. No sucede nada; los dioses te desoyen por completo.
+4. El altar se oscurece en la niebla. Cuando el humo se disipa, los dos objetos siguen ahí sin cambios, pero hay otro junto a ellos. El Guerrero del Caos conserva los originales y gana un tercero. Tira en la Tabla de Artefactos del Caos para saber qué es.
+5-6. Se produce la mutación perfecta de ambos objetos, pero los efectos no son acumulativos. Consulta el Libro del Aventurero para conocer sus reglas.</rules>
+  </location>
+  <location id="location-templo-del-matador">
+    <name>Templo del Matador</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Hasta que la muerte te conceda el último honor, tu orgullo reside en el altar de los Enanos Ancestrales.</description>
+    <visitors>
+      <visitor>slayer</visitor>
+    </visitors>
+    <rules>Dentro de esta Localización Especial el Aventurero puede rezar a los dioses por 1D6 x 50 monedas de oro. Tira 1D6:
+
+1. No impresionas a nadie.
+2. El resto te reconoce como un Matador más.
+3-4. Te permiten entrar en la Cámara Interior del Santuario y hacer una tirada.
+5-6. Te permiten entrar en la Cámara Interior del Santuario y hacer dos tiradas.
+
+Cámara Interior del Santuario:
+1. Un Matademonios te hace un tatuaje. Te sientes feroz al instante.
+2. Un Matagigantes te hace una increíble cresta naranja que te vuelve más temible. Cualquier monstruo que saque un 1 para impactar en la siguiente aventura pierde todos sus ataques ese turno. Tira 1D6; con un 6, el efecto es permanente.
+3-5. El Herrero Rúnico te permite grabar una runa en tu hacha. Tira 1D6 para saber cuál:
+1-2. Runa de Fuerza: +1 Fuerza en tu próxima aventura.
+3-4. Runa de Resistencia: +1 Resistencia en la próxima aventura.
+5-6. Runa de Furia: en la siguiente aventura, durante un solo turno, podrás ignorar la regla de Trabado e Iniciativa y mover el doble. Tira 1D6; con un 6, el efecto es permanente.
+6. Golpe Asesino. Un Matatrolls te enseña una técnica letal. Cada turno podrás designar un ataque como Golpe Asesino; si impacta, obtienes otro Ataque extra.
+
+Si pierdes tu Hacha Rúnica, recibes otra nueva y gratis de nivel 1 en el Maestro Rúnico, pero no puedes visitar el Santuario en ese mismo Asentamiento.</rules>
+  </location>
+  <location id="location-calabozo-portuario">
+    <name>Calabozo Portuario</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Compartirás celda con hombres despiadados, ladrones, asesinos, contrabandistas, alborotadores y piratas. Muchos de tus compañeros de celda vienen de tierras extranjeras, hablan dialectos extraños y tienen muy mal aliento.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>En tu estancia en el calabozo, conoce la historia más llamativa que te ocurrió. Tira 1D6:
+
+1. ¡Deportado! Tu Aventurero acaba en la celda de aislamiento y cree que será enviado a una lejana colonia. Tira 1D6: con un 1 fallas en tu intento de fuga y acabas muy, muy lejos; nadie vuelve a saber de ti. Con 2+ consigues escapar de la celda de aislamiento y de tu horrible destino. Acuérdate de tus Puntos de Suerte.
+
+2. ¡Gachas en mal estado! Solo para la siguiente aventura, tu Aventurero tiene -2 Heridas Iniciales.
+
+3. ¡Látigo de nueve colas! A los guardias no les gusta tu aspecto ni cómo les estás mirando. Te llevan al patio y eres azotado con el temido látigo de nueve colas. -1 Resistencia en la siguiente aventura.
+
+4-5. ¡Picar piedra! Tu Aventurero se pasa el día entero encadenado picando piedra.
+
+6. ¡Mapa del tesoro! Encuentras a un hombre viejo, calvo y esquelético, con un gran bigote, que gesticula sin parar y maldice en voz alta en un idioma extranjero. Te entrega un pergamino que resulta ser un mapa de un tesoro perdido. Al finalizar la próxima aventura ganas 1D6 x 100 monedas.</rules>
+  </location>
+  <location id="location-marina-de-guerra">
+    <name>Marina de Guerra</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Este comercio, conocido por todos como “La Marina de Guerra”, tiene todo lo necesario para sobrevivir a las condiciones más adversas de tus aventuras y viajes oceánicos, pequeño grumete.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Equipo disponible:
+
+- Cuerda de caña. Stock 7+. Compra 50. Venta 10. Sigue las reglas de una cuerda normal, pero además te permite escapar de los tentáculos del Kraken. Tira 1D6 tras usarla; con 1-2 se rompe.
+- 1D6 Tragos de ron. Stock 6+. Compra 75. Cada trago te permite estar más de un turno sin trabarte.
+- 1D6 Escamas de Mar. Stock 8+. Compra 75. Fuerza 3; tiras 1D3 si se rompe.
+- Botas de clavos. Stock 8+. Compra 100. Venta 10. Puedes ignorar el primer 1 al comerciar.
+- Espada oriental. Stock 10+. Compra 500. Venta 50. El causante de Daño a la HA en vez de la Resistencia.
+- Loro. Stock 7+. Compra 75. Venta 5. Permite repetir resultados de 1 si sufres emboscadas; tira 1D6, con 6 evitas la misma.
+- Parche de ojo. Stock 7+. Compra 50. Venta 5.
+- Garfio pirata. Stock 5+. Compra 50. Venta 5. Cuenta como un arma corta; si impacta con un 1, el monstruo más próximo gana +1 Fuerza y +1 Movimiento durante 2D6 turnos.
+- Brújula. Stock 8+. Compra 250. Venta 30. Reduce el tiempo de viaje en 1D3 semanas.
+
+Usa las reglas básicas del equipo equivalente cuando la carta remita a un objeto normal del juego.</rules>
+  </location>
+  <location id="location-puerto-de-mar">
+    <name>Puerto de Mar</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>Son áreas de distribución y de transporte costero, lo que las define como zonas de influencia. Esta zona portuaria forma parte de algunos Asentamientos y tiene su Taberna, Calabozo, Puesto Comercial, Muelle de Contrabando o Tienda Marina de Guerra.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Los Aventureros pueden intentar probar suerte y comerciar con mercancías exóticas y raras que pasan por el puerto cada día. Tu Aventurero debe decidir qué mercancía comprará:
+
+Mercancía / Coste / Valor de venta máximo
+- Sedas / 30 / x10
+- Perfumes exóticos / 60 / x10
+- Especias extranjeras / 100 / x15
+- Vinos y licores / 150 / x20
+- Armas antiguas / 200 / x20
+- Esclavos / 300 / x25
+
+Primero tira 1D6 para ver cuántas de esas mercancías hay disponibles. Puedes comprar todas las mercancías disponibles por el valor indicado en el coste. Pero si sacas un 1, no habrá stock en ese momento.
+
+Tras comprar las mercancías puedes revenderlas en las calles. Por cada artículo de mercancía puedes tirar un dado, hasta el máximo del Valor de Venta. Suma el total de todos los dados y multiplícalo por el Valor de Venta. El total es la cantidad de monedas que recibes. Si sacas un 1 en cualquier dado, descubren que el producto es de mala calidad y no recibes monedas por él, además de perderlo.
+
+Si comercías con artículos ilegales, tras el anterior 1 tira 1D6. Si sacas un 1 o 2 eres arrestado. Tus mercancías son confiscadas, tanto legales como ilegales, y acabas una semana completa en el Calabozo.</rules>
+  </location>
+  <location id="location-taberna-portuaria">
+    <name>Taberna Portuaria</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Una taberna costera repleta de marineros, piratas y algún que otro capitán borracho.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Tira 2D6:
+
+2. Una patrulla de la Marina te alista. Tira 1D6:
+1. Te unes a la Marina y dedicas tu vida al mar. No se te vuelve a ver.
+2-5. Debes pagar 2D6 x 10 monedas para sobornarlos.
+6. Te proclamas como el Almirante Krueger y ganas 1D6 x 10 monedas por multarles.
+
+3. Si bailas durante medio minuto, ganas 2D6 x 10 monedas. Si te niegas, tu reputación baja 1 punto en la Tabla del Capitán de este Asentamiento.
+
+4. Un par de marineros te piden ayuda con sus negocios de contrabando. Si quieres colaborar, tira 1D6:
+1. Te descubren y vas al Calabozo.
+2-6. Ganas 2D6 x 50 monedas.
+
+5. Un pirata con pata de palo y un loro te da un mapa con una X en negro. En la próxima aventura los monstruos te atacan en primer lugar, pero si sobrevives ganas +1D3 Tesoros de Estancia Objetivo.
+
+6. Hoy es la noche de “Bebe hasta dejar el bar seco”. Al despertar, estás en un callejón con una gran calavera tatuada en el pecho y una frase humillante.
+
+7. Te retan a un concurso de beber y eliges ron del Capitán Ahab. Tira 1D6 con los modificadores de Taberna, y el máster hace lo mismo. Repetid el proceso hasta ver quién llega antes a 30. Si ganas, consigues tragos de ron. Si pierdes, despiertas perdido en un pequeño bote sin remos y gastas 1 día en volver al Puerto de Mar.
+
+8. Participas en una partida de dados con apuestas y ganas 2D6 x 10 monedas.
+
+9. Tropiezas con un capitán borracho que te convence de que puede llevarte al infinito y más allá. Sin pensarlo dos veces aceptas. Tira en la Tabla del Capitán con un modificador de -1.
+
+10. Invitas al Capitán Nemo a varias rondas y gastas 1D6 x 10 monedas. Te entrega una fina talla de marfil. Se usa una vez por aventura para forzar a un monstruo a repetir una tirada para impactar.
+
+11. Un joven capitán te enseña una técnica siempre que tengas una cuerda. Una vez por aventura te destrabas y mueves hasta 6 casillas, incluso ocupadas.
+
+12. Aprendes una canción de mar que puedes usar una vez por aventura. Elige un monstruo adyacente y tira 1D6; con 4+ el monstruo huye. Con 1-3 solo te ataca a ti hasta morir.</rules>
+  </location>
+  <location id="location-brujo-curandero">
+    <name>Brujo Curandero</name>
+    <available>
+      <type>special</type>
+    </available>
+    <description>Todas las pequeñas comunidades nativas tienen un brujo curandero, quien cura enfermedades, predice el futuro y maldice a la gente. Algunos tienen poderes mágicos y podrán ayudarte a cambio de un precio.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Equipo disponible:
+
+- Amuleto. Compra 250. Venta 25. Una vez por aventura puedes obligar a un monstruo a repetir un ataque con éxito.
+- Lectura de la Fortuna. Compra 1D6 x 100. Venta 25%. En la siguiente aventura puedes usar la predicción para evitar una trampa.
+- Muñeco Vudú. Compra 300. Venta 30. Una vez por aventura puedes causar 2D6 Heridas sin modificadores a un monstruo. Si tiene Resistencia Mágica, aplica un -1 a la tirada para comprobar si le afecta o no el muñeco. Si sale doble 1 o doble 6, no puedes usarlo más.
+- Poción. Compra 200 por unidad. Venta 20. Tira 1D6 para saber cuál es:
+1. Poción de Amor: sin efecto.
+2. Poción de Fuerza: cualquier tirada por daño en el siguiente turno causa 1D6 Heridas extra.
+3. Poción de Furia: puedes entrar en Furia Asesina. El Bárbaro puede chequear dos veces si falla.
+4. Poción Curativa: cura 2D6 Heridas.
+5. Poción de Invisibilidad: eres invisible durante este turno y nadie puede atacarte.
+6. Poción Somnífera: quedas tumbado durante 1D6 + 1 turnos, pero al despertar recuperas todas las heridas.</rules>
+  </location>
+  <location id="location-caravanas">
+    <name>Caravanas</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Animales exóticos ideales para cruzar antiguos continentes y superar las adversidades climatológicas de otros países. Al gastar más de 100 monedas puedes regatear: tira 2D6. Con 2-3 no hay efecto; con 4-8 el precio baja 1D6 x 10; con 9-10 el precio sube 1D6 x 10; con 11 el precio es la mitad; con 12 el precio se dobla.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Equipo disponible:
+
+- Lámpara Mágica. Stock 11+. Compra 2200. Venta 250. Un genio cura 2D6 Heridas o causa 4D6 Heridas sin modificar armadura. Un solo uso.
+- Antorcha. Stock 5+. Compra 150. Venta 25. Ilumina el tablero durante 1D6 + 2 turnos. Un solo uso.
+- Polvo de huellas dactilares. Stock 4+. Compra 200. Venta 10. Tiene 1D6 usos y concede +1 al buscar pasajes secretos.
+- Alfombra Mágica. Stock 10+. Compra 800. Venta 75. Acorta un viaje entero. Tira 1D6; con 3+ queda inutilizable.
+- Ballesta de Repetición. Stock 8+. Compra 1000. Venta 100. Fuerza 4, usa virotes y dispara dos veces con -1 para impactar.
+- Cimitarra. Stock 5+. Compra 500. Venta 75. Causa 1D6 + Fuerza y los monstruos tienen -1 para impactarte.
+- Barajas. Stock 3+. Compra 20.
+- Pañuelo de cabeza. Stock 4+. Compra 50. Venta 5. Protege a tu aventurero del calor del desierto.
+- Raíz rara. Stock 7+. Compra 50. Tira 1D6 para saber el efecto del turno:
+1. Furia Asesina.
+2. Dos acciones.
+3. Esquivar Golpes 5+.
+4. Ninguno.
+5. Tu Movimiento, HA y HP quedan reducidos a 1 el siguiente turno.
+6. Tienes una alucinación y diriges todos tus ataques hacia la casilla de la izquierda (1-3) o de la derecha (4-6).
+- 1D6 Raciones de Desierto. Stock 5+. Compra 100. Recupera 3 Heridas. Nunca se pudre.
+- Cerveza de Raíz. Stock 5+. Compra 75. Produce un fuerte aumento de daño en el siguiente turno, pero con dobles puede dejarte aturdido varios turnos.
+- Cuerda de Pelo de Camello. Stock 4+. Compra 100. Venta 10. Funciona como una cuerda, pero permite una segunda tirada si sacas un 1 al comprobar si se rompe.</rules>
+  </location>
+  <location id="location-comerciante-de-animales">
+    <name>Comerciante de Animales</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Animales exóticos ideales para cruzar antiguos continentes y superar las adversidades climatológicas, ya sea nieve, calor tropical o desiertos.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Equipo disponible:
+
+- Camello de Arabia. Stock 5. Compra 500. Venta 50. Reduce el tiempo de viaje 1 semana y aumenta los gastos diarios en 3 monedas de oro.
+- Gélido de Lustria. Stock 7+. Compra 800. Venta 80. Reduce el tiempo de viaje 2 semanas y aumenta los gastos diarios en 2 monedas de oro.
+- Elefante de Guerra. Stock 10+. Compra 1500. Venta 150. Reduce el tiempo de viaje 2 semanas, aumenta los gastos diarios en 10 monedas de oro, da +2 a resultados de combate en Viajes y cuesta 300 monedas adicionales por la acomodación del viaje.
+- Caballo Salvaje de Kislev. Stock 9+. Compra 750. Venta 285. Puede cabalgar incluso con “Nieve profunda” en la Tabla de Condiciones del Viaje. Tira 2D6 en cada Asentamiento: con doble 1 es robado; con doble 6 los ladrones huyen y recibes 2D6 x 10 monedas.
+- Carro de Nieve en Kislev. Stock 7+. Compra 300. Venta 100. Puede transportar a 4 Aventureros y todo su equipo, pero necesita cualquiera de los animales de tiro descritos anteriormente. Reduce el tiempo de viaje en 1 semana. No lleva ruedas, solo esquís, y sirve para Kislev o Norsca.</rules>
+  </location>
+  <location id="location-comercios-de-kislev">
+    <name>Comercios de Kislev</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Los artículos de comercio de Kislev son armaduras contra el frío gélido y férreas armas para el combate. Antes de comprar o vender aquí, debes tener en cuenta los artículos de la Localización Especial básica correspondiente, especialmente Armería, Arquería y Fabricante de Armaduras, además de los que aparecen en el reverso.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Artículos añadidos sobre la base de Armería, Arquería y Fabricante de Armaduras:
+
+- Guantes forrados. Stock 8+. Compra 130. Venta 25. Inmunes a la congelación de “dedos” y “punta de piel de los dedos” en la Tabla de Congelación.
+- Botas forradas de piel. Stock 8+. Compra 100. Venta 20. Inmunes a la congelación de “dedos del pie” en la Tabla de Congelación.
+- Pieles de oso. Stock 7+. Compra 400. Venta 120. +2 Resistencia, pero contra armas de proyectil solo +1 Resistencia. Pueden usarse con armadura ligera, con las restricciones normales.
+- Pistola Ballesta. En Kislev no se venden este tipo de armas.
+- Espada de hierro fundido. Stock 4+. Compra 100. Venta 15. Con un 1 al impactar debes tirar 2D6; si sacas doble, la hoja se rompe y la espada queda inutilizada.
+- Martillo Pico. Stock 10+. Compra 450. Venta 120. El daño causado no tiene modificador por armadura. Cada 6 al impactar causa 1D6 Heridas extra.
+- Estrellas arrojadizas. En Kislev no se venden este tipo de armas.
+- Provisiones. Stock 5+. Compra 50. Venta 5. Curan 2 Heridas. Al terminar la aventura tira 1D6; con 1-2 el frío las conserva para la siguiente.
+- Cualquier arma normal. El precio de compra y venta es el doble.</rules>
+  </location>
+  <location id="location-comercios-de-lustria">
+    <name>Comercios de Lustria</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Los artículos de comercio de Lustria son rupestres pero muy efectivos, desde antídotos hasta cerbatanas. Antes de comprar o vender aquí, debes tener en cuenta los artículos de la Localización Especial básica, especialmente Almacén, Armería y Arquería, además de los que aparecen en el reverso.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Artículos añadidos sobre la base de Almacén, Armería y Arquería:
+
+- Antídoto. Stock 6+. Compra 100. Contiene 1D6 dosis y puede usarse para curar la penalización de Fuerza sufrida al quedar a 0 Heridas por un ataque de Veneno.
+- Mapa. Stock 11+. Compra 100. Venta 10. Puede usarse en cualquier momento, tantas veces como quieras durante una aventura. Tira 1D6:
+1. Es falso. Descártalo y añade 1D3 cartas al mazo de Mazmorra.
+2-5. Nada familiar. El mapa no es de aquí, pero puedes volver a usarlo.
+6. ¡Tesoro! Cuando resuelvas el siguiente evento, elimina el mapa y roba 1D6 Cartas de Tesoro para todo el grupo.
+- 1D6 Flechas Envenenadas. Stock 8+. Compra 30. Venta 15. Causan 1D6 + 4 Heridas. Con 4+ al impactar, el daño se aplica sin modificadores de Resistencia o ignorando dolor, según proceda.
+- Machete. Stock 5+. Compra 20. Venta 2. Causa 1D6 + Fuerza al daño y da -1 para impactar.
+- Cuchillo de Caza. Stock 3+. Compra 50. Venta 5. Causa 1D6 + 1 de daño y puede esconderse.
+- Cerbatana. Stock 6+. Compra 50. Venta 5. Causa 1D6 + 1 de daño, da -1 para impactar y no requiere munición ni pólvora.</rules>
+  </location>
+  <location id="location-taberna-de-arabia">
+    <name>Taberna de Arabia</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Llena de gente extraña e interesantes viajeros, es el lugar perfecto para conocer historias y meterse en líos.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Tira 2D6:
+
+2. Borracho hasta no poder más. Te echan de la taberna y pierdes 1D6 x 50 monedas.
+
+3. Eres arrestado por una conducta inapropiada y acabas en la prisión durante 1D6 días. No pagas Gastos diarios ni tienes Eventos.
+
+4. Te parece una magnífica idea robar algo del palacio del Sultán por una apuesta. Tira 2D6. Si el resultado es menor o igual que el Nivel de Combate de tu Aventurero, lo logras y ganas 1D6 x 100 monedas. En caso contrario eres capturado, condenado, azotado, incinerado, y tus compañeros pierden 2D6 x 50 monedas cada uno como pago de tu fianza.
+
+5. Invitas a un viejo conocido a tomar un trago, lo que cuesta 1D6 x 10 monedas. Cuando acabe la siguiente aventura robas 1D3 cartas de tesoro. Puedes elegir una para ti y el resto para el grupo.
+
+6. El chimpancé del tabernero se come 1D3 de tus Provisiones.
+
+7. Se desencadena una pelea y les robas 1D6 x 50 monedas.
+
+8. El tabernero te recomienda visitar una pequeña tienda al azar. En ese comercio tiras 1D6 adicional para comprobar el stock de cada objeto que quieras comprar.
+
+9. La cerveza se te sube y amaneces en un callejón con un camello menos de compañía.
+
+10. Un corsario borracho te enseña una nueva técnica como ataque normal. Una vez por aventura, todos los monstruos situados junto a ti reciben 1D6 + 1 Heridas y son obligados a situarse una casilla más allá de ti, si es posible.
+
+11. Un pirata con cicatrices te enseña su grito de batalla. Una vez por aventura puedes usarlo con un monstruo en combate CaC. Queda tan desconcertado que tiene -1 a sus tiradas para impactarte durante el siguiente turno. No funciona con monstruos con Terror.
+
+12. Un hombre misterioso, con una túnica, te invita a una bebida y te solicita que encuentres un valioso artefacto para él. Si entregas la siguiente Carta de Tesoro de Estancia Objetivo que ganéis, te recompensa con 1D6 x 50 monedas.</rules>
+  </location>
+  <location id="location-taberna-de-lustria">
+    <name>Taberna de Lustria</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>Llena de gente extraña e interesantes viajeros, es el lugar perfecto para conocer historias y meterse en líos.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Tira 2D6:
+
+2. Un hombre te vende un mapa de la Ciudad Perdida de Xahnadralailana por 1D6 x 100 monedas o un objeto de ese valor. Tira 1D6 en la siguiente Estancia Objetivo:
+1-3. Solo hay 1D6 monedas.
+4-5. Encontráis el tesoro normal.
+6. Hay un tesoro extra para cada Aventurero.
+
+3. Tras una divertida noche de juerga, tu animal de monta ha sido robado.
+
+4. La noche se acelera en un mar de alcohol. Uno de los Aventureros acaba en prisión tras cantar de manera horrible en mitad de la noche.
+
+5. El tabernero te dice que alguien quiere verte en la trastienda. Tira 1D6:
+1-3. Una barra de hierro te golpea la cabeza. Despiertas en un callejón con -1D6 x 50 monedas.
+4-6. Hay alguien que quiere acompañaros para recuperar un objeto. En la siguiente aventura usa una miniatura para representarle. Mueve 4 casillas, pero no ataca ni es atacado. El objeto está en la Estancia Objetivo. Si sale con vida ganáis 1D6 x 100 monedas.
+
+6. Te ves envuelto en un complicado juego de cartas. Decide cuánto apuestas. Otros 1D3 jugadores apuestan también 1D4 x 50 monedas. Tira 1D4; si el resultado es menor que tu Suerte Inicial, ganas todo el dinero. En caso contrario pierdes lo apostado.
+
+7. Ves a un grupo de Aventureros hablando sobre sus hazañas. Tira 1D6:
+1-3. Nadie te cree al contar las tuyas.
+4-5. Están impresionados y te invitan a una ronda.
+6. Hay un veterano tan impresionado que te regala un Tesoro de Estancia Objetivo.
+
+8. Un hombrecillo nervioso te dice que es cartógrafo y te pide ayuda para explorar una zona desconocida. Si aceptas, tu viaje de vuelta dura 1D6 semanas más, pero te paga 2D6 x 50 monedas.
+
+9. Un borracho dice que es un gran explorador y te regala un talismán que cura 1D6 Heridas una vez por aventura.
+
+10. Ves un valioso objeto de equipo en una esquina y te lo venden por solo 1D6 x 50 monedas. Roba un Tesoro de Estancia Objetivo.
+
+11. Te hablan de un nuevo sendero en las profundidades de la jungla. El próximo viaje ahorras 1D3 semanas.
+
+12. Eres el único que mantiene las formas tras toda la noche y ganas 1D6 x 150 monedas al saquear a otros clientes.</rules>
+  </location>
+  <location id="location-taberna-de-kislev">
+    <name>Taberna de Kislev</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+      <type>village</type>
+    </available>
+    <description>La Taberna es el centro de vida del pueblo. Con un gran fuego, ruido y bebida fuerte, la gente se olvida de las penurias.</description>
+    <visitors>
+      <visitor>all</visitor>
+    </visitors>
+    <rules>Cuando el Aventurero esté en una Taberna tira 2D6 en la Tabla de Eventos en la Taberna y aplica los modificadores habituales (Cazador de Brujas y Elfo -4, Hechicero -3, Sacerdote Guerrero y Explorador Elfo -2). Sin embargo, si salen dobles, consulta lo siguiente:
+
+Doble 1-5. Te despiertas a la mañana siguiente en el suelo de la taberna. Tu último recuerdo de la noche era una persona que te entregó un vaso pequeño con un líquido incoloro, inodoro e insípido. Te levantas mareado en busca de desayuno.
+
+Doble 6. Cuando te despiertas a la mañana siguiente tienes en la mano una petaca metálica. Contiene un líquido incoloro, inodoro e insípido. Es el fuerte licor que los kislevitas utilizan para protegerse del frío.
+
+Una vez por aventura, el Aventurero puede beberlo. Durante el resto de la aventura obtiene +1 Resistencia y +1D6 Heridas. Estas Heridas son solo un añadido temporal; las Heridas Iniciales no varían. Debido a la fuerza de la bebida tienes -1 HA, -1 HP y -1 para Destrabarse.
+
+Mientras permanezcan en Kislev, el Aventurero puede rellenar el frasco por 20 monedas en la Taberna, sin necesidad de sacar otro doble 6.</rules>
+  </location>
+  <location id="location-colegio-amatista">
+    <name>Colegio Amatista</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de los hechiceros que estudian el Saber de la Muerte. Hecho de piedra oscura, con estilo gótico y puertas y ventanas de arcos.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>amethyst-wizard</visitor>
+    </visitors>
+    <rules>El Hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Pórtico de Piedra. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Jardín de Morr. Ganas temporalmente +1 Dado de Daño extra para la siguiente aventura.
+3. Biblioteca Oscura. Tras conocer a Magdalena Thaurstein puedes añadir un nuevo conjuro de entre los siguientes a tu colección. Tira 1D6:
+1. Defensa: “Maldición Saqueador Tumbas” (11).
+2-3. Curación: “Telepatía” (11).
+4-5. Ataque: “Viento de Muerte” (11).
+6. Especial: “Salvaje Estirpe Zandox” (11).
+4. Sótano de Alimañas. Johan Zauberlich, un legendario doctor amatista, te permite robar al azar una Carta de Equipo del Colegio de Magia por 1.500 monedas.
+5. La Torre Gótica. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Capilla de Morr. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Robo de Alma” (12).
+2. Gabrielle Marsner te enseña el Hechizo de Defensa: “Manto de Desesperación” (12).
+3-4. Gunther Klaus te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Gabrielle Marsner te enseña el hechizo de Ataque: “Defunción Rápida” (12).
+6. Viggo Hexensohn, Magister Patriarca del Colegio Amatista, te enseña el Hechizo Especial: “Visión de la Muerte” (12).
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Shyish”. La visita al Colegio Amatista solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-ambar">
+    <name>Colegio Ámbar</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de los hechiceros que estudian el Saber de las Bestias. En mitad de la naturaleza, el Cónclave se reúne solo si es necesario.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>amber-wizard</visitor>
+    </visitors>
+    <rules>El Hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Paraje incorrecto. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Bosques de los Eonir. Ganas temporalmente +1 Fuerza para la siguiente aventura.
+3. Colinas de Ámbar. El solitario Berndt Aberwold comparte sus conocimientos para que aprendas un nuevo conjuro. Tira 1D6:
+1. Defensa: “Muro de Hielo” (11).
+2-3. Curación: “Bestia Mejorada” (9).
+4-5. Ataque: “Lanza Cazadora” (11).
+6. Especial: “Transformación de Kadon” (11).
+4. Hermandad de Cazadores. Gregor Martak merodea la zona buscando la Manada, y te obsequia con una Carta de Equipo al azar del Colegio de Magia por 1.500 monedas.
+5. Cuevas más allá de la ciudad. Puedes comprar una Carta de Equipo como en el resultado 4 o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Centro Totémico del Padre Salvaje. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Regalo de Hiskal” (10).
+2. Kerwen Sigmarsson te enseña el Hechizo de Defensa: “Llamada Salvaje” (12).
+3-4. El viejo Jurgen Helvitt te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Orsini Sardug te enseña el hechizo de Ataque: “Llamada a las Alimañas” (12).
+6. Setanta Lobas, Magister Patriarca del Colegio Ámbar, te enseña el Hechizo Especial. Tira 1D6:
+1-3. “Bestia Salvaje de Horros” (12).
+4. “Voz del Amo” (12).
+5. “Lupens, Lobo del Acecho” (12).
+6. “Corvus, Señor de los Cuervos” (12).
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Ghur”. La visita al Colegio Ámbar solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-brillante">
+    <name>Colegio Brillante</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de los hechiceros que estudian el Saber del Fuego. Está en un barrio de ruinas calcinadas, tras un incendio que no se investigó.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>bright-wizard</visitor>
+    </visitors>
+    <rules>El Hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Barrera Protectora. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Portón con siete bocallaves. Ganas temporalmente +1 Ataque para la siguiente aventura.
+3. Habitaciones de Aprendices. Tras conocer a los Hermanos Fleissman puedes añadir un nuevo conjuro de entre los siguientes a tu colección. Tira 1D6:
+1. Defensa: “Rebote Carmesí” (11).
+2-3. Curación: “Llamas del Fénix” (11).
+4-5. Ataque: “Explosión Ardiente” (11).
+6. Especial: “La Llave de Secretos” (11).
+4. Laboratorio. Cindik Antum, Profesor de Alquimia Incendiaria, te permite robar al azar una Carta de Equipo de tu Colegio de Magia a cambio de 1.500 monedas.
+5. La Extensa Biblioteca. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Consejo de Sabios. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Poder del Fénix” (12).
+2. Felicita Garret te enseña el Hechizo de Defensa: “Escudo de Aqshy” (12).
+3-4. Sulphus Natchman te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Sienna Fuegonasus te enseña el hechizo de Ataque: “Tormenta de Magma” (12).
+6. Thyrus Gormann, Magister Patriarca del Colegio Brillante, te premia con una llave del saber y te enseña el Hechizo Especial: “Elemental de Fuego” (12). Cuando tengas 7 llaves ya, ganas con carácter permanente 1D6 Puntos de Poder extra y cualquier hechizo cuesta 1 punto de poder menos.
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Aqshy”. La visita al Colegio Brillante solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-celestial">
+    <name>Colegio Celestial</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de quienes estudian el Saber de los Cielos, un colegio compuesto por multitud de elevadas torres coronadas con cúpulas acristaladas.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>celestial-wizard</visitor>
+    </visitors>
+    <rules>El Hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Portón de metal negro. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Patea de nubes y bruma. Ganas 1 Punto de Suerte extra temporalmente para la siguiente aventura.
+3. Cúpula acristalada. Klaus Solmann está de paso en esta sede y, tras conocerle, puedes añadir un nuevo conjuro a tu colección. Tira 1D6:
+1. Defensa: “Conversación Armónica” (11).
+2-3. Curación: “Portento de Far” (11).
+4-5. Ataque: “Vendabal” (11).
+6. Especial: “Ala Veloz” (11).
+4. Cámara de Gabriel. Janna Eberhauer está reparando el reloj lunar, y te permite robar al azar una Carta de Equipo del Colegio de Magia por 1.500 monedas.
+5. Torre de Casandora. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Observatorio de Uraninon. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Renovar Suerte” (12).
+2. Gunther Grinwald te enseña el Hechizo de Defensa: “Maldición Viento Medianoche” (12).
+3-4. Dieter Klemperer te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Hildegard Niederthaler te enseña el hechizo de Ataque: “Relámpagos en cadena” (12).
+6. Raphael Julevna, Magister Patriarca del Colegio, te enseña el Hechizo Especial: “¡Que soplen los cuatro vientos!” (12).
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Azyr”. La visita al Colegio Celestial solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-dorado">
+    <name>Colegio Dorado</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de los hechiceros que estudian el Saber del Metal, formado por fraguas y talleres con chimeneas que expulsan vapores de todos los colores.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>gold-wizard</visitor>
+    </visitors>
+    <rules>Puede ser visitado por el Hechicero Dorado. El hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Los Bajos Fondos. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Estatua de Haendrich. Ganas temporalmente +1 Armadura para la siguiente aventura.
+3. Librería de Alquimia y Metalurgia. Solitaria Ferris Goldschlager comparte su conocimiento para que aprendas un nuevo conjuro. Tira 1D6:
+1. Defensa: “Capa Brillante” (11).
+2-3. Curación: “Espadas Hechizadas de Airan” (11).
+4-5. Ataque: “Espadas de Mercurio” (11).
+6. Especial: “Mastines de Gehenna” (11).
+4. La Fundición. Janna Colburg trabaja con tesón en esta zona y te obsequia con una Carta de Equipo al azar del Colegio de Magia por 1.500 monedas.
+5. Laboratorio de Plomo. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Torre de Cas Meijer. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Transmutación Plomo” (12).
+2. Max Schreiber te enseña el Hechizo de Defensa: “Maldición Acero Forjado” (12).
+3-4. El viejo Gotthif Puchta te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Albrecht Helseher te enseña el Hechizo de Ataque: “Transmutación Final” (12).
+6. Balthasar Gelt, Magister Patriarca del Colegio Dorado, te enseña el Hechizo Especial: “Replicación de Levorg”.
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Ghamon”. La visita al Colegio Dorado solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-gris">
+    <name>Colegio Gris</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de los hechiceros que estudian el Saber de las Sombras, un conjunto ruinoso con muros y ventanas rotas y sucias, repleto de musgo.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>gray-wizard</visitor>
+    </visitors>
+    <rules>Puede ser visitado por el Hechicero Gris. El hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Burdeles de dudosa reputación. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Edificios de ruinas en piedra. Ganas temporalmente +1 Resistencia para la siguiente aventura.
+3. Biblioteca para Umbramantes. Markus Rischer comparte sus conocimientos para que aprendas un nuevo conjuro. Tira 1D6:
+1. Defensa: “Miasma de Melkoth” (11).
+2-3. Curación: “Clonar Imagen” (11).
+4-5. Ataque: “Péndulo de Penumbras” (11).
+6. Especial: “Pellejo de Medianoche” (11).
+4. Red de túneles ocultos. Christoph Engel investiga esta red de túneles y te obsequia con una Carta de Equipo al azar del Colegio de Magia por 1.500 monedas.
+5. Cámara Negra de Verena. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Ruinosa Torre de Búhos Blancos. Durante 7 días, una eminencia te asesora e instruye para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Ilusión Completa” (12).
+2. Regimius Woeller te enseña el Hechizo de Defensa: “Sombra de Muerte” (12).
+3-4. Stephan Vesterfel te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Jocelin Herzog te enseña el Hechizo de Ataque: “Sombras de Esplendor” (12).
+6. Reiner Starke, Magister Patriarca del Colegio Gris, te enseña el Hechizo Especial: “Muerte Aparente” (12).
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Migur”. La visita al Colegio Gris solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-jade">
+    <name>Colegio Jade</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de los hechiceros que estudian el Saber de la Vida, rodeado por un muro verde y lleno de menhires, arroyos y árboles.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>jade-wizard</visitor>
+    </visitors>
+    <rules>Puede ser visitado por el Hechicero Jade. El hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. El Muro Verde. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Estanque y arroyos. Ganas temporalmente +1 Punto de Poder para la siguiente aventura.
+3. Círculo de Piedras. La serenidad del lugar te confiere suficientes conocimientos para que aprendas un nuevo conjuro. Tira 1D6:
+1. Defensa: “Naturaleza Imparable” (11).
+2-3. Curación: “Apoteosis Verde” (11).
+4-5. Ataque: “Los que Habitan Bajo Tierra” (11).
+6. Especial: “Crecimiento Vital” (11).
+4. Lago Plateado. En lo más profundo del lago encuentras una reliquia ancestral. Roba una Carta de Equipo al azar del Colegio de Magia por 1.500 monedas.
+5. Torre de Árboles. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. El Consejo. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender el Hechizo de Curación: “Tormenta de Renovación” (12).
+2. Katelina Matthias te enseña el Hechizo de Defensa: “Sangre Terrenal” (12).
+3-4. Dagmar von Arburg te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Guillaume Deschamps te enseña el Hechizo de Ataque: “Cascada Esmeralda” (12).
+6. Garvan Paranoth, Magister Patriarca del Colegio Jade, te enseña un Hechizo Especial. Tira 1D6:
+1-3. “Señor de la Piedra” (12).
+4-6. “Señor del Agua” (12).
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Ghyran”. La visita al Colegio Jade solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+  <location id="location-colegio-luminoso">
+    <name>Colegio Luminoso</name>
+    <available>
+      <type>city</type>
+      <type>town</type>
+    </available>
+    <description>El hogar de quienes estudian el Saber de la Luz. Solo se materializa cuando se alinean las estrellas y la luna del cambio, Morrslieb.</description>
+    <visitors>
+      <visitor>wizard</visitor>
+      <visitor>light-wizard</visitor>
+    </visitors>
+    <rules>Puede ser visitado por el Hechicero Luminoso. El hechicero debe realizar un donativo de 2D6 x 50 monedas. Tira 1D6 y consulta esta carta:
+
+1. Puerta Septentrional. No eres digno de acceder. El Colegio no te reconoce como uno de los suyos. Prueba en la próxima Ciudad, a ver si tienes suerte.
+2. Plaza de mármol blanco. Ganas temporalmente +1 Fuerza de Voluntad para la siguiente aventura.
+3. Universidad. Wolfgang Lichmeister comparte sus conocimientos para que aprendas un nuevo conjuro. Tira 1D6:
+1. Defensa: “Expulsar Demonios” (11).
+2-3. Curación: “Mano Curativa Ulzha” (11).
+4-5. Ataque: “Habitantes de las Profundidades” (11).
+6. Especial: “Luz Inexorable” (11).
+4. Obeliscos y Esfinges. Konrad Mauer pasea por esta zona reservada del Colegio y te permite robar al azar una Carta de Equipo del Colegio de Magia por 1.500 monedas.
+5. Pirámide de Luz. Podrás comprar una Carta de Equipo como en el resultado anterior o aprender un nuevo conjuro de los del resultado 3. Tardarás 3 días.
+6. Guardianes de la Orden. Durante 7 días, una eminencia te presta asesoramiento para mejorar como Magister. Tira 1D6:
+1. Has logrado aprender un nuevo Hechizo de Curación: “Poder de la Verdad” (12).
+2. Otto Baldurich te enseña el Hechizo de Defensa: “Centinela Resplandeciente” (12).
+3-4. Konrad Messner te permite robar a tu elección una Carta de Equipo de tu Colegio de Magia por 2.000 monedas. La mitad sirve para subir de nivel.
+5. Verspasian Kant te enseña el Hechizo de Ataque: “Luz Cegadora de Amshu” (12).
+6. Velans, Magister Patriarca del Colegio Luminoso, te enseña el Hechizo Especial: “Protección de Pha” (12).
+
+En caso de recibir un tesoro o hechizo que ya tenías, puedes repetir la tirada. Si sale un resultado doble en la anterior tabla, el Colegio te premia con el Liber del Saber “Hysh”. La visita al Colegio Luminoso solo se puede hacer una vez por Asentamiento.</rules>
+  </location>
+</locations>

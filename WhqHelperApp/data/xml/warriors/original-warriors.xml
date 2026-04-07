@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<warriors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="whq-warriors-schema.xsd">
+  <warrior id="warrior-amethyst-wizard">
+    <name>Amethyst Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/amatist.png</counter>
+  </warrior>
+  <warrior id="warrior-amber-wizard">
+    <name>Amber Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/amber.png</counter>
+  </warrior>
+  <warrior id="warrior-assassin">
+    <name>Assassin</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/assassin.png</counter>
+  </warrior>
+  <warrior id="warrior-barbarian">
+    <name>Barbarian</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/barbarian.png</counter>
+  </warrior>
+  <warrior id="warrior-ex-blood-bowl-player">
+    <name>Ex-Blood Bowl Player</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/bb_player.png</counter>
+  </warrior>
+  <warrior id="warrior-bounty-hunter">
+    <name>Bounty Hunter</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/bounty_hunter.png</counter>
+  </warrior>
+  <warrior id="warrior-bretonnian-knight">
+    <name>Bretonnian Knight</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/bretonian_knight.png</counter>
+  </warrior>
+  <warrior id="warrior-brewmaster-dwarf">
+    <name>Brewmaster Dwarf</name>
+    <race>Dwarf</race>
+    <counter>resources/warrior_counters/brewmaster.png</counter>
+  </warrior>
+  <warrior id="warrior-bright-wizard">
+    <name>Bright Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/bright.png</counter>
+  </warrior>
+  <warrior id="warrior-cathayan-monk">
+    <name>Cathayan Monk</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/cathayan_monk.png</counter>
+  </warrior>
+  <warrior id="warrior-celestial-wizard">
+    <name>Celestial Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/celestial.png</counter>
+  </warrior>
+  <warrior id="warrior-chaos-warrior">
+    <name>Chaos Warrior</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/chaos_warrior.png</counter>
+  </warrior>
+  <warrior id="warrior-dwarf">
+    <name>Dwarf</name>
+    <race>Dwarf</race>
+    <counter>resources/warrior_counters/dwarf.png</counter>
+  </warrior>
+  <warrior id="warrior-elf">
+    <name>Elf</name>
+    <race>Elf</race>
+    <counter>resources/warrior_counters/elf.png</counter>
+  </warrior>
+  <warrior id="warrior-elf-ranger">
+    <name>Elf Ranger</name>
+    <race>Elf</race>
+    <counter>resources/warrior_counters/elf_ranger.png</counter>
+  </warrior>
+  <warrior id="warrior-gold-digger">
+    <name>Gold Digger</name>
+    <race>Dwarf</race>
+    <counter>resources/warrior_counters/gold_digger.png</counter>
+  </warrior>
+  <warrior id="warrior-gold-wizard">
+    <name>Gold Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/golden.png</counter>
+  </warrior>
+  <warrior id="warrior-grey-wizard">
+    <name>Grey Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/grey.png</counter>
+  </warrior>
+  <warrior id="warrior-halfling-thief">
+    <name>Halfling Thief</name>
+    <race>Halfling</race>
+    <counter>resources/warrior_counters/halfling_thief.png</counter>
+  </warrior>
+  <warrior id="warrior-imperial-noble">
+    <name>Imperial Noble</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/imperial_noble.png</counter>
+  </warrior>
+  <warrior id="warrior-jade-wizard">
+    <name>Jade Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/jade.png</counter>
+  </warrior>
+  <warrior id="warrior-light-wizard">
+    <name>Light Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/light.png</counter>
+  </warrior>
+  <warrior id="warrior-lord-of-aenarion">
+    <name>Lord of Aenarion</name>
+    <race>Elf</race>
+    <counter>resources/warrior_counters/lord_of_aenarion.png</counter>
+  </warrior>
+  <warrior id="warrior-ogre">
+    <name>Ogre</name>
+    <race>Ogre</race>
+    <counter>resources/warrior_counters/ogre.png</counter>
+  </warrior>
+  <warrior id="warrior-outlaw">
+    <name>Outlaw</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/outlaw.png</counter>
+  </warrior>
+  <warrior id="warrior-pit-fighter">
+    <name>Pit Fighter</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/pit_fighter.png</counter>
+  </warrior>
+  <warrior id="warrior-ronin">
+    <name>Ronin</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/ronin.png</counter>
+  </warrior>
+  <warrior id="warrior-sea-wolf">
+    <name>Sea Wolf</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/seadog.png</counter>
+  </warrior>
+  <warrior id="warrior-sister-of-sigmar">
+    <name>Sister of Sigmar</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/sister_sigmar.png</counter>
+  </warrior>
+  <warrior id="warrior-trollslayer">
+    <name>Trollslayer</name>
+    <race>Dwarf</race>
+    <counter>resources/warrior_counters/trollslayer.png</counter>
+  </warrior>
+  <warrior id="warrior-wardancer">
+    <name>Wardancer</name>
+    <race>Elf</race>
+    <counter>resources/warrior_counters/wardancer.png</counter>
+  </warrior>
+  <warrior id="warrior-warrior-priest">
+    <name>Warrior Priest</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/warrior_priest.png</counter>
+  </warrior>
+  <warrior id="warrior-witch-elf">
+    <name>Witch Elf</name>
+    <race>Elf</race>
+    <counter>resources/warrior_counters/witch_elf.png</counter>
+  </warrior>
+  <warrior id="warrior-witch-hunter">
+    <name>Witch Hunter</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/witch_hunter.png</counter>
+  </warrior>
+  <warrior id="warrior-wizard">
+    <name>Wizard</name>
+    <race>Human</race>
+    <counter>resources/warrior_counters/wizard.png</counter>
+  </warrior>
+</warriors>

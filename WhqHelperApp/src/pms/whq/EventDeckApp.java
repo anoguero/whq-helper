@@ -2,8 +2,18 @@ package pms.whq;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+import java.nio.file.Files;
+
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
@@ -20,7 +30,11 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.WhqUiTheme;
@@ -87,6 +101,20 @@ public class EventDeckApp {
   private EventList settlementEventList;
   private EventList treasureEventList;
   private EventList objectiveTreasureEventList;
+
+  private record WarriorDefinition(
+      String id,
+      String name,
+      String race,
+      String counterPath,
+      String rulesPath) {
+    String displayName() {
+      if (race == null || race.isBlank()) {
+        return name;
+      }
+      return name + " (" + race + ")";
+    }
+  }
 
   /*public static void main(String[] args) {
     Display display = new Display();
@@ -519,27 +547,293 @@ public class EventDeckApp {
     }
   }
 
-  public void openPartySizeSettings(Shell parent) {
-    int size = Settings.getSettingAsInt(Settings.PARTY_SIZE);
-    String newSize =
-        SwtDialogs.promptForText(
-            resolveParent(parent),
-            "Set Party Size",
-            "Please enter the number of Warriors in your adventuring party.",
-            Integer.toString(size));
+  public void openPartySettings(Shell parent) {
+    Shell owner = resolveParent(parent);
+    List<WarriorDefinition> warriors;
+    try {
+      warriors = loadWarriors();
+    } catch (Exception ex) {
+      SwtDialogs.showWarning(
+          owner,
+          I18n.t("dialog.party.title"),
+          I18n.t("dialog.party.error.loadWarriors") + ex.getMessage());
+      return;
+    }
 
-    if (newSize != null) {
-      try {
-        size = Integer.parseInt(newSize.trim());
-        Settings.setSettingAndSave(Settings.PARTY_SIZE, Integer.toString(size));
-      } catch (NumberFormatException nfe) {
-        String message =
-            "The value ["
-                + newSize
-                + "] does not appear to be valid. Party size must be a positive numeric value.";
-        SwtDialogs.showWarning(resolveParent(parent), "Invalid Entry", message);
+    Shell dialog = new Shell(owner, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+    AppIcon.inherit(dialog, owner);
+    dialog.setText(I18n.t("dialog.party.title"));
+    dialog.setLayout(new GridLayout(2, false));
+
+    Label descriptionLabel = new Label(dialog, SWT.WRAP);
+    descriptionLabel.setText(I18n.t("dialog.party.description"));
+    GridData descriptionData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+    descriptionData.horizontalSpan = 2;
+    descriptionData.widthHint = 520;
+    descriptionLabel.setLayoutData(descriptionData);
+
+    new Label(dialog, SWT.NONE).setText(I18n.t("dialog.party.availableWarrior"));
+    org.eclipse.swt.widgets.Combo warriorCombo =
+        new org.eclipse.swt.widgets.Combo(dialog, SWT.DROP_DOWN | SWT.READ_ONLY);
+    warriorCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    for (WarriorDefinition warrior : warriors) {
+      warriorCombo.add(warrior.displayName());
+    }
+    if (!warriors.isEmpty()) {
+      warriorCombo.select(0);
+    }
+
+    Composite selectionActions = new Composite(dialog, SWT.NONE);
+    GridData selectionActionsData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+    selectionActionsData.horizontalSpan = 2;
+    selectionActions.setLayoutData(selectionActionsData);
+    selectionActions.setLayout(new GridLayout(2, false));
+
+    Button addWarriorButton = new Button(selectionActions, SWT.PUSH);
+    addWarriorButton.setText("+");
+    addWarriorButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+
+    Button removeWarriorButton = new Button(selectionActions, SWT.PUSH);
+    removeWarriorButton.setText("-");
+    removeWarriorButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+
+    Label selectedWarriorsLabel = new Label(dialog, SWT.NONE);
+    selectedWarriorsLabel.setText(I18n.t("dialog.party.selectedWarriors"));
+    GridData selectedWarriorsLabelData = new GridData(SWT.FILL, SWT.CENTER, true, false);
+    selectedWarriorsLabelData.horizontalSpan = 2;
+    selectedWarriorsLabel.setLayoutData(selectedWarriorsLabelData);
+
+    org.eclipse.swt.widgets.List selectedWarriorsList =
+        new org.eclipse.swt.widgets.List(dialog, SWT.BORDER | SWT.V_SCROLL);
+    GridData selectedWarriorsData = new GridData(SWT.FILL, SWT.FILL, true, true);
+    selectedWarriorsData.horizontalSpan = 2;
+    selectedWarriorsData.heightHint = 180;
+    selectedWarriorsList.setLayoutData(selectedWarriorsData);
+
+    Label partySizeLabel = new Label(dialog, SWT.NONE);
+    partySizeLabel.setText(I18n.t("dialog.party.partySize"));
+    Label partySizeValueLabel = new Label(dialog, SWT.NONE);
+    partySizeValueLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+    LinkedHashMap<String, WarriorDefinition> warriorsById = new LinkedHashMap<>();
+    for (WarriorDefinition warrior : warriors) {
+      warriorsById.put(warrior.id(), warrior);
+    }
+
+    java.util.List<WarriorDefinition> selectedWarriors =
+        resolveSelectedWarriors(warriorsById, Settings.getSetting(Settings.PARTY_WARRIORS));
+
+    Runnable refreshSelectedWarriors = () -> {
+      selectedWarriorsList.removeAll();
+      for (WarriorDefinition warrior : selectedWarriors) {
+        selectedWarriorsList.add(warrior.displayName());
+      }
+      partySizeValueLabel.setText(Integer.toString(selectedWarriors.size()));
+      partySizeValueLabel.getParent().layout();
+    };
+    refreshSelectedWarriors.run();
+
+    addWarriorButton.addListener(
+        SWT.Selection,
+        event -> {
+          int index = warriorCombo.getSelectionIndex();
+          if (index < 0 || index >= warriors.size()) {
+            return;
+          }
+          WarriorDefinition selected = warriors.get(index);
+          boolean alreadySelected =
+              selectedWarriors.stream().anyMatch(warrior -> warrior.id().equals(selected.id()));
+          if (!alreadySelected) {
+            selectedWarriors.add(selected);
+            refreshSelectedWarriors.run();
+          }
+        });
+
+    removeWarriorButton.addListener(
+        SWT.Selection,
+        event -> {
+          int index = selectedWarriorsList.getSelectionIndex();
+          if (index < 0 || index >= selectedWarriors.size()) {
+            return;
+          }
+          selectedWarriors.remove(index);
+          refreshSelectedWarriors.run();
+        });
+
+    Composite actions = new Composite(dialog, SWT.NONE);
+    GridData actionsData = new GridData(SWT.END, SWT.CENTER, true, false);
+    actionsData.horizontalSpan = 2;
+    actions.setLayoutData(actionsData);
+    actions.setLayout(new GridLayout(2, true));
+
+    Button acceptButton = new Button(actions, SWT.PUSH);
+    acceptButton.setText(I18n.t("button.accept"));
+    acceptButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    acceptButton.addListener(
+        SWT.Selection,
+        event -> {
+          if (selectedWarriors.isEmpty()) {
+            SwtDialogs.showWarning(
+                owner,
+                I18n.t("dialog.party.invalidTitle"),
+                I18n.t("dialog.party.invalidMessage"));
+            return;
+          }
+          Settings.setSetting(Settings.PARTY_SIZE, Integer.toString(selectedWarriors.size()));
+          Settings.setSetting(
+              Settings.PARTY_WARRIORS,
+              selectedWarriors.stream()
+                  .map(WarriorDefinition::id)
+                  .collect(Collectors.joining(",")));
+          Settings.save();
+          dialog.close();
+        });
+
+    Button cancelButton = new Button(actions, SWT.PUSH);
+    cancelButton.setText(I18n.t("button.cancel"));
+    cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+    cancelButton.addListener(SWT.Selection, event -> dialog.close());
+
+    dialog.setDefaultButton(acceptButton);
+    dialog.pack();
+    dialog.setSize(Math.max(560, dialog.getSize().x), dialog.getSize().y);
+    Rectangle ownerBounds = owner.getBounds();
+    Point dialogSize = dialog.getSize();
+    int x = ownerBounds.x + ((ownerBounds.width - dialogSize.x) / 2);
+    int y = ownerBounds.y + ((ownerBounds.height - dialogSize.y) / 2);
+    dialog.setLocation(Math.max(0, x), Math.max(0, y));
+    dialog.open();
+
+    while (!dialog.isDisposed()) {
+      if (!display.readAndDispatch()) {
+        display.sleep();
       }
     }
+  }
+
+  private java.util.List<WarriorDefinition> loadWarriors() throws Exception {
+    Path warriorsDirectory = projectRoot.resolve("data/xml/warriors");
+    if (!Files.isDirectory(warriorsDirectory)) {
+      return List.of();
+    }
+
+    EditableContentTranslations translations =
+        EditableContentTranslations.load(projectRoot, I18n.getLanguage());
+    Map<String, WarriorDefinition> warriorsById = new LinkedHashMap<>();
+
+    List<Path> files;
+    try (var stream = Files.list(warriorsDirectory)) {
+      files =
+          stream
+              .filter(this::isWarriorXmlFile)
+              .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
+              .toList();
+    }
+
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    factory.setNamespaceAware(false);
+
+    for (Path file : files) {
+      var document = factory.newDocumentBuilder().parse(file.toFile());
+      Element root = document.getDocumentElement();
+      if (root == null || !"warriors".equals(root.getTagName())) {
+        continue;
+      }
+
+      NodeList children = root.getChildNodes();
+      for (int i = 0; i < children.getLength(); i++) {
+        Node node = children.item(i);
+        if (node.getNodeType() != Node.ELEMENT_NODE || !"warrior".equals(node.getNodeName())) {
+          continue;
+        }
+
+        Element warriorElement = (Element) node;
+        String id =
+            warriorElement.getAttribute("id") == null
+                ? ""
+                : warriorElement.getAttribute("id").trim();
+        if (id.isEmpty()) {
+          continue;
+        }
+
+        String rawName = childText(warriorElement, "name");
+        String rawRace = childText(warriorElement, "race");
+        String counter = childText(warriorElement, "counter");
+        String rules = childText(warriorElement, "rules");
+
+        warriorsById.put(
+            id,
+            new WarriorDefinition(
+                id,
+                translations.t("warrior." + id + ".name", rawName),
+                translations.t("warrior." + id + ".race", rawRace),
+                counter,
+                translations.t("warrior." + id + ".rules", rules)));
+      }
+    }
+
+    return warriorsById.values().stream()
+        .sorted(Comparator.comparing(WarriorDefinition::name, String.CASE_INSENSITIVE_ORDER))
+        .toList();
+  }
+
+  private boolean isWarriorXmlFile(Path file) {
+    if (file == null || !Files.isRegularFile(file)) {
+      return false;
+    }
+    String name = file.getFileName().toString().toLowerCase();
+    return name.endsWith(".xml")
+        && !name.endsWith(".xml.bak")
+        && !"whq-warriors-schema.xsd".equals(name);
+  }
+
+  private static java.util.List<WarriorDefinition> resolveSelectedWarriors(
+      Map<String, WarriorDefinition> warriorsById, String persistedSelection) {
+    LinkedHashSet<String> ids = new LinkedHashSet<>();
+    if (persistedSelection != null && !persistedSelection.isBlank()) {
+      for (String token : persistedSelection.split(",")) {
+        String trimmed = token == null ? "" : token.trim();
+        if (!trimmed.isEmpty()) {
+          ids.add(trimmed);
+        }
+      }
+    }
+
+    if (ids.isEmpty()) {
+      ids.add("warrior-barbarian");
+      ids.add("warrior-dwarf");
+      ids.add("warrior-elf");
+      ids.add("warrior-wizard");
+    }
+
+    java.util.List<WarriorDefinition> selected = new ArrayList<>();
+    for (String id : ids) {
+      WarriorDefinition warrior = warriorsById.get(id);
+      if (warrior != null) {
+        selected.add(warrior);
+      }
+    }
+
+    if (selected.isEmpty()) {
+      selected.addAll(warriorsById.values());
+    }
+
+    return selected;
+  }
+
+  private static String childText(Element parent, String tagName) {
+    if (parent == null || tagName == null || tagName.isBlank()) {
+      return "";
+    }
+    NodeList children = parent.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node node = children.item(i);
+      if (node.getNodeType() == Node.ELEMENT_NODE && tagName.equals(node.getNodeName())) {
+        String text = node.getTextContent();
+        return text == null ? "" : text.trim();
+      }
+    }
+    return "";
   }
 
   public void openEventProbabilitySettings(Shell parent) {
@@ -714,6 +1008,14 @@ public class EventDeckApp {
   public void reloadData() {
     reloadControllerContent();
     resetEventList();
+  }
+
+  public void drawSettlementEvent() {
+    generateSettlementEvent();
+  }
+
+  public void closeAllOpenCards() {
+    cardWindowManager.closeAllCards();
   }
 
   public ContentRepository contentRepository() {

@@ -1,6 +1,6 @@
 import { formatTreasureUsers, t } from './i18n';
 import { toHitRollNeeded } from './deck';
-import type { EventModel, LanguageCode, Monster, MonsterEntry, Rule } from './types';
+import type { EventModel, LanguageCode, Monster, MonsterEntry, Rule, SettlementLocation } from './types';
 
 function esc(value: string): string {
   return value
@@ -241,6 +241,23 @@ export function renderMonsterCard(
         <img src="/data/graphics/gold.png" alt="Gold" />
         <span>${esc(monster.gold)}g</span>
       </footer>
+    </article>
+  `;
+}
+
+export function renderSettlementLocationCard(location: SettlementLocation, visitorLabels: string[]): string {
+  const visitors = visitorLabels.join(', ');
+  return `
+    <article class="card settlement-location-card">
+      <img class="settlement-location-template" src="/resources/dungeon-card-template.png" alt="" />
+      <header>
+        <h2>${esc(location.name)}</h2>
+      </header>
+      <section class="body">
+        ${location.description ? `<p class="flavor">${esc(location.description)}</p>` : ''}
+        ${location.rules ? `<div class="rules-scroll"><p>${esc(location.rules)}</p></div>` : ''}
+      </section>
+      <footer>${esc(visitors)}</footer>
     </article>
   `;
 }
