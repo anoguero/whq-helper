@@ -49,6 +49,7 @@ public final class CardFactory {
   private static final int TITLE_HEIGHT = 40;
   private static final int TYPE_CIRCLE_SIZE = 32;
   private static final String TREASURE_TEMPLATE_PATH = "resources/treasure-card-template.png";
+  private static final String DUNGEON_TEMPLATE_PATH = "resources/dungeon-card-template.png";
   private static final String TREASURE_COIN_PATH = "data/graphics/coin.png";
   private static final String TREASURE_COIN_FALLBACK_PATH = "data/graphics/gold.png";
   private static final String TREASURE_COIN_LEGACY_FALLBACK_PATH = "data/graphics/coin.jpg";
@@ -69,6 +70,11 @@ public final class CardFactory {
 
   public static Composite createTreasureCardPreview(Composite parent, Event event) {
     return new TreasureCardComposite(parent, event);
+  }
+
+  public static Composite createSettlementLocationCardPreview(
+      Composite parent, String title, String description, String rules, List<String> visitors) {
+    return new SettlementLocationCardComposite(parent, title, description, rules, visitors);
   }
 
   public static Shell createEventCard(Shell parent, Event event, int cardWidth, int cardHeight) {
@@ -1308,6 +1314,397 @@ public final class CardFactory {
     }
   }
 
+  private static final class SettlementLocationCardComposite extends Composite {
+
+    private static final double LOCATION_TITLE_X = 110.0 / 1024.0;
+    private static final double LOCATION_TITLE_Y = 124.0 / 1536.0;
+    private static final double LOCATION_TITLE_W = 806.0 / 1024.0;
+    private static final double LOCATION_TITLE_H = 96.0 / 1536.0;
+    private static final double LOCATION_BODY_X = 125.0 / 1024.0;
+    private static final double LOCATION_BODY_Y = 258.0 / 1536.0;
+    private static final double LOCATION_BODY_W = 770.0 / 1024.0;
+    private static final double LOCATION_BODY_H = 1038.0 / 1536.0;
+    private static final double LOCATION_FOOTER_LEFT_X = 108.0 / 1024.0;
+    private static final double LOCATION_FOOTER_RIGHT_X = 915.0 / 1024.0;
+    private static final double LOCATION_FOOTER_TOP_Y = 1328.0 / 1536.0;
+    private static final double LOCATION_FOOTER_BOTTOM_Y = 1404.0 / 1536.0;
+
+    private final String title;
+    private final String description;
+    private final String rules;
+    private final String visitorsText;
+    private final Image templateImage;
+    private final Color borderColor;
+    private final Color accentColor;
+    private final Color bodyTextColor;
+    private final Canvas bodyCanvas;
+    private final Font bodyFont;
+    private final Font descriptionFont;
+    private int bodyScrollOffset;
+    private int bodyContentHeight;
+
+    private SettlementLocationCardComposite(
+        Composite parent, String title, String description, String rules, List<String> visitors) {
+      super(parent, SWT.DOUBLE_BUFFERED);
+      this.title = nullSafe(title);
+      this.description = nullSafe(description);
+      this.rules = nullSafe(rules);
+      this.visitorsText = buildLocationVisitorsText(visitors);
+      this.templateImage = loadCardImage(this, DUNGEON_TEMPLATE_PATH);
+      this.borderColor = new Color(getDisplay(), 20, 17, 14);
+      this.accentColor = new Color(getDisplay(), 187, 165, 104);
+      this.bodyTextColor = new Color(getDisplay(), 22, 18, 14);
+      this.bodyFont = createNamedFont(this, 14, SWT.NORMAL, "Newtext Bk BT", "Times New Roman");
+      this.descriptionFont =
+          createNamedFont(this, 14, SWT.BOLD | SWT.ITALIC, "Newtext Bk BT", "Times New Roman");
+
+      setLayout(null);
+      setBackground(borderColor);
+
+      bodyCanvas = new Canvas(this, SWT.V_SCROLL | SWT.DOUBLE_BUFFERED);
+      bodyCanvas.setForeground(bodyTextColor);
+      bodyCanvas.setBackground(getDisplay().getSystemColor(SWT.COLOR_WHITE));
+      bodyCanvas.addPaintListener(this::paintBodyArea);
+      bodyCanvas.addControlListener(
+          new ControlAdapter() {
+            @Override
+            public void controlResized(ControlEvent resizeEvent) {
+              updateBodyScrollState();
+            }
+          });
+
+      ScrollBar verticalBar = bodyCanvas.getVerticalBar();
+      if (verticalBar != null) {
+        verticalBar.setIncrement(18);
+        verticalBar.addListener(
+            SWT.Selection,
+            selectionEvent -> {
+              bodyScrollOffset = verticalBar.getSelection();
+              bodyCanvas.redraw();
+            });
+      }
+
+      addControlListener(
+          new ControlAdapter() {
+            @Override
+            public void controlResized(ControlEvent resizeEvent) {
+              layoutLocationChildren();
+            }
+          });
+
+      addPaintListener(this::paintCard);
+      addDisposeListener(
+          disposeEvent -> {
+            borderColor.dispose();
+            accentColor.dispose();
+            bodyTextColor.dispose();
+            bodyFont.dispose();
+            descriptionFont.dispose();
+            if (templateImage != null && !templateImage.isDisposed()) {
+              templateImage.dispose();
+            }
+          });
+
+      layoutLocationChildren();
+    }
+
+    private void paintCard(PaintEvent paintEvent) {
+      Rectangle area = getClientArea();
+      if (area.width <= 0 || area.height <= 0) {
+        return;
+      }
+
+      GC gc = paintEvent.gc;
+      gc.setAdvanced(true);
+      gc.setAntialias(SWT.ON);
+      gc.setTextAntialias(SWT.ON);
+
+      drawTemplate(gc, area);
+
+      Rectangle titleBandBounds = scaledRect(area, LOCATION_TITLE_X, LOCATION_TITLE_Y, LOCATION_TITLE_W, LOCATION_TITLE_H);
+      gc.setBackground(borderColor);
+      gc.fillRoundRectangle(
+          titleBandBounds.x,
+          titleBandBounds.y,
+          titleBandBounds.width,
+          titleBandBounds.height,
+          18,
+          18);
+      gc.fillRectangle(
+          titleBandBounds.x,
+          titleBandBounds.y + (titleBandBounds.height / 2),
+          titleBandBounds.width,
+          titleBandBounds.height / 2);
+
+      drawCenteredText(
+          gc,
+          title.toUpperCase(),
+          new Rectangle(
+              titleBandBounds.x + 18,
+              titleBandBounds.y + 10,
+              Math.max(40, titleBandBounds.width - 36),
+              Math.max(24, titleBandBounds.height - 20)),
+          accentColor,
+          SWT.BOLD,
+          34,
+          16,
+          "Casablanca Antique",
+          "Times New Roman");
+
+      drawFooterBand(
+          gc,
+          buildFooterBounds(area),
+          visitorsText);
+    }
+
+    private void drawTemplate(GC gc, Rectangle area) {
+      if (templateImage != null && !templateImage.isDisposed()) {
+        Rectangle source = templateImage.getBounds();
+        gc.drawImage(
+            templateImage,
+            0,
+            0,
+            source.width,
+            source.height,
+            area.x,
+            area.y,
+            area.width,
+            area.height);
+        return;
+      }
+
+      gc.setBackground(borderColor);
+      gc.fillRoundRectangle(area.x, area.y, area.width - 1, area.height - 1, 26, 26);
+    }
+
+    private void paintBodyArea(PaintEvent paintEvent) {
+      Rectangle area = bodyCanvas.getClientArea();
+      if (area.width <= 0 || area.height <= 0) {
+        return;
+      }
+
+      GC gc = paintEvent.gc;
+      gc.setAdvanced(true);
+      gc.setAntialias(SWT.ON);
+      gc.setTextAntialias(SWT.ON);
+      paintBodyBackground(gc);
+
+      int marginX = Math.max(8, Math.round(area.width * 0.03f));
+      int marginY = Math.max(8, Math.round(area.height * 0.03f));
+      int availableWidth = Math.max(50, area.width - (marginX * 2));
+      int y = marginY - bodyScrollOffset;
+
+      if (!isBlank(description)) {
+        TextLayout descriptionLayout = createBodyLayout(description, descriptionFont, availableWidth);
+        try {
+          gc.setForeground(bodyTextColor);
+          descriptionLayout.draw(gc, marginX, y);
+          y += descriptionLayout.getBounds().height + Math.max(10, Math.round(area.height * 0.03f));
+        } finally {
+          descriptionLayout.dispose();
+        }
+      }
+
+      if (!isBlank(rules)) {
+        TextLayout rulesLayout = createBodyLayout(rules, bodyFont, availableWidth);
+        try {
+          gc.setForeground(bodyTextColor);
+          rulesLayout.draw(gc, marginX, y);
+        } finally {
+          rulesLayout.dispose();
+        }
+      }
+    }
+
+    private void paintBodyBackground(GC gc) {
+      Rectangle canvasBounds = bodyCanvas.getBounds();
+      Rectangle cardArea = getClientArea();
+      if (templateImage != null && !templateImage.isDisposed()) {
+        Rectangle source = templateImage.getBounds();
+        gc.drawImage(
+            templateImage,
+            0,
+            0,
+            source.width,
+            source.height,
+            -canvasBounds.x,
+            -canvasBounds.y,
+            cardArea.width,
+            cardArea.height);
+        return;
+      }
+
+      gc.setBackground(getDisplay().getSystemColor(SWT.COLOR_WHITE));
+      gc.fillRectangle(0, 0, canvasBounds.width, canvasBounds.height);
+    }
+
+    private void layoutLocationChildren() {
+      Rectangle area = getClientArea();
+      if (area.width <= 0 || area.height <= 0) {
+        return;
+      }
+
+      Rectangle scrollRect = scaledRect(area, LOCATION_BODY_X, LOCATION_BODY_Y, LOCATION_BODY_W, LOCATION_BODY_H);
+      bodyCanvas.setBounds(scrollRect);
+      updateBodyScrollState();
+      bodyCanvas.redraw();
+    }
+
+    private void updateBodyScrollState() {
+      if (bodyCanvas == null || bodyCanvas.isDisposed()) {
+        return;
+      }
+
+      Rectangle area = bodyCanvas.getClientArea();
+      if (area.width <= 0 || area.height <= 0) {
+        return;
+      }
+
+      int marginX = Math.max(8, Math.round(area.width * 0.03f));
+      int marginY = Math.max(8, Math.round(area.height * 0.03f));
+      int availableWidth = Math.max(50, area.width - (marginX * 2));
+      int spacing = Math.max(10, Math.round(area.height * 0.03f));
+      int contentHeight = marginY;
+
+      if (!isBlank(description)) {
+        TextLayout descriptionLayout = createBodyLayout(description, descriptionFont, availableWidth);
+        try {
+          contentHeight += descriptionLayout.getBounds().height;
+        } finally {
+          descriptionLayout.dispose();
+        }
+      }
+
+      if (!isBlank(rules)) {
+        if (!isBlank(description)) {
+          contentHeight += spacing;
+        }
+        TextLayout rulesLayout = createBodyLayout(rules, bodyFont, availableWidth);
+        try {
+          contentHeight += rulesLayout.getBounds().height;
+        } finally {
+          rulesLayout.dispose();
+        }
+      }
+
+      bodyContentHeight = contentHeight + marginY;
+      ScrollBar verticalBar = bodyCanvas.getVerticalBar();
+      if (verticalBar == null) {
+        return;
+      }
+
+      int thumb = Math.max(1, area.height);
+      int maxSelection = Math.max(0, bodyContentHeight - area.height);
+      verticalBar.setMaximum(Math.max(bodyContentHeight, area.height));
+      verticalBar.setThumb(Math.min(thumb, verticalBar.getMaximum()));
+      verticalBar.setPageIncrement(thumb);
+      verticalBar.setVisible(bodyContentHeight > area.height);
+
+      if (bodyScrollOffset > maxSelection) {
+        bodyScrollOffset = maxSelection;
+      }
+      verticalBar.setSelection(bodyScrollOffset);
+    }
+
+    private TextLayout createBodyLayout(String text, Font font, int width) {
+      TextLayout layout = new TextLayout(getDisplay());
+      layout.setText(nullSafe(text));
+      layout.setFont(font);
+      layout.setWidth(width);
+      layout.setSpacing(2);
+      return layout;
+    }
+
+    private void drawCenteredText(
+        GC gc,
+        String text,
+        Rectangle target,
+        Color color,
+        int style,
+        int maxFontSize,
+        int minFontSize,
+        String... fontNames) {
+
+      if (isBlank(text)) {
+        return;
+      }
+
+      Font font = null;
+      try {
+        for (int size = maxFontSize; size >= minFontSize; size--) {
+          if (font != null) {
+            font.dispose();
+          }
+          font = createNamedFont(this, size, style, fontNames);
+          gc.setFont(font);
+          Point extent = gc.textExtent(text, SWT.DRAW_TRANSPARENT);
+          if (extent.x <= target.width && extent.y <= (target.height + 4)) {
+            break;
+          }
+        }
+
+        gc.setForeground(color);
+        Point extent = gc.textExtent(text, SWT.DRAW_TRANSPARENT);
+        int x = target.x + ((target.width - extent.x) / 2);
+        int y = target.y + ((target.height - extent.y) / 2);
+        gc.drawText(text, x, y, true);
+      } finally {
+        if (font != null) {
+          font.dispose();
+        }
+      }
+    }
+
+    private void drawFooterBand(GC gc, Rectangle bounds, String text) {
+      if (bounds == null || bounds.width <= 0 || bounds.height <= 0 || isBlank(text)) {
+        return;
+      }
+      gc.setForeground(accentColor);
+      gc.setLineWidth(4);
+      gc.drawLine(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y);
+      gc.drawLine(bounds.x, bounds.y + bounds.height, bounds.x + bounds.width, bounds.y + bounds.height);
+
+      drawCenteredText(
+          gc,
+          text,
+          new Rectangle(
+              bounds.x,
+              bounds.y + 6,
+              Math.max(40, bounds.width),
+              Math.max(18, bounds.height - 12)),
+          bodyTextColor,
+          SWT.BOLD,
+          16,
+          10,
+          "Copperplate Gothic Bold",
+          "Copperplate",
+          "Trebuchet MS",
+          "Verdana",
+          "Arial",
+          "Sans");
+    }
+
+    private Rectangle buildFooterBounds(Rectangle area) {
+      int leftX = Math.round(area.width * (float) LOCATION_FOOTER_LEFT_X);
+      int rightX = Math.round(area.width * (float) LOCATION_FOOTER_RIGHT_X);
+      int topY = Math.round(area.height * (float) LOCATION_FOOTER_TOP_Y);
+      int bottomY = Math.round(area.height * (float) LOCATION_FOOTER_BOTTOM_Y);
+      return new Rectangle(
+          leftX,
+          topY,
+          Math.max(1, rightX - leftX),
+          Math.max(1, bottomY - topY));
+    }
+
+    private Rectangle scaledRect(Rectangle area, double relX, double relY, double relW, double relH) {
+      return new Rectangle(
+          Math.round(area.width * (float) relX),
+          Math.round(area.height * (float) relY),
+          Math.max(1, Math.round(area.width * (float) relW)),
+          Math.max(1, Math.round(area.height * (float) relH)));
+    }
+  }
+
   private static boolean isTravelOrSettlementEvent(Event event) {
     return event instanceof TravelEvent || event instanceof SettlementEvent;
   }
@@ -1325,6 +1722,24 @@ public final class CardFactory {
   private static boolean isObjectiveTreasure(Event event) {
     String id = nullSafe(event == null ? "" : event.id).trim().toLowerCase();
     return event != null && event.treasure && id.contains("-objective-");
+  }
+
+  private static String buildLocationVisitorsText(List<String> visitors) {
+    if (visitors == null || visitors.isEmpty()) {
+      return I18n.t("card.location.visitor.all");
+    }
+    List<String> labels = new ArrayList<>();
+    for (String visitor : visitors) {
+      String normalized = nullSafe(visitor).trim();
+      if (normalized.isEmpty()) {
+        continue;
+      }
+      labels.add(I18n.t("card.location.visitor." + normalized));
+    }
+    if (labels.isEmpty()) {
+      return I18n.t("card.location.visitor.all");
+    }
+    return String.join(" / ", labels);
   }
 
   private static int buildBodyHeight(Event event) {

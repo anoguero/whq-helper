@@ -7,10 +7,13 @@ import type {
   MonsterEntry,
   ObjectiveRoomAdventure,
   Rule,
+  SettlementLocation,
+  SettlementType,
   SpecialRuleLink,
   TableKind,
   TableModel,
-  TableRefEntry
+  TableRefEntry,
+  WarriorDefinition
 } from './types';
 
 const STORAGE_KEY = 'whq_helper_spa_user_content_v1';
@@ -25,7 +28,9 @@ export type UserContentKind =
   | 'rule'
   | 'monster'
   | 'table'
-  | 'objectiveRoomAdventure';
+  | 'objectiveRoomAdventure'
+  | 'warrior'
+  | 'location';
 
 export type UserContentMode = 'new' | 'modified';
 
@@ -99,6 +104,23 @@ export interface UserObjectiveRoomAdventureData {
   generic: boolean;
 }
 
+export interface UserWarriorData {
+  id: string;
+  name: string;
+  race: string;
+  counterPath: string;
+  rulesPath: string;
+}
+
+export interface UserLocationData {
+  id: string;
+  name: string;
+  availableTypes: SettlementType[];
+  description: string;
+  visitors: string[];
+  rules: string;
+}
+
 interface UserContentBase<TKind extends UserContentKind, TData> {
   uid: string;
   kind: TKind;
@@ -119,6 +141,8 @@ export type UserRuleItem = UserContentBase<'rule', UserRuleData>;
 export type UserMonsterItem = UserContentBase<'monster', UserMonsterData>;
 export type UserTableItem = UserContentBase<'table', UserTableData>;
 export type UserObjectiveRoomAdventureItem = UserContentBase<'objectiveRoomAdventure', UserObjectiveRoomAdventureData>;
+export type UserWarriorItem = UserContentBase<'warrior', UserWarriorData>;
+export type UserLocationItem = UserContentBase<'location', UserLocationData>;
 
 export type UserContentItem =
   | UserDungeonCardItem
@@ -130,7 +154,9 @@ export type UserContentItem =
   | UserRuleItem
   | UserMonsterItem
   | UserTableItem
-  | UserObjectiveRoomAdventureItem;
+  | UserObjectiveRoomAdventureItem
+  | UserWarriorItem
+  | UserLocationItem;
 
 export interface UserXmlDocument {
   path: string;
@@ -421,6 +447,34 @@ function serializeObjectiveRoomAdventure(item: UserObjectiveRoomAdventureData): 
   ].join('\n');
 }
 
+function serializeWarrior(item: UserWarriorData): string {
+  const lines = [`  <warrior id="${escapeXml(item.id.trim())}">`];
+  lines.push(`    <name>${escapeXml(item.name.trim())}</name>`);
+  lines.push(`    <race>${escapeXml(item.race.trim())}</race>`);
+  lines.push(`    <counter>${escapeXml(item.counterPath.trim())}</counter>`);
+  if (item.rulesPath.trim()) {
+    lines.push(`    <rules>${escapeXml(item.rulesPath.trim())}</rules>`);
+  }
+  lines.push('  </warrior>');
+  return lines.join('\n');
+}
+
+function serializeLocation(item: UserLocationData): string {
+  return [
+    `  <location id="${escapeXml(item.id.trim())}">`,
+    `    <name>${escapeXml(item.name.trim())}</name>`,
+    '    <available>',
+    ...item.availableTypes.map((type) => `      <type>${escapeXml(type)}</type>`),
+    '    </available>',
+    `    <description>${escapeXml(item.description.trim())}</description>`,
+    '    <visitors>',
+    ...item.visitors.map((visitor) => `      <visitor>${escapeXml(visitor.trim())}</visitor>`),
+    '    </visitors>',
+    `    <rules>${escapeXml(item.rules.trim())}</rules>`,
+    '  </location>'
+  ].join('\n');
+}
+
 function serializeTableMonsterEntry(entry: MonsterEntry, indent: string): string {
   const number = entry.min === entry.max ? String(entry.min) : `${entry.min}-${entry.max}`;
   const attrs = [
@@ -608,6 +662,35 @@ function normalizeObjectiveRoomAdventureData(
   };
 }
 
+function normalizeWarriorData(data: UserWarriorData, mode: UserContentMode): UserWarriorData {
+  return {
+    ...data,
+    id:
+      mode === 'modified'
+        ? (data.id ?? '').trim()
+        : ensurePrefixedId(data.id || data.name || '', 'warrior-', 'warrior'),
+    name: (data.name ?? '').trim(),
+    race: (data.race ?? '').trim(),
+    counterPath: (data.counterPath ?? '').trim(),
+    rulesPath: (data.rulesPath ?? '').trim()
+  };
+}
+
+function normalizeLocationData(data: UserLocationData, mode: UserContentMode): UserLocationData {
+  return {
+    ...data,
+    id:
+      mode === 'modified'
+        ? (data.id ?? '').trim()
+        : ensurePrefixedId(data.id || data.name || '', 'location-', 'location'),
+    name: (data.name ?? '').trim(),
+    availableTypes: (data.availableTypes ?? []).map((value) => value.trim() as SettlementType).filter(Boolean),
+    description: (data.description ?? '').trim(),
+    visitors: (data.visitors ?? []).map((value) => value.trim()).filter(Boolean),
+    rules: (data.rules ?? '').trim()
+  };
+}
+
 export function loadUserContentItems(): UserContentItem[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -721,6 +804,24 @@ export function normalizeUserContentItem(item: UserContentItem): UserContentItem
       data
     };
   }
+  if (item.kind === 'warrior') {
+    const data = normalizeWarriorData(item.data, item.mode);
+    return {
+      ...item,
+      title: data.name || data.id,
+      updatedAt,
+      data
+    };
+  }
+  if (item.kind === 'location') {
+    const data = normalizeLocationData(item.data, item.mode);
+    return {
+      ...item,
+      title: data.name || data.id,
+      updatedAt,
+      data
+    };
+  }
 
   const data = normalizeTableData(item.data, item.mode);
   return {
@@ -759,6 +860,12 @@ export function userContentItemXml(item: UserContentItem): string {
       '</objectiveRoomAdventures>'
     ].join('\n');
   }
+  if (normalized.kind === 'warrior') {
+    return ['<?xml version="1.0"?>', '<warriors>', serializeWarrior(normalized.data), '</warriors>'].join('\n');
+  }
+  if (normalized.kind === 'location') {
+    return ['<?xml version="1.0"?>', '<locations>', serializeLocation(normalized.data), '</locations>'].join('\n');
+  }
   return normalized.data.xml;
 }
 
@@ -776,6 +883,8 @@ export function buildUserContentXmlDocuments(): UserXmlDocument[] {
   const objectiveRoomAdventures = items.filter(
     (item): item is UserObjectiveRoomAdventureItem => item.kind === 'objectiveRoomAdventure'
   );
+  const warriors = items.filter((item): item is UserWarriorItem => item.kind === 'warrior');
+  const locations = items.filter((item): item is UserLocationItem => item.kind === 'location');
 
   const documents: UserXmlDocument[] = [];
 
@@ -846,6 +955,20 @@ export function buildUserContentXmlDocuments(): UserXmlDocument[] {
     });
   }
 
+  if (warriors.length > 0) {
+    documents.push({
+      path: '/userdefined/warriors/userdefined-warriors.xml',
+      xml: ['<?xml version="1.0"?>', '<warriors>', ...warriors.map((item) => serializeWarrior(item.data)), '</warriors>'].join('\n')
+    });
+  }
+
+  if (locations.length > 0) {
+    documents.push({
+      path: '/userdefined/locations/userdefined-locations.xml',
+      xml: ['<?xml version="1.0"?>', '<locations>', ...locations.map((item) => serializeLocation(item.data)), '</locations>'].join('\n')
+    });
+  }
+
   for (const table of tables) {
     documents.push({
       path: `/userdefined/tables/${slugify(table.data.name) || table.uid}.xml`,
@@ -877,7 +1000,7 @@ export function createDefaultDungeonCard(nextId: number): UserDungeonCardData {
 }
 
 export function createDefaultEvent(
-  kind: Exclude<UserContentKind, 'dungeonCard' | 'rule' | 'monster' | 'table'>
+  kind: Exclude<UserContentKind, 'dungeonCard' | 'rule' | 'monster' | 'table' | 'warrior' | 'location'>
 ): UserEventData {
   return {
     id: '',
@@ -951,6 +1074,27 @@ export function createDefaultObjectiveRoomAdventure(): UserObjectiveRoomAdventur
     flavorText: '',
     rulesText: '',
     generic: false
+  };
+}
+
+export function createDefaultWarrior(): UserWarriorData {
+  return {
+    id: '',
+    name: '',
+    race: '',
+    counterPath: '',
+    rulesPath: ''
+  };
+}
+
+export function createDefaultLocation(): UserLocationData {
+  return {
+    id: '',
+    name: '',
+    availableTypes: ['city'],
+    description: '',
+    visitors: ['all'],
+    rules: ''
   };
 }
 
@@ -1033,6 +1177,27 @@ export function mapObjectiveRoomAdventureToUserData(adventure: ObjectiveRoomAdve
     flavorText: adventure.flavorText,
     rulesText: adventure.rulesText,
     generic: adventure.generic
+  };
+}
+
+export function mapWarriorToUserData(warrior: WarriorDefinition): UserWarriorData {
+  return {
+    id: warrior.id,
+    name: warrior.name,
+    race: warrior.race,
+    counterPath: warrior.counterPath,
+    rulesPath: warrior.rulesPath
+  };
+}
+
+export function mapLocationToUserData(location: SettlementLocation): UserLocationData {
+  return {
+    id: location.id,
+    name: location.name,
+    availableTypes: [...location.availableTypes],
+    description: location.description,
+    visitors: [...location.visitors],
+    rules: location.rules
   };
 }
 

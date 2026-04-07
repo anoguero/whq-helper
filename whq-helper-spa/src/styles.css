@@ -1200,6 +1200,15 @@ body.simulator-active .controls {
   display: none;
 }
 
+body.settlement-panel-active .deck-toggles,
+body.settlement-panel-active .decks {
+  display: none;
+}
+
+.settlement-inline-layout {
+  gap: 1rem;
+}
+
 .treasure-search-dialog {
   display: grid;
   gap: 12px;
@@ -1280,5 +1289,243 @@ body.simulator-active .controls {
 
   .new-dungeon-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.party-summary-control {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 14rem;
+}
+
+.party-summary-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 245, 224, 0.72);
+}
+
+.party-dialog-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.party-dialog-size {
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.secondary-button {
+  align-self: start;
+  border: 1px solid rgba(230, 198, 132, 0.35);
+  background: rgba(255, 245, 224, 0.08);
+  color: beige;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+}
+
+.warrior-counter-window {
+  width: 200px;
+  height: 240px;
+}
+
+.warrior-counter-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.warrior-counter-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.warrior-counter-name {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 8.2%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.warrior-counter-name span {
+  font-family: "Copperplate", "Copperplate Gothic Light", Georgia, serif;
+  font-size: 17px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #f4d05b;
+  text-align: center;
+  white-space: nowrap;
+  transform: scaleX(0.92);
+  transform-origin: center center;
+  text-shadow: 0 1px 0 rgba(20, 12, 0, 0.65), 0 0 10px rgba(20, 12, 0, 0.35);
+}
+
+.settlement-dialog {
+  width: min(1400px, 94vw);
+}
+
+.settlement-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+  gap: 1rem;
+  min-height: 70vh;
+}
+
+.settlement-left {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.settlement-top,
+.settlement-bottom,
+.settlement-preview {
+  border: 1px solid rgba(230, 198, 132, 0.18);
+  border-radius: 18px;
+  background: rgba(21, 14, 6, 0.78);
+  padding: 1rem;
+}
+
+.settlement-preview {
+  display: grid;
+  place-items: center;
+}
+
+.settlement-settlement-deck {
+  height: 100%;
+}
+
+.settlement-location-card {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 847 / 1264;
+  color: #22160b;
+  overflow: hidden;
+  height: 68%;
+}
+
+.settlement-location-template {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.settlement-location-card header,
+.settlement-location-card footer,
+.settlement-location-card .body {
+  position: relative;
+  z-index: 1;
+}
+
+.settlement-location-card header {
+  margin: 8.5% 12.5% 0;
+  background: #0f0b08;
+  color: #f7e8bf;
+  border-radius: 8px;
+  min-height: 8%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0.9rem 1rem;
+}
+
+.settlement-location-card header h2 {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.settlement-location-card .body {
+  margin: 4% 12.5% 0;
+  height: 68%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0.85rem;
+  background: transparent;
+  padding: 0;
+  overflow: hidden;
+}
+
+.settlement-location-card .body .flavor {
+  margin: 0;
+  font-style: italic;
+  font-weight: 700;
+  color: #000;
+}
+
+.settlement-location-card .rules-scroll {
+  overflow: auto;
+  padding-right: 0.35rem;
+}
+
+.settlement-location-card .rules-scroll p {
+  margin: 0;
+  white-space: pre-wrap;
+  color: #000;
+  height: 80%;
+  overflow: auto;
+}
+
+.settlement-location-card footer {
+  position: absolute;
+  left: 12.5%;
+  right: 12.5%;
+  bottom: 7.8%;
+  background: #000;
+  color: #f7e8bf;
+  border-radius: 0;
+  min-height: 6.2%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  font-family: 'Copperplate WHQ', Verdana, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-top: 2px solid #f7e8bf;
+  border-bottom: 2px solid #f7e8bf;
+}
+
+.warrior-counter-preview {
+  display: grid;
+  place-items: center;
+}
+
+.warrior-counter-preview .warrior-counter-card {
+  width: min(100%, 220px);
+  aspect-ratio: 200 / 240;
+}
+
+.dashboard-selector-block {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.settlement-location-preview .settlement-location-card {
+  width: min(100%, 360px);
+}
+
+@media (max-width: 980px) {
+  .party-dialog-layout,
+  .settlement-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .settlement-left {
+    grid-template-rows: auto auto;
   }
 }

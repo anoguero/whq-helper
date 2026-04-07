@@ -7,10 +7,13 @@ import type {
   Monster,
   MonsterEntry,
   Rule,
+  SettlementLocation,
+  SettlementType,
   SpecialRuleLink,
   TableRefEntry,
   TableKind,
-  TableModel
+  TableModel,
+  WarriorDefinition
 } from './types';
 import { getXmlOverride } from './contentOverrides';
 import { loadContentTranslations, translateContent } from './contentTranslations';
@@ -255,6 +258,50 @@ function parseRule(node: Element, translations: Map<string, string>): Rule {
   };
 }
 
+function parseSettlementType(value: string): SettlementType | null {
+  const normalized = value.trim().toLowerCase();
+  if (
+    normalized === 'any' ||
+    normalized === 'city' ||
+    normalized === 'town' ||
+    normalized === 'village' ||
+    normalized === 'outskirts' ||
+    normalized === 'special'
+  ) {
+    return normalized;
+  }
+  return null;
+}
+
+function parseWarrior(node: Element, translations: Map<string, string>): WarriorDefinition {
+  const id = getAttribute(node, 'id');
+  return {
+    id,
+    name: translateContent(translations, `warrior.${id}.name`, getChildValue(node, 'name') || getAttribute(node, 'name')),
+    race: translateContent(translations, `warrior.${id}.race`, getChildValue(node, 'race')),
+    counterPath: getChildValue(node, 'counter'),
+    rulesPath: getChildValue(node, 'rules')
+  };
+}
+
+function parseLocation(node: Element, translations: Map<string, string>): SettlementLocation {
+  const id = getAttribute(node, 'id');
+  const availableTypes = Array.from(node.querySelectorAll('available > type'))
+    .map((typeNode) => parseSettlementType(typeNode.textContent ?? ''))
+    .filter((type): type is SettlementType => !!type);
+  const visitors = Array.from(node.querySelectorAll('visitors > visitor'))
+    .map((visitorNode) => visitorNode.textContent?.trim() ?? '')
+    .filter(Boolean);
+  return {
+    id,
+    name: translateContent(translations, `location.${id}.name`, getChildValue(node, 'name')),
+    availableTypes,
+    description: translateContent(translations, `location.${id}.description`, getChildValue(node, 'description')),
+    visitors,
+    rules: translateContent(translations, `location.${id}.rules`, getChildValue(node, 'rules'))
+  };
+}
+
 export async function loadContent(language: LanguageCode): Promise<ContentRepository> {
   const manifest = await loadContentManifest();
   const translations = await loadContentTranslations(language);
@@ -265,7 +312,9 @@ export async function loadContent(language: LanguageCode): Promise<ContentReposi
     travelEvents: new Map<string, EventModel>(),
     settlementEvents: new Map<string, EventModel>(),
     rules: new Map<string, Rule>(),
-    tables: new Map<string, TableModel>()
+    tables: new Map<string, TableModel>(),
+    warriors: new Map<string, WarriorDefinition>(),
+    locations: new Map<string, SettlementLocation>()
   };
 
   const parser = new DOMParser();
@@ -321,6 +370,26 @@ export async function loadContent(language: LanguageCode): Promise<ContentReposi
         if (node.tagName === 'table') {
           const parsed = parseTable(node);
           repository.tables.set(parsed.name, parsed);
+        }
+      }
+      continue;
+    }
+
+    if (root.tagName === 'warriors') {
+      for (const node of Array.from(root.children)) {
+        if (node.tagName === 'warrior') {
+          const parsed = parseWarrior(node, translations);
+          repository.warriors.set(parsed.id, parsed);
+        }
+      }
+      continue;
+    }
+
+    if (root.tagName === 'locations') {
+      for (const node of Array.from(root.children)) {
+        if (node.tagName === 'location') {
+          const parsed = parseLocation(node, translations);
+          repository.locations.set(parsed.id, parsed);
         }
       }
       continue;
