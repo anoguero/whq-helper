@@ -97,6 +97,25 @@ export interface TableModel {
   events: EventEntry[];
 }
 
+export interface WarriorDefinition {
+  id: string;
+  name: string;
+  race: string;
+  counterPath: string;
+  rulesPath: string;
+}
+
+export type SettlementType = 'any' | 'city' | 'town' | 'village' | 'outskirts' | 'special';
+
+export interface SettlementLocation {
+  id: string;
+  name: string;
+  availableTypes: SettlementType[];
+  description: string;
+  visitors: string[];
+  rules: string;
+}
+
 export interface ContentRepository {
   monsters: Map<string, Monster>;
   events: Map<string, EventModel>;
@@ -104,6 +123,8 @@ export interface ContentRepository {
   settlementEvents: Map<string, EventModel>;
   rules: Map<string, Rule>;
   tables: Map<string, TableModel>;
+  warriors: Map<string, WarriorDefinition>;
+  locations: Map<string, SettlementLocation>;
 }
 
 export interface AppSettings {
@@ -116,6 +137,7 @@ export interface AppSettings {
   dungeonActive: boolean;
   activeDungeonLevel: number;
   partySize: number;
+  partyWarriors: string[];
   eventProbability: number;
   treasureGoldProbability: number;
   language: LanguageCode;

@@ -12,6 +12,7 @@ const DEFAULT_SETTINGS: AppSettings = {
   dungeonActive: false,
   activeDungeonLevel: 1,
   partySize: 4,
+  partyWarriors: ['warrior-barbarian', 'warrior-dwarf', 'warrior-elf', 'warrior-wizard'],
   eventProbability: 37,
   treasureGoldProbability: 19,
   language: 'ES',
@@ -61,6 +62,17 @@ function normalizeAdventureAmbience(value: string | undefined): string {
   return normalized === 'orcs-goblins' ? 'orcs' : normalized;
 }
 
+function parsePartyWarriors(value: string | undefined): string[] {
+  if (!value) {
+    return [...DEFAULT_SETTINGS.partyWarriors];
+  }
+  const parsed = value
+    .split(',')
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+  return parsed.length > 0 ? parsed : [...DEFAULT_SETTINGS.partyWarriors];
+}
+
 function decodeJavaPropertyKey(rawKey: string): string {
   return rawKey.replace(/\\ /g, ' ').replace(/\\:/g, ':').replace(/\\=/g, '=');
 }
@@ -106,6 +118,7 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
     dungeonActive: parseBoolean(props.get('AdventureActive'), DEFAULT_SETTINGS.dungeonActive),
     activeDungeonLevel: parseNumber(props.get('AdventureLevel'), DEFAULT_SETTINGS.activeDungeonLevel),
     partySize: parseNumber(props.get('PartySize'), DEFAULT_SETTINGS.partySize),
+    partyWarriors: parsePartyWarriors(props.get('PartyWarriors')),
     eventProbability: parseNumber(props.get('EventPropability'), DEFAULT_SETTINGS.eventProbability),
     treasureGoldProbability: parseNumber(
       props.get('TreasureGoldProbability'),
@@ -180,7 +193,13 @@ export async function loadSettings(): Promise<AppSettings> {
 
   merged.eventProbability = clampProbability(merged.eventProbability);
   merged.treasureGoldProbability = clampProbability(merged.treasureGoldProbability);
-  merged.partySize = Math.max(1, merged.partySize);
+  merged.partyWarriors = Array.isArray(merged.partyWarriors)
+    ? merged.partyWarriors.map((entry) => `${entry ?? ''}`.trim()).filter(Boolean)
+    : [...DEFAULT_SETTINGS.partyWarriors];
+  if (merged.partyWarriors.length === 0) {
+    merged.partyWarriors = [...DEFAULT_SETTINGS.partyWarriors];
+  }
+  merged.partySize = Math.max(1, merged.partyWarriors.length || merged.partySize);
   merged.activeDungeonLevel = Math.max(1, Math.min(10, merged.activeDungeonLevel));
   merged.objectiveMonsterEasyWeight = Math.max(0, merged.objectiveMonsterEasyWeight);
   merged.objectiveMonsterNormalWeight = Math.max(0, merged.objectiveMonsterNormalWeight);

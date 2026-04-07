@@ -19,6 +19,7 @@ public final class Settings {
   public static final String SETTLEMENT_DIR = "SettlementDir";
   public static final String TABLE_DIR = "TableDir";
   public static final String RULES_DIR = "RulesDir";
+  public static final String WARRIOR_DIR = "WarriorDir";
 
   public static final String IMG_DIR = "ImageDir";
   public static final String MONSTER_IMG_DIR = "MonsterImageDir";
@@ -29,6 +30,7 @@ public final class Settings {
   public static final String FONT_DIR = "FontDir";
   public static final String SIMULATE_DECK = "SimulateDeck";
   public static final String PARTY_SIZE = "PartySize";
+  public static final String PARTY_WARRIORS = "PartyWarriors";
   public static final String EVENT_PROBABILITY = "EventPropability";
   public static final String TREASURE_GOLD_PROBABILITY = "TreasureGoldProbability";
   public static final String LANGUAGE = "Language";
@@ -175,6 +177,7 @@ public final class Settings {
     settings.setProperty(SETTLEMENT_DIR, directoryPath("data/xml/settlement"));
     settings.setProperty(TABLE_DIR, directoryPath("data/xml/tables"));
     settings.setProperty(RULES_DIR, directoryPath("data/xml/rules"));
+    settings.setProperty(WARRIOR_DIR, directoryPath("data/xml/warriors"));
 
     settings.setProperty(IMG_DIR, directoryPath("data/graphics"));
     settings.setProperty(MONSTER_IMG_DIR, directoryPath("data/graphics/monsters"));
@@ -184,6 +187,9 @@ public final class Settings {
     settings.setProperty(CARD_WIDTH, "240");
     settings.setProperty(CARD_HEIGHT, "370");
     settings.setProperty(PARTY_SIZE, "4");
+    settings.setProperty(
+        PARTY_WARRIORS,
+        "warrior-barbarian,warrior-dwarf,warrior-elf,warrior-wizard");
     settings.setProperty(EVENT_PROBABILITY, "37");
     settings.setProperty(TREASURE_GOLD_PROBABILITY, "19");
     settings.setProperty(SIMULATE_DECK, "false");
@@ -216,6 +222,7 @@ public final class Settings {
     normalizeDirectorySetting(SETTLEMENT_DIR);
     normalizeDirectorySetting(TABLE_DIR);
     normalizeDirectorySetting(RULES_DIR);
+    normalizeDirectorySetting(WARRIOR_DIR);
     normalizeDirectorySetting(IMG_DIR);
     normalizeDirectorySetting(MONSTER_IMG_DIR);
     normalizeDirectorySetting(EVENT_IMG_DIR);
@@ -259,6 +266,7 @@ public final class Settings {
       case IMG_DIR -> "data/graphics";
       case MONSTER_IMG_DIR -> "data/graphics/monsters";
       case EVENT_IMG_DIR -> "data/graphics/events";
+      case WARRIOR_DIR -> "data/xml/warriors";
       case FONT_DIR -> "data/fonts";
       default -> "";
     };

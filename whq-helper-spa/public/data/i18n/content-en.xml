@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translations>
+  <entry key="warrior.warrior-barbarian.name">Barbarian</entry>
+  <entry key="warrior.warrior-barbarian.race">Human</entry>
+  <entry key="warrior.warrior-dwarf.name">Dwarf</entry>
+  <entry key="warrior.warrior-dwarf.race">Dwarf</entry>
+  <entry key="warrior.warrior-elf.name">Elf</entry>
+  <entry key="warrior.warrior-elf.race">Elf</entry>
+  <entry key="warrior.warrior-wizard.name">Wizard</entry>
+  <entry key="warrior.warrior-wizard.race">Human</entry>
   <entry key="adventure.fighting-pit.1.flavor">Captured by the Goblin Warlord Ugrul Headsticka while exploring the ruins of Karak Azgal, the Warriors have been given a chance to escape and, in the process, provide entertainment for the Goblins. The Warriors must fight their way to freedom without weapons or armour. And as if that were not enough, their only way out is through the Minotaurs&apos; lair.</entry>
   <entry key="adventure.fighting-pit.1.name">The Beast</entry>
   <entry key="adventure.fighting-pit.1.rules">The Warriors start this dungeon stripped of any armour and weapons they may have, and must fight with their bare hands. While they are without armour they may only deduct their Toughness from any blows that hit them. They start with no weapons at all, even missile weapons, and must therefore fight in hand-to-hand combat using their fists. While fighting unarmed, each Warrior does 1D6 Wounds when he hits, with no modifiers for Strength. When the first Monster Event Card is triggered, the Warriors notice that their assailants are carrying, but not using, their weapons. If the Warriors kill all these monsters, they may retrieve their weapons. When the second Event Card that reveals Monsters is triggered, the Warriors see that their assailants are guarding their armour. If the Warriors kill all these monsters, they may retrieve their armour. When the Warriors reach the objective room do not roll on the Objective Room Monster Table. The only way for the Warriors to escape the dungeon is through the trapdoor at the bottom of the fighting pit. For every Warrior, up to a total of three, who jumps into the pit, a Minotaur appears next to him and will fight him to the death. As soon as a Warrior is placed in one of the fighting pit squares, place a Minotaur model in any adjacent square in the pit. If all four Warriors jump into the pit, use the rule of One-on-One to determine which Warriors the three Minotaurs attack. Any Warriors that stay out of the fighting pit may help defeat the Minotaurs, for example by firing bows, without causing another Minotaur to appear. When the first Minotaur is killed, it and all the other Minotaurs who magically appeared immediately vanish and the combat is over. Once the Warriors defeat the Minotaurs, they each find one item of treasure in the bottom of the pit and may escape through the trapdoor.</entry>
@@ -18,9 +26,9 @@
   <entry key="adventure.fighting-pit.6.flavor">During a recent raid on Miragliano, the Skaven took around twenty wealthy and influential citizens as captives, and have been making all manner of unreasonable and outrageous threats ever since. The Skaven know full well that their unconditional demands to hand over all the wealth, women and children of the city will never be agreed to, but it gives them a good excuse to send back portions of their victims as proof that they mean business. The Warriors have been employed to enter the Blighted Marshes and rescue the prisoners from the dungeons of the Chaos ratmen.</entry>
   <entry key="adventure.fighting-pit.6.name">Free the Prisoners</entry>
   <entry key="adventure.fighting-pit.6.rules">The prisoners are being kept below the fighting pit, in a network of cells and guardrooms. Roll on the Objective Room Monster Table to determine the guardians of these cells, reading any Goblins as Skaven. When the guardians are dead, each player rolls a dice. The number rolled is the number of prisoners his Warrior finds alive. Every prisoner a Warrior finds gives him 1D6 x 20 gold for freeing them. At the bottom of the cell complex, there is a secret door that leads to the marshes above and to safety. In their weakened state the prisoners have not been able to open it, but the Warriors have no trouble. They soon smash it down and take the captives to freedom.</entry>
-  <entry key="adventure.fighting-pit.generic.flavor">Usa la ambientacion normal de la Fighting Pit sin una aventura concreta del Adventure Book.</entry>
-  <entry key="adventure.fighting-pit.generic.name">Generica</entry>
-  <entry key="adventure.fighting-pit.generic.rules">Resuelve la sala objetivo con el comportamiento habitual de la aplicacion. No hay objetivo especial adicional.</entry>
+  <entry key="adventure.fighting-pit.generic.flavor">Use the normal Fighting Pit setting without a specific Adventure Book mission.</entry>
+  <entry key="adventure.fighting-pit.generic.name">Generic</entry>
+  <entry key="adventure.fighting-pit.generic.rules">Resolve the objective room using the application&apos;s standard behaviour. There is no additional special objective.</entry>
   <entry key="adventure.firechasm.1.flavor">Rumours abound of a powerful long-lost Skaven artefact that has been rediscovered in the Worlds Edge Mountains. The artefact is a skull-shaped icon made from raw warpstone, and its mutating powers are said to be beyond imagination. The icon must be destroyed at all costs to stop the Skaven reclaiming it. Unfortunately, the only way to destroy the icon is to hurl it into the cleansing flames of the firechasm.</entry>
   <entry key="adventure.firechasm.1.name">Destroy the Warpstone Icon</entry>
   <entry key="adventure.firechasm.1.rules">The first dungeon room that the Warriors enter contains a sturdy iron casket holding the icon. When the Warriors have completed the room&apos;s event, keep the dungeon room card next to the leader&apos;s Adventure Record sheet to remind yourself that the Warriors have the casket. When the Warriors reach the firechasm, they must overcome the defenders of the chamber and hurl the warpstone icon into the flames. Roll once on the Objective Room Monster Table to determine the Monsters that are guarding the firechasm. If the icon is thrown into the chasm it is instantly consumed with a roar of lurid green flames. The room begins to collapse, and the Warriors must get out straight away or be crushed. To escape, the Warriors must cross the chasm and exit through a secret door that opens in the far wall, behind the stone dragon. The Warriors must escape within 2 turns of killing all the Monsters and hurling the icon into the chasm. After that point, the whole room caves in, killing any Warriors still inside. Each Warrior who escapes the dungeon is rewarded with 1D6 x 100 gold.</entry>
@@ -39,9 +47,9 @@
   <entry key="adventure.firechasm.6.flavor">The magical flames of the Dwarf temple, the Firechasm, are in danger of being extinguished by the foul Skaven who now occupy the ancient Dwarf city of Karak Azgal. They plan to fill the entire chasm with debris, hoping to stem the magma flow and cause a pressure build-up deep underground. Even now, their engineers are channelling tunnels to send the diverted magma spurting into the areas of the city occupied by Orcs and other creatures, as well as hopefully burying the Dwarf fortress occupied by Kargun Skalfson that sits at the entrance to Karak Azgal. If the Skaven succeed, there is a good chance that the ancient Dwarf citadel will be sealed off forever, leaving them free to search for the lost Dwarf treasure hoards rumoured to lie in its deepest halls. Spies have reported this fiendish plan to the Emperor and his Dwarf allies. Other bands of Warriors will attempt to block the tunnels created by the Skaven to channel the magma. Your band of Warriors has been chosen to stop the damming of the firechasm itself.</entry>
   <entry key="adventure.firechasm.6.name">Preserve the Fires</entry>
   <entry key="adventure.firechasm.6.rules">When the Warriors enter the firechasm, do not roll on the Objective Room Monster Table. Instead, the room is guarded by 1D6 + 6 Skaven warriors. Place all but one according to the normal rules for setting up Monsters. The other Skaven should be placed on the far side of the chasm, next to the dragon statue. He is the head Skaven engineer, and mastermind of the foul plot. As soon as the Warriors enter the firechasm roll 2D6. The Warriors have this number of turns in which to kill the guards, get across the chasm and kill the engineer. If the Warriors succeed, they may escape through a secret tunnel at the back of the chamber, and are rewarded with 1D6 x 50 gold each. If they fail to kill the engineer in time, roll 1D6. On 1-2 the engineer operates a steel lever and tons of debris plunge into the magma pool, killing all the Warriors and Skaven. On 3-4 the Warriors fail and the future of Karak Azgal lies in the hands of the other teams. On 5 the debris blocks the firechasm completely and the Warriors have failed utterly, though they may still make good their escape through a small passageway to the outside world. On 6 the engineer operates the lever to drop tons of debris into the chasm, but it snaps off in his paws, giving the Warriors another 1D6 turns in which to kill him as he fixes it. If he is still not dead by then, roll on the table again.</entry>
-  <entry key="adventure.firechasm.generic.flavor">Usa la ambientacion normal de la Firechasm sin una aventura concreta del Adventure Book.</entry>
-  <entry key="adventure.firechasm.generic.name">Generica</entry>
-  <entry key="adventure.firechasm.generic.rules">Resuelve la sala objetivo con el comportamiento habitual. La ambientacion especifica de la Firechasm no se aplica si no eliges una aventura concreta.</entry>
+  <entry key="adventure.firechasm.generic.flavor">Use the normal Firechasm setting without a specific Adventure Book mission.</entry>
+  <entry key="adventure.firechasm.generic.name">Generic</entry>
+  <entry key="adventure.firechasm.generic.rules">Resolve the objective room using the standard behaviour. The specific Firechasm setting does not apply unless you choose a specific mission.</entry>
   <entry key="adventure.fountain-of-light.1.flavor">In the south of the Empire lies Bugman&apos;s Brewery, where the Dwarf brewers create the finest beers in the Warhammer World. Always striving for perfection in his brews, Bugman has heard of a dried-up fountain that used to be the source of the purest water in the world, and purer water makes better beer. The story is that a potion of dizzying power must be poured into the fountain, a whole barrelful, if the waters are ever to flow again. The only powerful dizzying potion available in barrels that Bugman can think of is a cask of his precious Bugman&apos;s XXXXXX Superbrew. The legend tells that the fountain lies in the caves of the Black Mountains, somewhere between Karak Hirn and Black Fire Pass. The Lord of Karak Hirn knows a cave system within the borders of his realm that fits the description, and has agreed to let four Warriors search for the fountain as long as he gets a free supply of the resulting beer. Of course, the cave system is not actually part of the city of Karak Hirn, more a long abandoned labyrinth now populated by all manner of evil beasts.</entry>
   <entry key="adventure.fountain-of-light.1.name">Clearwater</entry>
   <entry key="adventure.fountain-of-light.1.rules">Nominate one of the Warriors to carry the cask of beer. The chosen Warrior&apos;s Movement is reduced by 1 square per turn while carrying it. There is plenty of beer in the barrel and, if they wish, each Warrior can drink from it. If each Warrior drinks from it more than once, however, there will not be enough left to activate the fountain. Any Warrior who drinks from the barrel must roll 1D6. On 1-2 the Warrior falls senseless to the floor for the rest of the turn and everyone thinks him dead, but at the start of the next turn he awakens healed by 1D6 Wounds. On 3 he is at -1 Weapon Skill, -1 Movement and +1 Attacks for the rest of the adventure. On 4 he is at -1 Weapon Skill and +1 Attacks for the rest of the adventure. On 5 the brew heals 1D6 + 1 Wounds. On 6 the brew restores the Warrior to full Wounds. Roll on the Objective Room Monster Table to determine what Monsters the fountain room contains. When they are defeated, the Warrior carrying the barrel may pour it into the fountain, at which point fresh waters spring forth, the clearest ever seen. The adventure is then over, and the Warriors may make their way out of the dungeon via a passageway to the surface, back to Bugman&apos;s Brewery to report the good news. Each Warrior receives 1D6 x 20 gold, plus a 2% royalty on all sales of Bugman&apos;s Freshbrew XI.</entry>
@@ -60,9 +68,9 @@
   <entry key="adventure.fountain-of-light.6.flavor">A mighty Sorcerer, resident in Marienburg, wishes to find the Burning Fountain, a mythical place rumoured to exist somewhere in the caves below the Dragonback Mountains. Scrying its exact location has proven to be of no use, but he has managed to obtain a picture of the fountain itself in his sorcerous mirror, confirming that it does indeed lie somewhere under the mountains, and is guarded by ferocious monsters. No matter how much gold he offers, no one can be found to venture that far afield, so he has cunningly entrapped the four Warriors under a curse, capturing their souls in glowing gems. Using powerful magic, he has reached through his mirror and dropped these gems into the fountain. The Warriors have no choice but to find the fountain and retrieve their lost souls. The gems must be returned to the Sorcerer before he can reunite the Warriors&apos; ethereal bodies with their physical bodies. He is apologetic about this underhand trick, but does promise rich rewards if the Warriors succeed in capturing some of the waters in a specially prepared container while they are there.</entry>
   <entry key="adventure.fountain-of-light.6.name">Fountain of Lost Souls</entry>
   <entry key="adventure.fountain-of-light.6.rules">Roll on the Objective Room Monster Table to determine what Monsters the fountain room contains. Once the Monsters are defeated, the Warriors may attempt to take the gems from the fountain. Roll 1D6 for each Warrior and add his Toughness. If the result is 6 or over, the Warrior survives the burning waters and retrieves his soul. If the number is 5 or less, the Warrior is consumed by the power of the water and dies in agony. While getting his gem, a Warrior may collect some of the water for the Sorcerer. If the Warriors return to the Sorcerer with some of the water he reunites their souls and bodies and gives each of them 2D6 x 50 gold.</entry>
-  <entry key="adventure.fountain-of-light.generic.flavor">Usa la ambientacion normal de la Fountain of Light sin una aventura concreta del Adventure Book.</entry>
-  <entry key="adventure.fountain-of-light.generic.name">Generica</entry>
-  <entry key="adventure.fountain-of-light.generic.rules">Resuelve la sala objetivo con el comportamiento habitual. No se aplican rituales ni objetivos adicionales sobre la fuente.</entry>
+  <entry key="adventure.fountain-of-light.generic.flavor">Use the normal Fountain of Light setting without a specific Adventure Book mission.</entry>
+  <entry key="adventure.fountain-of-light.generic.name">Generic</entry>
+  <entry key="adventure.fountain-of-light.generic.rules">Resolve the objective room using the standard behaviour. No additional rituals or objectives apply to the fountain.</entry>
   <entry key="adventure.idol-chamber.1.flavor">One of the Warriors&apos; kinsmen has been captured by Orcs, and even now he is being tortured in their lair. He is to be sacrificed to their foul gods unless the Warriors can rescue him.</entry>
   <entry key="adventure.idol-chamber.1.name">Sacrifice?</entry>
   <entry key="adventure.idol-chamber.1.rules">Randomly determine the Warrior whose kinsman has been captured using the Warrior Counters. At the start of each Power Phase, before doing anything else, roll 3D6. If all the dice come up the same number the Warriors are too late and the prisoner has been sacrificed. With the exception of the Warrior whose kinsman has just been sacrificed, the Warriors may choose whether to carry on and avenge the prisoner&apos;s death, or to give up and return to the surface. The Warrior whose kinsman has been sacrificed has no choice and must go on. Roll on the Objective Room Monster Table to determine what Monsters the idol chamber contains. The Monsters are guarding the prisoner, who is bound in chains in front of a foul idol of Chaos. The Warrior who is his kinsman is so enraged by the sight that he goes insane with battle fury. For the rest of the game, that Warrior is at -1 Weapon Skill and +1 Attacks. Once the prisoner is freed, he shows the Warriors a secret way out of the dungeon that leads past a treasure chamber. From this room, each Warrior may take 2D6 x 50 gold.</entry>
@@ -81,9 +89,9 @@
   <entry key="adventure.idol-chamber.6.flavor">One of the long-lost swords of the Elector Counts of the Empire, missing for centuries, has been found by a band of warriors in the Worlds Edge Mountains, near the Dwarf Hold of Mount Grimfang. Unfortunately, before they could return the blade to safety, all but one of the warriors were killed. The one warrior who survived, although tortured and badly mutilated, managed to escape and get back to the Emperor to tell his story. The Warriors have been requested to seek out this extremely important sword and return it. The sword is being kept in the idol chamber, clasped in the hand of the stone idol.</entry>
   <entry key="adventure.idol-chamber.6.name">Sword of the Electors</entry>
   <entry key="adventure.idol-chamber.6.rules">Roll on the Objective Room Monster Table to determine what Monsters the idol chamber contains. Once the Monsters have been defeated, the Warriors may try and retrieve the sword. Each Warrior may make one attempt to get the sword each turn. To do so, a Warrior must stand in one of the squares adjacent to the idol. Roll 1D6 and add the Warrior&apos;s Strength. If the total is 7 or more, he has succeeded and wrenches the sword free. If the total is less than 7, the idol suddenly animates and strikes the Warrior. The attack automatically hits and does 3D6 Wounds, modified for Toughness and armour. The idol then becomes immobile once more. The same Warrior cannot try again until all the Warriors have attempted the task. If the Warriors retrieve the sword, they are rewarded with 1D6 x 50 gold each.</entry>
-  <entry key="adventure.idol-chamber.generic.flavor">Usa la ambientacion normal de la Idol Chamber sin una aventura concreta del Adventure Book.</entry>
-  <entry key="adventure.idol-chamber.generic.name">Generica</entry>
-  <entry key="adventure.idol-chamber.generic.rules">Resuelve la sala objetivo con el comportamiento habitual. No se aplican objetivos especiales asociados al idol.</entry>
+  <entry key="adventure.idol-chamber.generic.flavor">Use the normal Idol Chamber setting without a specific Adventure Book mission.</entry>
+  <entry key="adventure.idol-chamber.generic.name">Generic</entry>
+  <entry key="adventure.idol-chamber.generic.rules">Resolve the objective room using the standard behaviour. No special objectives linked to the idol apply.</entry>
   <entry key="adventure.tomb-chamber.1.flavor">Deep below Middenheim there is a maze of tunnels inhabited by all manner of evil creatures. No-one ventures into this dark realm, and the entrances in the city have been sealed for centuries. Now, however, an evil presence has been detected by the priests of Ulric, the holy leaders of the city. The source of this malign power is growing, and resides somewhere in the ancient catacombs below the city. The priests suspect it may be the spirit of a long dead Necromancer, returned to wreak havoc once again on the inhabitants of Middenheim. Like moths to a candle, other malign and twisted creatures are being drawn to the tunnels below Middenheim by this evil presence. Carrying holy artefacts from the temples of the city, the Warriors must descend into the catacombs to exorcise the evil before its power grows too strong to contain.</entry>
   <entry key="adventure.tomb-chamber.1.name">Exorcism</entry>
   <entry key="adventure.tomb-chamber.1.rules">Each Warrior has been given a holy symbol of Ulric to take into the dungeon below Middenheim. These artefacts must be placed on top of the Necromancer&apos;s tomb to lay him to rest. Roll on the Objective Room Monster Table to determine what Monsters the tomb chamber contains. Once the Monsters are defeated, each Warrior may move to a square adjacent to the tomb and lay his artefact on the tomb lid in an attempt to exorcise the evil that dwells within it. At the start of the next turn, during the Power Phase, each player must roll 1D6. If any of the dice score a 1, take another Event Card as the evil spirit summons vile creatures to its aid. Once these are killed, the Warriors may try again. This continues until the Warriors do not roll any 1s, at which point the spirit is destroyed and the evil lifted. The Warriors may now make their way to the surface to be hailed as heroes. While in the tomb, the Warriors find 1D6 x 50 gold each, plus they get a further 1D6 x 50 gold each as reward for their part in the adventure.</entry>
@@ -102,9 +110,9 @@
   <entry key="adventure.tomb-chamber.6.flavor">The Warriors have been employed to carry out an apparently simple task, for which they will be well paid. All they have to do is solve an inheritance dispute between two Imperial Lords by correctly identifying a body buried in a far away tomb in the Worlds Edge Mountains.</entry>
   <entry key="adventure.tomb-chamber.6.name">Identify</entry>
   <entry key="adventure.tomb-chamber.6.rules">Roll on the Objective Room Monster Table to determine what Monsters the tomb chamber contains. Once the Monsters are defeated, the Warriors may lift back the lid of the tomb and determine who the body belongs to. Roll 1D6. On 1-3 the skeleton has no teeth. On 4-6 the skeleton is missing its left hand. Having identified the body, the Warriors may make their way to the surface. As they have killed all the Monsters in the dungeon, the way out is clear and they may exit without even rolling for Unexpected Events. If the skeleton has no teeth, it belongs to the household of Luckstein, an honourable family who reward the Warriors with 1D6 x 100 gold each. If the skeleton is missing its left hand, it belongs to the household of Bravia, whose current Lord is a scheming, arrogant individual who refuses to pay them.</entry>
-  <entry key="adventure.tomb-chamber.generic.flavor">Usa la ambientacion normal de la Tomb Chamber sin una aventura concreta del Adventure Book.</entry>
-  <entry key="adventure.tomb-chamber.generic.name">Generica</entry>
-  <entry key="adventure.tomb-chamber.generic.rules">Resuelve la sala objetivo con el comportamiento habitual. No se aplica ningun ritual o prueba especial adicional en la tumba.</entry>
+  <entry key="adventure.tomb-chamber.generic.flavor">Use the normal Tomb Chamber setting without a specific Adventure Book mission.</entry>
+  <entry key="adventure.tomb-chamber.generic.name">Generic</entry>
+  <entry key="adventure.tomb-chamber.generic.rules">Resolve the objective room using the standard behaviour. No additional special ritual or trial applies in the tomb.</entry>
   <entry key="adventure.dread-king-s-throne-room.1.flavor">Rumours have reached the Empire: dark tales of a brooding evil lurking within the pyramid mountain known as the Twisted Spire. This cursed peak lies in the far off Lands of the Dead, amongst the shifting sands and bleached bones of Khemri and Quatar. The Twisted Spire is said to be the time worn remains of an ancient pyramid, the resting place of a once powerful king. It is said that a black soul has returned to haunt this tomb, who plans to blight the world with death and pain. This evil lord of the Undead is known only as Van Damneg the Dread King. The wizards of the Empire need time to consider what course of action to take. While they ponder, the power of the Dread King grows. The Warriors are called upon to seek out the ancient Orb of Chalcidar, as it may be powerful enough to bind the Dread King forever in his pyramid tomb, if not destroy him outright. This powerful magical artefact was stolen by Gunther Laranscheld some months ago, and spirited away to his stronghold Spine Mountain Keep, in the Black Mountains. For the Warriors to stand any chance whatsoever of defeating the Dread King, they must retrieve this orb from the clutches of Laranscheld. Spine Mountain Keep is a dark and dangerous place, and the Warriors must have quick wits and brave hearts to survive this deadly challenge.</entry>
   <entry key="adventure.dread-king-s-throne-room.1.name">Find the Orb of Chalcidar</entry>
   <entry key="adventure.dread-king-s-throne-room.1.rules">Do not include the Dread King Event card in the Event deck for this adventure, as he is far off in the Lands of the Dead. Whenever the Warriors find a room, they may search it for the lost orb. They may only do this once any event triggered by the room has been completed, and so long as there are no Monsters on the board. If the Warriors want to search the room, it takes a whole turn, during which they may do nothing else except heal each other if they have the means. To search a room, place all the Catacombs of Terror counters in a cup. To find the orb, one of the players rolls 1D6, and another takes a counter at random from the cup. The number on the counter is added to the score rolled on the dice. If the total is 8 or more, then the players have found the orb. Remember that whatever they score, a 1 is a 1 and always fails. Each room can only be searched once per turn, and one dice roll is made per room, not once per Warrior. Once a counter is out of the cup, the Warriors keep it, even if they did not find the orb. When they next search, they add the totals of all the counters that are out of the cup to the dice roll. As soon as the Skull counter is picked, their search is over for now. The room they were searching does not have the orb in it, so there is no point searching further. All the counters go back in the cup, and the Warriors must take an Event card immediately because the noise of their searching has disturbed some evil force within the catacombs. As soon as they find the orb, each Warrior also takes a Treasure card. If the Warriors do not find the orb by the time they come to the objective room, then whatever else happens in the room, the orb will be there. Use the Dread King&apos;s Throne Room, which in this adventure is the lair of Laranscheld the Necromancer. Do not roll on the Objective Room Monster Table to see what Monsters lurk inside. The Warriors will face Laranscheld, Luthor, the Grimoire Necris, 1D3 Tomb Guardians and 2D6 Skeleton Bowmen. If the Warriors find the orb before the objective room, they may make off with it without venturing any further. However, such is the fervour within the Empire to stop this insidious Undead menace, that the Warriors have been offered an extra 30 gold for every servant of Undeath that they destroy, on top of whatever gold value the Monsters are worth anyway.</entry>
@@ -124,7 +132,7 @@
   <entry key="adventure.dread-king-s-throne-room.6.name">The Final Conflict</entry>
   <entry key="adventure.dread-king-s-throne-room.6.rules">Before playing this adventure, remove the Dread King Event card from the Event deck, and place the special Catacombs counters in a cup or mug. Whenever the Warriors finish a combat, then as well as any treasure and gold they gain, the leader takes a counter from the cup for every Event card of Monsters that was involved in the combat. If he finds the Skull counter, then the Warriors have found one of the legendary Death Dealer swords of Malach the Cruel. These are the only weapons capable of harming the Dread King. The leader then places all the counters back in the cup, ready for the next combat, when the Warriors can try to find another sword. There will only ever be four swords, and without one a Warrior will be able to inflict no damage on the Dread King whatsoever. With a Death Dealer sword, a Warrior may fight the Dread King as usual, inflicting damage as normal. If the Warriors manage to defeat the Dread King, at the end of the adventure they are richly rewarded, each Warrior gains two extra Treasure cards. Not only that, but they have the choice of plundering the Dread King&apos;s ancient tomb if they wish. Any Warrior who wishes to plunder the gold from the tomb may roll as many dice as he likes, adding up the totals rolled and multiplying the result by 100, to see how much gold he has found. If any dice he rolls come up as a 1, then as the Warrior packs the gold into his bag, he fails to notice the huge stone blocks sliding into place behind him. He has triggered the ancient defences, and will be sealed into the Twisted Spire forever, a rich, yet very dead Warrior. Otherwise, he may escape with the gold intact. Warriors are not allowed to use Luck or any other abilities to re-roll this result.</entry>
   <entry key="adventure.dread-king-s-throne-room.generic.flavor">Use the default ambience for the Dread King&apos;s Throne Room without a specific mission from the Adventure Book.</entry>
-  <entry key="adventure.dread-king-s-throne-room.generic.name">Generica</entry>
+  <entry key="adventure.dread-king-s-throne-room.generic.name">Generic</entry>
   <entry key="adventure.dread-king-s-throne-room.generic.rules">Resolve the objective room using the normal Dread King&apos;s Throne Room rules. Use the Catacombs of Terror monster table, apply the multi-level room rules, and place the Dread King on the dais with the Grimoire Necris before the throne.</entry>
   <entry key="dungeonCard.10.description">You face a moss covered corridor, its end hidden in the gloom.</entry>
   <entry key="dungeonCard.10.name">PASSAGEWAY I</entry>
@@ -3642,7 +3650,7 @@
   <entry key="event.rpb-locked-door.rules">The next door the Warriors find is locked with a huge padlock. If one of the Warriors has bought a set of lock picks he may try to pick it. Roll 1D6 each turn he spends doing so. On a score of 6 the padlock opens. While picking the lock a Warrior may do nothing else. If the padlock cannot be opened the Warriors must turn back.</entry>
   <entry key="event.rpb-locked-door.special">Draw another Event card immediately.</entry>
   <entry key="event.rpb-lost-gold.name">Lost Gold</entry>
-  <entry key="event.rpb-lost-gold.rules">Roll 1D6 for each Warrior. The Warrior with the lowest score realises that his backpack has a small hole in it and he has los+1D6 x 200 gold!</entry>
+  <entry key="event.rpb-lost-gold.rules">Roll 1D6 for each Warrior. The Warrior with the lowest score realises that his backpack has a small hole in it and he has lost 1D6 x 200 gold!</entry>
   <entry key="event.rpb-lost-gold.special">Draw another Event card immediately.</entry>
   <entry key="event.rpb-lost.name">Lost</entry>
   <entry key="event.rpb-lost.rules">After wandering around the dungeon for what seems likes hours with no sign of anything interesting, the Warriors realise they are lost. Take another 1D6 Dungeon cards from those you put back in the box at the start of the game, making sure that none of them are objective rooms. Put the cards on the top of the Dungeon deck. To get back on track, the Warriors must first go through these extra cards.</entry>
@@ -5243,5 +5251,1569 @@
   <entry key="rule.cot-undead-magic-item.text">When playing an Undead adventure and an Undead Monster has a magic item, use the following Undead Magic Items table. 1 Staff of Flaming Death: gives the Monster the equivalent of Breathe Fire (3). 2 Skull Staff: only a magic-using Monster may have this item, otherwise reroll. The bearer may force Warriors to reroll any Resist Magic or Dispel Magic attempts, and magic items used against the wielder have no effect on a D6 roll of 6, though limited-use items are still expended. 3 The Cursed Books of Har-Ak-Iman: any Warrior adjacent to the bearer suffers -1 to hand-to-hand and missile to hit rolls, and all Warrior spells cast on the same board section cost +1 Power. 4 Bracelet of Khemri: any hand-to-hand attack against the bearer is deflected on a 6 and has no effect, in addition to any other abilities the Monster already has. 5 Amulet of Helsnicht: at the start of each Monsters' Phase roll 1D6. On 1-2 nothing happens, on 3-4 the bearer creates 1D6 Skeletons placed immediately using the normal rules and able to attack that Phase, on 5 the bearer heals 2D6 Wounds up to its Starting Wounds, and on 6 it may immediately cast a single Necromantic spell. 6 Staff of Osiris: any Warrior standing next to the bearer at the start of the Monsters' Phase is hit on 4, 5 or 6 by an attack with Strength equal to that Warrior's battle-level.</entry>
   <entry key="rule.cot-undead-magic-weapon.name">UNDEAD MAGIC WEAPONS</entry>
   <entry key="rule.cot-undead-magic-weapon.text">When playing an Undead adventure and an Undead Monster has a magic weapon, use the following Undead Magic Weapons table. 1 Dread Blade: any Warrior standing adjacent to the wielder at the end of the turn suffers 3 Fatal Wounds with no deductions. 2 Chaos Tomb Blade: each time a Warrior is reduced to zero Wounds by this blade, roll 1D6; on a 1 he permanently loses 1D3 Wounds. 3 Blade of Resurrection: keep track of the Wounds caused by this weapon; for every 10 Wounds caused, one Skeleton Warrior armed with a sword is created and placed using the normal rules, able to attack in the next Monsters' Phase. 4 Grave Ripper: each hit ignores 1D6 points of armour, and on a roll of 6 one randomly determined piece of armour worn by the target is destroyed. 5 Axes of Nagashizzar: the wielder gains +1 Attack; when a Warrior is reduced to zero Wounds by one of the axes, roll 1D6. On 1 he is dead and cannot be healed by any means, on 2-3 he permanently loses 1D6 Wounds, on 4 he permanently loses 1 Toughness, on 5 he permanently loses 1 Strength, and on 6 he suffers no additional effect. 6 Flail of Skulls: on a natural 6 to hit, the Warrior takes an extra 2D6 Wounds with no deductions.</entry>
+  <entry key="location.location-alquimista.description">Need gold in a hurry? The local Alchemist may be able to help with that problem...</entry>
+  <entry key="location.location-alquimista.name">Alchemist</entry>
+  <entry key="location.location-alquimista.rules">The Alchemist&apos;s laboratory is a strange place, full of noxious vapours and bubbling glass vessels. His chief occupation is turning base metals into gold, and any Warrior may seek his services.
+
+The Alchemist takes any unused item of equipment or a Treasure card and attempts to transmute it. Discard the item or card, roll as many dice as you wish, add up the total and multiply the result by 50. That is the amount of gold produced.
+
+If any of the dice show a 1, the transmutation fails completely and the object is reduced to a puddle of sludge.
+
+The Alchemist keeps half of the gold produced. If he produces nothing, he charges nothing.</entry>
+  <entry key="location.location-armas-de-fuego.description">The finest firearms in the region are sold here, along with the powder and shot needed to keep them working.</entry>
+  <entry key="location.location-armas-de-fuego.name">Firearms Merchant</entry>
+  <entry key="location.location-armas-de-fuego.rules">Brace of Pistols (2). Stock 10+. Buy 3000. Sell 600. Requires powder and shot. Each pistol must be reloaded after firing. Strength 6. Range 6 squares. You may fire twice in one turn, but afterwards you must spend a turn reloading because of the terrible report. Cannot be used in hand-to-hand combat. Hands 1.
+
+Musket. Stock 11+. Buy 2000. Sell 700. While carried it imposes -1 Strength, -1 Toughness and -1 Movement. Strength 8. If you ignore the penalty, the shot is made at Strength 10. Cannot be used in hand-to-hand combat. Hands 2.
+
+Shot. Stock 4+. Buy 100.
+
+Powder. Stock 4+. Buy 100. One unit is spent each time a pistol or musket is fired during an adventure.</entry>
+  <entry key="location.location-armeria.description">Arm yourself properly to face vermin and giants alike. Steel for every sort of Warrior is sold here.</entry>
+  <entry key="location.location-armeria.name">Armoury</entry>
+  <entry key="location.location-armeria.rules">Dagger. Stock 4+. Buy 75. Sell 20. Strength 1. Thrown weapon; recovered at the end of the combat.
+
+Scimitar. Stock 4+. Buy 100. Sell 15.
+
+Sword. Stock 5+. Buy 200. Sell 15. Damage caused is 1D6 + the Warrior&apos;s Strength.
+
+Longsword. Stock 7+. Buy 300. Sell 20. +1 Strength.
+
+Great Sword. Stock 8+. Buy 700. Sell 35. +4 Strength, +1 Attacks and -1 Initiative. Cannot be used with a shield.
+
+Axe. Stock 4+. Buy 150. Sell 15. Damage caused is 1D6 + the Warrior&apos;s Strength.
+
+Broad Axe. Stock 4+. Buy 500. Sell 50. +2 Strength. Cannot be used with a shield.
+
+Battle Axe. Stock 7+. Buy 300. Sell 35. +1 Strength. May fight from a rear rank.
+
+Two-handed Axe. Stock 8+. Buy 500. Sell 60. +2 Strength. Cannot be used with a shield.
+
+Spear. Stock 4+. Buy 200. Sell 20. Thrown weapon. On 4+ it is recovered after the combat. +1 Initiative. May fight from a rear rank.
+
+Hammer. Stock 10+. Buy 300. Sell 35.
+
+Warhammer. Stock 10+. Buy 400. Sell 100. If you roll a natural 6 to hit, the blow causes an extra 1D6 Wounds.
+
+Mace. Stock 9+. Buy 200. Sell 50. +1 Strength. If you hit, you may leave the enemy stunned.
+
+Throwing Sticks. Stock 9+. Buy 250. Sell 100. +2 Strength and +2 to hit.
+
+Metal Sword. Stock 8+. Buy 1000. Sell 300. If you hit, the target may not add any shield bonus to its Toughness.
+
+Halberd. Stock 7+. Buy 250. Sell 75. +1 Strength. You cannot use a shield. May fight from a rear rank.</entry>
+  <entry key="location.location-banco.description">Tired of carrying all your gold and treasures on your person? It may be time to open a bank account and keep it all safe.</entry>
+  <entry key="location.location-banco.name">Bank</entry>
+  <entry key="location.location-banco.rules">Anyone may visit the Bank and, unlike other Special Locations, it can be found in any kind of Settlement, including Villages.
+
+A Warrior may:
+- Open an account.
+- Check an account.
+- Withdraw money.
+- Deposit money.
+- Hire safety deposit boxes.
+
+a) Open an account. This costs 10 gold and requires a minimum deposit of 100 gold. Each Warrior may have only one account.
+
+b) Check an account. Roll 1D6 and add +1 if you are in a Town or +2 if you are in a City.
+1-2. The Bank has been robbed, or worse! Roll 2D6 on the Robberies and Catastrophes table:
+2. The Bank claims to have no record of you or your account. All the money is lost and the account ceases to exist.
+3. A disastrous investment has cost your account half its money.
+4-6. A fire has damaged the branch. Your account is intact, but you may not withdraw or deposit money in this Settlement.
+7-9. An unknown criminal has siphoned money from your account. Lose 1D6 x 50 gold.
+10+. Bad management forces the Bank to use your money to settle its debts. Lose 10 gold for every full thousand deposited, rounding up.
+
+3-6. Your account has grown through interest. Roll 1D6:
+1. Your account gains 1D6 x 10 gold.
+2. Your account gains 1D6 x 20 gold.
+3. Your account gains 20 gold for every full thousand deposited, rounding up.
+4. Your account gains 1D6 x 50 gold.
+5-6. Your account gains 1D6 x 100 gold.
+
+c) Withdraw money. Once the account has been checked, the Warrior may withdraw any amount up to the current balance. If the account is left with less than 50 gold, all of it must be withdrawn and the account is closed.
+
+d) Deposit money. Once the account has been checked, the Warrior may deposit any amount.
+
+e) Safety deposit boxes. Each box costs 25 gold and can hold up to five Treasure items. There is no limit to the number of boxes a Warrior may own. Items may be placed in or removed from the boxes whenever the Warrior visits the Bank, but cannot be used while stored there. The only thing that affects a safety deposit box is a 4-6 result on the Robberies and Catastrophes table; in that case the box remains intact, but cannot be accessed from that branch.
+
+If a Warrior dies, another Warrior may collect the contents of his account and deposit boxes, but the account and boxes then cease to exist.</entry>
+  <entry key="location.location-barrio-elfico.description">Visit your kin and trade for the finest weapons and gear in the whole settlement. This is the ideal place for Elves to find equipment made for their own kind.</entry>
+  <entry key="location.location-barrio-elfico.name">Elven Quarter</entry>
+  <entry key="location.location-barrio-elfico.rules">Provided they are not denied entry, only Elven characters may visit the Elven Quarter: Elf, Wardancer and Elf Ranger. The Elves refuse entry to any who are not of their race.
+
+Elven items and cost:
+Elven Bow. Cost 2,000. Availability 10.
+Elven Armour. Cost 3,000. Availability 10.
+Elven Boots. Cost 100. Availability 7.
+Elven Cloak. Cost 100. Availability 7.
+Elven Rope. Cost 75. Availability 2.
+Elven Shield. Cost 700. Availability 8.
+1D6+2 Trueflight Arrows. Cost 20. Availability 8.
+Healing Herbs. Cost 1D6 x 100. Availability 2.
+1D6 Waybread. Cost 10. Availability 2.
+Elven Helm. Cost 1,000. Availability 8.
+
+Elven Bow: while used by an Elf, the bow has Strength equal to its wielder&apos;s and may fire as many shots per turn as the wielder has Attacks. It may only be used by an Elf.
+
+Elven Armour: the wearer gains +1 Toughness. In addition, if any of the Monster&apos;s Wound dice show a natural 1 or 2, ignore that die when resolving the damage.
+
+Elven Cloak: whenever your Warrior is hit while wearing an Elven Cloak he may ignore the first Wound caused by that blow. Roll 1D6 each time the cloak absorbs a blow; on a 1 the cloak tears and is ruined. Only an Elf may wear this cloak and it can absorb one blow per turn.
+
+Elven Shield: while an Elf uses an Elven Shield, the Warrior may ignore the first blow inflicted in each turn unless the to hit roll was a natural 6, in which case the shield has no effect. It may only be used by an Elf.
+
+Trueflight Arrows: add +1 to hit with missile fire. Each arrow can be used for a single shot. They only work for Elves; if used by any other Warrior they count as normal arrows.
+
+Waybread: each portion restores 1 Wound to the Warrior who eats it. At the end of the adventure, if any Waybread remains, roll 1D6; on a 1 it goes bad and must be discarded, on 2-6 it may be kept for the next adventure.
+
+Elven Boots: while the Elf wears these boots he gains +1 Movement. They may only be worn by an Elf. The enchantment lasts for one adventure.
+
+Elven Helm: while worn by an Elf, the Warrior gains +1 Toughness. In addition, when hit he may choose to take the blow on his head. Roll 1D6:
+1. The Elven Helm absorbs all the damage from the blow, but is destroyed in the process.
+2-4. The blow is resolved normally; the helm is not damaged. Apply the +1 Toughness as normal.
+5-6. The blow glances harmlessly from the Elven Helm and causes no damage.
+
+Elven Rope: after using it, roll 1D6; on a 1 the rope snaps and must be discarded. Only an Elf may use Elven Rope.
+
+Healing Herbs: by paying 1D6 x 100 gold, the Elf obtains enough herbs to make 1D6 Healing Potions, each of which heals 1D6 Wounds.
+
+Elven Master Armourer: while in the Elven Quarter the Elf may visit the Master Armourer. The Elves have worked metal for millennia and can repair the most battered armour, helmets and shields. The cost of repair is 1D6 x 100 gold. Each item must be rolled for and paid for separately. Once the gold has been paid, roll 1D6: on a 2+ the item is repaired and may be used again; on a 1, the armour is beyond repair and the money is lost.</entry>
+  <entry key="location.location-campos-de-entrenamiento.description">Our camp is equipped with everything needed to turn you into the finest Hero and the strongest fighter around. Sign up today for a full week of training.</entry>
+  <entry key="location.location-campos-de-entrenamiento.name">Training Grounds</entry>
+  <entry key="location.location-campos-de-entrenamiento.rules">A Warrior must devote a full week to training in order to rise in Battle-Level. While here, the Warrior may not visit any Special Location or buy equipment. He also pays no Daily Expenses, because food and lodging are included in the cost of training. Nor does he roll on the Settlement Events table.
+
+Gold represents far more than mere coins; it is also the measure of how far you have advanced, since the more gold you possess, the more you can improve your Battle-Level. Gaining a Battle-Level means improving permanent characteristics such as Wounds, Damage, Strength or Toughness, learning new skills and rising in social standing.
+
+Consult your Warrior&apos;s Level Table to find the cost in gold as well as the improvements you gain.</entry>
+  <entry key="location.location-casa-de-apuestas.description">From the dingiest den to the most exclusive salon, gambling houses have only one true purpose: to fleece the visitor or make him richer than a noble in the space of a single day.</entry>
+  <entry key="location.location-casa-de-apuestas.name">Gambling House</entry>
+  <entry key="location.location-casa-de-apuestas.rules">There is a Gambling House in every Settlement and there are no restrictions on visiting it. Each visit consumes one day.
+
+Declare how much gold you are going to stake, to a maximum of 200 gold per visit, and roll 1D6:
+
+1. Your Warrior has a very bad night and loses 1D6 times his original stake. If he does not have enough money, the house takes his most valuable item.
+2-5. You have had a pleasant day; you lose nothing and you gain nothing.
+6. Fortune smiles upon your Warrior and he quickly wins 1D6 times his original stake in gold.</entry>
+  <entry key="location.location-enfermeria.description">Whether it is a learned priest, a battle-hardened physician or an old hermit, the local healer offers medical aid to townsfolk and passing travellers alike.</entry>
+  <entry key="location.location-enfermeria.name">Infirmary</entry>
+  <entry key="location.location-enfermeria.rules">Whenever a Warrior is reduced to zero Wounds, whether by an attack, spell, trap or any other cause, and is later healed back to 1 Wound or more, he suffers an Injury or After-effect from that brush with death. His body or mind is marked by more serious harm.
+
+The Warrior must draw a random Injury or After-effect card, which explains the new penalty. The accumulation of these after-effects may cause death if any characteristic is reduced to zero.
+
+An Injury or After-effect cannot be removed with potions, bandages or provisions. Instead, it must be treated at the Infirmary of a Settlement, paying the amount of gold and spending the number of days indicated.
+
+The Infirmary also restores permanent characteristic losses caused by Paralysis, Plague, Petrify or Poison in exchange for 50 gold and 2 days.</entry>
+  <entry key="location.location-escuela-de-lucha.description">Sweat, blood and sand. The ideal place to hone your skills and harden your muscles.</entry>
+  <entry key="location.location-escuela-de-lucha.name">Fighting School</entry>
+  <entry key="location.location-escuela-de-lucha.rules">A Pit Fighter, Barbarian, Slayer, Dwarf or Chaos Warrior may visit the Fighting School once per Settlement. The Fighting School is a Special Location, but it may be found on a 6+ instead of a 7+.
+
+If you find a Fighting School, roll 2D6 and consult the following table. A Pit Fighter adds +1 to the roll:
+
+2. The gladiators and trainers laugh at your Warrior and give him a savage beating. Your Warrior leaves the Settlement in disgrace immediately. Do not roll on the Settlement Events table today.
+
+3. The fighters challenge your Warrior to a wrestling match. Brutus the Great steps forward and the two of you grapple for several minutes. Roll 1D6 and add your Strength. If you score 7 or more, you defeat Brutus the Great and win 1D6 x 10 gold on the wager. If you fail, you must spend the next 1D6 days cleaning the School latrines as payment for losing. No Settlement Events are rolled during this time.
+
+4. One of the fighters snatches one of your weapons at random, including magic weapons. If you cannot intimidate him with a score of 7 or more on 1D6 + your Battle-Level, he keeps the item. Discard it immediately.
+
+5. An old, grizzled veteran teaches you a trick for slipping out of an opponent&apos;s grip. You may add the skill “Duck and Dodge” to your Warrior&apos;s repertoire. This skill allows the Warrior to break from pinning automatically and may be used once per adventure.
+
+6. You are given a pair of special fighting gauntlets, which may be used once per adventure. For one turn only, you may punch your enemies to force their guard open, gaining +1 to hit with any hand-to-hand attack.
+
+7. The extra training improves your stamina and hardens your body. Add +1 permanently to your total Wounds.
+
+8. You learn a number of tricks and techniques that can be used later. Gain 1 additional training point, to be spent the next time you rise in Battle-Level. A Warrior who is not a Pit Fighter instead gains +1 in a characteristic of his choice for the next adventure.
+
+9. The other fighters at the school invite you to fight in the pit. Roll 1D6 and add either your Weapon Skill or your Strength, whichever you prefer. If the total is 7 or more, you win and receive 1D6 x 50 gold. If you lose, you must pay 1D6 x 50 gold and may not visit any location on the following day.
+
+10. You are taught a special manoeuvre that whirls your weapons in a lethal pattern. Once per adventure you may use this attack instead of one of your normal attacks. Make one to hit roll against every Monster in an adjacent square. Any hits are resolved normally, but no Death-blows may be generated.
+
+11. An old friend of yours is visiting the Fighting School. He has been lucky in some recent bouts and has bought his freedom. In a gesture of generosity he offers to pay 2D6 x 20 gold of your total debt. A Warrior who is not a Pit Fighter simply adds this amount to his gold total and leaves before the old friend realises his mistake.
+
+12. You are offered an intensive course in a specialised fighting style. If you pay 1D6 x 100 gold, you spend the next 1D6 days in the Fighting School. Gain 1D6 additional training points to spend when you next rise in Battle-Level. Any Hero who is not a Pit Fighter instead gains, permanently, either +1 Weapon Skill, +1 Initiative, +1 Attacks or +1 Ballistic Skill, as you choose.
+
+13. While crossing an inner yard you are struck violently and black out. When you wake, your former master stands over you with four hired thugs. If you still owe him money, they bind you and throw you into the back of a wagon. It takes 2D6 days to escape, during which time the rest of the group must decide whether to wait for you or leave. Roll 1D6 on the following table. If you have paid less than your Battle-Level x 500 gold, apply -1:
+1. Your former master is furious and takes all your gold and possessions. Work out the total value of everything taken and halve it. Reduce your debt by that amount.
+2. Your former master demands a payment toward your debt. During the next adventure he takes half the gold you earn. You must also sell all the treasure you find during that adventure and give him half the proceeds. Reduce your total debt by that amount afterwards.
+3-6. Your former master gives you a savage warning and lets you go after roughing you up badly. You keep your possessions, but start the next adventure with 1D3 fewer Starting Wounds.</entry>
+  <entry key="location.location-establos.description">Travellers may leave their mounts at the stables, where they will be fed and well cared for until it is time to set out on the next adventure.</entry>
+  <entry key="location.location-establos.name">Stables</entry>
+  <entry key="location.location-establos.rules">Mandatory daily cost:
+Dog x2
+Mule +1
+Horse +2
+Warhorse +3
+
+If you are using riding animals from remote lands or continents, you may bring them with you into the Old World, but must pay an additional transport surcharge. Roll 2D6 and multiply the result by the listed value to determine the transport cost.
+
+Mandatory daily cost for exotic mounts:
+Wild Horse of Kislev +2
+Cold One of Lustria +2
+Camel of Araby +3
+Elephant of Lustria +10</entry>
+  <entry key="location.location-fabricante-de-armaduras.description">Leather, mail and plate... here you will find all the protection you need to survive your next adventure.</entry>
+  <entry key="location.location-fabricante-de-armaduras.name">Armourer</entry>
+  <entry key="location.location-fabricante-de-armaduras.rules">Mail Shirt. Stock 6+. Buy 500. Sell 150. +2 Toughness and -1 Movement.
+
+Light Armour. Stock 7+. Buy 1000. Sell 350. +2 Toughness.
+
+Heavy Armour. Stock 8+. Buy 4000. Sell 1100. +3 Toughness and -1 Movement, except for Dwarfs.
+
+Plate Armour. Stock 10+. Buy 8000. Sell 2000. +4 Toughness. Cannot be used with two-handed weapons.
+
+Shield. Stock 4+. Buy 300. Sell 75. +1 Toughness. If used with a two-handed weapon it gives +2 Toughness and -1 Movement. If an enemy rolls exactly the number needed to hit, the blow is cancelled.
+
+Pavise. Stock 9+. Buy 550. Sell 150. +2 Toughness and -1 Movement.
+
+Helmet. Stock 7+. Buy 500. Sell 150. +1 Toughness.
+
+Great Helm. Stock 5+. Buy 1000. Sell 300. +1 Toughness. Destroyed the first time you suffer a head hit.
+
+Leather Armour. Stock 5+. Buy 40. Sell 20. +1 Toughness. Destroyed the first time you suffer a head hit.
+
+Skull Cap. Stock 4+. Buy 100. Sell 12. +1 Toughness. Allows you to ignore the usual rules for being reduced to 0 Wounds.</entry>
+  <entry key="location.location-gremio-de-enanos.description">For the highest lore in engineering and armourcraft, visit the Dwarf guild masters. Here you may buy special items or have runes forged upon your axes.</entry>
+  <entry key="location.location-gremio-de-enanos.name">Dwarven Guild</entry>
+  <entry key="location.location-gremio-de-enanos.rules">Only Dwarfs may visit the Dwarven Masters&apos; Guild, provided they are not denied entry.
+
+Available equipment:
+Lock Picks. Cost 25.
+Bombs. Cost 75.
+Blinding Powder. Cost 50.
+Dwarf Stonebread. Cost 15.
+
+Lock Picks: the Warrior may attempt to open a locked chest, door or similar obstacle. Roll 1D6; on 4+ the lock opens.
+
+Bombs: once per adventure, instead of making an attack, throw a bomb at an adjacent square or one up to 4 squares away. Every model in the target square and every adjacent square suffers 1D6 Wounds with no modifiers for Toughness or armour.
+
+Blinding Powder: once per adventure, throw the powder at a Monster in an adjacent square. Roll 1D6. On 4+ the Monster is blinded and all Warriors get +1 to hit it until the end of the turn.
+
+Dwarf Stonebread: each portion restores 1 Wound and counts as provisions.
+
+Runesmith: the Dwarf may pay to have runes forged onto his axes. Roll or choose as normal for the runes available to the Runesmith:
+Rune of Flight. The axe may be thrown and returns to the wielder&apos;s hand after the attack.
+Rune of Speed. The axe grants +1 Initiative.
+Rune of Fire. The axe causes +1D6 Wounds against Undead and creatures vulnerable to flame.
+Rune of Breaking. The axe ignores shield bonuses.
+Rune of Might. The axe grants +1 Strength.
+Rune of Fury. Once per adventure the wielder may make +1 Attack for one turn.
+
+Each rune is paid for separately. If the Warrior loses the axe, the rune is lost with it.</entry>
+  <entry key="location.location-gremio-de-hechiceros.description">Full of books, scrolls and caged creatures, the Wizards&apos; Guild welcomes only those who practise the Imperial arts of magic.</entry>
+  <entry key="location.location-gremio-de-hechiceros.name">Wizards&apos; Guild</entry>
+  <entry key="location.location-gremio-de-hechiceros.rules">Upon reaching a Town or City, the Wizard and the Elf Ranger, provided he knows at least one spell, may visit the Wizards&apos; Guild if they find it, seeking advice and probably magical help for their next adventure.
+
+In a Town the Guild will be little more than a dark and gloomy hall beside the tavern or inn, but in a City it may be a great building housing many Wizards. Whatever its form, certain things are always the same: magic can almost be smelt in the air, strange objects hang from the ceiling, and the whole place is thick with oddly coloured vapours.
+
+Fees:
+The Guild Wizards charge 1D6 x 50 gold for any request for help or consultation. If the Wizard does not have enough money to pay these fees, he must leave the Guild immediately. Unfortunately, even if he cannot make his request, he has spent so much time waiting in one antechamber or another that he may do nothing else that day.
+
+The Request:
+Once the fee has been paid, roll 1D6:
+1. Refused. The Guild refuses to help. The visit ends here.
+2. The Petition. State what kind of help the Wizard seeks and roll 1D6:
+1-2. The Guild refuses the request.
+3-4. The Guild can help, but it will take 1D3 days more.
+5-6. The Guild grants the request immediately.
+3-6. Roll on the Wizards&apos; Guild Table.
+
+Wizards&apos; Guild Table:
+1. Advice. The Wizard receives good counsel. He may add +1 to a single spell-casting roll during the next adventure.
+2. Magical Potions. The Wizard may buy 1D6 magical potions. Roll 1D6 for each potion:
+1. Healing Potion. Restores 1D6 Wounds.
+2. Power Draught. Add +1 to a single Power roll.
+3. Potion of Strength. Add +1 Strength for one combat.
+4. Potion of Toughness. Add +1 Toughness for one combat.
+5. Potion of Speed. Add +1 Attack for one turn.
+6. Potion of Vision. Ignore the effects of darkness and similar penalties for one adventure.
+3. Wizard&apos;s Staff. The Guild offers a finely made Wizard&apos;s Staff. While wielding it, the Wizard adds +1 to a single spell-casting roll per adventure.
+4. Fountain of Power. The Wizard may meditate beside the fountain. During the next adventure he may reroll one Power roll, but must keep the second result.
+5. Changing Spells. The Wizard may discard one of his known spells and replace it with another of the same type chosen at random.
+6. Careful Research. Through painstaking study the Wizard locates and learns exactly the spell he needs for the next adventure. He may choose any spell of the same type to replace the one he discarded.
+
+Elf Rangers who visit the Guild use the same procedure, but only insofar as it affects the single spell they know.</entry>
+  <entry key="location.location-prision.description">Remember that every settlement has its own laws... Behave yourself, traveller, or justice will be done.</entry>
+  <entry key="location.location-prision.name">Prison</entry>
+  <entry key="location.location-prision.rules">This is a settlement location where Warriors may end up imprisoned for a number of days as the result of settlement events, tavern brawls or other rules.
+
+While a Warrior is in prison he does not pay Daily Expenses in the Settlement and need not worry about Settlement Events or Catastrophic Events that might otherwise occur.</entry>
+  <entry key="location.location-puertas-de-acceso.description">Any Warrior left outside the settlement walls is at the mercy of storm, monsters and the wildest creatures, among many other dangers.</entry>
+  <entry key="location.location-puertas-de-acceso.name">Settlement Gates</entry>
+  <entry key="location.location-puertas-de-acceso.rules">Sometimes Travel Hazards or Catastrophic Events send the Warriors straight on to the next adventure. It is also possible for the whole party to be “Expelled” from the Settlement.
+
+If they already have a set adventure or the Innkeeper has assigned them one, they leave at once; otherwise, if they are expelled, they must roll D66 on the “Immediate Adventures” table to determine which mission they must undertake.
+
+Consult the relevant pages of Littlemonk&apos;s Ultimate Adventure Book for the adventure and its special rules.
+
+Warriors often find these adventures the least rewarding and the most dangerous, but they have no choice in the matter.</entry>
+  <entry key="location.location-taberna.description">Packed with strange folk and interesting travellers, this is the perfect place to hear stories and get into trouble.</entry>
+  <entry key="location.location-taberna.name">Tavern</entry>
+  <entry key="location.location-taberna.rules">The Tavern is the only location that the Warriors can always find automatically in any kind of Settlement, including Villages.
+
+Any Warrior except the Wardancer may visit the Tavern. The Barbarian, the Dwarf and other equally hard Warriors suffer no penalties on the table. When a Warrior enters the Tavern, roll 2D6 and consult the result. If he is an Elf, subtract 4; if he is a Wizard, subtract 3; if he is a Warrior Priest or an Elf Ranger, subtract 2. Any result lower than 2 counts as 2.
+
+2. While the Warrior is quietly drinking a beer, Ragnar the Terrible sells him the supposed Talisman of Erik for 500 gold. The talisman is a fake. If the Warrior does not have 500 gold, he must hand over all his gold and one Treasure item as compensation.
+
+3. The Warrior gets thoroughly drunk and loses 1D6 x 100 gold.
+
+4. Griswold the Mad wagers 200 gold that the Warrior cannot survive a fight in the pit against his pack of wolves. If he accepts, 1D3 customers join the wager. Roll 1D6:
+1. The Warrior wins, but Griswold keeps all the stakes to compensate for losing his animals.
+2-3. The Warrior escapes the fighting pit, but loses the wager.
+4-6. The Warrior makes mincemeat of the wolves and collects all the stakes.
+
+5. Rogar the Squint sells the Warrior a miraculous potion for 100 gold or a Treasure item, weapon or armour. When the Warrior drinks it, roll 1D6:
+1-2. It has no effect beyond causing nausea.
+3-5. The Warrior enters Berserk Rage until all the Monsters are dead.
+6. He recovers 1D6 Wounds.
+
+6. A local artist tattoos the Warrior with an Orc head bearing his own features and the legend “Orc Love”.
+
+7. The Warrior wins an arm-wrestling contest. From now on, each time he tries to buy something in a shop in this Settlement, roll 1D6:
+1-2. The shopkeepers slam the door in his face.
+3-6. They sell him everything at half price.
+
+8. A veteran Norse Barbarian teaches the Warrior to smear himself in animal grease so that he becomes slippery in combat. Once per adventure he may use this trick to avoid a blow that would otherwise have wounded him.
+
+9. The Slaughterhouse Singers, a troupe of jugglers from Erengrad, teach the Warrior one verse of “She Was the Emperor&apos;s Only Daughter”. Once per adventure he may choose a Monster on the board worth no more than 300 gold and roll 1D6; on a 5 or 6 the Monster dies of a brain haemorrhage.
+
+10. The Warrior ends a night of heavy drinking as the only one still standing and helps himself to the belongings of the other drunkards. He gains (1D6 + 2) x 100 gold.
+
+11. A scarred Kislevite teaches the Warrior how to play dead. Once per adventure he may lay his model down. While he is pretending to be dead and another Warrior remains standing, no Monster will attack him until he stands up again or no other Warrior is left standing.
+
+12. A burly mercenary from Marienburg teaches the Warrior how to fight with two weapons at once. Once per adventure he may make +1 Attack.
+
+The rulebook also includes an expanded optional Tavern system with refinement levels, tavern brawls and a much larger results table. If you want to use that version, it overlays this core table.</entry>
+  <entry key="location.location-torre-de-guardia.description">Spend the day earning gold, not spending it. Join the Watch and protect the citizens of the Empire.</entry>
+  <entry key="location.location-torre-de-guardia.name">Watchtower</entry>
+  <entry key="location.location-bar-del-muelle.description">Here you gather with other sailors to swap stories or train, always with a measure of rum close at hand.</entry>
+  <entry key="location.location-bar-del-muelle.name">Dockside Bar</entry>
+  <entry key="location.location-bar-del-muelle.rules">The Sea Wolf spends 1D6 x 10 gold here and may:
+
+a) Train in order to rise in level.
+b) Listen to news and pirate tales.
+c) Drink rum with drunken sailors.
+d) Buy items from the War Fleet store. Draw its Special Location card.
+
+News:
+The Sea Wolf learns news about the next adventure. Roll 1D6:
+1-2. Nothing you did not know already.
+3-4. A particular treasure may be found only by the Sea Wolf in the next adventure. You may choose it when you draw an extra treasure card.
+5. You are given a map showing the best road to the nearest settlement after the next Dungeon. Reduce the journey by 2 weeks.
+6. The next adventure will be especially dangerous, so the Sea Wolf receives a Healing Potion.
+
+The drunken sailor:
+The Sea Wolf may always try to get information from the drunken sailors who haunt the waterside taverns. If you wish, you may look for one during your stay. Roll 1D6:
+1-3. The drunk merely babbles nonsense and wastes your time.
+4. The sailor has met strange folk from the distant east and seen marvellous sword tricks. They teach you an impressive technique. During the next adventure you gain 1D3 Attacks.
+5. They teach you a moving sea shanty. All Heroes recover 1D3 Wounds in the next adventure.
+6. They show you another sea song, this one so despairing that 1D3 Monsters on the same board section lose 1D6 + 1 Wounds with no modifiers.</entry>
+  <entry key="location.location-bienvenida.description">Each time you enter a Settlement, roll 1D6 + Reputation and consult this card to see what sort of welcome you receive.</entry>
+  <entry key="location.location-bienvenida.name">Welcome!</entry>
+  <entry key="location.location-bienvenida.rules">Each time you enter a Settlement, roll 1D6 + Reputation and consult the result.
+
+The earliest results of the original table are not fully legible in the surviving scan and should be checked against the original source material.
+
+5 or less. The townsfolk do not know you as any great Bounty Hunter.
+
+6-9. Some recognise you and warn the others. Each time you enter a shop, roll 1D6; on a 6 any item costs half price.
+
+10. The Bounty Hunter is met by a small welcoming committee on the outskirts of town. Roll 1D6 + Reputation. On 7 or more, the townsfolk fear you and you do not pay Daily Expenses while you remain in the Settlement. On a natural 1, the citizens drive you away.
+
+11-12. The inhabitants stare at you in amazement. You do not pay Daily Expenses and shops sell you items at half price if you score 9+ on 1D6 + Reputation when entering each shop.
+
+13 or more. Criminals flee at your arrival. You do not pay Daily Expenses and, grateful for ridding them of villains, the townsfolk pay you 1D6 x 50 gold.</entry>
+  <entry key="location.location-bodega-cerveceria.description">Alcoholic drinks are brewed and distilled here, especially imported Dwarf ales for the whole Old World, though they are not fit for the faint-hearted.</entry>
+  <entry key="location.location-bodega-cerveceria.name">Brewery / Beer Cellar</entry>
+  <entry key="location.location-bodega-cerveceria.rules">The brewery never buys second-hand drink, so there is no sale value. The Brewmaster may only carry one barrel of each type to refill his empty casks.
+
+Each barrel contains 1D3 draughts. If doubles are rolled when determining it, the barrel contains 2D3 draughts. Bugman&apos;s Grand Reserve contains only a single draught.
+
+Original ales:
+Special Reserve. Stock 4+. Buy 150. During one turn you gain +3 Attacks and ignore Fear and Terror for the whole combat.
+
+Bugman XXXXX. Stock 5+. Buy 200. Heals 1D6 Wounds. Then roll 1D6: on a 1 you are dazed for one turn; on a 6 you recover 100 Wounds.
+
+Special brews:
+Mushroom Beer. Stock 4+. Buy 250. Any adjacent Monster suffers 2D6 Wounds with no modifiers.
+
+Volcano Fire. Stock 8+. Buy 350. The Dwarf enters Frenzy until the end of the combat and doubles his Attacks.
+
+Norse Original. Stock 8+. Buy 250. During one turn you gain 1D6 Attacks and +1 Strength.
+
+Lycanthropic Reserve. Stock 9+. Buy 400. For one combat round you strike first and gain +1 Attacks and +1 Movement.
+
+The Golden Drop. Stock 9+. Buy 500. If you roll a 6 to hit, you inflict an extra 1D6 Wounds.
+
+Bugman&apos;s Grand Reserve. Stock 10+. Buy 600. Heals 100 Wounds. Then roll 1D6: on a 1 you lose 1 Attack until the end of the combat; on a 6 you also gain +1 Toughness.</entry>
+  <entry key="location.location-borrachera.description">Ending a visit to a Settlement with an epic drinking bout is perfectly normal for a Brewmaster.</entry>
+  <entry key="location.location-borrachera.name">Carouse!</entry>
+  <entry key="location.location-borrachera.rules">You invite every Warrior and each may accept or refuse. Once they have decided, roll 2D6 on the following table, add the total number of Warriors taking part and apply each participant&apos;s Tavern modifiers.
+
+5 or less. The Warriors wake with splitting headaches and each one has 1D6 x 100 fewer gold.
+
+6-9. After the third tavern, the Brewmaster finds a vile little bar in a very rough part of town. A huge brawl breaks out and one of the Warriors is hurt. Each Warrior must roll 2D6 and apply his Tavern modifier. The Warrior with the lowest score suffers -1 Toughness in the next adventure.
+
+10-13. After a glorious night of drinking and gambling, you wake with an extra 1D6 x 50 gold each and one Treasure item apiece. You can do nothing the next day: you are far too busy vomiting.
+
+14 or more. A binge of truly epic proportions. A barman from a local tavern is so impressed that he gives each of you 3 barrels of ale and 1D6 x 100 gold for having turned his tavern into a brutal celebration. In the next adventure you are immune to Fear and Terror, and each of you permanently gains +1 Starting Wound.</entry>
+  <entry key="location.location-la-autoridad.description">There is always a chance that the Guard will recognise you and throw you into the cells when you visit a Settlement.</entry>
+  <entry key="location.location-la-autoridad.name">The Law</entry>
+  <entry key="location.location-la-autoridad.rules">When you visit a Village, roll 1D6. In Towns and Cities, roll 2D6. Whenever any die shows a 1, the Outlaw is recognised by the law and may be brought to justice. Roll 1D6 and consult the following table:
+
+1. Hang him! You are dragged to the gallows and executed by the town marshal. You die, unless you spend Luck.
+
+2-4. You haven&apos;t seen me, right? You avoid a grim end by bribing a Guard. Pay 10% of your current gold; he removes your shackles and lets you escape.
+
+5. Desperate escape. In a frantic struggle with the Guards, you leap from a high parapet in order to flee. Roll 1D6; on a 1 or 2 you are injured and start the next adventure with 1D3 fewer Starting Wounds. If you are a Masked Bandit, you may reroll the die.
+
+6. I have a brilliant plan. Thanks to your cunning and a spectacular use of your lock-picking kit, you escape under cover of darkness.</entry>
+  <entry key="location.location-los-bajos-fondos.description">While you remain in a Settlement, you may attempt as many robberies as you wish, but you had better hope you are never caught.</entry>
+  <entry key="location.location-los-bajos-fondos.name">The Underworld</entry>
+  <entry key="location.location-los-bajos-fondos.rules">1) Choose a Shop or Special Location that carries goods. If you do not find that place, you may choose another. Each target may only be robbed once per Settlement.
+
+2) The Halfling Thief may visit the Underworld Informer to hear rumours.
+
+3) You may plan the robbery.
+
+The Informer:
+Each visit gives you information about the target&apos;s rumours and security. If you do not like the information, you may choose another shop. The results for each shop remain in effect.
+
+Rumour table:
+1-2. There is nothing worth stealing. That place is short of stock.
+3-5. They have everything. You may rob it normally.
+6. The place is overflowing with goods. +1 to the Stock roll if you attempt to steal an item.
+
+Guard table:
+1. The place is right next to the Guards. You may not rob it.
+2. There are locks. -1 to the Robbery roll.
+3-5. There are easier places, and harder ones too. You may rob it without modifiers.
+6. It would be easier if they left it out in the square. +1 to the Robbery roll.
+
+Planning:
+To improve his chances of success, the Halfling may spend several days planning the job. The maximum number of days is his Battle-Level. Days may be split between several robberies, but they must always be consecutive, and during them he may do nothing else. For each day, roll 1D6; every natural 6 gives a cumulative +1 to the Robbery roll.
+
+Begin the robbery:
+On the last day of planning, the job is ready to go ahead. You may also try without planning. First roll 1D6; on a 1 the rumours were false. Roll again on the rumour table to discover the truth. If it turns out the Guard is there, you must abort the robbery.
+
+Robbing shops:
+Make a Stock roll with a -4 modifier. If you entered the shop for the sole purpose of stealing, suffer an additional -1. There is no limit to the number of items you may try to steal, but only 1 item, or one batch of 1D6, of each type.
+
+Robbery table:
+1. You are caught red-handed.
+2-3. You get away empty-handed, but free.
+4. You may steal 1 item.
+5. You may steal 1D3 items.
+6. You may steal 1D6 items.
+
+To steal an item you must succeed in its Stock roll. There is no limit to the number of attempts, but if you roll a 1 the Guard catches you. If the Halfling fails the Stock roll while stealing, he may also be captured.
+
+Selling the stolen goods:
+The stolen item may be sold to other Heroes or on the black market. Roll 1D6:
+1. The local Guard breaks up the sale.
+2. You unload it for 10% of its price.
+3-4. You manage to sell it for 50% of its value.
+5. You gain 75% of its normal price.
+6. You sell it for its full value.
+
+You&apos;ve been caught!
+To escape you must score 8+ on 1D6 + Initiative. If you fail, roll 1D6:
+1. You are sent before the courts.
+2. You are beaten and expelled from the City.
+3. Lose 1 Wound permanently.
+4. You are thrown out of the Settlement.
+5. Pay a fine of 2D6 x 100 gold.
+6. Pay 1D6 x 100 gold.
+
+Dragged before the court:
+The Halfling Thief may do nothing for the next 1D6 days. On the last day he is tried. Roll 1D6:
+
+Crime table:
+1. Being a Halfling.
+2. Attempted theft.
+3. Theft.
+4. Great thievery.
+5. Illegal acquisition.
+6. Theft with intent.
+
+Sentence table:
+1. Innocent and free, but everything is confiscated.
+2. You receive a severe warning and are released.
+3. Fine of 1000 gold. If you do not pay, you are expelled from the City.
+4. Physical punishment. The judge orders that you never forget what happened. Roll 1D6:
+1. You lose an ear, a finger or another non-vital extremity.
+2-4. You lose a leg: -1 Movement, -2 Initiative and the rule Knocked Down on a 6 in the next adventure.
+5-6. You lose a hand: -1 to hit.
+5. Prison for 1D6 x 5 years. The Hero is out of play, though if at the start of any adventure you roll 5+, he has escaped and may return to play.
+6. Death! Roll 1D6 on the Execution table, unless you spend a Luck point.
+
+Sentences may be avoided if the Warriors bribe the judge. They must pay the sum of the rolled results x 100. If they do not, the Halfling leaves the Settlement.
+
+Execution table:
+1. Beheading.
+2. Hanging.
+3. Drowning.
+4. Burning at the stake.
+5. Torture.
+6. Starvation.</entry>
+  <entry key="location.location-mercader.description">The local market is always the ideal place to buy rope, bandages, fresh boots and other provisions for the road.</entry>
+  <entry key="location.location-mercader.name">Merchant</entry>
+  <entry key="location.location-mercader.rules">Rope. Stock 5+. Buy 30. Sell 5. Lets you escape from pits. Roll 1D6 after using it; on a 1 it breaks.
+
+1D6 Bandages. Stock 7+. Buy 50. Sell 5. Each bandage restores 1D3 Wounds. They cannot be kept after the adventure ends.
+
+1D6 Provisions. Stock 5+. Buy 50. No resale value. Each provision restores 3 Wounds. They cannot be kept after the adventure ends.
+
+1D6 Stakes. Stock 7+. Buy 100. Sell 10. A stake may be used to bar a door. It can only be used once per adventure and requires a Strength test of 9+.
+
+1D6 Barrels of Ale. Stock 5+. Buy 50. No resale value. They grant +1 to the Power roll for one turn. If a Wizard drinks from one, he may not cast spells for 2 turns.
+
+Fine Clothes. Stock 6+. Buy 50. Sell 20.
+
+Boots. Stock 4+. Buy 20. Sell 10.
+
+Trance Stone. Stock 7+. Buy 300. Sell 75.</entry>
+  <entry key="location.location-templo.description">Temples are the cornerstones of every active faith; within them, ritual magic is celebrated according to the rites and practices of the deity to whom the temple is dedicated.</entry>
+  <entry key="location.location-templo.name">Temple</entry>
+  <entry key="location.location-templo.rules">Your Warrior may pray to the Gods for 50 gold. The effects last for a single adventure. Roll 1D6:
+
+1-2. The Gods do not heed your prayers.
+
+3. Your Warrior may double his number of attacks for one turn.
+
+4. Your Warrior may add +3 to a single to hit roll.
+
+5. Your Warrior may ignore the Wounds suffered from one attack.
+
+6. Your Warrior may roll an extra 1D6 when determining the damage caused by an attack.
+
+Certain Warriors have their own temple with additional benefits.</entry>
+  <entry key="location.location-capilla-del-grial.description">You are told of a Grail Chapel lying on the outskirts of the Settlement, far away in a forgotten wood.</entry>
+  <entry key="location.location-capilla-del-grial.name">Grail Chapel</entry>
+  <entry key="location.location-capilla-del-grial.rules">Roll 1D6 to see what the Bretonnian Knight discovers:
+
+1-3. You find nothing.
+4. Sacred Lake.
+5. Ancient ruined Grail Chapel.
+6. Grail Chapel.
+
+Renown bonus:
+Scant +0
+Modest +1
+Widespread +2
+Legendary +3
+
+4. Sacred Lake
+You reach a Sacred Lake deep in the forest. At this location you may perform two actions, applying the Renown bonuses:
+
+a) Spend 1D6 days watching to see whether the Lady of the Lake appears. You need 6+ on 1D6 with bonuses. If you succeed, you gain +1 to one characteristic for the next adventure.
+
+b) Bless your sword in the Lake. This requires 6+ on 1D6 with bonuses:
+1. Magic Blessing
+2. Blessing of the Blade
+3. Blessing of Protection
+4. Blessing of Fortune
+5. Blessing of Banishment
+6. Blessing of Justice
+
+Blessings may be lost if you are reduced to no Honour Points.
+
+5. Ancient ruined Grail Chapel
+Roll 1D6 to see how many days it takes you to reach it and 1D6 to see what you find:
+1-3. Nothing.
+4. Monster. Pass a Strength test; if you do, you gain gold, if you fail you lose Honour Points.
+5. You find equipment or treasure linked to the place.
+6. You discover a new Dungeon.
+
+6. The Grail Chapel
+First make a donation of 1D6 x 50 gold and perform penance for 1D3 days to purify yourself. Each day of penance, roll 1D6; on 4+ you recover the Honour Points you lost in the last adventure. You may then:
+
+a) Seek counsel from the Hermit Knight. Requires 6+ on 1D6 with bonuses. If you succeed, roll 1D6 again:
+1. Enciphered message
+2. Weak point
+3. Dungeon map
+4. The Beast
+5. The Treasure
+6. The Relic
+
+b) Ask aid of the Grail Damsels. On 4+ on 1D6 you recover 1 permanently lost characteristic. Another Warrior may attempt the same if he pays his own donation, but if a 1 is rolled the Damsels expel you both. If you are not injured, you may ask for aid for the next adventure. Roll 1D6:
+1. The Lady&apos;s Challenge
+2-4. Revitalising Potion
+5. +1 Toughness
+6. +1 Strength</entry>
+  <entry key="location.location-casa-del-guardia.description">Wherever there are people there is crime, and where there is crime there is always work for a Bounty Hunter. The Guardhouse is the ideal place to deliver justice, claim a reward and search for the next prey.</entry>
+  <entry key="location.location-casa-del-guardia.name">Guardhouse</entry>
+  <entry key="location.location-casa-del-guardia.rules">a) Reward Table
+If you killed or captured the Outlaw in the previous adventure, roll 1D6:
+
+1. The Outlaw you brought in is not the wanted criminal at all. You must pay him 1D6 x 100 gold.
+
+2. The Outlaw proves innocent of some of the crimes attributed to him while you were hunting him. Remove 1D6 random crimes and adjust his reward value. If he turns out to be innocent of everything, apply result 1.
+
+3-4. You are paid for a job well done.
+
+5. Add 1D3 crimes committed since you started hunting him and increase his value.
+
+6. Add 1D6 crimes committed since you started hunting him and increase his value even more.
+
+b) “Wanted” Posters
+After collecting the reward, look for any new Wanted posters. Roll 1D6:
+
+1. Someone else has already caught one of the Outlaws you were pursuing. Remove one Outlaw marker from your Wanted list.
+
+2. There are no new Wanted posters.
+
+3-5. The Bounty Hunter finds another Wanted poster. Generate the Outlaw as usual.
+
+6. There are 1D3 more Wanted posters. Generate the new Outlaws as usual.</entry>
+  <entry key="location.location-casa-del-noble.description">Everyone says the same of the Noble House: it is a place of wealth, high influence and astonishing knowledge, all wrapped in the traditional arrogance of the Elves.</entry>
+  <entry key="location.location-casa-del-noble.name">Noble House</entry>
+  <entry key="location.location-casa-del-noble.rules">First of all, you must roll 1D6 and, if a 1 is rolled, you are compelled to buy an object of peerless value. Roll 1D6 again:
+1. Silk from Ulthuan, 2000 gold.
+2. Gem of Dragon Isle, 1500 gold.
+3. Spices from Araby, 1000 gold.
+4. Wine from Bretonnia, 750 gold.
+5. Meats from Tilea, 500 gold.
+6. Vessels from Lustria, 300 gold.
+
+a) Learn the latest news. Roll 1D6:
+1. There is nothing interesting to learn.
+2. +1 on the trainers table when you next rise in Battle-Level.
+3. You receive a map of the next adventure. You may choose to be the leader.
+4. Double Attacks for one turn against a Monster in the next adventure.
+5. At the end of the next adventure you gain treasure worth 5D6 x 100 gold, which you may share or keep.
+6. You may claim a Treasure card in the next adventure even if it would not normally fall to you.
+
+b) Seek advice from the Lord of the Noble House by paying 1D6 x 100 gold.
+
+If you are a Wizard, roll 1D6:
+1. Once in the next adventure, you may attempt to cast one extra spell.
+2. In one turn of the next adventure, gain +1 to the Power Phase roll.
+3. In one turn of the next adventure, gain +1 Toughness.
+4. During the next adventure, you may use the Tyrant War Crown twice.
+5. Once in the next adventure, you may cast one extra spell regardless of its power.
+6. Once in the next adventure, improve the effect of one spell by 1D6.
+
+If you are a Knight, roll 1D6:
+1. Once in the next adventure, you have one extra attack.
+2. +1 Luck for the next adventure.
+3. You may make another extra roll on the news table with a +1 modifier.
+4. During the next adventure, you may use the Tyrant War Crown twice.
+5. In one turn of the next adventure, your Attacks gain +1 to hit.
+6. Once in the next adventure, one successful hit gains +2 Strength.</entry>
+  <entry key="location.location-castillo-del-baron.description">High above stands every Bretonnian&apos;s dream: a great stone castle and the chance to visit the nobility who uphold the honour of knighthood.</entry>
+  <entry key="location.location-castillo-del-baron.name">Baron&apos;s Castle</entry>
+  <entry key="location.location-castillo-del-baron.rules">The castle stands on the outskirts of the settlement, raised atop a hill. Audiences, tournaments and challenges for Bretonnian Knights are held there. Consult your Renown table to determine the result.
+
+Events at the Baron&apos;s Castle:
+Access denied. The rough gatekeeper looks you up and down and barks, “Begone, low-born rogue!” Return to the Settlement and lose 1 Renown point.
+
+Challenge and combat. Other Knights of the Realm challenge you to a duel. If you refuse the challenge, lose 1 Renown point. This scene is played as a knightly tournament in which rival knights challenge you. Follow the relevant special rules from the rulebook for tournaments and cavalry duels.
+
+At the higher results you may be admitted before the Baron, gain a Special Reward, increase your Renown further, or suffer the consequences of failure if you dishonour the local nobility.</entry>
+  <entry key="location.location-circulo-sagrado.description">There are many circles of upright stones across the Old World, from rough-hewn slabs raised by pre-human tribes to elegantly carved menhirs set with jewels by the High Elves.</entry>
+  <entry key="location.location-circulo-sagrado.name">Sacred Circle</entry>
+  <entry key="location.location-circulo-sagrado.rules">Your Warrior performs a ritual for 50 gold. The result lasts only for the next adventure. Roll 1D6:
+
+1. Nothing happens.
+
+2. You predict fine weather for the next journey. Any Event related to a storm is treated as a week without incident.
+
+3. You may automatically dispel one enemy spell.
+
+4. You may reroll one Power Phase roll. If it comes up as a 1 again, add your Battle-Level to the result, though the Event still occurs.
+
+5. One single hit that you suffer may be ignored.
+
+6. The Druid chooses one of the benefits above.</entry>
+  <entry key="location.location-cocinas.description">Delicious scents of roast pork, baked potatoes and cherry pies drift through the kitchens.</entry>
+  <entry key="location.location-cocinas.name">Kitchens</entry>
+  <entry key="location.location-cocinas.rules">Roll 2D6:
+
+2. You work as a Halfling cook for 1D6 days and earn 10 gold per day.
+
+3. You are given 1D3 food rations, each of which heals 1D6 Wounds for any Halfling.
+
+4. You receive a fine sack of food containing 1D6 Pork Pies, 1D6 Apples and one fruit tart. Each item heals 1 Wound.
+
+5. A chef teaches you a few tricks. Halfling food rations heal 1 extra Wound in the next adventure.
+
+6. You are given a leather satchel with 1D6 Provisions for your next adventure.
+
+7. You gain a talisman that grants 1 Luck point for the next adventure.
+
+8. You are given a Magic Acorn that you may throw at a Monster if you pass a Ballistic Skill test. Draw its card.
+
+9. You are shown a map to the Mystic Berry Bush. It takes 1D6 days to find it and then roll 1D6:
+1. You do not find it and leave disappointed.
+2-6. You gather 1D6 Berries; each one heals 1D6 Wounds for any Warrior.
+
+10. Some distant Halfling relatives give you an object of great value. Draw 1 Objective Room Treasure card.
+
+11. You are given a page from the recipe book of the legendary Bobbins Huggo. To prepare it, you must give up one food item. Roll 1D6 and draw the matching card:
+1. Supreme Chocolate
+2. Surprise Pudding
+3. Death by Chocolate
+4. Worm Stew
+5. Restorative Pie
+6. Special Dessert
+
+12. You are presented with a small jar of pickles that heals all Wounds on any Halfling.
+
+Any food you gain must be used in the next adventure or it will spoil.</entry>
+  <entry key="location.location-comerciante-armas.description">A shop specialising in weapons for the most famous Bounty Hunters of the Empire. With this armament your prey is certain to fall.</entry>
+  <entry key="location.location-comerciante-armas.name">Weapons Dealer</entry>
+  <entry key="location.location-comerciante-armas.rules">Equipment available to the Bounty Hunter:
+
+Crossbow Bolts. Stock 3+. Cost 25. Last for one adventure.
+
+Fine Ammunition. Stock 8+. Cost 200. If used and you pass a reload roll, the bolts may be used for a second adventure.
+
+Six-shot Load. Stock 10+. Cost 500. 3 bolts per shot, for one adventure.
+
+Rapid-fire Repeating Crossbow. Stock 11+. Cost 5000. +1 Attacks and +1 to Hunt. Uses bolts per shot, for one adventure. Cannot be used in hand-to-hand combat. It may fire 6 times per combat, and therefore requires a Six-shot Load.
+
+Hidden Blade. Stock 9+. Cost 500. If it has not been revealed, you gain +1 to hit and +1 Attacks against whoever attacks you.
+
+Cloak of Darkness. Stock 10+. Cost 750. Monsters are at -1 to hit you.
+
+Manacles. Stock 9+. Cost 600. A captured Outlaw does not escape if you roll 3+ on 1D6 after defeating him.</entry>
+  <entry key="location.location-taberna-del-maestro.description">This tavern serves a great range of rich and flavoursome ales. For connoisseurs only.</entry>
+  <entry key="location.location-taberna-del-maestro.name">Brewmaster&apos;s Tavern</entry>
+  <entry key="location.location-taberna-del-maestro.rules">Within this Special Location the Warrior may:
+
+a) Drink in the taproom with Dwarfs.
+1. After taking a deep draught of ale, you collapse unconscious on the floor.
+2-3. You enter a tournament to see who can drink the most in the least time. The number of rounds is 1D3 + 2. To pass the first round, roll 1D6 + Toughness and score 6+. Each later round rises to 7+, 8+, and so on. If you lose, you pay 100 gold. If you win, you gain 100 gold per round passed and 50 more for the final round.
+4-5. An old Brewmaster takes a liking to you and offers you a draught. Roll 1D6 + Toughness. If you score 9+, you gain +1 Toughness for the next adventure and permanently gain 1 Starting Wound.
+6. You accept a challenge to see who can drink Volcano Ale first. Roll 2D6 + Toughness. On a score of 12+, a Runesmith inscribes a rune on your axe for free, impressed by your feat.
+7+. A venerable Brewmaster gives you a magic jug that never runs dry. You may pour one of your original ales into the jug and drink from it up to 1D6 times per adventure.
+
+b) Buy from the Brewery / Beer Cellar.
+Draw its Special Location card.
+
+c) Visit the Brewery.
+You may present your own creations to the Lord of the Tavern for tasting. Roll 1D6 + number of special ingredients found + number of days spent fermenting:
+1-3. You are thrown out and must return any winnings gained from competitions, though you may keep what you purchased.
+4-7. He fills one of your original barrels.
+8-10. He gives you a Beercart mule. It never collapses on reaching a Settlement, is loyal and cannot be stolen, though it costs 2 extra gold per day to keep.
+11+. All the gold spent in the Brewery is returned. In addition, you are given a barrel of Bugman&apos;s Grand Reserve as a gift.</entry>
+  <entry key="location.location-campamento-silvano.description">Colonies of Wood Elves dwell in small camps beyond the borders of Athel Loren.</entry>
+  <entry key="location.location-campamento-silvano.name">Wood Elf Camp</entry>
+  <entry key="location.location-campamento-silvano.rules">Roll 1D6 to see whether you locate the Camp:
+
+1. You lose 1D6 days searching to no avail. You may enter the Settlement and look for your companions or wait for them outside.
+
+2-3. You reach the Camp and return to the Settlement after 2D6 days.
+
+4-5. You reach the Camp and return to the Settlement after 1D6 days.
+
+6. You discover a camp just before reaching the Settlement. You may remain there and return in one day.
+
+If “Quiet Week” is rolled during a journey, the Wardancer may find traces of the Camp on a 6 on 1D6.
+
+Each day in the Wood Elf Camp:
+Daily Expenses: 2D6.
+Daily Events: roll 1D6.
+
+1. You hear news of a raid in the Forest of Loren. Orion orders you back immediately. Roll 1D6:
+1. Though you defended the forest bravely, you suffered terrible wounds. You die beneath the Eternal Oak of Athel Loren in Ariel&apos;s lap.
+2-3. Lose 1D3 Starting Wounds.
+4-6. Lose 1 Starting Wound.
+
+2-5. By the time you reach the Forest of Loren, the attack has already been turned aside and the journey was in vain. You return to rejoin the group. You are given 2D6 Elven Waybreads, but you consumed 2D6 getting there; note any that remain.
+
+6. You defeat the enemy leader in single combat. Receive 1 Dungeon Room Treasure card.
+
+2. An ambush struck the Camp and you have lost friends and kin. Your visit ends here. You must now kill (2D6 + Battle-Level) creatures of the attacking race to fulfil your vengeance. While this lasts, you earn double gold, but everything costs double. Roll 1D6 to determine the attacking race:
+1. Greenskins
+2. Undead
+3. Skaven
+4. Chaos
+5. Dark Elves
+6. Chaos Dwarfs
+
+3-4. You are welcomed with open arms and pay only 1D6 in Daily Expenses.
+
+5. The Camp is in turmoil over the theft of a treasured item. Roll 1D6:
+1. Sword
+2. Scroll
+3. Bow
+4. Helm
+5. Potion
+6. Magic Ring
+
+If another Warrior wins an item of that type, you must still pay for it as usual, and you are rewarded with 1D6:
+1-2. You are never charged Daily Expenses again.
+3-5. 1D3 Dungeon Room Treasure cards and all Camp prices are halved.
+6. You may choose one of your two Swords of Orion and roll on the Aspect Table.
+
+6. You are gifted 1D6 x 100 gold.</entry>
+  <entry key="location.location-capilla-del-convento.description">While a Sister of Sigmar or a Warrior Priest is staying at a Convent of Mercy, she or he may visit the Convent&apos;s main Chapel to pray to Sigmar through ancient rites and ceremonies.</entry>
+  <entry key="location.location-capilla-del-convento.name">Convent Chapel</entry>
+  <entry key="location.location-capilla-del-convento.rules">You must make a donation of 1D6 x 100 gold. Add +1 to the result if you are a Sister of Mercy or +2 if you are a Superior Sister. Roll 2D6:
+
+2-4. Nothing.
+5. Once only in the next adventure you may break from pinning automatically.
+6. Automatic prayer for the next adventure that heals 1D6 Wounds on a Warrior.
+7. +1 Weapon Skill in the next adventure.
+8. Choose one weapon or piece of armour; it counts as magical.
+9. In the next adventure you may exchange a treasure you cannot use for one belonging to another Warrior, though you will end up donating it to the Convent if you roll a 1 on 1D6.
+10. Choose a weapon that becomes magical and in the next adventure causes 1 extra Wound per Battle-Level against Undead and Chaos.
+11. +1 Toughness in the next adventure.
+12. Choose a weapon that becomes magical and causes 1 extra Wound per Battle-Level against Undead and Chaos. This effect may stack.
+13+. +1 permanent Starting Wound.</entry>
+  <entry key="location.location-comerciante-elfo-silvano.description">The finest equipment crafted by the Wood Elves to defend the forests and the lands around the Camp against the enemies of Athel Loren.</entry>
+  <entry key="location.location-comerciante-elfo-silvano.name">Wood Elf Trader</entry>
+  <entry key="location.location-comerciante-elfo-silvano.rules">To determine whether the Wood Elf Trader has the item the Wardancer wants, he must score 10 or more on 2D6. Any Warrior of another race rolls 1D6 instead.
+
+Equipment:
+1D6 Healing Herbs. Stock 5+. Cost 50 each. If taken on the spot, they heal 2D6 Wounds; otherwise the Master Herbalist may make 1D6 potions from them.
+
+Elven Rope. Stock 3+. Cost 75. After use, roll 1D6; it breaks on a 1.
+
+Tribal Boots. Stock 6+. Cost 100. You become invisible for one full combat, but reappear if you attack, when the combat ends, or if you avoid an Event during a journey.
+
+Cloak of Concealment. Stock 6+. Cost 750.
+
+1D6 Waybreads. Stock 3+. Cost 10 each. Each restores 1D6 Wounds and never goes stale; they are used by the Wood Elves.</entry>
+  <entry key="location.location-convento-de-la-merced.description">The home of sacred texts and holy artefacts, always open, but only to the sisterhood.</entry>
+  <entry key="location.location-convento-de-la-merced.name">Convent of Mercy</entry>
+  <entry key="location.location-convento-de-la-merced.rules">This is always your first visit, and you must donate 10% of the gold you are carrying. The donation counts towards the cost of rising in level. Inside the Convent you pay no Daily Expenses, though you still roll on the Settlement Events table.
+
+A Warrior Priest may only be admitted if he also donates a Treasure card chosen by the Sisters and scores 7+ on 1D6 + Initiative. He may then visit the Abbess at -2 to the roll and pray in the Main Chapel.
+
+a) Visit the Abbess. Roll 1D6:
+0. She expels you.
+1. She offers you nothing; she is indifferent to you.
+2. +1 to the Damage roll when using a Blessing of Sigmar.
+3. The next time you rise in level, roll one extra die to determine the Prayer or Gift received.
+4. She sprinkles you with Holy Water. Gain +1D6 temporary Starting Wounds in the next adventure.
+5. Choose between Assistance or opening the Silver Chest.
+6. Choose between Assistance, the Silver Chest or the Gold Chest.
+
+Assistance. Roll 2D6 + Battle-Level and check whether you are in a Village, Town or City. In each case: Priestess -1, Prophetess +1.
+
+Sacred Phials. Roll 2D6:
+1-2. Combat
+3-4. Strength
+5-6. Toughness
+7-9. Holy Water
+10-11. Rejuvenation
+12-13. Restoration
+
+Sacred Items. Roll 2D6:
+1-2. Hindrance Bracelets
+3-4. Mantle of Release
+5-6. Stone Amulet
+7. Gloves of Wrath
+8-9. Reinforced Iron Diadem
+10-11. Enchanted Silk Sling
+12-13. Ring of Deflecting Justice
+
+Mentor. Roll 2D6:
+1-2. Hand of Sigmar
+3-4. Hinder Enemy
+5-6. Extraordinary Shot
+7-9. Repel
+10-11. Lash
+12-13. Bombard
+
+Open the Silver Chest:
+1D6 Bandages. Donation 50. Stock 5+
+Steel Balls. Donation 150. Stock 4+
+Sling. Donation 75. Stock 4+
+Warhammer. Donation 300. Stock 7+
+Steel Whip. Donation 500. Stock 8+
+Breastplate of Mercy. Donation 500. Stock 7+
+Coif and Crown. Donation 500. Stock 8+
+Steel Greaves. Donation 500. Stock 9+
+Holy Symbol. Donation 750. Stock 6+
+
+Open the Gold Chest:
+2D6 Blessed Marbles. Donation 200. Stock 7+
+Mace of Resolve. Donation 750. Stock 9+
+Flail of Immunity. Donation 1000. Stock 13+
+Hammer of Sonja. Donation 2000. Stock 15+
+Buckler of Condemnation. Donation 1000. Stock 11+
+Sacred Gauntlets. Donation 1500. Stock 13+
+Helm of Mercy. Donation 2000. Stock 15+
+
+b) Visit the Main Chapel.
+Draw its Settlement card.</entry>
+  <entry key="location.location-elfos-silvanos-antiguos.description">The Ancients are the beings who form the Council of Wise Ones. This is the first compulsory stop in the Camp, and only afterwards may you buy their finest devices.</entry>
+  <entry key="location.location-elfos-silvanos-antiguos.name">Ancient Wood Elves</entry>
+  <entry key="location.location-elfos-silvanos-antiguos.rules">Available equipment:
+
+Lucky Amulet. Available to Wardancer and Elf Ranger. Stock 8+. Cost 1000. Grants +1 permanent Luck.
+
+Elixir of Orion. Available to Wardancer and Elf Ranger. Stock 8+. Cost 300. The elixir heals 1D6 Wounds and may only be used once between adventures. If both pairs add together, odd dice instead subtract Wounds.
+
+Rod of Ariel. Available to Wardancer. Stock 10+. Cost 500. Wild druidic power runs through it; whoever bears it moves through briars as if they were not there.
+
+Flute of Isha. Available to Wardancer. Stock 9+. Cost 750. One use per adventure. When played, Monsters must roll 6+ in the Power Phase. It does not affect Elves.
+
+Drum of Kurnous. Available to Wardancer. Stock 9+. Cost 750. For an entire board section, no Power Phase rolls may be made. In addition, it applies a cumulative +1 per turn to the Power Phase.</entry>
+  <entry key="location.location-espiritu-salvaje.description">An immortal creature covered in tattoos and marked by its lineage, at once terrifying and majestic. It is the master of the Dance of Death.</entry>
+  <entry key="location.location-espiritu-salvaje.name">Wild Spirit</entry>
+  <entry key="location.location-espiritu-salvaje.rules">First you must make a donation of 1D6 x 100 gold to the Wood Elves; they will tell you where the Spirit has appeared. Roll 2D6; on 7+ the Wild Spirit appears. You may only try to see the Spirit once per visit to the Camp. The Wild Hunt lasts 1D3 days, during which time the Warrior may not visit other locations or roll on the Event table.
+
+Battle Tattoos:
+Whenever Monsters appear, roll 1D6:
+1. You make no further rolls when Monsters appear.
+2-5. The tattoos are present, but have no effect.
+6. The Warrior causes Fear in the Monsters and they are at -1 to hit him.
+
+The Spring of Ariel:
+The first Sacred Glade is the Spring of Ariel. From this moment onward, your swords are magical against Daemons and Undead. Once you have visited it, you may discover other Sacred Glades.
+
+Sacred Glades:
+During the Wild Hunt you may visit other glades. Roll 1D6:
+1-2. You do not reach any Sacred Glade.
+3-4. You find one Sacred Glade and one of your swords gains an Aspect.
+5-6. You find one Sacred Glade and both your swords gain an Aspect.
+
+Aspects of Orion&apos;s Swords:
+You never need to seek the Spring again unless you lose your Swords of Orion. If you score 3-6 at the Spring, roll 1D6 for each sword. A sword may have only one Aspect:
+
+1. Oak Aspect: +1 Toughness. If both swords have this Aspect, +3 Toughness.
+2. Willow Aspect: Dodge Blow 6+. If both have it, 5+.
+3. Sun Aspect: Monsters are at -1 to hit you; if both have it, -2.
+4. Earth Aspect: every blow inflicts extra Wounds. Novice +1, Champion +2, Hero +3, Lord +4.
+5. Wind Aspect: +Attacks. Up to Champion +1, Hero +2, Lord +3.
+6. Water Aspect: if you lose Wounds, roll 1D6. On 5+ you recover 1D6 Wounds; if both swords have it, add +1 to the result of the first 1D6.</entry>
+  <entry key="location.location-maestro-de-espadas.description">A master who keeps alive the ancestral tradition of metalwork and sword forging, a craft passed down from generation to generation since the High Elves ruled the world. The swords made by these Wood Elves are beyond compare.</entry>
+  <entry key="location.location-maestro-de-espadas.name">Swordmaster</entry>
+  <entry key="location.location-maestro-de-espadas.rules">If you lose one of your Swords of Orion, you must find a Swordmaster.
+
+If the Wardancer finds a Swordmaster, he may replace a lost sword by scoring 4+ on 1D6.
+
+The Wardancer must make one roll for each sword that has been lost. He may never possess more than two Swords of Orion. The new sword will be identical to one of the Level 1 swords with which the Wardancer begins the game.
+
+They cost no money, but from that moment the Wardancer will be known as a “Sword-loser”, and the shame of losing a blade granted by Orion himself will never leave him while he lives. He will therefore do everything in his power never to lose his weapons again.</entry>
+  <entry key="location.location-gremio-cazarrecompensas.description">Beware! The Witch Hunter&apos;s Guild is a powerful institution with a voice in every corner of the Settlement. Its doors are open only to its own kind.</entry>
+  <entry key="location.location-gremio-cazarrecompensas.name">Witch Hunter&apos;s Guild</entry>
+  <entry key="location.location-gremio-cazarrecompensas.rules">Within this location the Witch Hunter may:
+
+a) Recharge the uses of each amulet by paying 1D6 x 50 gold. Then roll 1D6:
+1. You lose the amulet.
+2. The recharge has no effect, but you keep the amulet.
+3-5. The amulet is recharged; roll 1D6 to see how many uses it has.
+6. The amulet is restored to 6 charges and in addition you receive another extra amulet; roll 1D6 to determine which one.
+
+b) Train to rise in Battle-Level. You may roll twice on the Training Benefits table, or pay for assistance in order to attempt one additional roll. To receive help, roll 1D6 and achieve the indicated result:
+Level 1: 3+, cost 200.
+Level 2: 3+, cost 400.
+Level 3: 3+, cost 600.
+Level 4: 4+, cost 1000.
+Level 5: 4+, cost 1500.
+Level 6: 4+, cost 2000.
+Level 7: 4+, cost 3000.
+Level 8: 4+, cost 3500.
+Level 9: 4+, cost 4000.
+Level 10: 5+, cost 5000.
+
+Training benefits / successful assistance table. Roll 1D6:
+1. Gain 1D6 extra Faith Points.
+2. Objects and equipment. Roll 2D6: Silver Bullets, 1D6 Bombs, Amulet of Power, Lock Picks, Iron Fists, Aiming Blades, 1D3 Blinding Powder, Rope and Hook, Cloak of Deceit, Holy Book or Ring of Protection.
+3. Potions and elixirs. Roll 1D6: Healing, Holy Water, Elixir against Undead, Elixir against Chaos, Elixir against Daemons or Light of Valour.
+4. Artefacts and symbols. Roll 1D6: Chalice of Life, Mirror of the Condemned, Hoschenfels Book, Talisman of Khardoz, Amulet of Charadris or Icon of Ghalamuk.
+5. Invocations. Roll 1D6: Curse Undead, Curse Vampires, Scourge of Chaos, Dispel Magic, Scourge of Daemons or Greater Daemon&apos;s Curse.
+6. Skills. Roll 1D6: Dodge, Dirty Blow, Instinctive Attack, Vengeance, Oppressor or Killing Blow.
+
+Consult your rulebook pages or Warrior cards for the rules of each result.</entry>
+  <entry key="location.location-gremio-de-asesinos.description">“Password?” “Your weapons. Now.” “No. You can&apos;t see him.” “We have a target for you...” The Guild is where the Assassin gains news, advice and assignments of the most discreet kind.</entry>
+  <entry key="location.location-gremio-de-asesinos.name">Assassins&apos; Guild</entry>
+  <entry key="location.location-gremio-de-asesinos.rules">While you are in the Guild, the Assassin must pay a fee of 1D6 x 150 gold. Then roll 1D6:
+
+1. Information is scarce and the Assassin learns nothing.
+
+2. An old friend has just returned and learned new techniques. The next time you gain a skill, you may reroll the result.
+
+3. Another criminal has visited many monster lairs in the region and gives you a map of the dungeon. If you wish, you may be the leader in the next adventure.
+
+4. The Assassin learns that several monsters have been laying waste to a nearby dungeon. Once during the next adventure, you may avoid an Ambush attack and the Warriors attack first. In addition, the Assassin gains 20% more gold for every monster he kills.
+
+5. A Guild member warns you of the presence of an Arcane Monster. If the final enemy in the next dungeon dies, the Assassin takes a Dungeon Room Treasure card for himself.
+
+6. The Grand Master assigns you a special assassination mission. Choose one monster in the next dungeon; the Assassin will gain double gold when that enemy dies.</entry>
+  <entry key="location.location-luigi-o-salvatore.description">The sign at the entrance says it all: “Makers of fine arms and quality articles for the aristocracy”. Since 2034, Luigi &amp; Salvatore have supplied dukes, barons and nobles with a taste for luxury.</entry>
+  <entry key="location.location-luigi-o-salvatore.name">Luigi &amp; Salvatore</entry>
+  <entry key="location.location-luigi-o-salvatore.rules">Luigi &amp; Salvatore is a shop reserved for dukes and barons. Before entering, you must rid yourself of anything bought elsewhere, including animals. L&amp;S always has stock, but they never buy second-hand goods, so you may not sell anything here.
+
+When you go to buy, roll 2D6:
+2-3. They decide you do not deserve the item. You leave the establishment in disgust.
+4-10. Luigi &amp; Salvatore charge the normal price.
+11. They charge you 1D6 x 50 gold extra.
+12. They double the prices. If you do not have enough money, they expel you and you leave the Settlement in shame.
+
+Available equipment:
+- Fine Clothes, 100 gold. Greatly improve your social bearing and any tests of style or etiquette.
+- Rapier, 400 gold. A light, elegant weapon intended for duels.
+- Blunderbuss, 2500 gold. A clumsy but devastating firearm at short range.
+- Dueling Pistol, 1500 gold. A refined weapon for nobles; it must be reloaded between shots.
+- Ruby Rosary, 900 gold. +2 Toughness and bears the blazon of an important family.
+- Decorated Breastplate, 500 gold. +1 Toughness.
+- 1D6 Pearl Bandages, 750 gold. Each bandage restores 3 Wounds; on a 6 when used, the bandage tears apart.
+- Grand Reserve Chilled Wine, 200 gold. Each draught temporarily improves your abilities, though it may bring undesirable side effects.
+- Powder and Shot, 150 gold. Enough ammunition for a full adventure, except for the Blunderbuss.
+- Silver Bullets, 250 gold. Special ammunition, treated as magical.
+- Silver Spurs, 100 gold. Improve control over your mount.
+- Riding Boots, 100 gold. Allow you to ride with greater ease and elegance.
+
+Some items on the original card are difficult to read clearly; if they are used in play, it is advisable to check them against the image before applying them literally.</entry>
+  <entry key="location.location-mercado-de-pulgas.description">Deep in the bustling streets of the Settlement lies a dark and furtive world that operates beyond the reach of the law.</entry>
+  <entry key="location.location-mercado-de-pulgas.name">Outlaws&apos; Market</entry>
+  <entry key="location.location-mercado-de-pulgas.rules">There are three types of trader, and you may visit only one per day:
+
+1) Weapons Dealer. Sells the same equipment as a Master Armourer and an Archery Range, but at a 10% discount and all under one roof.
+2) Equipment Trader.
+3) Black Market.
+
+Equipment Trader:
+- Compass. Stock 5+. Buy 40. Sell 10.
+- Provisions. Stock 5+. Buy 30. Sell 7.5.
+- Spare boots. Stock 6+. Buy 40. Sell 10.
+- Ropes. Stock 8+. Buy 25. Sell 5.
+- Barrels of ale. Stock 8+. Buy 200. Sell 50. Last for one turn; if the Wizard drinks, he may not cast spells for 2 turns.
+
+Black Market:
+- Fang Sword. Stock 10+. Buy 650. Sell 70. Causes 1 extra Wound and ignores armour.
+- Steel-toed Boots. Stock 8+. Buy 500. Sell 20.
+- Dagger. Stock 8+. Buy 750. Sell 35. Grants an additional attack on a to hit roll of 6.
+- Repeating Crossbow. Stock 11+. Buy 1250. Sell 300. Makes two shots per turn.
+- Disguise. Stock 8+. Buy 300. Sell 60. Reroll a result of 1 if you are detected by city guards.
+- Healing Stone. Stock 6+. Buy 200. Sell 10. Heals exactly as the one from the Dwarven Guild.
+- Blinding Powder. Stock 9+. Buy 75 for 1D3. Sell 75.
+- Weapon Poison. Stock 9+. Buy 250 for 1D3. Sell 10. Applied to hand-to-hand weapons and adds 1 extra Wound on a successful hit.
+
+Use the normal game profiles for any equipment not expressly detailed here.</entry>
+  <entry key="location.location-montanas-rocosas.description">These vast masses of rock on the outskirts are the perfect playground for creatures larger than men.</entry>
+  <entry key="location.location-montanas-rocosas.name">Rocky Mountains</entry>
+  <entry key="location.location-montanas-rocosas.rules">An Ogre always pays double subsistence expenses. This is not out of luxury: he is simply not very bright and often sleeps here or in the Stables.
+
+Strictly speaking, there are many places the Ogre ought not to visit, but nobody dares stop him. For that reason he may attempt to visit any location he pleases. Roll 1D6 on entering:
+
+1-3. Without really meaning to, but with a gift for causing trouble, he prevents business from functioning properly. He spends the day “helping”, gains nothing and returns wearing a satisfied grin. If he visits the Wizards&apos; Guild, roll 1D6; on 1-3 he is such a nuisance that they turn him into a toad for 3 days, during which time he can do nothing else.
+
+4-6. He may attempt only one thing or make one purchase within the Special Location, and somehow it seems to work out, though at greater cost. For example, in the Dwarven Guild, on 5+ he might have a rune engraved on his weapon or even on his chest. He may also attempt to find Elven armour, though the stock roll is 12 and it costs 6000 gold.</entry>
+  <entry key="location.location-santuario-de-asuryan.description">Here the Elves may worship and pray to the greatest of the Elven gods, honouring him with mighty offerings.</entry>
+  <entry key="location.location-santuario-de-asuryan.name">Shrine of Asuryan</entry>
+  <entry key="location.location-santuario-de-asuryan.rules">Upon arriving at this Special Location you must make a donation of 2D6 x 120 gold. Roll 1D6 + Blood Points and consult the table:
+
+20 or more. You overcome Khaine&apos;s Curse forever, though it takes you 1D6 days to recover. Battle Trance no longer affects you, you may not choose it, and you may ignore any future increase in your Blood Points. You also stop rolling in Elven Quarters.
+
+19-18. Asuryan frees you from your burden for the next adventure. You do not move the Trance counters toward the blue side after combat if you score 3+ on 1D6. In addition, lose 1 Blood Point.
+
+17-16. During the next adventure you recover 1 Wound in any turn in which you do nothing.
+
+15-14. You see a small door opening into an antechamber. Inside lies 1 Objective Room Treasure card.
+
+13-12. The image of a great artefact fixes itself in your mind. You must carry that treasure to Asuryan to lighten your burden. If you succeed, lose 1D6 Blood Points.
+
+11-9. Roll 1D6; that is the number of times you may replace a Battle Trance counter in the next adventure. You must accept the second result.
+
+8-6. During one turn of the next adventure you gain +1 Strength.
+
+5-2. During one turn of the next adventure you are immune to Fear and Terror.
+
+1 to 2. You are not worthy of Asuryan.
+3. The next adventure you begin with -1D6 Wounds.
+4 to 6. During the next adventure you have -1 Strength.
++7 or more. Lose 1D3 Starting Wounds permanently and you are expelled from the Settlement.</entry>
+  <entry key="location.location-soledad.description">Far from the clamour of Settlements, you may remain in solitude and in full communion with nature.</entry>
+  <entry key="location.location-soledad.name">Solitude</entry>
+  <entry key="location.location-soledad.rules">Instead of visiting the temple, a Shaman may sit outside the settlement in communion with his deities. This takes 1D6 days, during which he has no Settlement Events and pays no Daily Expenses. Roll 2D6:
+
+2-4. Your prayers go unanswered.
+5. You gain a small blessing of experience and receive +1 Innate Mana point, but only for the next adventure.
+6-8. You are uplifted by solitude and gain +2 Innate Mana points, but only for the next adventure.
+9. During the next adventure you gain +1D6 extra Innate Mana.
+10. You receive a special gift from your deity and gain an extra 1D6 Innate Mana.
+11. During the next dungeon you may invoke one spell without spending mana.
+12. You bind yourself directly to your deity. You spend the next 1D6 days recovering, but immediately gain one extra spell and +1D6 Innate Mana.</entry>
+  <entry key="location.location-tienda-foot-locker.description">The “Foot Locker” sports shop is paradise for Blood Bowl lovers. Here you will find equipment made to run, block and flatten anyone who stands in your way.</entry>
+  <entry key="location.location-tienda-foot-locker.name">Foot Locker</entry>
+  <entry key="location.location-tienda-foot-locker.rules">With the exception of Athletic Bandages, you may never own more than one of each normal item sold here. No dice need be rolled to check for stock and, in addition to this location, you should keep the Foot Locker Special Items card to hand.
+
+Normal equipment:
+- Gat-Ork-ade Bottle, 150 gold. One use per adventure. Roll 1D6: on 1-2 it is empty; on 3-6 you may keep using it. Choose between +1 Strength for one combat, +2 Strength for one combat, or doubling your Movement for 1D3 turns.
+- Spiked Football, 1000 gold. It uses its own to hit roll and causes 1D6 Wounds with no modifiers. The usual +1 equipment bonus to hit does not apply. The ball is recovered at the end of the combat.
+- Studded Boots, 500 gold. Grant extra movement or extra distance each turn. Your attacks are at -1 to hit, but cause 1D6 + Strength.
+- Athletic Bandages, 200 gold. Restore 1D6 Wounds to the Ex-Blood Bowl Player and never spoil.
+- Blood Bowl Breastplate, 250 gold. +1 Starting Toughness.
+- Spiked Shoulder Pads, 250 gold. You may continue making a Blitz in a straight line as long as you still have Movement remaining.
+
+Special items:
+The Foot Locker special items card contains a D66 table of rare items. Among them are boots, shoulder pads, balls, gloves, runes and other Blood Bowl contraptions that improve movement, blocking, armour, attacks or damage. Use that table whenever a rule allows you to obtain one of those special items.</entry>
+  <entry key="location.location-calabozo-portuario.description">You will share a cell with ruthless men, thieves, murderers, smugglers, rioters and pirates. Many of your cellmates come from foreign lands, speak strange dialects and have very bad breath.</entry>
+  <entry key="location.location-calabozo-portuario.name">Dockside Gaol</entry>
+  <entry key="location.location-calabozo-portuario.rules">During your time in gaol, discover the most striking thing that happened to you there. Roll 1D6:
+
+1. Deported! Your Warrior ends up in solitary confinement and believes he is about to be shipped to some far-flung penal colony. Roll 1D6: on a 1 you fail in your attempt to escape and end up very, very far away; nobody ever hears from you again. On 2+ you escape the isolation cell and your dreadful fate. Remember your Luck points.
+
+2. Rotten Gruel! For the next adventure only, your Warrior has -2 Starting Wounds.
+
+3. Cat-o&apos;-nine-tails! The guards do not like your appearance or the way you are looking at them. They drag you into the yard and lash you with the dreaded cat-o&apos;-nine-tails. -1 Toughness in the next adventure.
+
+4-5. Breaking stones! Your Warrior spends the whole day in chains breaking rock.
+
+6. Treasure map! You meet an old, bald, skeletal man with a huge moustache, gesturing wildly and cursing in a foreign tongue. He hands you a scroll that proves to be a map to a lost treasure. At the end of the next adventure you gain 1D6 x 100 gold.</entry>
+  <entry key="location.location-marina-de-guerra.description">This shop, known to all as “The War Fleet”, has everything needed to survive the harshest conditions of your adventures and ocean voyages, little swab.</entry>
+  <entry key="location.location-marina-de-guerra.name">War Fleet</entry>
+  <entry key="location.location-marina-de-guerra.rules">Available equipment:
+
+- Reed Rope. Stock 7+. Buy 50. Sell 10. Follows the rules of a normal rope, but also lets you escape from a Kraken&apos;s tentacles. Roll 1D6 after use; on 1-2 it breaks.
+- 1D6 Draughts of Rum. Stock 6+. Buy 75. Each draught allows you to remain unpinned for more than one turn.
+- 1D6 Sea Scales. Stock 8+. Buy 75. Strength 3; roll 1D3 if one breaks.
+- Clawed Boots. Stock 8+. Buy 100. Sell 10. You may ignore the first 1 rolled while trading.
+- Eastern Sword. Stock 10+. Buy 500. Sell 50. Causes Damage against Weapon Skill rather than Toughness.
+- Parrot. Stock 7+. Buy 75. Sell 5. Lets you reroll results of 1 if you suffer ambushes; roll 1D6, on a 6 you avoid the same one.
+- Eyepatch. Stock 7+. Buy 50. Sell 5.
+- Pirate Hook. Stock 5+. Buy 50. Sell 5. Counts as a light weapon; if you hit with a 1, the nearest Monster gains +1 Strength and +1 Movement for 2D6 turns.
+- Compass. Stock 8+. Buy 250. Sell 30. Reduces travel time by 1D3 weeks.
+
+Use the basic rules of the equivalent item whenever the card refers back to a normal item from the game.</entry>
+  <entry key="location.location-puerto-de-mar.description">These are centres of distribution and coastal transport, making them true zones of influence. This dockside district forms part of some Settlements and has its own Tavern, Gaol, Trading Post, Smuggler&apos;s Wharf or War Fleet store.</entry>
+  <entry key="location.location-puerto-de-mar.name">Seaport</entry>
+  <entry key="location.location-puerto-de-mar.rules">The Warriors may try their luck trading in exotic and rare goods that pass through the port each day. Your Warrior must decide which merchandise he will buy:
+
+Goods / Cost / Maximum sale value
+- Silks / 30 / x10
+- Exotic perfumes / 60 / x10
+- Foreign spices / 100 / x15
+- Wines and spirits / 150 / x20
+- Ancient weapons / 200 / x20
+- Slaves / 300 / x25
+
+First roll 1D6 to see how many of those goods are available. You may buy all goods available at the listed cost. If you roll a 1, however, there is no stock at that moment.
+
+After buying the goods you may resell them in the streets. For each lot of merchandise you may roll one die, up to the maximum Sale Value. Add the total rolled on all the dice and multiply it by the Sale Value. The result is the number of gold pieces you receive. If any die comes up as a 1, the product is discovered to be of poor quality and you receive no money for it, losing it as well.
+
+If you are trading in illegal goods, after the previous 1 roll 1D6. On a 1 or 2 you are arrested. All your merchandise, legal and illegal alike, is confiscated and you spend a full week in the Gaol.</entry>
+  <entry key="location.location-taberna-portuaria.description">A waterfront tavern packed with sailors, pirates and the occasional drunken captain.</entry>
+  <entry key="location.location-taberna-portuaria.name">Dockside Tavern</entry>
+  <entry key="location.location-taberna-portuaria.rules">Roll 2D6:
+
+2. A Navy patrol presses you into service. Roll 1D6:
+1. You join the Navy and devote your life to the sea. You are never seen again.
+2-5. You must pay 2D6 x 10 gold to bribe them.
+6. You proclaim yourself to be Admiral Krueger and gain 1D6 x 10 gold by fining them instead.
+
+3. If you dance for half a minute, you gain 2D6 x 10 gold. If you refuse, your reputation drops by 1 point on this Settlement&apos;s Captain Table.
+
+4. A pair of sailors ask for your help in their smuggling business. If you agree, roll 1D6:
+1. You are discovered and sent to the Gaol.
+2-6. You gain 2D6 x 50 gold.
+
+5. A peg-legged pirate with a parrot gives you a map marked with a black X. In the next adventure the monsters attack you first, but if you survive you gain +1D3 Objective Room Treasures.
+
+6. Tonight is “Drink till the bar runs dry”. When you wake up, you are in an alley with a great skull tattooed on your chest and some humiliating phrase beneath it.
+
+7. You are challenged to a drinking contest and choose Captain Ahab&apos;s rum. Roll 1D6 with the normal Tavern modifiers, and the GM does the same. Repeat the process until someone reaches 30. If you win, you gain draughts of rum. If you lose, you wake up lost in a tiny boat with no oars and spend 1 day getting back to the Seaport.
+
+8. You take part in a dice game with wagers and win 2D6 x 10 gold.
+
+9. You stumble into a drunken captain who convinces you that he can carry you to infinity and beyond. Without thinking twice you agree. Roll on the Captain Table with a -1 modifier.
+
+10. You buy Captain Nemo several rounds and spend 1D6 x 10 gold. He gives you a fine ivory carving. It may be used once per adventure to force a Monster to reroll a to hit roll.
+
+11. A young captain teaches you a trick so long as you have a rope. Once per adventure you may break from pinning and move up to 6 squares, even through occupied ones.
+
+12. You learn a sea song that you may use once per adventure. Choose an adjacent Monster and roll 1D6; on 4+ the Monster flees. On 1-3 it attacks only you until death.</entry>
+  <entry key="location.location-templo-de-khaine.description">This shrine is a gathering place for all worshippers of the God of Murder.</entry>
+  <entry key="location.location-templo-de-khaine.name">Temple of Khaine</entry>
+  <entry key="location.location-templo-de-khaine.rules">Upon arriving at this Special Location you must make a sacrifice. Roll 1D6 and, on a 1, lose 1 Starting Wound. Then roll 1D6 + Blood Points and consult the table:
+
+20 or more. You feel as if your body is wrapped in flame. Roll 1D6 + Toughness; if the result is 7 or less, you lose 1 permanent Starting Wound.
+
+1-6. Khaine is unimpressed by your pleas and ignores you.
+
+7-9. Khaine deigns to grant you a blessing. You gain 1 permanent Starting Wound.
+
+10-11. Your bond with Khaine deepens. Gain 1 Blood Point and roll again on this table.
+
+12-14. You become obsessed with bloodlust and war. Gain +1 Weapon Skill and +1 Blood Point permanently.
+
+15-17. During the next adventure you gain the special rule Frenzy 6+.
+
+18-19. You are a child of Khaine, the God of Murder, who has stolen your soul and your self-control. You suffer -1 Willpower permanently. When you next enter the Elven Quarter you gain an additional 1D6 bonus.
+
+20 or more again. You are Khaine&apos;s Puppet. Gain +1 Training Point and roll as though you had risen in Battle-Level. You no longer interact normally or enter further Settlements. Your soul belongs to Khaine.
+
+If your Blood Points ever return to 0 or less, you may behave normally again. Until then, each turn roll 1D6 and, on a 1 and only if there are no monsters present, you attack a random Warrior.</entry>
+  <entry key="location.location-templo-de-sigmar.description">Now is the time to pray, to worship our Lord of Light. Now is the time to praise Sigmar.</entry>
+  <entry key="location.location-templo-de-sigmar.name">Temple of Sigmar</entry>
+  <entry key="location.location-templo-de-sigmar.rules">Within this Special Location the Warrior must make a donation of 2D6 x 50 gold. All donated money must be recorded on your Warrior sheet, because it may be deducted from the cost of rising in Battle-Level later. Then roll 2D6:
+
+2. After a day of meditation, the Priest feels inspired.
+
+3-4. The Warhammer is magical during the next adventure and, on a single hit, may cause an extra 1D6 Damage.
+
+5. +1 permanent Starting Wound.
+
+6. The Warhammer is magical during the next adventure and, once only, you may use this blessing before making an attack. All the Wounds you cause will be healed.
+
+7. During the next adventure, the Priest may choose to roll one extra die when using the Jade Ring to heal himself. He may not use it on the following turn.
+
+8. Your weapon is magical and you gain +1 Toughness in the next adventure.
+
+9. Your weapon is magical and, in the next adventure, causes an extra 1D6 + Battle-Level Damage on a hit roll of 6.
+
+10. The Warrior Priest randomly chooses one blessing that he may use successfully once, and then loses it.
+
+11. During the next adventure you may choose either +1 Weapon Skill, +1 Toughness or +1 Strength.
+
+12. During the next adventure you may add +1 to any one of your characteristics.</entry>
+  <entry key="location.location-templo-del-caos.description">The lure of Chaos is power and immortality. There are no few madmen willing to risk everything, if need be, to win the rewards of Chaos.</entry>
+  <entry key="location.location-templo-del-caos.name">Temple of Chaos</entry>
+  <entry key="location.location-templo-del-caos.rules">Within this Special Location the Warrior must make an offering of 2D6 x 10 gold. Then roll 1D6:
+
+1. Gain 2 Chaos Attributes; consult the appropriate table in the Warrior book.
+
+2. Gain 1 Chaos Attribute; consult the appropriate table in the Warrior book.
+
+3. Your prayers receive no answer.
+
+4. You must choose one Chaos Attribute on your profile for it to be replaced by another at random.
+
+5. +1 permanent Starting Wound.
+
+6. The Chaos Warrior kneels before his gods and may fuse 2 items of the same type. Roll 1D6:
+1. You lose one item at random and the other remains unchanged.
+2-3. Nothing happens; the gods ignore you entirely.
+4. The altar darkens in mist. When the smoke clears, both items still lie there unchanged, but another item stands beside them. The Chaos Warrior keeps the originals and gains a third. Roll on the Chaos Artefacts Table to discover what it is.
+5-6. The two items undergo perfect mutation, though their effects are not cumulative. Consult the Warrior book for the exact rules.</entry>
+  <entry key="location.location-templo-del-matador.description">Until death grants you the final honour, your pride rests upon the altar of the Ancestor Dwarfs.</entry>
+  <entry key="location.location-templo-del-matador.name">Slayer Shrine</entry>
+  <entry key="location.location-templo-del-matador.rules">Within this Special Location the Warrior may pray to the gods for 1D6 x 50 gold. Roll 1D6:
+
+1. You impress no one.
+2. The others acknowledge you as just another Slayer.
+3-4. You are allowed into the Inner Chamber of the Shrine and may make one roll there.
+5-6. You are allowed into the Inner Chamber of the Shrine and may make two rolls there.
+
+Inner Chamber of the Shrine:
+1. A Daemonslayer gives you a tattoo. You feel ferocious at once.
+2. A Giantslayer gives you an incredible orange crest that makes you even more fearsome. Any Monster that rolls a 1 to hit in the next adventure loses all its attacks that turn. Roll 1D6; on a 6, the effect is permanent.
+3-5. The Runesmith allows you to inscribe a rune upon your axe. Roll 1D6 to see which:
+1-2. Rune of Strength: +1 Strength in your next adventure.
+3-4. Rune of Toughness: +1 Toughness in the next adventure.
+5-6. Rune of Fury: in the next adventure, during one turn only, you may ignore pinning and Initiative and move double. Roll 1D6; on a 6, the effect is permanent.
+6. Killing Blow. A Trollslayer teaches you a lethal technique. Each turn you may designate one attack as a Killing Blow; if it hits, you gain one extra attack.
+
+If you lose your Runic Axe, you receive another level 1 one for free from the Runesmith, but you may not visit the Shrine in that same Settlement.</entry>
+  <entry key="location.location-brujo-curandero.description">Every small native community has a witch doctor who cures disease, foretells the future and lays curses upon people. Some possess real magical powers and may aid you, for a price.</entry>
+  <entry key="location.location-brujo-curandero.name">Witch Doctor</entry>
+  <entry key="location.location-brujo-curandero.rules">Available items:
+
+- Amulet. Buy 250. Sell 25. Once per adventure you may force a monster to reroll a successful attack.
+- Fortune Reading. Buy 1D6 x 100. Sell 25%. In the next adventure you may use the prediction to avoid a trap.
+- Voodoo Doll. Buy 300. Sell 30. Once per adventure you may cause 2D6 Wounds with no modifiers to a monster. If it has Magic Resistance, apply a -1 penalty to the roll to see whether the doll affects it. If you roll double 1 or double 6, it can never be used again.
+- Potion. Buy 200 each. Sell 20. Roll 1D6 to see what it is:
+1. Love Potion: no effect.
+2. Strength Potion: any damage roll you make next turn causes +1D6 extra Wounds.
+3. Fury Potion: you may enter Berserk Rage. The Barbarian may test twice if he fails.
+4. Healing Potion: heals 2D6 Wounds.
+5. Invisibility Potion: you are invisible for this turn and nobody may attack you.
+6. Sleeping Potion: you are knocked down for 1D6 + 1 turns, but when you wake up you recover all your Wounds.</entry>
+  <entry key="location.location-caravanas.description">Exotic wares and beasts for crossing ancient continents and enduring the harsh climates of foreign lands. Whenever you spend more than 100 gold, you may haggle: roll 2D6. On 2-3 there is no effect; on 4-8 the price is reduced by 1D6 x 10; on 9-10 the price rises by 1D6 x 10; on 11 the price is halved; on 12 it is doubled.</entry>
+  <entry key="location.location-caravanas.name">Caravans</entry>
+  <entry key="location.location-caravanas.rules">Available items:
+
+- Magic Lamp. Stock 11+. Buy 2200. Sell 250. A genie heals 2D6 Wounds or causes 4D6 Wounds with no armour modifiers. One use only.
+- Torch. Stock 5+. Buy 150. Sell 25. Illuminates the whole board for 1D6 + 2 turns. One use only.
+- Fingerprint Powder. Stock 4+. Buy 200. Sell 10. Has 1D6 uses and grants +1 when searching for secret passages.
+- Magic Carpet. Stock 10+. Buy 800. Sell 75. Shortens an entire journey. Roll 1D6; on 3+ it becomes unusable.
+- Repeating Crossbow. Stock 8+. Buy 1000. Sell 100. Strength 4, uses bolts and fires twice at -1 to hit.
+- Scimitar. Stock 5+. Buy 500. Sell 75. Causes 1D6 + Strength Damage and monsters are at -1 to hit you.
+- Playing Cards. Stock 3+. Buy 20.
+- Headscarf. Stock 4+. Buy 50. Sell 5. Protects your Warrior from the heat of the desert.
+- Rare Root. Stock 7+. Buy 50. Roll 1D6 to determine the effect for this turn:
+1. Berserk Rage.
+2. Two actions.
+3. Dodge Blows 5+.
+4. No effect.
+5. Your Movement, WS and BS are reduced to 1 next turn.
+6. You suffer a hallucination and direct all your attacks toward the square on your left (1-3) or on your right (4-6).
+- 1D6 Desert Rations. Stock 5+. Buy 100. Restore 3 Wounds. They never spoil.
+- Root Beer. Stock 5+. Buy 75. Grants a great increase in damage next turn, but doubles may leave you stunned for several turns.
+- Camel Hair Rope. Stock 4+. Buy 100. Sell 10. Works like a rope, but allows a second roll if you roll a 1 when checking whether it breaks.</entry>
+  <entry key="location.location-comerciante-de-animales.description">Exotic animals, perfect for crossing ancient continents and enduring harsh conditions, whether deep snow, tropical heat or barren desert.</entry>
+  <entry key="location.location-comerciante-de-animales.name">Animal Trader</entry>
+  <entry key="location.location-comerciante-de-animales.rules">Available items:
+
+- Camel of Araby. Stock 5. Buy 500. Sell 50. Reduces journey time by 1 week and increases daily expenses by 3 gold.
+- Cold One of Lustria. Stock 7+. Buy 800. Sell 80. Reduces journey time by 2 weeks and increases daily expenses by 2 gold.
+- War Elephant. Stock 10+. Buy 1500. Sell 150. Reduces journey time by 2 weeks, increases daily expenses by 10 gold, grants +2 to combat results during Travel events, and costs 300 extra gold in transport accommodation.
+- Wild Horse of Kislev. Stock 9+. Buy 750. Sell 285. May be ridden even under "Deep Snow" on the Travel Conditions Table. Roll 2D6 in each Settlement: on double 1 it is stolen; on double 6 the thieves flee and you gain 2D6 x 10 gold.
+- Snow Cart of Kislev. Stock 7+. Buy 300. Sell 100. May carry 4 Warriors and all their gear, but requires any one of the draft animals listed above. Reduces journey time by 1 week. It has no wheels, only runners, and may be used in Kislev or Norsca.</entry>
+  <entry key="location.location-comercios-de-kislev.description">The trade goods of Kislev are armour against the killing cold and hard iron weapons for war. Before buying or selling here, remember to check the items from the matching basic Special Locations, especially Armoury, Archery and Armourer, as well as those listed on the reverse.</entry>
+  <entry key="location.location-comercios-de-kislev.name">Kislev Trade Goods</entry>
+  <entry key="location.location-comercios-de-kislev.rules">Items added to the normal stock of the Armoury, Archery and Armourer:
+
+- Lined Gloves. Stock 8+. Buy 130. Sell 25. Immune to the "fingers" and "fingertips" results on the Frostbite Table.
+- Fur-lined Boots. Stock 8+. Buy 100. Sell 20. Immune to the "toes" result on the Frostbite Table.
+- Bear Furs. Stock 7+. Buy 400. Sell 120. +2 Toughness, but only +1 Toughness against missile weapons. They may be used with light armour, subject to the normal restrictions.
+- Pistol Crossbow. These weapons are not sold in Kislev.
+- Cast Iron Sword. Stock 4+. Buy 100. Sell 15. If you roll a 1 to hit, roll 2D6; on a double, the blade shatters and the sword is ruined.
+- Pick Hammer. Stock 10+. Buy 450. Sell 120. Damage caused has no armour modifier. Every 6 to hit causes +1D6 extra Wounds.
+- Throwing Stars. These weapons are not sold in Kislev.
+- Provisions. Stock 5+. Buy 50. Sell 5. Heal 2 Wounds. At the end of the adventure roll 1D6; on 1-2 the cold preserves them for the next one.
+- Any normal weapon. The buying and selling price is doubled.</entry>
+  <entry key="location.location-comercios-de-lustria.description">The trade goods of Lustria are primitive but highly effective, ranging from antidotes to blowpipes. Before buying or selling here, remember to check the items from the matching basic Special Locations, especially Storehouse, Armoury and Archery, as well as those listed on the reverse.</entry>
+  <entry key="location.location-comercios-de-lustria.name">Lustria Trade Goods</entry>
+  <entry key="location.location-comercios-de-lustria.rules">Items added to the normal stock of the Storehouse, Armoury and Archery:
+
+- Antidote. Stock 6+. Buy 100. Contains 1D6 doses and may be used to cure the Strength penalty suffered after being reduced to 0 Wounds by a Poison attack.
+- Map. Stock 11+. Buy 100. Sell 10. May be used at any time, as often as you wish during an adventure. Roll 1D6:
+1. It is false. Discard it and add 1D3 cards to the Dungeon deck.
+2-5. Nothing looks familiar. The map is not of this place, but you may use it again.
+6. Treasure! Once you resolve the next event, discard the map and draw 1D6 Treasure cards for the whole party.
+- 1D6 Poisoned Arrows. Stock 8+. Buy 30. Sell 15. Cause 1D6 + 4 Wounds. On a roll of 4+ to hit, the damage is applied without Toughness modifiers or by ignoring pain, as appropriate.
+- Machete. Stock 5+. Buy 20. Sell 2. Causes 1D6 + Strength Damage and gives -1 to hit.
+- Hunting Knife. Stock 3+. Buy 50. Sell 5. Causes 1D6 + 1 Damage and may be hidden.
+- Blowpipe. Stock 6+. Buy 50. Sell 5. Causes 1D6 + 1 Damage, gives -1 to hit, and requires neither ammunition nor powder.</entry>
+  <entry key="location.location-taberna-de-arabia.description">Filled with strange folk and intriguing travellers, it is the perfect place to hear stories and get yourself into trouble.</entry>
+  <entry key="location.location-taberna-de-arabia.name">Arabian Tavern</entry>
+  <entry key="location.location-taberna-de-arabia.rules">Roll 2D6:
+
+2. You get blind drunk. You are thrown out of the tavern and lose 1D6 x 50 gold.
+
+3. You are arrested for improper conduct and spend 1D6 days in gaol. You pay no daily expenses and suffer no Events.
+
+4. On a drunken wager you decide it is a splendid idea to steal from the Sultan's palace. Roll 2D6. If the result is less than or equal to your Warrior's Battle-Level, you succeed and gain 1D6 x 100 gold. Otherwise you are captured, condemned, flogged, burned alive, and each of your companions loses 2D6 x 50 gold to pay your bail.
+
+5. You buy an old acquaintance a drink, costing 1D6 x 10 gold. After the next adventure draw 1D3 Treasure cards. You may keep one and give the rest to the party.
+
+6. The innkeeper's chimpanzee eats 1D3 of your Provisions.
+
+7. A brawl breaks out and you rob the participants of 1D6 x 50 gold.
+
+8. The innkeeper recommends a random small shop. In that shop you roll 1 extra D6 when checking the stock of each item you wish to buy.
+
+9. The ale hits you hard and you wake in an alley with one fewer camel than before.
+
+10. A drunken corsair teaches you a new technique as a normal attack. Once per adventure, every monster adjacent to you suffers 1D6 + 1 Wounds and is pushed one square directly away from you, if possible.
+
+11. A scarred pirate teaches you his battle cry. Once per adventure you may use it against a monster in hand-to-hand combat. It is so unsettled that it suffers -1 to hit you next turn. This does not work against monsters that cause Terror.
+
+12. A mysterious robed man buys you a drink and asks you to recover a priceless artefact for him. If you hand over the next Objective Room Treasure card the party wins, he rewards you with 1D6 x 50 gold.</entry>
+  <entry key="location.location-taberna-de-lustria.description">Filled with strange folk and intriguing travellers, it is the perfect place to hear stories and get yourself into trouble.</entry>
+  <entry key="location.location-taberna-de-lustria.name">Lustrian Tavern</entry>
+  <entry key="location.location-taberna-de-lustria.rules">Roll 2D6:
+
+2. A man sells you a map to the Lost City of Xahnadralailana for 1D6 x 100 gold or an item worth that much. Roll 1D6 in the next Objective Room:
+1-3. There are only 1D6 gold pieces there.
+4-5. You find the normal treasure.
+6. There is one extra treasure for each Warrior.
+
+3. After a glorious night's revelry, your riding beast has been stolen.
+
+4. The night dissolves into a sea of drink. One of the Warriors ends up in prison after singing horribly in the middle of the night.
+
+5. The innkeeper tells you that someone wishes to see you in the back room. Roll 1D6:
+1-3. An iron bar smashes into your skull. You wake in an alley with 1D6 x 50 fewer gold pieces.
+4-6. Someone wishes to accompany the party in order to recover an item. In the next adventure use a model to represent him. He moves 4 squares, but never attacks and cannot be attacked. The item lies in the Objective Room. If he gets out alive, you gain 1D6 x 100 gold.
+
+6. You are drawn into a complicated card game. Decide how much you stake. Another 1D3 players each stake 1D4 x 50 gold as well. Roll 1D4; if the result is less than your Starting Luck, you win all the money. Otherwise you lose your stake.
+
+7. You see a group of adventurers talking about their exploits. Roll 1D6:
+1-3. Nobody believes your stories.
+4-5. They are impressed and buy you a round.
+6. One veteran is so impressed that he gives you an Objective Room Treasure.
+
+8. A nervous little man says he is a cartographer and asks for your help in exploring an unknown region. If you agree, your return journey lasts 1D6 weeks longer, but he pays you 2D6 x 50 gold.
+
+9. A drunkard claiming to be a great explorer gives you a talisman that heals 1D6 Wounds once per adventure.
+
+10. You spot a valuable piece of equipment in a corner and are allowed to buy it for only 1D6 x 50 gold. Draw an Objective Room Treasure.
+
+11. You hear of a new trail through the depths of the jungle. On your next journey you save 1D3 weeks.
+
+12. You are the only one to keep your wits through the whole night and gain 1D6 x 150 gold by looting other patrons.</entry>
+  <entry key="location.location-taberna-de-kislev.description">The Tavern is the heart of the village. With a great fire, much noise and powerful drink, folk forget their hardships for a while.</entry>
+  <entry key="location.location-taberna-de-kislev.name">Kislev Tavern</entry>
+  <entry key="location.location-taberna-de-kislev.rules">Whenever the Warrior is in a Tavern, roll 2D6 on the normal Tavern Events Table and apply the usual modifiers (Witch Hunter and Elf -4, Wizard -3, Warrior Priest and Elf Ranger -2). However, if you roll doubles, consult the following:
+
+Double 1-5. You wake the next morning on the tavern floor. Your last memory of the night is of someone handing you a tiny glass containing a colourless, odourless and tasteless liquid. You rise unsteadily in search of breakfast.
+
+Double 6. When you wake the next morning you are clutching a metal flask. It contains a colourless, odourless and tasteless liquid: the fierce spirit the people of Kislev drink to ward off the cold.
+
+Once per adventure, the Warrior may drink it. For the rest of that adventure he gains +1 Toughness and +1D6 Wounds. These Wounds are temporary only; his Starting Wounds do not change. Because of the strength of the liquor he suffers -1 WS, -1 BS and -1 on attempts to break from pinning.
+
+While they remain in Kislev, the Warrior may refill the flask for 20 gold at the Tavern, with no need to roll another double 6.</entry>
+  <entry key="location.location-colegio-amatista.description">Home of the Wizards who study the Lore of Death. Built of dark stone in the Gothic style, with arched doors and windows.</entry>
+  <entry key="location.location-colegio-amatista.name">Amethyst College</entry>
+  <entry key="location.location-colegio-amatista.rules">The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. Stone Portal. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Garden of Morr. You temporarily gain +1 extra Damage dice for the next adventure.
+3. Dark Library. After meeting Magdalena Thaurstein you may add a new spell to your collection. Roll 1D6:
+1. Defence: "Tomb Robber's Curse" (11).
+2-3. Healing: "Telepathy" (11).
+4-5. Attack: "Wind of Death" (11).
+6. Special: "Zandox's Savage Lineage" (11).
+4. Cellar of Vermin. Johan Zauberlich, a legendary Amethyst doctor, allows you to draw a random Magic College Equipment card for 1,500 gold.
+5. The Gothic Tower. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. Chapel of Morr. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Soul Steal" (12).
+2. Gabrielle Marsner teaches you the Defence spell: "Mantle of Despair" (12).
+3-4. Gunther Klaus allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Gabrielle Marsner teaches you the Attack spell: "Swift Death" (12).
+6. Viggo Hexensohn, Patriarch Magister of the Amethyst College, teaches you the Special spell: "Vision of Death" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Shyish". You may visit the Amethyst College only once per Settlement.</entry>
+  <entry key="location.location-colegio-ambar.description">Home of the Wizards who study the Lore of Beasts. Deep amid the wilds, the Conclave gathers only when it must.</entry>
+  <entry key="location.location-colegio-ambar.name">Amber College</entry>
+  <entry key="location.location-colegio-ambar.rules">The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. The Wrong Place. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Forests of the Eonir. You temporarily gain +1 Strength for the next adventure.
+3. Amber Hills. The solitary Berndt Aberwold shares his lore so that you may learn a new spell. Roll 1D6:
+1. Defence: "Ice Wall" (11).
+2-3. Healing: "Enhanced Beast" (9).
+4-5. Attack: "Hunter's Spear" (11).
+6. Special: "Transformation of Kadon" (11).
+4. Hunters' Brotherhood. Gregor Martak prowls this region in search of the Pack, and grants you a random Magic College Equipment card for 1,500 gold.
+5. Caves Beyond the City. You may buy an Equipment card as on result 4 or learn a new spell from result 3. This takes 3 days.
+6. Totemic Centre of the Wild Father. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Gift of Hiskal" (10).
+2. Kerwen Sigmarsson teaches you the Defence spell: "Wild Call" (12).
+3-4. Old Jurgen Helvitt allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Orsini Sardug teaches you the Attack spell: "Call to the Beasts" (12).
+6. Setanta Lobas, Patriarch Magister of the Amber College, teaches you a Special spell. Roll 1D6:
+1-3. "Horros' Wild Beast" (12).
+4. "Master's Voice" (12).
+5. "Lupens, Stalking Wolf" (12).
+6. "Corvus, Lord of Ravens" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Ghur". You may visit the Amber College only once per Settlement.</entry>
+  <entry key="location.location-colegio-brillante.description">Home of the Wizards who study the Lore of Fire. It stands in a district of charred ruins, left by a blaze that was never properly investigated.</entry>
+  <entry key="location.location-colegio-brillante.name">Bright College</entry>
+  <entry key="location.location-colegio-brillante.rules">The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. Protective Barrier. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Gate with Seven Keyholes. You temporarily gain +1 Attack for the next adventure.
+3. Apprentices' Quarters. After meeting the Fleissman Brothers you may add a new spell to your collection. Roll 1D6:
+1. Defence: "Crimson Rebound" (11).
+2-3. Healing: "Phoenix Flames" (11).
+4-5. Attack: "Blazing Burst" (11).
+6. Special: "The Key of Secrets" (11).
+4. Laboratory. Cindik Antum, Professor of Incendiary Alchemy, allows you to draw a random Equipment card from your Magic College for 1,500 gold.
+5. The Great Library. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. Council of Sages. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Power of the Phoenix" (12).
+2. Felicita Garret teaches you the Defence spell: "Shield of Aqshy" (12).
+3-4. Sulphus Natchman allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Sienna Fuegonasus teaches you the Attack spell: "Magma Storm" (12).
+6. Thyrus Gormann, Patriarch Magister of the Bright College, rewards you with a Key of Knowledge and teaches you the Special spell: "Fire Elemental" (12). Once you possess 7 keys, you permanently gain +1D6 extra Power Points and every spell costs 1 less Power Point to cast.
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Aqshy". You may visit the Bright College only once per Settlement.</entry>
+  <entry key="location.location-colegio-celestial.description">Home of those who study the Lore of the Heavens, a college made up of many lofty towers crowned with glass domes.</entry>
+  <entry key="location.location-colegio-celestial.name">Celestial College</entry>
+  <entry key="location.location-colegio-celestial.rules">The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. Black Metal Gate. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Courtyard of Clouds and Mist. You gain 1 temporary extra Luck point for the next adventure.
+3. Glass Dome. Klaus Solmann is visiting this chapter-house and, after meeting him, you may add a new spell to your collection. Roll 1D6:
+1. Defence: "Harmonic Conversation" (11).
+2-3. Healing: "Far's Portent" (11).
+4-5. Attack: "Stormwind" (11).
+6. Special: "Swift Wing" (11).
+4. Gabriel's Chamber. Janna Eberhauer is repairing the lunar clock and allows you to draw a random Magic College Equipment card for 1,500 gold.
+5. Casandora's Tower. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. Uraninon's Observatory. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Renew Luck" (12).
+2. Gunther Grinwald teaches you the Defence spell: "Midnight Wind Curse" (12).
+3-4. Dieter Klemperer allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Hildegard Niederthaler teaches you the Attack spell: "Chain Lightning" (12).
+6. Raphael Julevna, Patriarch Magister of the College, teaches you the Special spell: "Let the Four Winds Blow!" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Azyr". You may visit the Celestial College only once per Settlement.</entry>
+  <entry key="location.location-colegio-dorado.description">Home of the Wizards who study the Lore of Metal, a place of forges and workshops whose chimneys belch vapours of every colour.</entry>
+  <entry key="location.location-colegio-dorado.name">Gold College</entry>
+  <entry key="location.location-colegio-dorado.rules">This location may be visited by the Gold Wizard. The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. The Underworld. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Statue of Haendrich. You temporarily gain +1 Armour for the next adventure.
+3. Library of Alchemy and Metallurgy. Solitaria Ferris Goldschlager shares her knowledge so that you may learn a new spell. Roll 1D6:
+1. Defence: "Shining Cloak" (11).
+2-3. Healing: "Airan's Enchanted Swords" (11).
+4-5. Attack: "Mercury Swords" (11).
+6. Special: "Hounds of Gehenna" (11).
+4. The Foundry. Janna Colburg toils tirelessly here and grants you a random Magic College Equipment card for 1,500 gold.
+5. Lead Laboratory. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. Tower of Cas Meijer. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Lead Transmutation" (12).
+2. Max Schreiber teaches you the Defence spell: "Forged Steel Curse" (12).
+3-4. Old Gotthif Puchta allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Albrecht Helseher teaches you the Attack spell: "Final Transmutation" (12).
+6. Balthasar Gelt, Patriarch Magister of the Gold College, teaches you the Special spell: "Levorg's Replication" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Chamon". You may visit the Gold College only once per Settlement.</entry>
+  <entry key="location.location-colegio-gris.description">Home of the Wizards who study the Lore of Shadows, a ruinous complex of broken, filthy walls and windows choked with moss.</entry>
+  <entry key="location.location-colegio-gris.name">Grey College</entry>
+  <entry key="location.location-colegio-gris.rules">This location may be visited by the Grey Wizard. The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. Brothels of Dubious Reputation. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Ruined Stone Buildings. You temporarily gain +1 Toughness for the next adventure.
+3. Library of the Umbramancers. Markus Rischer shares his knowledge so that you may learn a new spell. Roll 1D6:
+1. Defence: "Melkoth's Miasma" (11).
+2-3. Healing: "Cloned Image" (11).
+4-5. Attack: "Pendulum of Penumbras" (11).
+6. Special: "Midnight Hide" (11).
+4. Network of Hidden Tunnels. Christoph Engel explores these tunnels and grants you a random Magic College Equipment card for 1,500 gold.
+5. Verena's Black Chamber. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. Ruined Tower of White Owls. For 7 days, one of the great masters advises you and trains you so that you may improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Complete Illusion" (12).
+2. Regimius Woeller teaches you the Defence spell: "Shadow of Death" (12).
+3-4. Stephan Vesterfel allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Jocelin Herzog teaches you the Attack spell: "Shadows of Splendour" (12).
+6. Reiner Starke, Patriarch Magister of the Grey College, teaches you the Special spell: "Apparent Death" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Ulgu". You may visit the Grey College only once per Settlement.</entry>
+  <entry key="location.location-colegio-jade.description">Home of the Wizards who study the Lore of Life, ringed by a green wall and filled with standing stones, streams and trees.</entry>
+  <entry key="location.location-colegio-jade.name">Jade College</entry>
+  <entry key="location.location-colegio-jade.rules">This location may be visited by the Jade Wizard. The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. The Green Wall. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Pool and Streams. You temporarily gain +1 Power Point for the next adventure.
+3. Circle of Stones. The serenity of this place grants you enough insight to learn a new spell. Roll 1D6:
+1. Defence: "Unstoppable Nature" (11).
+2-3. Healing: "Green Apotheosis" (11).
+4-5. Attack: "Those Who Dwell Beneath the Earth" (11).
+6. Special: "Vital Growth" (11).
+4. Silver Lake. In its deepest waters you find an ancient relic. Draw a random Magic College Equipment card for 1,500 gold.
+5. Tower of Trees. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. The Council. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn the Healing spell: "Storm of Renewal" (12).
+2. Katelina Matthias teaches you the Defence spell: "Earth Blood" (12).
+3-4. Dagmar von Arburg allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Guillaume Deschamps teaches you the Attack spell: "Emerald Cascade" (12).
+6. Garvan Paranoth, Patriarch Magister of the Jade College, teaches you a Special spell. Roll 1D6:
+1-3. "Lord of Stone" (12).
+4-6. "Lord of Water" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Ghyran". You may visit the Jade College only once per Settlement.</entry>
+  <entry key="location.location-colegio-luminoso.description">Home of those who study the Lore of Light. It manifests only when the stars and Morrslieb, the Changing Moon, stand in alignment.</entry>
+  <entry key="location.location-colegio-luminoso.name">Light College</entry>
+  <entry key="location.location-colegio-luminoso.rules">This location may be visited by the Light Wizard. The Wizard must make a donation of 2D6 x 50 gold. Roll 1D6 and consult this card:
+
+1. Northern Gate. You are not worthy to enter. The College does not recognise you as one of its own. Try again in the next City, if fortune favours you.
+2. Square of White Marble. You temporarily gain +1 Willpower for the next adventure.
+3. University. Wolfgang Lichmeister shares his knowledge so that you may learn a new spell. Roll 1D6:
+1. Defence: "Banish Daemons" (11).
+2-3. Healing: "Ulzha's Healing Hand" (11).
+4-5. Attack: "Dwellers of the Deep" (11).
+6. Special: "Relentless Light" (11).
+4. Obelisks and Sphinxes. Konrad Mauer strolls through this reserved quarter of the College and allows you to draw a random Magic College Equipment card for 1,500 gold.
+5. Pyramid of Light. You may buy an Equipment card as on the previous result or learn a new spell from result 3. This takes 3 days.
+6. Guardians of the Order. For 7 days, one of the great masters advises you and helps you improve as a Magister. Roll 1D6:
+1. You learn a new Healing spell: "Power of Truth" (12).
+2. Otto Baldurich teaches you the Defence spell: "Shining Sentinel" (12).
+3-4. Konrad Messner allows you to draw, by choice, one Equipment card from your Magic College for 2,000 gold. Half this amount counts toward levelling.
+5. Verspasian Kant teaches you the Attack spell: "Blinding Light of Amshu" (12).
+6. Volans, Patriarch Magister of the Light College, teaches you the Special spell: "Protection of Pha" (12).
+
+If you receive a treasure or spell you already possess, you may reroll. If you roll a double on the table above, the College rewards you with the Liber of Lore "Hysh". You may visit the Light College only once per Settlement.</entry>
+  <!-- Settlement locations translations: first block end -->
   <!-- Arabia Desserts translations end -->
 </translations>

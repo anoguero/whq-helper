@@ -37,12 +37,16 @@ public class XmlContentService {
   private static final String EVENT_SCHEMA = "whq-events-schema.xsd";
   private static final String RULE_SCHEMA = "whq-rules-schema.xsd";
   private static final String TABLE_SCHEMA = "whq-tables-schema.xsd";
+  private static final String LOCATION_SCHEMA = "whq-locations-schema.xsd";
+  private static final String WARRIOR_SCHEMA = "whq-warriors-schema.xsd";
   private static final String MONSTERS_DIR = "data/xml/monsters";
   private static final String EVENTS_DIR = "data/xml/events";
   private static final String RULES_DIR = "data/xml/rules";
   private static final String TABLES_DIR = "data/xml/tables";
   private static final String TRAVEL_DIR = "data/xml/travel";
   private static final String SETTLEMENT_DIR = "data/xml/settlement";
+  private static final String LOCATIONS_DIR = "data/xml/locations";
+  private static final String WARRIORS_DIR = "data/xml/warriors";
 
   private final Path projectRoot;
   private final DocumentBuilderFactory dbf;
@@ -83,6 +87,14 @@ public class XmlContentService {
     return listXmlFiles(projectRoot.resolve(SETTLEMENT_DIR));
   }
 
+  public List<Path> listLocationFiles() throws IOException {
+    return listXmlFiles(projectRoot.resolve(LOCATIONS_DIR));
+  }
+
+  public List<Path> listWarriorFiles() throws IOException {
+    return listXmlFiles(projectRoot.resolve(WARRIORS_DIR));
+  }
+
   public Path getRulesDirectory() {
     return projectRoot.resolve(RULES_DIR);
   }
@@ -105,6 +117,14 @@ public class XmlContentService {
 
   public Path getTablesDirectory() {
     return projectRoot.resolve(TABLES_DIR);
+  }
+
+  public Path getLocationsDirectory() {
+    return projectRoot.resolve(LOCATIONS_DIR);
+  }
+
+  public Path getWarriorsDirectory() {
+    return projectRoot.resolve(WARRIORS_DIR);
   }
 
   private List<Path> listXmlFiles(Path directory) throws IOException {
@@ -322,6 +342,122 @@ public class XmlContentService {
         file, getMonstersDirectory(), "monsters", getMonstersDirectory().resolve(MONSTER_SCHEMA));
   }
 
+  public List<LocationEntry> loadLocations(Path file) throws Exception {
+    Document doc = parse(file);
+    Element root = doc.getDocumentElement();
+    List<LocationEntry> entries = new ArrayList<>();
+    NodeList children = root.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node node = children.item(i);
+      if (node.getNodeType() != Node.ELEMENT_NODE || !"location".equals(node.getNodeName())) {
+        continue;
+      }
+
+      Element locationElement = (Element) node;
+      LocationEntry entry = new LocationEntry();
+      entry.id = locationElement.getAttribute("id");
+      entry.name = getChildText(locationElement, "name");
+      entry.available = joinChildValues(directChild(locationElement, "available"), "type");
+      entry.description = getChildText(locationElement, "description");
+      entry.visitors = joinChildValues(directChild(locationElement, "visitors"), "visitor");
+      entry.rules = getChildText(locationElement, "rules");
+      entries.add(entry);
+    }
+    return entries;
+  }
+
+  public void saveLocations(Path file, List<LocationEntry> entries) throws Exception {
+    validateLocationEntries(entries);
+
+    Document doc = newDocument("locations", LOCATION_SCHEMA);
+    Element root = doc.getDocumentElement();
+    for (LocationEntry entry : entries) {
+      validateRequired(entry.id, "id");
+      validateRequired(entry.name, "name");
+      validateRequired(entry.description, "description");
+      validateRequired(entry.rules, "rules");
+
+      Element node = doc.createElement("location");
+      node.setAttribute("id", entry.id.trim());
+      appendRequiredText(doc, node, "name", entry.name);
+
+      Element available = doc.createElement("available");
+      for (String type : splitCsv(entry.available)) {
+        appendText(doc, available, "type", type);
+      }
+      node.appendChild(available);
+
+      appendRequiredText(doc, node, "description", entry.description);
+
+      Element visitors = doc.createElement("visitors");
+      for (String visitor : splitCsv(entry.visitors)) {
+        appendText(doc, visitors, "visitor", visitor);
+      }
+      node.appendChild(visitors);
+
+      appendRequiredText(doc, node, "rules", entry.rules);
+      root.appendChild(node);
+    }
+
+    writeDocument(file, doc, getLocationsDirectory().resolve(LOCATION_SCHEMA));
+  }
+
+  public Path createEmptyLocationsFile(Path file) throws Exception {
+    return createEmptyXmlFile(
+        file, getLocationsDirectory(), "locations", getLocationsDirectory().resolve(LOCATION_SCHEMA));
+  }
+
+  public List<WarriorEntry> loadWarriors(Path file) throws Exception {
+    Document doc = parse(file);
+    Element root = doc.getDocumentElement();
+    List<WarriorEntry> entries = new ArrayList<>();
+    NodeList children = root.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node node = children.item(i);
+      if (node.getNodeType() != Node.ELEMENT_NODE || !"warrior".equals(node.getNodeName())) {
+        continue;
+      }
+
+      Element warriorElement = (Element) node;
+      WarriorEntry entry = new WarriorEntry();
+      entry.id = warriorElement.getAttribute("id");
+      entry.name = getChildText(warriorElement, "name");
+      entry.race = getChildText(warriorElement, "race");
+      entry.counter = getChildText(warriorElement, "counter");
+      entry.rules = getChildText(warriorElement, "rules");
+      entries.add(entry);
+    }
+    return entries;
+  }
+
+  public void saveWarriors(Path file, List<WarriorEntry> entries) throws Exception {
+    validateWarriorEntries(entries);
+
+    Document doc = newDocument("warriors", WARRIOR_SCHEMA);
+    Element root = doc.getDocumentElement();
+    for (WarriorEntry entry : entries) {
+      validateRequired(entry.id, "id");
+      validateRequired(entry.name, "name");
+      validateRequired(entry.race, "race");
+      validateRequired(entry.counter, "counter");
+
+      Element node = doc.createElement("warrior");
+      node.setAttribute("id", entry.id.trim());
+      appendRequiredText(doc, node, "name", entry.name);
+      appendRequiredText(doc, node, "race", entry.race);
+      appendRequiredText(doc, node, "counter", entry.counter);
+      appendOptionalText(doc, node, "rules", entry.rules);
+      root.appendChild(node);
+    }
+
+    writeDocument(file, doc, getWarriorsDirectory().resolve(WARRIOR_SCHEMA));
+  }
+
+  public Path createEmptyWarriorsFile(Path file) throws Exception {
+    return createEmptyXmlFile(
+        file, getWarriorsDirectory(), "warriors", getWarriorsDirectory().resolve(WARRIOR_SCHEMA));
+  }
+
   public void validateRulesFile(Path file) throws Exception {
     validateFile(file, file.getParent().resolve(RULE_SCHEMA));
     List<RuleEntry> entries = loadRules(file);
@@ -358,6 +494,20 @@ public class XmlContentService {
 
   public void validateSettlementFile(Path file) throws Exception {
     validateEventsFile(file);
+  }
+
+  public void validateLocationsFile(Path file) throws Exception {
+    validateFile(file, getLocationsDirectory().resolve(LOCATION_SCHEMA));
+    List<LocationEntry> entries = loadLocations(file);
+    validateLocationEntries(entries);
+    ensureLocationIdsUniqueAcrossFiles(file, entries);
+  }
+
+  public void validateWarriorsFile(Path file) throws Exception {
+    validateFile(file, getWarriorsDirectory().resolve(WARRIOR_SCHEMA));
+    List<WarriorEntry> entries = loadWarriors(file);
+    validateWarriorEntries(entries);
+    ensureWarriorIdsUniqueAcrossFiles(file, entries);
   }
 
   public TableFileModel loadTables(Path file) throws Exception {
@@ -587,6 +737,50 @@ public class XmlContentService {
     }
   }
 
+  private static void validateLocationEntries(List<LocationEntry> entries) {
+    if (entries == null || entries.isEmpty()) {
+      throw new IllegalArgumentException("Locations XML must contain at least one entry.");
+    }
+
+    Set<String> ids = new HashSet<>();
+    for (LocationEntry entry : entries) {
+      validateRequired(entry.id, "id");
+      validateRequired(entry.name, "name");
+      validateRequired(entry.description, "description");
+      validateRequired(entry.rules, "rules");
+      if (splitCsv(entry.available).isEmpty()) {
+        throw new IllegalArgumentException("Location '" + safe(entry.id) + "' requires at least one available type.");
+      }
+      if (splitCsv(entry.visitors).isEmpty()) {
+        throw new IllegalArgumentException("Location '" + safe(entry.id) + "' requires at least one visitor.");
+      }
+
+      String id = safe(entry.id);
+      if (!ids.add(id)) {
+        throw new IllegalArgumentException("Duplicate location ID in file: " + id);
+      }
+    }
+  }
+
+  private static void validateWarriorEntries(List<WarriorEntry> entries) {
+    if (entries == null || entries.isEmpty()) {
+      throw new IllegalArgumentException("Warriors XML must contain at least one entry.");
+    }
+
+    Set<String> ids = new HashSet<>();
+    for (WarriorEntry entry : entries) {
+      validateRequired(entry.id, "id");
+      validateRequired(entry.name, "name");
+      validateRequired(entry.race, "race");
+      validateRequired(entry.counter, "counter");
+
+      String id = safe(entry.id);
+      if (!ids.add(id)) {
+        throw new IllegalArgumentException("Duplicate warrior ID in file: " + id);
+      }
+    }
+  }
+
   private void validateTableModel(TableFileModel model) throws Exception {
     if (model == null || model.tables == null || model.tables.isEmpty()) {
       throw new IllegalArgumentException("Tables XML must contain at least one table.");
@@ -690,6 +884,48 @@ public class XmlContentService {
         if (ids.contains(id)) {
           throw new IllegalArgumentException(
               "Monster ID '" + id + "' already exists in file '" + file.getFileName() + "'.");
+        }
+      }
+    }
+  }
+
+  private void ensureLocationIdsUniqueAcrossFiles(Path targetFile, List<LocationEntry> entries) throws Exception {
+    Set<String> ids = new HashSet<>();
+    for (LocationEntry entry : entries) {
+      ids.add(safe(entry.id));
+    }
+
+    Path normalizedTarget = normalize(targetFile);
+    for (Path file : listLocationFiles()) {
+      if (samePath(file, normalizedTarget)) {
+        continue;
+      }
+      for (LocationEntry existing : loadLocations(file)) {
+        String id = safe(existing.id);
+        if (ids.contains(id)) {
+          throw new IllegalArgumentException(
+              "Location ID '" + id + "' already exists in file '" + file.getFileName() + "'.");
+        }
+      }
+    }
+  }
+
+  private void ensureWarriorIdsUniqueAcrossFiles(Path targetFile, List<WarriorEntry> entries) throws Exception {
+    Set<String> ids = new HashSet<>();
+    for (WarriorEntry entry : entries) {
+      ids.add(safe(entry.id));
+    }
+
+    Path normalizedTarget = normalize(targetFile);
+    for (Path file : listWarriorFiles()) {
+      if (samePath(file, normalizedTarget)) {
+        continue;
+      }
+      for (WarriorEntry existing : loadWarriors(file)) {
+        String id = safe(existing.id);
+        if (ids.contains(id)) {
+          throw new IllegalArgumentException(
+              "Warrior ID '" + id + "' already exists in file '" + file.getFileName() + "'.");
         }
       }
     }
@@ -1148,6 +1384,50 @@ public class XmlContentService {
     return text == null ? "" : text.trim();
   }
 
+  private static Element directChild(Element parent, String tagName) {
+    if (parent == null || tagName == null) {
+      return null;
+    }
+    NodeList children = parent.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node child = children.item(i);
+      if (child.getNodeType() == Node.ELEMENT_NODE && tagName.equals(child.getNodeName())) {
+        return (Element) child;
+      }
+    }
+    return null;
+  }
+
+  private static String joinChildValues(Element parent, String childTag) {
+    if (parent == null) {
+      return "";
+    }
+    List<String> values = new ArrayList<>();
+    NodeList children = parent.getChildNodes();
+    for (int i = 0; i < children.getLength(); i++) {
+      Node child = children.item(i);
+      if (child.getNodeType() == Node.ELEMENT_NODE && childTag.equals(child.getNodeName())) {
+        String text = child.getTextContent();
+        String trimmed = text == null ? "" : text.trim();
+        if (!trimmed.isEmpty()) {
+          values.add(trimmed);
+        }
+      }
+    }
+    return String.join(",", values);
+  }
+
+  private static List<String> splitCsv(String raw) {
+    List<String> values = new ArrayList<>();
+    for (String part : safe(raw).split(",")) {
+      String trimmed = safe(part).trim();
+      if (!trimmed.isEmpty()) {
+        values.add(trimmed);
+      }
+    }
+    return values;
+  }
+
   private static String specialNodeToRaw(Element parentElement) {
     NodeList children = parentElement.getChildNodes();
     Element specialElement = null;
@@ -1367,6 +1647,23 @@ public class XmlContentService {
     public String armor = "";
     public String damage = "";
     public String specialEntriesRaw = "";
+  }
+
+  public static final class LocationEntry {
+    public String id = "";
+    public String name = "";
+    public String available = "";
+    public String description = "";
+    public String visitors = "";
+    public String rules = "";
+  }
+
+  public static final class WarriorEntry {
+    public String id = "";
+    public String name = "";
+    public String race = "";
+    public String counter = "";
+    public String rules = "";
   }
 
   public static final class TableFileModel {
