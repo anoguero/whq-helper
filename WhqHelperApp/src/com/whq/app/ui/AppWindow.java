@@ -1,9 +1,11 @@
 package com.whq.app.ui;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,17 +13,20 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.TextLayout;
+import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -30,6 +35,7 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
@@ -37,11 +43,15 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.whq.app.adventure.ObjectiveRoomAdventure;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepository;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepositoryException;
 import com.whq.app.adventure.XmlObjectiveRoomAdventureRepository;
+import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
 import com.whq.app.io.CardCsvService;
@@ -51,24 +61,43 @@ import com.whq.app.render.CardRenderer;
 import com.whq.app.storage.DungeonCardStorageException;
 import com.whq.app.storage.DungeonCardStore;
 import com.whq.app.storage.XmlDungeonCardStore;
+
 import pms.whq.EventDeckApp;
 import pms.whq.Settings;
 import pms.whq.content.ContentRepository;
 import pms.whq.data.MonsterEntry;
 import pms.whq.data.MonsterGroup;
 import pms.whq.data.Table;
-import pms.whq.data.TableReferenceEntry;
 import pms.whq.data.TableKind;
+import pms.whq.data.TableReferenceEntry;
 import pms.whq.game.TableDrawService;
-import pms.whq.state.AppState;
 import pms.whq.state.AdventureAmbience;
+import pms.whq.state.AppState;
 import pms.whq.swt.CardFactory;
 import pms.whq.swt.EventContentEditorDialog;
 
 public class AppWindow {
     private static final TableDrawService TABLE_DRAW_SERVICE = new TableDrawService();
+    private static final String SETTLEMENT_TYPE_ANY = "any";
 
     private record ObjectiveMonsterDifficulty(String labelKey, int[] offsets) {
+    }
+
+    private record SettlementLocation(
+            String id,
+            String name,
+            String description,
+            String rules,
+            List<String> visitors,
+            Set<String> availableTypes) {
+    }
+
+    private record WarriorCounterDefinition(
+            String id,
+            String name,
+            String race,
+            String counterPath,
+            String rulesPath) {
     }
 
     private static final List<ObjectiveMonsterDifficulty> OBJECTIVE_MONSTER_DIFFICULTIES = List.of(
@@ -89,6 +118,10 @@ public class AppWindow {
     private CardRenderer renderer;
     private java.util.List<DungeonCard> cards;
     private DungeonCard selected;
+    private final java.util.List<WarriorCounterDefinition> remainingWarriorCounters = new ArrayList<>();
+    private String warriorCounterPartySignature = "";
+    private boolean warriorCounterPoolInitialized;
+    private Point nextWarriorCounterLocation;
     private WhqUiTheme theme;
     private Canvas renderCanvas;
     private Canvas heroArtCanvas;
@@ -106,6 +139,8 @@ public class AppWindow {
     private Label previewTitleLabel;
     private Label previewHintLabel;
     private Button newDungeonButton;
+    private Button newSettlementButton;
+    private Button genWarriorCounterButton;
     private Button openEventDecksButton;
     private Button activateTablesButton;
     private Button contentEditorButton;
@@ -117,13 +152,15 @@ public class AppWindow {
     private MenuItem optionsMenuItem;
 
     private final LocalizedUiAction newDungeonAction;
+    private final LocalizedUiAction newSettlementAction;
     private final LocalizedUiAction openEventDecksAction;
+    private final LocalizedUiAction genWarriorCounterAction;
     private final LocalizedUiAction eventContentEditorAction;
     private final LocalizedUiAction importCsvAction;
     private final LocalizedUiAction exportAllCsvAction;
     private final LocalizedUiAction exportEnvironmentCsvAction;
     private final LocalizedUiAction activateTablesAction;
-    private final LocalizedUiAction setPartySizeAction;
+    private final LocalizedUiAction setPartyAction;
     private final LocalizedUiAction setEventProbabilityAction;
     private final LocalizedUiAction simulateDeckAction;
     private final LocalizedUiAction simulateTableAction;
@@ -141,7 +178,9 @@ public class AppWindow {
         this.csvService = new CardCsvService();
         this.localizedActions = new ArrayList<>();
         this.newDungeonAction = registerAction(LocalizedUiAction.push("menu.item.newDungeon", this::openNewDungeonDialog));
+        this.newSettlementAction = registerAction(LocalizedUiAction.push("menu.item.newSettlement", this::openNewSettlementDialog));
         this.openEventDecksAction = registerAction(LocalizedUiAction.push("menu.item.openEventDecks", this::openEventDecks));
+        this.genWarriorCounterAction = registerAction(LocalizedUiAction.push("menu.item.openWarriorCounter", this::genWarriorCounter));
         this.eventContentEditorAction = registerAction(LocalizedUiAction.push("menu.item.contentEditor", this::openEventContentEditor));
         this.importCsvAction = registerAction(LocalizedUiAction.push("menu.item.importCsv", this::handleImportCsv));
         this.exportAllCsvAction = registerAction(LocalizedUiAction.push(
@@ -153,7 +192,7 @@ public class AppWindow {
                 this::handleExportSelectedEnvironment,
                 () -> selected != null));
         this.activateTablesAction = registerAction(LocalizedUiAction.push("menu.item.activateTables", this::openActivateTablesDialog));
-        this.setPartySizeAction = registerAction(LocalizedUiAction.push("menu.item.setPartySize", this::openPartySizeDialog));
+        this.setPartyAction = registerAction(LocalizedUiAction.push("menu.item.setParty", this::openPartyDialog));
         this.setEventProbabilityAction = registerAction(LocalizedUiAction.push(
                 "menu.item.setEventProbability",
                 this::openEventProbabilityDialog,
@@ -220,7 +259,7 @@ public class AppWindow {
         shell.addListener(SWT.Activate, event -> refreshLocalizedTexts());
         shell.open();
         getOrCreateEventDeckApp().open();
-        shell.forceActive();
+        //shell.forceActive();
     }
 
     private void createMenuBar() {
@@ -231,6 +270,7 @@ public class AppWindow {
         Menu playMenu = new Menu(shell, SWT.DROP_DOWN);
         playMenuItem.setMenu(playMenu);
         createActionMenuItem(playMenu, SWT.PUSH, newDungeonAction);
+        createActionMenuItem(playMenu, SWT.PUSH, newSettlementAction);
 
         viewMenuItem = new MenuItem(menuBar, SWT.CASCADE);
         Menu viewMenu = new Menu(shell, SWT.DROP_DOWN);
@@ -250,7 +290,7 @@ public class AppWindow {
         Menu eventCardsMenu = new Menu(shell, SWT.DROP_DOWN);
         eventCardsMenuItem.setMenu(eventCardsMenu);
         createActionMenuItem(eventCardsMenu, SWT.PUSH, activateTablesAction);
-        createActionMenuItem(eventCardsMenu, SWT.PUSH, setPartySizeAction);
+        createActionMenuItem(eventCardsMenu, SWT.PUSH, setPartyAction);
         createActionMenuItem(eventCardsMenu, SWT.PUSH, setEventProbabilityAction);
         new MenuItem(eventCardsMenu, SWT.SEPARATOR);
         createActionMenuItem(eventCardsMenu, SWT.RADIO, simulateDeckAction);
@@ -271,6 +311,23 @@ public class AppWindow {
         eventDeckApp = getOrCreateEventDeckApp();
         eventDeckApp.open();
         eventDeckApp.focus();
+    }
+    
+    private void genWarriorCounter() {
+        try {
+            refreshWarriorCounterPoolIfNeeded();
+        } catch (Exception ex) {
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.load") + ex.getMessage());
+            return;
+        }
+
+        if (remainingWarriorCounters.isEmpty()) {
+            showInfo(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.noneRemaining"));
+            return;
+        }
+
+        WarriorCounterDefinition selectedCounter = remainingWarriorCounters.remove(new Random().nextInt(remainingWarriorCounters.size()));
+        openWarriorCounterWindow(selectedCounter);
     }
 
     private LocalizedUiAction registerAction(LocalizedUiAction action) {
@@ -309,14 +366,14 @@ public class AppWindow {
         eventDeckApp.refreshTexts();
         return eventDeckApp;
     }
-
+    
     private void openActivateTablesDialog() {
         getOrCreateEventDeckApp().openTableSettings(shell);
         refreshLocalizedTexts();
     }
 
-    private void openPartySizeDialog() {
-        getOrCreateEventDeckApp().openPartySizeSettings(shell);
+    private void openPartyDialog() {
+        getOrCreateEventDeckApp().openPartySettings(shell);
         refreshLocalizedTexts();
     }
 
@@ -408,7 +465,7 @@ public class AppWindow {
         Composite actionRow = new Composite(heroCopy, SWT.NONE);
         actionRow.setBackground(theme.panelBackground);
         actionRow.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-        GridLayout actionsLayout = new GridLayout(2, true);
+        GridLayout actionsLayout = new GridLayout(3, true);
         actionsLayout.marginWidth = 0;
         actionsLayout.marginHeight = 4;
         actionsLayout.horizontalSpacing = 10;
@@ -416,6 +473,8 @@ public class AppWindow {
         actionRow.setLayout(actionsLayout);
 
         newDungeonButton = createHeroButton(actionRow, newDungeonAction);
+        newSettlementButton = createHeroButton(actionRow, newSettlementAction);
+        genWarriorCounterButton = createHeroButton(actionRow, genWarriorCounterAction);
         openEventDecksButton = createHeroButton(actionRow, openEventDecksAction);
         activateTablesButton = createHeroButton(actionRow, activateTablesAction);
         contentEditorButton = createHeroButton(actionRow, eventContentEditorAction);
@@ -434,6 +493,40 @@ public class AppWindow {
         button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
         action.bind(button);
         return button;
+    }
+
+    private Image loadSettlementDeckPreviewImage() {
+        String imgDir = Settings.getSetting(Settings.IMG_DIR);
+        if (imgDir == null || imgDir.isBlank()) {
+            return null;
+        }
+        Path path = Path.of(imgDir).resolve("settlement.png").normalize();
+        if (!java.nio.file.Files.isRegularFile(path)) {
+            return null;
+        }
+        return new Image(display, path.toString());
+    }
+
+    private void paintSettlementDeckBack(PaintEvent event, Canvas canvas, Image image) {
+        Rectangle area = canvas.getClientArea();
+        theme.paintDarkPanel(event.gc, area);
+        if (image == null || image.isDisposed() || area.width <= 0 || area.height <= 0) {
+            return;
+        }
+
+        Rectangle source = image.getBounds();
+        int targetWidth = Math.max(1, area.width - 24);
+        int targetHeight = Math.max(1, area.height - 24);
+        double scale = Math.min((double) targetWidth / source.width, (double) targetHeight / source.height);
+        int drawWidth = Math.max(1, (int) Math.round(source.width * scale));
+        int drawHeight = Math.max(1, (int) Math.round(source.height * scale));
+        int drawX = area.x + (area.width - drawWidth) / 2;
+        int drawY = area.y + (area.height - drawHeight) / 2;
+
+        event.gc.setAdvanced(true);
+        event.gc.setAntialias(SWT.ON);
+        event.gc.setInterpolation(SWT.HIGH);
+        event.gc.drawImage(image, 0, 0, source.width, source.height, drawX, drawY, drawWidth, drawHeight);
     }
 
     private Canvas createDialogHeader(Composite parent, String title, String subtitle) {
@@ -545,118 +638,6 @@ public class AppWindow {
         spinner.setFont(theme.bodyFont);
     }
 
-    private Label createStatLabel(Composite parent) {
-        Label label = new Label(parent, SWT.WRAP | SWT.CENTER);
-        label.setBackground(theme.panelBackgroundAlt);
-        label.setForeground(theme.parchment);
-        label.setFont(theme.statFont);
-        GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
-        data.heightHint = 64;
-        label.setLayoutData(data);
-        return label;
-    }
-
-    private void buildWorkspaceSection(Composite parent) {
-        SashForm split = new SashForm(parent, SWT.NONE);
-        split.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        split.setBackground(theme.brassDark);
-
-        buildLeftPanel(split);
-        buildRenderPanel(split);
-
-        split.setWeights(new int[] {32, 68});
-    }
-
-    private void buildLeftPanel(Composite parent) {
-        Composite left = new Composite(parent, SWT.DOUBLE_BUFFERED);
-        left.setBackground(theme.parchment);
-        left.setLayout(new GridLayout(1, false));
-        left.addPaintListener(event -> theme.paintParchmentPanel(event.gc, left.getClientArea()));
-
-        browserTitleLabel = new Label(left, SWT.NONE);
-        browserTitleLabel.setBackground(theme.parchment);
-        browserTitleLabel.setForeground(theme.ink);
-        browserTitleLabel.setFont(theme.sectionTitleFont);
-        browserTitleLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-
-        cardList = new org.eclipse.swt.widgets.List(left, SWT.BORDER | SWT.V_SCROLL);
-        cardList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        cardList.setBackground(theme.mist);
-        cardList.setForeground(theme.ink);
-        cardList.setFont(theme.bodyFont);
-        reloadCardList();
-
-        cardList.addListener(SWT.Selection, event -> {
-            int index = cardList.getSelectionIndex();
-            if (index >= 0 && index < cards.size()) {
-                selected = cards.get(index);
-                if (renderCanvas != null && !renderCanvas.isDisposed()) {
-                    renderCanvas.redraw();
-                }
-            }
-        });
-
-        browserHintLabel = new Label(left, SWT.WRAP);
-        browserHintLabel.setBackground(theme.parchment);
-        browserHintLabel.setForeground(theme.mutedInk);
-        browserHintLabel.setFont(theme.bodyFont);
-        browserHintLabel.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
-    }
-
-    private void buildRenderPanel(Composite parent) {
-        Composite right = new Composite(parent, SWT.DOUBLE_BUFFERED);
-        right.setBackground(theme.panelBackground);
-        GridLayout rightLayout = new GridLayout(1, false);
-        rightLayout.marginWidth = 16;
-        rightLayout.marginHeight = 16;
-        rightLayout.verticalSpacing = 10;
-        right.setLayout(rightLayout);
-        right.addPaintListener(event -> theme.paintDarkPanel(event.gc, right.getClientArea()));
-
-        previewTitleLabel = new Label(right, SWT.NONE);
-        previewTitleLabel.setBackground(theme.panelBackground);
-        previewTitleLabel.setForeground(theme.mist);
-        previewTitleLabel.setFont(theme.sectionTitleFont);
-        previewTitleLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-
-        previewHintLabel = new Label(right, SWT.WRAP);
-        previewHintLabel.setBackground(theme.panelBackground);
-        previewHintLabel.setForeground(theme.parchment);
-        previewHintLabel.setFont(theme.bodyFont);
-        previewHintLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-
-        renderCanvas = new Canvas(right, SWT.DOUBLE_BUFFERED | SWT.BORDER);
-        renderCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        renderCanvas.addPaintListener(new PaintListener() {
-            @Override
-            public void paintControl(PaintEvent event) {
-                Rectangle area = renderCanvas.getClientArea();
-                theme.paintDarkPanel(event.gc, area);
-                Rectangle inner = new Rectangle(area.x + 12, area.y + 12, area.width - 24, area.height - 24);
-
-                if (selected == null) {
-                    event.gc.setForeground(theme.mist);
-                    event.gc.setFont(theme.bodyFont);
-                    event.gc.drawText(I18n.t("dashboard.preview.hint"), inner.x + 18, inner.y + 18, true);
-                    return;
-                }
-
-                Point scaled = renderer.scaleToFit(area);
-                int x = area.x + (area.width - scaled.x) / 2;
-                int y = area.y + (area.height - scaled.y) / 2;
-                renderer.drawCard(event.gc, new Rectangle(x, y, scaled.x, scaled.y), selected);
-            }
-        });
-
-        right.addListener(SWT.Resize, event -> renderCanvas.redraw());
-
-        shell.addListener(SWT.KeyDown, event -> {
-            if (event.keyCode == SWT.F5) {
-                renderCanvas.redraw();
-            }
-        });
-    }
-
     private void refreshDashboardStats() {
         if (cards == null || theme == null) {
             return;
@@ -686,10 +667,17 @@ public class AppWindow {
         Settings.setLanguage(language);
         Settings.save();
         I18n.setLanguage(language);
+        resetWarriorCounterPoolCache();
         if (eventDeckApp != null && !eventDeckApp.isDisposed()) {
             eventDeckApp.reloadData();
         }
         refreshLocalizedTexts();
+    }
+
+    private void resetWarriorCounterPoolCache() {
+        remainingWarriorCounters.clear();
+        warriorCounterPartySignature = "";
+        warriorCounterPoolInitialized = false;
     }
 
     private void openDungeonDefaultsDialog() {
@@ -849,322 +837,692 @@ public class AppWindow {
         handleExportCsv(environmentGroup);
     }
 
-    private void openCardMaintenanceDialog() {
-        Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+//    private void openCardMaintenanceDialog() {
+//        Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL | SWT.RESIZE);
+//        AppIcon.inherit(dialog, shell);
+//        dialog.setText(I18n.t("dialog.maintenance.title"));
+//        dialog.setLayout(new GridLayout(2, true));
+//        dialog.setSize(980, 620);
+//
+//        org.eclipse.swt.widgets.List maintenanceList = new org.eclipse.swt.widgets.List(dialog, SWT.BORDER | SWT.V_SCROLL);
+//        maintenanceList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+//
+//        Composite details = new Composite(dialog, SWT.NONE);
+//        details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+//        details.setLayout(new GridLayout(2, false));
+//
+//        Label bulkEnvironmentLabel = new Label(details, SWT.NONE);
+//        bulkEnvironmentLabel.setText(I18n.t("dialog.tileConfig.environment"));
+//        org.eclipse.swt.widgets.Combo bulkEnvironmentCombo = new org.eclipse.swt.widgets.Combo(
+//                details,
+//                SWT.DROP_DOWN | SWT.READ_ONLY);
+//        bulkEnvironmentCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        Composite bulkActions = new Composite(details, SWT.NONE);
+//        bulkActions.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+//        GridLayout bulkActionsLayout = new GridLayout(2, true);
+//        bulkActionsLayout.marginWidth = 0;
+//        bulkActionsLayout.marginHeight = 0;
+//        bulkActions.setLayout(bulkActionsLayout);
+//
+//        org.eclipse.swt.widgets.Button enableEnvironmentButton = new org.eclipse.swt.widgets.Button(bulkActions, SWT.PUSH);
+//        enableEnvironmentButton.setText(I18n.t("dialog.tileConfig.enableEnvironment"));
+//        enableEnvironmentButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        org.eclipse.swt.widgets.Button disableEnvironmentButton = new org.eclipse.swt.widgets.Button(bulkActions, SWT.PUSH);
+//        disableEnvironmentButton.setText(I18n.t("dialog.tileConfig.disableEnvironment"));
+//        disableEnvironmentButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        Label nameLabel = new Label(details, SWT.NONE);
+//        nameLabel.setText("Nombre:");
+//        Label nameValue = new Label(details, SWT.WRAP);
+//        nameValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        Label typeLabel = new Label(details, SWT.NONE);
+//        typeLabel.setText("Tipo:");
+//        Label typeValue = new Label(details, SWT.WRAP);
+//        typeValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        Label environmentLabel = new Label(details, SWT.NONE);
+//        environmentLabel.setText("Entorno:");
+//        Label environmentValue = new Label(details, SWT.WRAP);
+//        environmentValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        Label copiesLabel = new Label(details, SWT.NONE);
+//        copiesLabel.setText("Número de copias:");
+//        Spinner copiesSpinner = new Spinner(details, SWT.BORDER);
+//        copiesSpinner.setMinimum(0);
+//        copiesSpinner.setMaximum(999);
+//        copiesSpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        Label enabledLabel = new Label(details, SWT.NONE);
+//        enabledLabel.setText("Habilitada:");
+//        org.eclipse.swt.widgets.Button enabledCheckbox = new org.eclipse.swt.widgets.Button(details, SWT.CHECK);
+//        enabledCheckbox.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+//
+//        Label tilePathLabel = new Label(details, SWT.NONE);
+//        tilePathLabel.setText("Tile path:");
+//        Composite tilePathRow = new Composite(details, SWT.NONE);
+//        tilePathRow.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//        GridLayout tilePathLayout = new GridLayout(2, false);
+//        tilePathLayout.marginWidth = 0;
+//        tilePathLayout.marginHeight = 0;
+//        tilePathRow.setLayout(tilePathLayout);
+//
+//        Text tilePathText = new Text(tilePathRow, SWT.BORDER);
+//        tilePathText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        org.eclipse.swt.widgets.Button browseTileButton = new org.eclipse.swt.widgets.Button(tilePathRow, SWT.PUSH);
+//        browseTileButton.setText("Examinar...");
+//        browseTileButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
+//
+//        Composite actions = new Composite(details, SWT.NONE);
+//        actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false, 2, 1));
+//        GridLayout actionsLayout = new GridLayout(3, true);
+//        actionsLayout.marginWidth = 0;
+//        actions.setLayout(actionsLayout);
+//
+//        org.eclipse.swt.widgets.Button saveButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
+//        saveButton.setText(I18n.t("button.saveChanges"));
+//        saveButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        org.eclipse.swt.widgets.Button deleteButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
+//        deleteButton.setText(I18n.t("button.deleteCard"));
+//        deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        org.eclipse.swt.widgets.Button closeButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
+//        closeButton.setText(I18n.t("button.close"));
+//        closeButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+//
+//        List<DungeonCard> maintenanceCards = new ArrayList<>();
+//        final long[] selectedCardId = new long[] {-1L};
+//
+//        final Runnable[] syncSelectionDetails = new Runnable[1];
+//        syncSelectionDetails[0] = () -> {
+//            int selectedIndex = maintenanceList.getSelectionIndex();
+//            boolean hasSelection = selectedIndex >= 0 && selectedIndex < maintenanceCards.size();
+//            saveButton.setEnabled(hasSelection);
+//            deleteButton.setEnabled(hasSelection);
+//            copiesSpinner.setEnabled(hasSelection);
+//            enabledCheckbox.setEnabled(hasSelection);
+//            tilePathText.setEnabled(hasSelection);
+//            browseTileButton.setEnabled(hasSelection);
+//            boolean hasEnvironmentSelection = bulkEnvironmentCombo.getSelectionIndex() >= 0;
+//            enableEnvironmentButton.setEnabled(hasEnvironmentSelection);
+//            disableEnvironmentButton.setEnabled(hasEnvironmentSelection);
+//
+//            if (!hasSelection) {
+//                nameValue.setText("");
+//                typeValue.setText("");
+//                environmentValue.setText("");
+//                copiesSpinner.setSelection(0);
+//                enabledCheckbox.setSelection(false);
+//                tilePathText.setText("");
+//                details.layout(true, true);
+//                return;
+//            }
+//
+//            DungeonCard card = maintenanceCards.get(selectedIndex);
+//            selectedCardId[0] = card.getId();
+//            nameValue.setText(card.getName());
+//            typeValue.setText(card.getType().getLabel());
+//            environmentValue.setText(card.getEnvironment());
+//            copiesSpinner.setSelection(card.getCopyCount());
+//            enabledCheckbox.setSelection(card.isEnabled());
+//            tilePathText.setText(card.getTileImagePath());
+//            details.layout(true, true);
+//        };
+//
+//        Runnable reloadMaintenanceCards = () -> {
+//            try {
+//                maintenanceCards.clear();
+//                maintenanceCards.addAll(cardStore.loadCards());
+//            } catch (DungeonCardStorageException ex) {
+//                showError("Mantenimiento", "No se han podido cargar las cartas: " + ex.getMessage());
+//                return;
+//            }
+//
+//            maintenanceList.removeAll();
+//            for (DungeonCard card : maintenanceCards) {
+//                maintenanceList.add(formatMaintenanceCardEntry(card));
+//            }
+//
+//            String previouslySelectedEnvironment = bulkEnvironmentCombo.getText();
+//            java.util.List<String> environments = maintenanceCards.stream()
+//                    .map(DungeonCard::getEnvironment)
+//                    .filter(environment -> environment != null && !environment.isBlank())
+//                    .distinct()
+//                    .sorted(String.CASE_INSENSITIVE_ORDER)
+//                    .collect(Collectors.toList());
+//            bulkEnvironmentCombo.setItems(environments.toArray(String[]::new));
+//            if (!previouslySelectedEnvironment.isBlank()) {
+//                int selectedIndex = bulkEnvironmentCombo.indexOf(previouslySelectedEnvironment);
+//                if (selectedIndex >= 0) {
+//                    bulkEnvironmentCombo.select(selectedIndex);
+//                }
+//            }
+//            if (bulkEnvironmentCombo.getSelectionIndex() < 0 && !environments.isEmpty()) {
+//                bulkEnvironmentCombo.select(0);
+//            }
+//
+//            int indexToSelect = -1;
+//            if (selectedCardId[0] >= 0) {
+//                for (int i = 0; i < maintenanceCards.size(); i++) {
+//                    if (maintenanceCards.get(i).getId() == selectedCardId[0]) {
+//                        indexToSelect = i;
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            if (indexToSelect < 0 && !maintenanceCards.isEmpty()) {
+//                indexToSelect = 0;
+//                selectedCardId[0] = maintenanceCards.get(0).getId();
+//            }
+//
+//            if (indexToSelect >= 0) {
+//                maintenanceList.select(indexToSelect);
+//            }
+//            syncSelectionDetails[0].run();
+//            refreshCards();
+//        };
+//
+//        bulkEnvironmentCombo.addListener(SWT.Selection, event -> syncSelectionDetails[0].run());
+//
+//        final java.util.function.Consumer<Boolean> applyEnvironmentEnabled = enabled -> {
+//            String selectedEnvironment = bulkEnvironmentCombo.getText();
+//            if (selectedEnvironment == null || selectedEnvironment.isBlank()) {
+//                return;
+//            }
+//
+//            int changed = 0;
+//            for (DungeonCard card : maintenanceCards) {
+//                if (!selectedEnvironment.equalsIgnoreCase(card.getEnvironment()) || card.isEnabled() == enabled) {
+//                    continue;
+//                }
+//                try {
+//                    cardStore.updateCard(new DungeonCard(
+//                            card.getId(),
+//                            card.getName(),
+//                            card.getType(),
+//                            card.getEnvironment(),
+//                            card.getCopyCount(),
+//                            enabled,
+//                            card.getDescriptionText(),
+//                            card.getRulesText(),
+//                            card.getTileImagePath()));
+//                    changed++;
+//                } catch (DungeonCardStorageException ex) {
+//                    showError(
+//                            I18n.t("dialog.maintenance.title"),
+//                            I18n.t("dialog.tileConfig.bulkUpdateError") + ": " + ex.getMessage());
+//                    return;
+//                }
+//            }
+//
+//            if (changed > 0) {
+//                showInfo(
+//                        I18n.t("dialog.maintenance.title"),
+//                        String.format(I18n.t("dialog.tileConfig.bulkUpdated"), changed, selectedEnvironment));
+//            }
+//            reloadMaintenanceCards.run();
+//        };
+//
+//        enableEnvironmentButton.addListener(SWT.Selection, event -> applyEnvironmentEnabled.accept(Boolean.TRUE));
+//        disableEnvironmentButton.addListener(SWT.Selection, event -> applyEnvironmentEnabled.accept(Boolean.FALSE));
+//
+//        maintenanceList.addListener(SWT.Selection, event -> syncSelectionDetails[0].run());
+//
+//        browseTileButton.addListener(SWT.Selection, event -> {
+//            int selectedIndex = maintenanceList.getSelectionIndex();
+//            if (selectedIndex < 0 || selectedIndex >= maintenanceCards.size()) {
+//                return;
+//            }
+//
+//            FileDialog fileDialog = new FileDialog(dialog, SWT.OPEN);
+//            fileDialog.setText("Seleccionar tile");
+//            fileDialog.setFilterExtensions(new String[] {"*.png;*.jpg;*.jpeg;*.gif;*.bmp", "*.*"});
+//            fileDialog.setFilterNames(new String[] {"Image files", "All files"});
+//            String selectedPath = fileDialog.open();
+//            if (selectedPath == null || selectedPath.isBlank()) {
+//                return;
+//            }
+//
+//            Path absolutePath = Path.of(selectedPath).toAbsolutePath().normalize();
+//            Path normalizedProjectRoot = projectRoot.toAbsolutePath().normalize();
+//            if (absolutePath.startsWith(normalizedProjectRoot)) {
+//                tilePathText.setText(normalizedProjectRoot.relativize(absolutePath).toString().replace('\\', '/'));
+//            } else {
+//                tilePathText.setText(absolutePath.toString().replace('\\', '/'));
+//            }
+//        });
+//
+//        saveButton.addListener(SWT.Selection, event -> {
+//            int selectedIndex = maintenanceList.getSelectionIndex();
+//            if (selectedIndex < 0 || selectedIndex >= maintenanceCards.size()) {
+//                return;
+//            }
+//
+//            DungeonCard card = maintenanceCards.get(selectedIndex);
+//            try {
+//                cardStore.updateCard(new DungeonCard(
+//                        card.getId(),
+//                        card.getName(),
+//                        card.getType(),
+//                        card.getEnvironment(),
+//                        copiesSpinner.getSelection(),
+//                        enabledCheckbox.getSelection(),
+//                        card.getDescriptionText(),
+//                        card.getRulesText(),
+//                        tilePathText.getText().trim()));
+//                selectedCardId[0] = card.getId();
+//                reloadMaintenanceCards.run();
+//            } catch (DungeonCardStorageException ex) {
+//                showError("Mantenimiento", "No se han podido guardar los cambios: " + ex.getMessage());
+//            }
+//        });
+//
+//        deleteButton.addListener(SWT.Selection, event -> {
+//            int selectedIndex = maintenanceList.getSelectionIndex();
+//            if (selectedIndex < 0 || selectedIndex >= maintenanceCards.size()) {
+//                return;
+//            }
+//
+//            DungeonCard card = maintenanceCards.get(selectedIndex);
+//            MessageBox confirmBox = new MessageBox(dialog, SWT.ICON_WARNING | SWT.YES | SWT.NO);
+//            confirmBox.setText("Eliminar carta");
+//            confirmBox.setMessage("¿Seguro que quieres eliminar la carta \"" + card.getName() + "\"?");
+//            if (confirmBox.open() != SWT.YES) {
+//                return;
+//            }
+//
+//            try {
+//                cardStore.deleteCard(card.getId());
+//                selectedCardId[0] = -1L;
+//                reloadMaintenanceCards.run();
+//            } catch (DungeonCardStorageException ex) {
+//                showError("Mantenimiento", "No se ha podido eliminar la carta: " + ex.getMessage());
+//            }
+//        });
+//
+//        closeButton.addListener(SWT.Selection, event -> dialog.close());
+//        reloadMaintenanceCards.run();
+//        dialog.open();
+//        while (!dialog.isDisposed()) {
+//            if (!display.readAndDispatch()) {
+//                display.sleep();
+//            }
+//        }
+//    }
+
+    private void openNewSettlementDialog() {
+        List<SettlementLocation> allLocations;
+        try {
+            allLocations = loadSettlementLocations();
+        } catch (Exception ex) {
+            showError(I18n.t("dialog.newSettlement.title"), I18n.t("dialog.newSettlement.error.loadLocations") + ex.getMessage());
+            return;
+        }
+
+        Shell dialog = new Shell(shell, SWT.SHELL_TRIM | SWT.RESIZE | SWT.MAX);
         AppIcon.inherit(dialog, shell);
-        dialog.setText(I18n.t("dialog.maintenance.title"));
-        dialog.setLayout(new GridLayout(2, true));
-        dialog.setSize(980, 620);
+        dialog.setText(I18n.t("dialog.newSettlement.title"));
+        dialog.setBackground(theme.shellBackground);
+        dialog.setLayout(new GridLayout(1, false));
+        dialog.setSize(1180, 760);
+        dialog.setMaximized(true);
 
-        org.eclipse.swt.widgets.List maintenanceList = new org.eclipse.swt.widgets.List(dialog, SWT.BORDER | SWT.V_SCROLL);
-        maintenanceList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        createDialogHeader(
+                dialog,
+                I18n.t("dialog.newSettlement.title"),
+                I18n.t("dialog.newSettlement.subtitle"));
 
-        Composite details = new Composite(dialog, SWT.NONE);
-        details.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-        details.setLayout(new GridLayout(2, false));
+        SashForm horizontalSplit = new SashForm(dialog, SWT.HORIZONTAL);
+        horizontalSplit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        horizontalSplit.setBackground(theme.brassDark);
 
-        Label bulkEnvironmentLabel = new Label(details, SWT.NONE);
-        bulkEnvironmentLabel.setText(I18n.t("dialog.tileConfig.environment"));
-        org.eclipse.swt.widgets.Combo bulkEnvironmentCombo = new org.eclipse.swt.widgets.Combo(
-                details,
+        SashForm leftSplit = new SashForm(horizontalSplit, SWT.VERTICAL);
+        leftSplit.setBackground(theme.brassDark);
+
+        Composite locationsPanel = createDarkPanel(leftSplit, 1);
+        Group locationsGroup = new Group(locationsPanel, SWT.NONE);
+        locationsGroup.setText(I18n.t("dialog.newSettlement.group.locations"));
+        locationsGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        locationsGroup.setBackground(theme.panelBackground);
+        locationsGroup.setForeground(theme.mist);
+        locationsGroup.setFont(theme.sectionTitleFont);
+        GridLayout locationsLayout = new GridLayout(1, false);
+        locationsLayout.marginWidth = 12;
+        locationsLayout.marginHeight = 12;
+        locationsLayout.verticalSpacing = 10;
+        locationsGroup.setLayout(locationsLayout);
+
+        Label settlementTypeLabel = new Label(locationsGroup, SWT.NONE);
+        settlementTypeLabel.setText(I18n.t("dialog.newSettlement.label.settlementType"));
+        styleDarkLabel(settlementTypeLabel, false);
+
+        org.eclipse.swt.widgets.Combo settlementTypeCombo = new org.eclipse.swt.widgets.Combo(
+                locationsGroup,
                 SWT.DROP_DOWN | SWT.READ_ONLY);
-        bulkEnvironmentCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Composite bulkActions = new Composite(details, SWT.NONE);
-        bulkActions.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-        GridLayout bulkActionsLayout = new GridLayout(2, true);
-        bulkActionsLayout.marginWidth = 0;
-        bulkActionsLayout.marginHeight = 0;
-        bulkActions.setLayout(bulkActionsLayout);
-
-        org.eclipse.swt.widgets.Button enableEnvironmentButton = new org.eclipse.swt.widgets.Button(bulkActions, SWT.PUSH);
-        enableEnvironmentButton.setText(I18n.t("dialog.tileConfig.enableEnvironment"));
-        enableEnvironmentButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        org.eclipse.swt.widgets.Button disableEnvironmentButton = new org.eclipse.swt.widgets.Button(bulkActions, SWT.PUSH);
-        disableEnvironmentButton.setText(I18n.t("dialog.tileConfig.disableEnvironment"));
-        disableEnvironmentButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label nameLabel = new Label(details, SWT.NONE);
-        nameLabel.setText("Nombre:");
-        Label nameValue = new Label(details, SWT.WRAP);
-        nameValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label typeLabel = new Label(details, SWT.NONE);
-        typeLabel.setText("Tipo:");
-        Label typeValue = new Label(details, SWT.WRAP);
-        typeValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label environmentLabel = new Label(details, SWT.NONE);
-        environmentLabel.setText("Entorno:");
-        Label environmentValue = new Label(details, SWT.WRAP);
-        environmentValue.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label copiesLabel = new Label(details, SWT.NONE);
-        copiesLabel.setText("Número de copias:");
-        Spinner copiesSpinner = new Spinner(details, SWT.BORDER);
-        copiesSpinner.setMinimum(0);
-        copiesSpinner.setMaximum(999);
-        copiesSpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label enabledLabel = new Label(details, SWT.NONE);
-        enabledLabel.setText("Habilitada:");
-        org.eclipse.swt.widgets.Button enabledCheckbox = new org.eclipse.swt.widgets.Button(details, SWT.CHECK);
-        enabledCheckbox.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
-
-        Label tilePathLabel = new Label(details, SWT.NONE);
-        tilePathLabel.setText("Tile path:");
-        Composite tilePathRow = new Composite(details, SWT.NONE);
-        tilePathRow.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        GridLayout tilePathLayout = new GridLayout(2, false);
-        tilePathLayout.marginWidth = 0;
-        tilePathLayout.marginHeight = 0;
-        tilePathRow.setLayout(tilePathLayout);
-
-        Text tilePathText = new Text(tilePathRow, SWT.BORDER);
-        tilePathText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        org.eclipse.swt.widgets.Button browseTileButton = new org.eclipse.swt.widgets.Button(tilePathRow, SWT.PUSH);
-        browseTileButton.setText("Examinar...");
-        browseTileButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
-
-        Composite actions = new Composite(details, SWT.NONE);
-        actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false, 2, 1));
-        GridLayout actionsLayout = new GridLayout(3, true);
-        actionsLayout.marginWidth = 0;
-        actions.setLayout(actionsLayout);
-
-        org.eclipse.swt.widgets.Button saveButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
-        saveButton.setText(I18n.t("button.saveChanges"));
-        saveButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        org.eclipse.swt.widgets.Button deleteButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
-        deleteButton.setText(I18n.t("button.deleteCard"));
-        deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        org.eclipse.swt.widgets.Button closeButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
-        closeButton.setText(I18n.t("button.close"));
-        closeButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        List<DungeonCard> maintenanceCards = new ArrayList<>();
-        final long[] selectedCardId = new long[] {-1L};
-
-        final Runnable[] syncSelectionDetails = new Runnable[1];
-        syncSelectionDetails[0] = () -> {
-            int selectedIndex = maintenanceList.getSelectionIndex();
-            boolean hasSelection = selectedIndex >= 0 && selectedIndex < maintenanceCards.size();
-            saveButton.setEnabled(hasSelection);
-            deleteButton.setEnabled(hasSelection);
-            copiesSpinner.setEnabled(hasSelection);
-            enabledCheckbox.setEnabled(hasSelection);
-            tilePathText.setEnabled(hasSelection);
-            browseTileButton.setEnabled(hasSelection);
-            boolean hasEnvironmentSelection = bulkEnvironmentCombo.getSelectionIndex() >= 0;
-            enableEnvironmentButton.setEnabled(hasEnvironmentSelection);
-            disableEnvironmentButton.setEnabled(hasEnvironmentSelection);
-
-            if (!hasSelection) {
-                nameValue.setText("");
-                typeValue.setText("");
-                environmentValue.setText("");
-                copiesSpinner.setSelection(0);
-                enabledCheckbox.setSelection(false);
-                tilePathText.setText("");
-                details.layout(true, true);
-                return;
-            }
-
-            DungeonCard card = maintenanceCards.get(selectedIndex);
-            selectedCardId[0] = card.getId();
-            nameValue.setText(card.getName());
-            typeValue.setText(card.getType().getLabel());
-            environmentValue.setText(card.getEnvironment());
-            copiesSpinner.setSelection(card.getCopyCount());
-            enabledCheckbox.setSelection(card.isEnabled());
-            tilePathText.setText(card.getTileImagePath());
-            details.layout(true, true);
+        String[] settlementTypeValues = new String[] {
+                SETTLEMENT_TYPE_ANY,
+                "city",
+                "town",
+                "village",
+                "outskirts",
+                "special"
         };
+        settlementTypeCombo.setItems(new String[] {
+                I18n.t("dialog.newSettlement.type.any"),
+                I18n.t("dialog.newSettlement.type.city"),
+                I18n.t("dialog.newSettlement.type.town"),
+                I18n.t("dialog.newSettlement.type.village"),
+                I18n.t("dialog.newSettlement.type.outskirts"),
+                I18n.t("dialog.newSettlement.type.special")
+        });
+        settlementTypeCombo.select(0);
+        settlementTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        styleCombo(settlementTypeCombo);
 
-        Runnable reloadMaintenanceCards = () -> {
-            try {
-                maintenanceCards.clear();
-                maintenanceCards.addAll(cardStore.loadCards());
-            } catch (DungeonCardStorageException ex) {
-                showError("Mantenimiento", "No se han podido cargar las cartas: " + ex.getMessage());
-                return;
-            }
+        org.eclipse.swt.widgets.List locationsList =
+                new org.eclipse.swt.widgets.List(locationsGroup, SWT.BORDER | SWT.V_SCROLL);
+        locationsList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        locationsList.setBackground(theme.mist);
+        locationsList.setForeground(theme.ink);
+        locationsList.setFont(theme.bodyFont);
 
-            maintenanceList.removeAll();
-            for (DungeonCard card : maintenanceCards) {
-                maintenanceList.add(formatMaintenanceCardEntry(card));
-            }
+        Label emptyLocationsLabel = new Label(locationsGroup, SWT.WRAP);
+        emptyLocationsLabel.setText(
+                allLocations.isEmpty()
+                        ? I18n.t("dialog.newSettlement.locations.empty")
+                        : I18n.t("dialog.newSettlement.locations.noneForType"));
+        emptyLocationsLabel.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false));
+        styleDarkLabel(emptyLocationsLabel, false);
 
-            String previouslySelectedEnvironment = bulkEnvironmentCombo.getText();
-            java.util.List<String> environments = maintenanceCards.stream()
-                    .map(DungeonCard::getEnvironment)
-                    .filter(environment -> environment != null && !environment.isBlank())
-                    .distinct()
-                    .sorted(String.CASE_INSENSITIVE_ORDER)
-                    .collect(Collectors.toList());
-            bulkEnvironmentCombo.setItems(environments.toArray(String[]::new));
-            if (!previouslySelectedEnvironment.isBlank()) {
-                int selectedIndex = bulkEnvironmentCombo.indexOf(previouslySelectedEnvironment);
-                if (selectedIndex >= 0) {
-                    bulkEnvironmentCombo.select(selectedIndex);
+        Composite deckPanel = createDarkPanel(leftSplit, 1);
+        Group deckGroup = new Group(deckPanel, SWT.NONE);
+        deckGroup.setText(I18n.t("dialog.newSettlement.group.deck"));
+        deckGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        deckGroup.setBackground(theme.panelBackground);
+        deckGroup.setForeground(theme.mist);
+        deckGroup.setFont(theme.sectionTitleFont);
+        GridLayout deckLayout = new GridLayout(2, false);
+        deckLayout.marginWidth = 16;
+        deckLayout.marginHeight = 16;
+        deckLayout.horizontalSpacing = 12;
+        deckGroup.setLayout(deckLayout);
+
+        Canvas settlementDeckCanvas = new Canvas(deckGroup, SWT.DOUBLE_BUFFERED | SWT.BORDER);
+        GridData settlementDeckCanvasData = new GridData(SWT.FILL, SWT.FILL, true, true);
+        settlementDeckCanvasData.minimumWidth = 220;
+        settlementDeckCanvas.setLayoutData(settlementDeckCanvasData);
+        settlementDeckCanvas.setBackground(theme.panelBackgroundAlt);
+        settlementDeckCanvas.setToolTipText(I18n.t("button.clickHere"));
+        Image settlementDeckBack = loadSettlementDeckPreviewImage();
+        if (settlementDeckBack != null) {
+            settlementDeckCanvas.addPaintListener(event -> paintSettlementDeckBack(event, settlementDeckCanvas, settlementDeckBack));
+            settlementDeckCanvas.addDisposeListener(event -> {
+                if (!settlementDeckBack.isDisposed()) {
+                    settlementDeckBack.dispose();
                 }
-            }
-            if (bulkEnvironmentCombo.getSelectionIndex() < 0 && !environments.isEmpty()) {
-                bulkEnvironmentCombo.select(0);
-            }
+            });
+        } else {
+            settlementDeckCanvas.addPaintListener(event -> {
+                Rectangle area = settlementDeckCanvas.getClientArea();
+                theme.paintDarkPanel(event.gc, area);
+                event.gc.setForeground(theme.parchment);
+                event.gc.setFont(theme.bodyFont);
+                org.eclipse.swt.graphics.Point extent = event.gc.textExtent(I18n.t("button.clickHere"), SWT.DRAW_TRANSPARENT);
+                int x = area.x + Math.max(12, (area.width - extent.x) / 2);
+                int y = area.y + Math.max(12, (area.height - extent.y) / 2);
+                event.gc.drawText(I18n.t("button.clickHere"), x, y, true);
+            });
+        }
+        settlementDeckCanvas.addListener(SWT.MouseUp, event -> {
+            EventDeckApp eventApp = getOrCreateEventDeckApp();
+            eventApp.reloadData();
+            eventApp.drawSettlementEvent();
+        });
 
-            int indexToSelect = -1;
-            if (selectedCardId[0] >= 0) {
-                for (int i = 0; i < maintenanceCards.size(); i++) {
-                    if (maintenanceCards.get(i).getId() == selectedCardId[0]) {
-                        indexToSelect = i;
-                        break;
+        Button closeAllSettlementCardsButton = new Button(deckGroup, SWT.PUSH);
+        closeAllSettlementCardsButton.setText(I18n.t("menu.item.closeAllCards"));
+        closeAllSettlementCardsButton.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
+        closeAllSettlementCardsButton.setBackground(theme.panelBackgroundAlt);
+        closeAllSettlementCardsButton.setForeground(theme.mist);
+        closeAllSettlementCardsButton.setFont(theme.bodyFont);
+        closeAllSettlementCardsButton.addListener(SWT.Selection, event -> getOrCreateEventDeckApp().closeAllOpenCards());
+
+        Composite previewPanel = createParchmentPanel(horizontalSplit, 1);
+        Group previewGroup = new Group(previewPanel, SWT.NONE);
+        previewGroup.setText(I18n.t("dialog.newSettlement.group.preview"));
+        previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        previewGroup.setBackground(theme.parchment);
+        previewGroup.setForeground(theme.ink);
+        previewGroup.setFont(theme.sectionTitleFont);
+        GridLayout previewLayout = new GridLayout(1, false);
+        previewLayout.marginWidth = 18;
+        previewLayout.marginHeight = 18;
+        previewGroup.setLayout(previewLayout);
+
+        Composite previewHost = new Composite(previewGroup, SWT.NONE);
+        previewHost.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        FillLayout previewHostLayout = new FillLayout();
+        previewHostLayout.marginWidth = 0;
+        previewHostLayout.marginHeight = 0;
+        previewHost.setLayout(previewHostLayout);
+        previewHost.setBackground(theme.parchment);
+
+        List<SettlementLocation> visibleLocations = new ArrayList<>();
+
+        Runnable refreshPreview =
+                () -> {
+                    for (org.eclipse.swt.widgets.Control child : previewHost.getChildren()) {
+                        child.dispose();
                     }
-                }
+
+                    int selectionIndex = locationsList.getSelectionIndex();
+                    if (selectionIndex < 0 || selectionIndex >= visibleLocations.size()) {
+                        Label previewPlaceholder = new Label(previewHost, SWT.WRAP | SWT.CENTER);
+                        previewPlaceholder.setText(I18n.t("dialog.newSettlement.preview.pending"));
+                        styleParchmentLabel(previewPlaceholder, false);
+                    } else {
+                        SettlementLocation selectedLocation = visibleLocations.get(selectionIndex);
+                        CardFactory.createSettlementLocationCardPreview(
+                                previewHost,
+                                selectedLocation.name(),
+                                selectedLocation.description(),
+                                selectedLocation.rules(),
+                                selectedLocation.visitors());
+                    }
+                    previewHost.layout(true, true);
+                };
+
+        Runnable refreshLocations =
+                () -> {
+                    visibleLocations.clear();
+                    locationsList.removeAll();
+
+                    String selectedType =
+                            settlementTypeCombo.getSelectionIndex() >= 0
+                                    ? settlementTypeValues[settlementTypeCombo.getSelectionIndex()]
+                                    : SETTLEMENT_TYPE_ANY;
+
+                    for (SettlementLocation location : allLocations) {
+                        if (SETTLEMENT_TYPE_ANY.equals(selectedType)
+                                || location.availableTypes().contains(selectedType)) {
+                            visibleLocations.add(location);
+                            locationsList.add(location.name());
+                        }
+                    }
+
+                    visibleLocations.sort(Comparator.comparing(SettlementLocation::name, String.CASE_INSENSITIVE_ORDER));
+                    locationsList.removeAll();
+                    for (SettlementLocation location : visibleLocations) {
+                        locationsList.add(location.name());
+                    }
+
+                    boolean hasLocations = !visibleLocations.isEmpty();
+                    emptyLocationsLabel.setVisible(!hasLocations);
+                    emptyLocationsLabel.setText(
+                            allLocations.isEmpty()
+                                    ? I18n.t("dialog.newSettlement.locations.empty")
+                                    : I18n.t("dialog.newSettlement.locations.noneForType"));
+
+                    if (hasLocations) {
+                        locationsList.select(0);
+                    }
+                    refreshPreview.run();
+                    locationsGroup.layout(true, true);
+                };
+
+        settlementTypeCombo.addListener(SWT.Selection, event -> refreshLocations.run());
+        locationsList.addListener(SWT.Selection, event -> refreshPreview.run());
+
+        leftSplit.setWeights(new int[] {50, 50});
+        horizontalSplit.setWeights(new int[] {50, 50});
+        refreshLocations.run();
+
+        dialog.open();
+    }
+
+    private List<SettlementLocation> loadSettlementLocations() throws Exception {
+        Path locationsDirectory = projectRoot.resolve("data/xml/locations");
+        if (!Files.isDirectory(locationsDirectory)) {
+            return List.of();
+        }
+
+        EditableContentTranslations translations = EditableContentTranslations.load(projectRoot, I18n.getLanguage());
+        Map<String, SettlementLocation> locationsById = new LinkedHashMap<>();
+
+        List<Path> files;
+        try (var stream = Files.list(locationsDirectory)) {
+            files = stream
+                    .filter(this::isSettlementLocationXmlFile)
+                    .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
+                    .toList();
+        }
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+
+        for (Path file : files) {
+            var document = factory.newDocumentBuilder().parse(file.toFile());
+            Element root = document.getDocumentElement();
+            if (root == null || !"locations".equals(root.getTagName())) {
+                continue;
             }
 
-            if (indexToSelect < 0 && !maintenanceCards.isEmpty()) {
-                indexToSelect = 0;
-                selectedCardId[0] = maintenanceCards.get(0).getId();
-            }
-
-            if (indexToSelect >= 0) {
-                maintenanceList.select(indexToSelect);
-            }
-            syncSelectionDetails[0].run();
-            refreshCards();
-        };
-
-        bulkEnvironmentCombo.addListener(SWT.Selection, event -> syncSelectionDetails[0].run());
-
-        final java.util.function.Consumer<Boolean> applyEnvironmentEnabled = enabled -> {
-            String selectedEnvironment = bulkEnvironmentCombo.getText();
-            if (selectedEnvironment == null || selectedEnvironment.isBlank()) {
-                return;
-            }
-
-            int changed = 0;
-            for (DungeonCard card : maintenanceCards) {
-                if (!selectedEnvironment.equalsIgnoreCase(card.getEnvironment()) || card.isEnabled() == enabled) {
+            NodeList children = root.getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                Node node = children.item(i);
+                if (node.getNodeType() != Node.ELEMENT_NODE || !"location".equals(node.getNodeName())) {
                     continue;
                 }
-                try {
-                    cardStore.updateCard(new DungeonCard(
-                            card.getId(),
-                            card.getName(),
-                            card.getType(),
-                            card.getEnvironment(),
-                            card.getCopyCount(),
-                            enabled,
-                            card.getDescriptionText(),
-                            card.getRulesText(),
-                            card.getTileImagePath()));
-                    changed++;
-                } catch (DungeonCardStorageException ex) {
-                    showError(
-                            I18n.t("dialog.maintenance.title"),
-                            I18n.t("dialog.tileConfig.bulkUpdateError") + ": " + ex.getMessage());
-                    return;
+
+                Element locationElement = (Element) node;
+                String id = locationElement.getAttribute("id") == null ? "" : locationElement.getAttribute("id").trim();
+                if (id.isEmpty()) {
+                    continue;
                 }
-            }
 
-            if (changed > 0) {
-                showInfo(
-                        I18n.t("dialog.maintenance.title"),
-                        String.format(I18n.t("dialog.tileConfig.bulkUpdated"), changed, selectedEnvironment));
-            }
-            reloadMaintenanceCards.run();
-        };
+                String rawName = childText(locationElement, "name");
+                String rawDescription = childText(locationElement, "description");
+                String rawRules = childText(locationElement, "rules");
 
-        enableEnvironmentButton.addListener(SWT.Selection, event -> applyEnvironmentEnabled.accept(Boolean.TRUE));
-        disableEnvironmentButton.addListener(SWT.Selection, event -> applyEnvironmentEnabled.accept(Boolean.FALSE));
+                String translatedName = translations.t("location." + id + ".name", rawName);
+                String translatedDescription = translations.t("location." + id + ".description", rawDescription);
+                String translatedRules = translations.t("location." + id + ".rules", rawRules);
 
-        maintenanceList.addListener(SWT.Selection, event -> syncSelectionDetails[0].run());
-
-        browseTileButton.addListener(SWT.Selection, event -> {
-            int selectedIndex = maintenanceList.getSelectionIndex();
-            if (selectedIndex < 0 || selectedIndex >= maintenanceCards.size()) {
-                return;
-            }
-
-            FileDialog fileDialog = new FileDialog(dialog, SWT.OPEN);
-            fileDialog.setText("Seleccionar tile");
-            fileDialog.setFilterExtensions(new String[] {"*.png;*.jpg;*.jpeg;*.gif;*.bmp", "*.*"});
-            fileDialog.setFilterNames(new String[] {"Image files", "All files"});
-            String selectedPath = fileDialog.open();
-            if (selectedPath == null || selectedPath.isBlank()) {
-                return;
-            }
-
-            Path absolutePath = Path.of(selectedPath).toAbsolutePath().normalize();
-            Path normalizedProjectRoot = projectRoot.toAbsolutePath().normalize();
-            if (absolutePath.startsWith(normalizedProjectRoot)) {
-                tilePathText.setText(normalizedProjectRoot.relativize(absolutePath).toString().replace('\\', '/'));
-            } else {
-                tilePathText.setText(absolutePath.toString().replace('\\', '/'));
-            }
-        });
-
-        saveButton.addListener(SWT.Selection, event -> {
-            int selectedIndex = maintenanceList.getSelectionIndex();
-            if (selectedIndex < 0 || selectedIndex >= maintenanceCards.size()) {
-                return;
-            }
-
-            DungeonCard card = maintenanceCards.get(selectedIndex);
-            try {
-                cardStore.updateCard(new DungeonCard(
-                        card.getId(),
-                        card.getName(),
-                        card.getType(),
-                        card.getEnvironment(),
-                        copiesSpinner.getSelection(),
-                        enabledCheckbox.getSelection(),
-                        card.getDescriptionText(),
-                        card.getRulesText(),
-                        tilePathText.getText().trim()));
-                selectedCardId[0] = card.getId();
-                reloadMaintenanceCards.run();
-            } catch (DungeonCardStorageException ex) {
-                showError("Mantenimiento", "No se han podido guardar los cambios: " + ex.getMessage());
-            }
-        });
-
-        deleteButton.addListener(SWT.Selection, event -> {
-            int selectedIndex = maintenanceList.getSelectionIndex();
-            if (selectedIndex < 0 || selectedIndex >= maintenanceCards.size()) {
-                return;
-            }
-
-            DungeonCard card = maintenanceCards.get(selectedIndex);
-            MessageBox confirmBox = new MessageBox(dialog, SWT.ICON_WARNING | SWT.YES | SWT.NO);
-            confirmBox.setText("Eliminar carta");
-            confirmBox.setMessage("¿Seguro que quieres eliminar la carta \"" + card.getName() + "\"?");
-            if (confirmBox.open() != SWT.YES) {
-                return;
-            }
-
-            try {
-                cardStore.deleteCard(card.getId());
-                selectedCardId[0] = -1L;
-                reloadMaintenanceCards.run();
-            } catch (DungeonCardStorageException ex) {
-                showError("Mantenimiento", "No se ha podido eliminar la carta: " + ex.getMessage());
-            }
-        });
-
-        closeButton.addListener(SWT.Selection, event -> dialog.close());
-        reloadMaintenanceCards.run();
-        dialog.open();
-        while (!dialog.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
+                Set<String> availableTypes = extractAvailableTypes(locationElement);
+                List<String> visitors = extractVisitors(locationElement);
+                locationsById.put(
+                        id,
+                        new SettlementLocation(
+                                id,
+                                translatedName,
+                                translatedDescription,
+                                translatedRules,
+                                visitors,
+                                availableTypes));
             }
         }
+
+        return locationsById.values().stream()
+                .sorted(Comparator.comparing(SettlementLocation::name, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+    }
+
+    private boolean isSettlementLocationXmlFile(Path file) {
+        if (file == null || !Files.isRegularFile(file)) {
+            return false;
+        }
+        String fileName = file.getFileName().toString().toLowerCase();
+        return fileName.endsWith(".xml")
+                && !fileName.endsWith("-schema.xsd")
+                && !fileName.endsWith(".bak")
+                && !fileName.startsWith("#");
+    }
+
+    private static Set<String> extractAvailableTypes(Element locationElement) {
+        Element availableElement = directChild(locationElement, "available");
+        if (availableElement == null) {
+            return Set.of();
+        }
+        java.util.LinkedHashSet<String> types = new java.util.LinkedHashSet<>();
+        NodeList children = availableElement.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            Node child = children.item(i);
+            if (child.getNodeType() != Node.ELEMENT_NODE || !"type".equals(child.getNodeName())) {
+                continue;
+            }
+            String type = child.getTextContent() == null ? "" : child.getTextContent().trim().toLowerCase();
+            if (!type.isEmpty()) {
+                types.add(type);
+            }
+        }
+        return types;
+    }
+
+    private static List<String> extractVisitors(Element locationElement) {
+        Element visitorsElement = directChild(locationElement, "visitors");
+        if (visitorsElement == null) {
+            return List.of();
+        }
+        List<String> visitors = new ArrayList<>();
+        NodeList children = visitorsElement.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            Node child = children.item(i);
+            if (child.getNodeType() != Node.ELEMENT_NODE || !"visitor".equals(child.getNodeName())) {
+                continue;
+            }
+            String visitor = child.getTextContent() == null ? "" : child.getTextContent().trim();
+            if (!visitor.isEmpty()) {
+                visitors.add(visitor);
+            }
+        }
+        return List.copyOf(visitors);
+    }
+
+    private static String childText(Element parent, String tagName) {
+        Element child = directChild(parent, tagName);
+        if (child == null || child.getTextContent() == null) {
+            return "";
+        }
+        return child.getTextContent().trim();
+    }
+
+    private static Element directChild(Element parent, String tagName) {
+        if (parent == null || tagName == null || tagName.isBlank()) {
+            return null;
+        }
+        NodeList children = parent.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            Node child = children.item(i);
+            if (child.getNodeType() == Node.ELEMENT_NODE && tagName.equals(child.getNodeName())) {
+                return (Element) child;
+            }
+        }
+        return null;
     }
 
     private void openNewDungeonDialog() {
@@ -2460,6 +2818,292 @@ public class AppWindow {
         box.setText(title);
         box.setMessage(message);
         box.open();
+    }
+
+    private void refreshWarriorCounterPoolIfNeeded() throws Exception {
+        String partySetting = Settings.getSetting(Settings.PARTY_WARRIORS);
+        String normalizedSignature = partySetting == null ? "" : partySetting.trim();
+        if (warriorCounterPoolInitialized && normalizedSignature.equals(warriorCounterPartySignature)) {
+            return;
+        }
+
+        java.util.List<WarriorCounterDefinition> allWarriors = loadWarriorCounters();
+        Map<String, WarriorCounterDefinition> warriorsById = new LinkedHashMap<>();
+        for (WarriorCounterDefinition warrior : allWarriors) {
+            warriorsById.put(warrior.id(), warrior);
+        }
+
+        LinkedHashMap<String, WarriorCounterDefinition> configuredWarriors = new LinkedHashMap<>();
+        if (partySetting != null && !partySetting.isBlank()) {
+            for (String token : partySetting.split(",")) {
+                String id = token == null ? "" : token.trim();
+                if (id.isEmpty()) {
+                    continue;
+                }
+                WarriorCounterDefinition warrior = warriorsById.get(id);
+                if (warrior != null) {
+                    configuredWarriors.put(id, warrior);
+                }
+            }
+        }
+
+        if (configuredWarriors.isEmpty()) {
+            for (String id : List.of("warrior-barbarian", "warrior-dwarf", "warrior-elf", "warrior-wizard")) {
+                WarriorCounterDefinition warrior = warriorsById.get(id);
+                if (warrior != null) {
+                    configuredWarriors.put(id, warrior);
+                }
+            }
+        }
+
+        remainingWarriorCounters.clear();
+        remainingWarriorCounters.addAll(configuredWarriors.values());
+        warriorCounterPartySignature = normalizedSignature;
+        warriorCounterPoolInitialized = true;
+    }
+
+    private java.util.List<WarriorCounterDefinition> loadWarriorCounters() throws Exception {
+        Path warriorsDirectory = projectRoot.resolve("data/xml/warriors");
+        if (!Files.isDirectory(warriorsDirectory)) {
+            return List.of();
+        }
+
+        EditableContentTranslations translations = EditableContentTranslations.load(projectRoot, I18n.getLanguage());
+        Map<String, WarriorCounterDefinition> warriorsById = new LinkedHashMap<>();
+
+        List<Path> files;
+        try (var stream = Files.list(warriorsDirectory)) {
+            files = stream
+                    .filter(this::isWarriorXmlFile)
+                    .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
+                    .toList();
+        }
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+
+        for (Path file : files) {
+            var document = factory.newDocumentBuilder().parse(file.toFile());
+            Element root = document.getDocumentElement();
+            if (root == null || !"warriors".equals(root.getTagName())) {
+                continue;
+            }
+
+            NodeList children = root.getChildNodes();
+            for (int i = 0; i < children.getLength(); i++) {
+                Node node = children.item(i);
+                if (node.getNodeType() != Node.ELEMENT_NODE || !"warrior".equals(node.getNodeName())) {
+                    continue;
+                }
+
+                Element warriorElement = (Element) node;
+                String id = warriorElement.getAttribute("id") == null ? "" : warriorElement.getAttribute("id").trim();
+                if (id.isEmpty()) {
+                    continue;
+                }
+
+                String rawName = childText(warriorElement, "name");
+                String rawRace = childText(warriorElement, "race");
+                String counterPath = childText(warriorElement, "counter");
+                String rawRulesPath = childText(warriorElement, "rules");
+
+                warriorsById.put(
+                        id,
+                        new WarriorCounterDefinition(
+                                id,
+                                translations.t("warrior." + id + ".name", rawName),
+                                translations.t("warrior." + id + ".race", rawRace),
+                                counterPath,
+                                translations.t("warrior." + id + ".rules", rawRulesPath)));
+            }
+        }
+
+        return warriorsById.values().stream()
+                .sorted(Comparator.comparing(WarriorCounterDefinition::name, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+    }
+
+    private boolean isWarriorXmlFile(Path file) {
+        if (file == null || !Files.isRegularFile(file)) {
+            return false;
+        }
+        String name = file.getFileName().toString().toLowerCase();
+        return name.endsWith(".xml") && !name.endsWith(".xml.bak");
+    }
+
+    private void openWarriorCounterWindow(WarriorCounterDefinition warrior) {
+        if (warrior == null || warrior.counterPath() == null || warrior.counterPath().isBlank()) {
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage"));
+            return;
+        }
+
+        Path imagePath = projectRoot.resolve(warrior.counterPath()).normalize();
+        if (!Files.isRegularFile(imagePath)) {
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage") + imagePath);
+            return;
+        }
+
+        Image image;
+        try {
+            image = new Image(display, imagePath.toString());
+        } catch (RuntimeException ex) {
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage") + imagePath);
+            return;
+        }
+
+        Rectangle bounds = image.getBounds();
+        Shell dialog = new Shell(shell, SWT.SHELL_TRIM | SWT.CLOSE);
+        String partySignatureAtOpen = warriorCounterPartySignature;
+        AppIcon.inherit(dialog, shell);
+        dialog.setText(warrior.name());
+        dialog.setBackground(theme.shellBackground);
+        dialog.setLayout(new FillLayout());
+
+        Canvas canvas = new Canvas(dialog, SWT.DOUBLE_BUFFERED);
+        canvas.setBackground(theme.shellBackground);
+        canvas.addPaintListener(event -> {
+            event.gc.drawImage(image, 0, 0);
+            paintWarriorCounterLabel(event, canvas, warrior.name());
+        });
+        canvas.addDisposeListener(event -> {
+            if (!image.isDisposed()) {
+                image.dispose();
+            }
+        });
+        dialog.addDisposeListener(event -> {
+            if (!partySignatureAtOpen.equals(warriorCounterPartySignature)) {
+                return;
+            }
+            boolean alreadyAvailable = remainingWarriorCounters.stream()
+                    .anyMatch(candidate -> candidate.id().equals(warrior.id()));
+            if (!alreadyAvailable) {
+                remainingWarriorCounters.add(warrior);
+                remainingWarriorCounters.sort(Comparator.comparing(WarriorCounterDefinition::name, String.CASE_INSENSITIVE_ORDER));
+            }
+        });
+
+        Rectangle trim = dialog.computeTrim(0, 0, bounds.width, bounds.height);
+        dialog.setSize(trim.width, trim.height);
+        Rectangle screen = display.getPrimaryMonitor().getClientArea();
+        if (nextWarriorCounterLocation == null) {
+            Point parentLocation = shell.getLocation();
+            nextWarriorCounterLocation = new Point(parentLocation.x + 40, parentLocation.y + 40);
+        }
+        dialog.setLocation(nextWarriorCounterLocation);
+        int nextX = nextWarriorCounterLocation.x + 36;
+        int nextY = nextWarriorCounterLocation.y + 36;
+        if (nextX + trim.width > screen.x + screen.width || nextY + trim.height > screen.y + screen.height) {
+            Point parentLocation = shell.getLocation();
+            nextWarriorCounterLocation = new Point(parentLocation.x + 40, parentLocation.y + 40);
+        } else {
+            nextWarriorCounterLocation = new Point(nextX, nextY);
+        }
+        dialog.open();
+    }
+
+    private void paintWarriorCounterLabel(PaintEvent event, Canvas canvas, String label) {
+        if (label == null || label.isBlank()) {
+            return;
+        }
+        Rectangle area = canvas.getClientArea();
+        if (area.width <= 0 || area.height <= 0) {
+            return;
+        }
+
+        String text = label.trim().toUpperCase();
+        int bandX = Math.round(area.width * 0.225f);
+        int bandWidth = Math.round(area.width * 0.54f);
+        int baselineY = Math.round(area.height * 0.775f);
+        int fontHeight = 24;
+
+        Font font = createWarriorCounterFont(canvas, fontHeight);
+        GC gc = event.gc;
+        gc.setAdvanced(true);
+        gc.setAntialias(SWT.ON);
+        gc.setTextAntialias(SWT.ON);
+        gc.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
+        gc.setFont(font);
+        try {
+            drawFittedSingleLineText(gc, text, bandX, baselineY, bandWidth);
+        } finally {
+            font.dispose();
+        }
+    }
+
+    private Font createWarriorCounterFont(Canvas canvas, int height) {
+        String[] families = {
+                "Copperplate Gothic Bold",
+                "Copperplate Gothic",
+                "Copperplate",
+                "Times New Roman"
+        };
+        for (String family : families) {
+            FontData data = new FontData(family, height, SWT.BOLD);
+            Font font = new Font(canvas.getDisplay(), data);
+            FontData[] actual = font.getFontData();
+            if (actual != null && actual.length > 0) {
+                String actualName = actual[0].getName();
+                if (actualName != null && actualName.equalsIgnoreCase(family)) {
+                    return font;
+                }
+            }
+            font.dispose();
+        }
+        return new Font(canvas.getDisplay(), "Times New Roman", height, SWT.BOLD);
+    }
+
+    private void drawFittedSingleLineText(GC gc, String text, int x, int baselineY, int maxWidth) {
+        if (text.isBlank()) {
+            return;
+        }
+        int[] glyphWidths = new int[text.length()];
+        int glyphWidthSum = 0;
+        for (int i = 0; i < text.length(); i++) {
+            Point extent = gc.textExtent(String.valueOf(text.charAt(i)), SWT.DRAW_TRANSPARENT);
+            glyphWidths[i] = extent.x;
+            glyphWidthSum += extent.x;
+        }
+
+        int letterCount = Math.max(0, text.length() - 1);
+        int spacing = letterCount > 0 ? Math.min(6, Math.max(0, (maxWidth - glyphWidthSum) / letterCount)) : 0;
+        int naturalWidth = glyphWidthSum + spacing * letterCount;
+
+        Point textExtent = gc.textExtent(text, SWT.DRAW_TRANSPARENT);
+        int drawHeight = textExtent.y;
+        int drawY = baselineY - drawHeight / 2;
+
+        if (naturalWidth <= maxWidth) {
+            int drawX = x + (maxWidth - naturalWidth) / 2;
+            drawTextWithSpacing(gc, text, glyphWidths, drawX, drawY, spacing);
+            return;
+        }
+
+        float scaleX = (float) maxWidth / (float) Math.max(1, naturalWidth);
+        float scaledWidth = naturalWidth * scaleX;
+        float drawX = x + (maxWidth - scaledWidth) / 2f;
+
+        Transform original = new Transform(gc.getDevice());
+        gc.getTransform(original);
+        Transform scaled = new Transform(gc.getDevice());
+        scaled.translate(drawX, drawY);
+        scaled.scale(scaleX, 1f);
+        gc.setTransform(scaled);
+        drawTextWithSpacing(gc, text, glyphWidths, 0, 0, spacing);
+        gc.setTransform(original);
+        scaled.dispose();
+        original.dispose();
+    }
+
+    private void drawTextWithSpacing(GC gc, String text, int[] glyphWidths, int startX, int startY, int spacing) {
+        int cursor = startX;
+        for (int i = 0; i < text.length(); i++) {
+            String glyph = String.valueOf(text.charAt(i));
+            gc.drawText(glyph, cursor, startY, SWT.DRAW_TRANSPARENT);
+            cursor += glyphWidths[i];
+            if (i + 1 < text.length()) {
+                cursor += spacing;
+            }
+        }
     }
 
     private String formatCardListEntry(DungeonCard card) {
