@@ -45,6 +45,7 @@ import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
+import com.whq.app.model.WhiteDwarfRoomReferences;
 import com.whq.app.render.CardRenderer;
 import com.whq.app.storage.DungeonCardStorageException;
 import com.whq.app.storage.XmlDungeonCardStore;
@@ -251,12 +252,19 @@ public final class EventContentEditorDialog {
     previewGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
     previewGroup.setLayout(new GridLayout(1, false));
 
+    Button whiteDwarfReferenceButton = new Button(previewGroup, SWT.PUSH);
+    whiteDwarfReferenceButton.setText(I18n.t("dialog.whiteDwarfReference.button"));
+    whiteDwarfReferenceButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.TOP, false, false));
+    whiteDwarfReferenceButton.setEnabled(false);
+
     Canvas previewCanvas = new Canvas(previewGroup, SWT.DOUBLE_BUFFERED | SWT.BORDER);
     previewCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
     contentSash.setWeights(new int[] {65, 35});
 
     CardRenderer renderer = new CardRenderer(dialog.getDisplay(), projectRoot);
     dialog.addDisposeListener(event -> renderer.dispose());
+    RuleDialog whiteDwarfReferenceDialog = new RuleDialog(dialog);
+    dialog.addDisposeListener(event -> whiteDwarfReferenceDialog.dispose());
 
     List<DungeonCard> cards = new ArrayList<>();
     final DungeonCard[] draftCard = new DungeonCard[1];
@@ -276,8 +284,20 @@ public final class EventContentEditorDialog {
                   descriptionText.getText().trim(),
                   rulesText.getText().trim(),
                   tilePathText.getText().trim());
+          whiteDwarfReferenceButton.setEnabled(WhiteDwarfRoomReferences.find(draftCard[0]).isPresent());
           previewCanvas.redraw();
         };
+
+    whiteDwarfReferenceButton.addListener(
+        SWT.Selection,
+        event -> {
+          if (draftCard[0] == null) {
+            return;
+          }
+          WhiteDwarfRoomReferences.find(draftCard[0]).ifPresent(reference -> whiteDwarfReferenceDialog.showContent(
+              reference.title(com.whq.app.i18n.I18n.getLanguage()),
+              reference.source() + "\n\n" + reference.text(com.whq.app.i18n.I18n.getLanguage())));
+        });
 
     browseTileButton.addListener(
         SWT.Selection,

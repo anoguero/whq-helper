@@ -7,6 +7,7 @@ import { loadSettings, saveSettings } from './settings';
 import { renderEventCard, renderMonsterCard, renderSettlementLocationCard } from './render';
 import { DungeonCardStore, downloadCsv, exportCardsToCsv, importCardsFromCsvFile } from './dungeonStore';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
+import { getWhiteDwarfReference } from './whiteDwarfReferences';
 import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
 import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from './counterAssets';
 import { getXmlOverride, removeXmlOverride, saveXmlOverride } from './contentOverrides';
@@ -282,6 +283,7 @@ function createAppShell(language: LanguageCode): void {
       <dialog id="missionDialog" class="table-dialog"></dialog>
       <dialog id="maintenanceDialog" class="table-dialog wide-dialog"></dialog>
       <dialog id="treasureSearchDialog" class="table-dialog ultra-dialog"></dialog>
+      <dialog id="whiteDwarfReferenceDialog" class="table-dialog wide-dialog"></dialog>
       <section id="contentDashboardView" class="dashboard-view" hidden></section>
     </div>
   `;
@@ -416,6 +418,27 @@ function buildControls(): void {
 
 function closeAllOpenCards(): void {
   document.querySelector<HTMLElement>('#windows')!.innerHTML = '';
+}
+
+function openWhiteDwarfReferenceDialog(card: DungeonCard): void {
+  const dialog = document.querySelector<HTMLDialogElement>('#whiteDwarfReferenceDialog');
+  const reference = getWhiteDwarfReference(card);
+  if (!dialog || !reference) {
+    return;
+  }
+
+  dialog.innerHTML = `
+    <form method="dialog" class="white-dwarf-reference-dialog">
+      <h2>${escapeHtml(reference.title[settings.language])}</h2>
+      <p class="white-dwarf-reference-source">${escapeHtml(reference.source)}</p>
+      <div class="white-dwarf-reference-body">${escapeHtml(reference.text[settings.language]).replaceAll('\n', '<br>')}</div>
+      <menu>
+        <button value="cancel">${t(settings.language, 'dialog.button.close')}</button>
+      </menu>
+    </form>
+  `;
+
+  dialog.showModal();
 }
 
 function openPartyDialog(): void {
@@ -2150,6 +2173,17 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
         <div class="dashboard-preview-column">
           <section class="dashboard-card-preview">
             <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <button type="button" id="ucWhiteDwarfReferenceBtn" ${getWhiteDwarfReference({
+              id: data.id,
+              name: data.name,
+              type: data.type,
+              environment: data.environment,
+              copyCount: data.copyCount,
+              enabled: data.enabled,
+              tileImagePath: data.tileImagePath,
+              descriptionText: data.descriptionText,
+              rulesText: data.rulesText
+            } as DungeonCard) ? '' : 'disabled'}>${t(settings.language, 'dialog.whiteDwarfReference.button')}</button>
             <canvas id="ucPreviewCanvas" width="847" height="1264"></canvas>
           </section>
           <section class="dashboard-xml-panel">
@@ -2173,6 +2207,7 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
   const toggleXmlButton = editor.querySelector<HTMLButtonElement>('#ucToggleXmlBtn');
   const tilePathInput = editor.querySelector<HTMLInputElement>('#ucTileImagePath');
   const tileFileInput = editor.querySelector<HTMLInputElement>('#ucTileFile');
+  const whiteDwarfReferenceButton = editor.querySelector<HTMLButtonElement>('#ucWhiteDwarfReferenceBtn');
 
   const buildDraftCard = (): DungeonCard => ({
     id: data.id,
@@ -2188,6 +2223,9 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
 
   const refreshCardEditorPreview = () => {
     const draftCard = buildDraftCard();
+    if (whiteDwarfReferenceButton) {
+      whiteDwarfReferenceButton.disabled = !getWhiteDwarfReference(draftCard);
+    }
     if (previewCanvas) {
       renderDungeonCardToCanvasLocalized(previewCanvas, draftCard, settings.language).catch((error) => console.error(error));
     }
@@ -2198,6 +2236,10 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
       });
     }
   };
+
+  whiteDwarfReferenceButton?.addEventListener('click', () => {
+    openWhiteDwarfReferenceDialog(buildDraftCard());
+  });
 
   toggleXmlButton?.addEventListener('click', () => {
     if (!xmlPanel) {
@@ -4460,6 +4502,7 @@ function openAdventureSimulator(
         <div>
           <h3>${t(settings.language, 'simulator.revealedCard')}</h3>
           <p id="revealedStatus">${t(settings.language, 'simulator.revealedHint')}</p>
+          <button type="button" id="whiteDwarfReferenceBtn" disabled>${t(settings.language, 'dialog.whiteDwarfReference.button')}</button>
           <canvas id="simRevealCanvas" width="847" height="1264"></canvas>
         </div>
       </section>
@@ -4516,10 +4559,12 @@ function openAdventureSimulator(
 
   const status = panel.querySelector<HTMLElement>('#simStatus')!;
   const revealedStatus = panel.querySelector<HTMLElement>('#revealedStatus')!;
+  const whiteDwarfReferenceButton = panel.querySelector<HTMLButtonElement>('#whiteDwarfReferenceBtn')!;
   const pilesContainer = panel.querySelector<HTMLElement>('#pilesContainer')!;
   const revealCanvas = panel.querySelector<HTMLCanvasElement>('#simRevealCanvas')!;
 
   const refreshReveal = () => {
+    whiteDwarfReferenceButton.disabled = !state.selectedCard || !getWhiteDwarfReference(state.selectedCard);
     if (!state.selectedCard) {
       const ctx = revealCanvas.getContext('2d');
       if (ctx) {
@@ -4532,6 +4577,12 @@ function openAdventureSimulator(
       console.error(error)
     );
   };
+
+  whiteDwarfReferenceButton.addEventListener('click', () => {
+    if (state.selectedCard && getWhiteDwarfReference(state.selectedCard)) {
+      openWhiteDwarfReferenceDialog(state.selectedCard);
+    }
+  });
 
   const refresh = () => {
     const total = state.piles.reduce((sum, pile) => sum + pile.length, 0);

@@ -30,23 +30,27 @@ public class RuleDialog {
       return;
     }
 
-    if (shell == null || shell.isDisposed()) {
-      createShell();
-    }
-
     String titleText = rule.name;
     if ("magic".equals(rule.type)) {
       titleText += " Magic";
     }
 
-    shell.setText(titleText);
-    title.setText(titleText);
-    text.setText(rule.text == null ? "" : rule.text);
+    showContent(titleText, rule.text == null ? "" : rule.text);
+  }
+
+  public void showContent(String titleText, String bodyText) {
+    if (shell == null || shell.isDisposed()) {
+      createShell();
+    }
+
+    shell.setText(titleText == null ? "" : titleText);
+    title.setText(titleText == null ? "" : titleText);
+    text.setText(bodyText == null ? "" : bodyText);
     text.setTopIndex(0);
 
     int w = Settings.getSettingAsInt(Settings.CARD_HEIGHT);
     int h = Settings.getSettingAsInt(Settings.CARD_WIDTH);
-    shell.setSize(Math.max(320, w), Math.max(240, h));
+    shell.setSize(Math.max(420, w), Math.max(340, h));
     shell.open();
     shell.forceActive();
   }

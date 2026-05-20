@@ -57,6 +57,7 @@ import com.whq.app.i18n.Language;
 import com.whq.app.io.CardCsvService;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
+import com.whq.app.model.WhiteDwarfRoomReferences;
 import com.whq.app.render.CardRenderer;
 import com.whq.app.storage.DungeonCardStorageException;
 import com.whq.app.storage.DungeonCardStore;
@@ -75,6 +76,7 @@ import pms.whq.state.AdventureAmbience;
 import pms.whq.state.AppState;
 import pms.whq.swt.CardFactory;
 import pms.whq.swt.EventContentEditorDialog;
+import pms.whq.swt.RuleDialog;
 
 public class AppWindow {
     private static final TableDrawService TABLE_DRAW_SERVICE = new TableDrawService();
@@ -2283,6 +2285,11 @@ public class AppWindow {
         revealStatus.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
         styleParchmentLabel(revealStatus, false);
 
+        Button whiteDwarfReferenceButton = new Button(revealArea, SWT.PUSH);
+        whiteDwarfReferenceButton.setText(I18n.t("dialog.whiteDwarfReference.button"));
+        whiteDwarfReferenceButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.TOP, false, false));
+        whiteDwarfReferenceButton.setEnabled(false);
+
         Canvas revealCanvas = new Canvas(revealArea, SWT.DOUBLE_BUFFERED);
         revealCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
         revealCanvas.addPaintListener(event -> {
@@ -2299,6 +2306,23 @@ public class AppWindow {
             int x = area.x + (area.width - scaled.x) / 2;
             int y = area.y + (area.height - scaled.y) / 2;
             renderer.drawCard(event.gc, new Rectangle(x, y, scaled.x, scaled.y), state.selectedCard);
+        });
+
+        RuleDialog whiteDwarfReferenceDialog = new RuleDialog(simulator);
+        simulator.addDisposeListener(event -> whiteDwarfReferenceDialog.dispose());
+
+        Runnable refreshWhiteDwarfReferenceButton = () -> {
+            boolean hasReference = state.selectedCard != null && WhiteDwarfRoomReferences.find(state.selectedCard).isPresent();
+            whiteDwarfReferenceButton.setEnabled(hasReference);
+        };
+
+        whiteDwarfReferenceButton.addListener(SWT.Selection, event -> {
+            if (state.selectedCard == null) {
+                return;
+            }
+            WhiteDwarfRoomReferences.find(state.selectedCard).ifPresent(reference -> whiteDwarfReferenceDialog.showContent(
+                    reference.title(I18n.getLanguage()),
+                    reference.source() + "\n\n" + reference.text(I18n.getLanguage())));
         });
 
         final Runnable[] refreshSimulatorUi = new Runnable[1];
@@ -2370,6 +2394,7 @@ public class AppWindow {
                         state.selectedPile = pileIndex;
                         revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), drawn.getName(), pileIndex + 1));
                         revealCanvas.redraw();
+                        refreshWhiteDwarfReferenceButton.run();
                         refreshSimulatorUi[0].run();
                     }
                 });
@@ -2456,6 +2481,7 @@ public class AppWindow {
                     state.selectedPile = pileIndex;
                     revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), selectedHistoryCard.getName(), pileIndex + 1));
                     revealCanvas.redraw();
+                    refreshWhiteDwarfReferenceButton.run();
                 });
 
                 if (state.selectedPile == pileIndex && state.selectedCard != null) {
@@ -2468,6 +2494,7 @@ public class AppWindow {
 
             pilesContainer.layout(true, true);
             deckArea.layout(true, true);
+            refreshWhiteDwarfReferenceButton.run();
         };
 
         Composite actions = new Composite(simulator, SWT.NONE);
