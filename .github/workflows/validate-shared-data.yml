@@ -1,0 +1,30 @@
+name: Validate Shared Data
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "WhqHelperApp/data/**"
+      - "whq-helper-spa/public/**"
+      - "whq-helper-spa/src/styles.css"
+      - "scripts/validate_shared_data.py"
+      - ".github/workflows/validate-shared-data.yml"
+  pull_request:
+    paths:
+      - "WhqHelperApp/data/**"
+      - "whq-helper-spa/public/**"
+      - "whq-helper-spa/src/styles.css"
+      - "scripts/validate_shared_data.py"
+      - ".github/workflows/validate-shared-data.yml"
+  workflow_dispatch:
+
+jobs:
+  validate-shared-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate shared data
+        run: python3 scripts/validate_shared_data.py

@@ -26,6 +26,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.i18n.ContentTranslations;
+import com.whq.app.i18n.I18n;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
 
@@ -237,6 +239,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     private List<DungeonCard> readCardsFromFile(Path file) throws DungeonCardStorageException {
         try {
             validateFile(file);
+            ContentTranslations translations = ContentTranslations.load(projectRoot, I18n.getLanguage());
             Document document = parse(file);
             Element root = document.getDocumentElement();
             NodeList children = root.getChildNodes();
@@ -247,15 +250,20 @@ public class XmlDungeonCardStore implements DungeonCardStore {
                     continue;
                 }
                 Element element = (Element) node;
+                long id = parseId(element.getAttribute("id"));
+                String baseKey = "dungeonCard." + id;
+                String name = require(element.getAttribute("name"), "name");
+                String description = readChildText(element, "description");
+                String rules = readChildText(element, "rules");
                 cards.add(new DungeonCard(
-                        parseId(element.getAttribute("id")),
-                        require(element.getAttribute("name"), "name"),
+                        id,
+                        translations.t(baseKey + ".name", name),
                         CardType.valueOf(require(element.getAttribute("type"), "type").toUpperCase(Locale.ROOT)),
                         normalizeEnvironment(element.getAttribute("environment")),
                         parseNonNegativeInt(element.getAttribute("copyCount"), "copyCount"),
                         Boolean.parseBoolean(element.getAttribute("enabled")),
-                        readChildText(element, "description"),
-                        readChildText(element, "rules"),
+                        translations.t(baseKey + ".description", description),
+                        translations.t(baseKey + ".rules", rules),
                         require(readChildText(element, "tileImagePath"), "tileImagePath")));
             }
             return cards;

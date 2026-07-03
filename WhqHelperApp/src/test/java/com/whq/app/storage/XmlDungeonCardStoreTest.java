@@ -11,6 +11,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import com.whq.app.i18n.I18n;
+import com.whq.app.i18n.Language;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
 
@@ -66,6 +68,36 @@ class XmlDungeonCardStoreTest {
         store.deleteCard(inserted.getId());
 
         assertFalse(store.loadCards().stream().anyMatch(card -> card.getId() == inserted.getId()));
+    }
+
+    @Test
+    void appliesDungeonCardTranslationsForCurrentLanguage() throws Exception {
+        Language previousLanguage = I18n.getLanguage();
+        try {
+            I18n.setLanguage(Language.ES);
+            createDefaultTiles();
+            Files.createDirectories(tempDir.resolve("data/i18n"));
+            Files.writeString(tempDir.resolve("data/i18n/content-es.xml"), """
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <translations>
+                      <entry key="dungeonCard.1.name">SALA TRADUCIDA</entry>
+                      <entry key="dungeonCard.1.description">Descripción traducida.</entry>
+                      <entry key="dungeonCard.1.rules">Reglas traducidas.</entry>
+                    </translations>
+                    """);
+            XmlDungeonCardStore store = new XmlDungeonCardStore(tempDir);
+
+            DungeonCard card = store.loadCards().stream()
+                    .filter(candidate -> candidate.getId() == 1)
+                    .findFirst()
+                    .orElseThrow();
+
+            assertEquals("SALA TRADUCIDA", card.getName());
+            assertEquals("Descripción traducida.", card.getDescriptionText());
+            assertEquals("Reglas traducidas.", card.getRulesText());
+        } finally {
+            I18n.setLanguage(previousLanguage);
+        }
     }
 
     private void createDefaultTiles() throws Exception {

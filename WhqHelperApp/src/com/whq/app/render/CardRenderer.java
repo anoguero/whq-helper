@@ -12,6 +12,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 
+import com.whq.app.i18n.I18n;
 import com.whq.app.model.DungeonCard;
 import com.whq.app.ui.FontResources;
 
@@ -132,7 +133,19 @@ public class CardRenderer {
         gc.drawLine(leftX, topY, rightX, topY);
         gc.drawLine(leftX, bottomY, rightX, bottomY);
 
-        textRenderer.drawWrappedCenteredText(gc, card.getType().getLabel(), layout.typeBox(), typeFont, textColor);
+        textRenderer.drawWrappedCenteredText(gc, localizedTypeLabel(card), layout.typeBox(), typeFont, textColor);
+    }
+
+    private String localizedTypeLabel(DungeonCard card) {
+        if (card == null || card.getType() == null) {
+            return "";
+        }
+        return switch (card.getType()) {
+            case DUNGEON_ROOM -> I18n.t("cardType.dungeonRoom");
+            case OBJECTIVE_ROOM -> I18n.t("cardType.objectiveRoom");
+            case CORRIDOR -> I18n.t("cardType.corridor");
+            case SPECIAL -> I18n.t("cardType.special");
+        };
     }
 
     private Font createBestFont(String[] preferredNames, int pixelHeight, int style) {

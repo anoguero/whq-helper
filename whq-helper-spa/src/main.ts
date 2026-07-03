@@ -254,7 +254,8 @@ function createAppShell(language: LanguageCode): void {
             <button type="button" id="newDungeonBtn">${t(language, 'deck.newDungeon')}</button>
             <button type="button" id="newSettlementBtn">${t(language, 'deck.newSettlement')}</button>
             <button type="button" id="warriorCountersBtn">${t(language, 'deck.warriorCounters')}</button>
-            <button type="button" id="tileConfigBtn">${t(language, 'deck.configureTiles')}</button>
+            <button type="button" id="closeWarriorCountersBtn">${t(language, 'menu.item.closeWarriorCounters')}</button>
+            <button type="button" id="activateTablesHeroBtn">${t(language, 'menu.item.activateTables')}</button>
             <button type="button" id="contentDashboardBtn">${t(language, 'deck.contentCreation')}</button>
           </div>
         </div>
@@ -302,8 +303,12 @@ function wireHeroActions(): void {
     drawWarriorCounter();
   });
 
-  document.querySelector<HTMLButtonElement>('#tileConfigBtn')?.addEventListener('click', () => {
-    openMaintenanceDialog();
+  document.querySelector<HTMLButtonElement>('#closeWarriorCountersBtn')?.addEventListener('click', () => {
+    closeAllWarriorCounters();
+  });
+
+  document.querySelector<HTMLButtonElement>('#activateTablesHeroBtn')?.addEventListener('click', () => {
+    openTableDialog();
   });
 
   document.querySelector<HTMLButtonElement>('#contentDashboardBtn')?.addEventListener('click', () => {
@@ -417,7 +422,15 @@ function buildControls(): void {
 }
 
 function closeAllOpenCards(): void {
-  document.querySelector<HTMLElement>('#windows')!.innerHTML = '';
+  document.querySelectorAll<HTMLElement>('#windows .card-window:not(.warrior-counter-window)').forEach((windowEl) => {
+    windowEl.remove();
+  });
+}
+
+function closeAllWarriorCounters(): void {
+  document.querySelectorAll<HTMLElement>('#windows .warrior-counter-window').forEach((windowEl) => {
+    windowEl.remove();
+  });
 }
 
 function openWhiteDwarfReferenceDialog(card: DungeonCard): void {
@@ -1994,8 +2007,15 @@ function renderDashboardHome(editor: HTMLElement): void {
     <div class="dashboard-empty">
       <h2>${t(settings.language, 'contentDashboard.title')}</h2>
       <p>${t(settings.language, 'contentDashboard.description')}</p>
+      <div class="dashboard-create-actions">
+        <button type="button" id="dashboardTileConfigBtn">${t(settings.language, 'contentDashboard.tileConfig')}</button>
+      </div>
     </div>
   `;
+
+  editor.querySelector<HTMLButtonElement>('#dashboardTileConfigBtn')?.addEventListener('click', () => {
+    openMaintenanceDialog();
+  });
 }
 
 function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLElement, kind: UserContentKind): void {

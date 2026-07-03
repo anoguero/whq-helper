@@ -107,7 +107,7 @@ public final class DungeonCardXmlValidator {
                   <xs:element name="dungeonCards">
                     <xs:complexType>
                       <xs:sequence>
-                        <xs:element name="card" maxOccurs="unbounded">
+                        <xs:element name="card" minOccurs="0" maxOccurs="unbounded">
                           <xs:complexType>
                             <xs:sequence>
                               <xs:element name="description" type="xs:string"/>

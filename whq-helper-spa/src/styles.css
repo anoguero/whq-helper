@@ -14,19 +14,19 @@
 
 @font-face {
   font-family: 'Copperplate WHQ';
-  src: url('/fonts/custom/copperplate.ttf') format('truetype');
+  src: url('/data/fonts/copperplate.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Casablanca Antique';
-  src: url('/fonts/custom/casablanca-antique.ttf') format('truetype');
+  src: url('/data/fonts/casablanca-antique.ttf') format('truetype');
   font-display: swap;
 }
 
 @font-face {
   font-family: 'Newtext Bk BT';
-  src: url('/fonts/custom/newtext-bk-bt.ttf') format('truetype');
+  src: url('/data/fonts/newtext-bk-bt.ttf') format('truetype');
   font-display: swap;
 }
 

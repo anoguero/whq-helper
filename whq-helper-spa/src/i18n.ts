@@ -20,6 +20,7 @@ const ES: Record<string, string> = {
   'toggle.showTreasureDeck': 'Mostrar mazo de tesoro',
   'toggle.showObjectiveTreasureDeck': 'Mostrar mazo de tesoro objetivo',
   'menu.item.closeAllCards': 'Cerrar todas las cartas',
+  'menu.item.closeWarriorCounters': 'Cerrar contadores',
   'menu.item.activateTables': 'Activar tablas',
   'menu.item.simulateDeck': 'Simular mazo',
   'menu.item.simulateTable': 'Simular tabla',
@@ -146,6 +147,7 @@ const ES: Record<string, string> = {
   'contentDashboard.description':
     'Crea o modifica contenido local en XML para cartas, eventos, reglas, monstruos y tablas definidas por el usuario.',
   'contentDashboard.back': 'Volver a la aplicación',
+  'contentDashboard.tileConfig': 'Disponibilidad de tiles',
   'contentDashboard.category.dungeonCard': 'Cartas de mazmorra',
   'contentDashboard.category.dungeonEvent': 'Eventos de mazmorra',
   'contentDashboard.category.treasure': 'Tesoros',
@@ -280,6 +282,7 @@ const EN: Record<string, string> = {
   'toggle.showTreasureDeck': 'Show treasure deck',
   'toggle.showObjectiveTreasureDeck': 'Show objective treasure deck',
   'menu.item.closeAllCards': 'Close all cards',
+  'menu.item.closeWarriorCounters': 'Close counters',
   'menu.item.activateTables': 'Activate tables',
   'menu.item.simulateDeck': 'Simulate deck',
   'menu.item.simulateTable': 'Simulate table',
@@ -406,6 +409,7 @@ const EN: Record<string, string> = {
   'contentDashboard.description':
     'Create or modify local XML content for dungeon cards, events, rules, monsters, and user-defined tables.',
   'contentDashboard.back': 'Back to application',
+  'contentDashboard.tileConfig': 'Tile availability',
   'contentDashboard.category.dungeonCard': 'Dungeon cards',
   'contentDashboard.category.dungeonEvent': 'Dungeon events',
   'contentDashboard.category.treasure': 'Treasures',

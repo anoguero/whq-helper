@@ -1,14 +1,21 @@
 package com.whq.app;
 
 import java.net.URISyntaxException;
+import java.io.IOException;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.security.CodeSource;
 
 public final class AppPaths {
 
     static final String APP_HOME_PROPERTY = "whq.app.home";
     static final String APP_HOME_ENV = "WHQ_APP_HOME";
+    static final String USER_HOME_PROPERTY = "whq.user.home";
+    static final String USER_HOME_ENV = "WHQ_USER_HOME";
+    private static final String APP_NAME = "WHQ Helper";
 
     private AppPaths() {
     }
@@ -32,6 +39,25 @@ public final class AppPaths {
         return workingDirectory;
     }
 
+    public static Path prepareRuntimeHome(Path appHome) {
+        Path normalizedAppHome = normalize(appHome);
+        Path writableHome = resolveWritableHome(normalizedAppHome);
+        if (normalizedAppHome == null || writableHome == null || normalizedAppHome.equals(writableHome)) {
+            return normalizedAppHome;
+        }
+
+        try {
+            Files.createDirectories(writableHome);
+            copyIfMissing(normalizedAppHome.resolve("settings.cfg"), writableHome.resolve("settings.cfg"));
+            copyDirectoryIfMissing(normalizedAppHome.resolve("data"), writableHome.resolve("data"));
+            copyDirectoryIfMissing(normalizedAppHome.resolve("resources"), writableHome.resolve("resources"));
+            copyDirectoryIfMissing(normalizedAppHome.resolve("lib"), writableHome.resolve("lib"));
+            return writableHome;
+        } catch (IOException ex) {
+            return normalizedAppHome;
+        }
+    }
+
     static Path explicitAppHome() {
         String propertyValue = System.getProperty(APP_HOME_PROPERTY);
         if (propertyValue != null && !propertyValue.isBlank()) {
@@ -39,6 +65,20 @@ public final class AppPaths {
         }
 
         String envValue = System.getenv(APP_HOME_ENV);
+        if (envValue != null && !envValue.isBlank()) {
+            return Path.of(envValue.trim());
+        }
+
+        return null;
+    }
+
+    static Path explicitUserHome() {
+        String propertyValue = System.getProperty(USER_HOME_PROPERTY);
+        if (propertyValue != null && !propertyValue.isBlank()) {
+            return Path.of(propertyValue.trim());
+        }
+
+        String envValue = System.getenv(USER_HOME_ENV);
         if (envValue != null && !envValue.isBlank()) {
             return Path.of(envValue.trim());
         }
@@ -109,6 +149,88 @@ public final class AppPaths {
         return Files.exists(directory.resolve("settings.cfg"))
                 || Files.isDirectory(directory.resolve("data"))
                 || Files.isDirectory(directory.resolve("resources"));
+    }
+
+    private static Path resolveWritableHome(Path appHome) {
+        Path explicitHome = normalize(explicitUserHome());
+        if (explicitHome != null) {
+            return explicitHome;
+        }
+
+        if (isWritableDirectory(appHome)) {
+            return appHome;
+        }
+
+        String os = System.getProperty("os.name", "").toLowerCase();
+        Path userHome = normalize(Path.of(System.getProperty("user.home", ".")));
+        if (userHome == null) {
+            return appHome;
+        }
+
+        if (os.contains("win")) {
+            String appData = System.getenv("APPDATA");
+            if (appData != null && !appData.isBlank()) {
+                return Path.of(appData).resolve(APP_NAME).toAbsolutePath().normalize();
+            }
+            return userHome.resolve("AppData/Roaming").resolve(APP_NAME);
+        }
+        if (os.contains("mac")) {
+            return userHome.resolve("Library/Application Support").resolve(APP_NAME);
+        }
+
+        String xdgDataHome = System.getenv("XDG_DATA_HOME");
+        if (xdgDataHome != null && !xdgDataHome.isBlank()) {
+            return Path.of(xdgDataHome).resolve("whq-helper").toAbsolutePath().normalize();
+        }
+        return userHome.resolve(".local/share/whq-helper");
+    }
+
+    private static boolean isWritableDirectory(Path directory) {
+        if (directory == null || !Files.isDirectory(directory)) {
+            return false;
+        }
+        try {
+            Path tempFile = Files.createTempFile(directory, ".whq-write-test", ".tmp");
+            Files.deleteIfExists(tempFile);
+            return true;
+        } catch (IOException ignored) {
+            return false;
+        }
+    }
+
+    private static void copyIfMissing(Path source, Path target) throws IOException {
+        if (!Files.isRegularFile(source) || Files.exists(target)) {
+            return;
+        }
+        Path parent = target.getParent();
+        if (parent != null) {
+            Files.createDirectories(parent);
+        }
+        Files.copy(source, target);
+    }
+
+    private static void copyDirectoryIfMissing(Path source, Path target) throws IOException {
+        if (!Files.isDirectory(source)) {
+            return;
+        }
+        Files.walkFileTree(source, new SimpleFileVisitor<>() {
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                Path relative = source.relativize(dir);
+                Files.createDirectories(target.resolve(relative));
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Path relative = source.relativize(file);
+                Path destination = target.resolve(relative);
+                if (!Files.exists(destination)) {
+                    Files.copy(file, destination);
+                }
+                return FileVisitResult.CONTINUE;
+            }
+        });
     }
 
     private static Path normalize(Path path) {

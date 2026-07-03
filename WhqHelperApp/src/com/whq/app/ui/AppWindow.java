@@ -66,6 +66,8 @@ import com.whq.app.storage.XmlDungeonCardStore;
 import pms.whq.EventDeckApp;
 import pms.whq.Settings;
 import pms.whq.content.ContentRepository;
+import pms.whq.data.Event;
+import pms.whq.data.EventEntry;
 import pms.whq.data.MonsterEntry;
 import pms.whq.data.MonsterGroup;
 import pms.whq.data.Table;
@@ -121,6 +123,7 @@ public class AppWindow {
     private java.util.List<DungeonCard> cards;
     private DungeonCard selected;
     private final java.util.List<WarriorCounterDefinition> remainingWarriorCounters = new ArrayList<>();
+    private final java.util.List<Shell> openWarriorCounterShells = new ArrayList<>();
     private String warriorCounterPartySignature = "";
     private boolean warriorCounterPoolInitialized;
     private Point nextWarriorCounterLocation;
@@ -133,9 +136,11 @@ public class AppWindow {
 
     private Label heroTitleLabel;
     private Label heroSubtitleLabel;
-    private Label collectionStatsLabel;
-    private Label environmentStatsLabel;
-    private Label availabilityStatsLabel;
+    private Label modeStatsLabel;
+    private Label eventProbabilityStatsLabel;
+    private Label treasureProbabilityStatsLabel;
+    private Label partyStatsLabel;
+    private Label languageStatsLabel;
     private Label browserTitleLabel;
     private Label browserHintLabel;
     private Label previewTitleLabel;
@@ -143,20 +148,20 @@ public class AppWindow {
     private Button newDungeonButton;
     private Button newSettlementButton;
     private Button genWarriorCounterButton;
-    private Button openEventDecksButton;
+    private Button closeWarriorCountersButton;
     private Button activateTablesButton;
     private Button contentEditorButton;
+    private Group eventDeckGroup;
 
     private MenuItem playMenuItem;
-    private MenuItem viewMenuItem;
     private MenuItem contentMenuItem;
     private MenuItem eventCardsMenuItem;
     private MenuItem optionsMenuItem;
 
     private final LocalizedUiAction newDungeonAction;
     private final LocalizedUiAction newSettlementAction;
-    private final LocalizedUiAction openEventDecksAction;
     private final LocalizedUiAction genWarriorCounterAction;
+    private final LocalizedUiAction closeWarriorCountersAction;
     private final LocalizedUiAction eventContentEditorAction;
     private final LocalizedUiAction importCsvAction;
     private final LocalizedUiAction exportAllCsvAction;
@@ -181,8 +186,8 @@ public class AppWindow {
         this.localizedActions = new ArrayList<>();
         this.newDungeonAction = registerAction(LocalizedUiAction.push("menu.item.newDungeon", this::openNewDungeonDialog));
         this.newSettlementAction = registerAction(LocalizedUiAction.push("menu.item.newSettlement", this::openNewSettlementDialog));
-        this.openEventDecksAction = registerAction(LocalizedUiAction.push("menu.item.openEventDecks", this::openEventDecks));
         this.genWarriorCounterAction = registerAction(LocalizedUiAction.push("menu.item.openWarriorCounter", this::genWarriorCounter));
+        this.closeWarriorCountersAction = registerAction(LocalizedUiAction.push("menu.item.closeWarriorCounters", this::closeAllWarriorCounters));
         this.eventContentEditorAction = registerAction(LocalizedUiAction.push("menu.item.contentEditor", this::openEventContentEditor));
         this.importCsvAction = registerAction(LocalizedUiAction.push("menu.item.importCsv", this::handleImportCsv));
         this.exportAllCsvAction = registerAction(LocalizedUiAction.push(
@@ -247,10 +252,12 @@ public class AppWindow {
         mainPanel.setLayout(mainLayout);
 
         buildHeroSection(mainPanel);
+        buildEventDeckSection(mainPanel);
         refreshDashboardStats();
         refreshLocalizedTexts();
 
         shell.addListener(SWT.Dispose, event -> {
+            closeAllWarriorCounters();
             renderer.dispose();
             if (theme != null) {
                 theme.dispose();
@@ -260,7 +267,6 @@ public class AppWindow {
         });
         shell.addListener(SWT.Activate, event -> refreshLocalizedTexts());
         shell.open();
-        getOrCreateEventDeckApp().open();
         //shell.forceActive();
     }
 
@@ -273,11 +279,6 @@ public class AppWindow {
         playMenuItem.setMenu(playMenu);
         createActionMenuItem(playMenu, SWT.PUSH, newDungeonAction);
         createActionMenuItem(playMenu, SWT.PUSH, newSettlementAction);
-
-        viewMenuItem = new MenuItem(menuBar, SWT.CASCADE);
-        Menu viewMenu = new Menu(shell, SWT.DROP_DOWN);
-        viewMenuItem.setMenu(viewMenu);
-        createActionMenuItem(viewMenu, SWT.PUSH, openEventDecksAction);
 
         contentMenuItem = new MenuItem(menuBar, SWT.CASCADE);
         Menu contentMenu = new Menu(shell, SWT.DROP_DOWN);
@@ -308,12 +309,6 @@ public class AppWindow {
 
         refreshLocalizedTexts();
     }
-
-    private void openEventDecks() {
-        eventDeckApp = getOrCreateEventDeckApp();
-        eventDeckApp.open();
-        eventDeckApp.focus();
-    }
     
     private void genWarriorCounter() {
         try {
@@ -330,6 +325,16 @@ public class AppWindow {
 
         WarriorCounterDefinition selectedCounter = remainingWarriorCounters.remove(new Random().nextInt(remainingWarriorCounters.size()));
         openWarriorCounterWindow(selectedCounter);
+    }
+
+    private void closeAllWarriorCounters() {
+        java.util.List<Shell> shells = new ArrayList<>(openWarriorCounterShells);
+        for (Shell counterShell : shells) {
+            if (counterShell != null && !counterShell.isDisposed()) {
+                counterShell.close();
+            }
+        }
+        openWarriorCounterShells.removeIf(counterShell -> counterShell == null || counterShell.isDisposed());
     }
 
     private LocalizedUiAction registerAction(LocalizedUiAction action) {
@@ -408,7 +413,6 @@ public class AppWindow {
     private void refreshLocalizedTexts() {
         shell.setText(I18n.t("app.title"));
         playMenuItem.setText(I18n.t("menu.play"));
-        viewMenuItem.setText(I18n.t("menu.view"));
         contentMenuItem.setText(I18n.t("menu.content"));
         eventCardsMenuItem.setText(I18n.t("menu.eventCards"));
         optionsMenuItem.setText(I18n.t("menu.options"));
@@ -419,6 +423,9 @@ public class AppWindow {
         }
         if (heroSubtitleLabel != null && !heroSubtitleLabel.isDisposed()) {
             heroSubtitleLabel.setText(I18n.t("dashboard.hero.subtitle"));
+        }
+        if (eventDeckGroup != null && !eventDeckGroup.isDisposed()) {
+            eventDeckGroup.setText(I18n.t("event.window.title"));
         }
 
         refreshDashboardStats();
@@ -464,6 +471,22 @@ public class AppWindow {
         subtitleData.widthHint = 520;
         heroSubtitleLabel.setLayoutData(subtitleData);
 
+        Composite statsRow = new Composite(heroCopy, SWT.NONE);
+        statsRow.setBackground(theme.panelBackground);
+        statsRow.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+        GridLayout statsLayout = new GridLayout(5, true);
+        statsLayout.marginWidth = 0;
+        statsLayout.marginHeight = 0;
+        statsLayout.horizontalSpacing = 8;
+        statsLayout.verticalSpacing = 8;
+        statsRow.setLayout(statsLayout);
+
+        modeStatsLabel = createHeroStatLabel(statsRow);
+        eventProbabilityStatsLabel = createHeroStatLabel(statsRow);
+        treasureProbabilityStatsLabel = createHeroStatLabel(statsRow);
+        partyStatsLabel = createHeroStatLabel(statsRow);
+        languageStatsLabel = createHeroStatLabel(statsRow);
+
         Composite actionRow = new Composite(heroCopy, SWT.NONE);
         actionRow.setBackground(theme.panelBackground);
         actionRow.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -477,7 +500,7 @@ public class AppWindow {
         newDungeonButton = createHeroButton(actionRow, newDungeonAction);
         newSettlementButton = createHeroButton(actionRow, newSettlementAction);
         genWarriorCounterButton = createHeroButton(actionRow, genWarriorCounterAction);
-        openEventDecksButton = createHeroButton(actionRow, openEventDecksAction);
+        closeWarriorCountersButton = createHeroButton(actionRow, closeWarriorCountersAction);
         activateTablesButton = createHeroButton(actionRow, activateTablesAction);
         contentEditorButton = createHeroButton(actionRow, eventContentEditorAction);
 
@@ -487,6 +510,30 @@ public class AppWindow {
         artData.heightHint = 230;
         heroArtCanvas.setLayoutData(artData);
         heroArtCanvas.addPaintListener(event -> theme.paintHeroBanner(event.gc, heroArtCanvas.getClientArea()));
+    }
+
+    private Label createHeroStatLabel(Composite parent) {
+        Label label = new Label(parent, SWT.CENTER | SWT.WRAP);
+        label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        label.setBackground(theme.panelBackgroundAlt);
+        label.setForeground(theme.mist);
+        label.setFont(theme.bodyFont);
+        return label;
+    }
+
+    private void buildEventDeckSection(Composite parent) {
+        eventDeckGroup = new Group(parent, SWT.NONE);
+        eventDeckGroup.setText(I18n.t("event.window.title"));
+        eventDeckGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        eventDeckGroup.setBackground(theme.shellBackground);
+        eventDeckGroup.setForeground(theme.mist);
+        eventDeckGroup.setFont(theme.sectionTitleFont);
+        GridLayout layout = new GridLayout(1, false);
+        layout.marginWidth = 0;
+        layout.marginHeight = 0;
+        eventDeckGroup.setLayout(layout);
+
+        eventDeckApp = new EventDeckApp(display, projectRoot, eventDeckGroup);
     }
 
     private Button createHeroButton(Composite parent, LocalizedUiAction action) {
@@ -645,23 +692,32 @@ public class AppWindow {
             return;
         }
 
-        long environments = cards.stream()
-                .map(DungeonCard::getEnvironment)
-                .filter(environment -> environment != null && !environment.isBlank())
-                .distinct()
-                .count();
-        long enabled = cards.stream()
-                .filter(DungeonCard::isEnabled)
-                .count();
+        AppState appState = AppState.loadFromSettings();
+        String mode = appState.deckMode().isDeck()
+                ? I18n.t("dashboard.value.mode.deck")
+                : I18n.t("dashboard.value.mode.table");
+        String language = I18n.getLanguage() == Language.EN
+                ? I18n.t("dashboard.value.language.en")
+                : I18n.t("dashboard.value.language.es");
 
-        if (collectionStatsLabel != null && !collectionStatsLabel.isDisposed()) {
-            collectionStatsLabel.setText(String.format(I18n.t("dashboard.stats.cards"), cards.size()));
+        if (modeStatsLabel != null && !modeStatsLabel.isDisposed()) {
+            modeStatsLabel.setText(String.format(I18n.t("dashboard.stats.mode"), mode));
         }
-        if (environmentStatsLabel != null && !environmentStatsLabel.isDisposed()) {
-            environmentStatsLabel.setText(String.format(I18n.t("dashboard.stats.environments"), environments));
+        if (eventProbabilityStatsLabel != null && !eventProbabilityStatsLabel.isDisposed()) {
+            eventProbabilityStatsLabel.setText(String.format(
+                    I18n.t("dashboard.stats.eventProbability"),
+                    Settings.getSettingAsInt(Settings.EVENT_PROBABILITY)));
         }
-        if (availabilityStatsLabel != null && !availabilityStatsLabel.isDisposed()) {
-            availabilityStatsLabel.setText(String.format(I18n.t("dashboard.stats.enabled"), enabled));
+        if (treasureProbabilityStatsLabel != null && !treasureProbabilityStatsLabel.isDisposed()) {
+            treasureProbabilityStatsLabel.setText(String.format(
+                    I18n.t("dashboard.stats.treasureProbability"),
+                    Settings.getSettingAsInt(Settings.TREASURE_GOLD_PROBABILITY)));
+        }
+        if (partyStatsLabel != null && !partyStatsLabel.isDisposed()) {
+            partyStatsLabel.setText(String.format(I18n.t("dashboard.stats.party"), activePartySummary()));
+        }
+        if (languageStatsLabel != null && !languageStatsLabel.isDisposed()) {
+            languageStatsLabel.setText(String.format(I18n.t("dashboard.stats.language"), language));
         }
     }
 
@@ -680,6 +736,45 @@ public class AppWindow {
         remainingWarriorCounters.clear();
         warriorCounterPartySignature = "";
         warriorCounterPoolInitialized = false;
+    }
+
+    private String activePartySummary() {
+        try {
+            Map<String, WarriorCounterDefinition> warriorsById = new LinkedHashMap<>();
+            for (WarriorCounterDefinition warrior : loadWarriorCounters()) {
+                warriorsById.put(warrior.id(), warrior);
+            }
+
+            List<String> ids = configuredPartyIds();
+            List<String> names = new ArrayList<>();
+            for (String id : ids) {
+                WarriorCounterDefinition warrior = warriorsById.get(id);
+                names.add(warrior == null ? id : warrior.name());
+            }
+            return names.isEmpty() ? I18n.t("dashboard.value.party.none") : String.join(", ", names);
+        } catch (Exception ignored) {
+            return I18n.t("dashboard.value.party.unavailable");
+        }
+    }
+
+    private List<String> configuredPartyIds() {
+        String partySetting = Settings.getSetting(Settings.PARTY_WARRIORS);
+        List<String> ids = new ArrayList<>();
+        if (partySetting != null && !partySetting.isBlank()) {
+            for (String token : partySetting.split(",")) {
+                String id = token == null ? "" : token.trim();
+                if (!id.isEmpty() && !ids.contains(id)) {
+                    ids.add(id);
+                }
+            }
+        }
+        if (ids.isEmpty()) {
+            ids.add("warrior-barbarian");
+            ids.add("warrior-dwarf");
+            ids.add("warrior-elf");
+            ids.add("warrior-wizard");
+        }
+        return ids;
     }
 
     private void openDungeonDefaultsDialog() {
@@ -2500,7 +2595,7 @@ public class AppWindow {
         Composite actions = new Composite(simulator, SWT.NONE);
         actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false, 2, 1));
         boolean showMissionButton = selectedAdventure != null && !selectedAdventure.generic();
-        GridLayout actionsLayout = new GridLayout(showMissionButton ? 3 : 2, false);
+        GridLayout actionsLayout = new GridLayout(showMissionButton ? 4 : 3, false);
         actionsLayout.marginWidth = 0;
         actionsLayout.horizontalSpacing = 12;
         actions.setLayout(actionsLayout);
@@ -2537,6 +2632,12 @@ public class AppWindow {
             eventApp.showEntries(simulator, entries);
         });
 
+        org.eclipse.swt.widgets.Button treasureSearchButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
+        treasureSearchButton.setText(I18n.t("treasureSearch.button"));
+        styleActionButton(treasureSearchButton);
+        treasureSearchButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
+        treasureSearchButton.addListener(SWT.Selection, event -> openTreasureSearchDialog(simulator));
+
         org.eclipse.swt.widgets.Button finishButton = new org.eclipse.swt.widgets.Button(actions, SWT.PUSH);
         finishButton.setText(I18n.t("button.finishAdventure"));
         styleActionButton(finishButton);
@@ -2550,6 +2651,121 @@ public class AppWindow {
 
         refreshSimulatorUi[0].run();
         simulator.open();
+    }
+
+    private void openTreasureSearchDialog(Shell parent) {
+        EventDeckApp eventApp = getOrCreateEventDeckApp();
+        ContentRepository contentRepository = eventApp.contentRepository();
+        List<Event> treasures = activeTreasureEvents(contentRepository);
+        if (treasures.isEmpty()) {
+            showInfo(I18n.t("treasureSearch.title"), I18n.t("treasureSearch.empty"));
+            return;
+        }
+
+        Shell dialog = new Shell(parent == null || parent.isDisposed() ? shell : parent, SWT.DIALOG_TRIM | SWT.RESIZE);
+        AppIcon.inherit(dialog, shell);
+        dialog.setText(I18n.t("treasureSearch.title"));
+        dialog.setBackground(theme.shellBackground);
+        dialog.setLayout(new GridLayout(1, false));
+        dialog.setSize(560, 620);
+
+        Label filterLabel = new Label(dialog, SWT.NONE);
+        filterLabel.setText(I18n.t("treasureSearch.filter"));
+        styleDarkLabel(filterLabel, false);
+
+        Text filterText = new Text(dialog, SWT.BORDER | SWT.SEARCH | SWT.ICON_SEARCH | SWT.CANCEL);
+        filterText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+        filterText.setMessage(I18n.t("treasureSearch.placeholder"));
+        filterText.setFont(theme.bodyFont);
+
+        Label resultsLabel = new Label(dialog, SWT.NONE);
+        resultsLabel.setText(I18n.t("treasureSearch.results"));
+        styleDarkLabel(resultsLabel, true);
+
+        org.eclipse.swt.widgets.List resultList = new org.eclipse.swt.widgets.List(dialog, SWT.BORDER | SWT.SINGLE | SWT.V_SCROLL);
+        resultList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+        resultList.setFont(theme.bodyFont);
+        resultList.setBackground(theme.mist);
+        resultList.setForeground(theme.ink);
+
+        Composite actions = new Composite(dialog, SWT.NONE);
+        actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false));
+        actions.setBackground(theme.shellBackground);
+        GridLayout actionsLayout = new GridLayout(2, false);
+        actionsLayout.marginWidth = 0;
+        actionsLayout.horizontalSpacing = 12;
+        actions.setLayout(actionsLayout);
+
+        Button showButton = new Button(actions, SWT.PUSH);
+        showButton.setText(I18n.t("treasureSearch.show"));
+        styleActionButton(showButton);
+
+        Button closeButton = new Button(actions, SWT.PUSH);
+        closeButton.setText(I18n.t("button.close"));
+        styleActionButton(closeButton);
+
+        List<Event> filteredTreasures = new ArrayList<>();
+        Runnable refreshResults = () -> {
+            String filter = filterText.getText() == null ? "" : filterText.getText().trim().toLowerCase();
+            filteredTreasures.clear();
+            filteredTreasures.addAll(treasures.stream()
+                    .filter(treasure -> {
+                        String name = treasure.name == null ? "" : treasure.name;
+                        return filter.isEmpty() || name.toLowerCase().contains(filter);
+                    })
+                    .toList());
+            resultList.removeAll();
+            for (Event treasure : filteredTreasures) {
+                resultList.add(treasure.name == null || treasure.name.isBlank() ? treasure.id : treasure.name);
+            }
+            showButton.setEnabled(!filteredTreasures.isEmpty());
+            if (!filteredTreasures.isEmpty()) {
+                resultList.setSelection(0);
+            }
+        };
+
+        Runnable showSelectedTreasure = () -> {
+            int index = resultList.getSelectionIndex();
+            if (index < 0 || index >= filteredTreasures.size()) {
+                return;
+            }
+            Event treasure = filteredTreasures.get(index);
+            eventApp.showEntries(dialog, List.of(new EventEntry(treasure.id)));
+        };
+
+        filterText.addListener(SWT.Modify, event -> refreshResults.run());
+        resultList.addListener(SWT.DefaultSelection, event -> showSelectedTreasure.run());
+        showButton.addListener(SWT.Selection, event -> showSelectedTreasure.run());
+        closeButton.addListener(SWT.Selection, event -> dialog.close());
+
+        refreshResults.run();
+        fitShellToDisplay(dialog, 40);
+        dialog.open();
+    }
+
+    private List<Event> activeTreasureEvents(ContentRepository contentRepository) {
+        if (contentRepository == null) {
+            return List.of();
+        }
+
+        Map<String, Event> treasures = new LinkedHashMap<>();
+        for (Table table : contentRepository.tables().values()) {
+            if (table == null || !table.isActive() || table.getTableKind() != TableKind.TREASURE) {
+                continue;
+            }
+            for (Object entry : table.getEventEntries()) {
+                if (!(entry instanceof EventEntry eventEntry)) {
+                    continue;
+                }
+                Event event = contentRepository.findEvent(eventEntry.id);
+                if (event != null && event.treasure) {
+                    treasures.put(event.id, event);
+                }
+            }
+        }
+        return treasures.values().stream()
+                .sorted(Comparator.comparing(event -> event.name, String.CASE_INSENSITIVE_ORDER))
+                .toList();
     }
 
     private void openAdventureMissionDialog(ObjectiveRoomAdventure selectedAdventure) {
@@ -2981,6 +3197,7 @@ public class AppWindow {
         Rectangle bounds = image.getBounds();
         Shell dialog = new Shell(shell, SWT.SHELL_TRIM | SWT.CLOSE);
         String partySignatureAtOpen = warriorCounterPartySignature;
+        openWarriorCounterShells.add(dialog);
         AppIcon.inherit(dialog, shell);
         dialog.setText(warrior.name());
         dialog.setBackground(theme.shellBackground);
@@ -2998,6 +3215,7 @@ public class AppWindow {
             }
         });
         dialog.addDisposeListener(event -> {
+            openWarriorCounterShells.remove(dialog);
             if (!partySignatureAtOpen.equals(warriorCounterPartySignature)) {
                 return;
             }

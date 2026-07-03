@@ -64,8 +64,10 @@ public class EventDeckApp {
   private final CardWindowManager cardWindowManager;
   private final Map<String, Image> previewImages;
   private final Path projectRoot;
+  private final Composite embeddedParent;
 
   private Shell shell;
+  private Composite root;
   private Composite buttonRow;
   private Canvas headerCanvas;
   private Composite eventDeckContainer;
@@ -135,9 +137,14 @@ public class EventDeckApp {
   }
 
   public EventDeckApp(Display display, Path projectRoot) {
+    this(display, projectRoot, null);
+  }
+
+  public EventDeckApp(Display display, Path projectRoot, Composite embeddedParent) {
     this.display = display;
     Path normalizedProjectRoot = projectRoot.toAbsolutePath().normalize();
     this.projectRoot = normalizedProjectRoot;
+    this.embeddedParent = embeddedParent;
     this.theme = new WhqUiTheme(display, normalizedProjectRoot);
     this.cardWindowManager = new CardWindowManager(display);
     this.previewImages = new TreeMap<>();
@@ -162,24 +169,37 @@ public class EventDeckApp {
   public void focus() {
     if (shell != null && !shell.isDisposed()) {
       shell.forceActive();
+    } else if (root != null && !root.isDisposed()) {
+      root.getShell().forceActive();
     }
   }
 
   public boolean isDisposed() {
+    if (embeddedParent != null) {
+      return root == null || root.isDisposed();
+    }
     return shell == null || shell.isDisposed();
   }
 
   private void layoutMainWindow() {
-    shell = new Shell(display);
-    AppIcon.apply(shell, projectRoot);
-    shell.setText(I18n.t("event.window.title"));
-    shell.setBackground(theme.shellBackground);
-    shell.setLayout(new GridLayout(1, false));
+    if (embeddedParent == null) {
+      shell = new Shell(display);
+      AppIcon.apply(shell, projectRoot);
+      shell.setText(I18n.t("event.window.title"));
+      shell.setBackground(theme.shellBackground);
+      shell.setLayout(new GridLayout(1, false));
+      root = shell;
+      createHeaderBanner(root);
+    } else {
+      root = new Composite(embeddedParent, SWT.NONE);
+      root.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+      root.setBackground(theme.shellBackground);
+      root.setLayout(new GridLayout(1, false));
+    }
 
-    createHeaderBanner();
-    createDeckVisibilityControls();
+    createDeckVisibilityControls(root);
 
-    buttonRow = new Composite(shell, SWT.DOUBLE_BUFFERED);
+    buttonRow = new Composite(root, SWT.DOUBLE_BUFFERED);
     buttonRow.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
     buttonRow.setBackground(theme.panelBackground);
     GridLayout rowLayout = new GridLayout(5, true);
@@ -244,7 +264,7 @@ public class EventDeckApp {
 
     applyDeckVisibility();
 
-    shell.addListener(SWT.Close, event -> {
+    root.addListener(SWT.Dispose, event -> {
       persistOptions();
       cardWindowManager.closeAllCards();
       cardWindowManager.disposeImages();
@@ -252,14 +272,16 @@ public class EventDeckApp {
       theme.dispose();
     });
 
-    shell.pack();
-    shell.setSize(Math.max(shell.getSize().x, 1240), Math.max(shell.getSize().y, 420));
-    centerOnPrimaryMonitor(shell);
+    if (shell != null && !shell.isDisposed()) {
+      shell.pack();
+      shell.setSize(Math.max(shell.getSize().x, 1240), Math.max(shell.getSize().y, 420));
+      centerOnPrimaryMonitor(shell);
+    }
     refreshTexts();
   }
 
-  private void createDeckVisibilityControls() {
-    Composite visibilityRow = new Composite(shell, SWT.DOUBLE_BUFFERED);
+  private void createDeckVisibilityControls(Composite parent) {
+    Composite visibilityRow = new Composite(parent, SWT.DOUBLE_BUFFERED);
     visibilityRow.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
     visibilityRow.setBackground(theme.panelBackground);
 
@@ -331,8 +353,8 @@ public class EventDeckApp {
     });
   }
 
-  private void createHeaderBanner() {
-    headerCanvas = new Canvas(shell, SWT.DOUBLE_BUFFERED);
+  private void createHeaderBanner(Composite parent) {
+    headerCanvas = new Canvas(parent, SWT.DOUBLE_BUFFERED);
     GridData headerData = new GridData(SWT.FILL, SWT.TOP, true, false);
     headerData.heightHint = 170;
     headerCanvas.setLayoutData(headerData);
@@ -413,8 +435,8 @@ public class EventDeckApp {
     if (buttonRow != null && !buttonRow.isDisposed()) {
       buttonRow.layout(true, true);
     }
-    if (shell != null && !shell.isDisposed()) {
-      shell.layout(true, true);
+    if (root != null && !root.isDisposed()) {
+      root.layout(true, true);
     }
   }
 
@@ -517,14 +539,15 @@ public class EventDeckApp {
   }
 
   private void generateFromList(EventList list) {
+    Shell owner = resolveParent(null);
     if (list.size() < 1) {
       boolean activate =
           SwtDialogs.confirmYesNo(
-              shell,
+              owner,
               "Deck Has No Active Entries",
               "It appears that this deck has no active entries. Would you like to activate some tables now?");
       if (activate) {
-        openTableSettings(shell);
+        openTableSettings(owner);
       }
     }
 
@@ -532,7 +555,7 @@ public class EventDeckApp {
       Object entry = list.getEntry();
       if (entry != null) {
         cardWindowManager.resetCascadeStart();
-        cardWindowManager.showCard(shell, entry, controller.contentRepository());
+        cardWindowManager.showCard(owner, entry, controller.contentRepository());
       } else {
         System.err.println("Null entry found.");
       }
@@ -1035,11 +1058,13 @@ public class EventDeckApp {
   }
 
   public void refreshTexts() {
-    if (shell == null || shell.isDisposed()) {
+    if (root == null || root.isDisposed()) {
       return;
     }
 
-    shell.setText(I18n.t("event.window.title"));
+    if (shell != null && !shell.isDisposed()) {
+      shell.setText(I18n.t("event.window.title"));
+    }
 
     if (showEventDeckToggle != null && !showEventDeckToggle.isDisposed()) {
       showEventDeckToggle.setText(I18n.t("toggle.showEventDeck"));
@@ -1111,12 +1136,18 @@ public class EventDeckApp {
       objectiveTreasureButton.setText(I18n.t("button.clickHere"));
     }
 
-    shell.layout(true, true);
+    root.layout(true, true);
   }
 
   private Shell resolveParent(Shell parent) {
     if (parent != null && !parent.isDisposed()) {
       return parent;
+    }
+    if (shell != null && !shell.isDisposed()) {
+      return shell;
+    }
+    if (root != null && !root.isDisposed()) {
+      return root.getShell();
     }
     return shell;
   }
