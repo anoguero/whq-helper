@@ -541,11 +541,21 @@ public class XmlContentService {
           entry.level = entryElement.getAttribute("level");
           entry.ambiences = entryElement.getAttribute("ambiences");
           entry.specialRaw = specialNodeToRaw(entryElement);
+          entry.specialAppend = specialAppendValue(entryElement);
           table.entries.add(entry);
         } else if ("event".equals(tag)) {
           TableEntry entry = new TableEntry();
           entry.type = "event";
           entry.id = entryElement.getAttribute("id");
+          entry.ambiences = entryElement.getAttribute("ambiences");
+          table.entries.add(entry);
+        } else if ("tableRef".equals(tag)) {
+          TableEntry entry = new TableEntry();
+          entry.type = "tableRef";
+          entry.refName = entryElement.getAttribute("name");
+          entry.level = entryElement.getAttribute("level");
+          entry.targetLevel = entryElement.getAttribute("targetLevel");
+          entry.times = entryElement.getAttribute("times");
           entry.ambiences = entryElement.getAttribute("ambiences");
           table.entries.add(entry);
         } else if ("group".equals(tag)) {
@@ -564,6 +574,7 @@ public class XmlContentService {
             member.number = monsterElement.getAttribute("number");
             member.ambiences = monsterElement.getAttribute("ambiences");
             member.specialRaw = specialNodeToRaw(monsterElement);
+            member.specialAppend = specialAppendValue(monsterElement);
             groupEntry.groupMembers.add(member);
           }
           table.entries.add(groupEntry);
@@ -607,6 +618,9 @@ public class XmlContentService {
           }
           if (entry.specialRaw != null && !entry.specialRaw.isBlank()) {
             Element special = doc.createElement("special");
+            if (entry.specialAppend != null && !entry.specialAppend.isBlank()) {
+              special.setAttribute("append", entry.specialAppend.trim());
+            }
             applySpecialRaw(doc, special, entry.specialRaw);
             monster.appendChild(special);
           }
@@ -619,6 +633,23 @@ public class XmlContentService {
             event.setAttribute("ambiences", entry.ambiences.trim());
           }
           tableElement.appendChild(event);
+        } else if ("tableRef".equals(type)) {
+          validateRequired(entry.refName, "tableRef.name");
+          Element tableRef = doc.createElement("tableRef");
+          tableRef.setAttribute("name", entry.refName.trim());
+          if (entry.level != null && !entry.level.trim().isEmpty()) {
+            tableRef.setAttribute("level", entry.level.trim());
+          }
+          if (entry.targetLevel != null && !entry.targetLevel.trim().isEmpty()) {
+            tableRef.setAttribute("targetLevel", entry.targetLevel.trim());
+          }
+          if (entry.times != null && !entry.times.trim().isEmpty()) {
+            tableRef.setAttribute("times", entry.times.trim());
+          }
+          if (entry.ambiences != null && !entry.ambiences.trim().isEmpty()) {
+            tableRef.setAttribute("ambiences", entry.ambiences.trim());
+          }
+          tableElement.appendChild(tableRef);
         } else if ("group".equals(type)) {
           if (entry.groupMembers == null || entry.groupMembers.isEmpty()) {
             throw new IllegalArgumentException("Group entries require at least one member.");
@@ -638,6 +669,9 @@ public class XmlContentService {
             }
             if (member.specialRaw != null && !member.specialRaw.isBlank()) {
               Element special = doc.createElement("special");
+              if (member.specialAppend != null && !member.specialAppend.isBlank()) {
+                special.setAttribute("append", member.specialAppend.trim());
+              }
               applySpecialRaw(doc, special, member.specialRaw);
               monster.appendChild(special);
             }
@@ -805,6 +839,8 @@ public class XmlContentService {
           parseSpecialDirectives(entry.specialRaw, "table '" + tableName + "' monster '" + safe(entry.id) + "'");
         } else if ("event".equals(type)) {
           validateRequired(entry.id, "event.id");
+        } else if ("tableRef".equals(type)) {
+          validateRequired(entry.refName, "tableRef.name");
         } else if ("group".equals(type)) {
           if (entry.groupMembers == null || entry.groupMembers.isEmpty()) {
             throw new IllegalArgumentException(
@@ -1428,6 +1464,16 @@ public class XmlContentService {
     return values;
   }
 
+  private static String specialAppendValue(Element parentElement) {
+    for (Node node = parentElement.getFirstChild(); node != null; node = node.getNextSibling()) {
+      if (node.getNodeType() == Node.ELEMENT_NODE && "special".equals(node.getNodeName())) {
+        Element special = (Element) node;
+        return special.hasAttribute("append") ? special.getAttribute("append") : "";
+      }
+    }
+    return "";
+  }
+
   private static String specialNodeToRaw(Element parentElement) {
     NodeList children = parentElement.getChildNodes();
     Element specialElement = null;
@@ -1683,7 +1729,14 @@ public class XmlContentService {
     public String level = "";
     public String ambiences = "";
     public String specialRaw = "";
+    // Valor del atributo append del <special> ("" = no presente). Se preserva tal cual al guardar
+    // para no alterar la semantica de las reglas especiales base del monstruo.
+    public String specialAppend = "";
     public List<TableGroupMember> groupMembers = new ArrayList<>();
+    // Solo para type == "tableRef": referencia a otra tabla que se resuelve al robar.
+    public String refName = "";
+    public String targetLevel = "";
+    public String times = "";
   }
 
   public static final class TableGroupMember {
@@ -1691,5 +1744,6 @@ public class XmlContentService {
     public String number = "";
     public String ambiences = "";
     public String specialRaw = "";
+    public String specialAppend = "";
   }
 }

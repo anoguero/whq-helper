@@ -191,6 +191,27 @@ function mergeCardsWithBaseline(baselineCards: DungeonCard[], persistedCards: Du
   return sortCards(merged);
 }
 
+// El almacenamiento local solo puede aportar estado (enabled/copyCount) sobre cartas
+// que sigan existiendo en base + contenido de usuario; nunca reintroducir cartas,
+// o las borradas desde el dashboard "resucitarian" en cada arranque.
+function applyPersistedCardState(baselineCards: DungeonCard[], persistedCards: DungeonCard[]): DungeonCard[] {
+  const persistedById = new Map(persistedCards.map((card) => [card.id, normalizeCard(card)]));
+  return sortCards(
+    baselineCards.map((baselineCard) => {
+      const persistedCard = persistedById.get(baselineCard.id);
+      if (!persistedCard) {
+        return baselineCard;
+      }
+
+      return normalizeCard({
+        ...baselineCard,
+        enabled: persistedCard.enabled,
+        copyCount: persistedCard.copyCount
+      });
+    })
+  );
+}
+
 export class DungeonCardStore {
   private cards: DungeonCard[] = [];
   private adventures: ObjectiveRoomAdventure[] = [];
@@ -213,7 +234,7 @@ export class DungeonCardStore {
         ?.xml ?? '';
     const userAdventures = userAdventureXml ? parseAdventuresXml(userAdventureXml) : [];
     const persisted = cardsFromStorage();
-    this.cards = persisted ? mergeCardsWithBaseline(contentCards, persisted) : contentCards;
+    this.cards = persisted ? applyPersistedCardState(contentCards, persisted) : contentCards;
     this.adventures = mergeAdventuresWithBaseline(parseAdventuresXml(adventuresXml), userAdventures);
     saveCardsToStorage(this.cards);
   }
@@ -302,29 +323,6 @@ export class DungeonCardStore {
     saveCardsToStorage(this.cards);
   }
 
-  deleteCard(cardId: number): void {
-    this.cards = this.cards.filter((card) => card.id !== cardId);
-    saveCardsToStorage(this.cards);
-  }
-
-  insertCards(cards: DungeonCard[]): void {
-    if (cards.length === 0) {
-      return;
-    }
-
-    let nextId = this.cards.reduce((max, card) => Math.max(max, card.id), 0) + 1;
-    for (const card of cards) {
-      this.cards.push(
-        normalizeCard({
-          ...card,
-          id: nextId++
-        })
-      );
-    }
-
-    saveCardsToStorage(this.cards);
-  }
-
   loadAdventuresForObjectiveRoom(objectiveRoomName: string): ObjectiveRoomAdventure[] {
     const normalized = objectiveRoomName.trim().toUpperCase();
     const filtered = this.adventures
@@ -371,151 +369,4 @@ export class DungeonCardStore {
   loadAllAdventures(): ObjectiveRoomAdventure[] {
     return this.adventures.map((adventure) => this.translateAdventure(adventure));
   }
-}
-
-const CSV_HEADER = [
-  'name',
-  'type',
-  'environment',
-  'copy_count',
-  'enabled',
-  'description_text',
-  'rules_text',
-  'tile_image_path'
-];
-
-function parseCsvRows(content: string): string[][] {
-  const rows: string[][] = [];
-  let row: string[] = [];
-  let cell = '';
-  let inQuotes = false;
-
-  for (let i = 0; i < content.length; i += 1) {
-    const char = content[i] as string;
-
-    if (inQuotes) {
-      if (char === '"') {
-        if (content[i + 1] === '"') {
-          cell += '"';
-          i += 1;
-        } else {
-          inQuotes = false;
-        }
-      } else {
-        cell += char;
-      }
-      continue;
-    }
-
-    if (char === '"') {
-      inQuotes = true;
-    } else if (char === ',') {
-      row.push(cell);
-      cell = '';
-    } else if (char === '\n') {
-      row.push(cell);
-      rows.push(row);
-      row = [];
-      cell = '';
-    } else if (char !== '\r') {
-      cell += char;
-    }
-  }
-
-  if (inQuotes) {
-    throw new Error('CSV invalido: comillas sin cerrar');
-  }
-
-  if (cell || row.length > 0) {
-    row.push(cell);
-    rows.push(row);
-  }
-
-  return rows;
-}
-
-export async function importCardsFromCsvFile(file: File): Promise<DungeonCard[]> {
-  const content = await file.text();
-  const rows = parseCsvRows(content);
-  if (rows.length === 0) {
-    return [];
-  }
-
-  let start = 0;
-  const first = rows[0].map((cell) => cell.trim().toLowerCase());
-  if (CSV_HEADER.every((header, idx) => first[idx] === header)) {
-    start = 1;
-  }
-
-  const cards: DungeonCard[] = [];
-  for (let i = start; i < rows.length; i += 1) {
-    const row = rows[i] ?? [];
-    if (row.length === 0 || row.every((value) => !value.trim())) {
-      continue;
-    }
-
-    const name = (row[0] ?? '').trim();
-    const type = cardTypeFromRaw(row[1] ?? '');
-    const environment = normalizeEnvironment((row[2] ?? '').trim());
-
-    const hasExtended = row.length >= 8;
-    const copyCount = hasExtended ? Math.max(0, Number.parseInt(row[3] ?? '1', 10) || 0) : 1;
-
-    let enabled = true;
-    if (hasExtended) {
-      const enabledRaw = (row[4] ?? '').trim().toLowerCase();
-      enabled = ['1', 'true', 'yes', 'si', 'sí'].includes(enabledRaw);
-    }
-
-    const textOffset = hasExtended ? 5 : 3;
-
-    cards.push({
-      id: 0,
-      name,
-      type,
-      environment,
-      copyCount,
-      enabled,
-      descriptionText: (row[textOffset] ?? '').trim(),
-      rulesText: (row[textOffset + 1] ?? '').trim(),
-      tileImagePath: (row[textOffset + 2] ?? '').trim()
-    });
-  }
-
-  return cards;
-}
-
-function csvCell(value: string): string {
-  return `"${value.replaceAll('"', '""')}"`;
-}
-
-export function exportCardsToCsv(cards: DungeonCard[]): string {
-  const lines: string[] = [CSV_HEADER.join(',')];
-
-  for (const card of cards) {
-    lines.push(
-      [
-        csvCell(card.name),
-        csvCell(card.type),
-        csvCell(normalizeEnvironment(card.environment)),
-        csvCell(String(card.copyCount)),
-        csvCell(card.enabled ? '1' : '0'),
-        csvCell(card.descriptionText),
-        csvCell(card.rulesText),
-        csvCell(card.tileImagePath)
-      ].join(',')
-    );
-  }
-
-  return `${lines.join('\n')}\n`;
-}
-
-export function downloadCsv(filename: string, csvContent: string): void {
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  link.click();
-  URL.revokeObjectURL(url);
 }

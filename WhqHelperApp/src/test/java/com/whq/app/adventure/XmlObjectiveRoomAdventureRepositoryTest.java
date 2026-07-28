@@ -9,18 +9,29 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.whq.app.i18n.I18n;
+import com.whq.app.i18n.Language;
+
 class XmlObjectiveRoomAdventureRepositoryTest {
 
     @Test
     void loadsObjectiveRoomAdventuresIncludingGenericMission() throws Exception {
-        XmlObjectiveRoomAdventureRepository repository = new XmlObjectiveRoomAdventureRepository(
-                Path.of(System.getProperty("user.dir")));
+        // Los nombres de aventura se traducen con el idioma activo de I18n; fijamos EN para que la
+        // asercion sea determinista independientemente del idioma por defecto de la aplicacion.
+        Language previousLanguage = I18n.getLanguage();
+        try {
+            I18n.setLanguage(Language.EN);
+            XmlObjectiveRoomAdventureRepository repository = new XmlObjectiveRoomAdventureRepository(
+                    Path.of(System.getProperty("user.dir")));
 
-        List<ObjectiveRoomAdventure> adventures = repository.loadAdventuresForObjectiveRoom("FIGHTING PIT");
+            List<ObjectiveRoomAdventure> adventures = repository.loadAdventuresForObjectiveRoom("FIGHTING PIT");
 
-        assertEquals(7, adventures.size());
-        assertTrue(adventures.stream().anyMatch(ObjectiveRoomAdventure::generic));
-        assertTrue(adventures.stream().anyMatch(adventure -> "Free the Prisoners".equals(adventure.name())));
+            assertEquals(7, adventures.size());
+            assertTrue(adventures.stream().anyMatch(ObjectiveRoomAdventure::generic));
+            assertTrue(adventures.stream().anyMatch(adventure -> "Free the Prisoners".equals(adventure.name())));
+        } finally {
+            I18n.setLanguage(previousLanguage);
+        }
     }
 
     @Test

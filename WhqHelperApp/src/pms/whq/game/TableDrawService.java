@@ -35,10 +35,7 @@ public class TableDrawService {
   }
 
   private Object drawEntry(Table table, Integer forcedLevel, Set<String> visitedTables) {
-    List<Object> monsters = filterMonsterEntries(table.getMonsterEntries());
-    if (forcedLevel != null) {
-      monsters = filterMonsterEntries(table.getMonsterEntries(), forcedLevel);
-    }
+    List<Object> monsters = filterMonsterEntries(table.getMonsterEntries(), forcedLevel);
     List<Object> events = table.getEventEntries();
     boolean hasMonsters = !monsters.isEmpty();
     boolean hasEvents = !events.isEmpty();
@@ -61,10 +58,9 @@ public class TableDrawService {
     return resolveEntry(drawn, visitedTables);
   }
 
-  private List<Object> filterMonsterEntries(List<Object> monsters) {
-    boolean adventureActive = Settings.getSettingAsBool(Settings.ADVENTURE_ACTIVE);
-    int adventureLevel = normalizeAdventureLevel(Settings.getSettingAsInt(Settings.ADVENTURE_LEVEL));
-
+  // Filtra por ambientacion (siempre) y por nivel. Con forcedLevel != null (resolucion de tableRef)
+  // se filtra al nivel indicado; si no, solo se filtra por nivel cuando hay una aventura activa.
+  private List<Object> filterMonsterEntries(List<Object> monsters, Integer forcedLevel) {
     AdventureAmbience selectedAmbience =
         AdventureAmbience.fromStorageValue(Settings.getSetting(Settings.ADVENTURE_AMBIENCE));
 
@@ -79,14 +75,19 @@ public class TableDrawService {
       }
     }
 
+    if (forcedLevel != null) {
+      return filterByLevel(ambienceFiltered, forcedLevel);
+    }
+
+    boolean adventureActive = Settings.getSettingAsBool(Settings.ADVENTURE_ACTIVE);
     if (!adventureActive) {
       return ambienceFiltered;
     }
-
-    return filterMonsterEntries(ambienceFiltered, adventureLevel);
+    int adventureLevel = normalizeAdventureLevel(Settings.getSettingAsInt(Settings.ADVENTURE_LEVEL));
+    return filterByLevel(ambienceFiltered, adventureLevel);
   }
 
-  private List<Object> filterMonsterEntries(List<Object> monsters, int adventureLevel) {
+  private List<Object> filterByLevel(List<Object> monsters, int adventureLevel) {
     return monsters.stream()
         .filter(entry -> matchesAdventureLevel(entry, adventureLevel))
         .collect(Collectors.toList());

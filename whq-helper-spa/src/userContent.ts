@@ -1007,7 +1007,7 @@ export function createDefaultEvent(
     name: '',
     rules: '',
     special: '',
-    flavor: kind === 'travelEvent' || kind === 'settlementEvent' ? '' : '',
+    flavor: '',
     goldValue: '',
     users: '',
     treasure: kind === 'treasure' || kind === 'objectiveTreasure'

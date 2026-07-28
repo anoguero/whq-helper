@@ -1560,7 +1560,14 @@ public final class EventContentEditorDialog {
           syncingForm[0] = true;
           try {
             String type = safe(entry.type);
-            if ("group".equals(type)) {
+            if ("tableRef".equals(type)) {
+              // No editable desde este formulario: mostramos la referencia y bloqueamos el guardado
+              // de la entrada (ver applyEntryButton) para no perder targetLevel/times/ambiences.
+              idText.setText(safe(entry.refName));
+              numberText.setText("");
+              specialText.setText("");
+              groupMembersText.setText("");
+            } else if ("group".equals(type)) {
               typeCombo.setText("group");
               idText.setText("");
               numberText.setText("");
@@ -1749,6 +1756,15 @@ public final class EventContentEditorDialog {
           int tableIndex = selectedTableIndex[0];
           if (tableIndex < 0 || tableIndex >= model[0].tables.size()) {
             showWarning(dialog, I18n.t("editor.tables.message.selectTable"));
+            return;
+          }
+
+          TableDefinition selectedTable = model[0].tables.get(tableIndex);
+          int selectedIndex = selectedEntryIndex[0];
+          if (selectedIndex >= 0
+              && selectedIndex < selectedTable.entries.size()
+              && "tableRef".equals(safe(selectedTable.entries.get(selectedIndex).type))) {
+            showWarning(dialog, I18n.t("editor.tables.message.tableRefReadOnly"));
             return;
           }
 
@@ -3954,6 +3970,9 @@ public final class EventContentEditorDialog {
     if ("event".equals(type)) {
       return "event | " + safe(entry.id);
     }
+    if ("tableRef".equals(type)) {
+      return "tableRef | " + safe(entry.refName);
+    }
     return "monster | " + safe(entry.id) + " | " + safe(entry.number);
   }
 
@@ -3981,6 +4000,10 @@ public final class EventContentEditorDialog {
     copy.level = safe(source == null ? "" : source.level);
     copy.ambiences = safe(source == null ? "" : source.ambiences);
     copy.specialRaw = safe(source == null ? "" : source.specialRaw);
+    copy.specialAppend = safe(source == null ? "" : source.specialAppend);
+    copy.refName = safe(source == null ? "" : source.refName);
+    copy.targetLevel = safe(source == null ? "" : source.targetLevel);
+    copy.times = safe(source == null ? "" : source.times);
     if (source != null && source.groupMembers != null) {
       for (TableGroupMember member : source.groupMembers) {
         TableGroupMember memberCopy = new TableGroupMember();
@@ -3988,6 +4011,7 @@ public final class EventContentEditorDialog {
         memberCopy.number = safe(member == null ? "" : member.number);
         memberCopy.ambiences = safe(member == null ? "" : member.ambiences);
         memberCopy.specialRaw = safe(member == null ? "" : member.specialRaw);
+        memberCopy.specialAppend = safe(member == null ? "" : member.specialAppend);
         copy.groupMembers.add(memberCopy);
       }
     }

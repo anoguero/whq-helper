@@ -14,7 +14,7 @@ public class RuntimeContentService {
   }
 
   public ContentRepository load(Consumer<ContentIssue> issueConsumer) {
-    ContentRepository repository = loader.load();
+    ContentRepository repository = loader.load(issueConsumer);
     validator.pruneInvalidTableEntries(repository, issueConsumer);
     return repository;
   }

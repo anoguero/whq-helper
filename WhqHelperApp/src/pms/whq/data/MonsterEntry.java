@@ -58,7 +58,11 @@ public class MonsterEntry extends SpecialContainer {
     
     Node special = XMLUtil.getNamedChild(node, "special");
     if (special != null) {
-      appendSpecials = Boolean.parseBoolean(XMLUtil.getAttribute(special, "append"));
+      // Coherente con la ausencia total de <special> (que mantiene appendSpecials=true):
+      // un <special> sin atributo "append" conserva el valor por defecto y solo se desactiva
+      // cuando el atributo indica explicitamente "false".
+      String append = XMLUtil.getAttribute(special, "append");
+      appendSpecials = append == null || append.isBlank() || Boolean.parseBoolean(append);
     }
     
     min = max = 0;

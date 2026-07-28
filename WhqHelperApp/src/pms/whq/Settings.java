@@ -156,18 +156,6 @@ public final class Settings {
     settings.setProperty(LANGUAGE, language.name());
   }
 
-  public static int countActiveTableSettings() {
-    int active = 0;
-
-    for (String name : settings.stringPropertyNames()) {
-      if (name.endsWith(".active") && Boolean.parseBoolean(settings.getProperty(name))) {
-        active++;
-      }
-    }
-
-    return active;
-  }
-
   private static void applyDefaultSettings() {
     settings.clear();
 

@@ -118,20 +118,6 @@ public class EventDeckApp {
     }
   }
 
-  /*public static void main(String[] args) {
-    Display display = new Display();
-    EventDeckApp app = new EventDeckApp(display, Path.of("").toAbsolutePath());
-    app.open();
-
-    while (!app.isDisposed()) {
-      if (!display.readAndDispatch()) {
-        display.sleep();
-      }
-    }
-
-    display.dispose();
-  }*/
-
   public EventDeckApp(Display display) {
     this(display, Path.of("").toAbsolutePath());
   }

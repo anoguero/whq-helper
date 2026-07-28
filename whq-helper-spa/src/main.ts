@@ -1,16 +1,15 @@
 import './styles.css';
 
 import { getAdventureAmbiences, getSettlementTypes, t, tf } from './i18n';
-import { findAnyEvent, loadContent, loadContentManifest } from './content';
+import { findAnyEvent, loadContent } from './content';
 import { applyTableActiveState, buildDecks, getMonsterNumber } from './deck';
 import { loadSettings, saveSettings } from './settings';
 import { renderEventCard, renderMonsterCard, renderSettlementLocationCard } from './render';
-import { DungeonCardStore, downloadCsv, exportCardsToCsv, importCardsFromCsvFile } from './dungeonStore';
+import { DungeonCardStore } from './dungeonStore';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
 import { getWhiteDwarfReference } from './whiteDwarfReferences';
 import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
 import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from './counterAssets';
-import { getXmlOverride, removeXmlOverride, saveXmlOverride } from './contentOverrides';
 import {
   createDefaultDungeonCard,
   createDefaultEvent,
@@ -141,7 +140,6 @@ let decks: DeckBundle;
 const dungeonStore = new DungeonCardStore();
 
 let dungeonCards: DungeonCard[] = [];
-let selectedDungeonCard: DungeonCard | null = null;
 
 let zIndexCounter = 20;
 const CARD_WINDOW_WIDTH = 320;
@@ -172,7 +170,6 @@ const DASHBOARD_CATEGORIES: DashboardCategoryMeta[] = [
 let activeDashboardItemUid: string | null = null;
 const DASHBOARD_CREATE_PREFIX = 'create:';
 let dashboardDraftItem: UserContentItem | null = null;
-let dashboardOpen = false;
 let warriorCounterAvailableIds = new Set<string>();
 let warriorCounterOpenIds = new Set<string>();
 let warriorCounterCascadeIndex = 0;
@@ -210,7 +207,10 @@ function locationVisitorLabel(visitorId: string): string {
   if (visitorId === 'all') {
     return t(settings.language, 'settlement.type.any');
   }
-  return repository.warriors.get(visitorId)?.name ?? visitorId;
+  // Los ids de visitante en locations.xml van sin el prefijo "warrior-" con el que se registran los
+  // guerreros (p.ej. "elf" -> "warrior-elf"). Intentamos ambas formas antes de caer al id crudo.
+  const warrior = repository.warriors.get(visitorId) ?? repository.warriors.get(`warrior-${visitorId}`);
+  return warrior?.name ?? visitorId;
 }
 
 function settlementTypeLabel(type: SettlementType): string {
@@ -992,35 +992,36 @@ function fitTreasureHeaderText(scope: ParentNode): void {
 }
 
 function makeCardWindowDraggable(windowEl: HTMLElement): void {
-  let dragging = false;
   let offsetX = 0;
   let offsetY = 0;
+
+  // Los listeners de movimiento/soltar se registran en window SOLO mientras dura el arrastre y se
+  // eliminan al soltar. Antes se anhadian de forma permanente por cada ventana, acumulandose y
+  // reteniendo las ventanas cerradas en memoria.
+  const onMouseMove = (event: MouseEvent): void => {
+    const nextX = Math.max(0, Math.min(window.innerWidth - windowEl.offsetWidth, event.clientX - offsetX));
+    const nextY = Math.max(0, Math.min(window.innerHeight - windowEl.offsetHeight, event.clientY - offsetY));
+    windowEl.style.left = `${nextX}px`;
+    windowEl.style.top = `${nextY}px`;
+  };
+
+  const onMouseUp = (): void => {
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+  };
 
   windowEl.addEventListener('mousedown', (event) => {
     const target = event.target as HTMLElement;
     if (target.closest('button, input, select, textarea, a, .rule-link')) {
       return;
     }
-    dragging = true;
     const rect = windowEl.getBoundingClientRect();
     offsetX = event.clientX - rect.left;
     offsetY = event.clientY - rect.top;
     windowEl.style.zIndex = `${zIndexCounter++}`;
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
     event.preventDefault();
-  });
-
-  window.addEventListener('mousemove', (event) => {
-    if (!dragging) {
-      return;
-    }
-    const nextX = Math.max(0, Math.min(window.innerWidth - windowEl.offsetWidth, event.clientX - offsetX));
-    const nextY = Math.max(0, Math.min(window.innerHeight - windowEl.offsetHeight, event.clientY - offsetY));
-    windowEl.style.left = `${nextX}px`;
-    windowEl.style.top = `${nextY}px`;
-  });
-
-  window.addEventListener('mouseup', () => {
-    dragging = false;
   });
 }
 
@@ -1088,8 +1089,8 @@ function openTableDialog(): void {
             .map(
               (table) => `
                 <label>
-                  <input type="checkbox" data-table-name="${table.name}" ${table.active ? 'checked' : ''}>
-                  ${table.name}
+                  <input type="checkbox" data-table-name="${escapeHtml(table.name)}" ${table.active ? 'checked' : ''}>
+                  ${escapeHtml(table.name)}
                 </label>
               `
             )
@@ -1119,15 +1120,17 @@ function openTableDialog(): void {
     dialog.close();
   };
 
-  saveButton?.addEventListener('click', handleSave, { once: true });
+  // Asignamos onclick (en vez de addEventListener con { once: true }) para reemplazar el handler
+  // en cada apertura: con addEventListener, cerrar sin guardar dejaba el listener vivo y las
+  // siguientes aperturas los acumulaban, ejecutando el guardado varias veces.
+  if (saveButton) {
+    saveButton.onclick = handleSave;
+  }
   dialog.showModal();
 }
 
 function refreshDungeonCards(): void {
   dungeonCards = dungeonStore.loadCards();
-  if (!selectedDungeonCard || !dungeonCards.some((card) => card.id === selectedDungeonCard?.id)) {
-    selectedDungeonCard = dungeonCards[0] ?? null;
-  }
 }
 
 function openMaintenanceDialog(): void {
@@ -1195,7 +1198,7 @@ function openMaintenanceDialog(): void {
   const environments = [...new Set(cards.map((card) => card.environment))].sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: 'base' })
   );
-  environmentSelect.innerHTML = environments.map((environment) => `<option value="${environment}">${environment}</option>`).join('');
+  environmentSelect.innerHTML = environments.map((environment) => `<option value="${escapeHtml(environment)}">${escapeHtml(environment)}</option>`).join('');
 
   for (const card of cards) {
     const row = document.createElement('label');
@@ -1264,88 +1267,6 @@ function openMaintenanceDialog(): void {
   });
 
   dialog.showModal();
-}
-
-async function openContentEditorDialog(): Promise<void> {
-  const dialog = document.querySelector<HTMLDialogElement>('#contentEditorDialog');
-  if (!dialog) {
-    return;
-  }
-
-  const manifest = await loadContentManifest();
-  const files = manifest.xmlFiles;
-  const fileOptions = files.map((path) => `<option value="${path}">${path}</option>`).join('');
-
-  dialog.innerHTML = `
-    <form method="dialog" class="maintenance-grid">
-      <h2>${t(settings.language, 'dialog.tableEditor.title')}</h2>
-      <p>${t(settings.language, 'dialog.tableEditor.description')}</p>
-      <label>${t(settings.language, 'dialog.tableEditor.file')}
-        <select id="ceFile">${fileOptions}</select>
-      </label>
-      <textarea id="ceText" rows="24"></textarea>
-      <menu>
-        <button value="cancel">${t(settings.language, 'dialog.button.close')}</button>
-        <button type="button" id="ceReset">${t(settings.language, 'dialog.button.reload')}</button>
-        <button type="button" id="ceSave">${t(settings.language, 'dialog.button.saveReload')}</button>
-      </menu>
-    </form>
-  `;
-
-  const fileSelect = dialog.querySelector<HTMLSelectElement>('#ceFile')!;
-  const textArea = dialog.querySelector<HTMLTextAreaElement>('#ceText')!;
-
-  const loadFile = async (path: string) => {
-    const override = getXmlOverride(path);
-    if (override != null) {
-      return override;
-    }
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`${t(settings.language, 'dialog.tableEditor.readError')} ${path}`);
-    }
-    return response.text();
-  };
-
-  const refreshText = async () => {
-    textArea.value = await loadFile(fileSelect.value);
-  };
-
-  fileSelect.addEventListener('change', () => {
-    refreshText().catch((error) => {
-      window.alert(String(error));
-    });
-  });
-
-  dialog.querySelector<HTMLButtonElement>('#ceReset')?.addEventListener('click', async () => {
-    removeXmlOverride(fileSelect.value);
-    await refreshText();
-    repository = await loadContent(settings.language);
-    rebuildDecks();
-  });
-
-  dialog.querySelector<HTMLButtonElement>('#ceSave')?.addEventListener('click', async () => {
-    const parser = new DOMParser();
-    const parsed = parser.parseFromString(textArea.value, 'text/xml');
-    if (parsed.querySelector('parsererror')) {
-      window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
-      return;
-    }
-    saveXmlOverride(fileSelect.value, textArea.value);
-    repository = await loadContent(settings.language);
-    rebuildDecks();
-    window.alert(t(settings.language, 'dialog.tableEditor.saved'));
-  });
-
-  await refreshText();
-  dialog.showModal();
-}
-
-function splitCsv(value: string): string[] {
-  return value
-    .split(',')
-    .map((item) => item.trim())
-    .filter(Boolean);
 }
 
 function escapeHtml(value: string): string {
@@ -1968,9 +1889,9 @@ function renderDashboardTree(container: HTMLElement): void {
           ${items
             .map(
               (item) => `
-                <li class="${item.uid === activeDashboardItemUid ? 'selected' : ''}" data-item-uid="${item.uid}" title="${contentDashboardSubtitle(item)}">
-                  <span>${item.title}</span>
-                  <small>${contentDashboardSubtitle(item)}</small>
+                <li class="${item.uid === activeDashboardItemUid ? 'selected' : ''}" data-item-uid="${escapeHtml(item.uid)}" title="${escapeHtml(contentDashboardSubtitle(item))}">
+                  <span>${escapeHtml(item.title)}</span>
+                  <small>${escapeHtml(contentDashboardSubtitle(item))}</small>
                 </li>
               `
             )
@@ -2047,7 +1968,7 @@ function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLEleme
         <label>
           ${t(settings.language, 'contentDashboard.source')}
           <select id="dashboardSourceSelect">
-            ${options.map((option) => `<option value="${option.id}">${option.label}</option>`).join('')}
+            ${options.map((option) => `<option value="${escapeHtml(option.id)}">${escapeHtml(option.label)}</option>`).join('')}
           </select>
         </label>
         <button type="button" id="dashboardCreateFromSourceBtn">${t(settings.language, 'contentDashboard.openEditor')}</button>
@@ -3081,10 +3002,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
   if (parsedEventTable) {
     const renderEventTableEditor = (): void => {
       const availableItems = availableEventItemsForTable(parsedEventTable.kind, item.uid, parsedEventTable.eventIds);
-      const selectedItemId = editor.querySelector<HTMLSelectElement>('#ucSelectedEventIds')?.value ?? parsedEventTable.eventIds[0] ?? '';
-      const selectedEventIds = selectedItemId && parsedEventTable.eventIds.includes(selectedItemId)
-        ? parsedEventTable.eventIds
-        : parsedEventTable.eventIds;
+      const selectedEventIds = parsedEventTable.eventIds;
       const availableOptions = availableItems
         .map((entry) => `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.label)}</option>`)
         .join('');
@@ -4063,7 +3981,6 @@ async function openContentDashboardDialog(): Promise<void> {
     return;
   }
 
-  dashboardOpen = true;
   document.body.classList.add('dashboard-active');
   container.hidden = false;
   container.innerHTML = `
@@ -4095,7 +4012,6 @@ async function closeContentDashboardView(): Promise<void> {
   }
 
   await refreshRuntimeContent();
-  dashboardOpen = false;
   document.body.classList.remove('dashboard-active');
   container.hidden = true;
   container.innerHTML = '';
@@ -4434,11 +4350,11 @@ function openMissionDialog(adventure: ObjectiveRoomAdventure): void {
 
   dialog.innerHTML = `
     <form method="dialog">
-      <h2>${t(settings.language, 'dialog.mission.title')}: ${adventure.name}</h2>
+      <h2>${t(settings.language, 'dialog.mission.title')}: ${escapeHtml(adventure.name)}</h2>
       <p><strong>${t(settings.language, 'dialog.mission.ambience')}</strong></p>
-      <p>${adventure.flavorText}</p>
+      <p>${escapeHtml(adventure.flavorText)}</p>
       <p><strong>${t(settings.language, 'dialog.mission.specialRules')}</strong></p>
-      <p>${adventure.rulesText}</p>
+      <p>${escapeHtml(adventure.rulesText)}</p>
       <menu><button value="cancel">${t(settings.language, 'dialog.button.close')}</button></menu>
     </form>
   `;
@@ -4510,7 +4426,7 @@ function openAdventureSimulator(
     <section class="simulator-layout">
       <header>
         <h2>${t(settings.language, 'simulator.title')}</h2>
-        <p>${t(settings.language, 'dialog.mission.title')}: ${adventure.name} | ${t(settings.language, 'dialog.mission.ambience')}: ${ambienceLabel} | ${t(settings.language, 'simulator.level')}: ${dungeonLevel}</p>
+        <p>${t(settings.language, 'dialog.mission.title')}: ${escapeHtml(adventure.name)} | ${t(settings.language, 'dialog.mission.ambience')}: ${ambienceLabel} | ${t(settings.language, 'simulator.level')}: ${dungeonLevel}</p>
       </header>
       <section class="simulator-body">
         <div>
@@ -4824,7 +4740,7 @@ function openNewDungeonDialog(): void {
   const objectiveVeryHardInput = dialog.querySelector<HTMLInputElement>('#ndObjectiveVeryHard')!;
   const objectiveExtremeInput = dialog.querySelector<HTMLInputElement>('#ndObjectiveExtreme')!;
 
-  envSelect.innerHTML = environments.map((environment) => `<option value="${environment}">${environment}</option>`).join('');
+  envSelect.innerHTML = environments.map((environment) => `<option value="${escapeHtml(environment)}">${escapeHtml(environment)}</option>`).join('');
 
   let objectiveRooms: DungeonCard[] = [];
   let missions: ObjectiveRoomAdventure[] = [];
@@ -4844,13 +4760,13 @@ function openNewDungeonDialog(): void {
     }
 
     missions = dungeonStore.loadAdventuresForObjectiveRoom(objective.name);
-    missionSelect.innerHTML = missions.map((mission) => `<option value="${mission.name}">${mission.name}</option>`).join('');
+    missionSelect.innerHTML = missions.map((mission) => `<option value="${escapeHtml(mission.name)}">${escapeHtml(mission.name)}</option>`).join('');
     syncMissionRules();
   };
 
   const reloadObjectives = () => {
     objectiveRooms = dungeonStore.loadObjectiveRoomsByEnvironment(envSelect.value);
-    objectiveSelect.innerHTML = objectiveRooms.map((room) => `<option value="${room.name}">${room.name}</option>`).join('');
+    objectiveSelect.innerHTML = objectiveRooms.map((room) => `<option value="${escapeHtml(room.name)}">${escapeHtml(room.name)}</option>`).join('');
     reloadMissions();
   };
 
@@ -4937,7 +4853,6 @@ async function bootstrap(): Promise<void> {
   applyTableActiveState(repository, settings);
   decks = buildDecks(repository, settings);
   dungeonCards = dungeonStore.loadCards();
-  selectedDungeonCard = dungeonCards[0] ?? null;
 
   render();
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.function.Consumer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,6 +29,7 @@ public class RuntimeContentLoader {
 
   private final Path projectRoot;
   private final DocumentBuilderFactory parserFactory;
+  private Consumer<ContentIssue> issueConsumer = issue -> {};
 
   public RuntimeContentLoader(Path projectRoot) {
     this.projectRoot = projectRoot.toAbsolutePath().normalize();
@@ -35,6 +37,11 @@ public class RuntimeContentLoader {
   }
 
   public ContentRepository load() {
+    return load(issue -> {});
+  }
+
+  public ContentRepository load(Consumer<ContentIssue> issueConsumer) {
+    this.issueConsumer = issueConsumer == null ? issue -> {} : issueConsumer;
     Settings.load(projectRoot);
     ContentTranslations translations = ContentTranslations.load(projectRoot, Settings.getLanguage());
 
@@ -205,7 +212,18 @@ public class RuntimeContentLoader {
         }
       }
     } catch (Exception ex) {
+      // No silenciamos el error: lo reportamos como ContentIssue para que la UI avise al usuario
+      // (antes solo se imprimia en stderr, invisible en una app grafica).
       ex.printStackTrace();
+      String reason = ex.getMessage() == null ? ex.getClass().getSimpleName() : ex.getMessage();
+      issueConsumer.accept(
+          new ContentIssue(
+              "Content File Could Not Be Loaded",
+              "The content file ["
+                  + file.getName()
+                  + "] could not be loaded and was skipped: "
+                  + reason
+                  + "."));
     }
   }
 

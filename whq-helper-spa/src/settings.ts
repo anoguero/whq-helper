@@ -102,10 +102,13 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
     }
   }
 
+  // Solo consideramos el idioma "configurado" si el cfg trae la clave Language explicitamente.
+  // Si no, dejamos language sin definir para que loadSettings pueda autodetectar el del navegador.
   const languageRaw = props.get('Language')?.trim().toUpperCase();
-  const language = languageRaw === 'EN' ? 'EN' : 'ES';
+  const language: AppSettings['language'] | undefined =
+    languageRaw === 'EN' ? 'EN' : languageRaw === 'ES' ? 'ES' : undefined;
 
-  return {
+  const parsed: Partial<AppSettings> = {
     simulateDeck: parseBoolean(props.get('SimulateDeck'), DEFAULT_SETTINGS.simulateDeck),
     showEventDeck: parseBoolean(props.get('ShowEventDeck'), DEFAULT_SETTINGS.showEventDeck),
     showSettlementDeck: parseBoolean(props.get('ShowSettlementDeck'), DEFAULT_SETTINGS.showSettlementDeck),
@@ -124,7 +127,6 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
       props.get('TreasureGoldProbability'),
       DEFAULT_SETTINGS.treasureGoldProbability
     ),
-    language,
     adventureAmbience: normalizeAdventureAmbience(props.get('AdventureAmbience')) || DEFAULT_SETTINGS.adventureAmbience,
     objectiveMonsterEasyWeight: parseNumber(
       props.get('ObjectiveMonsterEasyWeight'),
@@ -148,6 +150,12 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
     ),
     tableActive
   };
+
+  if (language) {
+    parsed.language = language;
+  }
+
+  return parsed;
 }
 
 function clampProbability(value: number): number {

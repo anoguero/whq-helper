@@ -17,15 +17,3 @@ export function getXmlOverride(path: string): string | null {
   const map = loadXmlOverrides();
   return map[path] ?? null;
 }
-
-export function saveXmlOverride(path: string, content: string): void {
-  const map = loadXmlOverrides();
-  map[path] = content;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
-}
-
-export function removeXmlOverride(path: string): void {
-  const map = loadXmlOverrides();
-  delete map[path];
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
-}

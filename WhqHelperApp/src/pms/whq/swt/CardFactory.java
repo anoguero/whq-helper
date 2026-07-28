@@ -257,7 +257,11 @@ public final class CardFactory {
     Font bodyFont = createNamedFont(content, 10, SWT.NORMAL, "Newtext Bk BT", "Times New Roman");
     Font bodyBoldFont = createNamedFont(content, 10, SWT.BOLD, "Newtext Bk BT", "Times New Roman");
     Image goldCoin = loadCardImage(content, TREASURE_COIN_PATH);
-    parent.addDisposeListener(
+    // Enganchamos la liberacion a 'card' (no a 'parent'): en la vista previa del editor 'parent'
+    // (previewHost) se reutiliza y solo se destruyen sus hijos en cada refresco, por lo que atarlo
+    // a 'parent' filtraba fuentes/imagen/RuleDialog hasta cerrar el dialogo. 'card' se destruye tanto
+    // en cada refresco de la vista previa como al cerrar la ventana de carta independiente.
+    card.addDisposeListener(
         event -> {
           statsLabelFont.dispose();
           statsValueFont.dispose();
@@ -357,7 +361,7 @@ public final class CardFactory {
     specialInner.setLayout(new GridLayout(1, false));
     specialInner.setBackground(bg);
     RuleDialog ruleDialog = new RuleDialog(content.getShell());
-    parent.addDisposeListener(event -> ruleDialog.dispose());
+    card.addDisposeListener(event -> ruleDialog.dispose());
 
     String specialText = buildSpecialText(monster, altSpecials, appendSpecials);
     if (!specialText.isEmpty()) {
