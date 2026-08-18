@@ -28,6 +28,7 @@ import com.whq.app.i18n.ContentTranslations;
 import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
+import com.whq.app.io.SafeXml;
 
 public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventureRepository {
     private static final String XML_DIR = "data/xml/adventures";
@@ -49,7 +50,7 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         this.xmlPath = normalizedRoot.resolve(XML_PATH);
         this.userXmlPath = normalizedRoot.resolve(USER_XML_PATH);
         this.schemaPath = normalizedRoot.resolve(SCHEMA_PATH);
-        this.parserFactory = DocumentBuilderFactory.newInstance();
+        this.parserFactory = SafeXml.newFactory();
         this.parserFactory.setNamespaceAware(true);
     }
 

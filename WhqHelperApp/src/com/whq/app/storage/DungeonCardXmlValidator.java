@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.io.SafeXml;
+
 public final class DungeonCardXmlValidator {
     private final Path projectRoot;
     private final Path schemaPath;
@@ -40,7 +42,7 @@ public final class DungeonCardXmlValidator {
             Validator schemaValidator = schema.newValidator();
             schemaValidator.validate(new javax.xml.transform.stream.StreamSource(xmlPath.toFile()));
 
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory factory = SafeXml.newFactory();
             factory.setNamespaceAware(true);
             Document document = factory.newDocumentBuilder().parse(xmlPath.toFile());
             validateSemantics(document);

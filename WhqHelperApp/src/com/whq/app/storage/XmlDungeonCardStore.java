@@ -3,6 +3,7 @@ package com.whq.app.storage;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -28,6 +29,7 @@ import org.w3c.dom.NodeList;
 
 import com.whq.app.i18n.ContentTranslations;
 import com.whq.app.i18n.I18n;
+import com.whq.app.io.SafeXml;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
 
@@ -51,7 +53,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         this.xmlPath = this.projectRoot.resolve(XML_PATH);
         this.userXmlPath = this.projectRoot.resolve(USER_XML_PATH);
         this.schemaPath = this.projectRoot.resolve(SCHEMA_PATH);
-        this.parserFactory = DocumentBuilderFactory.newInstance();
+        this.parserFactory = SafeXml.newFactory();
         this.parserFactory.setNamespaceAware(true);
     }
 
@@ -262,7 +264,10 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     private List<DungeonCard> readCardsFromFile(Path file, boolean translate) throws DungeonCardStorageException {
         try {
             validateFile(file);
-            ContentTranslations translations = ContentTranslations.load(projectRoot, I18n.getLanguage());
+            // Solo se cargan las traducciones cuando realmente se van a usar: updateCard y
+            // updateCardAvailability leen con translate=false (texto crudo) y no necesitan tocar
+            // el fichero de traducciones en absoluto.
+            ContentTranslations translations = translate ? ContentTranslations.load(projectRoot, I18n.getLanguage()) : null;
             Document document = parse(file);
             Element root = document.getDocumentElement();
             NodeList children = root.getChildNodes();
@@ -324,18 +329,36 @@ public class XmlDungeonCardStore implements DungeonCardStore {
                 root.appendChild(node);
             }
 
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-            try (OutputStream output = Files.newOutputStream(userXmlPath)) {
-                transformer.transform(new DOMSource(document), new StreamResult(output));
-            }
+            writeXmlAtomically(userXmlPath, document);
             validateFile(userXmlPath);
         } catch (DungeonCardStorageException ex) {
             throw ex;
         } catch (Exception ex) {
             throw new DungeonCardStorageException("No se han podido guardar las cartas XML.", ex);
+        }
+    }
+
+    /**
+     * Escribe el documento en un temporal dentro del mismo directorio que {@code target} y lo
+     * publica con un Files.move atomico, para no dejar el XML truncado si el transform falla a medias.
+     */
+    private void writeXmlAtomically(Path target, Document document) throws Exception {
+        Path directory = target.toAbsolutePath().normalize().getParent();
+        Files.createDirectories(directory);
+
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+        Path tmpFile = Files.createTempFile(directory, target.getFileName().toString(), ".tmp");
+        try {
+            try (OutputStream output = Files.newOutputStream(tmpFile)) {
+                transformer.transform(new DOMSource(document), new StreamResult(output));
+            }
+            Files.move(tmpFile, target, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        } finally {
+            Files.deleteIfExists(tmpFile);
         }
     }
 
@@ -362,7 +385,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
 
     private void writeBaseCards(List<DungeonCard> cards) throws DungeonCardStorageException {
         try {
-            Files.createDirectories(xmlPath.getParent());
             Document document = newDocument();
             Element root = document.createElement("dungeonCards");
             document.appendChild(root);
@@ -379,13 +401,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
                 appendText(document, node, "tileImagePath", require(card.getTileImagePath(), "tileImagePath"));
                 root.appendChild(node);
             }
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-            try (OutputStream output = Files.newOutputStream(xmlPath)) {
-                transformer.transform(new DOMSource(document), new StreamResult(output));
-            }
+            writeXmlAtomically(xmlPath, document);
             validateFile(xmlPath);
         } catch (Exception ex) {
             throw new DungeonCardStorageException("No se han podido guardar las cartas base XML.", ex);

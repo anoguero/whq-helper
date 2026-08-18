@@ -31,6 +31,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.io.SafeXml;
+
 public class XmlContentService {
 
   private static final String MONSTER_SCHEMA = "whq-monster-schema.xsd";
@@ -59,7 +61,7 @@ public class XmlContentService {
 
   public XmlContentService(Path projectRoot) {
     this.projectRoot = projectRoot.toAbsolutePath().normalize();
-    this.dbf = DocumentBuilderFactory.newInstance();
+    this.dbf = SafeXml.newFactory();
     this.dbf.setNamespaceAware(true);
   }
 
@@ -1346,11 +1348,13 @@ public class XmlContentService {
   }
 
   private void writeDocumentWithoutValidation(Path file, Document doc) throws Exception {
-    Files.createDirectories(file.toAbsolutePath().normalize().getParent());
+    Path normalizedFile = file.toAbsolutePath().normalize();
+    Path directory = normalizedFile.getParent();
+    Files.createDirectories(directory);
 
-    if (Files.exists(file)) {
-      Path backup = Path.of(file.toString() + ".bak");
-      Files.copy(file, backup, StandardCopyOption.REPLACE_EXISTING);
+    if (Files.exists(normalizedFile)) {
+      Path backup = Path.of(normalizedFile.toString() + ".bak");
+      Files.copy(normalizedFile, backup, StandardCopyOption.REPLACE_EXISTING);
     }
 
     TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -1359,8 +1363,17 @@ public class XmlContentService {
     transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
     transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
-    try (FileOutputStream output = new FileOutputStream(file.toFile())) {
-      transformer.transform(new DOMSource(doc), new StreamResult(output));
+    // Se escribe primero en un temporal en el mismo directorio y se publica con un
+    // Files.move atomico: si el transform falla a medias, el fichero destino no queda
+    // truncado (el .bak sigue siendo la unica copia previa, como antes).
+    Path tmpFile = Files.createTempFile(directory, normalizedFile.getFileName().toString(), ".tmp");
+    try {
+      try (FileOutputStream output = new FileOutputStream(tmpFile.toFile())) {
+        transformer.transform(new DOMSource(doc), new StreamResult(output));
+      }
+      Files.move(tmpFile, normalizedFile, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+    } finally {
+      Files.deleteIfExists(tmpFile);
     }
   }
 

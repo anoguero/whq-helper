@@ -58,6 +58,7 @@ import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
 import com.whq.app.io.CardCsvService;
+import com.whq.app.io.SafeXml;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
 import com.whq.app.model.WhiteDwarfRoomReferences;
@@ -1170,7 +1171,7 @@ public class AppWindow {
                     .toList();
         }
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory factory = SafeXml.newFactory();
         factory.setNamespaceAware(false);
 
         for (Path file : files) {
@@ -2458,7 +2459,7 @@ public class AppWindow {
                     .toList();
         }
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory factory = SafeXml.newFactory();
         factory.setNamespaceAware(false);
 
         for (Path file : files) {

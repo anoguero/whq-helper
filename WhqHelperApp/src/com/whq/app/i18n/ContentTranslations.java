@@ -4,16 +4,27 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.io.SafeXml;
+
 public final class ContentTranslations {
 
   private static final String RELATIVE_DIR = "data/i18n";
+
+  private record CacheKey(Path projectRoot, Language language) {
+  }
+
+  private record CacheEntry(long fileLastModifiedMillis, ContentTranslations translations) {
+  }
+
+  // Cache keyed por (projectRoot, idioma), invalidada cuando cambia el idioma (clave distinta)
+  // o cuando cambia el lastModified del fichero de traducciones (entrada distinta en la cache).
+  private static final Map<CacheKey, CacheEntry> CACHE = new ConcurrentHashMap<>();
 
   private final Map<String, String> values;
 
@@ -22,19 +33,46 @@ public final class ContentTranslations {
   }
 
   public static ContentTranslations load(Path projectRoot, Language language) {
-    Map<String, String> map = new HashMap<>();
     if (projectRoot == null || language == null) {
-      return new ContentTranslations(map);
+      return new ContentTranslations(new HashMap<>());
     }
 
+    Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
+    Path file = translationsFile(normalizedRoot, language);
+    long lastModifiedMillis = lastModifiedMillisOrZero(file);
+
+    CacheKey key = new CacheKey(normalizedRoot, language);
+    CacheEntry cached = CACHE.get(key);
+    if (cached != null && cached.fileLastModifiedMillis() == lastModifiedMillis) {
+      return cached.translations();
+    }
+
+    ContentTranslations loaded = parse(file);
+    CACHE.put(key, new CacheEntry(lastModifiedMillis, loaded));
+    return loaded;
+  }
+
+  private static Path translationsFile(Path normalizedProjectRoot, Language language) {
     String suffix = language == Language.EN ? "en" : "es";
-    Path file = projectRoot.toAbsolutePath().normalize().resolve(RELATIVE_DIR).resolve("content-" + suffix + ".xml");
+    return normalizedProjectRoot.resolve(RELATIVE_DIR).resolve("content-" + suffix + ".xml");
+  }
+
+  private static long lastModifiedMillisOrZero(Path file) {
+    try {
+      return Files.getLastModifiedTime(file).toMillis();
+    } catch (Exception ignored) {
+      return 0L;
+    }
+  }
+
+  private static ContentTranslations parse(Path file) {
+    Map<String, String> map = new HashMap<>();
     if (!Files.isRegularFile(file)) {
       return new ContentTranslations(map);
     }
 
     try {
-      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      var factory = SafeXml.newFactory();
       factory.setNamespaceAware(false);
       var document = factory.newDocumentBuilder().parse(file.toFile());
       Element root = document.getDocumentElement();

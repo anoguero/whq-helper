@@ -36,6 +36,7 @@ import org.w3c.dom.NodeList;
 
 import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
+import com.whq.app.io.SafeXml;
 import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.WhqUiTheme;
 
@@ -739,7 +740,7 @@ public class EventDeckApp {
               .toList();
     }
 
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    DocumentBuilderFactory factory = SafeXml.newFactory();
     factory.setNamespaceAware(false);
 
     for (Path file : files) {

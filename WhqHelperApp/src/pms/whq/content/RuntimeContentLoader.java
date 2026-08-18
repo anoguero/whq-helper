@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.whq.app.i18n.ContentTranslations;
+import com.whq.app.io.SafeXml;
 
 import pms.whq.Settings;
 import pms.whq.data.Event;
@@ -33,7 +34,7 @@ public class RuntimeContentLoader {
 
   public RuntimeContentLoader(Path projectRoot) {
     this.projectRoot = projectRoot.toAbsolutePath().normalize();
-    this.parserFactory = DocumentBuilderFactory.newInstance();
+    this.parserFactory = SafeXml.newFactory();
   }
 
   public ContentRepository load() {
