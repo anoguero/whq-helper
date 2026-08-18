@@ -1,0 +1,40 @@
+#EventDeck Settings
+EventPropability=25
+TableDir=data/xml/tables/
+ShowTravelDeck=true
+CardHeight=370
+ObjectiveMonsterNormalWeight=2
+CardWidth=240
+ShowTreasureDeck=true
+PartySize=4
+AdventureLevel=1
+WarriorDir=data/xml/warriors/
+PartyWarriors=warrior-elf,warrior-wizard,warrior-warrior-priest,warrior-outlaw
+AdventureDefaultRoomCount=5
+ShowObjectiveTreasureDeck=true
+FontDir=data/fonts/
+ShowSettlementDeck=true
+AdventureActive=false
+ObjectiveMonsterExtremeWeight=1
+SimulateDeck=false
+ObjectiveMonsterEasyWeight=1
+ImageDir=data/graphics/
+MonsterDir=data/xml/monsters/
+Language=ES
+AdventureDefaultDeckSize=12
+SettlementDir=data/xml/settlement/
+EventImageDir=data/graphics/events/
+ObjectiveMonsterVeryHardWeight=0
+EventDir=data/xml/events/
+RulesDir=data/xml/rules/
+AdventureAmbience=generic
+TravelDir=data/xml/travel/
+TreasureGoldProbability=15
+ObjectiveMonsterHardWeight=5
+MonsterImageDir=data/graphics/monsters/
+ShowEventDeck=true
+
+# Las líneas "<nombre de tabla>.active=true/false" se generan automáticamente
+# al guardar y reflejan qué tablas de contenido tienes habilitadas en tu partida.
+# No se incluyen aquí porque dependen de las tablas instaladas y de tu progreso;
+# se crean solas la primera vez que uses la aplicación.

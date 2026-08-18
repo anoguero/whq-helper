@@ -5,6 +5,8 @@ Desktop.ini
 *.swp
 *.swo
 *~
+#*#
+.#*
 
 # VCS / IDE / workspace metadata
 .metadata/
