@@ -33,7 +33,7 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
 
 Requisitos:
 
-- JDK 17.
+- JDK 25.
 - Maven 3.9+.
 
 Comandos:
@@ -101,7 +101,7 @@ windows-input/
 
 ### Generar `.exe` o `.msi`
 
-Este paso debe ejecutarse en Windows con JDK 17+:
+Este paso debe ejecutarse en Windows con JDK 25+:
 
 ```powershell
 ./scripts/package-windows.ps1
