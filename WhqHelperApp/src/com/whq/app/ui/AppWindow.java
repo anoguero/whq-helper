@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -51,6 +50,10 @@ import com.whq.app.adventure.ObjectiveRoomAdventure;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepository;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepositoryException;
 import com.whq.app.adventure.XmlObjectiveRoomAdventureRepository;
+import com.whq.app.game.AdventureDeckBuilder;
+import com.whq.app.game.AdventureDeckException;
+import com.whq.app.game.AdventureSession;
+import com.whq.app.game.ObjectiveRoomGenerator;
 import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
@@ -68,12 +71,8 @@ import pms.whq.Settings;
 import pms.whq.content.ContentRepository;
 import pms.whq.data.Event;
 import pms.whq.data.EventEntry;
-import pms.whq.data.MonsterEntry;
-import pms.whq.data.MonsterGroup;
 import pms.whq.data.Table;
 import pms.whq.data.TableKind;
-import pms.whq.data.TableReferenceEntry;
-import pms.whq.game.TableDrawService;
 import pms.whq.state.AdventureAmbience;
 import pms.whq.state.AppState;
 import pms.whq.swt.CardFactory;
@@ -81,11 +80,7 @@ import pms.whq.swt.EventContentEditorDialog;
 import pms.whq.swt.RuleDialog;
 
 public class AppWindow {
-    private static final TableDrawService TABLE_DRAW_SERVICE = new TableDrawService();
     private static final String SETTLEMENT_TYPE_ANY = "any";
-
-    private record ObjectiveMonsterDifficulty(String labelKey, int[] offsets) {
-    }
 
     private record SettlementLocation(
             String id,
@@ -104,13 +99,6 @@ public class AppWindow {
             String rulesPath) {
     }
 
-    private static final List<ObjectiveMonsterDifficulty> OBJECTIVE_MONSTER_DIFFICULTIES = List.of(
-            new ObjectiveMonsterDifficulty("difficulty.easy", new int[] {0, 0}),
-            new ObjectiveMonsterDifficulty("difficulty.normal", new int[] {0, 0, 0}),
-            new ObjectiveMonsterDifficulty("difficulty.hard", new int[] {1, 0, 0}),
-            new ObjectiveMonsterDifficulty("difficulty.veryHard", new int[] {1, 1, 0}),
-            new ObjectiveMonsterDifficulty("difficulty.extreme", new int[] {2, 1, 0}));
-
     private final Display display;
     private final Shell shell;
     private final Path projectRoot;
@@ -118,6 +106,8 @@ public class AppWindow {
     private final ObjectiveRoomAdventureRepository objectiveRoomAdventureRepository;
     private final CardCsvService csvService;
     private final List<LocalizedUiAction> localizedActions;
+    private final Random adventureRandom = new Random();
+    private final ObjectiveRoomGenerator objectiveRoomGenerator = new ObjectiveRoomGenerator(adventureRandom);
 
     private CardRenderer renderer;
     private java.util.List<DungeonCard> cards;
@@ -1665,7 +1655,7 @@ public class AppWindow {
                 Settings.setSetting(Settings.OBJECTIVE_MONSTER_HARD_WEIGHT, Integer.toString(hardWeightSpinner.getSelection()));
                 Settings.setSetting(Settings.OBJECTIVE_MONSTER_VERY_HARD_WEIGHT, Integer.toString(veryHardWeightSpinner.getSelection()));
                 Settings.setSetting(Settings.OBJECTIVE_MONSTER_EXTREME_WEIGHT, Integer.toString(extremeWeightSpinner.getSelection()));
-                List<DungeonCard> deck = buildAdventureDeck(
+                List<DungeonCard> deck = new AdventureDeckBuilder(cards, adventureRandom).buildAdventureDeck(
                         selectedEnvironment,
                         objectiveRoom,
                         deckSizeSpinner.getSelection(),
@@ -1680,8 +1670,8 @@ public class AppWindow {
                         selectedAmbience,
                         selectedLevel,
                         selectedEnvironment);
-            } catch (IllegalArgumentException ex) {
-                showError(I18n.t("dialog.newDungeon.title"), ex.getMessage());
+            } catch (AdventureDeckException ex) {
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t(ex.i18nKey()));
             }
         });
 
@@ -1695,278 +1685,6 @@ public class AppWindow {
                 display.sleep();
             }
         }
-    }
-
-    private List<DungeonCard> buildAdventureDeck(
-            String environment,
-            DungeonCard objectiveRoom,
-            int deckSize,
-            int dungeonRoomCount) {
-        if (deckSize < 2) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.deckTooSmall"));
-        }
-        if (dungeonRoomCount < 1) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.noRoomCards"));
-        }
-        if (dungeonRoomCount > deckSize - 1) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.roomCountTooLarge"));
-        }
-
-        List<DungeonCard> environmentCards = cards.stream()
-                .filter(card -> environment.equalsIgnoreCase(card.getEnvironment()))
-                .filter(DungeonCard::isEnabled)
-                .filter(card -> card.getCopyCount() > 0)
-                .collect(Collectors.toList());
-
-        if (!objectiveRoom.isEnabled() || objectiveRoom.getCopyCount() <= 0) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.objectiveRoomUnavailable"));
-        }
-
-        List<DungeonCard> dungeonRoomPool = environmentCards.stream()
-                .filter(card -> card.getType() == CardType.DUNGEON_ROOM)
-                .collect(Collectors.toList());
-        int availableDungeonRoomCopies = dungeonRoomPool.stream().mapToInt(DungeonCard::getCopyCount).sum();
-        if (availableDungeonRoomCopies <= 0) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.noDungeonRoomCards"));
-        }
-        if (dungeonRoomCount > availableDungeonRoomCopies) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.notEnoughDungeonRoomCopies"));
-        }
-
-        List<DungeonCard> corridorAndSpecialPool = environmentCards.stream()
-                .filter(card -> card.getType() == CardType.CORRIDOR || card.getType() == CardType.SPECIAL)
-                .collect(Collectors.toList());
-        int fillerCount = deckSize - dungeonRoomCount - 1;
-        int availableFillerCopies = corridorAndSpecialPool.stream().mapToInt(DungeonCard::getCopyCount).sum();
-        if (fillerCount > 0 && availableFillerCopies <= 0) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.noFillerCards"));
-        }
-        if (fillerCount > availableFillerCopies) {
-            throw new IllegalArgumentException(I18n.t("dialog.newDungeon.error.notEnoughFillerCopies"));
-        }
-
-        Random random = new Random();
-        List<DungeonCard> dungeonRooms = pickCardsByAvailableCopies(dungeonRoomPool, dungeonRoomCount, random);
-        List<DungeonCard> fillers = pickCardsByAvailableCopies(corridorAndSpecialPool, fillerCount, random);
-
-        List<DungeonCard> nonObjectiveCards = new ArrayList<>(deckSize - 1);
-        nonObjectiveCards.addAll(dungeonRooms);
-        nonObjectiveCards.addAll(fillers);
-        Collections.shuffle(nonObjectiveCards, random);
-
-        List<DungeonCard> deck = new ArrayList<>(Collections.nCopies(deckSize, null));
-        int minObjectiveIndex = Math.max(0, deckSize - 5);
-        int objectiveIndex = minObjectiveIndex + random.nextInt(deckSize - minObjectiveIndex);
-        deck.set(objectiveIndex, objectiveRoom);
-
-        int nonObjectiveIndex = 0;
-        for (int i = 0; i < deck.size(); i++) {
-            if (deck.get(i) == null) {
-                deck.set(i, nonObjectiveCards.get(nonObjectiveIndex));
-                nonObjectiveIndex++;
-            }
-        }
-        return deck;
-    }
-
-    private List<DungeonCard> pickCardsByAvailableCopies(List<DungeonCard> pool, int count, Random random) {
-        if (count <= 0) {
-            return new ArrayList<>();
-        }
-
-        List<DungeonCard> expandedPool = new ArrayList<>();
-        for (DungeonCard card : pool) {
-            for (int i = 0; i < card.getCopyCount(); i++) {
-                expandedPool.add(card);
-            }
-        }
-        Collections.shuffle(expandedPool, random);
-        return new ArrayList<>(expandedPool.subList(0, count));
-    }
-
-    private Set<Long> collectAdventureCardIds(AdventureSimulatorState state) {
-        java.util.Set<Long> ids = new java.util.HashSet<>();
-        for (List<DungeonCard> pile : state.piles) {
-            for (DungeonCard card : pile) {
-                ids.add(card.getId());
-            }
-        }
-        for (List<DungeonCard> history : state.histories) {
-            for (DungeonCard card : history) {
-                ids.add(card.getId());
-            }
-        }
-        if (state.selectedCard != null) {
-            ids.add(state.selectedCard.getId());
-        }
-        return ids;
-    }
-
-    private List<DungeonCard> pickAdditionalAdventureCards(String environment, Set<Long> existingIds) {
-        List<DungeonCard> eligible = cards.stream()
-                .filter(card -> environment.equalsIgnoreCase(card.getEnvironment()))
-                .filter(DungeonCard::isEnabled)
-                .filter(card -> card.getCopyCount() > 0)
-                .filter(card -> card.getType() != CardType.OBJECTIVE_ROOM)
-                .filter(card -> !existingIds.contains(card.getId()))
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        Collections.shuffle(eligible, new Random());
-        return eligible;
-    }
-
-    private int objectiveMonsterWeight(ObjectiveMonsterDifficulty difficulty) {
-        if (difficulty == null) {
-            return 0;
-        }
-        return switch (difficulty.labelKey()) {
-            case "difficulty.easy" -> Math.max(0, Settings.getSettingAsInt(Settings.OBJECTIVE_MONSTER_EASY_WEIGHT));
-            case "difficulty.normal" -> Math.max(0, Settings.getSettingAsInt(Settings.OBJECTIVE_MONSTER_NORMAL_WEIGHT));
-            case "difficulty.hard" -> Math.max(0, Settings.getSettingAsInt(Settings.OBJECTIVE_MONSTER_HARD_WEIGHT));
-            case "difficulty.veryHard" -> Math.max(0, Settings.getSettingAsInt(Settings.OBJECTIVE_MONSTER_VERY_HARD_WEIGHT));
-            default -> Math.max(0, Settings.getSettingAsInt(Settings.OBJECTIVE_MONSTER_EXTREME_WEIGHT));
-        };
-    }
-
-    private ObjectiveMonsterDifficulty rollObjectiveMonsterDifficulty() {
-        int totalWeight = OBJECTIVE_MONSTER_DIFFICULTIES.stream()
-                .mapToInt(this::objectiveMonsterWeight)
-                .sum();
-        if (totalWeight <= 0) {
-            return null;
-        }
-
-        int roll = new Random().nextInt(totalWeight);
-        for (ObjectiveMonsterDifficulty difficulty : OBJECTIVE_MONSTER_DIFFICULTIES) {
-            roll -= objectiveMonsterWeight(difficulty);
-            if (roll < 0) {
-                return difficulty;
-            }
-        }
-        return OBJECTIVE_MONSTER_DIFFICULTIES.get(OBJECTIVE_MONSTER_DIFFICULTIES.size() - 1);
-    }
-
-    private List<Object> activeDungeonMonsterEntries(ContentRepository repository) {
-        AdventureAmbience selectedAmbience =
-                AdventureAmbience.fromStorageValue(Settings.getSetting(Settings.ADVENTURE_AMBIENCE));
-
-        List<Object> activeEntries = repository.tables().values().stream()
-                .filter(Table::isActive)
-                .filter(table -> table.getTableKind() == TableKind.DUNGEON)
-                .flatMap(table -> table.getMonsterEntries().stream())
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        if (selectedAmbience.isGeneric()) {
-            return activeEntries;
-        }
-
-        List<Object> ambienceFiltered = activeEntries.stream()
-                .filter(entry -> matchesObjectiveMonsterAmbience(entry, selectedAmbience))
-                .collect(Collectors.toCollection(ArrayList::new));
-        return ambienceFiltered.isEmpty() ? activeEntries : ambienceFiltered;
-    }
-
-    private boolean matchesObjectiveMonsterAmbience(Object entry, AdventureAmbience selectedAmbience) {
-        if (selectedAmbience == null || selectedAmbience.isGeneric()) {
-            return true;
-        }
-        if (entry instanceof MonsterEntry monsterEntry) {
-            return selectedAmbience.matches(monsterEntry.ambiences);
-        }
-        if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-            return tableReferenceEntry.ambiences.isEmpty()
-                    || selectedAmbience.matches(tableReferenceEntry.ambiences);
-        }
-        if (entry instanceof MonsterGroup group) {
-            if (group.isEmpty()) {
-                return false;
-            }
-            for (Object nested : group) {
-                if (!matchesObjectiveMonsterAmbience(nested, selectedAmbience)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return true;
-    }
-
-    private int entryLevel(Object entry) {
-        if (entry instanceof MonsterEntry monsterEntry) {
-            return monsterEntry.level;
-        }
-        if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-            return tableReferenceEntry.level;
-        }
-        if (entry instanceof MonsterGroup group) {
-            return group.level;
-        }
-        return 1;
-    }
-
-    private List<Integer> availableObjectiveMonsterLevels(ContentRepository repository) {
-        return activeDungeonMonsterEntries(repository).stream()
-                .map(this::entryLevel)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private List<Integer> resolveObjectiveEncounterLevels(ContentRepository repository, int requestedLevel) {
-        List<Integer> availableLevels = availableObjectiveMonsterLevels(repository);
-        if (availableLevels.isEmpty()) {
-            return List.of();
-        }
-        if (availableLevels.contains(requestedLevel)) {
-            return List.of(requestedLevel);
-        }
-
-        for (int i = availableLevels.size() - 1; i >= 0; i--) {
-            int availableLevel = availableLevels.get(i);
-            if (availableLevel <= requestedLevel) {
-                return List.of(availableLevel, availableLevel);
-            }
-        }
-
-        int fallbackLevel = availableLevels.get(0);
-        return List.of(fallbackLevel, fallbackLevel);
-    }
-
-    private Object pickRandomObjectiveMonsterEntry(ContentRepository repository, int level) {
-        List<Object> entries = activeDungeonMonsterEntries(repository).stream()
-                .filter(entry -> entryLevel(entry) == level)
-                .collect(Collectors.toCollection(ArrayList::new));
-        if (entries.isEmpty()) {
-            return null;
-        }
-        Object selected = entries.get(new Random().nextInt(entries.size()));
-        if (selected instanceof TableReferenceEntry tableReferenceEntry) {
-            return TABLE_DRAW_SERVICE.resolveEntry(tableReferenceEntry);
-        }
-        return selected;
-    }
-
-    private List<Object> generateObjectiveRoomMonsterEntries(ContentRepository repository, int dungeonLevel) {
-        ObjectiveMonsterDifficulty difficulty = rollObjectiveMonsterDifficulty();
-        if (difficulty == null) {
-            return null;
-        }
-
-        showInfo(
-                I18n.t("button.generateObjectiveRoomMonsters"),
-                String.format(I18n.t("simulator.objectiveMonstersDifficulty"), I18n.t(difficulty.labelKey())));
-
-        List<Object> entries = new ArrayList<>();
-        for (int offset : difficulty.offsets()) {
-            List<Integer> resolvedLevels = resolveObjectiveEncounterLevels(repository, dungeonLevel + offset);
-            for (int resolvedLevel : resolvedLevels) {
-                Object entry = pickRandomObjectiveMonsterEntry(repository, resolvedLevel);
-                if (entry != null) {
-                    entries.add(entry);
-                }
-            }
-        }
-        return entries;
     }
 
     private String buildAdventureSimulatorSubtitle(
@@ -1994,9 +1712,7 @@ public class AppWindow {
         simulator.setLayout(new GridLayout(1, false));
         simulator.setSize(1380, 920);
 
-        AdventureSimulatorState state = new AdventureSimulatorState();
-        state.piles.add(new ArrayList<>(deck));
-        state.histories.add(new ArrayList<>());
+        AdventureSession session = new AdventureSession(deck);
 
         Image dungeonBack = new Image(display, projectRoot.resolve("resources/dungeon-back.jpeg").toString());
         simulator.addListener(SWT.Dispose, event -> {
@@ -2071,7 +1787,7 @@ public class AppWindow {
         revealCanvas.addPaintListener(event -> {
             Rectangle area = revealCanvas.getClientArea();
             theme.paintParchmentPanel(event.gc, area);
-            if (state.selectedCard == null) {
+            if (session.selectedCard() == null) {
                 event.gc.setForeground(theme.ink);
                 event.gc.setFont(theme.bodyFont);
                 event.gc.drawText(I18n.t("dialog.adventureSimulator.revealCanvasHint"), 18, 18, true);
@@ -2081,22 +1797,22 @@ public class AppWindow {
             Point scaled = renderer.scaleToFit(area);
             int x = area.x + (area.width - scaled.x) / 2;
             int y = area.y + (area.height - scaled.y) / 2;
-            renderer.drawCard(event.gc, new Rectangle(x, y, scaled.x, scaled.y), state.selectedCard);
+            renderer.drawCard(event.gc, new Rectangle(x, y, scaled.x, scaled.y), session.selectedCard());
         });
 
         RuleDialog whiteDwarfReferenceDialog = new RuleDialog(simulator);
         simulator.addDisposeListener(event -> whiteDwarfReferenceDialog.dispose());
 
         Runnable refreshWhiteDwarfReferenceButton = () -> {
-            boolean hasReference = state.selectedCard != null && WhiteDwarfRoomReferences.find(state.selectedCard).isPresent();
+            boolean hasReference = session.selectedCard() != null && WhiteDwarfRoomReferences.find(session.selectedCard()).isPresent();
             whiteDwarfReferenceButton.setEnabled(hasReference);
         };
 
         whiteDwarfReferenceButton.addListener(SWT.Selection, event -> {
-            if (state.selectedCard == null) {
+            if (session.selectedCard() == null) {
                 return;
             }
-            WhiteDwarfRoomReferences.find(state.selectedCard).ifPresent(reference -> whiteDwarfReferenceDialog.showContent(
+            WhiteDwarfRoomReferences.find(session.selectedCard()).ifPresent(reference -> whiteDwarfReferenceDialog.showContent(
                     reference.title(I18n.getLanguage()),
                     reference.source() + "\n\n" + reference.text(I18n.getLanguage())));
         });
@@ -2107,17 +1823,17 @@ public class AppWindow {
                 child.dispose();
             }
 
-            if (state.piles.size() <= 1) {
-                int remaining = state.piles.isEmpty() ? 0 : state.piles.get(0).size();
+            if (session.pileCount() <= 1) {
+                int remaining = session.pileCount() == 0 ? 0 : session.pile(0).size();
                 deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.singlePileStatus"), remaining));
             } else {
-                int remaining = state.piles.stream().mapToInt(List::size).sum();
-                deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.multiPileStatus"), state.piles.size(), remaining));
+                int remaining = session.totalRemainingCards();
+                deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.multiPileStatus"), session.pileCount(), remaining));
             }
 
-            for (int i = 0; i < state.piles.size(); i++) {
+            for (int i = 0; i < session.pileCount(); i++) {
                 int pileIndex = i;
-                List<DungeonCard> pile = state.piles.get(i);
+                List<DungeonCard> pile = session.pile(i);
 
                 Composite pileBox = createDarkPanel(pilesContainer, 1);
                 pileBox.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -2163,11 +1879,7 @@ public class AppWindow {
                             return;
                         }
 
-                        DungeonCard drawn = pile.remove(0);
-                        List<DungeonCard> pileHistory = state.histories.get(pileIndex);
-                        pileHistory.add(0, drawn);
-                        state.selectedCard = drawn;
-                        state.selectedPile = pileIndex;
+                        DungeonCard drawn = session.drawFrom(pileIndex);
                         revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), drawn.getName(), pileIndex + 1));
                         revealCanvas.redraw();
                         refreshWhiteDwarfReferenceButton.run();
@@ -2191,10 +1903,7 @@ public class AppWindow {
                     if (requestedPiles == null) {
                         return;
                     }
-                    state.piles = splitSelectedPile(state.piles, pileIndex, requestedPiles);
-                    state.histories = splitSelectedPileHistories(state.histories, pileIndex, requestedPiles);
-                    state.selectedCard = null;
-                    state.selectedPile = -1;
+                    session.splitPile(pileIndex, requestedPiles);
                     revealStatus.setText(I18n.t("dialog.adventureSimulator.splitStatus"));
                     revealCanvas.redraw();
                     refreshSimulatorUi[0].run();
@@ -2203,7 +1912,8 @@ public class AppWindow {
                 MenuItem addCardsItem = new MenuItem(menu, SWT.PUSH);
                 addCardsItem.setText(I18n.t("button.addCardsToDeck"));
                 addCardsItem.addListener(SWT.Selection, event -> {
-                    List<DungeonCard> availableCards = pickAdditionalAdventureCards(environment, collectAdventureCardIds(state));
+                    List<DungeonCard> availableCards = new AdventureDeckBuilder(cards, adventureRandom)
+                            .pickAdditionalAdventureCards(environment, session.collectAdventureCardIds());
                     if (availableCards.isEmpty()) {
                         showInfo(
                                 I18n.t("button.addCardsToDeck"),
@@ -2216,9 +1926,7 @@ public class AppWindow {
                         return;
                     }
 
-                    pile.addAll(availableCards.subList(0, requestedCards));
-                    Collections.shuffle(pile, new Random());
-                    state.selectedPile = pileIndex;
+                    session.addCardsToPile(pileIndex, availableCards.subList(0, requestedCards), adventureRandom);
                     revealStatus.setText(String.format(I18n.t("simulator.addCardsDone"), requestedCards, pileIndex + 1));
                     revealCanvas.redraw();
                     refreshSimulatorUi[0].run();
@@ -2242,7 +1950,7 @@ public class AppWindow {
                 historyList.setForeground(theme.ink);
                 historyList.setFont(theme.bodyFont);
 
-                List<DungeonCard> history = state.histories.get(pileIndex);
+                List<DungeonCard> history = session.history(pileIndex);
                 for (DungeonCard historicCard : history) {
                     historyList.add(historicCard.getName() + " [" + historicCard.getType().getLabel() + "]");
                 }
@@ -2253,15 +1961,14 @@ public class AppWindow {
                         return;
                     }
                     DungeonCard selectedHistoryCard = history.get(selectedIndex);
-                    state.selectedCard = selectedHistoryCard;
-                    state.selectedPile = pileIndex;
+                    session.selectFromHistory(pileIndex, selectedHistoryCard);
                     revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), selectedHistoryCard.getName(), pileIndex + 1));
                     revealCanvas.redraw();
                     refreshWhiteDwarfReferenceButton.run();
                 });
 
-                if (state.selectedPile == pileIndex && state.selectedCard != null) {
-                    int selectedIndex = history.indexOf(state.selectedCard);
+                if (session.selectedPile() == pileIndex && session.selectedCard() != null) {
+                    int selectedIndex = history.indexOf(session.selectedCard());
                     if (selectedIndex >= 0) {
                         historyList.setSelection(selectedIndex);
                     }
@@ -2297,13 +2004,18 @@ public class AppWindow {
         objectiveMonstersButton.addListener(SWT.Selection, event -> {
             EventDeckApp eventApp = getOrCreateEventDeckApp();
             ContentRepository contentRepository = eventApp.contentRepository();
-            List<Object> entries = generateObjectiveRoomMonsterEntries(contentRepository, selectedLevel);
-            if (entries == null) {
+            ObjectiveRoomGenerator.ObjectiveRoomEncounter encounter =
+                    objectiveRoomGenerator.generateObjectiveRoomMonsterEntries(contentRepository, selectedLevel);
+            if (encounter == null) {
                 showError(
                         I18n.t("button.generateObjectiveRoomMonsters"),
                         I18n.t("simulator.objectiveMonstersInvalidWeights"));
                 return;
             }
+            showInfo(
+                    I18n.t("button.generateObjectiveRoomMonsters"),
+                    String.format(I18n.t("simulator.objectiveMonstersDifficulty"), I18n.t(encounter.difficulty().labelKey())));
+            List<Object> entries = encounter.entries();
             if (entries.isEmpty()) {
                 showInfo(
                         I18n.t("button.generateObjectiveRoomMonsters"),
@@ -2632,63 +2344,6 @@ public class AppWindow {
             return null;
         }
         return result[0];
-    }
-
-    private List<List<DungeonCard>> splitSelectedPile(
-            List<List<DungeonCard>> piles,
-            int selectedPileIndex,
-            int pileCount) {
-        List<List<DungeonCard>> result = new ArrayList<>();
-
-        for (int i = 0; i < piles.size(); i++) {
-            List<DungeonCard> sourcePile = piles.get(i);
-            if (i != selectedPileIndex) {
-                result.add(new ArrayList<>(sourcePile));
-                continue;
-            }
-
-            List<List<DungeonCard>> splitPiles = new ArrayList<>();
-            for (int j = 0; j < pileCount; j++) {
-                splitPiles.add(new ArrayList<>());
-            }
-            for (int cardIndex = 0; cardIndex < sourcePile.size(); cardIndex++) {
-                splitPiles.get(cardIndex % pileCount).add(sourcePile.get(cardIndex));
-            }
-            result.addAll(splitPiles);
-        }
-
-        return result;
-    }
-
-    private List<List<DungeonCard>> splitSelectedPileHistories(
-            List<List<DungeonCard>> currentHistories,
-            int selectedPileIndex,
-            int pileCount) {
-        List<List<DungeonCard>> result = new ArrayList<>();
-
-        for (int i = 0; i < currentHistories.size(); i++) {
-            List<DungeonCard> sourceHistory = currentHistories.get(i);
-            if (i != selectedPileIndex) {
-                result.add(new ArrayList<>(sourceHistory));
-                continue;
-            }
-
-            for (int j = 0; j < pileCount; j++) {
-                result.add(new ArrayList<>());
-            }
-            if (!sourceHistory.isEmpty()) {
-                result.get(result.size() - pileCount).addAll(sourceHistory);
-            }
-        }
-
-        return result;
-    }
-
-    private static class AdventureSimulatorState {
-        private List<List<DungeonCard>> piles = new ArrayList<>();
-        private List<List<DungeonCard>> histories = new ArrayList<>();
-        private DungeonCard selectedCard;
-        private int selectedPile = -1;
     }
 
     private void refreshCards() {
