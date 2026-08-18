@@ -28,13 +28,16 @@ public final class EditableContentTranslations {
   private record CacheKey(Path projectRoot, Language language) {
   }
 
-  private record CacheEntry(long fileLastModifiedMillis, Map<String, String> values) {
+  // fileSizeBytes se comprueba junto con el lastModified: en sistemas de ficheros con
+  // granularidad de segundo, dos escrituras dentro del mismo tick tendrian el mismo
+  // lastModified pero (casi siempre) tamanyo distinto, y la cache debe invalidarse igualmente.
+  private record CacheEntry(long fileLastModifiedMillis, long fileSizeBytes, Map<String, String> values) {
   }
 
   // Cache del mapa base parseado del XML, con la misma invalidacion que ContentTranslations
-  // (idioma + lastModified). load() siempre devuelve una copia mutable propia del mapa cacheado:
-  // como esta clase se usa para editar (put/remove/save), compartir la misma instancia mutable
-  // entre llamadas a load() podria filtrar cambios sin guardar de una sesion de edicion a otra.
+  // (idioma + lastModified + tamanyo). load() siempre devuelve una copia mutable propia del mapa
+  // cacheado: como esta clase se usa para editar (put/remove/save), compartir la misma instancia
+  // mutable entre llamadas a load() podria filtrar cambios sin guardar de una sesion de edicion a otra.
   private static final Map<CacheKey, CacheEntry> CACHE = new ConcurrentHashMap<>();
 
   private final Path file;
@@ -53,11 +56,12 @@ public final class EditableContentTranslations {
     Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
     Path file = translationsFile(normalizedRoot, language);
     long lastModifiedMillis = lastModifiedMillisOrZero(file);
+    long sizeBytes = sizeOrZero(file);
 
     CacheKey key = new CacheKey(normalizedRoot, language);
     CacheEntry cached = CACHE.get(key);
-    if (cached == null || cached.fileLastModifiedMillis() != lastModifiedMillis) {
-      cached = new CacheEntry(lastModifiedMillis, parse(file));
+    if (cached == null || cached.fileLastModifiedMillis() != lastModifiedMillis || cached.fileSizeBytes() != sizeBytes) {
+      cached = new CacheEntry(lastModifiedMillis, sizeBytes, parse(file));
       CACHE.put(key, cached);
     }
 
@@ -67,6 +71,14 @@ public final class EditableContentTranslations {
   private static Path translationsFile(Path normalizedProjectRoot, Language language) {
     String suffix = language == Language.EN ? "en" : "es";
     return normalizedProjectRoot.resolve(RELATIVE_DIR).resolve("content-" + suffix + ".xml");
+  }
+
+  private static long sizeOrZero(Path file) {
+    try {
+      return Files.size(file);
+    } catch (Exception ignored) {
+      return 0L;
+    }
   }
 
   private static long lastModifiedMillisOrZero(Path file) {

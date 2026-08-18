@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -94,36 +95,31 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             throw new DungeonCardStorageException("La carta a actualizar no puede ser nula.");
         }
 
-        List<DungeonCard> cards = new ArrayList<>(readUserCards(false));
-        List<DungeonCard> effectiveCards = readCards(false);
-        List<DungeonCard> translatedCards = readCards(true);
-        boolean updated = false;
-        for (int i = 0; i < effectiveCards.size(); i++) {
-            DungeonCard current = effectiveCards.get(i);
-            if (current.getId() != card.getId()) {
-                continue;
-            }
-            DungeonCard translatedCurrent = findById(translatedCards, current.getId());
-            // El editor rellena el formulario con el texto traducido; si un campo no se ha modificado
-            // (sigue igual a la traduccion mostrada) persistimos el valor CRUDO original para no perder
-            // el texto base como fallback en otros idiomas. Si el usuario lo cambio, guardamos lo nuevo.
-            DungeonCard updatedCard = new DungeonCard(
-                    current.getId(),
-                    require(preserveRawIfUnchanged(card.getName(), translatedCurrent == null ? null : translatedCurrent.getName(), current.getName()), "name"),
-                    card.getType(),
-                    normalizeEnvironment(card.getEnvironment()),
-                    Math.max(0, card.getCopyCount()),
-                    card.isEnabled(),
-                    nullToEmpty(preserveRawIfUnchanged(card.getDescriptionText(), translatedCurrent == null ? null : translatedCurrent.getDescriptionText(), current.getDescriptionText())),
-                    nullToEmpty(preserveRawIfUnchanged(card.getRulesText(), translatedCurrent == null ? null : translatedCurrent.getRulesText(), current.getRulesText())),
-                    require(card.getTileImagePath(), "tileImagePath"));
-            upsertById(cards, updatedCard);
-            updated = true;
-            break;
-        }
-        if (!updated) {
+        // Un unico recorrido de los ficheros XML (readRawCardsByFile) sirve tanto para el listado
+        // crudo del fichero de usuario como para la version efectiva (base+usuario fusionados); la
+        // traduccion, ya cacheada por (projectRoot, idioma), se aplica solo a la carta afectada.
+        Map<Path, List<DungeonCard>> byFile = readRawCardsByFile();
+        List<DungeonCard> cards = new ArrayList<>(byFile.getOrDefault(userXmlPath, List.of()));
+        List<DungeonCard> effectiveCards = mergeCards(byFile.values());
+        DungeonCard current = findById(effectiveCards, card.getId());
+        if (current == null) {
             throw new DungeonCardStorageException("No se ha encontrado la carta con id " + card.getId() + ".");
         }
+        // El editor rellena el formulario con el texto traducido; si un campo no se ha modificado
+        // (sigue igual a la traduccion mostrada) persistimos el valor CRUDO original para no perder
+        // el texto base como fallback en otros idiomas. Si el usuario lo cambio, guardamos lo nuevo.
+        DungeonCard translatedCurrent = translateCard(current, ContentTranslations.load(projectRoot, I18n.getLanguage()));
+        DungeonCard updatedCard = new DungeonCard(
+                current.getId(),
+                require(preserveRawIfUnchanged(card.getName(), translatedCurrent.getName(), current.getName()), "name"),
+                card.getType(),
+                normalizeEnvironment(card.getEnvironment()),
+                Math.max(0, card.getCopyCount()),
+                card.isEnabled(),
+                nullToEmpty(preserveRawIfUnchanged(card.getDescriptionText(), translatedCurrent.getDescriptionText(), current.getDescriptionText())),
+                nullToEmpty(preserveRawIfUnchanged(card.getRulesText(), translatedCurrent.getRulesText(), current.getRulesText())),
+                require(card.getTileImagePath(), "tileImagePath"));
+        upsertById(cards, updatedCard);
         writeUserCards(cards);
     }
 
@@ -133,30 +129,24 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             throw new IllegalArgumentException("El numero de copias no puede ser negativo.");
         }
 
-        List<DungeonCard> cards = new ArrayList<>(readUserCards(false));
-        List<DungeonCard> effectiveCards = readCards(false);
-        boolean updated = false;
-        for (DungeonCard current : effectiveCards) {
-            if (current.getId() != cardId) {
-                continue;
-            }
-            // Cambiar disponibilidad no debe tocar el texto: persistimos el texto CRUDO (sin traducir).
-            upsertById(cards, new DungeonCard(
-                    current.getId(),
-                    current.getName(),
-                    current.getType(),
-                    current.getEnvironment(),
-                    copyCount,
-                    enabled,
-                    current.getDescriptionText(),
-                    current.getRulesText(),
-                    current.getTileImagePath()));
-            updated = true;
-            break;
-        }
-        if (!updated) {
+        Map<Path, List<DungeonCard>> byFile = readRawCardsByFile();
+        List<DungeonCard> cards = new ArrayList<>(byFile.getOrDefault(userXmlPath, List.of()));
+        List<DungeonCard> effectiveCards = mergeCards(byFile.values());
+        DungeonCard current = findById(effectiveCards, cardId);
+        if (current == null) {
             throw new DungeonCardStorageException("No se ha encontrado la carta con id " + cardId + ".");
         }
+        // Cambiar disponibilidad no debe tocar el texto: persistimos el texto CRUDO (sin traducir).
+        upsertById(cards, new DungeonCard(
+                current.getId(),
+                current.getName(),
+                current.getType(),
+                current.getEnvironment(),
+                copyCount,
+                enabled,
+                current.getDescriptionText(),
+                current.getRulesText(),
+                current.getTileImagePath()));
         writeUserCards(cards);
     }
 
@@ -176,8 +166,9 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             return;
         }
 
-        List<DungeonCard> existing = new ArrayList<>(readCards(false));
-        List<DungeonCard> userCards = new ArrayList<>(readUserCards(false));
+        Map<Path, List<DungeonCard>> byFile = readRawCardsByFile();
+        List<DungeonCard> existing = mergeCards(byFile.values());
+        List<DungeonCard> userCards = new ArrayList<>(byFile.getOrDefault(userXmlPath, List.of()));
         long nextId = existing.stream().mapToLong(DungeonCard::getId).max().orElse(0L) + 1L;
         for (DungeonCard card : cards) {
             userCards.add(new DungeonCard(
@@ -199,32 +190,8 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     }
 
     private List<DungeonCard> readCards(boolean translate) throws DungeonCardStorageException {
-        ensureBaseXmlExists();
-        try {
-            // listCardFiles() devuelve los ficheros userdefined-* primero: al fusionar por id
-            // usamos putIfAbsent para que la version del usuario prevalezca sobre la del fichero
-            // base y las ediciones guardadas no se pierdan al recargar.
-            Map<Long, DungeonCard> merged = new LinkedHashMap<>();
-            for (Path file : listCardFiles()) {
-                for (DungeonCard card : readCardsFromFile(file, translate)) {
-                    merged.putIfAbsent(card.getId(), card);
-                }
-            }
-            List<DungeonCard> cards = new ArrayList<>(merged.values());
-            cards.sort(Comparator
-                    .comparing(DungeonCard::getEnvironment, String.CASE_INSENSITIVE_ORDER)
-                    .thenComparing(DungeonCard::getName, String.CASE_INSENSITIVE_ORDER)
-                    .thenComparingLong(DungeonCard::getId));
-            return cards;
-        } catch (DungeonCardStorageException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new DungeonCardStorageException("No se han podido leer las cartas XML.", ex);
-        }
-    }
-
-    private List<DungeonCard> readUserCards() throws DungeonCardStorageException {
-        return readUserCards(true);
+        List<DungeonCard> merged = mergeCards(readRawCardsByFile().values());
+        return translate ? translateAll(merged) : merged;
     }
 
     private List<DungeonCard> readUserCards(boolean translate) throws DungeonCardStorageException {
@@ -232,7 +199,63 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         if (!Files.exists(userXmlPath)) {
             return new ArrayList<>();
         }
-        return readCardsFromFile(userXmlPath, translate);
+        List<DungeonCard> raw = readCardsFromFile(userXmlPath);
+        return translate ? translateAll(raw) : raw;
+    }
+
+    /**
+     * Lee el texto CRUDO (sin traducir) de todos los ficheros de cartas, uno por uno, en un unico
+     * recorrido. Base para {@link #readCards(boolean)}, {@link #readUserCards(boolean)} y para las
+     * operaciones de escritura, que necesitan tanto el fichero de usuario en crudo como la vista
+     * fusionada y no deben parsear el mismo fichero mas de una vez.
+     */
+    private Map<Path, List<DungeonCard>> readRawCardsByFile() throws DungeonCardStorageException {
+        ensureBaseXmlExists();
+        Map<Path, List<DungeonCard>> byFile = new LinkedHashMap<>();
+        for (Path file : listCardFiles()) {
+            byFile.put(file, readCardsFromFile(file));
+        }
+        return byFile;
+    }
+
+    // listCardFiles() devuelve los ficheros userdefined-* primero: al fusionar por id usamos
+    // putIfAbsent para que la version del usuario prevalezca sobre la del fichero base y las
+    // ediciones guardadas no se pierdan al recargar.
+    private List<DungeonCard> mergeCards(Collection<List<DungeonCard>> rawCardsByFileInPriorityOrder) {
+        Map<Long, DungeonCard> merged = new LinkedHashMap<>();
+        for (List<DungeonCard> cards : rawCardsByFileInPriorityOrder) {
+            for (DungeonCard card : cards) {
+                merged.putIfAbsent(card.getId(), card);
+            }
+        }
+        List<DungeonCard> cards = new ArrayList<>(merged.values());
+        cards.sort(Comparator
+                .comparing(DungeonCard::getEnvironment, String.CASE_INSENSITIVE_ORDER)
+                .thenComparing(DungeonCard::getName, String.CASE_INSENSITIVE_ORDER)
+                .thenComparingLong(DungeonCard::getId));
+        return cards;
+    }
+
+    private List<DungeonCard> translateAll(List<DungeonCard> rawCards) throws DungeonCardStorageException {
+        if (rawCards.isEmpty()) {
+            return rawCards;
+        }
+        ContentTranslations translations = ContentTranslations.load(projectRoot, I18n.getLanguage());
+        return rawCards.stream().map(card -> translateCard(card, translations)).toList();
+    }
+
+    private DungeonCard translateCard(DungeonCard raw, ContentTranslations translations) {
+        String baseKey = "dungeonCard." + raw.getId();
+        return new DungeonCard(
+                raw.getId(),
+                translations.t(baseKey + ".name", raw.getName()),
+                raw.getType(),
+                raw.getEnvironment(),
+                raw.getCopyCount(),
+                raw.isEnabled(),
+                translations.t(baseKey + ".description", raw.getDescriptionText()),
+                translations.t(baseKey + ".rules", raw.getRulesText()),
+                raw.getTileImagePath());
     }
 
     private List<Path> listCardFiles() throws DungeonCardStorageException {
@@ -255,19 +278,11 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         }
     }
 
+    // Siempre devuelve el texto CRUDO del XML (sin traducir); la traduccion se aplica aparte
+    // (ver translateAll/translateCard) para no tener que reparsear el fichero por cada variante.
     private List<DungeonCard> readCardsFromFile(Path file) throws DungeonCardStorageException {
-        return readCardsFromFile(file, true);
-    }
-
-    // translate=false devuelve el texto CRUDO del XML (sin traducir). Se usa en las operaciones de
-    // escritura para no persistir el texto traducido como canonico y perder el original como fallback.
-    private List<DungeonCard> readCardsFromFile(Path file, boolean translate) throws DungeonCardStorageException {
         try {
             validateFile(file);
-            // Solo se cargan las traducciones cuando realmente se van a usar: updateCard y
-            // updateCardAvailability leen con translate=false (texto crudo) y no necesitan tocar
-            // el fichero de traducciones en absoluto.
-            ContentTranslations translations = translate ? ContentTranslations.load(projectRoot, I18n.getLanguage()) : null;
             Document document = parse(file);
             Element root = document.getDocumentElement();
             NodeList children = root.getChildNodes();
@@ -279,19 +294,15 @@ public class XmlDungeonCardStore implements DungeonCardStore {
                 }
                 Element element = (Element) node;
                 long id = parseId(element.getAttribute("id"));
-                String baseKey = "dungeonCard." + id;
-                String name = require(element.getAttribute("name"), "name");
-                String description = readChildText(element, "description");
-                String rules = readChildText(element, "rules");
                 cards.add(new DungeonCard(
                         id,
-                        translate ? translations.t(baseKey + ".name", name) : name,
+                        require(element.getAttribute("name"), "name"),
                         CardType.valueOf(require(element.getAttribute("type"), "type").toUpperCase(Locale.ROOT)),
                         normalizeEnvironment(element.getAttribute("environment")),
                         parseNonNegativeInt(element.getAttribute("copyCount"), "copyCount"),
                         Boolean.parseBoolean(element.getAttribute("enabled")),
-                        translate ? translations.t(baseKey + ".description", description) : description,
-                        translate ? translations.t(baseKey + ".rules", rules) : rules,
+                        readChildText(element, "description"),
+                        readChildText(element, "rules"),
                         require(readChildText(element, "tileImagePath"), "tileImagePath")));
             }
             return cards;

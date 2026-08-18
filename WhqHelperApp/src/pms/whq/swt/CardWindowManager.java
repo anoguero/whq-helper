@@ -70,10 +70,7 @@ public class CardWindowManager {
       }
 
       int partySize = Settings.getSettingAsInt(Settings.PARTY_SIZE);
-      int numAppearing = monsterEntry.getNumber();
-      if (numAppearing != 0) {
-        numAppearing = Math.max(1, (numAppearing * partySize) / 4);
-      }
+      int numAppearing = scaleNumAppearing(monsterEntry.getNumber(), partySize);
 
       cardShell =
           CardFactory.createMonsterCard(
@@ -225,6 +222,16 @@ public class CardWindowManager {
 
     String monsterName = monster.name == null ? "" : monster.name.toLowerCase().replace(' ', '-');
     return loadImage(monsterImgDir + monsterName + ".png");
+  }
+
+  // Escala el numero base de monstruos que aparecen (pensado para party de 4) al tamanyo real
+  // de la party, redondeando al entero mas cercano en vez de truncar: con truncado, 3 monstruos
+  // base y una party de 5 seguian siendo 3 (15/4 = 3 truncado) en vez de los 4 que corresponden.
+  static int scaleNumAppearing(int baseNumAppearing, int partySize) {
+    if (baseNumAppearing == 0) {
+      return 0;
+    }
+    return Math.max(1, Math.round((baseNumAppearing * partySize) / 4.0f));
   }
 
   private String getMonsterTitle(Monster monster, int number) {

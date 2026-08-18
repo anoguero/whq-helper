@@ -19,11 +19,14 @@ public final class ContentTranslations {
   private record CacheKey(Path projectRoot, Language language) {
   }
 
-  private record CacheEntry(long fileLastModifiedMillis, ContentTranslations translations) {
+  // fileSizeBytes se comprueba junto con el lastModified: en sistemas de ficheros con
+  // granularidad de segundo, dos escrituras dentro del mismo tick tendrian el mismo
+  // lastModified pero (casi siempre) tamanyo distinto, y la cache debe invalidarse igualmente.
+  private record CacheEntry(long fileLastModifiedMillis, long fileSizeBytes, ContentTranslations translations) {
   }
 
   // Cache keyed por (projectRoot, idioma), invalidada cuando cambia el idioma (clave distinta)
-  // o cuando cambia el lastModified del fichero de traducciones (entrada distinta en la cache).
+  // o cuando cambia el lastModified/tamanyo del fichero de traducciones (entrada distinta en la cache).
   private static final Map<CacheKey, CacheEntry> CACHE = new ConcurrentHashMap<>();
 
   private final Map<String, String> values;
@@ -40,15 +43,16 @@ public final class ContentTranslations {
     Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
     Path file = translationsFile(normalizedRoot, language);
     long lastModifiedMillis = lastModifiedMillisOrZero(file);
+    long sizeBytes = sizeOrZero(file);
 
     CacheKey key = new CacheKey(normalizedRoot, language);
     CacheEntry cached = CACHE.get(key);
-    if (cached != null && cached.fileLastModifiedMillis() == lastModifiedMillis) {
+    if (cached != null && cached.fileLastModifiedMillis() == lastModifiedMillis && cached.fileSizeBytes() == sizeBytes) {
       return cached.translations();
     }
 
     ContentTranslations loaded = parse(file);
-    CACHE.put(key, new CacheEntry(lastModifiedMillis, loaded));
+    CACHE.put(key, new CacheEntry(lastModifiedMillis, sizeBytes, loaded));
     return loaded;
   }
 
@@ -60,6 +64,14 @@ public final class ContentTranslations {
   private static long lastModifiedMillisOrZero(Path file) {
     try {
       return Files.getLastModifiedTime(file).toMillis();
+    } catch (Exception ignored) {
+      return 0L;
+    }
+  }
+
+  private static long sizeOrZero(Path file) {
+    try {
+      return Files.size(file);
     } catch (Exception ignored) {
       return 0L;
     }
