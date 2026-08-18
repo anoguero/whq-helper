@@ -17,8 +17,8 @@ import java.util.*;
  * @author psiegel
  */
 public interface EventList {
-  public Object getEntry();
-  public void addEntry(Object o);
-  public void addEntries(Collection<Object> c);
+  public DrawableEntry getEntry();
+  public void addEntry(DrawableEntry entry);
+  public void addEntries(Collection<DrawableEntry> entries);
   public int  size();
 }

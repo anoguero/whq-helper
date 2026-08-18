@@ -6,17 +6,18 @@ import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 import pms.whq.Settings;
+import pms.whq.data.DrawableEntry;
 import pms.whq.data.EventEntry;
 
 public class TreasureDrawService {
 
   public static final String DUNGEON_GOLD_TREASURE_ID = "rpb-treasure-dungeon-gold";
 
-  public Object drawTreasureEntry(List<Object> eventEntries) {
-    List<Object> dungeonGoldEntries = new ArrayList<>();
-    List<Object> regularEntries = new ArrayList<>();
+  public DrawableEntry drawTreasureEntry(List<DrawableEntry> eventEntries) {
+    List<DrawableEntry> dungeonGoldEntries = new ArrayList<>();
+    List<DrawableEntry> regularEntries = new ArrayList<>();
 
-    for (Object entry : eventEntries) {
+    for (DrawableEntry entry : eventEntries) {
       if (isDungeonGoldTreasureEntry(entry)) {
         dungeonGoldEntries.add(entry);
       } else {
@@ -33,7 +34,7 @@ public class TreasureDrawService {
     return drawGold ? randomEntry(dungeonGoldEntries) : randomEntry(regularEntries);
   }
 
-  public boolean isDungeonGoldTreasureEntry(Object entry) {
+  public boolean isDungeonGoldTreasureEntry(DrawableEntry entry) {
     if (!(entry instanceof EventEntry eventEntry)) {
       return false;
     }
@@ -42,7 +43,7 @@ public class TreasureDrawService {
     return DUNGEON_GOLD_TREASURE_ID.equals(normalized);
   }
 
-  public static Object randomEntry(List<Object> source) {
+  public static DrawableEntry randomEntry(List<DrawableEntry> source) {
     if (source.isEmpty()) {
       return null;
     }

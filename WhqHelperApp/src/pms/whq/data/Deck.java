@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Deck implements EventList {
 
-  private final List<Object> draw;
-  private final List<Object> discard;
+  private final List<DrawableEntry> draw;
+  private final List<DrawableEntry> discard;
 
   public Deck() {
     draw = new ArrayList<>();
@@ -16,17 +16,17 @@ public class Deck implements EventList {
   }
 
   @Override
-  public void addEntry(Object entry) {
+  public void addEntry(DrawableEntry entry) {
     draw.add(entry);
   }
 
   @Override
-  public void addEntries(Collection<Object> entries) {
+  public void addEntries(Collection<DrawableEntry> entries) {
     draw.addAll(entries);
   }
 
   @Override
-  public Object getEntry() {
+  public DrawableEntry getEntry() {
     if (draw.isEmpty()) {
       shuffle();
     }
@@ -34,7 +34,7 @@ public class Deck implements EventList {
       return null;
     }
 
-    Object entry = draw.remove(0);
+    DrawableEntry entry = draw.remove(0);
     discard.add(entry);
     return entry;
   }

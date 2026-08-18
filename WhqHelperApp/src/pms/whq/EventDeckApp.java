@@ -41,6 +41,7 @@ import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.WhqUiTheme;
 
 import pms.whq.content.ContentRepository;
+import pms.whq.data.DrawableEntry;
 import pms.whq.data.EventList;
 import pms.whq.data.Table;
 import pms.whq.presenter.DeckType;
@@ -539,7 +540,7 @@ public class EventDeckApp {
     }
 
     if (list.size() > 0) {
-      Object entry = list.getEntry();
+      DrawableEntry entry = list.getEntry();
       if (entry != null) {
         cardWindowManager.resetCascadeStart();
         cardWindowManager.showCard(owner, entry, controller.contentRepository());
@@ -1032,14 +1033,14 @@ public class EventDeckApp {
     return controller.contentRepository();
   }
 
-  public void showEntries(Shell parent, List<Object> entries) {
+  public void showEntries(Shell parent, List<DrawableEntry> entries) {
     if (entries == null || entries.isEmpty()) {
       return;
     }
     open();
     focus();
     cardWindowManager.resetCascadeStart();
-    for (Object entry : entries) {
+    for (DrawableEntry entry : entries) {
       cardWindowManager.showCard(resolveParent(parent), entry, controller.contentRepository());
     }
   }

@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import pms.whq.content.ContentRepository;
 import pms.whq.data.Deck;
+import pms.whq.data.DrawableEntry;
 import pms.whq.data.EventEntry;
 import pms.whq.data.EventList;
 import pms.whq.data.Table;
@@ -61,9 +62,9 @@ public class DeckBuilderService {
     return table;
   }
 
-  private static List<Object> filterTreasureEntries(List<Object> entries, boolean dungeonTreasure) {
-    List<Object> filtered = new ArrayList<>();
-    for (Object entry : entries) {
+  private static List<DrawableEntry> filterTreasureEntries(List<DrawableEntry> entries, boolean dungeonTreasure) {
+    List<DrawableEntry> filtered = new ArrayList<>();
+    for (DrawableEntry entry : entries) {
       if (!(entry instanceof EventEntry eventEntry)) {
         continue;
       }
@@ -95,7 +96,7 @@ public class DeckBuilderService {
         continue;
       }
 
-      for (Object entry : table.getEntries()) {
+      for (DrawableEntry entry : table.getEntries()) {
         if (entry instanceof EventEntry eventEntry
             && TreasureDrawService.DUNGEON_GOLD_TREASURE_ID.equalsIgnoreCase(eventEntry.id)) {
           return true;

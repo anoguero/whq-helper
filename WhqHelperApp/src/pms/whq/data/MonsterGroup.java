@@ -2,7 +2,7 @@ package pms.whq.data;
 
 import java.util.ArrayList;
 
-public class MonsterGroup extends ArrayList<Object> {
+public final class MonsterGroup extends ArrayList<DrawableEntry> implements DrawableEntry {
 
   private static final long serialVersionUID = 1L;
 

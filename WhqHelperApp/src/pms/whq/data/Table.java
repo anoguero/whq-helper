@@ -19,8 +19,8 @@ public class Table implements EventList {
 
   private String name;
   private String kind;
-  private final List<Object> monsters;
-  private final List<Object> events;
+  private final List<DrawableEntry> monsters;
+  private final List<DrawableEntry> events;
   private boolean active;
 
   public Table() {
@@ -43,33 +43,37 @@ public class Table implements EventList {
   }
 
   @Override
-  public void addEntry(Object entry) {
-    if (entry instanceof MonsterEntry || entry instanceof List<?> || entry instanceof TableReferenceEntry) {
-      monsters.add(entry);
-    } else if (entry instanceof EventEntry) {
-      events.add(entry);
+  public void addEntry(DrawableEntry entry) {
+    switch (entry) {
+      case MonsterEntry monsterEntry -> monsters.add(monsterEntry);
+      case MonsterGroup group -> monsters.add(group);
+      case TableReferenceEntry tableReferenceEntry -> monsters.add(tableReferenceEntry);
+      case EventEntry eventEntry -> events.add(eventEntry);
+      case null -> {
+        // Se ignoran las entradas nulas, igual que hacia el instanceof original.
+      }
     }
   }
 
   @Override
-  public void addEntries(Collection<Object> entries) {
-    for (Object entry : entries) {
+  public void addEntries(Collection<DrawableEntry> entries) {
+    for (DrawableEntry entry : entries) {
       addEntry(entry);
     }
   }
 
-  public List<Object> getEntries() {
-    List<Object> list = new ArrayList<>(monsters.size() + events.size());
+  public List<DrawableEntry> getEntries() {
+    List<DrawableEntry> list = new ArrayList<>(monsters.size() + events.size());
     list.addAll(monsters);
     list.addAll(events);
     return list;
   }
 
-  public List<Object> getMonsterEntries() {
+  public List<DrawableEntry> getMonsterEntries() {
     return monsters;
   }
 
-  public List<Object> getEventEntries() {
+  public List<DrawableEntry> getEventEntries() {
     return events;
   }
 
@@ -81,7 +85,7 @@ public class Table implements EventList {
 
       NodeList entryNodes = node.getChildNodes();
       for (int i = 0; i < entryNodes.getLength(); i++) {
-        Object entry = nodeToEntry(entryNodes.item(i));
+        DrawableEntry entry = nodeToEntry(entryNodes.item(i));
         if (entry != null) {
           entryList.add(entry);
         }
@@ -96,7 +100,7 @@ public class Table implements EventList {
     }
   }
 
-  private Object nodeToEntry(Node node) {
+  private DrawableEntry nodeToEntry(Node node) {
     String type = node.getNodeName();
     if ("monster".equals(type)) {
       return new MonsterEntry(node);
@@ -142,7 +146,7 @@ public class Table implements EventList {
   }
 
   @Override
-  public Object getEntry() {
+  public DrawableEntry getEntry() {
     return DRAW_SERVICE.drawEntry(this);
   }
 

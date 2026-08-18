@@ -70,6 +70,7 @@ import com.whq.app.storage.XmlDungeonCardStore;
 import pms.whq.EventDeckApp;
 import pms.whq.Settings;
 import pms.whq.content.ContentRepository;
+import pms.whq.data.DrawableEntry;
 import pms.whq.data.Event;
 import pms.whq.data.EventEntry;
 import pms.whq.data.Table;
@@ -2016,7 +2017,7 @@ public class AppWindow {
             showInfo(
                     I18n.t("button.generateObjectiveRoomMonsters"),
                     String.format(I18n.t("simulator.objectiveMonstersDifficulty"), I18n.t(encounter.difficulty().labelKey())));
-            List<Object> entries = encounter.entries();
+            List<DrawableEntry> entries = encounter.entries();
             if (entries.isEmpty()) {
                 showInfo(
                         I18n.t("button.generateObjectiveRoomMonsters"),
@@ -2147,7 +2148,7 @@ public class AppWindow {
             if (table == null || !table.isActive() || table.getTableKind() != TableKind.TREASURE) {
                 continue;
             }
-            for (Object entry : table.getEventEntries()) {
+            for (DrawableEntry entry : table.getEventEntries()) {
                 if (!(entry instanceof EventEntry eventEntry)) {
                     continue;
                 }

@@ -7,6 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import pms.whq.Settings;
+import pms.whq.data.DrawableEntry;
+import pms.whq.data.EventEntry;
 import pms.whq.data.MonsterGroup;
 import pms.whq.data.MonsterEntry;
 import pms.whq.data.Table;
@@ -26,17 +28,17 @@ public class TableDrawService {
     this.treasureDrawService = treasureDrawService;
   }
 
-  public Object drawEntry(Table table) {
+  public DrawableEntry drawEntry(Table table) {
     return drawEntry(table, null, new HashSet<>());
   }
 
-  public Object resolveEntry(Object entry) {
+  public DrawableEntry resolveEntry(DrawableEntry entry) {
     return resolveEntry(entry, new HashSet<>());
   }
 
-  private Object drawEntry(Table table, Integer forcedLevel, Set<String> visitedTables) {
-    List<Object> monsters = filterMonsterEntries(table.getMonsterEntries(), forcedLevel);
-    List<Object> events = table.getEventEntries();
+  private DrawableEntry drawEntry(Table table, Integer forcedLevel, Set<String> visitedTables) {
+    List<DrawableEntry> monsters = filterMonsterEntries(table.getMonsterEntries(), forcedLevel);
+    List<DrawableEntry> events = table.getEventEntries();
     boolean hasMonsters = !monsters.isEmpty();
     boolean hasEvents = !events.isEmpty();
     if (!hasMonsters && !hasEvents) {
@@ -50,21 +52,21 @@ public class TableDrawService {
     if (hasMonsters && hasEvents) {
       int eventProbability = Settings.getSettingAsInt(Settings.EVENT_PROBABILITY);
       boolean drawEvent = ThreadLocalRandom.current().nextInt(100) < eventProbability;
-      Object drawn = drawEvent ? TreasureDrawService.randomEntry(events) : TreasureDrawService.randomEntry(monsters);
+      DrawableEntry drawn = drawEvent ? TreasureDrawService.randomEntry(events) : TreasureDrawService.randomEntry(monsters);
       return resolveEntry(drawn, visitedTables);
     }
 
-    Object drawn = hasMonsters ? TreasureDrawService.randomEntry(monsters) : TreasureDrawService.randomEntry(events);
+    DrawableEntry drawn = hasMonsters ? TreasureDrawService.randomEntry(monsters) : TreasureDrawService.randomEntry(events);
     return resolveEntry(drawn, visitedTables);
   }
 
   // Filtra por ambientacion (siempre) y por nivel. Con forcedLevel != null (resolucion de tableRef)
   // se filtra al nivel indicado; si no, solo se filtra por nivel cuando hay una aventura activa.
-  private List<Object> filterMonsterEntries(List<Object> monsters, Integer forcedLevel) {
+  private List<DrawableEntry> filterMonsterEntries(List<DrawableEntry> monsters, Integer forcedLevel) {
     AdventureAmbience selectedAmbience =
         AdventureAmbience.fromStorageValue(Settings.getSetting(Settings.ADVENTURE_AMBIENCE));
 
-    List<Object> ambienceFiltered = monsters;
+    List<DrawableEntry> ambienceFiltered = monsters;
     if (!selectedAmbience.isGeneric()) {
       ambienceFiltered =
           monsters.stream()
@@ -87,58 +89,41 @@ public class TableDrawService {
     return filterByLevel(ambienceFiltered, adventureLevel);
   }
 
-  private List<Object> filterByLevel(List<Object> monsters, int adventureLevel) {
+  private List<DrawableEntry> filterByLevel(List<DrawableEntry> monsters, int adventureLevel) {
     return monsters.stream()
         .filter(entry -> matchesAdventureLevel(entry, adventureLevel))
         .collect(Collectors.toList());
   }
 
-  private boolean matchesSelectedAmbience(Object entry, AdventureAmbience selectedAmbience) {
-    if (entry instanceof MonsterEntry monsterEntry) {
-      return selectedAmbience.matches(monsterEntry.ambiences);
-    }
-    if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-      return tableReferenceEntry.ambiences.isEmpty() || selectedAmbience.matches(tableReferenceEntry.ambiences);
-    }
-    if (entry instanceof List<?> group) {
-      if (group.isEmpty()) {
-        return false;
-      }
-      for (Object groupEntry : group) {
-        if (!matchesSelectedAmbience(groupEntry, selectedAmbience)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    return true;
+  private boolean matchesSelectedAmbience(DrawableEntry entry, AdventureAmbience selectedAmbience) {
+    return switch (entry) {
+      case MonsterEntry monsterEntry -> selectedAmbience.matches(monsterEntry.ambiences);
+      case TableReferenceEntry tableReferenceEntry ->
+          tableReferenceEntry.ambiences.isEmpty() || selectedAmbience.matches(tableReferenceEntry.ambiences);
+      case MonsterGroup group -> !group.isEmpty()
+          && group.stream().allMatch(groupEntry -> matchesSelectedAmbience(groupEntry, selectedAmbience));
+      case EventEntry eventEntry -> true;
+      case null -> true;
+    };
   }
 
-  private boolean matchesAdventureLevel(Object entry, int adventureLevel) {
-    if (entry instanceof MonsterEntry monsterEntry) {
-      return monsterEntry.level == adventureLevel;
-    }
-    if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-      return tableReferenceEntry.level == adventureLevel;
-    }
-    if (entry instanceof List<?> group) {
-      if (group.isEmpty()) {
-        return false;
-      }
-      Object first = group.get(0);
-      if (first instanceof MonsterEntry groupEntry) {
-        return groupEntry.level == adventureLevel;
-      }
-      return false;
-    }
-    return true;
+  private boolean matchesAdventureLevel(DrawableEntry entry, int adventureLevel) {
+    return switch (entry) {
+      case MonsterEntry monsterEntry -> monsterEntry.level == adventureLevel;
+      case TableReferenceEntry tableReferenceEntry -> tableReferenceEntry.level == adventureLevel;
+      case MonsterGroup group -> !group.isEmpty()
+          && group.get(0) instanceof MonsterEntry groupEntry
+          && groupEntry.level == adventureLevel;
+      case EventEntry eventEntry -> true;
+      case null -> true;
+    };
   }
 
   private int normalizeAdventureLevel(int level) {
     return Math.max(1, Math.min(10, level));
   }
 
-  private Object resolveEntry(Object entry, Set<String> visitedTables) {
+  private DrawableEntry resolveEntry(DrawableEntry entry, Set<String> visitedTables) {
     if (!(entry instanceof TableReferenceEntry tableReferenceEntry)) {
       return entry;
     }
@@ -154,7 +139,7 @@ public class TableDrawService {
 
       int targetLevel = Math.max(1, Math.min(10, tableReferenceEntry.targetLevel));
       for (int i = 0; i < Math.max(1, tableReferenceEntry.times); i++) {
-        Object resolved = drawReferencedEntry(referencedTable, targetLevel, visitedTables);
+        DrawableEntry resolved = drawReferencedEntry(referencedTable, targetLevel, visitedTables);
         appendResolvedEntry(combined, resolved);
       }
 
@@ -170,9 +155,9 @@ public class TableDrawService {
     }
   }
 
-  private Object drawReferencedEntry(Table referencedTable, int forcedLevel, Set<String> visitedTables) {
+  private DrawableEntry drawReferencedEntry(Table referencedTable, int forcedLevel, Set<String> visitedTables) {
     for (int attempt = 0; attempt < 32; attempt++) {
-      Object resolved = drawEntry(referencedTable, forcedLevel, visitedTables);
+      DrawableEntry resolved = drawEntry(referencedTable, forcedLevel, visitedTables);
       if (resolved != null) {
         return resolved;
       }
@@ -180,18 +165,13 @@ public class TableDrawService {
     return null;
   }
 
-  private void appendResolvedEntry(MonsterGroup combined, Object entry) {
-    if (entry == null) {
-      return;
+  private void appendResolvedEntry(MonsterGroup combined, DrawableEntry entry) {
+    switch (entry) {
+      case null -> {
+        // nada que anyadir
+      }
+      case MonsterGroup group -> combined.addAll(group);
+      default -> combined.add(entry);
     }
-    if (entry instanceof MonsterGroup group) {
-      combined.addAll(group);
-      return;
-    }
-    if (entry instanceof List<?> list) {
-      combined.addAll(list);
-      return;
-    }
-    combined.add(entry);
   }
 }

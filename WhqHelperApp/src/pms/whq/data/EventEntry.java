@@ -21,7 +21,7 @@ import pms.whq.util.XMLUtil;
  *
  * @author psiegel
  */
-public class EventEntry {
+public final class EventEntry implements DrawableEntry {
   
   public String       id;
   public List<String> ambiences;

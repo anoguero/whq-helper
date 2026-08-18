@@ -7,7 +7,7 @@ import org.w3c.dom.Node;
 
 import pms.whq.util.XMLUtil;
 
-public class TableReferenceEntry {
+public final class TableReferenceEntry implements DrawableEntry {
 
   public String tableName;
   public int level;

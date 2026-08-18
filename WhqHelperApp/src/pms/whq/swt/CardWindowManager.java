@@ -17,10 +17,12 @@ import org.eclipse.swt.widgets.Shell;
 
 import pms.whq.Settings;
 import pms.whq.content.ContentRepository;
+import pms.whq.data.DrawableEntry;
 import pms.whq.data.Event;
 import pms.whq.data.EventEntry;
 import pms.whq.data.Monster;
 import pms.whq.data.MonsterEntry;
+import pms.whq.data.MonsterGroup;
 import pms.whq.data.TableReferenceEntry;
 import pms.whq.game.TableDrawService;
 
@@ -39,73 +41,74 @@ public class CardWindowManager {
     this.display = display;
   }
 
-  public void showCard(Shell parent, Object entry, ContentRepository contentRepository) {
-    if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-      Object resolved = TABLE_DRAW_SERVICE.resolveEntry(tableReferenceEntry);
-      if (resolved == null) {
-        SwtDialogs.showWarning(
-            parent,
-            "Table Reference Not Resolved",
-            "Unable to resolve referenced table: " + tableReferenceEntry.tableName);
-        return;
-      }
-      showCard(parent, resolved, contentRepository);
-      return;
-    }
-
-    if (entry instanceof List<?> nestedList) {
-      for (Object nested : nestedList) {
-        showCard(parent, nested, contentRepository);
-      }
-      return;
-    }
-
+  public void showCard(Shell parent, DrawableEntry entry, ContentRepository contentRepository) {
     Shell cardShell = null;
 
-    if (entry instanceof MonsterEntry monsterEntry) {
-      Monster monster = contentRepository.findMonster(monsterEntry.id);
-      if (monster == null) {
-        SwtDialogs.showWarning(parent, "Monster Not Found", "Unable to find monster: " + monsterEntry.id);
-        return;
-      }
-
-      int partySize = Settings.getSettingAsInt(Settings.PARTY_SIZE);
-      int numAppearing = scaleNumAppearing(monsterEntry.getNumber(), partySize);
-
-      cardShell =
-          CardFactory.createMonsterCard(
+    switch (entry) {
+      case TableReferenceEntry tableReferenceEntry -> {
+        DrawableEntry resolved = TABLE_DRAW_SERVICE.resolveEntry(tableReferenceEntry);
+        if (resolved == null) {
+          SwtDialogs.showWarning(
               parent,
-              monster,
-              getMonsterTitle(monster, numAppearing),
-              monsterEntry,
-              monsterEntry.appendSpecials,
-              contentRepository.rules(),
-              getMonsterImage(monster),
-              Settings.getSettingAsInt(Settings.CARD_WIDTH),
-              Settings.getSettingAsInt(Settings.CARD_HEIGHT));
-    } else if (entry instanceof EventEntry eventEntry) {
-      Event event = contentRepository.findAnyEvent(eventEntry.id);
-      if (event == null) {
-        SwtDialogs.showWarning(parent, "Event Not Found", "Unable to find event: " + eventEntry.id);
+              "Table Reference Not Resolved",
+              "Unable to resolve referenced table: " + tableReferenceEntry.tableName);
+          return;
+        }
+        showCard(parent, resolved, contentRepository);
         return;
       }
+      case MonsterGroup group -> {
+        for (DrawableEntry nested : group) {
+          showCard(parent, nested, contentRepository);
+        }
+        return;
+      }
+      case MonsterEntry monsterEntry -> {
+        Monster monster = contentRepository.findMonster(monsterEntry.id);
+        if (monster == null) {
+          SwtDialogs.showWarning(parent, "Monster Not Found", "Unable to find monster: " + monsterEntry.id);
+          return;
+        }
 
-      cardShell =
-          event.treasure
-              ? CardFactory.createTreasureCard(
-                  parent,
-                  event,
-                  Settings.getSettingAsInt(Settings.CARD_WIDTH),
-                  Settings.getSettingAsInt(Settings.CARD_HEIGHT))
-              : CardFactory.createEventCard(
-                  parent,
-                  event,
-                  Settings.getSettingAsInt(Settings.CARD_WIDTH),
-                  Settings.getSettingAsInt(Settings.CARD_HEIGHT));
-    } else {
-      String type = entry == null ? "null" : entry.getClass().getName();
-      SwtDialogs.showWarning(parent, "Unknown Entry Type", "Unknown entry type: " + type);
-      return;
+        int partySize = Settings.getSettingAsInt(Settings.PARTY_SIZE);
+        int numAppearing = scaleNumAppearing(monsterEntry.getNumber(), partySize);
+
+        cardShell =
+            CardFactory.createMonsterCard(
+                parent,
+                monster,
+                getMonsterTitle(monster, numAppearing),
+                monsterEntry,
+                monsterEntry.appendSpecials,
+                contentRepository.rules(),
+                getMonsterImage(monster),
+                Settings.getSettingAsInt(Settings.CARD_WIDTH),
+                Settings.getSettingAsInt(Settings.CARD_HEIGHT));
+      }
+      case EventEntry eventEntry -> {
+        Event event = contentRepository.findAnyEvent(eventEntry.id);
+        if (event == null) {
+          SwtDialogs.showWarning(parent, "Event Not Found", "Unable to find event: " + eventEntry.id);
+          return;
+        }
+
+        cardShell =
+            event.treasure
+                ? CardFactory.createTreasureCard(
+                    parent,
+                    event,
+                    Settings.getSettingAsInt(Settings.CARD_WIDTH),
+                    Settings.getSettingAsInt(Settings.CARD_HEIGHT))
+                : CardFactory.createEventCard(
+                    parent,
+                    event,
+                    Settings.getSettingAsInt(Settings.CARD_WIDTH),
+                    Settings.getSettingAsInt(Settings.CARD_HEIGHT));
+      }
+      case null -> {
+        SwtDialogs.showWarning(parent, "Unknown Entry Type", "Unknown entry type: null");
+        return;
+      }
     }
 
     if (cardShell != null) {

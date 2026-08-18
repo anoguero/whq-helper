@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import pms.whq.Settings;
 import pms.whq.content.ContentRepository;
+import pms.whq.data.DrawableEntry;
 import pms.whq.data.MonsterEntry;
 import pms.whq.data.MonsterGroup;
 import pms.whq.data.Table;
@@ -33,7 +34,7 @@ public final class ObjectiveRoomGenerator {
             new ObjectiveMonsterDifficulty("difficulty.extreme", new int[] {2, 1, 0}));
 
     /** Resultado de generar los monstruos de la sala objetivo: la dificultad sorteada y las entradas resueltas. */
-    public record ObjectiveRoomEncounter(ObjectiveMonsterDifficulty difficulty, List<Object> entries) {
+    public record ObjectiveRoomEncounter(ObjectiveMonsterDifficulty difficulty, List<DrawableEntry> entries) {
     }
 
     private final Random random;
@@ -79,11 +80,11 @@ public final class ObjectiveRoomGenerator {
         return OBJECTIVE_MONSTER_DIFFICULTIES.get(OBJECTIVE_MONSTER_DIFFICULTIES.size() - 1);
     }
 
-    public List<Object> activeDungeonMonsterEntries(ContentRepository repository) {
+    public List<DrawableEntry> activeDungeonMonsterEntries(ContentRepository repository) {
         AdventureAmbience selectedAmbience =
                 AdventureAmbience.fromStorageValue(Settings.getSetting(Settings.ADVENTURE_AMBIENCE));
 
-        List<Object> activeEntries = repository.tables().values().stream()
+        List<DrawableEntry> activeEntries = repository.tables().values().stream()
                 .filter(Table::isActive)
                 .filter(table -> table.getTableKind() == TableKind.DUNGEON)
                 .flatMap(table -> table.getMonsterEntries().stream())
@@ -93,48 +94,33 @@ public final class ObjectiveRoomGenerator {
             return activeEntries;
         }
 
-        List<Object> ambienceFiltered = activeEntries.stream()
+        List<DrawableEntry> ambienceFiltered = activeEntries.stream()
                 .filter(entry -> matchesObjectiveMonsterAmbience(entry, selectedAmbience))
                 .collect(Collectors.toCollection(ArrayList::new));
         return ambienceFiltered.isEmpty() ? activeEntries : ambienceFiltered;
     }
 
-    public boolean matchesObjectiveMonsterAmbience(Object entry, AdventureAmbience selectedAmbience) {
+    public boolean matchesObjectiveMonsterAmbience(DrawableEntry entry, AdventureAmbience selectedAmbience) {
         if (selectedAmbience == null || selectedAmbience.isGeneric()) {
             return true;
         }
-        if (entry instanceof MonsterEntry monsterEntry) {
-            return selectedAmbience.matches(monsterEntry.ambiences);
-        }
-        if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-            return tableReferenceEntry.ambiences.isEmpty()
-                    || selectedAmbience.matches(tableReferenceEntry.ambiences);
-        }
-        if (entry instanceof MonsterGroup group) {
-            if (group.isEmpty()) {
-                return false;
-            }
-            for (Object nested : group) {
-                if (!matchesObjectiveMonsterAmbience(nested, selectedAmbience)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return true;
+        return switch (entry) {
+            case MonsterEntry monsterEntry -> selectedAmbience.matches(monsterEntry.ambiences);
+            case TableReferenceEntry tableReferenceEntry ->
+                    tableReferenceEntry.ambiences.isEmpty() || selectedAmbience.matches(tableReferenceEntry.ambiences);
+            case MonsterGroup group -> !group.isEmpty()
+                    && group.stream().allMatch(nested -> matchesObjectiveMonsterAmbience(nested, selectedAmbience));
+            case null, default -> true;
+        };
     }
 
-    public int entryLevel(Object entry) {
-        if (entry instanceof MonsterEntry monsterEntry) {
-            return monsterEntry.level;
-        }
-        if (entry instanceof TableReferenceEntry tableReferenceEntry) {
-            return tableReferenceEntry.level;
-        }
-        if (entry instanceof MonsterGroup group) {
-            return group.level;
-        }
-        return 1;
+    public int entryLevel(DrawableEntry entry) {
+        return switch (entry) {
+            case MonsterEntry monsterEntry -> monsterEntry.level;
+            case TableReferenceEntry tableReferenceEntry -> tableReferenceEntry.level;
+            case MonsterGroup group -> group.level;
+            case null, default -> 1;
+        };
     }
 
     public List<Integer> availableObjectiveMonsterLevels(ContentRepository repository) {
@@ -165,18 +151,18 @@ public final class ObjectiveRoomGenerator {
         return List.of(fallbackLevel, fallbackLevel);
     }
 
-    public Object pickRandomObjectiveMonsterEntry(ContentRepository repository, int level) {
-        List<Object> entries = activeDungeonMonsterEntries(repository).stream()
+    public DrawableEntry pickRandomObjectiveMonsterEntry(ContentRepository repository, int level) {
+        List<DrawableEntry> entries = activeDungeonMonsterEntries(repository).stream()
                 .filter(entry -> entryLevel(entry) == level)
                 .collect(Collectors.toCollection(ArrayList::new));
         if (entries.isEmpty()) {
             return null;
         }
-        Object selected = entries.get(random.nextInt(entries.size()));
-        if (selected instanceof TableReferenceEntry tableReferenceEntry) {
-            return tableDrawService.resolveEntry(tableReferenceEntry);
-        }
-        return selected;
+        DrawableEntry selected = entries.get(random.nextInt(entries.size()));
+        return switch (selected) {
+            case TableReferenceEntry tableReferenceEntry -> tableDrawService.resolveEntry(tableReferenceEntry);
+            default -> selected;
+        };
     }
 
     /**
@@ -189,11 +175,11 @@ public final class ObjectiveRoomGenerator {
             return null;
         }
 
-        List<Object> entries = new ArrayList<>();
+        List<DrawableEntry> entries = new ArrayList<>();
         for (int offset : difficulty.offsets()) {
             List<Integer> resolvedLevels = resolveObjectiveEncounterLevels(repository, dungeonLevel + offset);
             for (int resolvedLevel : resolvedLevels) {
-                Object entry = pickRandomObjectiveMonsterEntry(repository, resolvedLevel);
+                DrawableEntry entry = pickRandomObjectiveMonsterEntry(repository, resolvedLevel);
                 if (entry != null) {
                     entries.add(entry);
                 }

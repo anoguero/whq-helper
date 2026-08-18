@@ -22,7 +22,7 @@ import pms.whq.util.XMLUtil;
  *
  * @author psiegel
  */
-public class MonsterEntry extends SpecialContainer {
+public final class MonsterEntry extends SpecialContainer implements DrawableEntry {
   
   public String       id;
   public int          min;
