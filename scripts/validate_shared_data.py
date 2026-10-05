@@ -22,6 +22,13 @@ SHARED = ROOT / "shared"
 MANIFEST = SHARED / "content-manifest.json"
 DUNGEON_CARDS = SHARED / "data" / "xml" / "dungeon" / "dungeon-cards.xml"
 ROOM_REFERENCES = SHARED / "data" / "xml" / "dungeon" / "room-references.xml"
+UI_TRANSLATIONS = {language: SHARED / "data" / "i18n" / f"ui-{language}.xml" for language in ("es", "en")}
+JAVA_SOURCES = ROOT / "WhqHelperApp" / "src"
+SPA_SOURCES = ROOT / "whq-helper-spa" / "src"
+# Claves literales: I18n.t("clave"...) en Java, t(lang, 'clave') / tf(lang, 'clave', ...) en la SPA.
+# Las claves construidas en tiempo de ejecucion ("prefijo." + x, `prefijo.${x}`) no se pueden comprobar.
+JAVA_UI_KEY = re.compile(r'I18n\.t\(\s*"([^"]+)"')
+SPA_UI_KEY = re.compile(r"\btf?\(\s*[\w.]+\s*,\s*'([^']+)'")
 SPA_CSS = ROOT / "whq-helper-spa" / "src" / "styles.css"
 FORBIDDEN_COPIES = (
     ROOT / "whq-helper-spa" / "public" / "data",
@@ -81,6 +88,33 @@ def validate_room_references(errors: list[str]) -> None:
         seen.add(card_id)
 
 
+def ui_keys(path: Path) -> set[str]:
+    return {(entry.get("key") or "").strip() for entry in ET.parse(path).getroot().iter("entry")}
+
+
+def validate_ui_translations(errors: list[str]) -> None:
+    missing = [path for path in UI_TRANSLATIONS.values() if not path.is_file()]
+    for path in missing:
+        errors.append(f"Missing UI translations: {relative(path)}")
+    if missing:
+        return
+
+    keys = {language: ui_keys(path) for language, path in UI_TRANSLATIONS.items()}
+    for key in sorted(keys["es"] ^ keys["en"]):
+        errors.append(f"UI translation key not in both ui-es.xml and ui-en.xml: {key}")
+
+    used: dict[str, set[str]] = {}
+    for sources, pattern, suffix in ((JAVA_SOURCES, JAVA_UI_KEY, ".java"), (SPA_SOURCES, SPA_UI_KEY, ".ts")):
+        for path in sources.rglob(f"*{suffix}"):
+            if "test" in path.relative_to(sources).parts:
+                continue
+            for key in pattern.findall(path.read_text(encoding="utf-8")):
+                if not key.endswith("."):
+                    used.setdefault(key, set()).add(relative(path))
+    for key in sorted(set(used) - keys["es"]):
+        errors.append(f"UI translation key used in code but missing: {key} ({', '.join(sorted(used[key]))})")
+
+
 def validate_css_font_urls(errors: list[str]) -> None:
     if not SPA_CSS.is_file():
         errors.append(f"Missing SPA CSS: {relative(SPA_CSS)}")
@@ -132,6 +166,7 @@ def main() -> int:
     validate_manifest(errors)
     validate_tile_paths(errors)
     validate_room_references(errors)
+    validate_ui_translations(errors)
     validate_css_font_urls(errors)
     validate_no_duplicates(errors)
 

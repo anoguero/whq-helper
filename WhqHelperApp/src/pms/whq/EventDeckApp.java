@@ -568,7 +568,7 @@ public class EventDeckApp {
       SwtDialogs.showWarning(
           owner,
           I18n.t("dialog.party.title"),
-          I18n.t("dialog.party.error.loadWarriors") + ex.getMessage());
+          I18n.t("dialog.party.error.loadWarriors", Map.of("error", String.valueOf(ex.getMessage()))));
       return;
     }
 

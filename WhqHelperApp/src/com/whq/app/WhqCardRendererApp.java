@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import org.eclipse.swt.widgets.Display;
 
+import com.whq.app.i18n.I18n;
 import com.whq.app.ui.AppWindow;
 
 public class WhqCardRendererApp {
@@ -12,6 +13,7 @@ public class WhqCardRendererApp {
         Path sharedHome = AppPaths.resolveSharedHome(appHome);
         Path projectRoot = AppPaths.prepareRuntimeHome(appHome);
         AppPaths.bindSharedHome(projectRoot, sharedHome);
+        I18n.init(projectRoot);
         Display display = new Display();
 
         try {

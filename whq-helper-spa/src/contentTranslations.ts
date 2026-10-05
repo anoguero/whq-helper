@@ -6,7 +6,7 @@ function normalizeLanguage(language: LanguageCode): string {
   return language.toLowerCase();
 }
 
-function parseTranslations(xml: string): Map<string, string> {
+export function parseTranslations(xml: string): Map<string, string> {
   const map = new Map<string, string>();
   const doc = new DOMParser().parseFromString(xml, 'text/xml');
   const root = doc.documentElement;

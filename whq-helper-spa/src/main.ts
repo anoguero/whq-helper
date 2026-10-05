@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { getAdventureAmbiences, getSettlementTypes, t, tf } from './i18n';
+import { getAdventureAmbiences, getSettlementTypes, loadUiTranslations, t, tf } from './i18n';
 import { findAnyEvent, loadContent } from './content';
 import { applyTableActiveState, buildDecks, getMonsterNumber } from './deck';
 import { loadSettings, saveSettings } from './settings';
@@ -4844,7 +4844,7 @@ function render(): void {
 
 async function bootstrap(): Promise<void> {
   settings = await loadSettings();
-  await Promise.all([dungeonStore.init(settings.language)]);
+  await Promise.all([dungeonStore.init(settings.language), loadUiTranslations()]);
   repository = await loadContent(settings.language);
   syncPartySize();
   resetWarriorCounterPool();

@@ -306,7 +306,7 @@ public class AppWindow {
         try {
             refreshWarriorCounterPoolIfNeeded();
         } catch (Exception ex) {
-            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.load") + ex.getMessage());
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.load", Map.of("error", String.valueOf(ex.getMessage()))));
             return;
         }
 
@@ -693,23 +693,23 @@ public class AppWindow {
                 : I18n.t("dashboard.value.language.es");
 
         if (modeStatsLabel != null && !modeStatsLabel.isDisposed()) {
-            modeStatsLabel.setText(String.format(I18n.t("dashboard.stats.mode"), mode));
+            modeStatsLabel.setText(I18n.t("dashboard.stats.mode", Map.of("mode", mode)));
         }
         if (eventProbabilityStatsLabel != null && !eventProbabilityStatsLabel.isDisposed()) {
-            eventProbabilityStatsLabel.setText(String.format(
-                    I18n.t("dashboard.stats.eventProbability"),
-                    Settings.getSettingAsInt(Settings.EVENT_PROBABILITY)));
+            eventProbabilityStatsLabel.setText(I18n.t(
+                    "dashboard.stats.eventProbability",
+                    Map.of("value", Settings.getSettingAsInt(Settings.EVENT_PROBABILITY))));
         }
         if (treasureProbabilityStatsLabel != null && !treasureProbabilityStatsLabel.isDisposed()) {
-            treasureProbabilityStatsLabel.setText(String.format(
-                    I18n.t("dashboard.stats.treasureProbability"),
-                    Settings.getSettingAsInt(Settings.TREASURE_GOLD_PROBABILITY)));
+            treasureProbabilityStatsLabel.setText(I18n.t(
+                    "dashboard.stats.treasureProbability",
+                    Map.of("value", Settings.getSettingAsInt(Settings.TREASURE_GOLD_PROBABILITY))));
         }
         if (partyStatsLabel != null && !partyStatsLabel.isDisposed()) {
-            partyStatsLabel.setText(String.format(I18n.t("dashboard.stats.party"), activePartySummary()));
+            partyStatsLabel.setText(I18n.t("dashboard.stats.party", Map.of("party", activePartySummary())));
         }
         if (languageStatsLabel != null && !languageStatsLabel.isDisposed()) {
-            languageStatsLabel.setText(String.format(I18n.t("dashboard.stats.language"), language));
+            languageStatsLabel.setText(I18n.t("dashboard.stats.language", Map.of("language", language)));
         }
     }
 
@@ -931,7 +931,7 @@ public class AppWindow {
         try {
             allLocations = loadSettlementLocations();
         } catch (Exception ex) {
-            showError(I18n.t("dialog.newSettlement.title"), I18n.t("dialog.newSettlement.error.loadLocations") + ex.getMessage());
+            showError(I18n.t("dialog.newSettlement.title"), I18n.t("dialog.newSettlement.error.loadLocations", Map.of("error", String.valueOf(ex.getMessage()))));
             return;
         }
 
@@ -1301,7 +1301,7 @@ public class AppWindow {
         try {
             environments = cardStore.loadEnvironments();
         } catch (DungeonCardStorageException ex) {
-            showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadEnvironments") + ex.getMessage());
+            showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadEnvironments", Map.of("error", String.valueOf(ex.getMessage()))));
             return;
         }
 
@@ -1584,7 +1584,7 @@ public class AppWindow {
                     startButton.setEnabled(false);
                 }
             } catch (ObjectiveRoomAdventureRepositoryException ex) {
-                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadAdventures") + ex.getMessage());
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadAdventures", Map.of("error", String.valueOf(ex.getMessage()))));
                 missionRulesText.setText("");
                 startButton.setEnabled(false);
             }
@@ -1596,7 +1596,7 @@ public class AppWindow {
             try {
                 objectiveRooms = cardStore.loadObjectiveRoomsByEnvironment(environment);
             } catch (DungeonCardStorageException ex) {
-                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadObjectiveRooms") + ex.getMessage());
+                showError(I18n.t("dialog.newDungeon.title"), I18n.t("dialog.newDungeon.error.loadObjectiveRooms", Map.of("error", String.valueOf(ex.getMessage()))));
                 objectiveRooms = List.of();
             }
 
@@ -1828,10 +1828,10 @@ public class AppWindow {
 
             if (session.pileCount() <= 1) {
                 int remaining = session.pileCount() == 0 ? 0 : session.pile(0).size();
-                deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.singlePileStatus"), remaining));
+                deckStatus.setText(I18n.t("dialog.adventureSimulator.singlePileStatus", Map.of("count", remaining)));
             } else {
                 int remaining = session.totalRemainingCards();
-                deckStatus.setText(String.format(I18n.t("dialog.adventureSimulator.multiPileStatus"), session.pileCount(), remaining));
+                deckStatus.setText(I18n.t("dialog.adventureSimulator.multiPileStatus", Map.of("piles", session.pileCount(), "cards", remaining)));
             }
 
             for (int i = 0; i < session.pileCount(); i++) {
@@ -1844,7 +1844,7 @@ public class AppWindow {
 
                 Label pileLabel = new Label(pileBox, SWT.CENTER);
                 pileLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-                pileLabel.setText(String.format(I18n.t("dialog.adventureSimulator.pileLabel"), pileIndex + 1, pile.size()));
+                pileLabel.setText(I18n.t("dialog.adventureSimulator.pileLabel", Map.of("pile", pileIndex + 1, "cards", pile.size())));
                 pileLabel.setBackground(theme.panelBackground);
                 pileLabel.setForeground(theme.mist);
                 pileLabel.setFont(theme.sectionTitleFont);
@@ -1878,12 +1878,12 @@ public class AppWindow {
                 pileCanvas.addListener(SWT.MouseDown, event -> {
                     if (event.button == 1) {
                         if (pile.isEmpty()) {
-                            showInfo(I18n.t("dialog.adventureSimulator.title"), String.format(I18n.t("dialog.adventureSimulator.info.emptyPile"), pileIndex + 1));
+                            showInfo(I18n.t("dialog.adventureSimulator.title"), I18n.t("dialog.adventureSimulator.info.emptyPile", Map.of("pile", pileIndex + 1)));
                             return;
                         }
 
                         DungeonCard drawn = session.drawFrom(pileIndex);
-                        revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), drawn.getName(), pileIndex + 1));
+                        revealStatus.setText(I18n.t("dialog.adventureSimulator.selectedCard", Map.of("name", String.valueOf(drawn.getName()), "pile", pileIndex + 1)));
                         revealCanvas.redraw();
                         refreshWhiteDwarfReferenceButton.run();
                         refreshSimulatorUi[0].run();
@@ -1898,7 +1898,7 @@ public class AppWindow {
                     if (pileSize < 2) {
                         showInfo(
                                 I18n.t("dialog.adventureSimulator.title"),
-                                String.format(I18n.t("dialog.adventureSimulator.info.notEnoughToSplit"), pileIndex + 1));
+                                I18n.t("dialog.adventureSimulator.info.notEnoughToSplit", Map.of("pile", pileIndex + 1)));
                         return;
                     }
 
@@ -1920,7 +1920,7 @@ public class AppWindow {
                     if (availableCards.isEmpty()) {
                         showInfo(
                                 I18n.t("button.addCardsToDeck"),
-                                String.format(I18n.t("simulator.addCardsUnavailable"), 0));
+                                I18n.t("simulator.addCardsUnavailable", Map.of("max", 0)));
                         return;
                     }
 
@@ -1930,7 +1930,7 @@ public class AppWindow {
                     }
 
                     session.addCardsToPile(pileIndex, availableCards.subList(0, requestedCards), adventureRandom);
-                    revealStatus.setText(String.format(I18n.t("simulator.addCardsDone"), requestedCards, pileIndex + 1));
+                    revealStatus.setText(I18n.t("simulator.addCardsDone", Map.of("count", requestedCards, "pile", pileIndex + 1)));
                     revealCanvas.redraw();
                     refreshSimulatorUi[0].run();
                 });
@@ -1965,7 +1965,7 @@ public class AppWindow {
                     }
                     DungeonCard selectedHistoryCard = history.get(selectedIndex);
                     session.selectFromHistory(pileIndex, selectedHistoryCard);
-                    revealStatus.setText(String.format(I18n.t("dialog.adventureSimulator.selectedCard"), selectedHistoryCard.getName(), pileIndex + 1));
+                    revealStatus.setText(I18n.t("dialog.adventureSimulator.selectedCard", Map.of("name", String.valueOf(selectedHistoryCard.getName()), "pile", pileIndex + 1)));
                     revealCanvas.redraw();
                     refreshWhiteDwarfReferenceButton.run();
                 });
@@ -2017,7 +2017,7 @@ public class AppWindow {
             }
             showInfo(
                     I18n.t("button.generateObjectiveRoomMonsters"),
-                    String.format(I18n.t("simulator.objectiveMonstersDifficulty"), I18n.t(encounter.difficulty().labelKey())));
+                    I18n.t("simulator.objectiveMonstersDifficulty", Map.of("difficulty", I18n.t(encounter.difficulty().labelKey()))));
             List<DrawableEntry> entries = encounter.entries();
             if (entries.isEmpty()) {
                 showInfo(
@@ -2515,13 +2515,13 @@ public class AppWindow {
 
     private void openWarriorCounterWindow(WarriorCounterDefinition warrior) {
         if (warrior == null || warrior.counterPath() == null || warrior.counterPath().isBlank()) {
-            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage"));
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage", Map.of("path", "")));
             return;
         }
 
         Path imagePath = projectRoot.resolve(warrior.counterPath()).normalize();
         if (!Files.isRegularFile(imagePath)) {
-            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage") + imagePath);
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage", Map.of("path", String.valueOf(imagePath))));
             return;
         }
 
@@ -2529,7 +2529,7 @@ public class AppWindow {
         try {
             image = new Image(display, imagePath.toString());
         } catch (RuntimeException ex) {
-            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage") + imagePath);
+            showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage", Map.of("path", String.valueOf(imagePath))));
             return;
         }
 

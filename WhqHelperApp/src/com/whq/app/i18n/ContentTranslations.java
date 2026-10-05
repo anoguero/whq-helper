@@ -101,7 +101,7 @@ public final class ContentTranslations {
     }
   }
 
-  private static Map<String, String> parse(Path file) {
+  static Map<String, String> parse(Path file) {
     Map<String, String> map = new HashMap<>();
     if (!Files.isRegularFile(file)) {
       return map;
