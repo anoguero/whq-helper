@@ -15,7 +15,7 @@ $MainJar = "$ArtifactId-$Version.jar"
 $WindowsInputDir = Join-Path $ProjectRoot "target/windows-input"
 $OutputDir = Join-Path $ProjectRoot "target/windows-package"
 $WindowsSwtJar = Join-Path $ProjectRoot "lib/org.eclipse.swt.win32.win32.x86_64-3.127.0.jar"
-$WindowsIcon = Join-Path $ProjectRoot "resources/logo.ico"
+$WindowsIcon = Join-Path $ProjectRoot "../shared/branding/logo.ico"
 
 if (-not (Test-Path $WindowsSwtJar)) {
     throw "Falta el JAR de SWT para Windows: $WindowsSwtJar"

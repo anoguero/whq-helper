@@ -7,8 +7,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.whq.app.AppPaths;
+
 public final class AppIcon {
-    private static final String ICON_PATH = "resources/logo.png";
+    private static final String ICON_PATH = "branding/logo.png";
 
     private static Display iconDisplay;
     private static Image iconImage;
@@ -53,7 +55,7 @@ public final class AppIcon {
             return iconImage;
         }
 
-        Path iconPath = projectRoot.resolve(ICON_PATH).normalize();
+        Path iconPath = AppPaths.sharedPath(projectRoot, ICON_PATH).normalize();
         if (!Files.isRegularFile(iconPath)) {
             return null;
         }

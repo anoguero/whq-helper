@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
+
 import pms.whq.data.Table;
 import pms.whq.data.TableReferenceEntry;
 import pms.whq.game.TableDrawService;
@@ -22,7 +24,7 @@ class RuntimeContentServiceTest {
 
   @Test
   void catacombsTableFileParsesIntoLegacyTableModel() throws Exception {
-    Path file = Path.of("data/xml/tables/cot-monster-tables.xml").toAbsolutePath().normalize();
+    Path file = AppPaths.sharedPath(Path.of(""), "data/xml/tables/cot-monster-tables.xml").toAbsolutePath().normalize();
     var builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
     var document = builder.parse(file.toFile());
     NodeList nodes = document.getDocumentElement().getChildNodes();

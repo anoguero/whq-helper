@@ -31,6 +31,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.io.SafeXml;
 
 public class XmlContentService {
@@ -66,35 +67,35 @@ public class XmlContentService {
   }
 
   public List<Path> listMonsterFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(MONSTERS_DIR));
+    return listXmlFiles(MONSTERS_DIR);
   }
 
   public List<Path> listEventFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(EVENTS_DIR));
+    return listXmlFiles(EVENTS_DIR);
   }
 
   public List<Path> listRuleFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(RULES_DIR));
+    return listXmlFiles(RULES_DIR);
   }
 
   public List<Path> listTableFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(TABLES_DIR));
+    return listXmlFiles(TABLES_DIR);
   }
 
   public List<Path> listTravelFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(TRAVEL_DIR));
+    return listXmlFiles(TRAVEL_DIR);
   }
 
   public List<Path> listSettlementFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(SETTLEMENT_DIR));
+    return listXmlFiles(SETTLEMENT_DIR);
   }
 
   public List<Path> listLocationFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(LOCATIONS_DIR));
+    return listXmlFiles(LOCATIONS_DIR);
   }
 
   public List<Path> listWarriorFiles() throws IOException {
-    return listXmlFiles(projectRoot.resolve(WARRIORS_DIR));
+    return listXmlFiles(WARRIORS_DIR);
   }
 
   public Path getRulesDirectory() {
@@ -129,18 +130,13 @@ public class XmlContentService {
     return projectRoot.resolve(WARRIORS_DIR);
   }
 
-  private List<Path> listXmlFiles(Path directory) throws IOException {
-    if (!Files.isDirectory(directory)) {
-      return List.of();
-    }
+  // Ficheros base del shared home mas los userdefined-* del runtime home.
+  private List<Path> listXmlFiles(String directory) throws IOException {
     List<Path> files = new ArrayList<>();
-    try (var stream = Files.list(directory)) {
-      stream
-          .filter(Files::isRegularFile)
-          .filter(path -> path.getFileName().toString().toLowerCase().endsWith(".xml"))
-          .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
-          .forEach(files::add);
-    }
+    AppPaths.listContentFiles(projectRoot, directory).stream()
+        .filter(path -> path.getFileName().toString().toLowerCase().endsWith(".xml"))
+        .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
+        .forEach(files::add);
     return files;
   }
 
@@ -197,11 +193,11 @@ public class XmlContentService {
       root.appendChild(node);
     }
 
-    writeDocument(file, doc, file.getParent().resolve(RULE_SCHEMA));
+    writeDocument(file, doc, schemaPath(RULES_DIR, RULE_SCHEMA));
   }
 
   public Path createEmptyRulesFile(Path file) throws Exception {
-    return createEmptyXmlFile(file, getRulesDirectory(), "rules", getRulesDirectory().resolve(RULE_SCHEMA));
+    return createEmptyXmlFile(file, getRulesDirectory(), "rules", schemaPath(RULES_DIR, RULE_SCHEMA));
   }
 
   public List<EventEntry> loadEvents(Path file) throws Exception {
@@ -336,12 +332,12 @@ public class XmlContentService {
       root.appendChild(node);
     }
 
-    writeDocument(file, doc, file.getParent().resolve(MONSTER_SCHEMA));
+    writeDocument(file, doc, schemaPath(MONSTERS_DIR, MONSTER_SCHEMA));
   }
 
   public Path createEmptyMonstersFile(Path file) throws Exception {
     return createEmptyXmlFile(
-        file, getMonstersDirectory(), "monsters", getMonstersDirectory().resolve(MONSTER_SCHEMA));
+        file, getMonstersDirectory(), "monsters", schemaPath(MONSTERS_DIR, MONSTER_SCHEMA));
   }
 
   public List<LocationEntry> loadLocations(Path file) throws Exception {
@@ -401,12 +397,12 @@ public class XmlContentService {
       root.appendChild(node);
     }
 
-    writeDocument(file, doc, getLocationsDirectory().resolve(LOCATION_SCHEMA));
+    writeDocument(file, doc, schemaPath(LOCATIONS_DIR, LOCATION_SCHEMA));
   }
 
   public Path createEmptyLocationsFile(Path file) throws Exception {
     return createEmptyXmlFile(
-        file, getLocationsDirectory(), "locations", getLocationsDirectory().resolve(LOCATION_SCHEMA));
+        file, getLocationsDirectory(), "locations", schemaPath(LOCATIONS_DIR, LOCATION_SCHEMA));
   }
 
   public List<WarriorEntry> loadWarriors(Path file) throws Exception {
@@ -452,16 +448,16 @@ public class XmlContentService {
       root.appendChild(node);
     }
 
-    writeDocument(file, doc, getWarriorsDirectory().resolve(WARRIOR_SCHEMA));
+    writeDocument(file, doc, schemaPath(WARRIORS_DIR, WARRIOR_SCHEMA));
   }
 
   public Path createEmptyWarriorsFile(Path file) throws Exception {
     return createEmptyXmlFile(
-        file, getWarriorsDirectory(), "warriors", getWarriorsDirectory().resolve(WARRIOR_SCHEMA));
+        file, getWarriorsDirectory(), "warriors", schemaPath(WARRIORS_DIR, WARRIOR_SCHEMA));
   }
 
   public void validateRulesFile(Path file) throws Exception {
-    validateFile(file, file.getParent().resolve(RULE_SCHEMA));
+    validateFile(file, schemaPath(RULES_DIR, RULE_SCHEMA));
     List<RuleEntry> entries = loadRules(file);
     validateRuleEntries(entries);
     ensureRuleIdsUniqueAcrossFiles(file, entries);
@@ -481,7 +477,7 @@ public class XmlContentService {
   }
 
   public void validateMonstersFile(Path file) throws Exception {
-    validateFile(file, file.getParent().resolve(MONSTER_SCHEMA));
+    validateFile(file, schemaPath(MONSTERS_DIR, MONSTER_SCHEMA));
     List<MonsterEntry> entries = loadMonsters(file);
     validateMonsterEntries(entries);
     ensureMonsterIdsUniqueAcrossFiles(file, entries);
@@ -499,14 +495,14 @@ public class XmlContentService {
   }
 
   public void validateLocationsFile(Path file) throws Exception {
-    validateFile(file, getLocationsDirectory().resolve(LOCATION_SCHEMA));
+    validateFile(file, schemaPath(LOCATIONS_DIR, LOCATION_SCHEMA));
     List<LocationEntry> entries = loadLocations(file);
     validateLocationEntries(entries);
     ensureLocationIdsUniqueAcrossFiles(file, entries);
   }
 
   public void validateWarriorsFile(Path file) throws Exception {
-    validateFile(file, getWarriorsDirectory().resolve(WARRIOR_SCHEMA));
+    validateFile(file, schemaPath(WARRIORS_DIR, WARRIOR_SCHEMA));
     List<WarriorEntry> entries = loadWarriors(file);
     validateWarriorEntries(entries);
     ensureWarriorIdsUniqueAcrossFiles(file, entries);
@@ -688,15 +684,15 @@ public class XmlContentService {
       root.appendChild(tableElement);
     }
 
-    writeDocument(file, doc, file.getParent().resolve(TABLE_SCHEMA));
+    writeDocument(file, doc, schemaPath(TABLES_DIR, TABLE_SCHEMA));
   }
 
   public Path createEmptyTablesFile(Path file) throws Exception {
-    return createEmptyXmlFile(file, getTablesDirectory(), "tables", getTablesDirectory().resolve(TABLE_SCHEMA));
+    return createEmptyXmlFile(file, getTablesDirectory(), "tables", schemaPath(TABLES_DIR, TABLE_SCHEMA));
   }
 
   public void validateTablesFile(Path file) throws Exception {
-    validateFile(file, file.getParent().resolve(TABLE_SCHEMA));
+    validateFile(file, schemaPath(TABLES_DIR, TABLE_SCHEMA));
     TableFileModel model = loadTables(file);
     validateTableModel(model);
     ensureTableNamesUniqueAcrossFiles(file, model);
@@ -1239,13 +1235,29 @@ public class XmlContentService {
     if (normalized == null) {
       return EventScope.DUNGEON;
     }
-    if (normalized.startsWith(normalize(projectRoot.resolve(TRAVEL_DIR)))) {
+    if (isInContentDirectory(normalized, TRAVEL_DIR)) {
       return EventScope.TRAVEL;
     }
-    if (normalized.startsWith(normalize(projectRoot.resolve(SETTLEMENT_DIR)))) {
+    if (isInContentDirectory(normalized, SETTLEMENT_DIR)) {
       return EventScope.SETTLEMENT;
     }
     return EventScope.DUNGEON;
+  }
+
+  /** True si el fichero esta en el directorio de la categoria, ya sea en el shared home o en el runtime home. */
+  public boolean isInContentDirectory(Path file, String directory) {
+    Path normalized = normalize(file);
+    return normalized != null
+        && (normalized.startsWith(normalize(projectRoot.resolve(directory)))
+            || normalized.startsWith(normalize(AppPaths.sharedPath(projectRoot, directory))));
+  }
+
+  public boolean isTravelFile(Path file) {
+    return isInContentDirectory(file, TRAVEL_DIR);
+  }
+
+  public boolean isSettlementFile(Path file) {
+    return isInContentDirectory(file, SETTLEMENT_DIR);
   }
 
   private static EventScope scopeFromTableKind(String kind) {
@@ -1311,7 +1323,12 @@ public class XmlContentService {
   }
 
   private Path eventSchemaPath() {
-    return getEventsDirectory().resolve(EVENT_SCHEMA);
+    return schemaPath(EVENTS_DIR, EVENT_SCHEMA);
+  }
+
+  // Los esquemas son contenido base: se leen siempre del shared home.
+  private Path schemaPath(String directory, String schemaFileName) {
+    return AppPaths.sharedPath(projectRoot, directory).resolve(schemaFileName);
   }
 
   private static boolean samePath(Path a, Path b) {

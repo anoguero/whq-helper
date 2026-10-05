@@ -101,16 +101,16 @@
                                             </includes>
                                         </resource>
                                         <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
-                                                <include>data/**</include>
-                                            </includes>
-                                        </resource>
-                                        <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
-                                                <include>resources/**</include>
-                                            </includes>
+                                            <directory>${project.basedir}/../shared</directory>
+                                            <targetPath>shared</targetPath>
+                                            <excludes>
+                                                <exclude>**/userdefined-*</exclude>
+                                                <exclude>**/*.bak</exclude>
+                                                <exclude>**/.gitignore</exclude>
+                                                <exclude>settings.cfg</exclude>
+                                                <exclude>resources/tiles/ad/**</exclude>
+                                                <exclude>resources/tiles/at/**</exclude>
+                                            </excludes>
                                         </resource>
                                         <resource>
                                             <directory>${project.basedir}/lib</directory>
@@ -155,16 +155,16 @@
                                             </includes>
                                         </resource>
                                         <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
-                                                <include>data/**</include>
-                                            </includes>
-                                        </resource>
-                                        <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
-                                                <include>resources/**</include>
-                                            </includes>
+                                            <directory>${project.basedir}/../shared</directory>
+                                            <targetPath>shared</targetPath>
+                                            <excludes>
+                                                <exclude>**/userdefined-*</exclude>
+                                                <exclude>**/*.bak</exclude>
+                                                <exclude>**/.gitignore</exclude>
+                                                <exclude>settings.cfg</exclude>
+                                                <exclude>resources/tiles/ad/**</exclude>
+                                                <exclude>resources/tiles/at/**</exclude>
+                                            </excludes>
                                         </resource>
                                         <resource>
                                             <directory>${project.basedir}/lib</directory>
@@ -209,16 +209,16 @@
                                             </includes>
                                         </resource>
                                         <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
-                                                <include>data/**</include>
-                                            </includes>
-                                        </resource>
-                                        <resource>
-                                            <directory>${project.basedir}</directory>
-                                            <includes>
-                                                <include>resources/**</include>
-                                            </includes>
+                                            <directory>${project.basedir}/../shared</directory>
+                                            <targetPath>shared</targetPath>
+                                            <excludes>
+                                                <exclude>**/userdefined-*</exclude>
+                                                <exclude>**/*.bak</exclude>
+                                                <exclude>**/.gitignore</exclude>
+                                                <exclude>settings.cfg</exclude>
+                                                <exclude>resources/tiles/ad/**</exclude>
+                                                <exclude>resources/tiles/at/**</exclude>
+                                            </excludes>
                                         </resource>
                                         <resource>
                                             <directory>${project.basedir}/lib</directory>

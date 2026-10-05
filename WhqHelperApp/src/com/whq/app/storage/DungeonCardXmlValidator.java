@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.io.SafeXml;
 
 public final class DungeonCardXmlValidator {
@@ -74,7 +75,7 @@ public final class DungeonCardXmlValidator {
                 throw new DungeonCardStorageException("Una carta no tiene tileImagePath en " + xmlPath + ".");
             }
 
-            Path resolvedTile = projectRoot.resolve(tileImagePath).normalize();
+            Path resolvedTile = AppPaths.resolveContent(projectRoot, tileImagePath);
             if (!Files.exists(resolvedTile)) {
                 throw new DungeonCardStorageException("No existe la tile referenciada: " + tileImagePath + ".");
             }

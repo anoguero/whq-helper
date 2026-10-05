@@ -10,6 +10,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 
+import com.whq.app.AppPaths;
 import com.whq.app.model.DungeonCard;
 
 final class DungeonTileRenderer {
@@ -45,7 +46,7 @@ final class DungeonTileRenderer {
 
     private Image loadImage(String relativePath) {
         return imageCache.computeIfAbsent(relativePath, key -> {
-            Path path = projectRoot.resolve(key).normalize();
+            Path path = AppPaths.resolveContent(projectRoot, key);
             if (!Files.exists(path) || key.isEmpty()) {
                 return null;
             }

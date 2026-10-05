@@ -46,6 +46,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.adventure.ObjectiveRoomAdventure;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepository;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepositoryException;
@@ -1156,7 +1157,7 @@ public class AppWindow {
     }
 
     private List<SettlementLocation> loadSettlementLocations() throws Exception {
-        Path locationsDirectory = projectRoot.resolve("data/xml/locations");
+        Path locationsDirectory = AppPaths.sharedPath(projectRoot, "data/xml/locations");
         if (!Files.isDirectory(locationsDirectory)) {
             return List.of();
         }
@@ -1165,7 +1166,7 @@ public class AppWindow {
         Map<String, SettlementLocation> locationsById = new LinkedHashMap<>();
 
         List<Path> files;
-        try (var stream = Files.list(locationsDirectory)) {
+        try (var stream = AppPaths.listContentFiles(projectRoot, "data/xml/locations").stream()) {
             files = stream
                     .filter(this::isSettlementLocationXmlFile)
                     .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))
@@ -1716,7 +1717,7 @@ public class AppWindow {
 
         AdventureSession session = new AdventureSession(deck);
 
-        Image dungeonBack = new Image(display, projectRoot.resolve("resources/dungeon-back.jpeg").toString());
+        Image dungeonBack = new Image(display, AppPaths.sharedPath(projectRoot, "resources/dungeon-back.jpeg").toString());
         simulator.addListener(SWT.Dispose, event -> {
             if (!dungeonBack.isDisposed()) {
                 dungeonBack.dispose();
@@ -2444,7 +2445,7 @@ public class AppWindow {
     }
 
     private java.util.List<WarriorCounterDefinition> loadWarriorCounters() throws Exception {
-        Path warriorsDirectory = projectRoot.resolve("data/xml/warriors");
+        Path warriorsDirectory = AppPaths.sharedPath(projectRoot, "data/xml/warriors");
         if (!Files.isDirectory(warriorsDirectory)) {
             return List.of();
         }
@@ -2453,7 +2454,7 @@ public class AppWindow {
         Map<String, WarriorCounterDefinition> warriorsById = new LinkedHashMap<>();
 
         List<Path> files;
-        try (var stream = Files.list(warriorsDirectory)) {
+        try (var stream = AppPaths.listContentFiles(projectRoot, "data/xml/warriors").stream()) {
             files = stream
                     .filter(this::isWarriorXmlFile)
                     .sorted(Comparator.comparing(path -> path.getFileName().toString().toLowerCase()))

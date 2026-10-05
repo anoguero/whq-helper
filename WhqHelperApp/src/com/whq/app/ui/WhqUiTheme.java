@@ -17,6 +17,8 @@ import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 
+import com.whq.app.AppPaths;
+
 public final class WhqUiTheme {
 
   public final Color shellBackground;
@@ -88,9 +90,9 @@ public final class WhqUiTheme {
             10,
             SWT.BOLD);
 
-    heroCastle = loadImage(projectRoot.resolve("resources/ui/hero-castle.jpg"));
-    parchmentMap = loadImage(projectRoot.resolve("resources/ui/parchment-map.jpg"));
-    manuscriptBorder = loadImage(projectRoot.resolve("resources/ui/manuscript-border.jpg"));
+    heroCastle = loadImage(AppPaths.sharedPath(projectRoot, "resources/ui/hero-castle.jpg"));
+    parchmentMap = loadImage(AppPaths.sharedPath(projectRoot, "resources/ui/parchment-map.jpg"));
+    manuscriptBorder = loadImage(AppPaths.sharedPath(projectRoot, "resources/ui/manuscript-border.jpg"));
   }
 
   public Image getHeroCastle() {

@@ -10,6 +10,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.io.SafeXml;
 
 public final class ContentTranslations {
@@ -22,7 +23,12 @@ public final class ContentTranslations {
   // fileSizeBytes se comprueba junto con el lastModified: en sistemas de ficheros con
   // granularidad de segundo, dos escrituras dentro del mismo tick tendrian el mismo
   // lastModified pero (casi siempre) tamanyo distinto, y la cache debe invalidarse igualmente.
-  private record CacheEntry(long fileLastModifiedMillis, long fileSizeBytes, ContentTranslations translations) {
+  private record CacheEntry(
+      long fileLastModifiedMillis,
+      long fileSizeBytes,
+      long userFileLastModifiedMillis,
+      long userFileSizeBytes,
+      ContentTranslations translations) {
   }
 
   // Cache keyed por (projectRoot, idioma), invalidada cuando cambia el idioma (clave distinta)
@@ -42,23 +48,41 @@ public final class ContentTranslations {
 
     Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
     Path file = translationsFile(normalizedRoot, language);
+    Path userFile = userTranslationsFile(normalizedRoot, language);
     long lastModifiedMillis = lastModifiedMillisOrZero(file);
     long sizeBytes = sizeOrZero(file);
+    long userLastModifiedMillis = lastModifiedMillisOrZero(userFile);
+    long userSizeBytes = sizeOrZero(userFile);
 
     CacheKey key = new CacheKey(normalizedRoot, language);
     CacheEntry cached = CACHE.get(key);
-    if (cached != null && cached.fileLastModifiedMillis() == lastModifiedMillis && cached.fileSizeBytes() == sizeBytes) {
+    if (cached != null
+        && cached.fileLastModifiedMillis() == lastModifiedMillis
+        && cached.fileSizeBytes() == sizeBytes
+        && cached.userFileLastModifiedMillis() == userLastModifiedMillis
+        && cached.userFileSizeBytes() == userSizeBytes) {
       return cached.translations();
     }
 
-    ContentTranslations loaded = parse(file);
-    CACHE.put(key, new CacheEntry(lastModifiedMillis, sizeBytes, loaded));
+    Map<String, String> values = parse(file);
+    values.putAll(parse(userFile));
+    ContentTranslations loaded = new ContentTranslations(values);
+    CACHE.put(key, new CacheEntry(lastModifiedMillis, sizeBytes, userLastModifiedMillis, userSizeBytes, loaded));
     return loaded;
   }
 
-  private static Path translationsFile(Path normalizedProjectRoot, Language language) {
-    String suffix = language == Language.EN ? "en" : "es";
-    return normalizedProjectRoot.resolve(RELATIVE_DIR).resolve("content-" + suffix + ".xml");
+  // Traducciones del contenido base: shared home, solo lectura.
+  static Path translationsFile(Path normalizedProjectRoot, Language language) {
+    return AppPaths.sharedPath(normalizedProjectRoot, RELATIVE_DIR).resolve("content-" + suffix(language) + ".xml");
+  }
+
+  // Traducciones del contenido del usuario: runtime home escribible, aplicadas sobre las base.
+  static Path userTranslationsFile(Path normalizedProjectRoot, Language language) {
+    return normalizedProjectRoot.resolve(RELATIVE_DIR).resolve("userdefined-content-" + suffix(language) + ".xml");
+  }
+
+  private static String suffix(Language language) {
+    return language == Language.EN ? "en" : "es";
   }
 
   private static long lastModifiedMillisOrZero(Path file) {
@@ -77,10 +101,10 @@ public final class ContentTranslations {
     }
   }
 
-  private static ContentTranslations parse(Path file) {
+  private static Map<String, String> parse(Path file) {
     Map<String, String> map = new HashMap<>();
     if (!Files.isRegularFile(file)) {
-      return new ContentTranslations(map);
+      return map;
     }
 
     try {
@@ -89,7 +113,7 @@ public final class ContentTranslations {
       var document = factory.newDocumentBuilder().parse(file.toFile());
       Element root = document.getDocumentElement();
       if (root == null || !"translations".equals(root.getTagName())) {
-        return new ContentTranslations(map);
+        return map;
       }
 
       NodeList children = root.getChildNodes();
@@ -109,7 +133,7 @@ public final class ContentTranslations {
       // If translation parsing fails, runtime content falls back to XML text.
     }
 
-    return new ContentTranslations(map);
+    return map;
   }
 
   public String t(String key, String fallback) {

@@ -38,6 +38,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
+import com.whq.app.AppPaths;
 import com.whq.app.adventure.ObjectiveRoomAdventure;
 import com.whq.app.adventure.ObjectiveRoomAdventureRepositoryException;
 import com.whq.app.adventure.XmlObjectiveRoomAdventureRepository;
@@ -310,8 +311,11 @@ public final class EventContentEditorDialog {
             return;
           }
           Path normalizedSelection = Path.of(selectedPath).toAbsolutePath().normalize();
+          Path sharedHome = AppPaths.sharedHome(projectRoot);
           String storedPath;
-          if (normalizedSelection.startsWith(projectRoot)) {
+          if (normalizedSelection.startsWith(sharedHome)) {
+            storedPath = sharedHome.relativize(normalizedSelection).toString();
+          } else if (normalizedSelection.startsWith(projectRoot)) {
             storedPath = projectRoot.relativize(normalizedSelection).toString();
           } else {
             storedPath = normalizedSelection.toString();

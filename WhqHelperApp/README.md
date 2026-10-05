@@ -7,13 +7,13 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
 - UI SWT con dos paneles:
   - lista de habitaciones/cartas disponibles,
   - visor de renderizado de carta.
-- Renderizado de carta sobre plantilla (`resources/dungeon-card-template.png`):
+- Renderizado de carta sobre plantilla (`shared/resources/dungeon-card-template.png`):
   - nombre,
   - texto descriptivo,
   - texto de reglas,
   - imagen de tile,
   - banda inferior con tipo (`DUNGEON ROOM`, `OBJECTIVE ROOM`, `CORRIDOR`, `SPECIAL`).
-- Repositorio XML de cartas de mazmorra (`data/xml/dungeon/dungeon-cards.xml`) como fuente principal de mantenimiento.
+- Repositorio XML de cartas de mazmorra (`shared/data/xml/dungeon/dungeon-cards.xml`) como fuente principal de mantenimiento.
 - Nuevo campo de datos `environment` en cada carta (por defecto: `The Old World`).
 - Dependencias de terceros mínimas:
   - SWT.
@@ -26,8 +26,29 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
 - `src/com/whq/app/storage/XmlDungeonCardStore.java`: acceso a cartas de mazmorra en XML.
 - `src/com/whq/app/io/CardCsvService.java`: import/export CSV.
 - `src/com/whq/app/model/*`: modelos de dominio.
-- `resources/tiles/*`: tiles de ejemplo.
-- `data/xml/dungeon/dungeon-cards.xml`: catálogo maestro de cartas de mazmorra.
+- `src/com/whq/app/AppPaths.java`: resolución del app home, del shared home y del directorio escribible.
+- `../shared/`: contenido base compartido con la SPA (XML, imágenes, fuentes, i18n). Ver el `README.md` de la raíz.
+- `data/xml/**/userdefined-*.xml`: contenido creado por el usuario (no versionado).
+
+## Contenido base y contenido del usuario
+
+La app distingue dos ubicaciones:
+
+| Tipo | Dónde | Permisos |
+|---|---|---|
+| Contenido base (XML, imágenes, fuentes, i18n) | shared home | Solo lectura |
+| Contenido del usuario (`userdefined-*`), `settings.cfg` | directorio escribible | Lectura y escritura |
+
+El shared home se resuelve en este orden:
+
+1. `-Dwhq.shared.home=<ruta>` o la variable de entorno `WHQ_SHARED_HOME`.
+2. `<appHome>/shared`: builds empaquetadas con `jpackage`.
+3. `<appHome>/../shared`: desarrollo, ejecutando desde `WhqHelperApp/`.
+4. `<appHome>`: compatibilidad con instalaciones antiguas que llevan `data/` y `resources/` dentro.
+
+El directorio escribible es el app home si se puede escribir en él; si no, `%APPDATA%/WHQ Helper` (Windows), `~/Library/Application Support/WHQ Helper` (macOS) o `$XDG_DATA_HOME/whq-helper` / `~/.local/share/whq-helper` (Linux). Se puede forzar con `-Dwhq.user.home` o `WHQ_USER_HOME`. Al prepararlo solo se copian `settings.cfg`, los `userdefined-*` y `lib/`: el contenido base se lee siempre del shared home y nunca queda una copia obsoleta.
+
+Las traducciones del contenido del usuario se guardan en `data/i18n/userdefined-content-{es,en}.xml` del directorio escribible cuando el `content-*.xml` base no se puede escribir (instalación empaquetada). En desarrollo, el editor de contenido sigue escribiendo directamente en `shared/`.
 
 ## Ejecutar
 
@@ -60,7 +81,7 @@ La opción recomendada para este proyecto es generar un bundle de aplicación y,
 
 Motivo:
 
-- la app SWT usa datos y recursos editables en disco (`data/`, `resources/`, `settings.cfg`),
+- la app SWT lee el contenido base de `shared/` y guarda el del usuario en disco (`userdefined-*`, `settings.cfg`),
 - el contenido XML no debe quedar enterrado dentro del JAR si quieres seguir editándolo, hacer backups o permitir contenido de usuario,
 - `jpackage` genera un `.exe` o `.msi` con runtime de Java incluido, sin pedir Java preinstalado al usuario final.
 
@@ -91,12 +112,14 @@ windows-input/
   whq-helper-app-1.0.0.jar
   lib/
     org.eclipse.swt.win32.win32.x86_64-3.127.0.jar
-  data/
-    xml/
-    graphics/
-    fonts/
-  resources/
-    ...
+  shared/
+    data/
+      xml/
+      graphics/
+      fonts/
+      i18n/
+    resources/
+    branding/
 ```
 
 ### Generar `.exe` o `.msi`
@@ -202,7 +225,7 @@ Salida:
 
 - `target/macos-package/`
 
-El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `resources/logo.png`.
+El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `shared/branding/logo.png`.
 
 ### Generación automática en GitHub Actions
 
@@ -249,32 +272,13 @@ La release quedará publicada en:
 
 ## Cómo quedan los XML en el ejecutable
 
-Los XML no se empaquetan dentro del JAR principal.
+Los XML no se empaquetan dentro del JAR principal. Los perfiles `*-dist` de Maven copian `../shared/` como `shared/` dentro del bundle de entrada (sin `userdefined-*`, `*.bak` ni las losetas borrador `resources/tiles/{ad,at}/`), y `jpackage` lo deja dentro del área `app/` de la imagen generada.
 
-Se copian como ficheros normales dentro del bundle de aplicación:
+En tiempo de ejecución la aplicación resuelve su base por la ubicación real del JAR empaquetado y encuentra `shared/` a su lado. Implicación práctica:
 
-- `data/xml/monsters/*.xml`
-- `data/xml/events/*.xml`
-- `data/xml/travel/*.xml`
-- `data/xml/settlement/*.xml`
-- `data/xml/tables/*.xml`
-- `data/xml/dungeon/*.xml`
-
-Cuando `jpackage` genera la imagen Windows, esos ficheros quedan junto al resto del contenido de la app dentro del área `app/` del paquete generado. En tiempo de ejecución la aplicación resuelve su base no por directorio de trabajo, sino por la ubicación real del JAR empaquetado.
-
-Implicación práctica:
-
-- el ejecutable puede leer y escribir los XML,
-- puedes distribuir XML de serie en la instalación,
-- los ficheros `userdefined-*.xml` y `*.bak` siguen funcionando,
+- el contenido base es de solo lectura y se actualiza con cada versión instalada,
+- el contenido del usuario (`userdefined-*.xml`, sus traducciones y `settings.cfg`) vive en el directorio escribible y sobrevive a las actualizaciones,
 - no necesitas descomprimir nada en cada arranque.
-
-Si quisieras un diseño todavía más limpio para despliegue, puedes separar:
-
-- XML base en el bundle instalado,
-- XML editables del usuario en `%APPDATA%/WHQ Helper/`
-
-Pero eso requeriría adaptar el código de carga/guardado. La configuración actual mantiene el comportamiento existente y es la opción más segura para este proyecto.
 
 Alternativa sin Maven:
 
@@ -286,7 +290,7 @@ Alternativa sin Maven:
 
 Fichero maestro:
 
-- `data/xml/dungeon/dungeon-cards.xml`
+- `shared/data/xml/dungeon/dungeon-cards.xml`
 
 Cada carta guarda:
 
@@ -297,8 +301,8 @@ Si el XML no existe al arrancar, la app crea un conjunto de ejemplo.
 
 ## Personalización
 
-- Para usar tus propias cartas, edita `data/xml/dungeon/dungeon-cards.xml` o importa desde CSV.
-- `tile_image_path` debe apuntar a una ruta válida relativa al root del proyecto (por ejemplo `resources/tiles/mi-tile.png`).
+- Para usar tus propias cartas, crea cartas desde el editor (se guardan en `data/xml/dungeon/userdefined-dungeon-cards.xml`) o importa desde CSV.
+- `tile_image_path` debe ser una ruta relativa al shared home (por ejemplo `resources/tiles/mi-tile.png`), relativa al directorio escribible si la imagen es tuya, o absoluta.
 - El renderer intenta usar fuentes con look clásico (`Cinzel/Trajan/Georgia/Trebuchet`) y cae a fuentes del sistema si no están instaladas.
 
 ## Import / Export CSV

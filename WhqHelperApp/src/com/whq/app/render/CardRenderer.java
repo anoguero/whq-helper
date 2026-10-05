@@ -12,6 +12,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.I18n;
 import com.whq.app.model.DungeonCard;
 import com.whq.app.ui.FontResources;
@@ -40,7 +41,7 @@ public class CardRenderer {
         if (device instanceof Display display) {
             FontResources.loadBundledFonts(display, projectRoot);
         }
-        this.template = new Image(device, projectRoot.resolve("resources/dungeon-card-template.png").toString());
+        this.template = new Image(device, AppPaths.sharedPath(projectRoot, "resources/dungeon-card-template.png").toString());
 
         Rectangle templateBounds = template.getBounds();
         this.templateWidth = templateBounds.width;

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+     Warhammer Quest Monster and Event table schema.
+    </xsd:documentation>
+  </xsd:annotation>
+  
+  <xsd:complexType name="eventType">
+    <xsd:all>
+      <xsd:element name="flavor"   type="xsd:string" minOccurs="0" />
+      <xsd:element name="rules"    type="xsd:string" />
+      <xsd:element name="special"  type="xsd:string" minOccurs="0" />
+      <xsd:element name="goldValue" type="xsd:string" minOccurs="0" />
+      <xsd:element name="users" type="xsd:string" minOccurs="0" />
+      <xsd:element name="treasure" type="xsd:boolean" />
+    </xsd:all>
+    <xsd:attribute name="id"   type="xsd:string" />
+    <xsd:attribute name="name" type="xsd:string" />
+  </xsd:complexType>
+
+  <xsd:element name="events">
+    <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded" minOccurs="1">
+        <xsd:element name="event" type="eventType" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+</xsd:schema>

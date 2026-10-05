@@ -1,0 +1,6 @@
+*.bak
+userdefined-*
+
+# Tile drafts (not ready yet)
+/resources/tiles/ad/
+/resources/tiles/at/

@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "WhqHelperApp/**"
+      - "shared/**"
       - ".github/workflows/build-macos-app.yml"
   workflow_dispatch:
 

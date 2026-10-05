@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - "WhqHelperApp/data/**"
+      - "shared/**"
       - "whq-helper-spa/public/**"
       - "whq-helper-spa/src/styles.css"
       - "scripts/validate_shared_data.py"
       - ".github/workflows/validate-shared-data.yml"
   pull_request:
     paths:
-      - "WhqHelperApp/data/**"
+      - "shared/**"
       - "whq-helper-spa/public/**"
       - "whq-helper-spa/src/styles.css"
       - "scripts/validate_shared_data.py"

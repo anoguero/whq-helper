@@ -34,6 +34,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.io.SafeXml;
@@ -723,7 +724,7 @@ public class EventDeckApp {
   }
 
   private java.util.List<WarriorDefinition> loadWarriors() throws Exception {
-    Path warriorsDirectory = projectRoot.resolve("data/xml/warriors");
+    Path warriorsDirectory = AppPaths.sharedPath(projectRoot, "data/xml/warriors");
     if (!Files.isDirectory(warriorsDirectory)) {
       return List.of();
     }
@@ -733,7 +734,7 @@ public class EventDeckApp {
     Map<String, WarriorDefinition> warriorsById = new LinkedHashMap<>();
 
     List<Path> files;
-    try (var stream = Files.list(warriorsDirectory)) {
+    try (var stream = AppPaths.listContentFiles(projectRoot, "data/xml/warriors").stream()) {
       files =
           stream
               .filter(this::isWarriorXmlFile)

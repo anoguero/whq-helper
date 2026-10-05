@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.I18n;
 import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.FontResources;
@@ -756,7 +757,8 @@ public final class CardFactory {
       return null;
     }
 
-    Path baseDir = Settings.getBaseDir();
+    // Plantillas e imagenes de carta son contenido base: se leen del shared home.
+    Path baseDir = AppPaths.sharedHome(Settings.getBaseDir());
     if (baseDir != null) {
       Image image = loadCardImageFromPath(base, baseDir.resolve(relativePath).normalize());
       if (image != null) {

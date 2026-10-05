@@ -23,15 +23,19 @@ import com.whq.app.io.SafeXml;
 
 public final class EditableContentTranslations {
 
-  private static final String RELATIVE_DIR = "data/i18n";
-
   private record CacheKey(Path projectRoot, Language language) {
   }
 
   // fileSizeBytes se comprueba junto con el lastModified: en sistemas de ficheros con
   // granularidad de segundo, dos escrituras dentro del mismo tick tendrian el mismo
   // lastModified pero (casi siempre) tamanyo distinto, y la cache debe invalidarse igualmente.
-  private record CacheEntry(long fileLastModifiedMillis, long fileSizeBytes, Map<String, String> values) {
+  private record CacheEntry(
+      long fileLastModifiedMillis,
+      long fileSizeBytes,
+      long userFileLastModifiedMillis,
+      long userFileSizeBytes,
+      Map<String, String> baseValues,
+      Map<String, String> values) {
   }
 
   // Cache del mapa base parseado del XML, con la misma invalidacion que ContentTranslations
@@ -41,36 +45,45 @@ public final class EditableContentTranslations {
   private static final Map<CacheKey, CacheEntry> CACHE = new ConcurrentHashMap<>();
 
   private final Path file;
+  private final Path userFile;
+  private final Map<String, String> baseValues;
   private final Map<String, String> values;
 
-  private EditableContentTranslations(Path file, Map<String, String> values) {
+  private EditableContentTranslations(Path file, Path userFile, Map<String, String> baseValues, Map<String, String> values) {
     this.file = file;
+    this.userFile = userFile;
+    this.baseValues = baseValues;
     this.values = values;
   }
 
   public static EditableContentTranslations load(Path projectRoot, Language language) {
     if (projectRoot == null || language == null) {
-      return new EditableContentTranslations(null, new LinkedHashMap<>());
+      return new EditableContentTranslations(null, null, Map.of(), new LinkedHashMap<>());
     }
 
     Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
-    Path file = translationsFile(normalizedRoot, language);
+    Path file = ContentTranslations.translationsFile(normalizedRoot, language);
+    Path userFile = ContentTranslations.userTranslationsFile(normalizedRoot, language);
     long lastModifiedMillis = lastModifiedMillisOrZero(file);
     long sizeBytes = sizeOrZero(file);
+    long userLastModifiedMillis = lastModifiedMillisOrZero(userFile);
+    long userSizeBytes = sizeOrZero(userFile);
 
     CacheKey key = new CacheKey(normalizedRoot, language);
     CacheEntry cached = CACHE.get(key);
-    if (cached == null || cached.fileLastModifiedMillis() != lastModifiedMillis || cached.fileSizeBytes() != sizeBytes) {
-      cached = new CacheEntry(lastModifiedMillis, sizeBytes, parse(file));
+    if (cached == null
+        || cached.fileLastModifiedMillis() != lastModifiedMillis
+        || cached.fileSizeBytes() != sizeBytes
+        || cached.userFileLastModifiedMillis() != userLastModifiedMillis
+        || cached.userFileSizeBytes() != userSizeBytes) {
+      Map<String, String> baseValues = parse(file);
+      Map<String, String> merged = new LinkedHashMap<>(baseValues);
+      merged.putAll(parse(userFile));
+      cached = new CacheEntry(lastModifiedMillis, sizeBytes, userLastModifiedMillis, userSizeBytes, baseValues, merged);
       CACHE.put(key, cached);
     }
 
-    return new EditableContentTranslations(file, new LinkedHashMap<>(cached.values()));
-  }
-
-  private static Path translationsFile(Path normalizedProjectRoot, Language language) {
-    String suffix = language == Language.EN ? "en" : "es";
-    return normalizedProjectRoot.resolve(RELATIVE_DIR).resolve("content-" + suffix + ".xml");
+    return new EditableContentTranslations(file, userFile, cached.baseValues(), new LinkedHashMap<>(cached.values()));
   }
 
   private static long sizeOrZero(Path file) {
@@ -146,10 +159,31 @@ public final class EditableContentTranslations {
     values.remove(key.trim());
   }
 
+  // Si el fichero base del shared home es escribible (desarrollo) se guarda ahi, como siempre.
+  // Si no (instalacion empaquetada), solo se guardan en el fichero userdefined-* del runtime home
+  // las entradas que difieren del base.
   public void save() throws Exception {
     if (file == null) {
       return;
     }
+    if (Files.isWritable(file)) {
+      write(file, values);
+      if (userFile != null && !userFile.equals(file)) {
+        Files.deleteIfExists(userFile);
+      }
+      return;
+    }
+
+    Map<String, String> userValues = new LinkedHashMap<>();
+    for (Map.Entry<String, String> entry : values.entrySet()) {
+      if (!entry.getValue().equals(baseValues.get(entry.getKey()))) {
+        userValues.put(entry.getKey(), entry.getValue());
+      }
+    }
+    write(userFile, userValues);
+  }
+
+  private static void write(Path file, Map<String, String> values) throws Exception {
     Path directory = file.toAbsolutePath().normalize().getParent();
     Files.createDirectories(directory);
 

@@ -59,6 +59,7 @@ public class RuntimeContentLoader {
   private void loadRules(ContentRepository repository, ContentTranslations translations) {
     loadNodes(
         Settings.getSetting(Settings.RULES_DIR),
+        "data/xml/rules",
         "rules",
         node -> {
           String nodeName = node.getNodeName();
@@ -74,6 +75,7 @@ public class RuntimeContentLoader {
   private void loadTables(ContentRepository repository) {
     loadNodes(
         Settings.getSetting(Settings.TABLE_DIR),
+        "data/xml/tables",
         "tables",
         node -> {
           if ("table".equals(node.getNodeName())) {
@@ -89,6 +91,7 @@ public class RuntimeContentLoader {
   private void loadMonsters(ContentRepository repository, ContentTranslations translations) {
     loadNodes(
         Settings.getSetting(Settings.MONSTER_DIR),
+        "data/xml/monsters",
         "monsters",
         node -> {
           if ("monster".equals(node.getNodeName())) {
@@ -104,6 +107,7 @@ public class RuntimeContentLoader {
   private void loadEvents(ContentRepository repository, ContentTranslations translations) {
     loadNodes(
         Settings.getSetting(Settings.EVENT_DIR),
+        "data/xml/events",
         "events",
         node -> {
           if ("event".equals(node.getNodeName())) {
@@ -139,6 +143,7 @@ public class RuntimeContentLoader {
   private void loadTravelEvents(ContentRepository repository, ContentTranslations translations) {
     loadNodes(
         Settings.getSetting(Settings.TRAVEL_DIR),
+        "data/xml/travel",
         "events",
         node -> {
           if ("event".equals(node.getNodeName())) {
@@ -153,6 +158,7 @@ public class RuntimeContentLoader {
   private void loadSettlementEvents(ContentRepository repository, ContentTranslations translations) {
     loadNodes(
         Settings.getSetting(Settings.SETTLEMENT_DIR),
+        "data/xml/settlement",
         "events",
         node -> {
           if ("event".equals(node.getNodeName())) {
@@ -176,16 +182,24 @@ public class RuntimeContentLoader {
     event.users = translations.t("event." + event.id + ".users", event.users);
   }
 
-  private void loadNodes(String directory, String rootName, NodeConsumer nodeConsumer) {
+  // directory es el directorio base configurado (shared home); los userdefined-* se leen del
+  // runtime home escribible, en userRelativeDirectory.
+  private void loadNodes(String directory, String userRelativeDirectory, String rootName, NodeConsumer nodeConsumer) {
     if (directory == null || directory.isBlank()) {
       return;
     }
 
     File dir = new File(directory);
-    File[] files = dir.listFiles(file -> file.getName().endsWith(".xml"));
-    if (files == null) {
+    File userDir = projectRoot.resolve(userRelativeDirectory).toFile();
+    boolean separateUserDir = !dir.getAbsoluteFile().toPath().normalize().equals(userDir.toPath().normalize());
+    File[] baseFiles =
+        dir.listFiles(file -> file.getName().endsWith(".xml") && !(separateUserDir && isUserDefined(file)));
+    if (baseFiles == null) {
       return;
     }
+    File[] userFiles =
+        separateUserDir ? userDir.listFiles(file -> file.getName().endsWith(".xml") && isUserDefined(file)) : null;
+    File[] files = userFiles == null ? baseFiles : concat(baseFiles, userFiles);
 
     Arrays.sort(
         files,
@@ -196,6 +210,16 @@ public class RuntimeContentLoader {
     for (File file : files) {
       loadNodesFromFile(file, rootName, nodeConsumer);
     }
+  }
+
+  private static boolean isUserDefined(File file) {
+    return file.getName().toLowerCase().startsWith("userdefined-");
+  }
+
+  private static File[] concat(File[] first, File[] second) {
+    File[] result = Arrays.copyOf(first, first.length + second.length);
+    System.arraycopy(second, 0, result, first.length, second.length);
+    return result;
   }
 
   private void loadNodesFromFile(File file, String rootName, NodeConsumer nodeConsumer) {

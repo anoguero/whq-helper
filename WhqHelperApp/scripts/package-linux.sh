@@ -18,7 +18,7 @@ MAIN_JAR="$ARTIFACT_ID-$VERSION.jar"
 LINUX_INPUT_DIR="$PROJECT_ROOT/target/linux-input"
 OUTPUT_DIR="$PROJECT_ROOT/target/linux-package"
 LINUX_SWT_JAR="$PROJECT_ROOT/lib/org.eclipse.swt.gtk.linux.x86_64-3.127.0.jar"
-LINUX_ICON="$PROJECT_ROOT/resources/logo.png"
+LINUX_ICON="$PROJECT_ROOT/../shared/branding/logo.png"
 
 if [[ ! -f "$LINUX_SWT_JAR" ]]; then
   echo "Falta el JAR de SWT para Linux: $LINUX_SWT_JAR" >&2

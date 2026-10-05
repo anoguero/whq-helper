@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Properties;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.Language;
 
 public final class Settings {
@@ -200,7 +201,12 @@ public final class Settings {
   }
 
   private static String directoryPath(String relativePath) {
-    return appendSeparator(baseDir.resolve(relativePath).normalize().toString());
+    return appendSeparator(sharedDir(relativePath).toString());
+  }
+
+  // Los directorios de contenido apuntan al shared home (contenido base, solo lectura).
+  private static Path sharedDir(String relativePath) {
+    return AppPaths.sharedPath(baseDir, relativePath).normalize();
   }
 
   private static void normalizeDirectorySettings() {
@@ -224,8 +230,11 @@ public final class Settings {
     }
 
     Path path = resolveDirectoryPath(value);
-    if (path == null || !Files.isDirectory(path)) {
-      path = baseDir.resolve(defaultRelativeDirectory(key)).normalize();
+    // Una ruta guardada con la ubicacion por defecto antigua (<home>/data/xml/..., donde ya solo queda
+    // contenido del usuario) se migra al shared home. Un directorio personalizado se respeta.
+    boolean legacyDefault = path != null && path.endsWith(Path.of(defaultRelativeDirectory(key)));
+    if (path == null || !Files.isDirectory(path) || legacyDefault) {
+      path = sharedDir(defaultRelativeDirectory(key));
     }
 
     settings.setProperty(key, appendSeparator(path.toString()));

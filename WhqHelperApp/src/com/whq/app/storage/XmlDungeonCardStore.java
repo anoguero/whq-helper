@@ -28,6 +28,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.ContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.io.SafeXml;
@@ -50,10 +51,11 @@ public class XmlDungeonCardStore implements DungeonCardStore {
 
     public XmlDungeonCardStore(Path projectRoot) {
         this.projectRoot = projectRoot.toAbsolutePath().normalize();
-        this.xmlDirectory = this.projectRoot.resolve(XML_DIR);
-        this.xmlPath = this.projectRoot.resolve(XML_PATH);
+        // Catalogo base y esquema en el shared home; las cartas del usuario en el runtime home.
+        this.xmlDirectory = AppPaths.sharedPath(this.projectRoot, XML_DIR);
+        this.xmlPath = AppPaths.sharedPath(this.projectRoot, XML_PATH);
         this.userXmlPath = this.projectRoot.resolve(USER_XML_PATH);
-        this.schemaPath = this.projectRoot.resolve(SCHEMA_PATH);
+        this.schemaPath = AppPaths.sharedPath(this.projectRoot, SCHEMA_PATH);
         this.parserFactory = SafeXml.newFactory();
         this.parserFactory.setNamespaceAware(true);
     }
@@ -264,9 +266,8 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             if (!Files.isDirectory(xmlDirectory)) {
                 return List.of(xmlPath);
             }
-            try (var stream = Files.list(xmlDirectory)) {
+            try (var stream = AppPaths.listContentFiles(projectRoot, XML_DIR).stream()) {
                 return stream
-                        .filter(Files::isRegularFile)
                         .filter(path -> path.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".xml"))
                         .sorted(Comparator
                                 .comparing((Path path) -> !path.getFileName().toString().toLowerCase(Locale.ROOT).startsWith("userdefined-"))

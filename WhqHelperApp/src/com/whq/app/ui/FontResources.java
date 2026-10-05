@@ -12,6 +12,8 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 
+import com.whq.app.AppPaths;
+
 public final class FontResources {
 
   private FontResources() {
@@ -22,7 +24,7 @@ public final class FontResources {
       return;
     }
 
-    Path fontDir = projectRoot.toAbsolutePath().normalize().resolve("data/fonts");
+    Path fontDir = AppPaths.sharedPath(projectRoot, "data/fonts");
     if (!Files.isDirectory(fontDir)) {
       return;
     }

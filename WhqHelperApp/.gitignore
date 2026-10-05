@@ -15,9 +15,5 @@
 # User-defined content
 /data/**/userdefined-*
 
-# Tile drafts (not ready yet)
-/resources/tiles/ad/
-/resources/tiles/at/
-
 # Local archives
 /*.tar.gz

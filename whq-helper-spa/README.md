@@ -32,7 +32,17 @@ Como es una SPA para hosting estático, no escribe en disco del servidor.
 - Estado de tablas activas: `localStorage`
 - Cambios de cartas de mazmorra / importaciones CSV: `localStorage`
 - Overrides de XML editados: `localStorage`
-- Los XML originales en `public/data/xml` se usan como base de lectura inicial.
+- Los XML originales de `../shared/data/xml` se usan como base de lectura inicial.
+
+## Contenido
+
+La SPA no tiene carpeta `public/`: `vite.config.ts` apunta `publicDir` a `../shared`, la fuente única de contenido del repositorio. Vite la sirve en `npm run dev` y la copia a `dist/` en `npm run build`, así que las rutas no cambian:
+
+- `/content-manifest.json`: lista de XML que carga la SPA.
+- `/settings.cfg`: configuración por defecto.
+- `/data/xml/...`, `/data/graphics/...`, `/data/fonts/...`, `/data/i18n/...`
+- `/resources/...`: plantillas, tiles, UI y contadores.
+- `/branding/logo.png`: favicon e icono.
 
 ## Ejecutar
 

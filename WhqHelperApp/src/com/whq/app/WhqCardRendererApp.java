@@ -9,7 +9,9 @@ import com.whq.app.ui.AppWindow;
 public class WhqCardRendererApp {
     public static void main(String[] args) {
         Path appHome = AppPaths.resolveAppHome();
+        Path sharedHome = AppPaths.resolveSharedHome(appHome);
         Path projectRoot = AppPaths.prepareRuntimeHome(appHome);
+        AppPaths.bindSharedHome(projectRoot, sharedHome);
         Display display = new Display();
 
         try {

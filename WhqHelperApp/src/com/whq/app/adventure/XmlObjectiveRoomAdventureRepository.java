@@ -24,6 +24,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.ContentTranslations;
 import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
@@ -46,10 +47,11 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
     public XmlObjectiveRoomAdventureRepository(Path projectRoot) {
         Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
         this.projectRoot = normalizedRoot;
-        this.xmlDirectory = normalizedRoot.resolve(XML_DIR);
-        this.xmlPath = normalizedRoot.resolve(XML_PATH);
+        // Aventuras base y esquema en el shared home; las del usuario en el runtime home.
+        this.xmlDirectory = AppPaths.sharedPath(normalizedRoot, XML_DIR);
+        this.xmlPath = AppPaths.sharedPath(normalizedRoot, XML_PATH);
         this.userXmlPath = normalizedRoot.resolve(USER_XML_PATH);
-        this.schemaPath = normalizedRoot.resolve(SCHEMA_PATH);
+        this.schemaPath = AppPaths.sharedPath(normalizedRoot, SCHEMA_PATH);
         this.parserFactory = SafeXml.newFactory();
         this.parserFactory.setNamespaceAware(true);
     }
@@ -234,9 +236,8 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         if (!Files.isDirectory(xmlDirectory)) {
             return List.of(xmlPath);
         }
-        try (var stream = Files.list(xmlDirectory)) {
+        try (var stream = AppPaths.listContentFiles(projectRoot, XML_DIR).stream()) {
             return stream
-                    .filter(Files::isRegularFile)
                     .filter(path -> path.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".xml"))
                     .sorted(Comparator
                             .comparing((Path path) -> !path.getFileName().toString().toLowerCase(Locale.ROOT).startsWith("userdefined-"))
