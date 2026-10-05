@@ -5,9 +5,9 @@ import { findAnyEvent, loadContent } from './content';
 import { applyTableActiveState, buildDecks, getMonsterNumber } from './deck';
 import { loadSettings, saveSettings } from './settings';
 import { renderEventCard, renderMonsterCard, renderSettlementLocationCard } from './render';
-import { DungeonCardStore } from './dungeonStore';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
 import { getWhiteDwarfReference } from './whiteDwarfReferences';
+import { appState } from './state';
 import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
 import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from './counterAssets';
 import {
@@ -134,13 +134,6 @@ const DECKS: DeckMeta[] = [
   }
 ];
 
-let repository: ContentRepository;
-let settings: AppSettings;
-let decks: DeckBundle;
-const dungeonStore = new DungeonCardStore();
-
-let dungeonCards: DungeonCard[] = [];
-
 let zIndexCounter = 20;
 const CARD_WINDOW_WIDTH = 320;
 const CARD_WINDOW_HEIGHT = 500;
@@ -181,20 +174,20 @@ function clampProbability(value: number): number {
 }
 
 function syncPartySize(): void {
-  settings.partyWarriors = settings.partyWarriors.filter((id, index, array) => !!repository.warriors.get(id) && array.indexOf(id) === index);
-  if (settings.partyWarriors.length === 0) {
-    settings.partyWarriors = ['warrior-barbarian', 'warrior-dwarf', 'warrior-elf', 'warrior-wizard'].filter((id) =>
-      repository.warriors.has(id)
+  appState.settings.partyWarriors = appState.settings.partyWarriors.filter((id, index, array) => !!appState.repository.warriors.get(id) && array.indexOf(id) === index);
+  if (appState.settings.partyWarriors.length === 0) {
+    appState.settings.partyWarriors = ['warrior-barbarian', 'warrior-dwarf', 'warrior-elf', 'warrior-wizard'].filter((id) =>
+      appState.repository.warriors.has(id)
     );
   }
-  if (settings.partyWarriors.length === 0) {
-    settings.partyWarriors = Array.from(repository.warriors.keys()).slice(0, 4);
+  if (appState.settings.partyWarriors.length === 0) {
+    appState.settings.partyWarriors = Array.from(appState.repository.warriors.keys()).slice(0, 4);
   }
-  settings.partySize = Math.max(1, settings.partyWarriors.length);
+  appState.settings.partySize = Math.max(1, appState.settings.partyWarriors.length);
 }
 
 function resetWarriorCounterPool(): void {
-  warriorCounterAvailableIds = new Set(settings.partyWarriors);
+  warriorCounterAvailableIds = new Set(appState.settings.partyWarriors);
   warriorCounterOpenIds = new Set<string>();
   warriorCounterCascadeIndex = 0;
 }
@@ -205,16 +198,16 @@ function warriorDisplayLabel(warrior: WarriorDefinition): string {
 
 function locationVisitorLabel(visitorId: string): string {
   if (visitorId === 'all') {
-    return t(settings.language, 'settlement.type.any');
+    return t(appState.settings.language, 'settlement.type.any');
   }
   // Los ids de visitante en locations.xml van sin el prefijo "warrior-" con el que se registran los
   // guerreros (p.ej. "elf" -> "warrior-elf"). Intentamos ambas formas antes de caer al id crudo.
-  const warrior = repository.warriors.get(visitorId) ?? repository.warriors.get(`warrior-${visitorId}`);
+  const warrior = appState.repository.warriors.get(visitorId) ?? appState.repository.warriors.get(`warrior-${visitorId}`);
   return warrior?.name ?? visitorId;
 }
 
 function settlementTypeLabel(type: SettlementType): string {
-  return t(settings.language, `settlement.type.${type}`);
+  return t(appState.settings.language, `settlement.type.${type}`);
 }
 
 function normalizeSettlementLocationType(value: string): SettlementType {
@@ -225,12 +218,12 @@ function normalizeSettlementLocationType(value: string): SettlementType {
 }
 
 async function applyLanguageChange(language: LanguageCode): Promise<void> {
-  settings.language = language;
-  await Promise.all([dungeonStore.setLanguage(language)]);
-  repository = await loadContent(language);
+  appState.settings.language = language;
+  await Promise.all([appState.dungeonStore.setLanguage(language)]);
+  appState.repository = await loadContent(language);
   syncPartySize();
   resetWarriorCounterPool();
-  saveSettings(settings);
+  saveSettings(appState.settings);
   render();
 }
 
@@ -324,58 +317,58 @@ function buildControls(): void {
 
   controls.innerHTML = `
     <label>
-      ${t(settings.language, 'controls.language')}
+      ${t(appState.settings.language, 'controls.language')}
       <select id="languageSelect">
-        <option value="ES" ${settings.language === 'ES' ? 'selected' : ''}>Español</option>
-        <option value="EN" ${settings.language === 'EN' ? 'selected' : ''}>English</option>
+        <option value="ES" ${appState.settings.language === 'ES' ? 'selected' : ''}>Español</option>
+        <option value="EN" ${appState.settings.language === 'EN' ? 'selected' : ''}>English</option>
       </select>
     </label>
 
     <label>
-      ${t(settings.language, 'controls.ambience')}
+      ${t(appState.settings.language, 'controls.ambience')}
       <select id="ambienceSelect">
-        ${getAdventureAmbiences(settings.language)
+        ${getAdventureAmbiences(appState.settings.language)
           .map(
           (ambience) =>
-            `<option value="${ambience.value}" ${settings.adventureAmbience === ambience.value ? 'selected' : ''}>${ambience.label}</option>`
+            `<option value="${ambience.value}" ${appState.settings.adventureAmbience === ambience.value ? 'selected' : ''}>${ambience.label}</option>`
           )
           .join('')}
       </select>
     </label>
 
     <div class="party-summary-control">
-      <span class="party-summary-label">${t(settings.language, 'controls.partyMembers')}</span>
-      <strong>${settings.partyWarriors
-        .map((id) => repository.warriors.get(id)?.name ?? id)
+      <span class="party-summary-label">${t(appState.settings.language, 'controls.partyMembers')}</span>
+      <strong>${appState.settings.partyWarriors
+        .map((id) => appState.repository.warriors.get(id)?.name ?? id)
         .join(', ')}</strong>
-      <small>${tf(settings.language, 'party.size', { count: settings.partySize })}</small>
+      <small>${tf(appState.settings.language, 'party.size', { count: appState.settings.partySize })}</small>
     </div>
 
     <label>
-      ${t(settings.language, 'controls.eventProbability')}
-      <input id="eventProbabilityInput" type="number" min="0" max="100" value="${settings.eventProbability}">
+      ${t(appState.settings.language, 'controls.eventProbability')}
+      <input id="eventProbabilityInput" type="number" min="0" max="100" value="${appState.settings.eventProbability}">
     </label>
 
     <label>
-      ${t(settings.language, 'controls.goldProbability')}
-      <input id="goldProbabilityInput" type="number" min="0" max="100" value="${settings.treasureGoldProbability}">
+      ${t(appState.settings.language, 'controls.goldProbability')}
+      <input id="goldProbabilityInput" type="number" min="0" max="100" value="${appState.settings.treasureGoldProbability}">
     </label>
 
     <fieldset class="mode-field">
       <label>
-        <input type="radio" name="mode" value="table" ${settings.simulateDeck ? '' : 'checked'}>
-        ${t(settings.language, 'menu.item.simulateTable')}
+        <input type="radio" name="mode" value="table" ${appState.settings.simulateDeck ? '' : 'checked'}>
+        ${t(appState.settings.language, 'menu.item.simulateTable')}
       </label>
       <label>
-        <input type="radio" name="mode" value="deck" ${settings.simulateDeck ? 'checked' : ''}>
-        ${t(settings.language, 'menu.item.simulateDeck')}
+        <input type="radio" name="mode" value="deck" ${appState.settings.simulateDeck ? 'checked' : ''}>
+        ${t(appState.settings.language, 'menu.item.simulateDeck')}
       </label>
     </fieldset>
 
     <div class="control-actions">
-      <button type="button" id="setPartyBtn">${t(settings.language, 'controls.setParty')}</button>
-      <button type="button" id="activateTablesBtn">${t(settings.language, 'menu.item.activateTables')}</button>
-      <button type="button" id="closeCardsBtn">${t(settings.language, 'menu.item.closeAllCards')}</button>
+      <button type="button" id="setPartyBtn">${t(appState.settings.language, 'controls.setParty')}</button>
+      <button type="button" id="activateTablesBtn">${t(appState.settings.language, 'menu.item.activateTables')}</button>
+      <button type="button" id="closeCardsBtn">${t(appState.settings.language, 'menu.item.closeAllCards')}</button>
     </div>
   `;
 
@@ -385,25 +378,25 @@ function buildControls(): void {
   });
 
   controls.querySelector<HTMLSelectElement>('#ambienceSelect')?.addEventListener('change', (event) => {
-    settings.adventureAmbience = (event.target as HTMLSelectElement).value;
+    appState.settings.adventureAmbience = (event.target as HTMLSelectElement).value;
     rebuildDecks();
   });
 
   controls.querySelector<HTMLInputElement>('#eventProbabilityInput')?.addEventListener('change', (event) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    settings.eventProbability = clampProbability(Number.isFinite(value) ? value : settings.eventProbability);
+    appState.settings.eventProbability = clampProbability(Number.isFinite(value) ? value : appState.settings.eventProbability);
     rebuildDecks();
   });
 
   controls.querySelector<HTMLInputElement>('#goldProbabilityInput')?.addEventListener('change', (event) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
-    settings.treasureGoldProbability = clampProbability(Number.isFinite(value) ? value : settings.treasureGoldProbability);
+    appState.settings.treasureGoldProbability = clampProbability(Number.isFinite(value) ? value : appState.settings.treasureGoldProbability);
     rebuildDecks();
   });
 
   controls.querySelectorAll<HTMLInputElement>('input[name="mode"]').forEach((radio) => {
     radio.addEventListener('change', () => {
-      settings.simulateDeck = radio.value === 'deck';
+      appState.settings.simulateDeck = radio.value === 'deck';
       rebuildDecks();
     });
   });
@@ -442,11 +435,11 @@ function openWhiteDwarfReferenceDialog(card: DungeonCard): void {
 
   dialog.innerHTML = `
     <form method="dialog" class="white-dwarf-reference-dialog">
-      <h2>${escapeHtml(reference.title[settings.language])}</h2>
+      <h2>${escapeHtml(reference.title[appState.settings.language])}</h2>
       <p class="white-dwarf-reference-source">${escapeHtml(reference.source)}</p>
-      <div class="white-dwarf-reference-body">${escapeHtml(reference.text[settings.language]).replaceAll('\n', '<br>')}</div>
+      <div class="white-dwarf-reference-body">${escapeHtml(reference.text[appState.settings.language]).replaceAll('\n', '<br>')}</div>
       <menu>
-        <button value="cancel">${t(settings.language, 'dialog.button.close')}</button>
+        <button value="cancel">${t(appState.settings.language, 'dialog.button.close')}</button>
       </menu>
     </form>
   `;
@@ -459,18 +452,18 @@ function openPartyDialog(): void {
   if (!dialog) {
     return;
   }
-  const available = Array.from(repository.warriors.values()).sort((left, right) =>
+  const available = Array.from(appState.repository.warriors.values()).sort((left, right) =>
     left.name.localeCompare(right.name, undefined, { sensitivity: 'base' })
   );
-  const selected = [...settings.partyWarriors];
+  const selected = [...appState.settings.partyWarriors];
 
   const renderPartyDialog = (): void => {
     dialog.innerHTML = `
       <form method="dialog" class="party-dialog">
-        <h2>${t(settings.language, 'party.title')}</h2>
+        <h2>${t(appState.settings.language, 'party.title')}</h2>
         <div class="party-dialog-layout">
           <section>
-            <label>${t(settings.language, 'party.available')}
+            <label>${t(appState.settings.language, 'party.available')}
               <select id="partyAvailableSelect">
                 ${available
                   .map((warrior) => `<option value="${escapeHtml(warrior.id)}">${escapeHtml(warriorDisplayLabel(warrior))}</option>`)
@@ -483,23 +476,23 @@ function openPartyDialog(): void {
             </div>
           </section>
           <section>
-            <label>${t(settings.language, 'party.selected')}
+            <label>${t(appState.settings.language, 'party.selected')}
               <select id="partySelectedList" size="10">
                 ${selected
                   .map((warriorId) => {
-                    const warrior = repository.warriors.get(warriorId);
+                    const warrior = appState.repository.warriors.get(warriorId);
                     const label = warrior ? warriorDisplayLabel(warrior) : warriorId;
                     return `<option value="${escapeHtml(warriorId)}">${escapeHtml(label)}</option>`;
                   })
                   .join('')}
               </select>
             </label>
-            <p class="party-dialog-size">${tf(settings.language, 'party.size', { count: selected.length })}</p>
+            <p class="party-dialog-size">${tf(appState.settings.language, 'party.size', { count: selected.length })}</p>
           </section>
         </div>
         <menu>
-          <button value="cancel">${t(settings.language, 'dialog.button.cancel')}</button>
-          <button type="button" id="partySaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button value="cancel">${t(appState.settings.language, 'dialog.button.cancel')}</button>
+          <button type="button" id="partySaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </menu>
       </form>
     `;
@@ -523,13 +516,13 @@ function openPartyDialog(): void {
 
     dialog.querySelector<HTMLButtonElement>('#partySaveBtn')?.addEventListener('click', () => {
       if (selected.length === 0) {
-        window.alert(t(settings.language, 'party.selectAtLeastOne'));
+        window.alert(t(appState.settings.language, 'party.selectAtLeastOne'));
         return;
       }
-      settings.partyWarriors = [...selected];
+      appState.settings.partyWarriors = [...selected];
       syncPartySize();
       resetWarriorCounterPool();
-      saveSettings(settings);
+      saveSettings(appState.settings);
       buildControls();
       dialog.close();
     });
@@ -583,13 +576,13 @@ function openWarriorCounterWindow(warrior: WarriorDefinition): void {
 }
 
 function drawWarriorCounter(): void {
-  const availableIds = [...warriorCounterAvailableIds].filter((id) => settings.partyWarriors.includes(id) && !warriorCounterOpenIds.has(id));
+  const availableIds = [...warriorCounterAvailableIds].filter((id) => appState.settings.partyWarriors.includes(id) && !warriorCounterOpenIds.has(id));
   if (availableIds.length === 0) {
-    window.alert(t(settings.language, 'warriorCounter.noneLeft'));
+    window.alert(t(appState.settings.language, 'warriorCounter.noneLeft'));
     return;
   }
   const selectedId = availableIds[Math.floor(Math.random() * availableIds.length)] ?? '';
-  const warrior = repository.warriors.get(selectedId);
+  const warrior = appState.repository.warriors.get(selectedId);
   if (!warrior) {
     return;
   }
@@ -599,7 +592,7 @@ function drawWarriorCounter(): void {
 }
 
 function settlementLocationsForType(type: SettlementType): SettlementLocation[] {
-  return Array.from(repository.locations.values())
+  return Array.from(appState.repository.locations.values())
     .filter((location) => type === 'any' || location.availableTypes.includes(type))
     .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
 }
@@ -621,28 +614,28 @@ function openSettlementSimulatorPanel(): void {
     panel.innerHTML = `
       <section class="simulator-layout settlement-inline-layout">
         <header>
-          <h2>${t(settings.language, 'settlement.title')}</h2>
-          <p>${t(settings.language, 'deck.settlement.subtitle')}</p>
+          <h2>${t(appState.settings.language, 'settlement.title')}</h2>
+          <p>${t(appState.settings.language, 'deck.settlement.subtitle')}</p>
         </header>
         <section class="settlement-layout">
           <div class="settlement-left">
             <section class="settlement-top">
               <article class="deck settlement-settlement-deck">
-              <label style="width: 100%; color: beige;">${t(settings.language, 'settlement.type')}
+              <label style="width: 100%; color: beige;">${t(appState.settings.language, 'settlement.type')}
                 <select id="settlementTypeSelect" style="width: 100%">
-                  ${getSettlementTypes(settings.language)
+                  ${getSettlementTypes(appState.settings.language)
                     .map((entry) => `<option value="${entry.value}" ${entry.value === currentType ? 'selected' : ''}>${escapeHtml(entry.label)}</option>`)
                     .join('')}
                 </select>
               </label>
-              <label style="width: 100%; color: beige;">${t(settings.language, 'settlement.locations')}
+              <label style="width: 100%; color: beige;">${t(appState.settings.language, 'settlement.locations')}
                 <select id="settlementLocationList" size="12" style="width: 100%">
                   ${
                     locations.length > 0
                       ? locations
                           .map((location) => `<option value="${escapeHtml(location.id)}" ${location.id === selectedLocationId ? 'selected' : ''}>${escapeHtml(location.name)}</option>`)
                           .join('')
-                      : `<option value="">${escapeHtml(t(settings.language, 'settlement.noLocations'))}</option>`
+                      : `<option value="">${escapeHtml(t(appState.settings.language, 'settlement.noLocations'))}</option>`
                   }
                 </select>
               </label>
@@ -651,13 +644,13 @@ function openSettlementSimulatorPanel(): void {
             <section class="settlement-bottom">
               <article class="deck settlement-settlement-deck">
                 <button type="button" class="deck-button" id="settlementDrawBtn">
-                  <img src="/data/graphics/settlement.png" alt="${escapeHtml(t(settings.language, 'deck.settlement.title'))}" />
-                  <span>${t(settings.language, 'button.clickHere')}</span>
+                  <img src="/data/graphics/settlement.png" alt="${escapeHtml(t(appState.settings.language, 'deck.settlement.title'))}" />
+                  <span>${t(appState.settings.language, 'button.clickHere')}</span>
                 </button>
-                <small>${decks.settlement.size()} ${t(settings.language, 'controls.entries')}</small>
+                <small>${appState.decks.settlement.size()} ${t(appState.settings.language, 'controls.entries')}</small>
                 <div class="dashboard-inline-actions">
-                  <button type="button" class="secondary-button" id="settlementCloseCardsBtn">${t(settings.language, 'menu.item.closeAllCards')}</button>
-                  <button type="button" class="secondary-button" id="closeSettlementPanelBtn">${t(settings.language, 'dialog.button.close')}</button>
+                  <button type="button" class="secondary-button" id="settlementCloseCardsBtn">${t(appState.settings.language, 'menu.item.closeAllCards')}</button>
+                  <button type="button" class="secondary-button" id="closeSettlementPanelBtn">${t(appState.settings.language, 'dialog.button.close')}</button>
                 </div>
               </article>
             </section>
@@ -666,7 +659,7 @@ function openSettlementSimulatorPanel(): void {
             ${
               selected
                 ? renderSettlementLocationCard(selected, selected.visitors.map((visitor) => locationVisitorLabel(visitor)))
-                : `<p>${escapeHtml(t(settings.language, 'settlement.noLocations'))}</p>`
+                : `<p>${escapeHtml(t(appState.settings.language, 'settlement.noLocations'))}</p>`
             }
           </div>
         </section>
@@ -685,7 +678,7 @@ function openSettlementSimulatorPanel(): void {
       drawFromDeck('settlement');
       const entries = panel.querySelector<HTMLElement>('.settlement-settlement-deck small');
       if (entries) {
-        entries.textContent = `${decks.settlement.size()} ${t(settings.language, 'controls.entries')}`;
+        entries.textContent = `${appState.decks.settlement.size()} ${t(appState.settings.language, 'controls.entries')}`;
       }
     });
     panel.querySelector<HTMLButtonElement>('#settlementCloseCardsBtn')?.addEventListener('click', () => {
@@ -715,12 +708,12 @@ function closeSettlementSimulatorPanel(): void {
 
 function getActiveTreasureEvents(): EventModel[] {
   const treasures = new Map<string, EventModel>();
-  for (const table of repository.tables.values()) {
+  for (const table of appState.repository.tables.values()) {
     if (!table.active || table.kind !== 'treasure') {
       continue;
     }
     for (const entry of table.events) {
-      const event = repository.events.get(entry.id);
+      const event = appState.repository.events.get(entry.id);
       if (event?.treasure) {
         treasures.set(event.id, event);
       }
@@ -738,22 +731,22 @@ function openTreasureSearchDialog(): void {
   const treasures = getActiveTreasureEvents();
   dialog.innerHTML = `
     <form method="dialog" class="treasure-search-dialog">
-      <h2>${t(settings.language, 'treasureSearch.title')}</h2>
-      <label>${t(settings.language, 'treasureSearch.filter')}
-        <input id="treasureSearchInput" type="text" autocomplete="off" placeholder="${t(settings.language, 'treasureSearch.placeholder')}">
+      <h2>${t(appState.settings.language, 'treasureSearch.title')}</h2>
+      <label>${t(appState.settings.language, 'treasureSearch.filter')}
+        <input id="treasureSearchInput" type="text" autocomplete="off" placeholder="${t(appState.settings.language, 'treasureSearch.placeholder')}">
       </label>
       <div class="treasure-search-layout">
         <section class="treasure-search-results">
-          <h3>${t(settings.language, 'treasureSearch.results')}</h3>
+          <h3>${t(appState.settings.language, 'treasureSearch.results')}</h3>
           <div id="treasureSearchList" class="table-list"></div>
         </section>
         <section class="treasure-search-preview">
-          <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+          <h3>${t(appState.settings.language, 'contentDashboard.cardPreview')}</h3>
           <div id="treasureSearchPreview" class="treasure-card-preview"></div>
         </section>
       </div>
       <menu>
-        <button value="cancel">${t(settings.language, 'dialog.button.close')}</button>
+        <button value="cancel">${t(appState.settings.language, 'dialog.button.close')}</button>
       </menu>
     </form>
   `;
@@ -765,7 +758,7 @@ function openTreasureSearchDialog(): void {
 
   const renderPreview = (): void => {
     const selected = treasures.find((event) => event.id === selectedId) ?? null;
-    preview.innerHTML = selected ? renderEventCard(selected, settings.language) : `<p>${t(settings.language, 'treasureSearch.empty')}</p>`;
+    preview.innerHTML = selected ? renderEventCard(selected, appState.settings.language) : `<p>${t(appState.settings.language, 'treasureSearch.empty')}</p>`;
     fitTreasureHeaderText(preview);
   };
 
@@ -787,7 +780,7 @@ function openTreasureSearchDialog(): void {
             `
           )
           .join('')
-      : `<p>${t(settings.language, 'treasureSearch.noResults')}</p>`;
+      : `<p>${t(appState.settings.language, 'treasureSearch.noResults')}</p>`;
 
     list.querySelectorAll<HTMLButtonElement>('[data-event-id]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -812,7 +805,7 @@ function buildDeckToggles(): void {
   }
 
   container.innerHTML = DECKS.map((deck) => {
-    const checked = settings[deck.toggleKey] ? 'checked' : '';
+    const checked = appState.settings[deck.toggleKey] ? 'checked' : '';
     const labelKey =
       deck.toggleKey === 'showEventDeck'
         ? 'toggle.showEventDeck'
@@ -827,7 +820,7 @@ function buildDeckToggles(): void {
     return `
       <label>
         <input type="checkbox" data-toggle="${deck.toggleKey}" ${checked}>
-        ${t(settings.language, labelKey)}
+        ${t(appState.settings.language, labelKey)}
       </label>
     `;
   }).join('');
@@ -835,15 +828,15 @@ function buildDeckToggles(): void {
   container.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
       const key = checkbox.dataset.toggle as DeckMeta['toggleKey'];
-      settings[key] = checkbox.checked;
-      saveSettings(settings);
+      appState.settings[key] = checkbox.checked;
+      saveSettings(appState.settings);
       renderDecks();
     });
   });
 }
 
 function deckVisible(meta: DeckMeta): boolean {
-  return settings[meta.toggleKey];
+  return appState.settings[meta.toggleKey];
 }
 
 function renderDecks(): void {
@@ -854,16 +847,16 @@ function renderDecks(): void {
 
   section.innerHTML = DECKS.filter(deckVisible)
     .map((deck) => {
-      const list = decks[deck.key];
+      const list = appState.decks[deck.key];
       return `
         <article class="deck" data-deck="${deck.key}">
-          <h3>${t(settings.language, deck.titleKey)}</h3>
-          <p>${t(settings.language, deck.subtitleKey)}</p>
+          <h3>${t(appState.settings.language, deck.titleKey)}</h3>
+          <p>${t(appState.settings.language, deck.subtitleKey)}</p>
           <button class="deck-button" data-draw="${deck.key}">
-            <img src="${deck.image}" alt="${t(settings.language, deck.titleKey)}" />
-            <span>${t(settings.language, 'button.clickHere')}</span>
+            <img src="${deck.image}" alt="${t(appState.settings.language, deck.titleKey)}" />
+            <span>${t(appState.settings.language, 'button.clickHere')}</span>
           </button>
-          <small>${list.size()} ${t(settings.language, 'controls.entries')}</small>
+          <small>${list.size()} ${t(appState.settings.language, 'controls.entries')}</small>
         </article>
       `;
     })
@@ -878,10 +871,10 @@ function renderDecks(): void {
 }
 
 function drawFromDeck(deckKey: keyof DeckBundle): void {
-  const list = decks[deckKey];
+  const list = appState.decks[deckKey];
   if (list.size() < 1) {
     const wantsActivate = window.confirm(
-      `${t(settings.language, 'dialog.deck.emptyTitle')}\n\n${t(settings.language, 'dialog.deck.emptyMessage')}`
+      `${t(appState.settings.language, 'dialog.deck.emptyTitle')}\n\n${t(appState.settings.language, 'dialog.deck.emptyMessage')}`
     );
     if (wantsActivate) {
       openTableDialog();
@@ -930,27 +923,27 @@ function showEntry(entry: DrawEntry): void {
   windowEl.appendChild(closeButton);
 
   if (entry.kind === 'event') {
-    const event = findAnyEvent(repository, entry.id);
+    const event = findAnyEvent(appState.repository, entry.id);
     if (!event) {
-      window.alert(`${t(settings.language, 'dialog.card.notFound.event')}: ${entry.id}`);
+      window.alert(`${t(appState.settings.language, 'dialog.card.notFound.event')}: ${entry.id}`);
       return;
     }
-    windowEl.insertAdjacentHTML('beforeend', renderEventCard(event, settings.language));
+    windowEl.insertAdjacentHTML('beforeend', renderEventCard(event, appState.settings.language));
   } else if (entry.kind === 'tableRef') {
     window.alert(`Unresolved table reference: ${entry.tableName}`);
     return;
   } else {
-    const monster = repository.monsters.get(entry.id);
+    const monster = appState.repository.monsters.get(entry.id);
     if (!monster) {
-      window.alert(`${t(settings.language, 'dialog.card.notFound.monster')}: ${entry.id}`);
+      window.alert(`${t(appState.settings.language, 'dialog.card.notFound.monster')}: ${entry.id}`);
       return;
     }
 
-    const number = getMonsterNumber(entry, settings.partySize);
+    const number = getMonsterNumber(entry, appState.settings.partySize);
     const title = number > 0 ? `${number} ${number > 1 ? monster.plural : monster.name}` : `* ${monster.name}`;
     windowEl.insertAdjacentHTML(
       'beforeend',
-      renderMonsterCard(monster, title, entry, entry.appendSpecials, repository.rules, settings.language)
+      renderMonsterCard(monster, title, entry, entry.appendSpecials, appState.repository.rules, appState.settings.language)
     );
   }
 
@@ -964,7 +957,7 @@ function showEntry(entry: DrawEntry): void {
     const target = event.target as HTMLElement;
     if (target.matches('.rule-link')) {
       const id = target.getAttribute('data-rule-id') ?? '';
-      const rule = repository.rules.get(id);
+      const rule = appState.repository.rules.get(id);
       if (rule?.text) {
         window.alert(`${rule.name || id}\n\n${rule.text}`);
       }
@@ -1060,7 +1053,7 @@ function openTableDialog(): void {
     return 'events';
   };
 
-  const tables = Array.from(repository.tables.values()).sort((a, b) => {
+  const tables = Array.from(appState.repository.tables.values()).sort((a, b) => {
     const themeDiff = themeOrder.indexOf(tableTheme(a)) - themeOrder.indexOf(tableTheme(b));
     if (themeDiff !== 0) {
       return themeDiff;
@@ -1084,7 +1077,7 @@ function openTableDialog(): void {
       }
       return `
         <section class="table-section">
-          <h3>${t(settings.language, themeLabelKey[theme])}</h3>
+          <h3>${t(appState.settings.language, themeLabelKey[theme])}</h3>
           ${items
             .map(
               (table) => `
@@ -1108,12 +1101,12 @@ function openTableDialog(): void {
       if (!tableName) {
         return;
       }
-      const table = repository.tables.get(tableName);
+      const table = appState.repository.tables.get(tableName);
       if (!table) {
         return;
       }
       table.active = checkbox.checked;
-      settings.tableActive[table.name] = checkbox.checked;
+      appState.settings.tableActive[table.name] = checkbox.checked;
     });
 
     rebuildDecks();
@@ -1130,7 +1123,7 @@ function openTableDialog(): void {
 }
 
 function refreshDungeonCards(): void {
-  dungeonCards = dungeonStore.loadCards();
+  appState.dungeonCards = appState.dungeonStore.loadCards();
 }
 
 function openMaintenanceDialog(): void {
@@ -1139,7 +1132,7 @@ function openMaintenanceDialog(): void {
     return;
   }
 
-  const cards = dungeonStore
+  const cards = appState.dungeonStore
     .loadCards()
     .slice()
     .sort((left, right) => {
@@ -1156,20 +1149,20 @@ function openMaintenanceDialog(): void {
 
   dialog.innerHTML = `
     <form method="dialog" class="maintenance-grid">
-      <h2>${t(settings.language, 'dialog.tileConfig.title')}</h2>
-      <p>${t(settings.language, 'dialog.tileConfig.description')}</p>
+      <h2>${t(appState.settings.language, 'dialog.tileConfig.title')}</h2>
+      <p>${t(appState.settings.language, 'dialog.tileConfig.description')}</p>
       <div class="tile-config-toolbar">
         <label>
-          ${t(settings.language, 'dialog.tileConfig.environment')}
+          ${t(appState.settings.language, 'dialog.tileConfig.environment')}
           <select id="tileEnvSelect"></select>
         </label>
-        <button type="button" id="tileEnableEnvBtn">${t(settings.language, 'dialog.tileConfig.enableEnvironment')}</button>
-        <button type="button" id="tileDisableEnvBtn">${t(settings.language, 'dialog.tileConfig.disableEnvironment')}</button>
+        <button type="button" id="tileEnableEnvBtn">${t(appState.settings.language, 'dialog.tileConfig.enableEnvironment')}</button>
+        <button type="button" id="tileDisableEnvBtn">${t(appState.settings.language, 'dialog.tileConfig.disableEnvironment')}</button>
       </div>
       <section id="maintenanceList" class="table-list"></section>
       <menu>
-        <button value="cancel">${t(settings.language, 'dialog.button.cancel')}</button>
-        <button type="button" id="mSave">${t(settings.language, 'dialog.button.save')}</button>
+        <button value="cancel">${t(appState.settings.language, 'dialog.button.cancel')}</button>
+        <button type="button" id="mSave">${t(appState.settings.language, 'dialog.button.save')}</button>
       </menu>
     </form>
   `;
@@ -1184,7 +1177,7 @@ function openMaintenanceDialog(): void {
   }
 
   if (cards.length === 0) {
-    list.textContent = t(settings.language, 'dialog.tileConfig.empty');
+    list.textContent = t(appState.settings.language, 'dialog.tileConfig.empty');
     saveButton.disabled = true;
     environmentSelect.disabled = true;
     enableEnvironmentButton.disabled = true;
@@ -1213,10 +1206,10 @@ function openMaintenanceDialog(): void {
     checkboxById.set(card.id, checkbox);
 
     const text = document.createElement('span');
-    text.textContent = tf(settings.language, 'dialog.tileConfig.tileEntry', {
+    text.textContent = tf(appState.settings.language, 'dialog.tileConfig.tileEntry', {
       id: card.id,
       name: card.name,
-      type: t(settings.language, `dungeon.cardType.${card.type}`),
+      type: t(appState.settings.language, `dungeon.cardType.${card.type}`),
       environment: card.environment
     });
 
@@ -1253,7 +1246,7 @@ function openMaintenanceDialog(): void {
         continue;
       }
       changed = true;
-      dungeonStore.updateCard({
+      appState.dungeonStore.updateCard({
         ...card,
         enabled
       });
@@ -1379,15 +1372,15 @@ function readFileAsDataUrl(file: File): Promise<string> {
 }
 
 async function refreshRuntimeContent(): Promise<void> {
-  await dungeonStore.init(settings.language);
-  repository = await loadContent(settings.language);
+  await appState.dungeonStore.init(appState.settings.language);
+  appState.repository = await loadContent(appState.settings.language);
   syncPartySize();
   refreshDungeonCards();
   rebuildDecks();
 }
 
 function nextUserDungeonCardId(): number {
-  const fromCards = dungeonCards.map((card) => card.id);
+  const fromCards = appState.dungeonCards.map((card) => card.id);
   const fromUserItems = loadUserContentItems()
     .filter((item): item is Extract<UserContentItem, { kind: 'dungeonCard' }> => item.kind === 'dungeonCard')
     .map((item) => item.data.id);
@@ -1423,24 +1416,24 @@ function currentDashboardItem(): UserContentItem | null {
 }
 
 function availableObjectiveRoomNames(): string[] {
-  return [...new Set(dungeonStore.loadCards().filter((card) => card.type === 'OBJECTIVE_ROOM').map((card) => card.name))]
+  return [...new Set(appState.dungeonStore.loadCards().filter((card) => card.type === 'OBJECTIVE_ROOM').map((card) => card.name))]
     .sort((left, right) => left.localeCompare(right, undefined, { sensitivity: 'base' }));
 }
 
 function availableMonsterFactions(): string[] {
-  return [...new Set(Array.from(repository.monsters.values()).flatMap((monster) => monster.factions).filter(Boolean))].sort((left, right) =>
+  return [...new Set(Array.from(appState.repository.monsters.values()).flatMap((monster) => monster.factions).filter(Boolean))].sort((left, right) =>
     left.localeCompare(right, undefined, { sensitivity: 'base' })
   );
 }
 
 function availableMonsterRules(): Rule[] {
-  return Array.from(repository.rules.values())
+  return Array.from(appState.repository.rules.values())
     .filter((rule) => rule.type !== 'magic')
     .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
 }
 
 function availableMagicRules(): Rule[] {
-  return Array.from(repository.rules.values())
+  return Array.from(appState.repository.rules.values())
     .filter((rule) => rule.type === 'magic')
     .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }));
 }
@@ -1644,7 +1637,7 @@ function summarizeMonsterCount(min: number, max: number): string {
 }
 
 function monsterEntryLabel(entry: MonsterEntry): string {
-  const monster = repository.monsters.get(entry.id);
+  const monster = appState.repository.monsters.get(entry.id);
   const name = monster?.name ?? entry.id;
   return `${name} (${entry.id}) x ${summarizeMonsterCount(entry.min, entry.max)}`;
 }
@@ -1709,37 +1702,37 @@ function createBlankEventTableItem(kind: EventTableKind): Extract<UserContentIte
 
 function dashboardSourceOptions(kind: UserContentKind): Array<{ id: string; label: string }> {
   if (kind === 'dungeonCard') {
-    return dungeonStore.loadCards().map((card) => ({ id: String(card.id), label: `${card.name} (#${card.id})` }));
+    return appState.dungeonStore.loadCards().map((card) => ({ id: String(card.id), label: `${card.name} (#${card.id})` }));
   }
   if (kind === 'treasure') {
-    return Array.from(repository.events.values())
+    return Array.from(appState.repository.events.values())
       .filter((event) => event.treasure && !event.id.toLowerCase().includes('-objective-'))
       .map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
   }
   if (kind === 'dungeonEvent') {
-    return Array.from(repository.events.values())
+    return Array.from(appState.repository.events.values())
       .filter((event) => !event.treasure)
       .map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
   }
   if (kind === 'objectiveTreasure') {
-    return Array.from(repository.events.values())
+    return Array.from(appState.repository.events.values())
       .filter((event) => event.treasure && event.id.toLowerCase().includes('-objective-'))
       .map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
   }
   if (kind === 'travelEvent') {
-    return Array.from(repository.travelEvents.values()).map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+    return Array.from(appState.repository.travelEvents.values()).map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
   }
   if (kind === 'settlementEvent') {
-    return Array.from(repository.settlementEvents.values()).map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
+    return Array.from(appState.repository.settlementEvents.values()).map((event) => ({ id: event.id, label: `${event.name} (${event.id})` }));
   }
   if (kind === 'rule') {
-    return Array.from(repository.rules.values()).map((rule) => ({ id: rule.id, label: `${rule.name} (${rule.id})` }));
+    return Array.from(appState.repository.rules.values()).map((rule) => ({ id: rule.id, label: `${rule.name} (${rule.id})` }));
   }
   if (kind === 'monster') {
-    return Array.from(repository.monsters.values()).map((monster) => ({ id: monster.id, label: `${monster.name} (${monster.id})` }));
+    return Array.from(appState.repository.monsters.values()).map((monster) => ({ id: monster.id, label: `${monster.name} (${monster.id})` }));
   }
   if (kind === 'objectiveRoomAdventure') {
-    return dungeonStore
+    return appState.dungeonStore
       .loadAllAdventures()
       .map((adventure) => ({
         id: `${adventure.objectiveRoomName}::${adventure.id}`,
@@ -1747,18 +1740,18 @@ function dashboardSourceOptions(kind: UserContentKind): Array<{ id: string; labe
       }));
   }
   if (kind === 'warrior') {
-    return Array.from(repository.warriors.values()).map((warrior) => ({
+    return Array.from(appState.repository.warriors.values()).map((warrior) => ({
       id: warrior.id,
       label: `${warrior.name} (${warrior.id})`
     }));
   }
   if (kind === 'location') {
-    return Array.from(repository.locations.values()).map((location) => ({
+    return Array.from(appState.repository.locations.values()).map((location) => ({
       id: location.id,
       label: `${location.name} (${location.id})`
     }));
   }
-  return Array.from(repository.tables.values()).map((table) => ({ id: table.name, label: table.name }));
+  return Array.from(appState.repository.tables.values()).map((table) => ({ id: table.name, label: table.name }));
 }
 
 function createBlankDashboardItem(kind: UserContentKind): UserContentItem {
@@ -1793,38 +1786,38 @@ function createModifiedDashboardItem(kind: UserContentKind, sourceId: string): U
   const updatedAt = new Date().toISOString();
   switch (kind) {
     case 'dungeonCard': {
-      const source = dungeonStore.loadCards().find((card) => String(card.id) === sourceId);
+      const source = appState.dungeonStore.loadCards().find((card) => String(card.id) === sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapDungeonCardToUserData(source) } : null;
     }
     case 'treasure':
     case 'dungeonEvent':
     case 'objectiveTreasure': {
-      const source = Array.from(repository.events.values()).find((event) => event.id === sourceId);
+      const source = Array.from(appState.repository.events.values()).find((event) => event.id === sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapEventToUserData(source) } : null;
     }
     case 'travelEvent': {
-      const source = Array.from(repository.travelEvents.values()).find((event) => event.id === sourceId);
+      const source = Array.from(appState.repository.travelEvents.values()).find((event) => event.id === sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapEventToUserData(source) } : null;
     }
     case 'settlementEvent': {
-      const source = Array.from(repository.settlementEvents.values()).find((event) => event.id === sourceId);
+      const source = Array.from(appState.repository.settlementEvents.values()).find((event) => event.id === sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapEventToUserData(source) } : null;
     }
     case 'rule': {
-      const source = repository.rules.get(sourceId);
+      const source = appState.repository.rules.get(sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapRuleToUserData(source) } : null;
     }
     case 'monster': {
-      const source = repository.monsters.get(sourceId);
+      const source = appState.repository.monsters.get(sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapMonsterToUserData(source) } : null;
     }
     case 'table': {
-      const source = repository.tables.get(sourceId);
+      const source = appState.repository.tables.get(sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapTableToUserData(source) } : null;
     }
     case 'objectiveRoomAdventure': {
       const [roomName, adventureId] = sourceId.split('::');
-      const source = dungeonStore
+      const source = appState.dungeonStore
         .loadAllAdventures()
         .find((adventure) => adventure.objectiveRoomName === roomName && adventure.id === adventureId);
       return source
@@ -1840,11 +1833,11 @@ function createModifiedDashboardItem(kind: UserContentKind, sourceId: string): U
         : null;
     }
     case 'warrior': {
-      const source = repository.warriors.get(sourceId);
+      const source = appState.repository.warriors.get(sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapWarriorToUserData(source) } : null;
     }
     case 'location': {
-      const source = repository.locations.get(sourceId);
+      const source = appState.repository.locations.get(sourceId);
       return source ? { uid, kind, mode: 'modified', sourceId, title: source.name, updatedAt, data: mapLocationToUserData(source) } : null;
     }
   }
@@ -1864,8 +1857,8 @@ function downloadUserXml(item: UserContentItem): void {
 
 function contentDashboardSubtitle(item: UserContentItem): string {
   return item.mode === 'modified'
-    ? t(settings.language, 'contentDashboard.mode.modified')
-    : t(settings.language, 'contentDashboard.mode.new');
+    ? t(appState.settings.language, 'contentDashboard.mode.modified')
+    : t(appState.settings.language, 'contentDashboard.mode.new');
 }
 
 function renderDashboardTree(container: HTMLElement): void {
@@ -1881,7 +1874,7 @@ function renderDashboardTree(container: HTMLElement): void {
       <section class="dashboard-tree-section">
         <div class="dashboard-tree-header ${selectedCreate ? 'selected' : ''}" data-create-kind="${category.kind}">
           <button type="button" class="dashboard-tree-label" data-create-kind="${category.kind}">
-            ${t(settings.language, category.titleKey)}
+            ${t(appState.settings.language, category.titleKey)}
           </button>
           <button type="button" class="dashboard-tree-add" data-create-kind="${category.kind}">+</button>
         </div>
@@ -1926,10 +1919,10 @@ function renderDashboardTree(container: HTMLElement): void {
 function renderDashboardHome(editor: HTMLElement): void {
   editor.innerHTML = `
     <div class="dashboard-empty">
-      <h2>${t(settings.language, 'contentDashboard.title')}</h2>
-      <p>${t(settings.language, 'contentDashboard.description')}</p>
+      <h2>${t(appState.settings.language, 'contentDashboard.title')}</h2>
+      <p>${t(appState.settings.language, 'contentDashboard.description')}</p>
       <div class="dashboard-create-actions">
-        <button type="button" id="dashboardTileConfigBtn">${t(settings.language, 'contentDashboard.tileConfig')}</button>
+        <button type="button" id="dashboardTileConfigBtn">${t(appState.settings.language, 'contentDashboard.tileConfig')}</button>
       </div>
     </div>
   `;
@@ -1945,33 +1938,33 @@ function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLEleme
     kind === 'table'
       ? `
       <div id="dashboardTableTypePicker" hidden>
-        <p>${t(settings.language, 'contentDashboard.tableTypePrompt')}</p>
+        <p>${t(appState.settings.language, 'contentDashboard.tableTypePrompt')}</p>
         <div class="dashboard-create-actions">
-          <button type="button" data-table-kind="monster">${t(settings.language, 'contentDashboard.tableType.monsterEncounters')}</button>
-          <button type="button" data-table-kind="dungeon">${t(settings.language, 'contentDashboard.tableType.dungeonEvents')}</button>
-          <button type="button" data-table-kind="travel">${t(settings.language, 'contentDashboard.tableType.travelEvents')}</button>
-          <button type="button" data-table-kind="settlement">${t(settings.language, 'contentDashboard.tableType.settlementEvents')}</button>
+          <button type="button" data-table-kind="monster">${t(appState.settings.language, 'contentDashboard.tableType.monsterEncounters')}</button>
+          <button type="button" data-table-kind="dungeon">${t(appState.settings.language, 'contentDashboard.tableType.dungeonEvents')}</button>
+          <button type="button" data-table-kind="travel">${t(appState.settings.language, 'contentDashboard.tableType.travelEvents')}</button>
+          <button type="button" data-table-kind="settlement">${t(appState.settings.language, 'contentDashboard.tableType.settlementEvents')}</button>
         </div>
       </div>
     `
       : '';
   editor.innerHTML = `
     <div class="dashboard-editor-shell">
-      <h2>${t(settings.language, 'contentDashboard.createPromptTitle')}</h2>
-      <p>${t(settings.language, 'contentDashboard.createPromptText')}</p>
+      <h2>${t(appState.settings.language, 'contentDashboard.createPromptTitle')}</h2>
+      <p>${t(appState.settings.language, 'contentDashboard.createPromptText')}</p>
       <div class="dashboard-create-actions">
-        <button type="button" id="dashboardCreateNewBtn">${t(settings.language, 'contentDashboard.createNew')}</button>
-        <button type="button" id="dashboardCreateModifyBtn">${t(settings.language, 'contentDashboard.createModify')}</button>
+        <button type="button" id="dashboardCreateNewBtn">${t(appState.settings.language, 'contentDashboard.createNew')}</button>
+        <button type="button" id="dashboardCreateModifyBtn">${t(appState.settings.language, 'contentDashboard.createModify')}</button>
       </div>
       ${tableTypePicker}
       <div id="dashboardSourcePicker" hidden>
         <label>
-          ${t(settings.language, 'contentDashboard.source')}
+          ${t(appState.settings.language, 'contentDashboard.source')}
           <select id="dashboardSourceSelect">
             ${options.map((option) => `<option value="${escapeHtml(option.id)}">${escapeHtml(option.label)}</option>`).join('')}
           </select>
         </label>
-        <button type="button" id="dashboardCreateFromSourceBtn">${t(settings.language, 'contentDashboard.openEditor')}</button>
+        <button type="button" id="dashboardCreateFromSourceBtn">${t(appState.settings.language, 'contentDashboard.openEditor')}</button>
       </div>
     </div>
   `;
@@ -2012,7 +2005,7 @@ function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLEleme
     const sourceId = editor.querySelector<HTMLSelectElement>('#dashboardSourceSelect')?.value ?? '';
     dashboardDraftItem = createModifiedDashboardItem(kind, sourceId);
     if (!dashboardDraftItem) {
-      window.alert(t(settings.language, 'contentDashboard.sourceNotFound'));
+      window.alert(t(appState.settings.language, 'contentDashboard.sourceNotFound'));
       return;
     }
     activeDashboardItemUid = 'draft';
@@ -2049,15 +2042,15 @@ function renderDashboardEditorShell(title: string, subtitle: string, body: strin
           <p>${subtitle}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body">
         <div class="dashboard-form">${body}</div>
         <div class="dashboard-xml-preview">
-          <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+          <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
             <textarea rows="18" readonly>${escapeHtml(xmlPreview)}</textarea>
           </label>
         </div>
@@ -2076,44 +2069,44 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
         <div>
-          <h2>${t(settings.language, 'contentDashboard.category.dungeonCard')}</h2>
+          <h2>${t(appState.settings.language, 'contentDashboard.category.dungeonCard')}</h2>
           <p>${contentDashboardSubtitle(item)}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body dungeon-card-editor-layout">
         <div class="dashboard-form">
-          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.type')}
+          <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.type')}
             <select id="ucType">
-              <option value="DUNGEON_ROOM" ${data.type === 'DUNGEON_ROOM' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.DUNGEON_ROOM')}</option>
-              <option value="OBJECTIVE_ROOM" ${data.type === 'OBJECTIVE_ROOM' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.OBJECTIVE_ROOM')}</option>
-              <option value="CORRIDOR" ${data.type === 'CORRIDOR' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.CORRIDOR')}</option>
-              <option value="SPECIAL" ${data.type === 'SPECIAL' ? 'selected' : ''}>${t(settings.language, 'dungeon.cardType.SPECIAL')}</option>
+              <option value="DUNGEON_ROOM" ${data.type === 'DUNGEON_ROOM' ? 'selected' : ''}>${t(appState.settings.language, 'dungeon.cardType.DUNGEON_ROOM')}</option>
+              <option value="OBJECTIVE_ROOM" ${data.type === 'OBJECTIVE_ROOM' ? 'selected' : ''}>${t(appState.settings.language, 'dungeon.cardType.OBJECTIVE_ROOM')}</option>
+              <option value="CORRIDOR" ${data.type === 'CORRIDOR' ? 'selected' : ''}>${t(appState.settings.language, 'dungeon.cardType.CORRIDOR')}</option>
+              <option value="SPECIAL" ${data.type === 'SPECIAL' ? 'selected' : ''}>${t(appState.settings.language, 'dungeon.cardType.SPECIAL')}</option>
             </select>
           </label>
-          <label>${t(settings.language, 'contentDashboard.field.environment')}<input id="ucEnvironment" value="${escapeHtml(data.environment)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.environment')}<input id="ucEnvironment" value="${escapeHtml(data.environment)}"></label>
           <div class="dashboard-tile-upload">
-            <label>${t(settings.language, 'contentDashboard.field.tileImagePath')}<input id="ucTileImagePath" value="${escapeHtml(getTileAssetDisplayName(data.tileImagePath))}" readonly></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.tileImagePath')}<input id="ucTileImagePath" value="${escapeHtml(getTileAssetDisplayName(data.tileImagePath))}" readonly></label>
             <div class="dashboard-inline-actions">
-              <button type="button" id="ucUploadTileBtn">${t(settings.language, 'contentDashboard.uploadTile')}</button>
+              <button type="button" id="ucUploadTileBtn">${t(appState.settings.language, 'contentDashboard.uploadTile')}</button>
               <input id="ucTileFile" type="file" accept="image/*" hidden>
             </div>
           </div>
-          <label>${t(settings.language, 'contentDashboard.field.description')}<textarea id="ucDescription" rows="6">${escapeHtml(data.descriptionText)}</textarea></label>
-          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rulesText)}</textarea></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.description')}<textarea id="ucDescription" rows="6">${escapeHtml(data.descriptionText)}</textarea></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rulesText)}</textarea></label>
           <div class="dashboard-inline-fields">
-            <label>${t(settings.language, 'contentDashboard.field.copyCount')}<input id="ucCopyCount" type="number" min="0" value="${data.copyCount}"></label>
-            <label class="dashboard-checkbox dashboard-inline-checkbox"><input id="ucEnabled" type="checkbox" ${data.enabled ? 'checked' : ''}>${t(settings.language, 'contentDashboard.field.enabled')}</label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.copyCount')}<input id="ucCopyCount" type="number" min="0" value="${data.copyCount}"></label>
+            <label class="dashboard-checkbox dashboard-inline-checkbox"><input id="ucEnabled" type="checkbox" ${data.enabled ? 'checked' : ''}>${t(appState.settings.language, 'contentDashboard.field.enabled')}</label>
           </div>
         </div>
         <div class="dashboard-preview-column">
           <section class="dashboard-card-preview">
-            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <h3>${t(appState.settings.language, 'contentDashboard.cardPreview')}</h3>
             <button type="button" id="ucWhiteDwarfReferenceBtn" ${getWhiteDwarfReference({
               id: data.id,
               name: data.name,
@@ -2124,13 +2117,13 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
               tileImagePath: data.tileImagePath,
               descriptionText: data.descriptionText,
               rulesText: data.rulesText
-            } as DungeonCard) ? '' : 'disabled'}>${t(settings.language, 'dialog.whiteDwarfReference.button')}</button>
+            } as DungeonCard) ? '' : 'disabled'}>${t(appState.settings.language, 'dialog.whiteDwarfReference.button')}</button>
             <canvas id="ucPreviewCanvas" width="847" height="1264"></canvas>
           </section>
           <section class="dashboard-xml-panel">
-            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
             <div id="ucXmlPanel" hidden>
-              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+              <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                 <textarea id="ucXmlPreview" rows="18" readonly></textarea>
               </label>
             </div>
@@ -2168,7 +2161,7 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
       whiteDwarfReferenceButton.disabled = !getWhiteDwarfReference(draftCard);
     }
     if (previewCanvas) {
-      renderDungeonCardToCanvasLocalized(previewCanvas, draftCard, settings.language).catch((error) => console.error(error));
+      renderDungeonCardToCanvasLocalized(previewCanvas, draftCard, appState.settings.language).catch((error) => console.error(error));
     }
     if (xmlPreview) {
       xmlPreview.value = userContentItemXml({
@@ -2189,8 +2182,8 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
     const nextHidden = !xmlPanel.hidden;
     xmlPanel.hidden = nextHidden;
     toggleXmlButton.textContent = nextHidden
-      ? t(settings.language, 'contentDashboard.showXml')
-      : t(settings.language, 'contentDashboard.hideXml');
+      ? t(appState.settings.language, 'contentDashboard.showXml')
+      : t(appState.settings.language, 'contentDashboard.hideXml');
   });
 
   editor.querySelector<HTMLButtonElement>('#ucUploadTileBtn')?.addEventListener('click', () => {
@@ -2258,39 +2251,39 @@ function renderEventEditor(
       <form class="dashboard-editor-shell">
         <header class="dashboard-editor-header">
           <div>
-            <h2>${t(settings.language, DASHBOARD_CATEGORIES.find((entry) => entry.kind === item.kind)?.titleKey ?? 'contentDashboard.title')}</h2>
+            <h2>${t(appState.settings.language, DASHBOARD_CATEGORIES.find((entry) => entry.kind === item.kind)?.titleKey ?? 'contentDashboard.title')}</h2>
             <p>${contentDashboardSubtitle(item)}</p>
           </div>
           <div class="dashboard-editor-actions">
-            <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-            <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-            <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+            <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+            <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+            <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
           </div>
         </header>
         <div class="dashboard-editor-body treasure-editor-layout">
           <div class="dashboard-form">
-            <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-            <label>${t(settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="4">${escapeHtml(data.flavor)}</textarea></label>
-            <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rules)}</textarea></label>
-            <label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="4">${escapeHtml(data.special)}</textarea></label>
-            <label>${t(settings.language, 'contentDashboard.field.goldValue')}<input id="ucGoldValue" value="${escapeHtml(data.goldValue)}"></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="4">${escapeHtml(data.flavor)}</textarea></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rules)}</textarea></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="4">${escapeHtml(data.special)}</textarea></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.goldValue')}<input id="ucGoldValue" value="${escapeHtml(data.goldValue)}"></label>
             <fieldset class="dashboard-checkbox-group">
-              <legend>${t(settings.language, 'contentDashboard.field.users')}</legend>
-              <label class="dashboard-checkbox"><input id="ucUserB" type="checkbox" ${userFlags.B ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.barbarian')}</label>
-              <label class="dashboard-checkbox"><input id="ucUserD" type="checkbox" ${userFlags.D ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.dwarf')}</label>
-              <label class="dashboard-checkbox"><input id="ucUserE" type="checkbox" ${userFlags.E ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.elf')}</label>
-              <label class="dashboard-checkbox"><input id="ucUserW" type="checkbox" ${userFlags.W ? 'checked' : ''}>${t(settings.language, 'card.treasure.user.wizard')}</label>
+              <legend>${t(appState.settings.language, 'contentDashboard.field.users')}</legend>
+              <label class="dashboard-checkbox"><input id="ucUserB" type="checkbox" ${userFlags.B ? 'checked' : ''}>${t(appState.settings.language, 'card.treasure.user.barbarian')}</label>
+              <label class="dashboard-checkbox"><input id="ucUserD" type="checkbox" ${userFlags.D ? 'checked' : ''}>${t(appState.settings.language, 'card.treasure.user.dwarf')}</label>
+              <label class="dashboard-checkbox"><input id="ucUserE" type="checkbox" ${userFlags.E ? 'checked' : ''}>${t(appState.settings.language, 'card.treasure.user.elf')}</label>
+              <label class="dashboard-checkbox"><input id="ucUserW" type="checkbox" ${userFlags.W ? 'checked' : ''}>${t(appState.settings.language, 'card.treasure.user.wizard')}</label>
             </fieldset>
           </div>
           <div class="dashboard-preview-column">
             <section class="dashboard-card-preview treasure-card-preview">
-              <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+              <h3>${t(appState.settings.language, 'contentDashboard.cardPreview')}</h3>
               <div id="ucTreasurePreview"></div>
             </section>
             <section class="dashboard-xml-panel">
-              <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+              <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
               <div id="ucXmlPanel" hidden>
-                <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                   <textarea id="ucXmlPreview" rows="18" readonly></textarea>
                 </label>
               </div>
@@ -2335,7 +2328,7 @@ function renderEventEditor(
             treasure: true,
             id: data.id || (item.kind === 'objectiveTreasure' ? 'preview-objective-item' : 'preview-treasure-item')
           },
-          settings.language
+          appState.settings.language
         );
         fitTreasureHeaderText(preview);
       }
@@ -2354,8 +2347,8 @@ function renderEventEditor(
       const nextHidden = !xmlPanel.hidden;
       xmlPanel.hidden = nextHidden;
       toggleXmlButton.textContent = nextHidden
-        ? t(settings.language, 'contentDashboard.showXml')
-        : t(settings.language, 'contentDashboard.hideXml');
+        ? t(appState.settings.language, 'contentDashboard.showXml')
+        : t(appState.settings.language, 'contentDashboard.hideXml');
     });
 
     form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((field) => {
@@ -2387,31 +2380,31 @@ function renderEventEditor(
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
         <div>
-          <h2>${t(settings.language, DASHBOARD_CATEGORIES.find((entry) => entry.kind === item.kind)?.titleKey ?? 'contentDashboard.title')}</h2>
+          <h2>${t(appState.settings.language, DASHBOARD_CATEGORIES.find((entry) => entry.kind === item.kind)?.titleKey ?? 'contentDashboard.title')}</h2>
           <p>${contentDashboardSubtitle(item)}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body event-editor-layout">
         <div class="dashboard-form">
-          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-          ${isTravelLike ? '' : `<label>${t(settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="4">${escapeHtml(data.flavor)}</textarea></label>`}
-          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rules)}</textarea></label>
-          ${isTravelLike ? '' : `<label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="4">${escapeHtml(data.special)}</textarea></label>`}
+          <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          ${isTravelLike ? '' : `<label>${t(appState.settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="4">${escapeHtml(data.flavor)}</textarea></label>`}
+          <label>${t(appState.settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="8">${escapeHtml(data.rules)}</textarea></label>
+          ${isTravelLike ? '' : `<label>${t(appState.settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="4">${escapeHtml(data.special)}</textarea></label>`}
         </div>
         <div class="dashboard-preview-column">
           <section class="dashboard-card-preview event-card-preview">
-            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <h3>${t(appState.settings.language, 'contentDashboard.cardPreview')}</h3>
             <div id="ucEventPreview"></div>
           </section>
           <section class="dashboard-xml-panel">
-            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
             <div id="ucXmlPanel" hidden>
-              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+              <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                 <textarea id="ucXmlPreview" rows="18" readonly></textarea>
               </label>
             </div>
@@ -2446,7 +2439,7 @@ function renderEventEditor(
           treasure: false,
           id: data.id || `preview-${eventCategory}-event`
         },
-        settings.language
+        appState.settings.language
       );
     }
     if (xmlPreview) {
@@ -2464,8 +2457,8 @@ function renderEventEditor(
     const nextHidden = !xmlPanel.hidden;
     xmlPanel.hidden = nextHidden;
     toggleXmlButton.textContent = nextHidden
-      ? t(settings.language, 'contentDashboard.showXml')
-      : t(settings.language, 'contentDashboard.hideXml');
+      ? t(appState.settings.language, 'contentDashboard.showXml')
+      : t(appState.settings.language, 'contentDashboard.hideXml');
   });
 
   form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((field) => {
@@ -2496,7 +2489,7 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
     return;
   }
   const rawData = item.data as Partial<UserRuleData>;
-  const sourceRule = repository.rules.get(item.sourceId ?? rawData.id ?? '');
+  const sourceRule = appState.repository.rules.get(item.sourceId ?? rawData.id ?? '');
   const rawParameterNames = rawData.parameterNames as string[] | string | undefined;
   const parameterNames = Array.isArray(rawParameterNames)
     ? (rawParameterNames.length > 0 ? rawParameterNames : sourceRule?.parameterNames ?? [])
@@ -2522,34 +2515,34 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
         <div>
-          <h2>${t(settings.language, 'contentDashboard.category.rule')}</h2>
+          <h2>${t(appState.settings.language, 'contentDashboard.category.rule')}</h2>
           <p>${contentDashboardSubtitle(item)}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body">
         <div class="dashboard-form">
-          <label>${t(settings.language, 'contentDashboard.field.id')}<input id="ucId" value="${escapeHtml(data.id)}" readonly></label>
-          <label>${t(settings.language, 'contentDashboard.field.ruleType')}
+          <label>${t(appState.settings.language, 'contentDashboard.field.id')}<input id="ucId" value="${escapeHtml(data.id)}" readonly></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.ruleType')}
             <select id="ucType">
               <option value="rule" ${data.type === 'rule' ? 'selected' : ''}>rule</option>
               <option value="magic" ${data.type === 'magic' ? 'selected' : ''}>magic</option>
             </select>
           </label>
-          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.parameterName')}<input id="ucParameterName" value="${escapeHtml(data.parameterName)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.parameterNames')}<input id="ucParameterNames" value="${escapeHtml((data.parameterNames ?? []).join(', '))}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.parameterFormat')}<input id="ucParameterFormat" value="${escapeHtml(data.parameterFormat)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.text')}<textarea id="ucText" rows="12">${escapeHtml(data.text)}</textarea></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.parameterName')}<input id="ucParameterName" value="${escapeHtml(data.parameterName)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.parameterNames')}<input id="ucParameterNames" value="${escapeHtml((data.parameterNames ?? []).join(', '))}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.parameterFormat')}<input id="ucParameterFormat" value="${escapeHtml(data.parameterFormat)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.text')}<textarea id="ucText" rows="12">${escapeHtml(data.text)}</textarea></label>
         </div>
         <div class="dashboard-xml-panel">
-          <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+          <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
           <div id="ucXmlPanel" hidden>
-            <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+            <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
               <textarea id="ucXmlPreview" rows="18" readonly></textarea>
             </label>
           </div>
@@ -2592,8 +2585,8 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
     const nextHidden = !xmlPanel.hidden;
     xmlPanel.hidden = nextHidden;
     toggleXmlButton.textContent = nextHidden
-      ? t(settings.language, 'contentDashboard.showXml')
-      : t(settings.language, 'contentDashboard.hideXml');
+      ? t(appState.settings.language, 'contentDashboard.showXml')
+      : t(appState.settings.language, 'contentDashboard.hideXml');
   });
 
   form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
@@ -2685,12 +2678,12 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
   );
 
   editor.innerHTML = renderDashboardEditorShell(
-    t(settings.language, 'contentDashboard.category.monster'),
+    t(appState.settings.language, 'contentDashboard.category.monster'),
     contentDashboardSubtitle(item),
     `
-      <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.plural')}<input id="ucPlural" value="${escapeHtml(data.plural)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.factions')}<input id="ucFactions" value="${escapeHtml(joinCsv(selectedFactions))}" readonly></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.plural')}<input id="ucPlural" value="${escapeHtml(data.plural)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.factions')}<input id="ucFactions" value="${escapeHtml(joinCsv(selectedFactions))}" readonly></label>
       <div class="dashboard-inline-actions">
         <select id="ucFactionSelect">
           ${factionOptions.map((faction) => `<option value="${escapeHtml(faction)}">${escapeHtml(faction)}</option>`).join('')}
@@ -2698,9 +2691,9 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
         <button type="button" id="ucAddFactionBtn">+</button>
         <button type="button" id="ucRemoveFactionBtn">-</button>
       </div>
-      <label>${t(settings.language, 'contentDashboard.field.move')}<input id="ucMove" value="${escapeHtml(data.move)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.weaponSkill')}<input id="ucWeaponSkill" value="${escapeHtml(data.weaponskill)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.ballisticSkill')}
+      <label>${t(appState.settings.language, 'contentDashboard.field.move')}<input id="ucMove" value="${escapeHtml(data.move)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.weaponSkill')}<input id="ucWeaponSkill" value="${escapeHtml(data.weaponskill)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.ballisticSkill')}
         <select id="ucBallisticSkill">
           ${ballisticSkillOptions
             .map(
@@ -2710,14 +2703,14 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
             .join('')}
         </select>
       </label>
-      <label>${t(settings.language, 'contentDashboard.field.strength')}<input id="ucStrength" value="${escapeHtml(data.strength)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.toughness')}<input id="ucToughness" value="${escapeHtml(data.toughness)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.wounds')}<input id="ucWounds" value="${escapeHtml(data.wounds)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.initiative')}<input id="ucInitiative" value="${escapeHtml(data.initiative)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.attacks')}<input id="ucAttacks" value="${escapeHtml(data.attacks)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.gold')}<input id="ucGold" value="${escapeHtml(data.gold)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.armor')}<input id="ucArmor" value="${escapeHtml(data.armor)}"></label>
-      <label>${t(settings.language, 'contentDashboard.field.damage')}
+      <label>${t(appState.settings.language, 'contentDashboard.field.strength')}<input id="ucStrength" value="${escapeHtml(data.strength)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.toughness')}<input id="ucToughness" value="${escapeHtml(data.toughness)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.wounds')}<input id="ucWounds" value="${escapeHtml(data.wounds)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.initiative')}<input id="ucInitiative" value="${escapeHtml(data.initiative)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.attacks')}<input id="ucAttacks" value="${escapeHtml(data.attacks)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.gold')}<input id="ucGold" value="${escapeHtml(data.gold)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.armor')}<input id="ucArmor" value="${escapeHtml(data.armor)}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.damage')}
         <select id="ucDamage">
           ${damageOptions
             .map(
@@ -2727,8 +2720,8 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
             .join('')}
         </select>
       </label>
-      <label>${t(settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="5">${escapeHtml(data.special)}</textarea></label>
-      <label>${t(settings.language, 'contentDashboard.field.specialLinks')}
+      <label>${t(appState.settings.language, 'contentDashboard.field.special')}<textarea id="ucSpecial" rows="5">${escapeHtml(data.special)}</textarea></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.specialLinks')}
         <select id="ucSpecialLinks" size="6">
           ${Object.entries(selectedRuleLinks)
             .map(([id, link]) => `<option value="${escapeHtml(id)}">${escapeHtml(formatRuleLinks({ [id]: link }))}</option>`)
@@ -2743,13 +2736,13 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
         <button type="button" id="ucRemoveRuleBtn">-</button>
       </div>
       <div id="ucRuleParameters"></div>
-      <label>${t(settings.language, 'contentDashboard.field.magicType')}
+      <label>${t(appState.settings.language, 'contentDashboard.field.magicType')}
         <select id="ucMagicType">
           <option value=""></option>
           ${magicOptions.map((rule) => `<option value="${escapeHtml(rule.id)}" ${data.magicType === rule.id ? 'selected' : ''}>${escapeHtml(rule.name)}</option>`).join('')}
         </select>
       </label>
-      <label>${t(settings.language, 'contentDashboard.field.magicLevel')}<input id="ucMagicLevel" type="number" min="0" value="${data.magicLevel}"></label>
+      <label>${t(appState.settings.language, 'contentDashboard.field.magicLevel')}<input id="ucMagicLevel" type="number" min="0" value="${data.magicLevel}"></label>
     `,
     userContentItemXml(item)
   );
@@ -2800,7 +2793,7 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
         return;
       }
       const heading = `<div class="dashboard-parameter-heading">${escapeHtml(
-        t(settings.language, 'contentDashboard.field.ruleParameter')
+        t(appState.settings.language, 'contentDashboard.field.ruleParameter')
       )}</div>`;
       const values = Array.from({ length: labels.length }, (_, index) => selectedRuleDraftParameters[index] ?? '');
       ruleParametersContainer.innerHTML =
@@ -2809,7 +2802,7 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
           .map(
             (label, index) =>
               `<label>${escapeHtml(label)}<input class="uc-rule-parameter" data-index="${index}" value="${escapeHtml(values[index] ?? '')}" placeholder="${escapeHtml(
-                label || t(settings.language, 'contentDashboard.field.ruleParameter')
+                label || t(appState.settings.language, 'contentDashboard.field.ruleParameter')
               )}"></label>`
           )
           .join('');
@@ -3023,25 +3016,25 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         <form class="dashboard-editor-shell">
           <header class="dashboard-editor-header">
             <div>
-              <h2>${t(settings.language, 'contentDashboard.category.table')}</h2>
+              <h2>${t(appState.settings.language, 'contentDashboard.category.table')}</h2>
               <p>${contentDashboardSubtitle(item)}</p>
             </div>
             <div class="dashboard-editor-actions">
-              <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-              <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-              <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+              <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+              <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+              <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
             </div>
           </header>
           <div class="dashboard-editor-body event-table-editor-layout">
             <div class="dashboard-form">
-              <label>${t(settings.language, 'contentDashboard.field.name')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.name')}
                 <input id="ucTableName" value="${escapeHtml(parsedEventTable.name)}">
               </label>
-              <label>${t(settings.language, 'contentDashboard.field.type')}
-                <input value="${escapeHtml(t(settings.language, `contentDashboard.tableType.${parsedEventTable.kind === 'dungeon' ? 'dungeonEvents' : parsedEventTable.kind === 'travel' ? 'travelEvents' : 'settlementEvents'}`))}" readonly>
+              <label>${t(appState.settings.language, 'contentDashboard.field.type')}
+                <input value="${escapeHtml(t(appState.settings.language, `contentDashboard.tableType.${parsedEventTable.kind === 'dungeon' ? 'dungeonEvents' : parsedEventTable.kind === 'travel' ? 'travelEvents' : 'settlementEvents'}`))}" readonly>
               </label>
               <div class="dashboard-table-event-picker">
-                <label>${t(settings.language, 'contentDashboard.field.availableEvents')}
+                <label>${t(appState.settings.language, 'contentDashboard.field.availableEvents')}
                   <select id="ucAvailableEventId">${availableOptions}</select>
                 </label>
                 <div class="dashboard-inline-actions dashboard-table-event-actions">
@@ -3049,15 +3042,15 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
                   <button type="button" id="ucRemoveEventBtn">-</button>
                 </div>
               </div>
-              <label>${t(settings.language, 'contentDashboard.field.selectedEvents')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.selectedEvents')}
                 <select id="ucSelectedEventIds" size="12">${selectedOptions}</select>
               </label>
             </div>
             <div class="dashboard-preview-column">
               <section class="dashboard-xml-panel">
-                <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+                <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
                 <div id="ucXmlPanel" hidden>
-                  <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                  <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                     <textarea id="ucXmlPreview" rows="18" readonly>${escapeHtml(xmlPreview)}</textarea>
                   </label>
                 </div>
@@ -3077,7 +3070,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
           xmlPanel.hidden = hidden;
         }
         if (toggleXmlBtn) {
-          toggleXmlBtn.textContent = t(settings.language, hidden ? 'contentDashboard.showXml' : 'contentDashboard.hideXml');
+          toggleXmlBtn.textContent = t(appState.settings.language, hidden ? 'contentDashboard.showXml' : 'contentDashboard.hideXml');
         }
       });
 
@@ -3111,17 +3104,17 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         event.preventDefault();
         const tableName = editor.querySelector<HTMLInputElement>('#ucTableName')?.value.trim() ?? '';
         if (!tableName) {
-          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
           return;
         }
         if (item.mode === 'new' && !tableName.toLowerCase().startsWith('userdefined-')) {
-          window.alert(t(settings.language, 'contentDashboard.tablePrefixError'));
+          window.alert(t(appState.settings.language, 'contentDashboard.tablePrefixError'));
           return;
         }
         const xml = serializeEventOnlyTable(tableName, parsedEventTable.kind, parsedEventTable.eventIds);
         const metadata = parseTableMetadata(xml);
         if (!metadata) {
-          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
           return;
         }
         const nextItem: UserContentItem = {
@@ -3157,11 +3150,11 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
     };
 
     const renderMonsterTableEditor = (): void => {
-      const monsterOptions = Array.from(repository.monsters.values())
+      const monsterOptions = Array.from(appState.repository.monsters.values())
         .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }))
         .map((monster) => `<option value="${escapeHtml(monster.id)}">${escapeHtml(`${monster.name} (${monster.id})`)}</option>`)
         .join('');
-      const ambienceOptions = getAdventureAmbiences(settings.language)
+      const ambienceOptions = getAdventureAmbiences(appState.settings.language)
         .filter((ambience) => !state.draftAmbiences.includes(ambience.value))
         .map((ambience) => `<option value="${escapeHtml(ambience.value)}">${escapeHtml(ambience.label)}</option>`)
         .join('');
@@ -3170,7 +3163,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         .join('');
       const draftAmbienceOptions = state.draftAmbiences
         .map((ambience) => {
-          const label = getAdventureAmbiences(settings.language).find((entry) => entry.value === ambience)?.label ?? ambience;
+          const label = getAdventureAmbiences(appState.settings.language).find((entry) => entry.value === ambience)?.label ?? ambience;
           return `<option value="${escapeHtml(ambience)}">${escapeHtml(label)}</option>`;
         })
         .join('');
@@ -3183,39 +3176,39 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         <form class="dashboard-editor-shell">
           <header class="dashboard-editor-header">
             <div>
-              <h2>${t(settings.language, 'contentDashboard.category.table')}</h2>
+              <h2>${t(appState.settings.language, 'contentDashboard.category.table')}</h2>
               <p>${contentDashboardSubtitle(item)}</p>
             </div>
             <div class="dashboard-editor-actions">
-              <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-              <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-              <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+              <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+              <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+              <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
             </div>
           </header>
           <div class="dashboard-editor-body monster-table-editor-layout">
             <div class="dashboard-form">
-              <label>${t(settings.language, 'contentDashboard.field.name')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.name')}
                 <input id="ucTableName" value="${escapeHtml(state.name)}">
               </label>
-              <label>${t(settings.language, 'contentDashboard.field.monsterType')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.monsterType')}
                 <select id="ucEncounterMonsterId">${monsterOptions}</select>
               </label>
               <div class="dashboard-inline-fields">
-                <label>${t(settings.language, 'contentDashboard.field.monsterMin')}
+                <label>${t(appState.settings.language, 'contentDashboard.field.monsterMin')}
                   <input id="ucEncounterMin" type="number" min="1" value="1">
                 </label>
-                <label>${t(settings.language, 'contentDashboard.field.monsterMax')}
+                <label>${t(appState.settings.language, 'contentDashboard.field.monsterMax')}
                   <input id="ucEncounterMax" type="number" min="1" value="1">
                 </label>
               </div>
               <div class="dashboard-inline-actions">
-                <button type="button" id="ucAddMonsterToEncounterBtn">${t(settings.language, 'contentDashboard.addMonsterToEncounter')}</button>
-                <button type="button" id="ucRemoveMonsterFromEncounterBtn">${t(settings.language, 'contentDashboard.removeMonsterFromEncounter')}</button>
+                <button type="button" id="ucAddMonsterToEncounterBtn">${t(appState.settings.language, 'contentDashboard.addMonsterToEncounter')}</button>
+                <button type="button" id="ucRemoveMonsterFromEncounterBtn">${t(appState.settings.language, 'contentDashboard.removeMonsterFromEncounter')}</button>
               </div>
-              <label>${t(settings.language, 'contentDashboard.field.encounterMonsters')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.encounterMonsters')}
                 <select id="ucEncounterMonsterList" size="6">${draftMonsterOptions}</select>
               </label>
-              <label>${t(settings.language, 'contentDashboard.field.encounterLevel')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.encounterLevel')}
                 <select id="ucEncounterLevel">
                   ${Array.from({ length: 10 }, (_, index) => index + 1)
                     .map((level) => `<option value="${level}" ${level === state.draftLevel ? 'selected' : ''}>${level}</option>`)
@@ -3223,7 +3216,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
                 </select>
               </label>
               <div class="dashboard-table-event-picker">
-                <label>${t(settings.language, 'contentDashboard.field.availableAmbiences')}
+                <label>${t(appState.settings.language, 'contentDashboard.field.availableAmbiences')}
                   <select id="ucEncounterAmbience">${ambienceOptions}</select>
                 </label>
                 <div class="dashboard-inline-actions dashboard-table-event-actions">
@@ -3231,22 +3224,22 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
                   <button type="button" id="ucRemoveAmbienceBtn">-</button>
                 </div>
               </div>
-              <label>${t(settings.language, 'contentDashboard.field.encounterAmbiences')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.encounterAmbiences')}
                 <select id="ucEncounterAmbienceList" size="5">${draftAmbienceOptions}</select>
               </label>
               <div class="dashboard-inline-actions">
-                <button type="button" id="ucAddEncounterToTableBtn">${t(settings.language, 'contentDashboard.addEncounterToTable')}</button>
-                <button type="button" id="ucRemoveEncounterFromTableBtn">${t(settings.language, 'contentDashboard.removeEncounterFromTable')}</button>
+                <button type="button" id="ucAddEncounterToTableBtn">${t(appState.settings.language, 'contentDashboard.addEncounterToTable')}</button>
+                <button type="button" id="ucRemoveEncounterFromTableBtn">${t(appState.settings.language, 'contentDashboard.removeEncounterFromTable')}</button>
               </div>
-              <label>${t(settings.language, 'contentDashboard.field.tableEncounters')}
+              <label>${t(appState.settings.language, 'contentDashboard.field.tableEncounters')}
                 <select id="ucTableEncounterList" size="10">${encounterOptions}</select>
               </label>
             </div>
             <div class="dashboard-preview-column">
               <section class="dashboard-xml-panel">
-                <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+                <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
                 <div id="ucXmlPanel" hidden>
-                  <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+                  <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                     <textarea id="ucXmlPreview" rows="18" readonly>${escapeHtml(xmlPreview)}</textarea>
                   </label>
                 </div>
@@ -3266,7 +3259,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
           xmlPanel.hidden = hidden;
         }
         if (toggleXmlBtn) {
-          toggleXmlBtn.textContent = t(settings.language, hidden ? 'contentDashboard.showXml' : 'contentDashboard.hideXml');
+          toggleXmlBtn.textContent = t(appState.settings.language, hidden ? 'contentDashboard.showXml' : 'contentDashboard.hideXml');
         }
       });
 
@@ -3371,17 +3364,17 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         event.preventDefault();
         const tableName = editor.querySelector<HTMLInputElement>('#ucTableName')?.value.trim() ?? '';
         if (!tableName) {
-          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
           return;
         }
         if (item.mode === 'new' && !tableName.toLowerCase().startsWith('userdefined-')) {
-          window.alert(t(settings.language, 'contentDashboard.tablePrefixError'));
+          window.alert(t(appState.settings.language, 'contentDashboard.tablePrefixError'));
           return;
         }
         const xml = serializeMonsterOnlyTable(tableName, state.entries);
         const metadata = parseTableMetadata(xml);
         if (!metadata) {
-          window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+          window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
           return;
         }
         const nextItem: UserContentItem = {
@@ -3407,10 +3400,10 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
   }
 
   editor.innerHTML = renderDashboardEditorShell(
-    t(settings.language, 'contentDashboard.category.table'),
+    t(appState.settings.language, 'contentDashboard.category.table'),
     contentDashboardSubtitle(item),
     `
-      <label>${t(settings.language, 'contentDashboard.field.tableXml')}
+      <label>${t(appState.settings.language, 'contentDashboard.field.tableXml')}
         <textarea id="ucTableXml" rows="22">${escapeHtml(data.xml)}</textarea>
       </label>
     `,
@@ -3423,11 +3416,11 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
     const xml = editor.querySelector<HTMLTextAreaElement>('#ucTableXml')?.value ?? '';
     const metadata = parseTableMetadata(xml);
     if (!metadata) {
-      window.alert(t(settings.language, 'dialog.tableEditor.invalidXml'));
+      window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
       return;
     }
     if (item.mode === 'new' && !metadata.name.trim().toLowerCase().startsWith('userdefined-')) {
-      window.alert(t(settings.language, 'contentDashboard.tablePrefixError'));
+      window.alert(t(appState.settings.language, 'contentDashboard.tablePrefixError'));
       return;
     }
     const nextItem: UserContentItem = {
@@ -3472,30 +3465,30 @@ function renderObjectiveRoomAdventureEditor(
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
         <div>
-          <h2>${t(settings.language, 'contentDashboard.category.objectiveRoomAdventure')}</h2>
+          <h2>${t(appState.settings.language, 'contentDashboard.category.objectiveRoomAdventure')}</h2>
           <p>${contentDashboardSubtitle(item)}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body event-editor-layout">
         <div class="dashboard-form">
-          <label>${t(settings.language, 'contentDashboard.field.objectiveRoomName')}
+          <label>${t(appState.settings.language, 'contentDashboard.field.objectiveRoomName')}
             <select id="ucObjectiveRoomName">${roomOptions}</select>
           </label>
-          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="6">${escapeHtml(data.flavorText)}</textarea></label>
-          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="10">${escapeHtml(data.rulesText)}</textarea></label>
-          <label class="dashboard-checkbox"><input id="ucGeneric" type="checkbox" ${data.generic ? 'checked' : ''}>${t(settings.language, 'contentDashboard.field.genericMission')}</label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.flavor')}<textarea id="ucFlavor" rows="6">${escapeHtml(data.flavorText)}</textarea></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="10">${escapeHtml(data.rulesText)}</textarea></label>
+          <label class="dashboard-checkbox"><input id="ucGeneric" type="checkbox" ${data.generic ? 'checked' : ''}>${t(appState.settings.language, 'contentDashboard.field.genericMission')}</label>
         </div>
         <div class="dashboard-preview-column">
           <section class="dashboard-xml-panel">
-            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
             <div id="ucXmlPanel" hidden>
-              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+              <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                 <textarea id="ucXmlPreview" rows="18" readonly></textarea>
               </label>
             </div>
@@ -3536,8 +3529,8 @@ function renderObjectiveRoomAdventureEditor(
     const nextHidden = !xmlPanel.hidden;
     xmlPanel.hidden = nextHidden;
     toggleXmlButton.textContent = nextHidden
-      ? t(settings.language, 'contentDashboard.showXml')
-      : t(settings.language, 'contentDashboard.hideXml');
+      ? t(appState.settings.language, 'contentDashboard.showXml')
+      : t(appState.settings.language, 'contentDashboard.hideXml');
   });
 
   form?.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach((field) => {
@@ -3572,37 +3565,37 @@ function renderWarriorEditor(container: HTMLElement, item: Extract<UserContentIt
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
         <div>
-          <h2>${t(settings.language, 'contentDashboard.category.warrior')}</h2>
+          <h2>${t(appState.settings.language, 'contentDashboard.category.warrior')}</h2>
           <p>${contentDashboardSubtitle(item)}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body event-editor-layout">
         <div class="dashboard-form">
-          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.race')}<input id="ucRace" value="${escapeHtml(data.race)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(data.name)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.race')}<input id="ucRace" value="${escapeHtml(data.race)}"></label>
           <div class="dashboard-tile-upload">
-            <label>${t(settings.language, 'contentDashboard.field.counterPath')}<input id="ucCounterPath" value="${escapeHtml(getCounterAssetDisplayName(data.counterPath))}" readonly></label>
+            <label>${t(appState.settings.language, 'contentDashboard.field.counterPath')}<input id="ucCounterPath" value="${escapeHtml(getCounterAssetDisplayName(data.counterPath))}" readonly></label>
             <div class="dashboard-inline-actions">
-              <button type="button" id="ucUploadCounterBtn">${t(settings.language, 'contentDashboard.uploadCounter')}</button>
+              <button type="button" id="ucUploadCounterBtn">${t(appState.settings.language, 'contentDashboard.uploadCounter')}</button>
               <input id="ucCounterFile" type="file" accept="image/*" hidden>
             </div>
           </div>
-          <label>${t(settings.language, 'contentDashboard.field.rulesPath')}<input id="ucRulesPath" value="${escapeHtml(data.rulesPath)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.rulesPath')}<input id="ucRulesPath" value="${escapeHtml(data.rulesPath)}"></label>
         </div>
         <div class="dashboard-preview-column">
           <section class="dashboard-card-preview warrior-counter-preview">
-            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <h3>${t(appState.settings.language, 'contentDashboard.cardPreview')}</h3>
             <div id="ucWarriorPreview"></div>
           </section>
           <section class="dashboard-xml-panel">
-            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
             <div id="ucXmlPanel" hidden>
-              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+              <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                 <textarea id="ucXmlPreview" rows="18" readonly></textarea>
               </label>
             </div>
@@ -3634,7 +3627,7 @@ function renderWarriorEditor(container: HTMLElement, item: Extract<UserContentIt
     if (preview) {
       const warrior = {
         id: draft.id || 'preview-warrior',
-        name: draft.name || t(settings.language, 'contentDashboard.category.warrior'),
+        name: draft.name || t(appState.settings.language, 'contentDashboard.category.warrior'),
         race: draft.race,
         counterPath: draft.counterPath,
         rulesPath: draft.rulesPath
@@ -3657,8 +3650,8 @@ function renderWarriorEditor(container: HTMLElement, item: Extract<UserContentIt
     }
     xmlPanel.hidden = !xmlPanel.hidden;
     toggleXmlButton.textContent = xmlPanel.hidden
-      ? t(settings.language, 'contentDashboard.showXml')
-      : t(settings.language, 'contentDashboard.hideXml');
+      ? t(appState.settings.language, 'contentDashboard.showXml')
+      : t(appState.settings.language, 'contentDashboard.hideXml');
   });
   editor.querySelector<HTMLButtonElement>('#ucUploadCounterBtn')?.addEventListener('click', () => counterFile?.click());
   counterFile?.addEventListener('change', async () => {
@@ -3725,7 +3718,7 @@ function renderLocationEditor(container: HTMLElement, item: Extract<UserContentI
     const typeSelect = editor.querySelector<HTMLSelectElement>('#ucLocationTypeSelect');
     const typesList = editor.querySelector<HTMLSelectElement>('#ucLocationTypesList');
     if (typeSelect) {
-      typeSelect.innerHTML = getSettlementTypes(settings.language)
+      typeSelect.innerHTML = getSettlementTypes(appState.settings.language)
         .filter((entry) => entry.value !== 'any' && !state.availableTypes.includes(entry.value as SettlementType))
         .map((entry) => `<option value="${escapeHtml(entry.value)}">${escapeHtml(entry.label)}</option>`)
         .join('');
@@ -3743,7 +3736,7 @@ function renderLocationEditor(container: HTMLElement, item: Extract<UserContentI
     if (visitorSelect) {
       visitorSelect.innerHTML = [
         { id: 'all', label: 'All' },
-        ...Array.from(repository.warriors.values())
+        ...Array.from(appState.repository.warriors.values())
           .sort((left, right) => left.name.localeCompare(right.name, undefined, { sensitivity: 'base' }))
           .map((warrior) => ({ id: warrior.id, label: warrior.name }))
       ]
@@ -3775,54 +3768,54 @@ function renderLocationEditor(container: HTMLElement, item: Extract<UserContentI
     <form class="dashboard-editor-shell">
       <header class="dashboard-editor-header">
         <div>
-          <h2>${t(settings.language, 'contentDashboard.category.location')}</h2>
+          <h2>${t(appState.settings.language, 'contentDashboard.category.location')}</h2>
           <p>${contentDashboardSubtitle(item)}</p>
         </div>
         <div class="dashboard-editor-actions">
-          <button type="button" id="dashboardDownloadBtn">${t(settings.language, 'contentDashboard.downloadXml')}</button>
-          <button type="button" id="dashboardDeleteBtn">${t(settings.language, 'contentDashboard.delete')}</button>
-          <button type="submit" id="dashboardSaveBtn">${t(settings.language, 'dialog.button.save')}</button>
+          <button type="button" id="dashboardDownloadBtn">${t(appState.settings.language, 'contentDashboard.downloadXml')}</button>
+          <button type="button" id="dashboardDeleteBtn">${t(appState.settings.language, 'contentDashboard.delete')}</button>
+          <button type="submit" id="dashboardSaveBtn">${t(appState.settings.language, 'dialog.button.save')}</button>
         </div>
       </header>
       <div class="dashboard-editor-body event-editor-layout">
         <div class="dashboard-form">
-          <label>${t(settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(state.name)}"></label>
-          <label>${t(settings.language, 'contentDashboard.field.description')}<textarea id="ucDescription" rows="5">${escapeHtml(state.description)}</textarea></label>
-          <label>${t(settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="10">${escapeHtml(state.rules)}</textarea></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.name')}<input id="ucName" value="${escapeHtml(state.name)}"></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.description')}<textarea id="ucDescription" rows="5">${escapeHtml(state.description)}</textarea></label>
+          <label>${t(appState.settings.language, 'contentDashboard.field.rules')}<textarea id="ucRules" rows="10">${escapeHtml(state.rules)}</textarea></label>
           <div class="dashboard-selector-block">
-            <label>${t(settings.language, 'contentDashboard.field.availableTypeOption')}
+            <label>${t(appState.settings.language, 'contentDashboard.field.availableTypeOption')}
               <select id="ucLocationTypeSelect"></select>
             </label>
             <div class="dashboard-inline-actions">
               <button type="button" id="ucAddLocationTypeBtn">+</button>
               <button type="button" id="ucRemoveLocationTypeBtn">-</button>
             </div>
-            <label>${t(settings.language, 'contentDashboard.field.availableTypes')}
+            <label>${t(appState.settings.language, 'contentDashboard.field.availableTypes')}
               <select id="ucLocationTypesList" size="5"></select>
             </label>
           </div>
           <div class="dashboard-selector-block">
-            <label>${t(settings.language, 'contentDashboard.field.availableVisitorOption')}
+            <label>${t(appState.settings.language, 'contentDashboard.field.availableVisitorOption')}
               <select id="ucVisitorSelect"></select>
             </label>
             <div class="dashboard-inline-actions">
               <button type="button" id="ucAddVisitorBtn">+</button>
               <button type="button" id="ucRemoveVisitorBtn">-</button>
             </div>
-            <label>${t(settings.language, 'contentDashboard.field.visitors')}
+            <label>${t(appState.settings.language, 'contentDashboard.field.visitors')}
               <select id="ucVisitorsList" size="6"></select>
             </label>
           </div>
         </div>
         <div class="dashboard-preview-column">
           <section class="dashboard-card-preview settlement-location-preview">
-            <h3>${t(settings.language, 'contentDashboard.cardPreview')}</h3>
+            <h3>${t(appState.settings.language, 'contentDashboard.cardPreview')}</h3>
             <div id="ucLocationPreview"></div>
           </section>
           <section class="dashboard-xml-panel">
-            <button type="button" id="ucToggleXmlBtn">${t(settings.language, 'contentDashboard.showXml')}</button>
+            <button type="button" id="ucToggleXmlBtn">${t(appState.settings.language, 'contentDashboard.showXml')}</button>
             <div id="ucXmlPanel" hidden>
-              <label>${t(settings.language, 'contentDashboard.xmlPreview')}
+              <label>${t(appState.settings.language, 'contentDashboard.xmlPreview')}
                 <textarea id="ucXmlPreview" rows="18" readonly></textarea>
               </label>
             </div>
@@ -3842,8 +3835,8 @@ function renderLocationEditor(container: HTMLElement, item: Extract<UserContentI
     }
     xmlPanel.hidden = !xmlPanel.hidden;
     toggleXmlButton.textContent = xmlPanel.hidden
-      ? t(settings.language, 'contentDashboard.showXml')
-      : t(settings.language, 'contentDashboard.hideXml');
+      ? t(appState.settings.language, 'contentDashboard.showXml')
+      : t(appState.settings.language, 'contentDashboard.hideXml');
   });
 
   editor.querySelector<HTMLInputElement>('#ucName')?.addEventListener('input', (event) => {
@@ -3988,10 +3981,10 @@ async function openContentDashboardDialog(): Promise<void> {
       <aside class="dashboard-sidebar">
         <header class="dashboard-sidebar-header">
           <div>
-            <h2>${t(settings.language, 'contentDashboard.title')}</h2>
-            <p>${t(settings.language, 'contentDashboard.description')}</p>
+            <h2>${t(appState.settings.language, 'contentDashboard.title')}</h2>
+            <p>${t(appState.settings.language, 'contentDashboard.description')}</p>
           </div>
-          <button type="button" id="contentDashboardBackBtn">${t(settings.language, 'contentDashboard.back')}</button>
+          <button type="button" id="contentDashboardBackBtn">${t(appState.settings.language, 'contentDashboard.back')}</button>
         </header>
         <div id="contentDashboardTree" class="dashboard-tree"></div>
       </aside>
@@ -4350,12 +4343,12 @@ function openMissionDialog(adventure: ObjectiveRoomAdventure): void {
 
   dialog.innerHTML = `
     <form method="dialog">
-      <h2>${t(settings.language, 'dialog.mission.title')}: ${escapeHtml(adventure.name)}</h2>
-      <p><strong>${t(settings.language, 'dialog.mission.ambience')}</strong></p>
+      <h2>${t(appState.settings.language, 'dialog.mission.title')}: ${escapeHtml(adventure.name)}</h2>
+      <p><strong>${t(appState.settings.language, 'dialog.mission.ambience')}</strong></p>
       <p>${escapeHtml(adventure.flavorText)}</p>
-      <p><strong>${t(settings.language, 'dialog.mission.specialRules')}</strong></p>
+      <p><strong>${t(appState.settings.language, 'dialog.mission.specialRules')}</strong></p>
       <p>${escapeHtml(adventure.rulesText)}</p>
-      <menu><button value="cancel">${t(settings.language, 'dialog.button.close')}</button></menu>
+      <menu><button value="cancel">${t(appState.settings.language, 'dialog.button.close')}</button></menu>
     </form>
   `;
 
@@ -4425,29 +4418,29 @@ function openAdventureSimulator(
   panel.innerHTML = `
     <section class="simulator-layout">
       <header>
-        <h2>${t(settings.language, 'simulator.title')}</h2>
-        <p>${t(settings.language, 'dialog.mission.title')}: ${escapeHtml(adventure.name)} | ${t(settings.language, 'dialog.mission.ambience')}: ${ambienceLabel} | ${t(settings.language, 'simulator.level')}: ${dungeonLevel}</p>
+        <h2>${t(appState.settings.language, 'simulator.title')}</h2>
+        <p>${t(appState.settings.language, 'dialog.mission.title')}: ${escapeHtml(adventure.name)} | ${t(appState.settings.language, 'dialog.mission.ambience')}: ${ambienceLabel} | ${t(appState.settings.language, 'simulator.level')}: ${dungeonLevel}</p>
       </header>
       <section class="simulator-body">
         <div>
-          <h3>${t(settings.language, 'simulator.piles')}</h3>
-          <p>${t(settings.language, 'simulator.pilesHint')}</p>
+          <h3>${t(appState.settings.language, 'simulator.piles')}</h3>
+          <p>${t(appState.settings.language, 'simulator.pilesHint')}</p>
           <p id="simStatus"></p>
           <div id="pilesContainer" class="piles-grid"></div>
         </div>
         <div>
-          <h3>${t(settings.language, 'simulator.revealedCard')}</h3>
-          <p id="revealedStatus">${t(settings.language, 'simulator.revealedHint')}</p>
-          <button type="button" id="whiteDwarfReferenceBtn" disabled>${t(settings.language, 'dialog.whiteDwarfReference.button')}</button>
+          <h3>${t(appState.settings.language, 'simulator.revealedCard')}</h3>
+          <p id="revealedStatus">${t(appState.settings.language, 'simulator.revealedHint')}</p>
+          <button type="button" id="whiteDwarfReferenceBtn" disabled>${t(appState.settings.language, 'dialog.whiteDwarfReference.button')}</button>
           <canvas id="simRevealCanvas" width="847" height="1264"></canvas>
         </div>
       </section>
       <menu>
-        ${adventure.generic ? '' : `<button type="button" id="showMissionBtn">${t(settings.language, 'simulator.missionButton')}</button>`}
-        <button type="button" id="objectiveRoomMonstersBtn">${t(settings.language, 'button.generateObjectiveRoomMonsters')}</button>
-        <button type="button" id="treasureSearchBtn">${t(settings.language, 'treasureSearch.button')}</button>
-        <button type="button" id="closeAllAdventureCardsBtn">${t(settings.language, 'menu.item.closeAllCards')}</button>
-        <button type="button" id="closeSimulatorBtn">${t(settings.language, 'button.finishAdventure')}</button>
+        ${adventure.generic ? '' : `<button type="button" id="showMissionBtn">${t(appState.settings.language, 'simulator.missionButton')}</button>`}
+        <button type="button" id="objectiveRoomMonstersBtn">${t(appState.settings.language, 'button.generateObjectiveRoomMonsters')}</button>
+        <button type="button" id="treasureSearchBtn">${t(appState.settings.language, 'treasureSearch.button')}</button>
+        <button type="button" id="closeAllAdventureCardsBtn">${t(appState.settings.language, 'menu.item.closeAllCards')}</button>
+        <button type="button" id="closeSimulatorBtn">${t(appState.settings.language, 'button.finishAdventure')}</button>
       </menu>
     </section>
   `;
@@ -4457,19 +4450,19 @@ function openAdventureSimulator(
   });
 
   panel.querySelector<HTMLButtonElement>('#objectiveRoomMonstersBtn')?.addEventListener('click', () => {
-    const result = generateObjectiveRoomMonsterEntries(repository, settings, dungeonLevel);
+    const result = generateObjectiveRoomMonsterEntries(appState.repository, appState.settings, dungeonLevel);
     if (!result) {
-      window.alert(t(settings.language, 'simulator.objectiveMonstersInvalidWeights'));
+      window.alert(t(appState.settings.language, 'simulator.objectiveMonstersInvalidWeights'));
       return;
     }
     if (result.entries.length === 0) {
-      window.alert(t(settings.language, 'simulator.objectiveMonstersNoEntries'));
+      window.alert(t(appState.settings.language, 'simulator.objectiveMonstersNoEntries'));
       return;
     }
 
     window.alert(
-      tf(settings.language, 'simulator.objectiveMonstersDifficulty', {
-        difficulty: objectiveDifficultyLabel(settings.language, result.difficulty.id)
+      tf(appState.settings.language, 'simulator.objectiveMonstersDifficulty', {
+        difficulty: objectiveDifficultyLabel(appState.settings.language, result.difficulty.id)
       })
     );
     showEntries(result.entries);
@@ -4484,8 +4477,8 @@ function openAdventureSimulator(
   });
 
   panel.querySelector<HTMLButtonElement>('#closeSimulatorBtn')?.addEventListener('click', () => {
-    settings.dungeonActive = false;
-    saveSettings(settings);
+    appState.settings.dungeonActive = false;
+    saveSettings(appState.settings);
     rebuildDecks();
     panel.hidden = true;
     panel.classList.remove('active');
@@ -4509,7 +4502,7 @@ function openAdventureSimulator(
       return;
     }
 
-    renderDungeonCardToCanvasLocalized(revealCanvas, state.selectedCard, settings.language).catch((error) =>
+    renderDungeonCardToCanvasLocalized(revealCanvas, state.selectedCard, appState.settings.language).catch((error) =>
       console.error(error)
     );
   };
@@ -4524,8 +4517,8 @@ function openAdventureSimulator(
     const total = state.piles.reduce((sum, pile) => sum + pile.length, 0);
     status.textContent =
       state.piles.length === 1
-        ? tf(settings.language, 'simulator.pileSingle', { count: state.piles[0]?.length ?? 0 })
-        : tf(settings.language, 'simulator.pileSplit', { piles: state.piles.length, cards: total });
+        ? tf(appState.settings.language, 'simulator.pileSingle', { count: state.piles[0]?.length ?? 0 })
+        : tf(appState.settings.language, 'simulator.pileSplit', { piles: state.piles.length, cards: total });
 
     pilesContainer.innerHTML = '';
 
@@ -4534,7 +4527,7 @@ function openAdventureSimulator(
       card.className = 'pile-box';
 
       const title = document.createElement('h4');
-      title.textContent = `Montón ${pileIndex + 1} (${pile.length} ${t(settings.language, 'controls.entries')})`;
+      title.textContent = `Montón ${pileIndex + 1} (${pile.length} ${t(appState.settings.language, 'controls.entries')})`;
       card.appendChild(title);
 
       const back = document.createElement('button');
@@ -4545,14 +4538,14 @@ function openAdventureSimulator(
         : '<span>Sin cartas</span>';
       back.addEventListener('click', () => {
         if (pile.length === 0) {
-          window.alert(tf(settings.language, 'simulator.emptyPile', { pile: pileIndex + 1 }));
+          window.alert(tf(appState.settings.language, 'simulator.emptyPile', { pile: pileIndex + 1 }));
           return;
         }
         const drawn = pile.shift() as DungeonCard;
         state.histories[pileIndex]!.unshift(drawn);
         state.selectedCard = drawn;
         state.selectedPile = pileIndex;
-        revealedStatus.textContent = tf(settings.language, 'simulator.selectedCard', {
+        revealedStatus.textContent = tf(appState.settings.language, 'simulator.selectedCard', {
           name: drawn.name,
           pile: pileIndex + 1
         });
@@ -4562,20 +4555,20 @@ function openAdventureSimulator(
 
       const splitBtn = document.createElement('button');
       splitBtn.type = 'button';
-      splitBtn.textContent = t(settings.language, 'simulator.splitPile');
+      splitBtn.textContent = t(appState.settings.language, 'simulator.splitPile');
       splitBtn.addEventListener('click', () => {
         if (pile.length < 2) {
-          window.alert(tf(settings.language, 'simulator.splitInsufficient', { pile: pileIndex + 1 }));
+          window.alert(tf(appState.settings.language, 'simulator.splitInsufficient', { pile: pileIndex + 1 }));
           return;
         }
 
-        const input = window.prompt(t(settings.language, 'simulator.splitPrompt'), '3');
+        const input = window.prompt(t(appState.settings.language, 'simulator.splitPrompt'), '3');
         if (!input) {
           return;
         }
         const count = Number.parseInt(input, 10);
         if (!Number.isFinite(count) || count < 2 || count > pile.length) {
-          window.alert(tf(settings.language, 'simulator.splitInvalid', { max: pile.length }));
+          window.alert(tf(appState.settings.language, 'simulator.splitInvalid', { max: pile.length }));
           return;
         }
 
@@ -4583,36 +4576,36 @@ function openAdventureSimulator(
         state.histories = splitSelectedPileHistories(state.histories, pileIndex, count);
         state.selectedCard = null;
         state.selectedPile = -1;
-        revealedStatus.textContent = t(settings.language, 'simulator.splitDone');
+        revealedStatus.textContent = t(appState.settings.language, 'simulator.splitDone');
         refresh();
       });
       card.appendChild(splitBtn);
 
       const addCardsBtn = document.createElement('button');
       addCardsBtn.type = 'button';
-      addCardsBtn.textContent = t(settings.language, 'button.addCardsToDeck');
+      addCardsBtn.textContent = t(appState.settings.language, 'button.addCardsToDeck');
       addCardsBtn.addEventListener('click', () => {
-        const available = pickAdditionalAdventureCards(environment, dungeonCards, collectAdventureCardIds(state));
+        const available = pickAdditionalAdventureCards(environment, appState.dungeonCards, collectAdventureCardIds(state));
         if (available.length === 0) {
-          window.alert(tf(settings.language, 'simulator.addCardsUnavailable', { max: 0 }));
+          window.alert(tf(appState.settings.language, 'simulator.addCardsUnavailable', { max: 0 }));
           return;
         }
 
-        const input = window.prompt(t(settings.language, 'simulator.addCardsPrompt'), '1');
+        const input = window.prompt(t(appState.settings.language, 'simulator.addCardsPrompt'), '1');
         if (!input) {
           return;
         }
 
         const count = Number.parseInt(input, 10);
         if (!Number.isFinite(count) || count < 1 || count > available.length) {
-          window.alert(tf(settings.language, 'simulator.addCardsInvalid', { max: available.length }));
+          window.alert(tf(appState.settings.language, 'simulator.addCardsInvalid', { max: available.length }));
           return;
         }
 
         state.piles[pileIndex]!.push(...available.slice(0, count));
         shuffleCards(state.piles[pileIndex]!);
         state.selectedPile = pileIndex;
-        revealedStatus.textContent = tf(settings.language, 'simulator.addCardsDone', {
+        revealedStatus.textContent = tf(appState.settings.language, 'simulator.addCardsDone', {
           count,
           pile: pileIndex + 1
         });
@@ -4621,7 +4614,7 @@ function openAdventureSimulator(
       card.appendChild(addCardsBtn);
 
       const historyLabel = document.createElement('p');
-      historyLabel.textContent = t(settings.language, 'simulator.history');
+      historyLabel.textContent = t(appState.settings.language, 'simulator.history');
       card.appendChild(historyLabel);
 
       const historyList = document.createElement('ul');
@@ -4633,7 +4626,7 @@ function openAdventureSimulator(
         item.addEventListener('click', () => {
           state.selectedCard = state.histories[pileIndex]![idx] as DungeonCard;
           state.selectedPile = pileIndex;
-          revealedStatus.textContent = tf(settings.language, 'simulator.selectedCard', {
+          revealedStatus.textContent = tf(appState.settings.language, 'simulator.selectedCard', {
             name: state.selectedCard.name,
             pile: pileIndex + 1
           });
@@ -4658,70 +4651,70 @@ function openNewDungeonDialog(): void {
     return;
   }
 
-  const environments = dungeonStore.loadEnvironments();
+  const environments = appState.dungeonStore.loadEnvironments();
   if (environments.length === 0) {
-    window.alert(t(settings.language, 'dialog.deck.noCardsForDungeon'));
+    window.alert(t(appState.settings.language, 'dialog.deck.noCardsForDungeon'));
     return;
   }
 
-  const ambienceOptions = getAdventureAmbiences(settings.language);
+  const ambienceOptions = getAdventureAmbiences(appState.settings.language);
 
   dialog.innerHTML = `
     <form method="dialog" class="maintenance-grid">
-      <h2>${t(settings.language, 'newDungeon.title')}</h2>
-      <p>${t(settings.language, 'newDungeon.description')}</p>
+      <h2>${t(appState.settings.language, 'newDungeon.title')}</h2>
+      <p>${t(appState.settings.language, 'newDungeon.description')}</p>
       <div class="new-dungeon-grid">
-        <label>${t(settings.language, 'newDungeon.environment')}
+        <label>${t(appState.settings.language, 'newDungeon.environment')}
           <select id="ndEnv"></select>
         </label>
-        <label>${t(settings.language, 'newDungeon.objectiveRoom')}
+        <label>${t(appState.settings.language, 'newDungeon.objectiveRoom')}
           <select id="ndObjective"></select>
         </label>
-        <label>${t(settings.language, 'newDungeon.mission')}
+        <label>${t(appState.settings.language, 'newDungeon.mission')}
           <select id="ndMission"></select>
         </label>
-        <label>${t(settings.language, 'newDungeon.ambience')}
+        <label>${t(appState.settings.language, 'newDungeon.ambience')}
           <select id="ndAmbience">
             ${ambienceOptions.map((item) => `<option value="${item.value}">${item.label}</option>`).join('')}
           </select>
         </label>
-        <label>${t(settings.language, 'newDungeon.level')}
-          <input id="ndLevel" type="number" min="1" max="10" value="${Math.max(1, Math.min(10, settings.activeDungeonLevel))}">
+        <label>${t(appState.settings.language, 'newDungeon.level')}
+          <input id="ndLevel" type="number" min="1" max="10" value="${Math.max(1, Math.min(10, appState.settings.activeDungeonLevel))}">
         </label>
-        <label>${t(settings.language, 'newDungeon.deckSize')}
+        <label>${t(appState.settings.language, 'newDungeon.deckSize')}
           <input id="ndDeckSize" type="number" min="2" max="200" value="12">
         </label>
-        <label>${t(settings.language, 'newDungeon.roomCount')}
+        <label>${t(appState.settings.language, 'newDungeon.roomCount')}
           <input id="ndRoomCount" type="number" min="1" max="11" value="5">
         </label>
       </div>
-      <label>${t(settings.language, 'newDungeon.specialRules')}
+      <label>${t(appState.settings.language, 'newDungeon.specialRules')}
         <textarea id="ndMissionRules" rows="5"  style="width: 100%; resize: none;" readonly></textarea>
       </label>
       <fieldset class="objective-monster-weights">
-        <legend>${t(settings.language, 'newDungeon.objectiveMonsterWeights')}</legend>
-        <p>${t(settings.language, 'newDungeon.objectiveMonsterWeightsHint')}</p>
+        <legend>${t(appState.settings.language, 'newDungeon.objectiveMonsterWeights')}</legend>
+        <p>${t(appState.settings.language, 'newDungeon.objectiveMonsterWeightsHint')}</p>
         <div class="new-dungeon-grid">
-          <label>${t(settings.language, 'newDungeon.objectiveMonsterEasy')}
-            <input id="ndObjectiveEasy" type="number" min="0" max="99" value="${Math.max(0, settings.objectiveMonsterEasyWeight)}">
+          <label>${t(appState.settings.language, 'newDungeon.objectiveMonsterEasy')}
+            <input id="ndObjectiveEasy" type="number" min="0" max="99" value="${Math.max(0, appState.settings.objectiveMonsterEasyWeight)}">
           </label>
-          <label>${t(settings.language, 'newDungeon.objectiveMonsterNormal')}
-            <input id="ndObjectiveNormal" type="number" min="0" max="99" value="${Math.max(0, settings.objectiveMonsterNormalWeight)}">
+          <label>${t(appState.settings.language, 'newDungeon.objectiveMonsterNormal')}
+            <input id="ndObjectiveNormal" type="number" min="0" max="99" value="${Math.max(0, appState.settings.objectiveMonsterNormalWeight)}">
           </label>
-          <label>${t(settings.language, 'newDungeon.objectiveMonsterHard')}
-            <input id="ndObjectiveHard" type="number" min="0" max="99" value="${Math.max(0, settings.objectiveMonsterHardWeight)}">
+          <label>${t(appState.settings.language, 'newDungeon.objectiveMonsterHard')}
+            <input id="ndObjectiveHard" type="number" min="0" max="99" value="${Math.max(0, appState.settings.objectiveMonsterHardWeight)}">
           </label>
-          <label>${t(settings.language, 'newDungeon.objectiveMonsterVeryHard')}
-            <input id="ndObjectiveVeryHard" type="number" min="0" max="99" value="${Math.max(0, settings.objectiveMonsterVeryHardWeight)}">
+          <label>${t(appState.settings.language, 'newDungeon.objectiveMonsterVeryHard')}
+            <input id="ndObjectiveVeryHard" type="number" min="0" max="99" value="${Math.max(0, appState.settings.objectiveMonsterVeryHardWeight)}">
           </label>
-          <label>${t(settings.language, 'newDungeon.objectiveMonsterExtreme')}
-            <input id="ndObjectiveExtreme" type="number" min="0" max="99" value="${Math.max(0, settings.objectiveMonsterExtremeWeight)}">
+          <label>${t(appState.settings.language, 'newDungeon.objectiveMonsterExtreme')}
+            <input id="ndObjectiveExtreme" type="number" min="0" max="99" value="${Math.max(0, appState.settings.objectiveMonsterExtremeWeight)}">
           </label>
         </div>
       </fieldset>
       <menu>
-        <button value="cancel">${t(settings.language, 'dialog.button.cancel')}</button>
-        <button type="button" id="ndStart">${t(settings.language, 'button.startAdventure')}</button>
+        <button value="cancel">${t(appState.settings.language, 'dialog.button.cancel')}</button>
+        <button type="button" id="ndStart">${t(appState.settings.language, 'button.startAdventure')}</button>
       </menu>
     </form>
   `;
@@ -4759,13 +4752,13 @@ function openNewDungeonDialog(): void {
       return;
     }
 
-    missions = dungeonStore.loadAdventuresForObjectiveRoom(objective.name);
+    missions = appState.dungeonStore.loadAdventuresForObjectiveRoom(objective.name);
     missionSelect.innerHTML = missions.map((mission) => `<option value="${escapeHtml(mission.name)}">${escapeHtml(mission.name)}</option>`).join('');
     syncMissionRules();
   };
 
   const reloadObjectives = () => {
-    objectiveRooms = dungeonStore.loadObjectiveRoomsByEnvironment(envSelect.value);
+    objectiveRooms = appState.dungeonStore.loadObjectiveRoomsByEnvironment(envSelect.value);
     objectiveSelect.innerHTML = objectiveRooms.map((room) => `<option value="${escapeHtml(room.name)}">${escapeHtml(room.name)}</option>`).join('');
     reloadMissions();
   };
@@ -4788,7 +4781,7 @@ function openNewDungeonDialog(): void {
     const objective = objectiveRooms.find((room) => room.name === objectiveSelect.value);
     const mission = missions.find((item) => item.name === missionSelect.value);
     if (!objective || !mission) {
-      window.alert(t(settings.language, 'dialog.newDungeon.requiredSelection'));
+      window.alert(t(appState.settings.language, 'dialog.newDungeon.requiredSelection'));
       return;
     }
 
@@ -4797,17 +4790,17 @@ function openNewDungeonDialog(): void {
     const dungeonLevel = Math.max(1, Math.min(10, Number.parseInt(levelInput.value, 10) || 1));
 
     try {
-      settings.objectiveMonsterEasyWeight = Math.max(0, Number.parseInt(objectiveEasyInput.value, 10) || 0);
-      settings.objectiveMonsterNormalWeight = Math.max(0, Number.parseInt(objectiveNormalInput.value, 10) || 0);
-      settings.objectiveMonsterHardWeight = Math.max(0, Number.parseInt(objectiveHardInput.value, 10) || 0);
-      settings.objectiveMonsterVeryHardWeight = Math.max(0, Number.parseInt(objectiveVeryHardInput.value, 10) || 0);
-      settings.objectiveMonsterExtremeWeight = Math.max(0, Number.parseInt(objectiveExtremeInput.value, 10) || 0);
+      appState.settings.objectiveMonsterEasyWeight = Math.max(0, Number.parseInt(objectiveEasyInput.value, 10) || 0);
+      appState.settings.objectiveMonsterNormalWeight = Math.max(0, Number.parseInt(objectiveNormalInput.value, 10) || 0);
+      appState.settings.objectiveMonsterHardWeight = Math.max(0, Number.parseInt(objectiveHardInput.value, 10) || 0);
+      appState.settings.objectiveMonsterVeryHardWeight = Math.max(0, Number.parseInt(objectiveVeryHardInput.value, 10) || 0);
+      appState.settings.objectiveMonsterExtremeWeight = Math.max(0, Number.parseInt(objectiveExtremeInput.value, 10) || 0);
 
-      const deck = buildAdventureDeck(envSelect.value, objective, deckSize, roomCount, dungeonCards);
-      settings.adventureAmbience = ambienceSelect.value;
-      settings.activeDungeonLevel = dungeonLevel;
-      settings.dungeonActive = true;
-      saveSettings(settings);
+      const deck = buildAdventureDeck(envSelect.value, objective, deckSize, roomCount, appState.dungeonCards);
+      appState.settings.adventureAmbience = ambienceSelect.value;
+      appState.settings.activeDungeonLevel = dungeonLevel;
+      appState.settings.dungeonActive = true;
+      saveSettings(appState.settings);
       rebuildDecks();
       dialog.close();
       openAdventureSimulator(
@@ -4826,15 +4819,15 @@ function openNewDungeonDialog(): void {
 }
 
 function rebuildDecks(): void {
-  applyTableActiveState(repository, settings);
-  decks = buildDecks(repository, settings);
-  saveSettings(settings);
+  applyTableActiveState(appState.repository, appState.settings);
+  appState.decks = buildDecks(appState.repository, appState.settings);
+  saveSettings(appState.settings);
   renderDecks();
 }
 
 function render(): void {
   syncPartySize();
-  createAppShell(settings.language);
+  createAppShell(appState.settings.language);
   wireHeroActions();
   buildControls();
   buildDeckToggles();
@@ -4843,19 +4836,21 @@ function render(): void {
 }
 
 async function bootstrap(): Promise<void> {
-  settings = await loadSettings();
-  await Promise.all([dungeonStore.init(settings.language), loadUiTranslations()]);
-  repository = await loadContent(settings.language);
+  appState.settings = await loadSettings();
+  await Promise.all([appState.dungeonStore.init(appState.settings.language), loadUiTranslations()]);
+  appState.repository = await loadContent(appState.settings.language);
   syncPartySize();
   resetWarriorCounterPool();
-  settings.dungeonActive = false;
+  appState.settings.dungeonActive = false;
 
-  applyTableActiveState(repository, settings);
-  decks = buildDecks(repository, settings);
-  dungeonCards = dungeonStore.loadCards();
+  applyTableActiveState(appState.repository, appState.settings);
+  appState.decks = buildDecks(appState.repository, appState.settings);
+  appState.dungeonCards = appState.dungeonStore.loadCards();
 
   render();
 }
+
+appState.hooks = { render, applyLanguageChange, refreshRuntimeContent };
 
 bootstrap().catch((error) => {
   const app = document.querySelector<HTMLDivElement>('#app');
@@ -4865,5 +4860,5 @@ bootstrap().catch((error) => {
 });
 
 window.addEventListener('beforeunload', () => {
-  saveSettings(settings);
+  saveSettings(appState.settings);
 });
