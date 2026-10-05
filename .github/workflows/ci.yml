@@ -1,0 +1,72 @@
+name: CI
+
+# Sin filtros de paths: los dos jobs tardan poco y un filtro con agujeros no vale nada.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  java-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: WhqHelperApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+
+      # Mismo paso que build-linux-appimage.yml: pom.xml declara SWT con scope system.
+      - name: Download SWT for Linux
+        run: |
+          swt_version="3.127.0"
+          swt_target="lib/org.eclipse.swt.gtk.linux.x86_64-${swt_version}.jar"
+          swt_url="https://repo.maven.apache.org/maven2/org/eclipse/platform/org.eclipse.swt.gtk.linux.x86_64/${swt_version}/org.eclipse.swt.gtk.linux.x86_64-${swt_version}.jar"
+          mkdir -p lib
+          curl -fsSL "$swt_url" -o "$swt_target"
+
+      - name: Run tests
+        run: mvn -B test
+
+  spa-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: whq-helper-spa
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: whq-helper-spa/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # tsc -b && vite build: chequeo de tipos y build. publicDir apunta a ../shared.
+      - name: Build
+        run: npm run build
