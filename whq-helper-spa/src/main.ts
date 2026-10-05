@@ -7,7 +7,7 @@ import { loadSettings, saveSettings } from './settings';
 import { renderEventCard, renderSettlementLocationCard } from './render';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
 import { getWhiteDwarfReference } from './whiteDwarfReferences';
-import { appState } from './state';
+import { appState, refreshDungeonCards } from './state';
 import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
 import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from './counterAssets';
 import {
@@ -389,30 +389,30 @@ function buildControls(): void {
 
   controls.querySelector<HTMLSelectElement>('#languageSelect')?.addEventListener('change', (event) => {
     const value = (event.target as HTMLSelectElement).value === 'EN' ? 'EN' : 'ES';
-    applyLanguageChange(value).catch((error) => window.alert(String(error)));
+    appState.hooks.applyLanguageChange(value).catch((error) => window.alert(String(error)));
   });
 
   controls.querySelector<HTMLSelectElement>('#ambienceSelect')?.addEventListener('change', (event) => {
     appState.settings.adventureAmbience = (event.target as HTMLSelectElement).value;
-    rebuildDecks();
+    appState.hooks.rebuildDecks();
   });
 
   controls.querySelector<HTMLInputElement>('#eventProbabilityInput')?.addEventListener('change', (event) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
     appState.settings.eventProbability = clampProbability(Number.isFinite(value) ? value : appState.settings.eventProbability);
-    rebuildDecks();
+    appState.hooks.rebuildDecks();
   });
 
   controls.querySelector<HTMLInputElement>('#goldProbabilityInput')?.addEventListener('change', (event) => {
     const value = Number.parseInt((event.target as HTMLInputElement).value, 10);
     appState.settings.treasureGoldProbability = clampProbability(Number.isFinite(value) ? value : appState.settings.treasureGoldProbability);
-    rebuildDecks();
+    appState.hooks.rebuildDecks();
   });
 
   controls.querySelectorAll<HTMLInputElement>('input[name="mode"]').forEach((radio) => {
     radio.addEventListener('change', () => {
       appState.settings.simulateDeck = radio.value === 'deck';
-      rebuildDecks();
+      appState.hooks.rebuildDecks();
     });
   });
 
@@ -532,7 +532,7 @@ function openPartyDialog(): void {
       syncPartySize();
       resetWarriorCounterPool();
       saveSettings(appState.settings);
-      buildControls();
+      appState.hooks.buildControls();
       dialog.close();
     });
   };
@@ -990,7 +990,7 @@ function openTableDialog(): void {
       appState.settings.tableActive[table.name] = checkbox.checked;
     });
 
-    rebuildDecks();
+    appState.hooks.rebuildDecks();
     dialog.close();
   };
 
@@ -1001,10 +1001,6 @@ function openTableDialog(): void {
     saveButton.onclick = handleSave;
   }
   dialog.showModal();
-}
-
-function refreshDungeonCards(): void {
-  appState.dungeonCards = appState.dungeonStore.loadCards();
 }
 
 function openMaintenanceDialog(): void {
@@ -1135,7 +1131,7 @@ function openMaintenanceDialog(): void {
 
     if (changed) {
       refreshDungeonCards();
-      rebuildDecks();
+      appState.hooks.rebuildDecks();
     }
     dialog.close();
   });
@@ -1796,7 +1792,7 @@ function bindDashboardCommonActions(container: HTMLElement, item: UserContentIte
     deleteUserContentItem(item.uid);
     dashboardDraftItem = null;
     activeDashboardItemUid = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 
@@ -2000,7 +1996,7 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -2141,7 +2137,7 @@ function renderEventEditor(
       upsertUserContentItem(nextItem);
       activeDashboardItemUid = nextItem.uid;
       dashboardDraftItem = null;
-      await refreshRuntimeContent();
+      await appState.hooks.refreshRuntimeContent();
       renderContentDashboard(container);
     });
     return;
@@ -2250,7 +2246,7 @@ function renderEventEditor(
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -2390,7 +2386,7 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -2751,7 +2747,7 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -2902,7 +2898,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         upsertUserContentItem(nextItem);
         activeDashboardItemUid = nextItem.uid;
         dashboardDraftItem = null;
-        await refreshRuntimeContent();
+        await appState.hooks.refreshRuntimeContent();
         renderContentDashboard(container);
       });
     };
@@ -3162,7 +3158,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
         upsertUserContentItem(nextItem);
         activeDashboardItemUid = nextItem.uid;
         dashboardDraftItem = null;
-        await refreshRuntimeContent();
+        await appState.hooks.refreshRuntimeContent();
         renderContentDashboard(container);
       });
     };
@@ -3208,7 +3204,7 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -3322,7 +3318,7 @@ function renderObjectiveRoomAdventureEditor(
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -3460,7 +3456,7 @@ function renderWarriorEditor(container: HTMLElement, item: Extract<UserContentIt
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -3676,7 +3672,7 @@ function renderLocationEditor(container: HTMLElement, item: Extract<UserContentI
     upsertUserContentItem(nextItem);
     activeDashboardItemUid = nextItem.uid;
     dashboardDraftItem = null;
-    await refreshRuntimeContent();
+    await appState.hooks.refreshRuntimeContent();
     renderContentDashboard(container);
   });
 }
@@ -3776,7 +3772,7 @@ async function closeContentDashboardView(): Promise<void> {
     return;
   }
 
-  await refreshRuntimeContent();
+  await appState.hooks.refreshRuntimeContent();
   document.body.classList.remove('dashboard-active');
   container.hidden = true;
   container.innerHTML = '';
@@ -4251,7 +4247,7 @@ function openAdventureSimulator(
   panel.querySelector<HTMLButtonElement>('#closeSimulatorBtn')?.addEventListener('click', () => {
     appState.settings.dungeonActive = false;
     saveSettings(appState.settings);
-    rebuildDecks();
+    appState.hooks.rebuildDecks();
     panel.hidden = true;
     panel.classList.remove('active');
     panel.innerHTML = '';
@@ -4573,7 +4569,7 @@ function openNewDungeonDialog(): void {
       appState.settings.activeDungeonLevel = dungeonLevel;
       appState.settings.dungeonActive = true;
       saveSettings(appState.settings);
-      rebuildDecks();
+      appState.hooks.rebuildDecks();
       dialog.close();
       openAdventureSimulator(
         deck,
@@ -4622,7 +4618,7 @@ async function bootstrap(): Promise<void> {
   render();
 }
 
-appState.hooks = { render, applyLanguageChange, refreshRuntimeContent };
+appState.hooks = { render, applyLanguageChange, refreshRuntimeContent, rebuildDecks, buildControls };
 
 bootstrap().catch((error) => {
   const app = document.querySelector<HTMLDivElement>('#app');

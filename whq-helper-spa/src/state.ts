@@ -9,6 +9,8 @@ export interface AppHooks {
   render(): void;
   applyLanguageChange(language: LanguageCode): Promise<void>;
   refreshRuntimeContent(): Promise<void>;
+  rebuildDecks(): void;
+  buildControls(): void;
 }
 
 /** Estado compartido de la aplicación. main.ts lo inicializa en bootstrap() antes del primer render. */
@@ -35,6 +37,12 @@ export const appState: AppState = {
   hooks: {
     render: hookNotRegistered,
     applyLanguageChange: hookNotRegistered,
-    refreshRuntimeContent: hookNotRegistered
+    refreshRuntimeContent: hookNotRegistered,
+    rebuildDecks: hookNotRegistered,
+    buildControls: hookNotRegistered
   }
 };
+
+export function refreshDungeonCards(): void {
+  appState.dungeonCards = appState.dungeonStore.loadCards();
+}
