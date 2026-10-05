@@ -41,6 +41,8 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     private static final String XML_PATH = "data/xml/dungeon/dungeon-cards.xml";
     private static final String USER_XML_PATH = "data/xml/dungeon/userdefined-dungeon-cards.xml";
     private static final String SCHEMA_PATH = "data/xml/dungeon/whq-dungeon-cards-schema.xsd";
+    // Comparte directorio con los catalogos de cartas, pero no es uno de ellos.
+    private static final String ROOM_REFERENCES_FILE = "room-references.xml";
 
     private final Path projectRoot;
     private final Path xmlDirectory;
@@ -269,6 +271,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             try (var stream = AppPaths.listContentFiles(projectRoot, XML_DIR).stream()) {
                 return stream
                         .filter(path -> path.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".xml"))
+                        .filter(path -> !path.getFileName().toString().equalsIgnoreCase(ROOM_REFERENCES_FILE))
                         .sorted(Comparator
                                 .comparing((Path path) -> !path.getFileName().toString().toLowerCase(Locale.ROOT).startsWith("userdefined-"))
                                 .thenComparing(path -> path.getFileName().toString().toLowerCase(Locale.ROOT)))

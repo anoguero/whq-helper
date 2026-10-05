@@ -22,6 +22,14 @@ class XmlDungeonCardStoreTest {
     Path tempDir;
 
     @Test
+    void loadsTheSharedCatalogIgnoringOtherXmlInTheDungeonDirectory() throws Exception {
+        // shared/data/xml/dungeon tambien contiene room-references.xml, que no es un catalogo de cartas.
+        List<DungeonCard> cards = new XmlDungeonCardStore(Path.of("")).loadCards();
+
+        assertTrue(cards.stream().anyMatch(card -> card.getId() == 56L));
+    }
+
+    @Test
     void createsDefaultXmlStoreWhenNoSourceDataExists() throws Exception {
         createDefaultTiles();
         XmlDungeonCardStore store = new XmlDungeonCardStore(tempDir);
