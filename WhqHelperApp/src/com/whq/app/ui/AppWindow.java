@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
@@ -54,6 +56,7 @@ import com.whq.app.adventure.XmlObjectiveRoomAdventureRepository;
 import com.whq.app.game.AdventureDeckBuilder;
 import com.whq.app.game.AdventureDeckException;
 import com.whq.app.game.AdventureSession;
+import com.whq.app.game.SavedAdventure;
 import com.whq.app.game.ObjectiveRoomGenerator;
 import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
@@ -66,10 +69,13 @@ import com.whq.app.model.WhiteDwarfRoomReferences;
 import com.whq.app.render.CardRenderer;
 import com.whq.app.storage.DungeonCardStorageException;
 import com.whq.app.storage.DungeonCardStore;
+import com.whq.app.storage.AdventureSessionStorageException;
+import com.whq.app.storage.XmlAdventureSessionStore;
 import com.whq.app.storage.XmlDungeonCardStore;
 
 import pms.whq.EventDeckApp;
 import pms.whq.Settings;
+import pms.whq.content.ContentIssue;
 import pms.whq.content.ContentRepository;
 import pms.whq.data.DrawableEntry;
 import pms.whq.data.Event;
@@ -107,6 +113,8 @@ public class AppWindow {
     private final Path projectRoot;
     private final DungeonCardStore cardStore;
     private final ObjectiveRoomAdventureRepository objectiveRoomAdventureRepository;
+    private final XmlAdventureSessionStore adventureSessionStore;
+    private boolean adventureSaveErrorShown;
     private final CardCsvService csvService;
     private final List<LocalizedUiAction> localizedActions;
     private final Random adventureRandom = new Random();
@@ -175,6 +183,7 @@ public class AppWindow {
         AppIcon.apply(this.shell, projectRoot);
         this.cardStore = new XmlDungeonCardStore(projectRoot);
         this.objectiveRoomAdventureRepository = new XmlObjectiveRoomAdventureRepository(projectRoot);
+        this.adventureSessionStore = new XmlAdventureSessionStore(projectRoot);
         this.csvService = new CardCsvService();
         this.localizedActions = new ArrayList<>();
         this.newDungeonAction = registerAction(LocalizedUiAction.push("menu.item.newDungeon", this::openNewDungeonDialog));
@@ -260,6 +269,7 @@ public class AppWindow {
         });
         shell.addListener(SWT.Activate, event -> refreshLocalizedTexts());
         shell.open();
+        display.asyncExec(this::offerPendingAdventure);
     }
 
     private void createMenuBar() {
@@ -1667,8 +1677,10 @@ public class AppWindow {
                 int selectedLevel = Math.max(1, Math.min(10, levelSpinner.getSelection()));
                 setActiveAdventureContext(AdventureAmbience.fromDisplayName(selectedAmbience), selectedLevel);
                 dialog.close();
+                discardAdventureSession();
                 openAdventureSimulator(
-                        deck,
+                        new AdventureSession(deck),
+                        objectiveRoom.getId(),
                         selectedAdventure,
                         selectedAmbience,
                         selectedLevel,
@@ -1703,7 +1715,8 @@ public class AppWindow {
     }
 
     private void openAdventureSimulator(
-            List<DungeonCard> deck,
+            AdventureSession session,
+            long objectiveRoomCardId,
             ObjectiveRoomAdventure selectedAdventure,
             String selectedAmbience,
             int selectedLevel,
@@ -1715,7 +1728,21 @@ public class AppWindow {
         simulator.setLayout(new GridLayout(1, false));
         simulator.setSize(1380, 920);
 
-        AdventureSession session = new AdventureSession(deck);
+        // Auto-guardado: la sesion en curso se sobrescribe tras cada cambio de los montones.
+        String ambienceStorageValue = AdventureAmbience.fromDisplayName(selectedAmbience).storageValue();
+        String missionId = selectedAdventure == null ? null : selectedAdventure.id();
+        adventureSaveErrorShown = false;
+        Runnable autoSave = () -> saveAdventureSession(new SavedAdventure(
+                environment,
+                selectedLevel,
+                ambienceStorageValue,
+                Settings.getSettingAsInt(Settings.PARTY_SIZE),
+                objectiveRoomCardId,
+                null,
+                missionId,
+                session));
+        session.setChangeListener(autoSave);
+        autoSave.run();
 
         Image dungeonBack = new Image(display, AppPaths.sharedPath(projectRoot, "resources/dungeon-back.jpeg").toString());
         simulator.addListener(SWT.Dispose, event -> {
@@ -1777,6 +1804,11 @@ public class AppWindow {
 
         Label revealStatus = new Label(revealArea, SWT.WRAP);
         revealStatus.setText(I18n.t("dialog.adventureSimulator.revealStatus"));
+        if (session.selectedCard() != null) {
+            // Sesion reanudada con una carta ya seleccionada.
+            revealStatus.setText(I18n.t("dialog.adventureSimulator.selectedCard", Map.of(
+                    "name", String.valueOf(session.selectedCard().getName()), "pile", session.selectedPile() + 1)));
+        }
         revealStatus.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
         styleParchmentLabel(revealStatus, false);
 
@@ -2039,12 +2071,16 @@ public class AppWindow {
         styleActionButton(finishButton);
         finishButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
         finishButton.addListener(SWT.Selection, event -> {
+            discardAdventureSession();
             simulator.close();
             if (!shell.isDisposed()) {
                 shell.forceActive();
             }
         });
 
+        // En GTK, una List sin seleccion que recibe el foco selecciona su primera fila y emite Selection:
+        // al abrir (o reanudar) el simulador eso cambiaria la carta seleccionada. El foco va a los botones.
+        simulator.setTabList(new Control[] {actions, body});
         refreshSimulatorUi[0].run();
         simulator.open();
     }
@@ -2186,6 +2222,179 @@ public class AppWindow {
                 display.sleep();
             }
         }
+    }
+
+    private void saveAdventureSession(SavedAdventure adventure) {
+        try {
+            adventureSessionStore.save(adventure);
+        } catch (AdventureSessionStorageException ex) {
+            // Un aviso por simulador: si el disco falla, no hay que repetirlo en cada carta.
+            if (!adventureSaveErrorShown) {
+                adventureSaveErrorShown = true;
+                showError(I18n.t("dialog.adventureSimulator.title"), I18n.t(
+                        "dialog.adventureSimulator.error.save", Map.of("error", String.valueOf(rootMessage(ex)))));
+            }
+        }
+    }
+
+    private void discardAdventureSession() {
+        try {
+            adventureSessionStore.discard();
+        } catch (AdventureSessionStorageException ex) {
+            showError(I18n.t("dialog.adventureSimulator.title"), I18n.t(
+                    "dialog.adventureSimulator.error.save", Map.of("error", String.valueOf(rootMessage(ex)))));
+        }
+    }
+
+    private static String rootMessage(Throwable error) {
+        Throwable cause = error;
+        while (cause.getCause() != null) {
+            cause = cause.getCause();
+        }
+        return cause.getMessage() == null ? cause.getClass().getSimpleName() : cause.getMessage();
+    }
+
+    private enum ResumeChoice {
+        RESUME,
+        DISCARD,
+        LATER
+    }
+
+    /** Al arrancar: si quedo una aventura sin terminar, ofrece continuarla o descartarla. */
+    private void offerPendingAdventure() {
+        if (shell.isDisposed() || !adventureSessionStore.hasPendingSession()) {
+            return;
+        }
+
+        Map<Long, DungeonCard> catalog = new LinkedHashMap<>();
+        for (DungeonCard card : cards) {
+            catalog.putIfAbsent(card.getId(), card);
+        }
+        List<ContentIssue> issues = new ArrayList<>();
+        Optional<SavedAdventure> loaded = adventureSessionStore.loadPending(catalog, issues::add);
+        if (loaded.isEmpty()) {
+            showContentIssues(issues);
+            return;
+        }
+
+        SavedAdventure saved = loaded.get();
+        ObjectiveRoomAdventure mission = resolveMission(saved, issues);
+        showContentIssues(issues);
+
+        ResumeChoice choice = promptResumeAdventure(saved);
+        if (choice == ResumeChoice.DISCARD) {
+            discardAdventureSession();
+            return;
+        }
+        if (choice != ResumeChoice.RESUME) {
+            return;
+        }
+
+        AdventureAmbience ambience = AdventureAmbience.fromStorageValue(saved.ambience());
+        int level = Math.max(1, Math.min(10, saved.adventureLevel()));
+        setActiveAdventureContext(ambience, level);
+        openAdventureSimulator(
+                saved.session(),
+                saved.objectiveRoomCardId(),
+                mission,
+                ambience.displayName(),
+                level,
+                saved.environment());
+    }
+
+    private ObjectiveRoomAdventure resolveMission(SavedAdventure saved, List<ContentIssue> issues) {
+        if (saved.missionId() == null || saved.missionId().isBlank() || saved.objectiveRoom() == null) {
+            return null;
+        }
+        try {
+            for (ObjectiveRoomAdventure adventure
+                    : objectiveRoomAdventureRepository.loadAdventuresForObjectiveRoom(saved.objectiveRoom().getName())) {
+                if (saved.missionId().equals(adventure.id())) {
+                    return adventure;
+                }
+            }
+        } catch (ObjectiveRoomAdventureRepositoryException ignored) {
+            // Se reporta abajo igual que una mision que ya no existe.
+        }
+        issues.add(new ContentIssue(
+                I18n.t("session.issue.title"),
+                I18n.t("session.issue.missionLost", Map.of("id", saved.missionId()))));
+        return null;
+    }
+
+    private void showContentIssues(List<ContentIssue> issues) {
+        if (issues.isEmpty()) {
+            return;
+        }
+        StringBuilder message = new StringBuilder();
+        for (ContentIssue issue : issues) {
+            if (message.length() > 0) {
+                message.append("\n\n");
+            }
+            message.append(issue.message());
+        }
+        MessageBox box = new MessageBox(shell, SWT.ICON_WARNING | SWT.OK);
+        box.setText(issues.get(0).title());
+        box.setMessage(message.toString());
+        box.open();
+    }
+
+    private ResumeChoice promptResumeAdventure(SavedAdventure saved) {
+        Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+        AppIcon.inherit(dialog, shell);
+        dialog.setText(I18n.t("dialog.resumeAdventure.title"));
+        dialog.setBackground(theme.shellBackground);
+        dialog.setLayout(new GridLayout(1, false));
+
+        String objectiveRoomName = saved.objectiveRoom() == null
+                ? I18n.t("dialog.resumeAdventure.unknownObjectiveRoom")
+                : saved.objectiveRoom().getName();
+        createDialogHeader(
+                dialog,
+                I18n.t("dialog.resumeAdventure.title"),
+                I18n.t("dialog.resumeAdventure.message", Map.of(
+                        "objectiveRoom", objectiveRoomName,
+                        "level", saved.adventureLevel())));
+
+        Composite actions = new Composite(dialog, SWT.NONE);
+        actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false));
+        GridLayout actionsLayout = new GridLayout(2, false);
+        actionsLayout.marginWidth = 0;
+        actionsLayout.horizontalSpacing = 12;
+        actions.setLayout(actionsLayout);
+        actions.setBackground(theme.shellBackground);
+
+        ResumeChoice[] choice = {ResumeChoice.LATER};
+        Button discardButton = new Button(actions, SWT.PUSH);
+        discardButton.setText(I18n.t("button.discardAdventure"));
+        styleActionButton(discardButton);
+        discardButton.addListener(SWT.Selection, event -> {
+            choice[0] = ResumeChoice.DISCARD;
+            dialog.close();
+        });
+        Button resumeButton = new Button(actions, SWT.PUSH);
+        resumeButton.setText(I18n.t("button.resumeAdventure"));
+        styleActionButton(resumeButton);
+        resumeButton.addListener(SWT.Selection, event -> {
+            choice[0] = ResumeChoice.RESUME;
+            dialog.close();
+        });
+        dialog.setDefaultButton(resumeButton);
+
+        dialog.pack();
+        Point size = dialog.getSize();
+        dialog.setSize(Math.max(size.x, 640), size.y);
+        Rectangle parentBounds = shell.getBounds();
+        dialog.setLocation(
+                parentBounds.x + (parentBounds.width - dialog.getSize().x) / 2,
+                parentBounds.y + (parentBounds.height - dialog.getSize().y) / 2);
+        dialog.open();
+        while (!dialog.isDisposed()) {
+            if (!display.readAndDispatch()) {
+                display.sleep();
+            }
+        }
+        return choice[0];
     }
 
     private void setActiveAdventureContext(AdventureAmbience ambience, int level) {

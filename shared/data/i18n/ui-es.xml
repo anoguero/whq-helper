@@ -7,9 +7,11 @@
   <entry key="button.clickHere">[Pulsa aquí]</entry>
   <entry key="button.close">Cerrar</entry>
   <entry key="button.deleteCard">Eliminar carta</entry>
+  <entry key="button.discardAdventure">Descartar y empezar de cero</entry>
   <entry key="button.finishAdventure">Finalizar aventura</entry>
   <entry key="button.generateObjectiveRoomMonsters">Generar Monstruos de Habitación Objetivo</entry>
   <entry key="button.ok">OK</entry>
+  <entry key="button.resumeAdventure">Continuar aventura</entry>
   <entry key="button.saveChanges">Guardar cambios</entry>
   <entry key="button.showMission">Mostrar misión</entry>
   <entry key="button.startAdventure">Iniciar aventura</entry>
@@ -221,6 +223,7 @@ Idioma: {language}</entry>
   <entry key="dialog.about.version">Cartas de Evento versión 1.0</entry>
   <entry key="dialog.adventureSimulator.deckHint">Pulsa sobre la carta trasera para revelar la carta superior. Botón derecho para dividir el mazo en varios montones.</entry>
   <entry key="dialog.adventureSimulator.deckPiles">Montones del mazo</entry>
+  <entry key="dialog.adventureSimulator.error.save">No se ha podido guardar la partida: {error}</entry>
   <entry key="dialog.adventureSimulator.history">Histórico de cartas extraídas</entry>
   <entry key="dialog.adventureSimulator.info.emptyPile">El montón {pile} está vacío.</entry>
   <entry key="dialog.adventureSimulator.info.notEnoughToSplit">El montón {pile} no tiene suficientes cartas para dividirse.</entry>
@@ -334,6 +337,9 @@ Idioma: {language}</entry>
   <entry key="dialog.probability.title">Configurar probabilidades</entry>
   <entry key="dialog.probability.treasureGold">Probabilidad de tesoro ORO (%)</entry>
   <entry key="dialog.probability.treasureGoldHint">Se aplica cuando una tabla de tesoro contiene entradas de oro y entradas normales.</entry>
+  <entry key="dialog.resumeAdventure.message">Hay una aventura sin terminar (sala objetivo: {objectiveRoom}, nivel {level}). ¿Quieres continuarla?</entry>
+  <entry key="dialog.resumeAdventure.title">Aventura en curso</entry>
+  <entry key="dialog.resumeAdventure.unknownObjectiveRoom">desconocida</entry>
   <entry key="dialog.rule.ok">OK</entry>
   <entry key="dialog.splitDeck.count">Número de montones:</entry>
   <entry key="dialog.splitDeck.subtitle">Elige en cuántos montones quieres repartir el montón seleccionado.</entry>
@@ -552,6 +558,13 @@ Idioma: {language}</entry>
   <entry key="party.selected">Grupo seleccionado</entry>
   <entry key="party.size">Tamaño del grupo: {count}</entry>
   <entry key="party.title">Grupo de Aventureros</entry>
+  <entry key="session.issue.invalidFile">La partida guardada {file} no es válida y no se puede cargar: {error}. Se ha apartado con la extensión .invalid.</entry>
+  <entry key="session.issue.missingHistoryCard">La carta {id} del historial del montón {pile} ya no existe en el catálogo y se ha omitido.</entry>
+  <entry key="session.issue.missingPileCard">La carta {id} del montón {pile} ya no existe en el catálogo y se ha omitido.</entry>
+  <entry key="session.issue.missingSelection">La carta seleccionada ({id}) ya no existe en el catálogo; la partida se carga sin selección.</entry>
+  <entry key="session.issue.missionLost">La misión {id} ya no existe para esta sala objetivo; la aventura continúa sin misión.</entry>
+  <entry key="session.issue.objectiveRoomLost">La sala objetivo de la partida guardada (carta {id}) ya no existe en el catálogo. La aventura se carga sin ella: revisa el mazo antes de seguir.</entry>
+  <entry key="session.issue.title">Partida guardada</entry>
   <entry key="settlement.locations">Localizaciones</entry>
   <entry key="settlement.noLocations">No hay localizaciones disponibles para este tipo.</entry>
   <entry key="settlement.title">Asentamiento</entry>

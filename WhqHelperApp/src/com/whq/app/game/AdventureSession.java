@@ -18,6 +18,7 @@ public final class AdventureSession {
     private List<List<DungeonCard>> histories = new ArrayList<>();
     private DungeonCard selectedCard;
     private int selectedPile = -1;
+    private Runnable changeListener = () -> { };
 
     public AdventureSession() {
     }
@@ -25,6 +26,37 @@ public final class AdventureSession {
     public AdventureSession(List<DungeonCard> initialDeck) {
         piles.add(new ArrayList<>(initialDeck));
         histories.add(new ArrayList<>());
+    }
+
+    /**
+     * Reconstruye una sesión completa (p. ej. al cargar una partida guardada). Cada historial va de la
+     * carta más reciente a la más antigua, como lo deja {@link #drawFrom(int)}.
+     */
+    public AdventureSession(
+            List<List<DungeonCard>> piles,
+            List<List<DungeonCard>> histories,
+            int selectedPile,
+            DungeonCard selectedCard) {
+        if (piles.size() != histories.size()) {
+            throw new IllegalArgumentException(
+                    "Cada montón necesita su historial: " + piles.size() + " montones y " + histories.size() + " historiales.");
+        }
+        if (selectedPile < -1 || selectedPile >= piles.size()) {
+            throw new IllegalArgumentException("Montón seleccionado fuera de rango: " + selectedPile + ".");
+        }
+        for (List<DungeonCard> pile : piles) {
+            this.piles.add(new ArrayList<>(pile));
+        }
+        for (List<DungeonCard> history : histories) {
+            this.histories.add(new ArrayList<>(history));
+        }
+        this.selectedPile = selectedPile;
+        this.selectedCard = selectedPile == -1 ? null : selectedCard;
+    }
+
+    /** Se invoca tras cada cambio de estado (robar, dividir, añadir cartas, seleccionar del historial). */
+    public void setChangeListener(Runnable changeListener) {
+        this.changeListener = changeListener == null ? () -> { } : changeListener;
     }
 
     public int pileCount() {
@@ -58,6 +90,7 @@ public final class AdventureSession {
         histories.get(pileIndex).add(0, drawn);
         selectedCard = drawn;
         selectedPile = pileIndex;
+        changeListener.run();
         return drawn;
     }
 
@@ -65,6 +98,7 @@ public final class AdventureSession {
     public void selectFromHistory(int pileIndex, DungeonCard card) {
         selectedCard = card;
         selectedPile = pileIndex;
+        changeListener.run();
     }
 
     /** Divide el montón indicado en {@code pileCount} montones nuevos, conservando el resto. */
@@ -73,6 +107,7 @@ public final class AdventureSession {
         histories = splitSelectedPileHistories(histories, pileIndex, pileCount);
         selectedCard = null;
         selectedPile = -1;
+        changeListener.run();
     }
 
     /** Añade cartas al montón indicado y lo baraja. */
@@ -81,6 +116,7 @@ public final class AdventureSession {
         pile.addAll(cardsToAdd);
         java.util.Collections.shuffle(pile, random);
         selectedPile = pileIndex;
+        changeListener.run();
     }
 
     /** ids de todas las cartas ya presentes en la sesión (montones, historiales y carta seleccionada). */

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="cardList">
+    <xs:sequence>
+      <xs:element name="card" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="adventure-session">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="context">
+          <xs:complexType>
+            <xs:attribute name="environment" type="xs:string" use="required"/>
+            <xs:attribute name="adventureLevel" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="ambience" type="xs:string" use="required"/>
+            <xs:attribute name="partySize" type="xs:nonNegativeInteger" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="objective-room">
+          <xs:complexType>
+            <xs:attribute name="cardId" type="xs:positiveInteger" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="mission" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="selection" minOccurs="0">
+          <xs:complexType>
+            <xs:attribute name="pileIndex" type="xs:nonNegativeInteger" use="required"/>
+            <xs:attribute name="cardId" type="xs:positiveInteger" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="piles">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pile" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:complexContent>
+                    <xs:extension base="cardList">
+                      <xs:attribute name="index" type="xs:nonNegativeInteger" use="required"/>
+                    </xs:extension>
+                  </xs:complexContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="histories">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="history" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:complexContent>
+                    <xs:extension base="cardList">
+                      <xs:attribute name="pileIndex" type="xs:nonNegativeInteger" use="required"/>
+                    </xs:extension>
+                  </xs:complexContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:positiveInteger" use="required"/>
+      <xs:attribute name="savedAt" type="xs:dateTime" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

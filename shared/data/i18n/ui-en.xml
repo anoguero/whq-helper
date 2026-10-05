@@ -7,9 +7,11 @@
   <entry key="button.clickHere">[Click here]</entry>
   <entry key="button.close">Close</entry>
   <entry key="button.deleteCard">Delete card</entry>
+  <entry key="button.discardAdventure">Discard and start over</entry>
   <entry key="button.finishAdventure">Finish adventure</entry>
   <entry key="button.generateObjectiveRoomMonsters">Generate Objective Room Monsters</entry>
   <entry key="button.ok">OK</entry>
+  <entry key="button.resumeAdventure">Continue adventure</entry>
   <entry key="button.saveChanges">Save changes</entry>
   <entry key="button.showMission">Show mission</entry>
   <entry key="button.startAdventure">Start adventure</entry>
@@ -221,6 +223,7 @@ Language: {language}</entry>
   <entry key="dialog.about.version">Event Cards version 1.0</entry>
   <entry key="dialog.adventureSimulator.deckHint">Click the card back to reveal the top card. Right click to split the deck into multiple piles.</entry>
   <entry key="dialog.adventureSimulator.deckPiles">Deck piles</entry>
+  <entry key="dialog.adventureSimulator.error.save">The adventure could not be saved: {error}</entry>
   <entry key="dialog.adventureSimulator.history">Drawn card history</entry>
   <entry key="dialog.adventureSimulator.info.emptyPile">Pile {pile} is empty.</entry>
   <entry key="dialog.adventureSimulator.info.notEnoughToSplit">Pile {pile} does not have enough cards to split.</entry>
@@ -334,6 +337,9 @@ Language: {language}</entry>
   <entry key="dialog.probability.title">Set probabilities</entry>
   <entry key="dialog.probability.treasureGold">Gold treasure probability (%)</entry>
   <entry key="dialog.probability.treasureGoldHint">Used when a treasure table contains both gold entries and regular treasure entries.</entry>
+  <entry key="dialog.resumeAdventure.message">There is an unfinished adventure (objective room: {objectiveRoom}, level {level}). Do you want to continue it?</entry>
+  <entry key="dialog.resumeAdventure.title">Adventure in progress</entry>
+  <entry key="dialog.resumeAdventure.unknownObjectiveRoom">unknown</entry>
   <entry key="dialog.rule.ok">OK</entry>
   <entry key="dialog.splitDeck.count">Number of piles:</entry>
   <entry key="dialog.splitDeck.subtitle">Choose how many piles you want to split the selected pile into.</entry>
@@ -552,6 +558,13 @@ Language: {language}</entry>
   <entry key="party.selected">Selected party</entry>
   <entry key="party.size">Party size: {count}</entry>
   <entry key="party.title">Party</entry>
+  <entry key="session.issue.invalidFile">The saved adventure {file} is not valid and cannot be loaded: {error}. It has been set aside with the .invalid extension.</entry>
+  <entry key="session.issue.missingHistoryCard">Card {id} in the history of pile {pile} no longer exists in the catalog and has been skipped.</entry>
+  <entry key="session.issue.missingPileCard">Card {id} in pile {pile} no longer exists in the catalog and has been skipped.</entry>
+  <entry key="session.issue.missingSelection">The selected card ({id}) no longer exists in the catalog; the adventure is loaded without a selection.</entry>
+  <entry key="session.issue.missionLost">Mission {id} no longer exists for this objective room; the adventure continues without a mission.</entry>
+  <entry key="session.issue.objectiveRoomLost">The objective room of the saved adventure (card {id}) no longer exists in the catalog. The adventure is loaded without it: check the deck before continuing.</entry>
+  <entry key="session.issue.title">Saved adventure</entry>
   <entry key="settlement.locations">Locations</entry>
   <entry key="settlement.noLocations">There are no locations available for this type.</entry>
   <entry key="settlement.title">Settlement</entry>

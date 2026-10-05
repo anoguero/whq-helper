@@ -17,3 +17,6 @@
 
 # Local archives
 /*.tar.gz
+
+# Saved adventure sessions
+/data/sessions/

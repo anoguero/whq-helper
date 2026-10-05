@@ -187,8 +187,6 @@ def main() -> int:
                 errors.append(f"{language} {key}: falta en ui-{language.lower()}.xml")
             elif ui[key] != value:
                 errors.append(f"{language} {key}: {ui[key]!r} != {value!r}")
-        for key in sorted(set(ui) - set(expected)):
-            errors.append(f"{language} {key}: clave que no existia en ninguna app")
 
     if errors:
         print("La migracion de i18n pierde o altera textos:", file=sys.stderr)
@@ -198,7 +196,7 @@ def main() -> int:
 
     print(
         f"OK: {checked} textos comprobados (Java {len(java['ES'])} + SPA {len(spa['ES'])} claves por idioma, "
-        f"union {len(load_ui('ES'))})."
+        f"claves actuales {len(load_ui('ES'))})."
     )
     return 0
 
