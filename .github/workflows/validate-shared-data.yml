@@ -1,22 +1,12 @@
 name: Validate Shared Data
 
+# Sin filtros de paths: el validador tarda segundos y vigila todo el repo (copias de shared/
+# en cualquier app y duplicados entre todos los ficheros versionados).
 on:
   push:
     branches:
       - main
-    paths:
-      - "shared/**"
-      - "whq-helper-spa/public/**"
-      - "whq-helper-spa/src/styles.css"
-      - "scripts/validate_shared_data.py"
-      - ".github/workflows/validate-shared-data.yml"
   pull_request:
-    paths:
-      - "shared/**"
-      - "whq-helper-spa/public/**"
-      - "whq-helper-spa/src/styles.css"
-      - "scripts/validate_shared_data.py"
-      - ".github/workflows/validate-shared-data.yml"
   workflow_dispatch:
 
 jobs:
