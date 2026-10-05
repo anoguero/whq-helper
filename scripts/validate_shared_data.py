@@ -75,19 +75,31 @@ def validate_css_font_urls(errors: list[str]) -> None:
             errors.append(f"CSS references missing font: {url}")
 
 
-def tracked_files() -> list[Path]:
-    output = subprocess.run(
-        ["git", "ls-files", "-z"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-    ).stdout.decode("utf-8")
+def tracked_files() -> list[Path] | None:
+    """Ficheros versionados, o None si no hay repositorio git (p. ej. desde un tarball)."""
+    try:
+        output = subprocess.run(
+            ["git", "ls-files", "-z"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout.decode("utf-8")
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
     return [ROOT / name for name in output.split("\0") if name]
 
 
 def validate_no_duplicates(errors: list[str]) -> None:
+    files = tracked_files()
+    if files is None:
+        print(
+            "Warning: no git repository found; skipping duplicate content check.",
+            file=sys.stderr,
+        )
+        return
+
     by_digest: dict[str, list[Path]] = defaultdict(list)
-    for path in tracked_files():
+    for path in files:
         if path.is_file() and path.stat().st_size > 0:
             by_digest[hashlib.sha256(path.read_bytes()).hexdigest()].append(path)
     for paths in by_digest.values():

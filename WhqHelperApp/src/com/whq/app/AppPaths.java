@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
@@ -103,7 +104,10 @@ public final class AppPaths {
 
     /** Ruta de un recurso base (solo lectura) relativa al shared home. */
     public static Path sharedPath(Path runtimeHome, String relativePath) {
-        return sharedHome(runtimeHome).resolve(relativePath);
+        Path sharedHome = Objects.requireNonNull(
+                sharedHome(runtimeHome),
+                () -> "No se puede resolver el shared home: runtimeHome es null (ruta pedida: " + relativePath + ").");
+        return sharedHome.resolve(relativePath);
     }
 
     /**
