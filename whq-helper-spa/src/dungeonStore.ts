@@ -1,6 +1,7 @@
 import { loadContentTranslations, translateContent } from './contentTranslations';
 import type { CardType, DungeonCard, LanguageCode, ObjectiveRoomAdventure } from './types';
 import { buildUserContentXmlDocuments, loadUserDungeonCards } from './userContent';
+import { loadRoomReferences } from './whiteDwarfReferences';
 
 const DUNGEON_CARDS_STORAGE_KEY = 'whq_helper_spa_dungeon_cards_v1';
 const DEFAULT_ENVIRONMENT = 'The Old World';
@@ -223,7 +224,8 @@ export class DungeonCardStore {
     this.translations = await loadContentTranslations(language);
     const [dungeonXml, adventuresXml] = await Promise.all([
       fetch('/data/xml/dungeon/dungeon-cards.xml').then((response) => response.text()),
-      fetch('/data/xml/adventures/original-objective-room-adventures.xml').then((response) => response.text())
+      fetch('/data/xml/adventures/original-objective-room-adventures.xml').then((response) => response.text()),
+      loadRoomReferences()
     ]);
 
     const baselineCards = parseDungeonCardsXml(dungeonXml);

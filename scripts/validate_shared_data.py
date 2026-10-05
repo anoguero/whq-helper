@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SHARED = ROOT / "shared"
 MANIFEST = SHARED / "content-manifest.json"
 DUNGEON_CARDS = SHARED / "data" / "xml" / "dungeon" / "dungeon-cards.xml"
+ROOM_REFERENCES = SHARED / "data" / "xml" / "dungeon" / "room-references.xml"
 SPA_CSS = ROOT / "whq-helper-spa" / "src" / "styles.css"
 FORBIDDEN_COPIES = (
     ROOT / "whq-helper-spa" / "public" / "data",
@@ -61,6 +62,23 @@ def validate_tile_paths(errors: list[str]) -> None:
         path = (element.text or "").strip()
         if path and not (SHARED / path).is_file():
             errors.append(f"Dungeon card references missing tile: {path}")
+
+
+def validate_room_references(errors: list[str]) -> None:
+    if not ROOM_REFERENCES.is_file():
+        errors.append(f"Missing room references: {relative(ROOM_REFERENCES)}")
+        return
+    if not DUNGEON_CARDS.is_file():
+        return
+    card_ids = {card.get("id") for card in ET.parse(DUNGEON_CARDS).iter("card")}
+    seen: set[str] = set()
+    for reference in ET.parse(ROOM_REFERENCES).iter("reference"):
+        card_id = (reference.get("cardId") or "").strip()
+        if card_id not in card_ids:
+            errors.append(f"Room reference points to missing dungeon card: cardId={card_id}")
+        if card_id in seen:
+            errors.append(f"Duplicate room reference: cardId={card_id}")
+        seen.add(card_id)
 
 
 def validate_css_font_urls(errors: list[str]) -> None:
@@ -113,6 +131,7 @@ def main() -> int:
     validate_no_copies(errors)
     validate_manifest(errors)
     validate_tile_paths(errors)
+    validate_room_references(errors)
     validate_css_font_urls(errors)
     validate_no_duplicates(errors)
 
