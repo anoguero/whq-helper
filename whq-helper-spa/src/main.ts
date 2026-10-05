@@ -8,6 +8,7 @@ import { renderEventCard, renderSettlementLocationCard } from './render';
 import { renderDungeonCardToCanvasLocalized } from './dungeonRenderer';
 import { getWhiteDwarfReference } from './whiteDwarfReferences';
 import { appState, refreshDungeonCards } from './state';
+import { DASHBOARD_CATEGORIES, DASHBOARD_CREATE_PREFIX, dashboardState } from './ui/dashboard/state';
 import { getTileAssetDisplayName, saveTileAsset } from './tileAssets';
 import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from './counterAssets';
 import {
@@ -86,29 +87,6 @@ import { openMaintenanceDialog } from './ui/maintenanceDialog';
 import { openWhiteDwarfReferenceDialog } from './ui/whiteDwarfReferenceDialog';
 import { openNewDungeonDialog } from './ui/adventureSimulator';
 
-interface DashboardCategoryMeta {
-  kind: UserContentKind;
-  titleKey: string;
-}
-
-const DASHBOARD_CATEGORIES: DashboardCategoryMeta[] = [
-  { kind: 'dungeonCard', titleKey: 'contentDashboard.category.dungeonCard' },
-  { kind: 'dungeonEvent', titleKey: 'contentDashboard.category.dungeonEvent' },
-  { kind: 'treasure', titleKey: 'contentDashboard.category.treasure' },
-  { kind: 'objectiveTreasure', titleKey: 'contentDashboard.category.objectiveTreasure' },
-  { kind: 'travelEvent', titleKey: 'contentDashboard.category.travelEvent' },
-  { kind: 'settlementEvent', titleKey: 'contentDashboard.category.settlementEvent' },
-  { kind: 'rule', titleKey: 'contentDashboard.category.rule' },
-  { kind: 'monster', titleKey: 'contentDashboard.category.monster' },
-  { kind: 'table', titleKey: 'contentDashboard.category.table' },
-  { kind: 'objectiveRoomAdventure', titleKey: 'contentDashboard.category.objectiveRoomAdventure' },
-  { kind: 'warrior', titleKey: 'contentDashboard.category.warrior' },
-  { kind: 'location', titleKey: 'contentDashboard.category.location' }
-];
-
-let activeDashboardItemUid: string | null = null;
-const DASHBOARD_CREATE_PREFIX = 'create:';
-let dashboardDraftItem: UserContentItem | null = null;
 type EventTableKind = 'dungeon' | 'travel' | 'settlement';
 
 function clampProbability(value: number): number {
@@ -376,17 +354,17 @@ function dashboardItemsByKind(kind: UserContentKind): UserContentItem[] {
 }
 
 function isDashboardDraftSelected(): boolean {
-  return activeDashboardItemUid === 'draft' && dashboardDraftItem !== null;
+  return dashboardState.activeDashboardItemUid === 'draft' && dashboardState.dashboardDraftItem !== null;
 }
 
 function currentDashboardItem(): UserContentItem | null {
   if (isDashboardDraftSelected()) {
-    return dashboardDraftItem;
+    return dashboardState.dashboardDraftItem;
   }
-  if (!activeDashboardItemUid || activeDashboardItemUid.startsWith(DASHBOARD_CREATE_PREFIX)) {
+  if (!dashboardState.activeDashboardItemUid || dashboardState.activeDashboardItemUid.startsWith(DASHBOARD_CREATE_PREFIX)) {
     return null;
   }
-  return loadUserContentItems().find((item) => item.uid === activeDashboardItemUid) ?? null;
+  return loadUserContentItems().find((item) => item.uid === dashboardState.activeDashboardItemUid) ?? null;
 }
 
 function availableObjectiveRoomNames(): string[] {
@@ -843,7 +821,7 @@ function renderDashboardTree(container: HTMLElement): void {
 
   tree.innerHTML = DASHBOARD_CATEGORIES.map((category) => {
     const items = dashboardItemsByKind(category.kind);
-    const selectedCreate = activeDashboardItemUid === `${DASHBOARD_CREATE_PREFIX}${category.kind}`;
+    const selectedCreate = dashboardState.activeDashboardItemUid === `${DASHBOARD_CREATE_PREFIX}${category.kind}`;
     return `
       <section class="dashboard-tree-section">
         <div class="dashboard-tree-header ${selectedCreate ? 'selected' : ''}" data-create-kind="${category.kind}">
@@ -856,7 +834,7 @@ function renderDashboardTree(container: HTMLElement): void {
           ${items
             .map(
               (item) => `
-                <li class="${item.uid === activeDashboardItemUid ? 'selected' : ''}" data-item-uid="${escapeHtml(item.uid)}" title="${escapeHtml(contentDashboardSubtitle(item))}">
+                <li class="${item.uid === dashboardState.activeDashboardItemUid ? 'selected' : ''}" data-item-uid="${escapeHtml(item.uid)}" title="${escapeHtml(contentDashboardSubtitle(item))}">
                   <span>${escapeHtml(item.title)}</span>
                   <small>${escapeHtml(contentDashboardSubtitle(item))}</small>
                 </li>
@@ -870,22 +848,22 @@ function renderDashboardTree(container: HTMLElement): void {
 
   tree.querySelectorAll<HTMLElement>('[data-create-kind]').forEach((element) => {
     element.addEventListener('click', () => {
-      activeDashboardItemUid = `${DASHBOARD_CREATE_PREFIX}${element.dataset.createKind as UserContentKind}`;
-      dashboardDraftItem = null;
-      renderContentDashboard(container);
+      dashboardState.activeDashboardItemUid = `${DASHBOARD_CREATE_PREFIX}${element.dataset.createKind as UserContentKind}`;
+      dashboardState.dashboardDraftItem = null;
+      dashboardState.renderContentDashboard(container);
     });
   });
 
   tree.querySelectorAll<HTMLElement>('[data-item-uid]').forEach((element) => {
     element.addEventListener('click', () => {
-      activeDashboardItemUid = element.dataset.itemUid ?? null;
-      dashboardDraftItem = null;
-      renderContentDashboard(container);
+      dashboardState.activeDashboardItemUid = element.dataset.itemUid ?? null;
+      dashboardState.dashboardDraftItem = null;
+      dashboardState.renderContentDashboard(container);
     });
     element.addEventListener('dblclick', () => {
-      activeDashboardItemUid = element.dataset.itemUid ?? null;
-      dashboardDraftItem = null;
-      renderContentDashboard(container);
+      dashboardState.activeDashboardItemUid = element.dataset.itemUid ?? null;
+      dashboardState.dashboardDraftItem = null;
+      dashboardState.renderContentDashboard(container);
     });
   });
 }
@@ -951,20 +929,20 @@ function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLEleme
       }
       return;
     }
-    dashboardDraftItem = createBlankDashboardItem(kind);
-    activeDashboardItemUid = 'draft';
-    renderContentDashboard(container);
+    dashboardState.dashboardDraftItem = createBlankDashboardItem(kind);
+    dashboardState.activeDashboardItemUid = 'draft';
+    dashboardState.renderContentDashboard(container);
   });
 
   editor.querySelectorAll<HTMLButtonElement>('[data-table-kind]').forEach((button) => {
     button.addEventListener('click', () => {
       const tableKind = button.dataset.tableKind ?? 'monster';
-      dashboardDraftItem =
+      dashboardState.dashboardDraftItem =
         tableKind === 'dungeon' || tableKind === 'travel' || tableKind === 'settlement'
           ? createBlankEventTableItem(tableKind)
           : createBlankDashboardItem('table');
-      activeDashboardItemUid = 'draft';
-      renderContentDashboard(container);
+      dashboardState.activeDashboardItemUid = 'draft';
+      dashboardState.renderContentDashboard(container);
     });
   });
 
@@ -977,29 +955,29 @@ function renderDashboardCreateSelector(container: HTMLElement, editor: HTMLEleme
 
   editor.querySelector<HTMLButtonElement>('#dashboardCreateFromSourceBtn')?.addEventListener('click', () => {
     const sourceId = editor.querySelector<HTMLSelectElement>('#dashboardSourceSelect')?.value ?? '';
-    dashboardDraftItem = createModifiedDashboardItem(kind, sourceId);
-    if (!dashboardDraftItem) {
+    dashboardState.dashboardDraftItem = createModifiedDashboardItem(kind, sourceId);
+    if (!dashboardState.dashboardDraftItem) {
       window.alert(t(appState.settings.language, 'contentDashboard.sourceNotFound'));
       return;
     }
-    activeDashboardItemUid = 'draft';
-    renderContentDashboard(container);
+    dashboardState.activeDashboardItemUid = 'draft';
+    dashboardState.renderContentDashboard(container);
   });
 }
 
 function bindDashboardCommonActions(container: HTMLElement, item: UserContentItem): void {
   container.querySelector<HTMLButtonElement>('#dashboardDeleteBtn')?.addEventListener('click', async () => {
     if (isDashboardDraftSelected()) {
-      dashboardDraftItem = null;
-      activeDashboardItemUid = null;
-      renderContentDashboard(container);
+      dashboardState.dashboardDraftItem = null;
+      dashboardState.activeDashboardItemUid = null;
+      dashboardState.renderContentDashboard(container);
       return;
     }
     deleteUserContentItem(item.uid);
-    dashboardDraftItem = null;
-    activeDashboardItemUid = null;
+    dashboardState.dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 
   container.querySelector<HTMLButtonElement>('#dashboardDownloadBtn')?.addEventListener('click', () => {
@@ -1200,10 +1178,10 @@ function renderDungeonCardEditor(container: HTMLElement, item: Extract<UserConte
       data: draftCard
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -1341,10 +1319,10 @@ function renderEventEditor(
         data: draftEvent
       };
       upsertUserContentItem(nextItem);
-      activeDashboardItemUid = nextItem.uid;
-      dashboardDraftItem = null;
+      dashboardState.activeDashboardItemUid = nextItem.uid;
+      dashboardState.dashboardDraftItem = null;
       await appState.hooks.refreshRuntimeContent();
-      renderContentDashboard(container);
+      dashboardState.renderContentDashboard(container);
     });
     return;
   }
@@ -1450,10 +1428,10 @@ function renderEventEditor(
       data: buildDraftEvent()
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -1590,10 +1568,10 @@ function renderRuleEditor(container: HTMLElement, item: Extract<UserContentItem,
       }
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -1951,10 +1929,10 @@ function renderMonsterEditor(container: HTMLElement, item: Extract<UserContentIt
       }
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -2102,10 +2080,10 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
           }
         };
         upsertUserContentItem(nextItem);
-        activeDashboardItemUid = nextItem.uid;
-        dashboardDraftItem = null;
+        dashboardState.activeDashboardItemUid = nextItem.uid;
+        dashboardState.dashboardDraftItem = null;
         await appState.hooks.refreshRuntimeContent();
-        renderContentDashboard(container);
+        dashboardState.renderContentDashboard(container);
       });
     };
 
@@ -2362,10 +2340,10 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
           }
         };
         upsertUserContentItem(nextItem);
-        activeDashboardItemUid = nextItem.uid;
-        dashboardDraftItem = null;
+        dashboardState.activeDashboardItemUid = nextItem.uid;
+        dashboardState.dashboardDraftItem = null;
         await appState.hooks.refreshRuntimeContent();
-        renderContentDashboard(container);
+        dashboardState.renderContentDashboard(container);
       });
     };
 
@@ -2408,10 +2386,10 @@ function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem
       }
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -2522,10 +2500,10 @@ function renderObjectiveRoomAdventureEditor(
       data: buildDraftAdventure()
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -2660,10 +2638,10 @@ function renderWarriorEditor(container: HTMLElement, item: Extract<UserContentIt
       data: buildDraftWarrior()
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -2876,10 +2854,10 @@ function renderLocationEditor(container: HTMLElement, item: Extract<UserContentI
       }
     };
     upsertUserContentItem(nextItem);
-    activeDashboardItemUid = nextItem.uid;
-    dashboardDraftItem = null;
+    dashboardState.activeDashboardItemUid = nextItem.uid;
+    dashboardState.dashboardDraftItem = null;
     await appState.hooks.refreshRuntimeContent();
-    renderContentDashboard(container);
+    dashboardState.renderContentDashboard(container);
   });
 }
 
@@ -2889,8 +2867,8 @@ function renderDashboardEditor(container: HTMLElement): void {
     return;
   }
 
-  if (activeDashboardItemUid?.startsWith(DASHBOARD_CREATE_PREFIX)) {
-    renderDashboardCreateSelector(container, editor, activeDashboardItemUid.slice(DASHBOARD_CREATE_PREFIX.length) as UserContentKind);
+  if (dashboardState.activeDashboardItemUid?.startsWith(DASHBOARD_CREATE_PREFIX)) {
+    renderDashboardCreateSelector(container, editor, dashboardState.activeDashboardItemUid.slice(DASHBOARD_CREATE_PREFIX.length) as UserContentKind);
     return;
   }
 
@@ -2969,7 +2947,7 @@ async function openContentDashboardDialog(): Promise<void> {
   container.querySelector<HTMLButtonElement>('#contentDashboardBackBtn')?.addEventListener('click', async () => {
     await closeContentDashboardView();
   });
-  renderContentDashboard(container);
+  dashboardState.renderContentDashboard(container);
 }
 
 async function closeContentDashboardView(): Promise<void> {
@@ -3017,6 +2995,7 @@ async function bootstrap(): Promise<void> {
 }
 
 appState.hooks = { render, applyLanguageChange, refreshRuntimeContent, rebuildDecks, buildControls };
+dashboardState.renderContentDashboard = renderContentDashboard;
 
 bootstrap().catch((error) => {
   const app = document.querySelector<HTMLDivElement>('#app');
