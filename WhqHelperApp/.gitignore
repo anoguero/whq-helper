@@ -1,0 +1,23 @@
+# Build outputs
+/target/
+/bin/
+/lib/*.jar
+
+# Eclipse metadata
+/.classpath
+/.project
+/.settings/
+
+# Local configuration and backups
+/settings.cfg
+*.bak
+
+# User-defined content
+/data/**/userdefined-*
+
+# Tile drafts (not ready yet)
+/resources/tiles/ad/
+/resources/tiles/at/
+
+# Local archives
+/*.tar.gz
