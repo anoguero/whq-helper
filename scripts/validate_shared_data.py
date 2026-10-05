@@ -24,7 +24,7 @@ DUNGEON_CARDS = SHARED / "data" / "xml" / "dungeon" / "dungeon-cards.xml"
 ROOM_REFERENCES = SHARED / "data" / "xml" / "dungeon" / "room-references.xml"
 ADVENTURES = SHARED / "data" / "xml" / "adventures" / "original-objective-room-adventures.xml"
 UI_TRANSLATIONS = {language: SHARED / "data" / "i18n" / f"ui-{language}.xml" for language in ("es", "en")}
-JAVA_SOURCES = ROOT / "WhqHelperApp" / "src"
+JAVA_SOURCES = ROOT / "WhqHelperApp" / "src" / "main" / "java"
 SPA_SOURCES = ROOT / "whq-helper-spa" / "src"
 # Claves literales: I18n.t("clave"...) en Java, t(lang, 'clave') / tf(lang, 'clave', ...) en la SPA.
 # Las claves construidas en tiempo de ejecucion ("prefijo." + x, `prefijo.${x}`) no se pueden comprobar.

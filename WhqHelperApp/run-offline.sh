@@ -18,7 +18,7 @@ mkdir -p "$BIN_DIR"
 CLASSPATH="$SWT_JAR"
 NATIVE_DIR="$LIB_DIR/native/linux-x86_64"
 
-javac --release 25 -cp "$CLASSPATH" -d "$BIN_DIR" $(find "$ROOT_DIR/src/com" "$ROOT_DIR/src/pms" -name '*.java' | sort)
+javac --release 25 -cp "$CLASSPATH" -d "$BIN_DIR" $(find "$ROOT_DIR/src/main/java" -name '*.java' | sort)
 java \
   --enable-native-access=ALL-UNNAMED \
   -Djava.library.path="$NATIVE_DIR" \

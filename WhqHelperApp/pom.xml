@@ -36,8 +36,6 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -45,9 +43,6 @@
                 <version>3.14.0</version>
                 <configuration>
                     <release>${maven.compiler.release}</release>
-                    <excludes>
-                        <exclude>test/**</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

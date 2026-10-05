@@ -20,13 +20,13 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
 
 ## Estructura
 
-- `src/com/whq/app/WhqCardRendererApp.java`: entrada principal.
-- `src/com/whq/app/ui/AppWindow.java`: ventana SWT.
-- `src/com/whq/app/render/CardRenderer.java`: motor de render.
-- `src/com/whq/app/storage/XmlDungeonCardStore.java`: acceso a cartas de mazmorra en XML.
-- `src/com/whq/app/io/CardCsvService.java`: import/export CSV.
-- `src/com/whq/app/model/*`: modelos de dominio.
-- `src/com/whq/app/AppPaths.java`: resolución del app home, del shared home y del directorio escribible.
+- `src/main/java/com/whq/app/WhqCardRendererApp.java`: entrada principal.
+- `src/main/java/com/whq/app/ui/AppWindow.java`: ventana SWT.
+- `src/main/java/com/whq/app/render/CardRenderer.java`: motor de render.
+- `src/main/java/com/whq/app/storage/XmlDungeonCardStore.java`: acceso a cartas de mazmorra en XML.
+- `src/main/java/com/whq/app/io/CardCsvService.java`: import/export CSV.
+- `src/main/java/com/whq/app/model/*`: modelos de dominio.
+- `src/main/java/com/whq/app/AppPaths.java`: resolución del app home, del shared home y del directorio escribible.
 - `../shared/`: contenido base compartido con la SPA (XML, imágenes, fuentes, i18n). Ver el `README.md` de la raíz.
 - `data/xml/**/userdefined-*.xml`: contenido creado por el usuario (no versionado).
 
