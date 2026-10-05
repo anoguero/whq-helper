@@ -30,12 +30,14 @@ import com.whq.app.i18n.EditableContentTranslations;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
 import com.whq.app.io.SafeXml;
+import com.whq.app.model.DungeonCard;
 
 public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventureRepository {
     private static final String XML_DIR = "data/xml/adventures";
     private static final String XML_PATH = "data/xml/adventures/original-objective-room-adventures.xml";
     private static final String USER_XML_PATH = "data/xml/adventures/userdefined-objective-room-adventures.xml";
     private static final String SCHEMA_PATH = "data/xml/adventures/whq-adventures-schema.xsd";
+    private static final String DUNGEON_XML_DIR = "data/xml/dungeon";
 
     private final Path xmlDirectory;
     private final Path xmlPath;
@@ -56,9 +58,15 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         this.parserFactory.setNamespaceAware(true);
     }
 
+    /**
+     * Aventuras de la sala objetivo, buscadas por id de carta (el nombre visible de la carta está traducido
+     * y no casa con el del XML). Las aventuras sin cardId que no se pudieron resolver casan por nombre.
+     */
     @Override
-    public List<ObjectiveRoomAdventure> loadAdventuresForObjectiveRoom(String objectiveRoomName)
+    public List<ObjectiveRoomAdventure> loadAdventuresForObjectiveRoom(DungeonCard objectiveRoom)
             throws ObjectiveRoomAdventureRepositoryException {
+        long objectiveRoomCardId = objectiveRoom == null ? 0L : objectiveRoom.getId();
+        String objectiveRoomName = objectiveRoom == null ? null : objectiveRoom.getName();
         String normalizedObjectiveRoomName = normalize(objectiveRoomName);
         validateFiles();
 
@@ -67,16 +75,19 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
             Map<String, ObjectiveRoomAdventure> merged = loadMergedAdventures(translations);
             List<ObjectiveRoomAdventure> adventures = new ArrayList<>();
             for (ObjectiveRoomAdventure adventure : merged.values()) {
-                if (!normalizedObjectiveRoomName.equals(normalize(adventure.objectiveRoomName()))) {
+                boolean matches = adventure.objectiveRoomCardId() > 0
+                        ? adventure.objectiveRoomCardId() == objectiveRoomCardId
+                        : normalizedObjectiveRoomName.equals(normalize(adventure.objectiveRoomName()));
+                if (!matches) {
                     continue;
                 }
                 adventures.add(adventure);
             }
 
             if (adventures.isEmpty()) {
-                adventures.add(buildGenericAdventure(objectiveRoomName, translations));
+                adventures.add(buildGenericAdventure(objectiveRoomName, objectiveRoomCardId, translations));
             } else if (adventures.stream().noneMatch(ObjectiveRoomAdventure::generic)) {
-                adventures.add(buildGenericAdventure(objectiveRoomName, translations));
+                adventures.add(buildGenericAdventure(objectiveRoomName, objectiveRoomCardId, translations));
             }
 
             adventures.sort(Comparator
@@ -107,23 +118,47 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
             throw new ObjectiveRoomAdventureRepositoryException("La aventura no puede ser nula.");
         }
         try {
+            ObjectiveRoomAdventure canonical = withCanonicalRoom(adventure, loadRoomIndex());
             List<ObjectiveRoomAdventure> userAdventures = loadUserAdventuresRaw();
-            upsertAdventure(userAdventures, adventure);
+            upsertAdventure(userAdventures, canonical);
             writeUserAdventures(userAdventures);
             EditableContentTranslations translations = EditableContentTranslations.load(projectRoot, I18n.getLanguage());
-            putAdventureTranslations(translations, adventure);
+            putAdventureTranslations(translations, canonical);
             translations.save();
         } catch (Exception ex) {
             throw new ObjectiveRoomAdventureRepositoryException("No se ha podido guardar la aventura del usuario.", ex);
         }
     }
 
+    /** La sala se identifica por nombre (inglés o traducido); se resuelve a su id de carta. */
     public void deleteUserAdventure(String objectiveRoomName, String adventureId) throws ObjectiveRoomAdventureRepositoryException {
         try {
+            ObjectiveRoomAdventure target = withCanonicalRoom(
+                    new ObjectiveRoomAdventure(objectiveRoomName, adventureId, "", "", "", false), loadRoomIndex());
+            deleteUserAdventure(target.objectiveRoomCardId(), target.objectiveRoomName(), adventureId);
+        } catch (ObjectiveRoomAdventureRepositoryException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ObjectiveRoomAdventureRepositoryException("No se ha podido eliminar la aventura del usuario.", ex);
+        }
+    }
+
+    public void deleteUserAdventure(long objectiveRoomCardId, String adventureId) throws ObjectiveRoomAdventureRepositoryException {
+        try {
+            deleteUserAdventure(objectiveRoomCardId, loadRoomIndex().rawNames().get(objectiveRoomCardId), adventureId);
+        } catch (ObjectiveRoomAdventureRepositoryException ex) {
+            throw ex;
+        } catch (Exception ex) {
+            throw new ObjectiveRoomAdventureRepositoryException("No se ha podido eliminar la aventura del usuario.", ex);
+        }
+    }
+
+    private void deleteUserAdventure(long objectiveRoomCardId, String objectiveRoomName, String adventureId)
+            throws ObjectiveRoomAdventureRepositoryException {
+        try {
+            String key = adventureKey(objectiveRoomCardId, objectiveRoomName, adventureId);
             List<ObjectiveRoomAdventure> userAdventures = loadUserAdventuresRaw();
-            boolean removed = userAdventures.removeIf(adventure ->
-                    normalize(adventure.objectiveRoomName()).equals(normalize(objectiveRoomName))
-                            && normalize(adventure.id()).equals(normalize(adventureId)));
+            boolean removed = userAdventures.removeIf(adventure -> adventureKey(adventure).equals(key));
             if (!removed) {
                 throw new ObjectiveRoomAdventureRepositoryException("Solo se pueden eliminar aventuras definidas por el usuario.");
             }
@@ -156,6 +191,7 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
     }
 
     private Map<String, ObjectiveRoomAdventure> loadMergedAdventures(ContentTranslations translations) throws Exception {
+        RoomIndex roomIndex = loadRoomIndex();
         Map<String, ObjectiveRoomAdventure> merged = new LinkedHashMap<>();
         for (Path file : listAdventureFiles()) {
             Document document = parserFactory.newDocumentBuilder().parse(file.toFile());
@@ -176,6 +212,8 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
                     Element adventureElement = (Element) adventureNode;
                     String adventureId = adventureElement.getAttribute("id").trim();
                     String roomName = roomElement.getAttribute("name").trim();
+                    long roomCardId = roomCardId(roomElement, roomIndex);
+                    // La clave de traducción sigue derivándose del nombre de sala del XML.
                     String roomKey = normalizeTranslationKey(roomName);
                     String baseKey = "adventure." + roomKey + "." + adventureId;
                     String fallbackKey = "adventure." + adventureId;
@@ -191,8 +229,9 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
                             translations.t(
                                     baseKey + ".rules",
                                     translations.t(fallbackKey + ".rules", childText(adventureElement, "rules"))),
-                            Boolean.parseBoolean(adventureElement.getAttribute("generic")));
-                    merged.put(adventureKey(roomName, adventureId), adventure);
+                            Boolean.parseBoolean(adventureElement.getAttribute("generic")),
+                            roomCardId);
+                    merged.put(adventureKey(adventure), adventure);
                 }
             }
         }
@@ -204,6 +243,7 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         if (!Files.exists(userXmlPath)) {
             return new ArrayList<>();
         }
+        RoomIndex roomIndex = loadRoomIndex();
         Document document = parserFactory.newDocumentBuilder().parse(userXmlPath.toFile());
         List<ObjectiveRoomAdventure> adventures = new ArrayList<>();
         NodeList roomNodes = document.getDocumentElement().getChildNodes();
@@ -226,7 +266,8 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
                         adventureElement.getAttribute("name").trim(),
                         childText(adventureElement, "flavor"),
                         childText(adventureElement, "rules"),
-                        Boolean.parseBoolean(adventureElement.getAttribute("generic"))));
+                        Boolean.parseBoolean(adventureElement.getAttribute("generic")),
+                        roomCardId(roomElement, roomIndex)));
             }
         }
         return adventures;
@@ -256,12 +297,18 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
 
         Map<String, List<ObjectiveRoomAdventure>> byRoom = new LinkedHashMap<>();
         for (ObjectiveRoomAdventure adventure : adventures) {
-            byRoom.computeIfAbsent(adventure.objectiveRoomName(), ignored -> new ArrayList<>()).add(adventure);
+            // Por id y nombre: el nombre guardado es el origen de las claves de traducción de cada aventura.
+            byRoom.computeIfAbsent(adventure.objectiveRoomCardId() + "|" + normalize(adventure.objectiveRoomName()), ignored -> new ArrayList<>())
+                    .add(adventure);
         }
 
         for (Map.Entry<String, List<ObjectiveRoomAdventure>> entry : byRoom.entrySet()) {
+            ObjectiveRoomAdventure first = entry.getValue().get(0);
             Element roomElement = document.createElement("objectiveRoom");
-            roomElement.setAttribute("name", entry.getKey());
+            roomElement.setAttribute("name", first.objectiveRoomName());
+            if (first.objectiveRoomCardId() > 0) {
+                roomElement.setAttribute("cardId", Long.toString(first.objectiveRoomCardId()));
+            }
             root.appendChild(roomElement);
             entry.getValue().sort(Comparator.comparing(ObjectiveRoomAdventure::id, String.CASE_INSENSITIVE_ORDER));
             for (ObjectiveRoomAdventure adventure : entry.getValue()) {
@@ -299,9 +346,9 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
     }
 
     private void upsertAdventure(List<ObjectiveRoomAdventure> adventures, ObjectiveRoomAdventure updated) {
-        String key = adventureKey(updated.objectiveRoomName(), updated.id());
+        String key = adventureKey(updated);
         for (int i = 0; i < adventures.size(); i++) {
-            if (adventureKey(adventures.get(i).objectiveRoomName(), adventures.get(i).id()).equals(key)) {
+            if (adventureKey(adventures.get(i)).equals(key)) {
                 adventures.set(i, updated);
                 return;
             }
@@ -309,8 +356,73 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         adventures.add(updated);
     }
 
-    private String adventureKey(String objectiveRoomName, String adventureId) {
-        return normalize(objectiveRoomName) + "::" + normalize(adventureId);
+    private String adventureKey(ObjectiveRoomAdventure adventure) {
+        return adventureKey(adventure.objectiveRoomCardId(), adventure.objectiveRoomName(), adventure.id());
+    }
+
+    private String adventureKey(long objectiveRoomCardId, String objectiveRoomName, String adventureId) {
+        return roomKey(objectiveRoomCardId, objectiveRoomName) + "::" + normalize(adventureId);
+    }
+
+    // La sala se identifica por id de carta; por nombre solo si no se conoce su id.
+    private String roomKey(long objectiveRoomCardId, String objectiveRoomName) {
+        return objectiveRoomCardId > 0 ? "#" + objectiveRoomCardId : normalize(objectiveRoomName);
+    }
+
+    /** Nombres de las cartas de mazmorra: el del XML (inglés) y los traducidos, para resolver salas por nombre. */
+    private record RoomIndex(Map<Long, String> rawNames, Map<String, Long> idsByName) {
+    }
+
+    private RoomIndex loadRoomIndex() throws Exception {
+        Map<Long, String> rawNames = new LinkedHashMap<>();
+        for (Path file : AppPaths.listContentFiles(projectRoot, DUNGEON_XML_DIR)) {
+            if (!file.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".xml")) {
+                continue;
+            }
+            NodeList cards = parserFactory.newDocumentBuilder().parse(file.toFile()).getElementsByTagName("card");
+            for (int i = 0; i < cards.getLength(); i++) {
+                Element card = (Element) cards.item(i);
+                try {
+                    rawNames.putIfAbsent(Long.parseLong(card.getAttribute("id").trim()), card.getAttribute("name").trim());
+                } catch (NumberFormatException ignored) {
+                    // Carta sin id numérico: no puede ser sala objetivo de una aventura.
+                }
+            }
+        }
+
+        Map<String, Long> idsByName = new LinkedHashMap<>();
+        rawNames.forEach((id, name) -> idsByName.putIfAbsent(normalize(name), id));
+        for (Language language : Language.values()) {
+            ContentTranslations translations = ContentTranslations.load(projectRoot, language);
+            rawNames.forEach((id, name) -> idsByName.putIfAbsent(normalize(translations.t("dungeonCard." + id + ".name", name)), id));
+        }
+        return new RoomIndex(rawNames, idsByName);
+    }
+
+    // cardId del XML; si falta (fichero antiguo), se resuelve por el nombre de la sala.
+    private long roomCardId(Element roomElement, RoomIndex roomIndex) {
+        String rawCardId = roomElement.getAttribute("cardId").trim();
+        if (!rawCardId.isEmpty()) {
+            return Long.parseLong(rawCardId);
+        }
+        return roomIndex.idsByName().getOrDefault(normalize(roomElement.getAttribute("name")), 0L);
+    }
+
+    // Normaliza la sala de una aventura a su id de carta y su nombre del XML (inglés), del que se
+    // derivan las claves de traducción; así no dependen del idioma en el que se editó.
+    private ObjectiveRoomAdventure withCanonicalRoom(ObjectiveRoomAdventure adventure, RoomIndex roomIndex) {
+        long cardId = adventure.objectiveRoomCardId() > 0
+                ? adventure.objectiveRoomCardId()
+                : roomIndex.idsByName().getOrDefault(normalize(adventure.objectiveRoomName()), 0L);
+        String roomName = cardId > 0 ? roomIndex.rawNames().getOrDefault(cardId, adventure.objectiveRoomName()) : adventure.objectiveRoomName();
+        return new ObjectiveRoomAdventure(
+                roomName,
+                adventure.id(),
+                adventure.name(),
+                adventure.flavorText(),
+                adventure.rulesText(),
+                adventure.generic(),
+                cardId);
     }
 
     private String childText(Element parent, String tagName) {
@@ -355,7 +467,10 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         return "adventure." + roomKey + "." + normalize(adventureId).toLowerCase(Locale.ROOT);
     }
 
-    private ObjectiveRoomAdventure buildGenericAdventure(String objectiveRoomName, ContentTranslations translations) {
+    private ObjectiveRoomAdventure buildGenericAdventure(
+            String objectiveRoomName,
+            long objectiveRoomCardId,
+            ContentTranslations translations) {
         String resolvedObjectiveRoomName = objectiveRoomName == null || objectiveRoomName.isBlank()
                 ? "OBJECTIVE ROOM"
                 : objectiveRoomName.trim();
@@ -374,6 +489,7 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
                         english
                                 ? "Resolve the objective room with the default app behaviour. There are no additional special rules for this mission."
                                 : "Resuelve la habitacion objetivo con el comportamiento habitual de la aplicacion. No hay reglas especiales adicionales para esta mision."),
-                true);
+                true,
+                objectiveRoomCardId);
     }
 }

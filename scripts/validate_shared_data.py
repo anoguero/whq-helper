@@ -22,6 +22,7 @@ SHARED = ROOT / "shared"
 MANIFEST = SHARED / "content-manifest.json"
 DUNGEON_CARDS = SHARED / "data" / "xml" / "dungeon" / "dungeon-cards.xml"
 ROOM_REFERENCES = SHARED / "data" / "xml" / "dungeon" / "room-references.xml"
+ADVENTURES = SHARED / "data" / "xml" / "adventures" / "original-objective-room-adventures.xml"
 UI_TRANSLATIONS = {language: SHARED / "data" / "i18n" / f"ui-{language}.xml" for language in ("es", "en")}
 JAVA_SOURCES = ROOT / "WhqHelperApp" / "src"
 SPA_SOURCES = ROOT / "whq-helper-spa" / "src"
@@ -86,6 +87,21 @@ def validate_room_references(errors: list[str]) -> None:
         if card_id in seen:
             errors.append(f"Duplicate room reference: cardId={card_id}")
         seen.add(card_id)
+
+
+def validate_adventure_rooms(errors: list[str]) -> None:
+    if not ADVENTURES.is_file():
+        errors.append(f"Missing adventures: {relative(ADVENTURES)}")
+        return
+    if not DUNGEON_CARDS.is_file():
+        return
+    card_ids = {card.get("id") for card in ET.parse(DUNGEON_CARDS).iter("card")}
+    for room in ET.parse(ADVENTURES).iter("objectiveRoom"):
+        card_id = (room.get("cardId") or "").strip()
+        if not card_id:
+            errors.append(f"Objective room without cardId in adventures: {room.get('name')}")
+        elif card_id not in card_ids:
+            errors.append(f"Adventure objective room points to missing dungeon card: cardId={card_id} ({room.get('name')})")
 
 
 def ui_keys(path: Path) -> set[str]:
@@ -166,6 +182,7 @@ def main() -> int:
     validate_manifest(errors)
     validate_tile_paths(errors)
     validate_room_references(errors)
+    validate_adventure_rooms(errors)
     validate_ui_translations(errors)
     validate_css_font_urls(errors)
     validate_no_duplicates(errors)

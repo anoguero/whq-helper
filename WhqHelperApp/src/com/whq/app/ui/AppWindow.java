@@ -1580,7 +1580,7 @@ public class AppWindow {
 
             try {
                 List<ObjectiveRoomAdventure> adventures = objectiveRoomAdventureRepository
-                        .loadAdventuresForObjectiveRoom(selectedObjectiveRoomName);
+                        .loadAdventuresForObjectiveRoom(objectiveByName.get(selectedObjectiveRoomName));
                 for (ObjectiveRoomAdventure adventure : adventures) {
                     adventureByName.put(adventure.name(), adventure);
                     missionCombo.add(adventure.name());
@@ -2308,7 +2308,7 @@ public class AppWindow {
         }
         try {
             for (ObjectiveRoomAdventure adventure
-                    : objectiveRoomAdventureRepository.loadAdventuresForObjectiveRoom(saved.objectiveRoom().getName())) {
+                    : objectiveRoomAdventureRepository.loadAdventuresForObjectiveRoom(saved.objectiveRoom())) {
                 if (saved.missionId().equals(adventure.id())) {
                     return adventure;
                 }
