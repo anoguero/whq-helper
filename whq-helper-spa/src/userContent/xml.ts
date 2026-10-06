@@ -1,3 +1,4 @@
+import { tableIdFromName } from '../tableIds';
 import type {
   EventEntry,
   GroupEntry,
@@ -69,6 +70,22 @@ export function parseTableName(xml: string): { name: string; kind: TableKind } |
     name: (table.getAttribute('name') ?? '').trim(),
     kind
   };
+}
+
+/**
+ * Id con el que se cargara la tabla del XML: su atributo id o, si no lo trae, el slug de su
+ * nombre (como parseTable en content.ts). Null si el XML no es valido o no tiene tabla.
+ */
+export function parseTableId(xml: string): string | null {
+  const doc = new DOMParser().parseFromString(xml, 'text/xml');
+  if (doc.querySelector('parsererror')) {
+    return null;
+  }
+  const table = Array.from(doc.documentElement.children).find((node) => node.tagName === 'table');
+  if (!table) {
+    return null;
+  }
+  return (table.getAttribute('id') ?? '').trim() || tableIdFromName((table.getAttribute('name') ?? '').trim());
 }
 
 export function parseEventIdsFromTableXml(xml: string): string[] {

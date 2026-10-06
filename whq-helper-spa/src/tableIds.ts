@@ -34,6 +34,33 @@ export function findReferencedTable(tables: Map<string, TableModel>, reference: 
   return tables.get(reference);
 }
 
+/**
+ * Otra tabla que ya usa el id: dos tablas con el mismo id comparten estado activo y las referencias
+ * por id irian a una sola. {@code ownName} es el nombre guardado de la tabla que se edita (no
+ * cuenta como choque); se omite para una tabla nueva.
+ */
+export function findTableIdConflict(
+  tables: Map<string, TableModel>,
+  id: string,
+  ownName?: string
+): TableModel | undefined {
+  for (const table of tables.values()) {
+    if (table.id === id && table.name !== ownName) {
+      return table;
+    }
+  }
+  return undefined;
+}
+
+/** Ids que comparten varias tablas, con sus nombres (XML editados a mano: los editores ya no lo permiten). */
+export function findDuplicateTableIds(tables: Map<string, TableModel>): Map<string, string[]> {
+  const namesById = new Map<string, string[]>();
+  for (const table of tables.values()) {
+    namesById.set(table.id, [...(namesById.get(table.id) ?? []), table.name]);
+  }
+  return new Map([...namesById].filter(([, names]) => names.length > 1));
+}
+
 const warnedOrphans = new Set<string>();
 
 /**

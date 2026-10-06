@@ -160,6 +160,7 @@
   <entry key="contentDashboard.source">Elemento base</entry>
   <entry key="contentDashboard.sourceNotFound">No se ha encontrado el elemento base seleccionado.</entry>
   <entry key="contentDashboard.tablePrefixError">Las tablas nuevas deben empezar por userdefined-.</entry>
+  <entry key="contentDashboard.tableIdConflict">El id «{id}» de esta tabla ya lo usa la tabla «{table}». Cambia el nombre de la tabla.</entry>
   <entry key="contentDashboard.tableType.dungeonEvents">Eventos de mazmorra</entry>
   <entry key="contentDashboard.tableType.monsterEncounters">Encuentros de monstruos</entry>
   <entry key="contentDashboard.tableType.settlementEvents">Eventos de ciudad</entry>
@@ -500,6 +501,7 @@ Idioma: {language}</entry>
   <entry key="editor.tables.message.requiredSubtype">Debes seleccionar un subtipo.</entry>
   <entry key="editor.tables.message.requiredTableName">El nombre de la tabla es obligatorio.</entry>
   <entry key="editor.tables.message.selectTable">Selecciona primero una tabla.</entry>
+  <entry key="editor.tables.message.duplicateTableId">El id «{id}» de esta tabla ya lo usa la tabla «{table}» ({file}). Si la tabla es nueva, usa otro nombre; si ya existía, cambia su atributo id en el XML.</entry>
   <entry key="editor.tables.message.tableRefReadOnly">Las entradas de referencia a otra tabla (tableRef) no se pueden editar aquí; se conservan tal cual al guardar.</entry>
   <entry key="editor.tables.monsters.pending">El editor de tablas de monstruos queda pendiente de implementación.</entry>
   <entry key="editor.tables.subtype.events.dungeon">Mazmorra</entry>

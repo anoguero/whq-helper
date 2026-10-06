@@ -1,9 +1,10 @@
 import { getAdventureAmbiences, t } from '../../i18n';
 import { appState } from '../../state';
 import type { GroupEntry, MonsterEntry } from '../../types';
-import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import { findTableIdConflict } from '../../tableIds';
+import { loadUserContentItems, upsertUserContentItem, userContentItemXml } from '../../userContent';
 import type { UserContentItem, UserTableData } from '../../userContent/types';
-import { parseTableMetadata } from '../../userContent/xml';
+import { parseTableId, parseTableMetadata } from '../../userContent/xml';
 import { escapeHtml } from '../formatting';
 import { bindDashboardCommonActions, contentDashboardSubtitle, renderDashboardEditorShell } from './common';
 import {
@@ -16,6 +17,32 @@ import {
   tableEncounterLabel
 } from './data';
 import { dashboardState } from './state';
+
+/**
+ * Mensaje de error si el id de la tabla del XML ya lo usa otra tabla (dos tablas con el mismo id
+ * comparten estado activo y las referencias por id irian a una sola), o null si esta libre. La
+ * tabla propia es la guardada del item o, en un borrador que modifica una tabla base, esa tabla.
+ */
+export function tableIdConflictMessage(xml: string, item: UserContentItem): string | null {
+  const id = parseTableId(xml);
+  if (!id) {
+    return null;
+  }
+  const saved = loadUserContentItems().find((entry) => entry.uid === item.uid);
+  const ownName =
+    saved?.kind === 'table'
+      ? (saved.data as UserTableData).name
+      : item.mode === 'modified' && item.kind === 'table'
+        ? (item.data as UserTableData).name
+        : undefined;
+  const conflict = findTableIdConflict(appState.repository.tables, id, ownName);
+  if (!conflict) {
+    return null;
+  }
+  return t(appState.settings.language, 'contentDashboard.tableIdConflict')
+    .replaceAll('{id}', id)
+    .replaceAll('{table}', conflict.name);
+}
 
 export function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'table' }>): void {
   const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
@@ -148,6 +175,11 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
         const metadata = parseTableMetadata(xml);
         if (!metadata) {
           window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
+          return;
+        }
+        const idConflict = tableIdConflictMessage(xml, item);
+        if (idConflict) {
+          window.alert(idConflict);
           return;
         }
         const nextItem: UserContentItem = {
@@ -410,6 +442,11 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
           window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
           return;
         }
+        const idConflict = tableIdConflictMessage(xml, item);
+        if (idConflict) {
+          window.alert(idConflict);
+          return;
+        }
         const nextItem: UserContentItem = {
           ...item,
           title: metadata.name,
@@ -454,6 +491,11 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
     }
     if (item.mode === 'new' && !metadata.name.trim().toLowerCase().startsWith('userdefined-')) {
       window.alert(t(appState.settings.language, 'contentDashboard.tablePrefixError'));
+      return;
+    }
+    const idConflict = tableIdConflictMessage(xml, item);
+    if (idConflict) {
+      window.alert(idConflict);
       return;
     }
     const nextItem: UserContentItem = {

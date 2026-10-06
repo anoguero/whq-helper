@@ -5,6 +5,7 @@ import type { UserMonsterData, UserRuleData } from './types';
 import {
   normalizeSpecialRuleLinks,
   parseEventIdsFromTableXml,
+  parseTableId,
   parseTableMetadata,
   parseTableName,
   serializeDungeonCard,
@@ -185,5 +186,14 @@ describe('serializeTableFromModel', () => {
     const ref = tableNode.querySelector('tableRef')!;
     expect([ref.getAttribute('name'), ref.getAttribute('targetLevel'), ref.getAttribute('times')]).toEqual(['Other', '1', '2']);
     expect(tableNode.querySelector('event')?.getAttribute('id')).toBe('gold');
+  });
+});
+
+describe('parseTableId', () => {
+  it('reads the id attribute or falls back to the slug of the name', () => {
+    expect(parseTableId('<tables><table id="kept-id" name="Renamed"/></tables>')).toBe('kept-id');
+    expect(parseTableId('<tables><table name="Salá  Ñ!"/></tables>')).toBe('sala-n');
+    expect(parseTableId('<tables/>')).toBeNull();
+    expect(parseTableId('<tables><table')).toBeNull();
   });
 });

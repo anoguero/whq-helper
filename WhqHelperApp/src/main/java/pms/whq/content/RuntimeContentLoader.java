@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Consumer;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -123,11 +125,35 @@ public class RuntimeContentLoader {
         });
     // El estado activo se lee por id cuando ya estan todas las tablas (base y del usuario), para
     // poder migrar antes las claves antiguas por nombre.
+    reportDuplicateTableIds(repository.tables());
     TableActiveSettings.migrateLegacyKeys(repository.tables(), issueConsumer);
     for (Table table : repository.tables().values()) {
       table.setActive(TableActiveSettings.isActive(table));
     }
     Table.registerAll(repository.tables());
+  }
+
+  // Dos tablas con el mismo id comparten estado activo y las referencias por id van a una sola.
+  // Los editores ya no lo permiten; esto avisa de los XML editados a mano.
+  private void reportDuplicateTableIds(Map<String, Table> tables) {
+    Map<String, List<String>> namesById = new TreeMap<>();
+    for (Table table : tables.values()) {
+      namesById.computeIfAbsent(table.getId(), id -> new ArrayList<>()).add(table.getName());
+    }
+    namesById.forEach(
+        (id, names) -> {
+          if (names.size() > 1) {
+            issueConsumer.accept(
+                new ContentIssue(
+                    "Duplicate Table Id",
+                    "The tables ["
+                        + String.join("], [", names)
+                        + "] share the id ["
+                        + id
+                        + "], so they share their active setting and references by id reach only one"
+                        + " of them. Change the id attribute of one of them in its XML file."));
+          }
+        });
   }
 
   private void loadMonsters(ContentRepository repository, ContentTranslations translations) {

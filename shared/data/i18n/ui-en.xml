@@ -160,6 +160,7 @@
   <entry key="contentDashboard.source">Source entry</entry>
   <entry key="contentDashboard.sourceNotFound">The selected source entry was not found.</entry>
   <entry key="contentDashboard.tablePrefixError">New tables must start with userdefined-.</entry>
+  <entry key="contentDashboard.tableIdConflict">The id “{id}” of this table is already used by the table “{table}”. Change the table name.</entry>
   <entry key="contentDashboard.tableType.dungeonEvents">Dungeon events</entry>
   <entry key="contentDashboard.tableType.monsterEncounters">Monster encounters</entry>
   <entry key="contentDashboard.tableType.settlementEvents">Settlement events</entry>
@@ -500,6 +501,7 @@ Language: {language}</entry>
   <entry key="editor.tables.message.requiredSubtype">Select a subtype first.</entry>
   <entry key="editor.tables.message.requiredTableName">Table name is required.</entry>
   <entry key="editor.tables.message.selectTable">Select a table first.</entry>
+  <entry key="editor.tables.message.duplicateTableId">The id “{id}” of this table is already used by the table “{table}” ({file}). If the table is new, use another name; if it already existed, change its id attribute in the XML.</entry>
   <entry key="editor.tables.message.tableRefReadOnly">Table reference (tableRef) entries cannot be edited here; they are preserved as-is when saving.</entry>
   <entry key="editor.tables.monsters.pending">Monster tables editor is pending implementation.</entry>
   <entry key="editor.tables.subtype.events.dungeon">Dungeon</entry>

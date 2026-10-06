@@ -781,6 +781,11 @@ public final class TablesTab extends EditorTab {
             if (prepared.entries.isEmpty()) {
               throw new IllegalArgumentException(I18n.t("editor.tables.message.requiredEntries"));
             }
+            rejectDuplicateTableId(
+                prepared,
+                selectedTableModelIndex[0] < model[0].tables.size() ? selectedTableModelIndex[0] : -1,
+                selectedFile(fileCombo, files),
+                model[0]);
 
             if (selectedTableModelIndex[0] >= 0 && selectedTableModelIndex[0] < model[0].tables.size()) {
               model[0].tables.set(selectedTableModelIndex[0], prepared);
@@ -817,6 +822,28 @@ public final class TablesTab extends EditorTab {
 
     showCurrentEditor.run();
     clearDraft.run();
+  }
+
+  // Dos tablas con el mismo id compartirian estado activo y las referencias por id irian a una sola.
+  private void rejectDuplicateTableId(TableDefinition table, int ownIndex, Path targetFile, TableFileModel targetModel)
+      throws Exception {
+    Map<Path, TableFileModel> otherFiles = new LinkedHashMap<>();
+    Path normalizedTarget = targetFile.toAbsolutePath().normalize();
+    for (Path file : service.listTableFiles()) {
+      if (!file.toAbsolutePath().normalize().equals(normalizedTarget)) {
+        otherFiles.put(file, service.loadTables(file));
+      }
+    }
+    TableIdConflicts.Conflict conflict = TableIdConflicts.find(table, ownIndex, targetFile, targetModel, otherFiles);
+    if (conflict != null) {
+      throw new IllegalArgumentException(
+          I18n.t(
+              "editor.tables.message.duplicateTableId",
+              Map.of(
+                  "id", conflict.id(),
+                  "table", conflict.tableName(),
+                  "file", conflict.file().getFileName().toString())));
+    }
   }
 
   private static String tableLabel(TableDefinition table) {

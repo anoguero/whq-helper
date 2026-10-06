@@ -1,5 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { findReferencedTable, migrateLegacyTableActive, tableIdFromName } from './tableIds';
+import {
+  findDuplicateTableIds,
+  findReferencedTable,
+  findTableIdConflict,
+  migrateLegacyTableActive,
+  tableIdFromName
+} from './tableIds';
 import { repository, settings, table } from './testing/fixtures';
 
 afterEach(() => {
@@ -31,6 +37,29 @@ describe('findReferencedTable', () => {
     const byId = table('Something', { id: 'ogres' });
     const byName = table('ogres', { id: 'other' });
     expect(findReferencedTable(repository([byName, byId]).tables, 'ogres')).toBe(byId);
+  });
+});
+
+describe('findTableIdConflict', () => {
+  it('finds another table with the same id, ignoring the table being edited', () => {
+    const base = table('Catacombs Monsters', { id: 'catacombs-monsters' });
+    const own = table('userdefined-Foo', { id: 'userdefined-foo' });
+    const tables = repository([base, own]).tables;
+    expect(findTableIdConflict(tables, 'catacombs-monsters')).toBe(base);
+    expect(findTableIdConflict(tables, 'userdefined-foo', 'userdefined-Foo')).toBeUndefined();
+    expect(findTableIdConflict(tables, 'userdefined-foo')).toBe(own);
+    expect(findTableIdConflict(tables, 'free')).toBeUndefined();
+  });
+});
+
+describe('findDuplicateTableIds', () => {
+  it('lists the ids shared by several tables with their names', () => {
+    const tables = repository([
+      table('A', { id: 'same' }),
+      table('B', { id: 'same' }),
+      table('C', { id: 'other' })
+    ]).tables;
+    expect(findDuplicateTableIds(tables)).toEqual(new Map([['same', ['A', 'B']]]));
   });
 });
 

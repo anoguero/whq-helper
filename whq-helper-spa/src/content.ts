@@ -18,7 +18,7 @@ import type {
 import { getXmlOverride } from './contentOverrides';
 import { loadContentTranslations, translateContent } from './contentTranslations';
 import { buildUserContentXmlDocuments } from './userContent';
-import { tableIdFromName } from './tableIds';
+import { findDuplicateTableIds, tableIdFromName } from './tableIds';
 
 interface ContentManifest {
   xmlFiles: string[];
@@ -444,6 +444,12 @@ export async function loadContent(language: LanguageCode): Promise<ContentReposi
         }
       }
     }
+  }
+
+  for (const [id, names] of findDuplicateTableIds(repository.tables)) {
+    console.warn(
+      `Las tablas ${names.join(', ')} comparten el id ${id}: comparten estado activo y las referencias por id van a una sola.`
+    );
   }
 
   return repository;

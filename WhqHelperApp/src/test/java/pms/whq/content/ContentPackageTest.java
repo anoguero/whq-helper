@@ -75,6 +75,30 @@ class ContentPackageTest {
   }
 
   @Test
+  void tablesSharingAnIdAreReportedOnLoad() throws Exception {
+    // Dos tablas con el mismo id comparten estado activo y las referencias por id van a una sola.
+    System.setProperty("whq.content.home", SAMPLE.toString());
+    Path userTables = runtimeHome.resolve("data/xml/tables");
+    Files.createDirectories(userTables);
+    Files.writeString(
+        userTables.resolve("userdefined-tables.xml"),
+        """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <tables>
+          <table id="sample-monsters" name="userdefined-Copy">
+            <monster id="sample-cellar-toad" number="1" level="1"/>
+          </table>
+        </tables>
+        """);
+    List<ContentIssue> issues = new ArrayList<>();
+
+    new RuntimeContentService(runtimeHome).load(issues::add);
+
+    assertEquals(List.of("Duplicate Table Id"), issues.stream().map(ContentIssue::title).toList());
+    assertTrue(issues.get(0).message().contains("[sample-monsters]"));
+  }
+
+  @Test
   void withoutContentPackageTheAppLoadsNothingAndCreatesNothing() throws Exception {
     Path missing = tempDir.resolve("no-content-here");
     System.setProperty("whq.content.home", missing.toString());
