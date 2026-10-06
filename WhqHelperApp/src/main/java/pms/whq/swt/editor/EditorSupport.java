@@ -433,4 +433,74 @@ public final class EditorSupport {
   public static String monsterTranslationKey(String id, String suffix) {
     return "monster." + safe(id).trim() + suffix;
   }
+
+  public static final double TREASURE_CARD_ASPECT_RATIO = 847d / 1264d;
+
+  public static final String RULE_NAME_SUFFIX = ".name";
+
+  public static final String RULE_TEXT_SUFFIX = ".text";
+
+  public static final String RULE_PARAMETER_NAME_SUFFIX = ".parameterName";
+
+  public static final String RULE_PARAMETER_NAMES_SUFFIX = ".parameterNames";
+
+  public static final String RULE_PARAMETER_FORMAT_SUFFIX = ".parameterFormat";
+
+  public static String selectedRuleId(Combo combo, List<RuleEntry> rules) {
+    int index = combo.getSelectionIndex();
+    if (index <= 0 || index - 1 >= rules.size()) {
+      return "";
+    }
+    return safe(rules.get(index - 1).id);
+  }
+
+  public static RuleEntry applyRuleTranslation(RuleEntry entry, EditableContentTranslations translations) {
+    RuleEntry localized = copyRuleEntry(entry);
+    localized.name = translations.t(ruleTranslationKey(localized.id, RULE_NAME_SUFFIX), localized.name);
+    localized.text = translations.t(ruleTranslationKey(localized.id, RULE_TEXT_SUFFIX), localized.text);
+    localized.parameterName =
+        translations.t(ruleTranslationKey(localized.id, RULE_PARAMETER_NAME_SUFFIX), localized.parameterName);
+    localized.parameterNames =
+        translations.t(ruleTranslationKey(localized.id, RULE_PARAMETER_NAMES_SUFFIX), localized.parameterNames);
+    localized.parameterFormat =
+        translations.t(ruleTranslationKey(localized.id, RULE_PARAMETER_FORMAT_SUFFIX), localized.parameterFormat);
+    return localized;
+  }
+
+  public static RuleEntry copyRuleEntry(RuleEntry source) {
+    RuleEntry copy = new RuleEntry();
+    copy.type = safe(source.type);
+    copy.id = safe(source.id);
+    copy.name = safe(source.name);
+    copy.text = safe(source.text);
+    copy.parameterName = safe(source.parameterName);
+    copy.parameterNames = safe(source.parameterNames);
+    copy.parameterFormat = safe(source.parameterFormat);
+    return copy;
+  }
+
+  public static String ruleTranslationKey(String id, String suffix) {
+    return "rule." + safe(id).trim() + suffix;
+  }
+
+  public static void layoutTreasurePreview(Composite viewport, Composite previewHost) {
+    if (viewport == null || previewHost == null || viewport.isDisposed() || previewHost.isDisposed()) {
+      return;
+    }
+    org.eclipse.swt.graphics.Rectangle area = viewport.getClientArea();
+    if (area.width <= 0 || area.height <= 0) {
+      return;
+    }
+
+    int width = area.width;
+    int height = (int) Math.floor(width / TREASURE_CARD_ASPECT_RATIO);
+    if (height > area.height) {
+      height = area.height;
+      width = (int) Math.floor(height * TREASURE_CARD_ASPECT_RATIO);
+    }
+
+    int x = area.x + Math.max(0, (area.width - width) / 2);
+    int y = area.y + Math.max(0, (area.height - height) / 2);
+    previewHost.setBounds(x, y, Math.max(1, width), Math.max(1, height));
+  }
 }
