@@ -3986,6 +3986,7 @@ public final class EventContentEditorDialog {
 
   private static TableDefinition copyTableDefinition(TableDefinition source) {
     TableDefinition copy = new TableDefinition();
+    copy.id = safe(source == null ? "" : source.id);
     copy.name = safe(source == null ? "" : source.name);
     copy.kind = safe(source == null ? "" : source.kind);
     if (source != null && source.entries != null) {

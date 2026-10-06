@@ -80,11 +80,15 @@ public class RuntimeContentLoader {
         node -> {
           if ("table".equals(node.getNodeName())) {
             Table table = new Table(node);
-            String settingName = table.getName() + ".active";
-            table.setActive(Settings.getSettingAsBool(settingName, true));
             repository.tables().put(table.getName(), table);
           }
         });
+    // El estado activo se lee por id cuando ya estan todas las tablas (base y del usuario), para
+    // poder migrar antes las claves antiguas por nombre.
+    TableActiveSettings.migrateLegacyKeys(repository.tables(), issueConsumer);
+    for (Table table : repository.tables().values()) {
+      table.setActive(TableActiveSettings.isActive(table));
+    }
     Table.registerAll(repository.tables());
   }
 

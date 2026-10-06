@@ -50,12 +50,28 @@ describe('getMonsterNumber', () => {
 });
 
 describe('applyTableActiveState', () => {
-  it('applies the configured state and defaults to active', () => {
+  it('applies the state configured by table id and defaults to active', () => {
     const repo = repository([table('A', { active: false }), table('B', { active: true }), table('C', { active: false })]);
-    applyTableActiveState(repo, settings({ tableActive: { A: true, B: false } }));
+    applyTableActiveState(repo, settings({ tableActiveById: { a: true, b: false } }));
     expect(repo.tables.get('A')?.active).toBe(true);
     expect(repo.tables.get('B')?.active).toBe(false);
     expect(repo.tables.get('C')?.active).toBe(true);
+  });
+
+  it('keeps the state of a renamed table, because it is stored by id', () => {
+    const config = settings({ tableActiveById: { 'hag-1': false } });
+    const renamed = repository([table('Hag Queen Monsters (Level 1)', { id: 'hag-1' })]);
+    applyTableActiveState(renamed, config);
+    expect(renamed.tables.get('Hag Queen Monsters (Level 1)')?.active).toBe(false);
+  });
+
+  it('migrates state saved by visible name before applying it', () => {
+    const repo = repository([table('Hag Queen - Level 1', { id: 'hag-1' })]);
+    const config = settings({ legacyTableActive: { 'Hag Queen - Level 1': false } });
+    applyTableActiveState(repo, config);
+    expect(repo.tables.get('Hag Queen - Level 1')?.active).toBe(false);
+    expect(config.tableActiveById).toEqual({ 'hag-1': false });
+    expect(config.legacyTableActive).toEqual({});
   });
 });
 

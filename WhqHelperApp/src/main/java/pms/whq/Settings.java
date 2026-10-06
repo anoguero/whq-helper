@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.whq.app.AppPaths;
 import com.whq.app.i18n.Language;
@@ -126,6 +128,14 @@ public final class Settings {
 
   public static void setSetting(String setting, String value) {
     settings.setProperty(setting, value);
+  }
+
+  public static void removeSetting(String setting) {
+    settings.remove(setting);
+  }
+
+  public static Set<String> settingNames() {
+    return new TreeSet<>(settings.stringPropertyNames());
   }
 
   public static void setSettingAndSave(String setting, String value) {

@@ -34,6 +34,8 @@ import org.w3c.dom.NodeList;
 import com.whq.app.AppPaths;
 import com.whq.app.io.SafeXml;
 
+import pms.whq.data.TableIds;
+
 public class XmlContentService {
 
   private static final String MONSTER_SCHEMA = "whq-monster-schema.xsd";
@@ -522,6 +524,10 @@ public class XmlContentService {
       TableDefinition table = new TableDefinition();
       table.name = tableElement.getAttribute("name");
       table.kind = tableElement.getAttribute("kind");
+      // Una tabla sin id recibe el slug de su nombre al cargarla: si se renombra en el editor,
+      // el id (y con el su estado activo) se conserva al guardar.
+      String tableId = tableElement.getAttribute("id").trim();
+      table.id = tableId.isEmpty() ? TableIds.fromName(table.name) : tableId;
 
       NodeList entries = tableElement.getChildNodes();
       for (int j = 0; j < entries.getLength(); j++) {
@@ -591,6 +597,8 @@ public class XmlContentService {
     for (TableDefinition table : model.tables) {
       validateRequired(table.name, "table.name");
       Element tableElement = doc.createElement("table");
+      String tableId = table.id == null ? "" : table.id.trim();
+      tableElement.setAttribute("id", tableId.isEmpty() ? TableIds.fromName(table.name) : tableId);
       tableElement.setAttribute("name", table.name.trim());
       if (table.kind != null && !table.kind.trim().isEmpty()) {
         tableElement.setAttribute("kind", table.kind.trim());
@@ -1747,6 +1755,7 @@ public class XmlContentService {
   }
 
   public static final class TableDefinition {
+    public String id = "";
     public String name = "";
     public String kind = "";
     public List<TableEntry> entries = new ArrayList<>();

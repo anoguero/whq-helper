@@ -17,6 +17,7 @@ public class Table implements EventList {
   private static final TableDrawService DRAW_SERVICE = new TableDrawService();
   private static final Map<String, Table> TABLE_REGISTRY = new ConcurrentHashMap<>();
 
+  private String id;
   private String name;
   private String kind;
   private final List<DrawableEntry> monsters;
@@ -24,6 +25,7 @@ public class Table implements EventList {
   private boolean active;
 
   public Table() {
+    id = "";
     name = "Table";
     kind = "";
     monsters = new ArrayList<>();
@@ -33,6 +35,7 @@ public class Table implements EventList {
 
   public Table(Node node) {
     this();
+    id = XMLUtil.getAttribute(node, "id").trim();
     name = XMLUtil.getAttribute(node, "name");
     kind = XMLUtil.getAttribute(node, "kind");
 
@@ -123,6 +126,11 @@ public class Table implements EventList {
   @Override
   public int size() {
     return monsters.size() + events.size();
+  }
+
+  /** Id estable de la tabla; si el XML no lo trae, el slug de su nombre (ver {@link TableIds}). */
+  public String getId() {
+    return id.isEmpty() ? TableIds.fromName(name) : id;
   }
 
   public String getName() {

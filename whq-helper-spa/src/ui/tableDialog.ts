@@ -91,7 +91,7 @@ export function openTableDialog(): void {
         return;
       }
       table.active = checkbox.checked;
-      appState.settings.tableActive[table.name] = checkbox.checked;
+      appState.settings.tableActiveById[table.id] = checkbox.checked;
     });
 
     appState.hooks.rebuildDecks();

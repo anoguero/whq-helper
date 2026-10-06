@@ -42,6 +42,7 @@ import com.whq.app.ui.AppIcon;
 import com.whq.app.ui.WhqUiTheme;
 
 import pms.whq.content.ContentRepository;
+import pms.whq.content.TableActiveSettings;
 import pms.whq.data.DrawableEntry;
 import pms.whq.data.EventList;
 import pms.whq.data.Table;
@@ -959,9 +960,7 @@ public class EventDeckApp {
         .persistToSettings();
 
     for (Table table : controller.contentRepository().tables().values()) {
-      String name = table.getName() + ".active";
-      String value = Boolean.toString(table.isActive());
-      Settings.setSetting(name, value);
+      TableActiveSettings.store(table);
     }
 
     Settings.save();

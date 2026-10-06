@@ -22,8 +22,14 @@ const DEFAULT_SETTINGS: AppSettings = {
   objectiveMonsterHardWeight: 1,
   objectiveMonsterVeryHardWeight: 1,
   objectiveMonsterExtremeWeight: 1,
-  tableActive: {}
+  tableActiveById: {},
+  legacyTableActive: {}
 };
+
+const TABLE_ID_KEY = /^table\.([a-z0-9]+(?:-[a-z0-9]+)*)\.active$/;
+
+/** Lo guardado en localStorage. tableActive es el formato antiguo, por nombre visible. */
+type StoredSettings = Partial<AppSettings> & { tableActive?: Record<string, boolean> };
 
 function detectBrowserLanguage(): AppSettings['language'] {
   const candidates = typeof navigator === 'undefined' ? [] : [...(navigator.languages ?? []), navigator.language ?? ''];
@@ -94,11 +100,16 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
     props.set(key, value);
   }
 
-  const tableActive: Record<string, boolean> = {};
+  // table.<id>.active es el formato actual; <nombre visible>.active, el antiguo.
+  const tableActiveById: Record<string, boolean> = {};
+  const legacyTableActive: Record<string, boolean> = {};
   for (const [key, value] of props.entries()) {
-    if (key.endsWith('.active')) {
+    const idMatch = TABLE_ID_KEY.exec(key);
+    if (idMatch) {
+      tableActiveById[idMatch[1] as string] = parseBoolean(value, false);
+    } else if (key.endsWith('.active')) {
       const tableName = key.slice(0, -'.active'.length);
-      tableActive[tableName] = parseBoolean(value, false);
+      legacyTableActive[tableName] = parseBoolean(value, false);
     }
   }
 
@@ -148,7 +159,8 @@ function parseSettingsCfg(content: string): Partial<AppSettings> {
       props.get('ObjectiveMonsterExtremeWeight'),
       DEFAULT_SETTINGS.objectiveMonsterExtremeWeight
     ),
-    tableActive
+    tableActiveById,
+    legacyTableActive
   };
 
   if (language) {
@@ -175,11 +187,11 @@ export async function loadSettings(): Promise<AppSettings> {
     // Ignore and keep defaults.
   }
 
-  let fromStorage: Partial<AppSettings> = {};
+  let fromStorage: StoredSettings = {};
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      fromStorage = JSON.parse(raw) as Partial<AppSettings>;
+      fromStorage = JSON.parse(raw) as StoredSettings;
     }
   } catch {
     // Ignore and keep defaults.
@@ -188,14 +200,24 @@ export async function loadSettings(): Promise<AppSettings> {
   const hasConfiguredLanguage = typeof fromCfg.language === 'string' || typeof fromStorage.language === 'string';
   const defaultLanguage = hasConfiguredLanguage ? DEFAULT_SETTINGS.language : detectBrowserLanguage();
 
+  // Un localStorage en el formato antiguo ya incluia los valores del cfg mezclados con los del
+  // usuario. Sus entradas por nombre se migran despues (y entonces gana el valor por id), asi que
+  // los valores por id del cfg no se aplican: pisarian lo que eligio el usuario.
+  const storedInLegacyFormat = fromStorage.tableActive !== undefined;
+  const { tableActive: storedLegacyTableActive, ...storedSettings } = fromStorage;
   const merged: AppSettings = {
     ...DEFAULT_SETTINGS,
     language: defaultLanguage,
     ...fromCfg,
-    ...fromStorage,
-    tableActive: {
-      ...(fromCfg.tableActive ?? {}),
-      ...(fromStorage.tableActive ?? {})
+    ...storedSettings,
+    tableActiveById: {
+      ...(storedInLegacyFormat ? {} : fromCfg.tableActiveById ?? {}),
+      ...(fromStorage.tableActiveById ?? {})
+    },
+    legacyTableActive: {
+      ...(fromCfg.legacyTableActive ?? {}),
+      ...(storedLegacyTableActive ?? {}),
+      ...(fromStorage.legacyTableActive ?? {})
     }
   };
 

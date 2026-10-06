@@ -34,7 +34,9 @@ ObjectiveMonsterHardWeight=5
 MonsterImageDir=data/graphics/monsters/
 ShowEventDeck=true
 
-# Las líneas "<nombre de tabla>.active=true/false" se generan automáticamente
+# Las líneas "table.<id de tabla>.active=true/false" se generan automáticamente
 # al guardar y reflejan qué tablas de contenido tienes habilitadas en tu partida.
+# Van por id para que renombrar una tabla no pierda su estado. Las del formato
+# antiguo ("<nombre de tabla>.active") se convierten solas al arrancar.
 # No se incluyen aquí porque dependen de las tablas instaladas y de tu progreso;
 # se crean solas la primera vez que uses la aplicación.

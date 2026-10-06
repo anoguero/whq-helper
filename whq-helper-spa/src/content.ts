@@ -18,6 +18,7 @@ import type {
 import { getXmlOverride } from './contentOverrides';
 import { loadContentTranslations, translateContent } from './contentTranslations';
 import { buildUserContentXmlDocuments } from './userContent';
+import { tableIdFromName } from './tableIds';
 
 interface ContentManifest {
   xmlFiles: string[];
@@ -173,8 +174,10 @@ function parseTable(node: Element): TableModel {
   }
 
   const kindRaw = getAttribute(node, 'kind');
+  const name = getAttribute(node, 'name');
   return {
-    name: getAttribute(node, 'name'),
+    id: getAttribute(node, 'id') || tableIdFromName(name),
+    name,
     kindRaw,
     kind: toTableKind(kindRaw),
     active: false,

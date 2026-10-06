@@ -82,6 +82,21 @@
     <xsd:attribute name="ambiences" type="ambiencesType" />
   </xsd:complexType>
   
+  <xsd:simpleType name="tableIdType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+       Stable table id, used to store the table's settings (table.&lt;id&gt;.active) so renaming
+       the table keeps them. Base tables carry the slug of the name they had when ids were
+       introduced: accents removed, lower case, every run of characters outside [a-z0-9]
+       replaced by '-', and leading/trailing '-' trimmed ("table" if nothing is left). Optional
+       so older user files keep validating: a table without id gets the slug of its current name.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[a-z0-9]+(-[a-z0-9]+)*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
   <xsd:complexType name="tableType">
     <xsd:sequence maxOccurs="unbounded" minOccurs="1">
       <xsd:choice>
@@ -91,6 +106,7 @@
         <xsd:element name="tableRef" type="tableRefType" />
       </xsd:choice>
     </xsd:sequence>
+    <xsd:attribute name="id" type="tableIdType" />
     <xsd:attribute name="name" type="xsd:string" />
     <xsd:attribute name="kind" type="xsd:string" />
   </xsd:complexType>

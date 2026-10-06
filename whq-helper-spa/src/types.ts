@@ -89,6 +89,8 @@ export type DrawEntry = EventEntry | MonsterEntry | GroupEntry | TableRefEntry;
 export type TableKind = 'dungeon' | 'travel' | 'settlement' | 'treasure';
 
 export interface TableModel {
+  /** Id estable (atributo id, o el slug del nombre si no lo trae). Indexa el estado activo. */
+  id: string;
   name: string;
   kindRaw: string;
   kind: TableKind;
@@ -147,7 +149,13 @@ export interface AppSettings {
   objectiveMonsterHardWeight: number;
   objectiveMonsterVeryHardWeight: number;
   objectiveMonsterExtremeWeight: number;
-  tableActive: Record<string, boolean>;
+  /** Estado activo de cada tabla, por id estable. */
+  tableActiveById: Record<string, boolean>;
+  /**
+   * Estado activo en el formato antiguo, por nombre visible: pendiente de migrar a tableActiveById
+   * (ver migrateLegacyTableActive) o sin tabla que case, y entonces se conserva.
+   */
+  legacyTableActive: Record<string, boolean>;
 }
 
 export interface DeckBundle {

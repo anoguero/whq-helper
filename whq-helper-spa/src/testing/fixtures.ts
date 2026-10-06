@@ -10,6 +10,7 @@ import type {
   TableModel,
   TableRefEntry
 } from '../types';
+import { tableIdFromName } from '../tableIds';
 
 export function settings(overrides: Partial<AppSettings> = {}): AppSettings {
   return {
@@ -32,7 +33,8 @@ export function settings(overrides: Partial<AppSettings> = {}): AppSettings {
     objectiveMonsterHardWeight: 0,
     objectiveMonsterVeryHardWeight: 0,
     objectiveMonsterExtremeWeight: 0,
-    tableActive: {},
+    tableActiveById: {},
+    legacyTableActive: {},
     ...overrides
   };
 }
@@ -66,6 +68,7 @@ export function eventModel(id: string): EventModel {
 
 export function table(name: string, overrides: Partial<TableModel> = {}): TableModel {
   return {
+    id: tableIdFromName(name),
     name,
     kindRaw: overrides.kind ?? 'dungeon',
     kind: 'dungeon',

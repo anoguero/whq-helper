@@ -23,6 +23,8 @@ MANIFEST = SHARED / "content-manifest.json"
 DUNGEON_CARDS = SHARED / "data" / "xml" / "dungeon" / "dungeon-cards.xml"
 ROOM_REFERENCES = SHARED / "data" / "xml" / "dungeon" / "room-references.xml"
 ADVENTURES = SHARED / "data" / "xml" / "adventures" / "original-objective-room-adventures.xml"
+TABLES_DIR = SHARED / "data" / "xml" / "tables"
+TABLE_ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 UI_TRANSLATIONS = {language: SHARED / "data" / "i18n" / f"ui-{language}.xml" for language in ("es", "en")}
 JAVA_SOURCES = ROOT / "WhqHelperApp" / "src" / "main" / "java"
 SPA_SOURCES = ROOT / "whq-helper-spa" / "src"
@@ -104,6 +106,24 @@ def validate_adventure_rooms(errors: list[str]) -> None:
             errors.append(f"Adventure objective room points to missing dungeon card: cardId={card_id} ({room.get('name')})")
 
 
+def validate_table_ids(errors: list[str]) -> None:
+    # El estado activo de cada tabla se guarda por id (table.<id>.active): debe existir y ser unico
+    # en todo el contenido base. El esquema lo deja opcional por los ficheros antiguos del usuario.
+    seen: dict[str, str] = {}
+    for path in sorted(TABLES_DIR.glob("*.xml")):
+        for table in ET.parse(path).getroot().iter("table"):
+            table_id = (table.get("id") or "").strip()
+            name = table.get("name")
+            if not table_id:
+                errors.append(f"Table without id in {relative(path)}: {name}")
+            elif not TABLE_ID.fullmatch(table_id):
+                errors.append(f"Invalid table id in {relative(path)}: {table_id} ({name})")
+            elif table_id in seen:
+                errors.append(f"Duplicate table id: {table_id} ({seen[table_id]} and {relative(path)})")
+            else:
+                seen[table_id] = relative(path)
+
+
 def ui_keys(path: Path) -> set[str]:
     return {(entry.get("key") or "").strip() for entry in ET.parse(path).getroot().iter("entry")}
 
@@ -183,6 +203,7 @@ def main() -> int:
     validate_tile_paths(errors)
     validate_room_references(errors)
     validate_adventure_rooms(errors)
+    validate_table_ids(errors)
     validate_ui_translations(errors)
     validate_css_font_urls(errors)
     validate_no_duplicates(errors)

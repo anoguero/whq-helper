@@ -11,6 +11,7 @@ import type {
   TableKind,
   TableModel
 } from './types';
+import { migrateLegacyTableActive } from './tableIds';
 
 const DUNGEON_GOLD_TREASURE_ID = 'rpb-treasure-dungeon-gold';
 
@@ -258,8 +259,9 @@ function hasActiveDungeonGoldTreasureEntry(repository: ContentRepository): boole
 }
 
 export function applyTableActiveState(repository: ContentRepository, settings: AppSettings): void {
+  migrateLegacyTableActive(repository, settings);
   for (const table of repository.tables.values()) {
-    const configured = settings.tableActive[table.name];
+    const configured = settings.tableActiveById[table.id];
     table.active = configured !== undefined ? configured : true;
   }
 }
