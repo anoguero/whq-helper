@@ -187,6 +187,10 @@ describe('serializeTableFromModel', () => {
     expect([ref.getAttribute('name'), ref.getAttribute('targetLevel'), ref.getAttribute('times')]).toEqual(['Other', '1', '2']);
     expect(tableNode.querySelector('event')?.getAttribute('id')).toBe('gold');
   });
+  it('writes the table id, so a modified copy of a base table keeps its active state', () => {
+    const tableNode = parse(serializeTableFromModel(table('Renamed Base', { id: 'original-base' }))).querySelector('table')!;
+    expect(tableNode.getAttribute('id')).toBe('original-base');
+  });
 });
 
 describe('parseTableId', () => {

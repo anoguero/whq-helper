@@ -8,7 +8,7 @@ import {
 } from './userContent';
 import { createDefaultEvent, createDefaultMonster } from './userContent/defaults';
 import type { UserContentItem } from './userContent/types';
-import { parseEventIdsFromTableXml } from './userContent/xml';
+import { parseEventIdsFromTableXml, parseTableId } from './userContent/xml';
 
 function newItem(partial: Pick<UserContentItem, 'kind' | 'data'> & { uid: string }): UserContentItem {
   return { mode: 'new', title: '', updatedAt: '', ...partial } as UserContentItem;
@@ -50,6 +50,18 @@ describe('user content storage and XML documents', () => {
 
     deleteUserContentItem('t2');
     expect(loadUserContentItems()).toEqual([]);
+  });
+
+  it('keeps the id of a managed treasure table when it rewrites it', () => {
+    upsertUserContentItem(newItem({ uid: 't1', kind: 'treasure', data: { ...createDefaultEvent('treasure'), name: 'Gold Cup' } }));
+    const managed = loadUserContentItems().find((item) => item.kind === 'table')!;
+    const xml = (managed.data as { xml: string }).xml.replace('<table ', '<table id="my-treasure" ');
+    upsertUserContentItem({ ...managed, data: { ...(managed.data as object), xml } } as UserContentItem);
+
+    upsertUserContentItem(newItem({ uid: 't2', kind: 'treasure', data: { ...createDefaultEvent('treasure'), name: 'Silver Ring' } }));
+    const rewritten = loadUserContentItems().find((item) => item.kind === 'table');
+    expect(parseTableId((rewritten?.data as { xml: string }).xml)).toBe('my-treasure');
+    expect(parseEventIdsFromTableXml((rewritten?.data as { xml: string }).xml)).toHaveLength(2);
   });
 
   it('builds no documents without user content', () => {

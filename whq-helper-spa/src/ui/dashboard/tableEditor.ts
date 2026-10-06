@@ -1,7 +1,7 @@
 import { getAdventureAmbiences, t } from '../../i18n';
 import { appState } from '../../state';
 import type { GroupEntry, MonsterEntry } from '../../types';
-import { findTableIdConflict } from '../../tableIds';
+import { findTableIdConflict, tableIdFromName } from '../../tableIds';
 import { loadUserContentItems, upsertUserContentItem, userContentItemXml } from '../../userContent';
 import type { UserContentItem, UserTableData } from '../../userContent/types';
 import { parseTableId, parseTableMetadata } from '../../userContent/xml';
@@ -44,6 +44,30 @@ export function tableIdConflictMessage(xml: string, item: UserContentItem): stri
     .replaceAll('{table}', conflict.name);
 }
 
+/**
+ * Id que conserva la tabla aunque se renombre (con el se guarda su estado activo): el de la version
+ * guardada del item o, en un borrador que modifica una tabla base, el de esa tabla. Undefined para
+ * una tabla nueva sin guardar, que toma el slug de su nombre.
+ */
+export function keptTableId(item: UserContentItem): string | undefined {
+  const saved = loadUserContentItems().find((entry) => entry.uid === item.uid);
+  if (saved?.kind === 'table') {
+    return parseTableId((saved.data as UserTableData).xml) ?? undefined;
+  }
+  if (item.mode === 'modified' && item.kind === 'table') {
+    return parseTableId((item.data as UserTableData).xml) ?? undefined;
+  }
+  return undefined;
+}
+
+/** En el editor de XML: si la tabla no trae id, se le pone el que conserva, para que renombrarla no lo cambie. */
+export function withKeptTableId(xml: string, keptId: string | undefined): string {
+  if (!keptId || /<table\b[^>]*\sid\s*=/.test(xml)) {
+    return xml;
+  }
+  return xml.replace(/<table(?=[\s>\/])/, `<table id="${keptId}"`);
+}
+
 export function renderTableEditor(container: HTMLElement, item: Extract<UserContentItem, { kind: 'table' }>): void {
   const editor = container.querySelector<HTMLElement>('#contentDashboardEditor');
   if (!editor) {
@@ -51,6 +75,8 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
   }
   const data = item.data as UserTableData;
   const parsedEventTable = parseEventOnlyTable(data.xml);
+  const keptId = keptTableId(item);
+  const tableIdFor = (name: string): string => keptId ?? tableIdFromName(name.trim());
 
   if (parsedEventTable) {
     const renderEventTableEditor = (): void => {
@@ -69,7 +95,8 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
       const xmlPreview = serializeEventOnlyTable(
         parsedEventTable.name,
         parsedEventTable.kind,
-        selectedEventIds
+        selectedEventIds,
+        tableIdFor(parsedEventTable.name)
       );
 
       editor.innerHTML = `
@@ -156,7 +183,12 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
         parsedEventTable.name = (event.currentTarget as HTMLInputElement).value;
         const preview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
         if (preview) {
-          preview.value = serializeEventOnlyTable(parsedEventTable.name, parsedEventTable.kind, parsedEventTable.eventIds);
+          preview.value = serializeEventOnlyTable(
+            parsedEventTable.name,
+            parsedEventTable.kind,
+            parsedEventTable.eventIds,
+            tableIdFor(parsedEventTable.name)
+          );
         }
       });
 
@@ -171,7 +203,7 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
           window.alert(t(appState.settings.language, 'contentDashboard.tablePrefixError'));
           return;
         }
-        const xml = serializeEventOnlyTable(tableName, parsedEventTable.kind, parsedEventTable.eventIds);
+        const xml = serializeEventOnlyTable(tableName, parsedEventTable.kind, parsedEventTable.eventIds, tableIdFor(tableName));
         const metadata = parseTableMetadata(xml);
         if (!metadata) {
           window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
@@ -235,7 +267,7 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
       const encounterOptions = state.entries
         .map((entry, index) => `<option value="${index}">${escapeHtml(tableEncounterLabel(entry, index))}</option>`)
         .join('');
-      const xmlPreview = serializeMonsterOnlyTable(state.name, state.entries);
+      const xmlPreview = serializeMonsterOnlyTable(state.name, state.entries, tableIdFor(state.name));
 
       editor.innerHTML = `
         <form class="dashboard-editor-shell">
@@ -332,7 +364,7 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
         state.name = (event.currentTarget as HTMLInputElement).value;
         const preview = editor.querySelector<HTMLTextAreaElement>('#ucXmlPreview');
         if (preview) {
-          preview.value = serializeMonsterOnlyTable(state.name, state.entries);
+          preview.value = serializeMonsterOnlyTable(state.name, state.entries, tableIdFor(state.name));
         }
       });
 
@@ -436,7 +468,7 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
           window.alert(t(appState.settings.language, 'contentDashboard.tablePrefixError'));
           return;
         }
-        const xml = serializeMonsterOnlyTable(tableName, state.entries);
+        const xml = serializeMonsterOnlyTable(tableName, state.entries, tableIdFor(tableName));
         const metadata = parseTableMetadata(xml);
         if (!metadata) {
           window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));
@@ -483,7 +515,7 @@ export function renderTableEditor(container: HTMLElement, item: Extract<UserCont
   bindDashboardCommonActions(container, item);
   editor.querySelector<HTMLFormElement>('form')?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const xml = editor.querySelector<HTMLTextAreaElement>('#ucTableXml')?.value ?? '';
+    const xml = withKeptTableId(editor.querySelector<HTMLTextAreaElement>('#ucTableXml')?.value ?? '', keptTableId(item));
     const metadata = parseTableMetadata(xml);
     if (!metadata) {
       window.alert(t(appState.settings.language, 'dialog.tableEditor.invalidXml'));

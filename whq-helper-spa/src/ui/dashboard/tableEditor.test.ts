@@ -6,7 +6,10 @@ import { appState } from '../../state';
 import { repository, settings, table } from '../../testing/fixtures';
 import { upsertUserContentItem } from '../../userContent';
 import type { UserTableItem } from '../../userContent/types';
-import { tableIdConflictMessage } from './tableEditor';
+import { loadUserContentItems } from '../../userContent';
+import { parseTableId } from '../../userContent/xml';
+import { dashboardState } from './state';
+import { keptTableId, renderTableEditor, tableIdConflictMessage, withKeptTableId } from './tableEditor';
 
 function tableXml(name: string, id?: string): string {
   const idAttr = id ? ` id="${id}"` : '';
@@ -75,5 +78,56 @@ describe('tableIdConflictMessage', () => {
     expect(message).toBe(
       'El id «userdefined-foo» de esta tabla ya lo usa la tabla «userdefined-Foo». Cambia el nombre de la tabla.'
     );
+  });
+});
+
+describe('keptTableId', () => {
+  it('is undefined for a new unsaved table, which takes the slug of its name', () => {
+    expect(keptTableId(tableItem('new-1', 'new', 'userdefined-Draft'))).toBeUndefined();
+  });
+
+  it('is the id of the saved version, or the slug of its saved name if it has none (older items)', () => {
+    upsertUserContentItem(tableItem('u-1', 'new', 'userdefined-Old name'));
+    expect(keptTableId(tableItem('u-1', 'new', 'userdefined-New name'))).toBe('userdefined-old-name');
+
+    upsertUserContentItem({ ...tableItem('u-2', 'new', 'userdefined-X'), data: { name: 'userdefined-X', kind: 'dungeon', xml: tableXml('userdefined-X', 'kept') } });
+    expect(keptTableId(tableItem('u-2', 'new', 'userdefined-Y'))).toBe('kept');
+  });
+
+  it('is the id of the base table that an unsaved modification replaces', () => {
+    const draft = { ...tableItem('mod-1', 'modified', 'Renamed Base'), data: { name: 'Renamed Base', kind: 'dungeon' as const, xml: tableXml('Renamed Base', 'base-id') } };
+    expect(keptTableId(draft)).toBe('base-id');
+  });
+});
+
+describe('withKeptTableId', () => {
+  it('adds the kept id to an XML table without one and leaves an explicit id alone', () => {
+    expect(parseTableId(withKeptTableId(tableXml('Renamed'), 'kept'))).toBe('kept');
+    expect(parseTableId(withKeptTableId(tableXml('Renamed', 'mine'), 'kept'))).toBe('mine');
+    expect(withKeptTableId(tableXml('Renamed'), undefined)).toBe(tableXml('Renamed'));
+  });
+});
+
+describe('renaming a user table in the editor', () => {
+  it('keeps its id, so its saved active state still applies', async () => {
+    // El fallo: el XML guardado no llevaba id y la tabla renombrada tomaba el slug del nombre nuevo.
+    const saved = tableItem('u-1', 'new', 'userdefined-Old name');
+    upsertUserContentItem(saved);
+    appState.hooks.refreshRuntimeContent = vi.fn(async () => {});
+    dashboardState.renderContentDashboard = vi.fn();
+    const container = document.createElement('div');
+    container.innerHTML = '<div id="contentDashboardEditor"></div>';
+
+    renderTableEditor(container, saved);
+    const nameInput = container.querySelector<HTMLInputElement>('#ucTableName');
+    expect(nameInput).not.toBeNull();
+    nameInput!.value = 'userdefined-New name';
+    nameInput!.dispatchEvent(new Event('input'));
+    container.querySelector<HTMLFormElement>('form')!.dispatchEvent(new Event('submit', { cancelable: true }));
+    await vi.waitFor(() => expect(dashboardState.renderContentDashboard).toHaveBeenCalled());
+
+    const stored = loadUserContentItems().find((entry) => entry.uid === 'u-1');
+    expect(stored?.kind === 'table' ? stored.data.name : '').toBe('userdefined-New name');
+    expect(parseTableId(stored?.kind === 'table' ? stored.data.xml : '')).toBe('userdefined-old-name');
   });
 });

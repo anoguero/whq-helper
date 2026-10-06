@@ -103,8 +103,8 @@ export function parseEventIdsFromTableXml(xml: string): string[] {
     .filter(Boolean);
 }
 
-export function serializeEventTableXml(name: string, kind: TableKind, eventIds: string[]): string {
-  const attrs = [`name="${escapeXml(name)}"`];
+export function serializeEventTableXml(name: string, kind: TableKind, eventIds: string[], id?: string): string {
+  const attrs = [...(id ? [`id="${escapeXml(id)}"`] : []), `name="${escapeXml(name)}"`];
   if (kind !== 'dungeon') {
     attrs.push(`kind="${escapeXml(kind)}"`);
   }
@@ -310,7 +310,8 @@ function serializeGroupEntry(entry: GroupEntry, indent: string): string {
 }
 
 export function serializeTableFromModel(table: TableModel): string {
-  const tableAttrs = [`name="${escapeXml(table.name)}"`];
+  // Con su id: la copia modificada de una tabla base conserva el estado activo de la base.
+  const tableAttrs = [`id="${escapeXml(table.id)}"`, `name="${escapeXml(table.name)}"`];
   if (table.kind !== 'dungeon') {
     tableAttrs.push(`kind="${escapeXml(table.kindRaw || table.kind)}"`);
   }

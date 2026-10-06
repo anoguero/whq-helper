@@ -24,6 +24,7 @@ import type {
 } from './userContent/types';
 import {
   parseEventIdsFromTableXml,
+  parseTableId,
   serializeDungeonCard,
   serializeEvent,
   serializeEventTableXml,
@@ -52,7 +53,7 @@ function ensureManagedTreasureTable(
         ...table.data,
         name,
         kind: 'treasure',
-        xml: serializeEventTableXml(name, 'treasure', ids)
+        xml: serializeEventTableXml(name, 'treasure', ids, parseTableId(table.data.xml) ?? undefined)
       };
       table.title = name;
       table.updatedAt = updatedAt;
@@ -90,7 +91,7 @@ function removeEventFromManagedTreasureTable(items: UserContentItem[], name: str
     ...table.data,
     name,
     kind: 'treasure',
-    xml: serializeEventTableXml(name, 'treasure', ids)
+    xml: serializeEventTableXml(name, 'treasure', ids, parseTableId(table.data.xml) ?? undefined)
   };
   table.title = name;
   table.updatedAt = nowIso();

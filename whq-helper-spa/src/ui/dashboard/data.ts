@@ -120,8 +120,8 @@ export function parseEventOnlyTable(xml: string): { name: string; kind: EventTab
   };
 }
 
-export function serializeEventOnlyTable(name: string, kind: EventTableKind, eventIds: string[]): string {
-  const tableAttrs = [`name="${escapeHtml(name)}"`];
+export function serializeEventOnlyTable(name: string, kind: EventTableKind, eventIds: string[], id?: string): string {
+  const tableAttrs = [...(id ? [`id="${escapeHtml(id)}"`] : []), `name="${escapeHtml(name)}"`];
   if (kind !== 'dungeon') {
     tableAttrs.push(`kind="${kind}"`);
   }
@@ -222,7 +222,7 @@ export function parseMonsterOnlyTable(xml: string): { name: string; entries: Arr
   };
 }
 
-export function serializeMonsterOnlyTable(name: string, entries: Array<MonsterEntry | GroupEntry>): string {
+export function serializeMonsterOnlyTable(name: string, entries: Array<MonsterEntry | GroupEntry>, id?: string): string {
   const serializeSpecial = (entry: MonsterEntry, indent: string): string[] => {
     const lines: string[] = [];
     if (!entry.special.trim() && Object.keys(entry.specialLinks).length === 0 && !entry.magicType.trim()) {
@@ -263,7 +263,8 @@ export function serializeMonsterOnlyTable(name: string, entries: Array<MonsterEn
     return lines;
   };
 
-  const lines = ['<?xml version="1.0"?>', '<tables>', `  <table name="${escapeHtml(name)}">`];
+  const idAttr = id ? `id="${escapeHtml(id)}" ` : '';
+  const lines = ['<?xml version="1.0"?>', '<tables>', `  <table ${idAttr}name="${escapeHtml(name)}">`];
   for (const entry of entries) {
     if (entry.kind === 'monster') {
       lines.push(...serializeMonster(entry, '    '));
