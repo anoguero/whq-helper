@@ -8,7 +8,7 @@ placeholders de Java a {nombre}, sufijos {error}/{path} en lugar de espacios fin
 resolucion de las divergencias entre apps.
 
 Requiere git, un JDK (javac/java) y Node 22+ (--experimental-strip-types).
-Uso: python3 scripts/check_i18n_migration.py [revision]   (por defecto 7eddee3)
+Uso: python3 scripts/check_i18n_migration.py [revision]   (por defecto a40cdc8)
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_REVISION = "7eddee3"
+DEFAULT_REVISION = "a40cdc8"
 JAVA_I18N = "WhqHelperApp/src/com/whq/app/i18n"
 SPA_SRC = "whq-helper-spa/src"
 
