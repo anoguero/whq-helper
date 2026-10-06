@@ -194,4 +194,6 @@ export interface ObjectiveRoomAdventure {
   flavorText: string;
   rulesText: string;
   generic: boolean;
+  /** Id de carta de la sala (atributo cardId); 0 o ausente en ficheros antiguos sin el. */
+  objectiveRoomCardId?: number;
 }

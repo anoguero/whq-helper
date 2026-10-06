@@ -106,6 +106,7 @@ function parseAdventuresXml(xmlText: string): ObjectiveRoomAdventure[] {
     }
 
     const objectiveRoomName = (roomNode.getAttribute('name') ?? '').trim();
+    const objectiveRoomCardId = Number.parseInt(roomNode.getAttribute('cardId') ?? '', 10) || 0;
 
     for (const adventureNode of Array.from(roomNode.children)) {
       if (adventureNode.tagName !== 'adventure') {
@@ -123,7 +124,8 @@ function parseAdventuresXml(xmlText: string): ObjectiveRoomAdventure[] {
         name: (adventureNode.getAttribute('name') ?? '').trim(),
         flavorText: childText('flavor'),
         rulesText: childText('rules'),
-        generic: (adventureNode.getAttribute('generic') ?? 'false').toLowerCase() === 'true'
+        generic: (adventureNode.getAttribute('generic') ?? 'false').toLowerCase() === 'true',
+        objectiveRoomCardId
       });
     }
   }
@@ -325,10 +327,21 @@ export class DungeonCardStore {
     saveCardsToStorage(this.cards);
   }
 
-  loadAdventuresForObjectiveRoom(objectiveRoomName: string): ObjectiveRoomAdventure[] {
-    const normalized = objectiveRoomName.trim().toUpperCase();
+  /**
+   * Misiones de una sala objetivo. Se buscan por id de carta: la carta llega con su nombre traducido
+   * y el XML de aventuras trae el nombre ingles. Las aventuras sin cardId (ficheros antiguos) se
+   * emparejan por nombre, ingles o traducido.
+   */
+  loadAdventuresForObjectiveRoom(objectiveRoom: DungeonCard): ObjectiveRoomAdventure[] {
+    const objectiveRoomName = objectiveRoom.name;
+    const rawName = this.cards.find((card) => card.id === objectiveRoom.id)?.name ?? objectiveRoom.name;
+    const names = new Set([rawName.trim().toUpperCase(), objectiveRoomName.trim().toUpperCase()]);
     const filtered = this.adventures
-      .filter((adventure) => adventure.objectiveRoomName.trim().toUpperCase() === normalized)
+      .filter((adventure) =>
+        adventure.objectiveRoomCardId
+          ? adventure.objectiveRoomCardId === objectiveRoom.id
+          : names.has(adventure.objectiveRoomName.trim().toUpperCase())
+      )
       .map((adventure) => this.translateAdventure(adventure));
 
     const generic: ObjectiveRoomAdventure = {

@@ -404,7 +404,7 @@ export function openNewDungeonDialog(): void {
       return;
     }
 
-    missions = appState.dungeonStore.loadAdventuresForObjectiveRoom(objective.name);
+    missions = appState.dungeonStore.loadAdventuresForObjectiveRoom(objective);
     missionSelect.innerHTML = missions.map((mission) => `<option value="${escapeHtml(mission.name)}">${escapeHtml(mission.name)}</option>`).join('');
     syncMissionRules();
   };
