@@ -14,12 +14,22 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Pattern;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 
 import com.whq.app.AppPaths;
+import com.whq.app.model.CardType;
 
 public final class WhqUiTheme {
+
+  // Color del titulo de cada tipo de carta de mazmorra (CardRenderer).
+  private static final Map<CardType, RGB> CARD_TYPE_ACCENTS =
+      Map.of(
+          CardType.DUNGEON_ROOM, new RGB(30, 102, 182),
+          CardType.OBJECTIVE_ROOM, new RGB(239, 68, 30),
+          CardType.CORRIDOR, new RGB(71, 190, 122),
+          CardType.SPECIAL, new RGB(187, 127, 255));
 
   public final Color shellBackground;
   public final Color panelBackground;
@@ -47,6 +57,11 @@ public final class WhqUiTheme {
   private final Image heroCastle;
   private final Image parchmentMap;
   private final Image manuscriptBorder;
+
+  /** Color del titulo de las cartas de ese tipo. */
+  public static RGB cardTypeAccent(CardType type) {
+    return CARD_TYPE_ACCENTS.get(type);
+  }
 
   public WhqUiTheme(Display display, Path projectRoot) {
     this.display = display;

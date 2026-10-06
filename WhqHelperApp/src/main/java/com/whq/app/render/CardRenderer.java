@@ -16,6 +16,7 @@ import com.whq.app.AppPaths;
 import com.whq.app.i18n.I18n;
 import com.whq.app.model.DungeonCard;
 import com.whq.app.ui.FontResources;
+import com.whq.app.ui.WhqUiTheme;
 
 public class CardRenderer {
     private static final int TITLE_FONT_BASE = 56;
@@ -83,11 +84,7 @@ public class CardRenderer {
         GC offscreenGc = new GC(offscreen);
 
         Color black = new Color(device, 0, 0, 0);
-        Color titleColor = new Color(
-                device,
-                card.getType().getAccentRed(),
-                card.getType().getAccentGreen(),
-                card.getType().getAccentBlue());
+        Color titleColor = new Color(device, WhqUiTheme.cardTypeAccent(card.getType()));
 
         try {
             offscreenGc.setAntialias(SWT.ON);
