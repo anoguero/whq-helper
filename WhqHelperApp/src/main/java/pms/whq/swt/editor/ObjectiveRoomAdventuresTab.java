@@ -81,6 +81,8 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
     rulesText.setLayoutData(rulesData);
 
     List<ObjectiveRoomAdventure> adventures = new ArrayList<>();
+    // Salas objetivo del desplegable, en su mismo orden: se emparejan con las aventuras por id de carta.
+    List<DungeonCard> objectiveRooms = new ArrayList<>();
     final String[] selectedKey = new String[] {""};
 
     Runnable refreshId = () -> idText.setText(selectedKey[0].isBlank() ? slugify(nameText.getText()) : selectedKey[0]);
@@ -103,7 +105,8 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
         () -> {
           itemList.removeAll();
           for (ObjectiveRoomAdventure adventure : adventures) {
-            itemList.add(adventure.objectiveRoomName() + " - " + adventure.name() + " (" + adventure.id() + ")");
+            itemList.add(
+                objectiveRoomLabel(objectiveRooms, adventure) + " - " + adventure.name() + " (" + adventure.id() + ")");
           }
         };
 
@@ -115,7 +118,12 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
           }
           ObjectiveRoomAdventure adventure = adventures.get(index);
           selectedKey[0] = adventure.id();
-          objectiveRoomCombo.setText(adventure.objectiveRoomName());
+          int roomIndex = objectiveRoomIndex(objectiveRooms, adventure);
+          if (roomIndex >= 0) {
+            objectiveRoomCombo.select(roomIndex);
+          } else {
+            objectiveRoomCombo.deselectAll();
+          }
           nameText.setText(adventure.name());
           genericCheck.setSelection(adventure.generic());
           flavorText.setText(adventure.flavorText());
@@ -128,15 +136,18 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
           try {
             adventures.clear();
             adventures.addAll(objectiveRoomAdventureRepository.loadAllAdventures());
-            refreshList.run();
 
             List<DungeonCard> cards = dungeonCardStore.loadCards();
+            objectiveRooms.clear();
             objectiveRoomCombo.removeAll();
             for (DungeonCard card : cards) {
-              if (card.getType() == CardType.OBJECTIVE_ROOM && objectiveRoomCombo.indexOf(card.getName()) < 0) {
+              if (card.getType() == CardType.OBJECTIVE_ROOM
+                  && objectiveRooms.stream().noneMatch(room -> room.getId() == card.getId())) {
+                objectiveRooms.add(card);
                 objectiveRoomCombo.add(card.getName());
               }
             }
+            refreshList.run();
             clearForm.run();
           } catch (Exception ex) {
             showError(dialog, ex);
@@ -152,7 +163,12 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
         SWT.Selection,
         event -> {
           try {
-            objectiveRoomAdventureRepository.deleteUserAdventure(objectiveRoomCombo.getText(), idText.getText());
+            int roomIndex = objectiveRoomCombo.getSelectionIndex();
+            if (roomIndex >= 0) {
+              objectiveRoomAdventureRepository.deleteUserAdventure(objectiveRooms.get(roomIndex).getId(), idText.getText());
+            } else {
+              objectiveRoomAdventureRepository.deleteUserAdventure(objectiveRoomCombo.getText(), idText.getText());
+            }
             notifySaved();
             reloadAdventures.run();
           } catch (ObjectiveRoomAdventureRepositoryException ex) {
@@ -164,7 +180,9 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
         SWT.Selection,
         event -> {
           try {
-            String objectiveRoomName = objectiveRoomCombo.getText().trim();
+            int roomIndex = objectiveRoomCombo.getSelectionIndex();
+            DungeonCard room = roomIndex >= 0 ? objectiveRooms.get(roomIndex) : null;
+            String objectiveRoomName = room != null ? room.getName() : objectiveRoomCombo.getText().trim();
             String adventureId = selectedKey[0].isBlank() ? slugify(nameText.getText()) : selectedKey[0];
             objectiveRoomAdventureRepository.saveUserAdventure(
                 new ObjectiveRoomAdventure(
@@ -173,7 +191,8 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
                     nameText.getText().trim(),
                     flavorText.getText().trim(),
                     rulesText.getText().trim(),
-                    genericCheck.getSelection()));
+                    genericCheck.getSelection(),
+                    room != null ? room.getId() : 0L));
             notifySaved();
             reloadAdventures.run();
           } catch (Exception ex) {
@@ -182,5 +201,26 @@ public final class ObjectiveRoomAdventuresTab extends EditorTab {
         });
 
     reloadAdventures.run();
+  }
+
+  // Sala de una aventura en el desplegable: por id de carta y, en ficheros antiguos sin cardId, por
+  // nombre. Las aventuras traen el nombre ingles del XML y el desplegable los nombres traducidos.
+  static int objectiveRoomIndex(List<DungeonCard> objectiveRooms, ObjectiveRoomAdventure adventure) {
+    for (int i = 0; i < objectiveRooms.size(); i++) {
+      if (adventure.objectiveRoomCardId() > 0 && objectiveRooms.get(i).getId() == adventure.objectiveRoomCardId()) {
+        return i;
+      }
+    }
+    for (int i = 0; i < objectiveRooms.size(); i++) {
+      if (objectiveRooms.get(i).getName().equalsIgnoreCase(safe(adventure.objectiveRoomName()).trim())) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  static String objectiveRoomLabel(List<DungeonCard> objectiveRooms, ObjectiveRoomAdventure adventure) {
+    int index = objectiveRoomIndex(objectiveRooms, adventure);
+    return index >= 0 ? objectiveRooms.get(index).getName() : adventure.objectiveRoomName();
   }
 }
