@@ -1,6 +1,10 @@
 package pms.whq.swt.editor;
 
+import static pms.whq.swt.editor.EditorSupport.*;
+
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
@@ -11,6 +15,7 @@ import com.whq.app.i18n.I18n;
 import com.whq.app.storage.XmlDungeonCardStore;
 
 import pms.whq.xml.XmlContentService;
+import pms.whq.xml.XmlContentService.EventEntry;
 
 /**
  * Pestana del editor de contenido. Expone las dependencias del dialogo con los mismos nombres de
@@ -44,5 +49,24 @@ public abstract class EditorTab {
     if (onContentSaved != null) {
       onContentSaved.run();
     }
+  }
+
+  protected List<Path> listNonTreasureEventFiles() throws Exception {
+    List<Path> files = new ArrayList<>();
+    for (Path file : service.listEventFiles()) {
+      if (!isTreasureFile(file)) {
+        files.add(file);
+      }
+    }
+    return files;
+  }
+
+  protected boolean isDungeonTreasureEntry(EventEntry entry) {
+    String normalizedId = safe(entry == null ? "" : entry.id).trim().toLowerCase();
+    return entry != null && entry.treasure && !normalizedId.contains("-objective-");
+  }
+
+  protected boolean isObjectiveTreasureEntry(EventEntry entry) {
+    return isTreasureEntry(entry, "objective");
   }
 }

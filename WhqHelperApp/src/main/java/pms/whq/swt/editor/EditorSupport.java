@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Predicate;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -299,5 +300,137 @@ public final class EditorSupport {
   @FunctionalInterface
   public interface CheckedPathFunction<T> {
     T apply(Path value) throws Exception;
+  }
+
+  public static final String EVENT_NAME_SUFFIX = ".name";
+
+  public static final String EVENT_FLAVOR_SUFFIX = ".flavor";
+
+  public static final String EVENT_RULES_SUFFIX = ".rules";
+
+  public static final String EVENT_SPECIAL_SUFFIX = ".special";
+
+  public static final String MONSTER_NAME_SUFFIX = ".name";
+
+  public static final String MONSTER_PLURAL_SUFFIX = ".plural";
+
+  public static boolean isTreasureFile(Path file) {
+    String name = file == null ? "" : safe(file.getFileName().toString()).toLowerCase();
+    return name.contains("treasure");
+  }
+
+  public static boolean isTreasureEntry(EventEntry entry, String section) {
+    String normalizedId = safe(entry == null ? "" : entry.id).trim().toLowerCase();
+    return entry != null
+        && entry.treasure
+        && normalizedId.contains("-treasure-")
+        && normalizedId.contains("-" + safe(section).toLowerCase() + "-");
+  }
+
+  public static List<EventEntry> filterVisibleEvents(
+      Path file,
+      List<EventEntry> entries,
+      Predicate<EventEntry> entryFilter,
+      boolean treasureFieldsVisible,
+      boolean objectiveTreasurePreview) {
+    if (!treasureFieldsVisible || entryFilter == null) {
+      return filterEvents(entries, entryFilter);
+    }
+
+    String fileName =
+        safe(file == null || file.getFileName() == null ? "" : file.getFileName().toString())
+            .toLowerCase(Locale.ROOT);
+    if (objectiveTreasurePreview && fileName.contains("objective")) {
+      List<EventEntry> filteredEntries = new ArrayList<>();
+      for (EventEntry entry : entries) {
+        if (entry != null && entry.treasure) {
+          filteredEntries.add(entry);
+        }
+      }
+      return filteredEntries;
+    }
+    return filterEvents(entries, entryFilter);
+  }
+
+  public static List<EventEntry> filterEvents(List<EventEntry> entries, Predicate<EventEntry> entryFilter) {
+    if (entryFilter == null) {
+      return new ArrayList<>(entries);
+    }
+
+    List<EventEntry> filteredEntries = new ArrayList<>();
+    for (EventEntry entry : entries) {
+      if (entryFilter.test(entry)) {
+        filteredEntries.add(entry);
+      }
+    }
+    return filteredEntries;
+  }
+
+  public static List<EventEntry> applyEventTranslations(
+      List<EventEntry> entries, EditableContentTranslations translations) {
+    List<EventEntry> localized = new ArrayList<>();
+    for (EventEntry entry : entries) {
+      EventEntry copy = copyEventEntry(entry);
+      copy.name = translations.t(eventTranslationKey(copy.id, EVENT_NAME_SUFFIX), copy.name);
+      copy.flavor = translations.t(eventTranslationKey(copy.id, EVENT_FLAVOR_SUFFIX), copy.flavor);
+      copy.rules = translations.t(eventTranslationKey(copy.id, EVENT_RULES_SUFFIX), copy.rules);
+      copy.special = translations.t(eventTranslationKey(copy.id, EVENT_SPECIAL_SUFFIX), copy.special);
+      localized.add(copy);
+    }
+    return localized;
+  }
+
+  public static List<MonsterEntry> applyMonsterTranslations(
+      List<MonsterEntry> entries, EditableContentTranslations translations) {
+    List<MonsterEntry> localized = new ArrayList<>();
+    for (MonsterEntry entry : entries) {
+      MonsterEntry copy = copyMonsterEntry(entry);
+      copy.name = translations.t(monsterTranslationKey(copy.id, MONSTER_NAME_SUFFIX), copy.name);
+      copy.plural = translations.t(monsterTranslationKey(copy.id, MONSTER_PLURAL_SUFFIX), copy.plural);
+      localized.add(copy);
+    }
+    return localized;
+  }
+
+  public static EventEntry copyEventEntry(EventEntry source) {
+    EventEntry copy = new EventEntry();
+    copy.id = safe(source.id);
+    copy.name = safe(source.name);
+    copy.flavor = safe(source.flavor);
+    copy.rules = safe(source.rules);
+    copy.special = safe(source.special);
+    copy.goldValue = safe(source.goldValue);
+    copy.users = safe(source.users);
+    copy.treasure = source.treasure;
+    return copy;
+  }
+
+  public static MonsterEntry copyMonsterEntry(MonsterEntry source) {
+    MonsterEntry copy = new MonsterEntry();
+    copy.id = safe(source.id);
+    copy.name = safe(source.name);
+    copy.plural = safe(source.plural);
+    copy.factions = safe(source.factions);
+    copy.wounds = safe(source.wounds);
+    copy.move = safe(source.move);
+    copy.weaponSkill = safe(source.weaponSkill);
+    copy.ballisticSkill = safe(source.ballisticSkill);
+    copy.strength = safe(source.strength);
+    copy.toughness = safe(source.toughness);
+    copy.initiative = safe(source.initiative);
+    copy.attacks = safe(source.attacks);
+    copy.gold = safe(source.gold);
+    copy.armor = safe(source.armor);
+    copy.damage = safe(source.damage);
+    copy.specialEntriesRaw = safe(source.specialEntriesRaw);
+    return copy;
+  }
+
+  public static String eventTranslationKey(String id, String suffix) {
+    return "event." + safe(id).trim() + suffix;
+  }
+
+  public static String monsterTranslationKey(String id, String suffix) {
+    return "monster." + safe(id).trim() + suffix;
   }
 }
