@@ -215,6 +215,20 @@ def validate_table_ids(errors: list[str], root: Path) -> None:
                 seen[table_id] = relative(path)
 
 
+def validate_adventure_translations(errors: list[str], root: Path) -> None:
+    # Las misiones se traducen por clave; una que falte en un idioma se ve con el texto del XML, que
+    # puede estar en el otro idioma.
+    files = {language: root / "data" / "i18n" / f"content-{language}.xml" for language in ("es", "en")}
+    if not all(path.is_file() for path in files.values()):
+        return
+    keys = {
+        language: {key for key in ui_keys(path) if key.startswith("adventure.")}
+        for language, path in files.items()
+    }
+    for key in sorted(keys["es"] ^ keys["en"]):
+        errors.append(f"Adventure translation key not in both content-es.xml and content-en.xml of {relative(root)}: {key}")
+
+
 def ui_keys(path: Path) -> set[str]:
     return {(entry.get("key") or "").strip() for entry in ET.parse(path).getroot().iter("entry")}
 
@@ -304,6 +318,7 @@ def main() -> int:
         validate_room_references(errors, root)
         validate_adventure_rooms(errors, root)
         validate_table_ids(errors, root)
+        validate_adventure_translations(errors, root)
         validate_against_schemas(errors, root)
     validate_css_font_urls(errors, content)
     where = f"content package {content}" if content else "no content package (only sample/)"

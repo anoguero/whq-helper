@@ -23,6 +23,7 @@ import com.whq.app.RealContent;
 
 class XmlObjectiveRoomAdventureRepositoryTest {
 
+    private static final long GORGUTS_LAIR = 27L;
     private static final long FIGHTING_PIT = 20L;
 
     @TempDir
@@ -188,6 +189,20 @@ class XmlObjectiveRoomAdventureRepositoryTest {
                 .toList();
         assertEquals(1, withSameId.size());
         assertTrue(withSameId.get(0).generic());
+    }
+
+    @Test
+    void gorgutsLairMissionsAreTranslatedToEnglish() throws Exception {
+        I18n.setLanguage(Language.EN);
+        XmlObjectiveRoomAdventureRepository repository = new XmlObjectiveRoomAdventureRepository(Path.of(""));
+
+        List<ObjectiveRoomAdventure> adventures = repository.loadAdventuresForObjectiveRoom(sharedCard(GORGUTS_LAIR));
+
+        // El fallo: sin estas traducciones, la mision generica se veia con el texto espanol del XML.
+        ObjectiveRoomAdventure generic = adventures.stream().filter(ObjectiveRoomAdventure::generic).findFirst().orElseThrow();
+        assertEquals("Generic", generic.name());
+        assertTrue(generic.flavorText().startsWith("Use the normal Gorgut's Lair setting"), generic.flavorText());
+        assertTrue(adventures.stream().anyMatch(adventure -> "Stop the Waaagh!".equals(adventure.name())));
     }
 
     private static ObjectiveRoomAdventure find(XmlObjectiveRoomAdventureRepository repository, DungeonCard room, String id)
