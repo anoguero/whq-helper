@@ -133,8 +133,7 @@ class XmlObjectiveRoomAdventureRepositoryTest {
                 .filter(adventure -> "mi-mision".equals(adventure.id()))
                 .count());
 
-        // Se conserva otra aventura de usuario: borrar la ultima escribe un <objectiveRoomAdventures/> vacio
-        // que el esquema rechaza (fallo previo, pendiente de arreglar aparte).
+        // Se conserva otra aventura de usuario (borrar la ultima se prueba aparte).
         repository.saveUserAdventure(new ObjectiveRoomAdventure("FIGHTING PIT", "otra", "Otra", "Sabor", "Reglas", false));
         repository.deleteUserAdventure("FOSO DE COMBATE", "mi-mision");
         List<String> ids = repository.loadAdventuresForObjectiveRoom(fightingPit).stream()
@@ -142,6 +141,30 @@ class XmlObjectiveRoomAdventureRepositoryTest {
                 .toList();
         assertFalse(ids.contains("mi-mision"), ids.toString());
         assertTrue(ids.contains("otra"), ids.toString());
+    }
+
+    @Test
+    void deletingTheLastUserAdventureLeavesNoInvalidFile() throws Exception {
+        Path runtimeHome = copySharedContent();
+        XmlObjectiveRoomAdventureRepository repository = new XmlObjectiveRoomAdventureRepository(runtimeHome);
+        I18n.setLanguage(Language.ES);
+        DungeonCard fightingPit = sharedCard(FIGHTING_PIT);
+        Path userFile = runtimeHome.resolve("data/xml/adventures/userdefined-objective-room-adventures.xml");
+        Path userTranslations = runtimeHome.resolve("data/i18n/userdefined-content-es.xml");
+
+        repository.saveUserAdventure(new ObjectiveRoomAdventure("FOSO DE COMBATE", "unica", "Unica", "Sabor", "Reglas", false));
+        assertTrue(Files.exists(userFile));
+
+        // El fallo: el esquema exige al menos una sala, y borrar la ultima escribia un fichero vacio invalido.
+        repository.deleteUserAdventure("FOSO DE COMBATE", "unica");
+
+        assertFalse(Files.exists(userFile));
+        assertTrue(repository.loadAdventuresForObjectiveRoom(fightingPit).stream().noneMatch(a -> "unica".equals(a.id())));
+        if (Files.exists(userTranslations)) {
+            assertFalse(Files.readString(userTranslations).contains(".unica."));
+        }
+        repository.saveUserAdventure(new ObjectiveRoomAdventure("FOSO DE COMBATE", "otra", "Otra", "Sabor", "Reglas", false));
+        assertEquals("Otra", find(repository, fightingPit, "otra").name());
     }
 
     private static ObjectiveRoomAdventure find(XmlObjectiveRoomAdventureRepository repository, DungeonCard room, String id)

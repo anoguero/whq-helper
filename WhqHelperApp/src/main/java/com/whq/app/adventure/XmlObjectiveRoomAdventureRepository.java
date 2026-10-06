@@ -3,6 +3,7 @@ package com.whq.app.adventure;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -288,6 +289,11 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
     }
 
     private void writeUserAdventures(List<ObjectiveRoomAdventure> adventures) throws Exception {
+        // El esquema exige al menos una sala: sin aventuras de usuario no queda fichero.
+        if (adventures.isEmpty()) {
+            Files.deleteIfExists(userXmlPath);
+            return;
+        }
         Files.createDirectories(userXmlPath.getParent());
         Document document = parserFactory.newDocumentBuilder().newDocument();
         Element root = document.createElement("objectiveRoomAdventures");
@@ -326,10 +332,17 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-        try (OutputStream output = Files.newOutputStream(userXmlPath)) {
-            transformer.transform(new DOMSource(document), new StreamResult(output));
+        // Se valida un temporal y solo entonces sustituye al fichero: nunca queda en disco un XML invalido.
+        Path tmpFile = Files.createTempFile(userXmlPath.getParent(), userXmlPath.getFileName().toString(), ".tmp");
+        try {
+            try (OutputStream output = Files.newOutputStream(tmpFile)) {
+                transformer.transform(new DOMSource(document), new StreamResult(output));
+            }
+            validateAdventureFile(tmpFile);
+            Files.move(tmpFile, userXmlPath, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        } finally {
+            Files.deleteIfExists(tmpFile);
         }
-        validateAdventureFile(userXmlPath);
     }
 
     private void validateAdventureFile(Path file) throws Exception {
