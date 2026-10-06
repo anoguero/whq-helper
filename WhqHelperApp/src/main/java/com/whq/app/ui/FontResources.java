@@ -24,7 +24,7 @@ public final class FontResources {
       return;
     }
 
-    Path fontDir = AppPaths.sharedPath(projectRoot, "data/fonts");
+    Path fontDir = AppPaths.contentPath(projectRoot, "data/fonts");
     if (!Files.isDirectory(fontDir)) {
       return;
     }

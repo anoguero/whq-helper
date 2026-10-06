@@ -50,8 +50,8 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
         Path normalizedRoot = projectRoot.toAbsolutePath().normalize();
         this.projectRoot = normalizedRoot;
         // Aventuras base y esquema en el shared home; las del usuario en el runtime home.
-        this.xmlDirectory = AppPaths.sharedPath(normalizedRoot, XML_DIR);
-        this.xmlPath = AppPaths.sharedPath(normalizedRoot, XML_PATH);
+        this.xmlDirectory = AppPaths.contentPath(normalizedRoot, XML_DIR);
+        this.xmlPath = AppPaths.contentPath(normalizedRoot, XML_PATH);
         this.userXmlPath = normalizedRoot.resolve(USER_XML_PATH);
         this.schemaPath = AppPaths.sharedPath(normalizedRoot, SCHEMA_PATH);
         this.parserFactory = SafeXml.newFactory();

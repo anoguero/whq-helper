@@ -25,6 +25,10 @@ public final class AppPaths {
     static final String SHARED_HOME_PROPERTY = "whq.shared.home";
     static final String SHARED_HOME_ENV = "WHQ_SHARED_HOME";
     static final String SHARED_DIR = "shared";
+    static final String CONTENT_HOME_PROPERTY = "whq.content.home";
+    static final String CONTENT_HOME_ENV = "WHQ_CONTENT_HOME";
+    static final String CONTENT_DIR = "content";
+    static final String DEVELOPMENT_CONTENT_DIR = "whq-content";
     private static final String APP_NAME = "WHQ Helper";
     private static final String USER_DEFINED_PREFIX = "userdefined-";
 
@@ -92,6 +96,73 @@ public final class AppPaths {
         }
     }
 
+    /**
+     * Paquete de contenido de juego (XML de datos, traducciones de contenido, graficos, losetas,
+     * fuentes...). Va aparte del shared home, que solo trae lo propio de la aplicacion (esquemas e
+     * i18n de interfaz), porque la aplicacion se distribuye sin contenido. Cascada:
+     * -Dwhq.content.home / WHQ_CONTENT_HOME, &lt;appHome&gt;/content (empaquetado, junto a shared/) y
+     * &lt;repo&gt;/../whq-content (desarrollo: hermano del repositorio). Si el shared home no es un
+     * directorio shared/ (disposicion antigua), el contenido esta en el mismo sitio.
+     *
+     * <p>Si no hay paquete devuelve igualmente la ruta donde se esperaria (ver {@link #hasContent}):
+     * los cargadores ven directorios vacios y el aviso puede decir donde colocarlo.
+     */
+    public static Path resolveContentHome(Path sharedHome) {
+        Path explicitHome = normalize(explicitContentHome());
+        if (explicitHome != null) {
+            return explicitHome;
+        }
+
+        Path normalizedSharedHome = normalize(sharedHome);
+        if (normalizedSharedHome == null) {
+            return null;
+        }
+        // Disposicion antigua: sin shared/, el propio app home hace de shared home y trae el contenido.
+        Path sharedName = normalizedSharedHome.getFileName();
+        if (sharedName == null || !SHARED_DIR.equals(sharedName.toString())) {
+            return normalizedSharedHome;
+        }
+        Path appOrRepoHome = normalizedSharedHome.getParent();
+        if (appOrRepoHome == null) {
+            return normalizedSharedHome.resolve(CONTENT_DIR);
+        }
+
+        Path bundledHome = appOrRepoHome.resolve(CONTENT_DIR);
+        if (Files.isDirectory(bundledHome)) {
+            return bundledHome;
+        }
+
+        Path workspace = appOrRepoHome.getParent();
+        Path developmentHome = workspace == null ? null : workspace.resolve(DEVELOPMENT_CONTENT_DIR);
+        if (developmentHome != null && Files.isDirectory(developmentHome)) {
+            return developmentHome;
+        }
+
+        // Sin paquete: en un checkout del repositorio (shared/ junto a WhqHelperApp/) se espera como
+        // hermano del repositorio; en una instalacion, junto a shared/.
+        boolean repositoryCheckout = Files.isDirectory(appOrRepoHome.resolve("WhqHelperApp"));
+        return repositoryCheckout && developmentHome != null ? developmentHome : bundledHome;
+    }
+
+    /** Paquete de contenido del runtime home (ver {@link #resolveContentHome}). */
+    public static Path contentHome(Path runtimeHome) {
+        return resolveContentHome(sharedHome(runtimeHome));
+    }
+
+    /** Ruta de un recurso de contenido relativa al paquete de contenido. */
+    public static Path contentPath(Path runtimeHome, String relativePath) {
+        Path contentHome = Objects.requireNonNull(
+                contentHome(runtimeHome),
+                () -> "No se puede resolver el contenido: runtimeHome es null (ruta pedida: " + relativePath + ").");
+        return contentHome.resolve(relativePath);
+    }
+
+    /** Si hay paquete de contenido: su directorio existe. */
+    public static boolean hasContent(Path runtimeHome) {
+        Path contentHome = contentHome(runtimeHome);
+        return contentHome != null && Files.isDirectory(contentHome);
+    }
+
     /** Shared home de un runtime home: el asociado al arrancar o, si no hay, el de la cascada. */
     public static Path sharedHome(Path runtimeHome) {
         Path normalizedRuntimeHome = normalize(runtimeHome);
@@ -102,7 +173,7 @@ public final class AppPaths {
         return bound != null ? bound : resolveSharedHome(normalizedRuntimeHome);
     }
 
-    /** Ruta de un recurso base (solo lectura) relativa al shared home. */
+    /** Ruta de un recurso propio de la aplicacion (esquemas, i18n de interfaz) relativa al shared home. */
     public static Path sharedPath(Path runtimeHome, String relativePath) {
         Path sharedHome = Objects.requireNonNull(
                 sharedHome(runtimeHome),
@@ -111,20 +182,20 @@ public final class AppPaths {
     }
 
     /**
-     * Resuelve una ruta de contenido relativa (p. ej. un tileImagePath): primero en el shared home
-     * y, si no existe ahi, en el runtime home, donde el usuario puede tener imagenes propias.
+     * Resuelve una ruta de contenido relativa (p. ej. un tileImagePath): primero en el paquete de
+     * contenido y, si no existe ahi, en el runtime home, donde el usuario puede tener imagenes propias.
      */
     public static Path resolveContent(Path runtimeHome, String relativePath) {
         Path path = Path.of(relativePath);
         if (path.isAbsolute()) {
             return path.normalize();
         }
-        Path sharedPath = sharedPath(runtimeHome, relativePath).normalize();
-        if (Files.exists(sharedPath)) {
-            return sharedPath;
+        Path contentPath = contentPath(runtimeHome, relativePath).normalize();
+        if (Files.exists(contentPath)) {
+            return contentPath;
         }
         Path userPath = normalize(runtimeHome).resolve(relativePath).normalize();
-        return Files.exists(userPath) ? userPath : sharedPath;
+        return Files.exists(userPath) ? userPath : contentPath;
     }
 
     public static boolean isUserDefined(Path file) {
@@ -133,20 +204,20 @@ public final class AppPaths {
     }
 
     /**
-     * Ficheros de una categoria de contenido: los base del shared home y los userdefined-* del
+     * Ficheros de una categoria de contenido: los base del paquete de contenido y los userdefined-* del
      * runtime home. Del runtime home solo se toman userdefined-*, asi una copia antigua del contenido
      * base que haya quedado en el directorio escribible no se carga.
      */
     public static List<Path> listContentFiles(Path runtimeHome, String relativeDirectory) throws IOException {
         Path normalizedRuntimeHome = normalize(runtimeHome);
-        Path sharedDirectory = sharedHome(normalizedRuntimeHome).resolve(relativeDirectory).normalize();
+        Path contentDirectory = contentHome(normalizedRuntimeHome).resolve(relativeDirectory).normalize();
         Path userDirectory = normalizedRuntimeHome.resolve(relativeDirectory).normalize();
 
         List<Path> files = new ArrayList<>();
-        if (sharedDirectory.equals(userDirectory)) {
-            addFiles(files, sharedDirectory, path -> true);
+        if (contentDirectory.equals(userDirectory)) {
+            addFiles(files, contentDirectory, path -> true);
         } else {
-            addFiles(files, sharedDirectory, path -> !isUserDefined(path));
+            addFiles(files, contentDirectory, path -> !isUserDefined(path));
             addFiles(files, userDirectory, AppPaths::isUserDefined);
         }
         return files;
@@ -187,6 +258,20 @@ public final class AppPaths {
         }
 
         String envValue = System.getenv(APP_HOME_ENV);
+        if (envValue != null && !envValue.isBlank()) {
+            return Path.of(envValue.trim());
+        }
+
+        return null;
+    }
+
+    static Path explicitContentHome() {
+        String propertyValue = System.getProperty(CONTENT_HOME_PROPERTY);
+        if (propertyValue != null && !propertyValue.isBlank()) {
+            return Path.of(propertyValue.trim());
+        }
+
+        String envValue = System.getenv(CONTENT_HOME_ENV);
         if (envValue != null && !envValue.isBlank()) {
             return Path.of(envValue.trim());
         }

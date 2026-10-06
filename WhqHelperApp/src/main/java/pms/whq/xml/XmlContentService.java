@@ -1257,7 +1257,7 @@ public class XmlContentService {
     Path normalized = normalize(file);
     return normalized != null
         && (normalized.startsWith(normalize(projectRoot.resolve(directory)))
-            || normalized.startsWith(normalize(AppPaths.sharedPath(projectRoot, directory))));
+            || normalized.startsWith(normalize(AppPaths.contentPath(projectRoot, directory))));
   }
 
   public boolean isTravelFile(Path file) {

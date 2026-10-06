@@ -211,12 +211,12 @@ public final class Settings {
   }
 
   private static String directoryPath(String relativePath) {
-    return appendSeparator(sharedDir(relativePath).toString());
+    return appendSeparator(contentDir(relativePath).toString());
   }
 
-  // Los directorios de contenido apuntan al shared home (contenido base, solo lectura).
-  private static Path sharedDir(String relativePath) {
-    return AppPaths.sharedPath(baseDir, relativePath).normalize();
+  // Los directorios de contenido apuntan al paquete de contenido (contenido base, solo lectura).
+  private static Path contentDir(String relativePath) {
+    return AppPaths.contentPath(baseDir, relativePath).normalize();
   }
 
   private static void normalizeDirectorySettings() {
@@ -241,10 +241,10 @@ public final class Settings {
 
     Path path = resolveDirectoryPath(value);
     // Una ruta guardada con la ubicacion por defecto antigua (<home>/data/xml/..., donde ya solo queda
-    // contenido del usuario) se migra al shared home. Un directorio personalizado se respeta.
+    // contenido del usuario) se migra al paquete de contenido. Un directorio personalizado se respeta.
     boolean legacyDefault = path != null && path.endsWith(Path.of(defaultRelativeDirectory(key)));
     if (path == null || !Files.isDirectory(path) || legacyDefault) {
-      path = sharedDir(defaultRelativeDirectory(key));
+      path = contentDir(defaultRelativeDirectory(key));
     }
 
     settings.setProperty(key, appendSeparator(path.toString()));

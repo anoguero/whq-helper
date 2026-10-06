@@ -15,6 +15,7 @@ import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
+import com.whq.app.RealContent;
 
 class XmlDungeonCardStoreTest {
 
@@ -23,6 +24,7 @@ class XmlDungeonCardStoreTest {
 
     @Test
     void loadsTheSharedCatalogIgnoringOtherXmlInTheDungeonDirectory() throws Exception {
+        RealContent.assumeAvailable();
         // shared/data/xml/dungeon tambien contiene room-references.xml, que no es un catalogo de cartas.
         List<DungeonCard> cards = new XmlDungeonCardStore(Path.of("")).loadCards();
 

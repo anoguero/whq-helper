@@ -176,10 +176,10 @@ public final class DungeonCardsTab extends EditorTab {
             return;
           }
           Path normalizedSelection = Path.of(selectedPath).toAbsolutePath().normalize();
-          Path sharedHome = AppPaths.sharedHome(projectRoot);
+          Path contentHome = AppPaths.contentHome(projectRoot);
           String storedPath;
-          if (normalizedSelection.startsWith(sharedHome)) {
-            storedPath = sharedHome.relativize(normalizedSelection).toString();
+          if (normalizedSelection.startsWith(contentHome)) {
+            storedPath = contentHome.relativize(normalizedSelection).toString();
           } else if (normalizedSelection.startsWith(projectRoot)) {
             storedPath = projectRoot.relativize(normalizedSelection).toString();
           } else {

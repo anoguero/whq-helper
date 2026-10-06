@@ -47,7 +47,7 @@ public final class XmlRoomReferenceRepository {
 
     public XmlRoomReferenceRepository(Path projectRoot) {
         this.projectRoot = projectRoot.toAbsolutePath().normalize();
-        this.xmlPath = AppPaths.sharedPath(this.projectRoot, XML_PATH);
+        this.xmlPath = AppPaths.contentPath(this.projectRoot, XML_PATH);
         this.schemaPath = AppPaths.sharedPath(this.projectRoot, SCHEMA_PATH);
     }
 

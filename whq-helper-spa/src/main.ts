@@ -11,6 +11,7 @@ import { resetWarriorCounterPool, syncPartySize } from './ui/partyPanel';
 import { renderDecks } from './ui/decks';
 import { renderContentDashboard } from './ui/dashboard/shell';
 import { buildControls, buildDeckToggles, createAppShell, wireHeroActions } from './ui/appShell';
+import { renderMissingContentNotice } from './ui/contentNotice';
 
 async function applyLanguageChange(language: LanguageCode): Promise<void> {
   appState.settings.language = language;
@@ -40,6 +41,7 @@ function rebuildDecks(): void {
 function render(): void {
   syncPartySize();
   createAppShell(appState.settings.language);
+  renderMissingContentNotice(appState.settings.language);
   wireHeroActions();
   buildControls();
   buildDeckToggles();

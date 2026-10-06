@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.whq.app.AppPaths;
 import com.whq.app.i18n.I18n;
@@ -18,6 +19,7 @@ import com.whq.app.i18n.Language;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
 import com.whq.app.storage.XmlDungeonCardStore;
+import com.whq.app.RealContent;
 
 class XmlObjectiveRoomAdventureRepositoryTest {
 
@@ -31,6 +33,11 @@ class XmlObjectiveRoomAdventureRepositoryTest {
     @AfterEach
     void restoreLanguage() {
         I18n.setLanguage(previousLanguage);
+    }
+
+    @BeforeEach
+    void requireRealContent() {
+        RealContent.assumeAvailable();
     }
 
     @Test
@@ -153,19 +160,26 @@ class XmlObjectiveRoomAdventureRepositoryTest {
     }
 
     // Copia del contenido base necesario: guardar una aventura escribe traducciones en content-*.xml
-    // y los tests no deben tocar el shared/ real del repositorio.
+    // y los tests no deben tocar el contenido real. Los esquemas van a shared/ y el contenido a
+    // content/, junto a el, como en una instalacion.
     private Path copySharedContent() throws Exception {
-        Path source = AppPaths.sharedHome(Path.of(""));
+        Path sharedSource = AppPaths.sharedHome(Path.of(""));
+        Path contentSource = AppPaths.contentHome(Path.of(""));
         Path sharedCopy = tempDir.resolve("shared");
+        Path contentCopy = tempDir.resolve("content");
+        for (String relative : List.of(
+                "data/xml/adventures/whq-adventures-schema.xsd",
+                "data/xml/dungeon/whq-dungeon-cards-schema.xsd")) {
+            Files.createDirectories(sharedCopy.resolve(relative).getParent());
+            Files.copy(sharedSource.resolve(relative), sharedCopy.resolve(relative));
+        }
         for (String relative : List.of(
                 "data/xml/adventures/original-objective-room-adventures.xml",
-                "data/xml/adventures/whq-adventures-schema.xsd",
                 "data/xml/dungeon/dungeon-cards.xml",
-                "data/xml/dungeon/whq-dungeon-cards-schema.xsd",
                 "data/i18n/content-es.xml",
                 "data/i18n/content-en.xml")) {
-            Files.createDirectories(sharedCopy.resolve(relative).getParent());
-            Files.copy(source.resolve(relative), sharedCopy.resolve(relative));
+            Files.createDirectories(contentCopy.resolve(relative).getParent());
+            Files.copy(contentSource.resolve(relative), contentCopy.resolve(relative));
         }
         Path runtimeHome = tempDir.resolve("user-home");
         Files.createDirectories(runtimeHome.resolve("data/xml/adventures"));

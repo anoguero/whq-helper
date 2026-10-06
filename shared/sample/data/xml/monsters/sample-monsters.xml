@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Contenido de ejemplo inventado para WHQ Helper. No procede de ningun producto publicado. -->
+<monsters>
+  <monster id="sample-lantern-moth" name="Lantern Moth" plural="Lantern Moths" factions="sample">
+    <wounds>2</wounds>
+    <move>6</move>
+    <weaponskill>2</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>1</strength>
+    <toughness>1</toughness>
+    <initiative>5</initiative>
+    <attacks>1</attacks>
+    <gold>10</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <text>Drawn to light: always attacks the warrior carrying the lantern first.</text>
+    </special>
+  </monster>
+  <monster id="sample-cellar-toad" name="Cellar Toad" plural="Cellar Toads" factions="sample">
+    <wounds>6</wounds>
+    <move>3</move>
+    <weaponskill>3</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>3</strength>
+    <toughness>4</toughness>
+    <initiative>1</initiative>
+    <attacks>2</attacks>
+    <gold>40</gold>
+    <armor>-</armor>
+    <damage>1D6</damage>
+    <special>
+      <text>Sticky tongue: a warrior it hits cannot move away next turn.</text>
+    </special>
+  </monster>
+  <monster id="sample-rust-golem" name="Rust Golem" plural="Rust Golems" factions="sample">
+    <wounds>14</wounds>
+    <move>3</move>
+    <weaponskill>4</weaponskill>
+    <ballisticskill>-</ballisticskill>
+    <strength>4</strength>
+    <toughness>5</toughness>
+    <initiative>1</initiative>
+    <attacks>2</attacks>
+    <gold>150</gold>
+    <armor>1</armor>
+    <damage>2D6</damage>
+    <special>
+      <text>Creaking joints: it never pins a warrior.</text>
+    </special>
+  </monster>
+</monsters>

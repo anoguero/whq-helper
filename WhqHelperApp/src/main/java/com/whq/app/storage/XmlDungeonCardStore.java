@@ -45,7 +45,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     private static final String ROOM_REFERENCES_FILE = "room-references.xml";
 
     private final Path projectRoot;
-    private final Path xmlDirectory;
     private final Path xmlPath;
     private final Path userXmlPath;
     private final Path schemaPath;
@@ -54,8 +53,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     public XmlDungeonCardStore(Path projectRoot) {
         this.projectRoot = projectRoot.toAbsolutePath().normalize();
         // Catalogo base y esquema en el shared home; las cartas del usuario en el runtime home.
-        this.xmlDirectory = AppPaths.sharedPath(this.projectRoot, XML_DIR);
-        this.xmlPath = AppPaths.sharedPath(this.projectRoot, XML_PATH);
+        this.xmlPath = AppPaths.contentPath(this.projectRoot, XML_PATH);
         this.userXmlPath = this.projectRoot.resolve(USER_XML_PATH);
         this.schemaPath = AppPaths.sharedPath(this.projectRoot, SCHEMA_PATH);
         this.parserFactory = SafeXml.newFactory();
@@ -265,9 +263,7 @@ public class XmlDungeonCardStore implements DungeonCardStore {
     private List<Path> listCardFiles() throws DungeonCardStorageException {
         ensureSchemaExists();
         try {
-            if (!Files.isDirectory(xmlDirectory)) {
-                return List.of(xmlPath);
-            }
+            // Sin paquete de contenido el directorio base no existe: solo quedan las cartas del usuario.
             try (var stream = AppPaths.listContentFiles(projectRoot, XML_DIR).stream()) {
                 return stream
                         .filter(path -> path.getFileName().toString().toLowerCase(Locale.ROOT).endsWith(".xml"))
@@ -379,6 +375,11 @@ public class XmlDungeonCardStore implements DungeonCardStore {
 
     private void ensureBaseXmlExists() throws DungeonCardStorageException {
         if (Files.exists(xmlPath)) {
+            return;
+        }
+        // Sin paquete de contenido no se crea nada en su ubicacion: la aplicacion se distribuye vacia
+        // y, si se crease, el siguiente arranque tomaria ese directorio por un paquete de contenido.
+        if (!AppPaths.hasContent(projectRoot)) {
             return;
         }
 

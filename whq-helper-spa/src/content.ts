@@ -24,9 +24,31 @@ interface ContentManifest {
   xmlFiles: string[];
 }
 
+let contentPackageAvailable = false;
+
+/** Si la ultima carga encontro el paquete de contenido (su content-manifest.json). */
+export function isContentPackageAvailable(): boolean {
+  return contentPackageAvailable;
+}
+
+/**
+ * Manifiesto del paquete de contenido. La SPA se distribuye sin contenido: si no hay paquete (404, o
+ * el index.html que devuelven algunos servidores para rutas desconocidas) carga un manifiesto vacio.
+ */
 export async function loadContentManifest(): Promise<ContentManifest> {
-  const manifestResponse = await fetch('/content-manifest.json');
-  return (await manifestResponse.json()) as ContentManifest;
+  contentPackageAvailable = false;
+  try {
+    const manifestResponse = await fetch('/content-manifest.json');
+    const contentType = manifestResponse.headers.get('content-type') ?? '';
+    if (!manifestResponse.ok || !contentType.includes('json')) {
+      return { xmlFiles: [] };
+    }
+    const manifest = (await manifestResponse.json()) as Partial<ContentManifest>;
+    contentPackageAvailable = true;
+    return { xmlFiles: Array.isArray(manifest.xmlFiles) ? manifest.xmlFiles : [] };
+  } catch {
+    return { xmlFiles: [] };
+  }
 }
 
 function getAttribute(node: Element, name: string): string {

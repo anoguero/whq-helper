@@ -19,19 +19,27 @@ class AppPathsTest {
     Path tempDir;
 
     private String previousSharedHome;
+    private String previousContentHome;
 
     @BeforeEach
     void clearSharedHomeProperty() {
         previousSharedHome = System.getProperty(AppPaths.SHARED_HOME_PROPERTY);
+        previousContentHome = System.getProperty(AppPaths.CONTENT_HOME_PROPERTY);
         System.clearProperty(AppPaths.SHARED_HOME_PROPERTY);
+        System.clearProperty(AppPaths.CONTENT_HOME_PROPERTY);
     }
 
     @AfterEach
     void restoreSharedHomeProperty() {
-        if (previousSharedHome == null) {
-            System.clearProperty(AppPaths.SHARED_HOME_PROPERTY);
+        restore(AppPaths.SHARED_HOME_PROPERTY, previousSharedHome);
+        restore(AppPaths.CONTENT_HOME_PROPERTY, previousContentHome);
+    }
+
+    private static void restore(String property, String previous) {
+        if (previous == null) {
+            System.clearProperty(property);
         } else {
-            System.setProperty(AppPaths.SHARED_HOME_PROPERTY, previousSharedHome);
+            System.setProperty(property, previous);
         }
     }
 
@@ -136,13 +144,14 @@ class AppPathsTest {
     }
 
     @Test
-    void listsBaseContentFromSharedAndUserContentFromRuntimeHome() throws Exception {
+    void listsBaseContentFromContentHomeAndUserContentFromRuntimeHome() throws Exception {
         Path sharedHome = createSharedHome(tempDir.resolve("app/shared"));
+        Path contentHome = tempDir.resolve("app/content");
         Path runtimeHome = tempDir.resolve("user-home");
-        Files.createDirectories(sharedHome.resolve("data/xml/monsters"));
+        Files.createDirectories(contentHome.resolve("data/xml/monsters"));
         Files.createDirectories(runtimeHome.resolve("data/xml/monsters"));
-        Files.writeString(sharedHome.resolve("data/xml/monsters/base-monsters.xml"), "<monsters/>");
-        Files.writeString(sharedHome.resolve("data/xml/monsters/userdefined-stray.xml"), "<monsters/>");
+        Files.writeString(contentHome.resolve("data/xml/monsters/base-monsters.xml"), "<monsters/>");
+        Files.writeString(contentHome.resolve("data/xml/monsters/userdefined-stray.xml"), "<monsters/>");
         Files.writeString(runtimeHome.resolve("data/xml/monsters/userdefined-monsters.xml"), "<monsters/>");
         // Copia antigua del contenido base en el directorio escribible: no debe cargarse.
         Files.writeString(runtimeHome.resolve("data/xml/monsters/base-monsters.xml"), "<monsters/>");
@@ -152,7 +161,7 @@ class AppPathsTest {
 
         assertEquals(
                 List.of(
-                        sharedHome.resolve("data/xml/monsters/base-monsters.xml"),
+                        contentHome.resolve("data/xml/monsters/base-monsters.xml"),
                         runtimeHome.resolve("data/xml/monsters/userdefined-monsters.xml")),
                 files.stream().sorted().toList());
     }
@@ -168,17 +177,60 @@ class AppPathsTest {
     }
 
     @Test
-    void resolvesContentFromSharedHomeThenRuntimeHome() throws Exception {
+    void resolvesContentFromContentHomeThenRuntimeHome() throws Exception {
         Path sharedHome = createSharedHome(tempDir.resolve("app/shared"));
+        Path contentHome = tempDir.resolve("app/content");
         Path runtimeHome = tempDir.resolve("user-home");
-        Files.createDirectories(sharedHome.resolve("resources/tiles"));
+        Files.createDirectories(contentHome.resolve("resources/tiles"));
         Files.createDirectories(runtimeHome.resolve("resources/tiles"));
-        Files.writeString(sharedHome.resolve("resources/tiles/base.png"), "png");
+        Files.writeString(contentHome.resolve("resources/tiles/base.png"), "png");
         Files.writeString(runtimeHome.resolve("resources/tiles/custom.png"), "png");
         AppPaths.bindSharedHome(runtimeHome, sharedHome);
 
-        assertEquals(sharedHome.resolve("resources/tiles/base.png"), AppPaths.resolveContent(runtimeHome, "resources/tiles/base.png"));
+        assertEquals(contentHome.resolve("resources/tiles/base.png"), AppPaths.resolveContent(runtimeHome, "resources/tiles/base.png"));
         assertEquals(runtimeHome.resolve("resources/tiles/custom.png"), AppPaths.resolveContent(runtimeHome, "resources/tiles/custom.png"));
+    }
+
+    @Test
+    void contentHomeFromExplicitPropertyWins() throws Exception {
+        Path sharedHome = createSharedHome(tempDir.resolve("app/shared"));
+        Files.createDirectories(tempDir.resolve("app/content"));
+        Path explicit = Files.createDirectories(tempDir.resolve("my-content"));
+        System.setProperty(AppPaths.CONTENT_HOME_PROPERTY, explicit.toString());
+
+        assertEquals(explicit, AppPaths.resolveContentHome(sharedHome));
+    }
+
+    @Test
+    void contentHomeBundledNextToSharedHome() throws Exception {
+        Path sharedHome = createSharedHome(tempDir.resolve("app/shared"));
+        Path bundled = Files.createDirectories(tempDir.resolve("app/content"));
+        Files.createDirectories(tempDir.resolve("whq-content"));
+
+        assertEquals(bundled, AppPaths.resolveContentHome(sharedHome));
+    }
+
+    @Test
+    void contentHomeNextToRepositoryInDevelopment() throws Exception {
+        Path sharedHome = createSharedHome(tempDir.resolve("whq-helper/shared"));
+        Files.createDirectories(tempDir.resolve("whq-helper/WhqHelperApp"));
+        Path sibling = Files.createDirectories(tempDir.resolve("whq-content"));
+
+        assertEquals(sibling, AppPaths.resolveContentHome(sharedHome));
+    }
+
+    @Test
+    void missingContentPointsToWhereItIsExpected() throws Exception {
+        Path repositoryShared = createSharedHome(tempDir.resolve("whq-helper/shared"));
+        Files.createDirectories(tempDir.resolve("whq-helper/WhqHelperApp"));
+        Path installedShared = createSharedHome(tempDir.resolve("install/app/shared"));
+        Path runtimeHome = tempDir.resolve("user-home");
+        AppPaths.bindSharedHome(runtimeHome, installedShared);
+
+        assertEquals(tempDir.resolve("whq-content"), AppPaths.resolveContentHome(repositoryShared));
+        assertEquals(tempDir.resolve("install/app/content"), AppPaths.contentHome(runtimeHome));
+        assertFalse(AppPaths.hasContent(runtimeHome));
+        assertEquals(List.of(), AppPaths.listContentFiles(runtimeHome, "data/xml/monsters"));
     }
 
     private static Path createSharedHome(Path directory) throws Exception {

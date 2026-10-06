@@ -1,8 +1,10 @@
 package com.whq.app.render;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Font;
@@ -23,6 +25,9 @@ public class CardRenderer {
     private static final int DESC_FONT_BASE = 56;
     private static final int RULES_FONT_BASE = 50;
     private static final int TYPE_FONT_BASE = 54;
+    private static final String TEMPLATE_PATH = "resources/dungeon-card-template.png";
+    private static final int BLANK_TEMPLATE_WIDTH = 818;
+    private static final int BLANK_TEMPLATE_HEIGHT = 1270;
 
     private final Device device;
     private final Image template;
@@ -42,7 +47,7 @@ public class CardRenderer {
         if (device instanceof Display display) {
             FontResources.loadBundledFonts(display, projectRoot);
         }
-        this.template = new Image(device, AppPaths.sharedPath(projectRoot, "resources/dungeon-card-template.png").toString());
+        this.template = loadTemplate(device, projectRoot);
 
         Rectangle templateBounds = template.getBounds();
         this.templateWidth = templateBounds.width;
@@ -67,6 +72,28 @@ public class CardRenderer {
                 new String[] {"Copperplate Gothic Bold", "Copperplate", "Trebuchet MS", "Verdana", "Arial", "Sans"},
                 layout.scaledFont(TYPE_FONT_BASE),
                 SWT.BOLD);
+    }
+
+    // Sin paquete de contenido no hay plantilla: un lienzo en blanco del mismo tamano que la plantilla
+    // original mantiene intacta la maquetacion (DungeonCardLayout se calcula sobre ese tamano).
+    private static Image loadTemplate(Device device, Path projectRoot) {
+        Path path = AppPaths.contentPath(projectRoot, TEMPLATE_PATH);
+        if (Files.isRegularFile(path)) {
+            try {
+                return new Image(device, path.toString());
+            } catch (SWTException ex) {
+                // Plantilla ilegible: se usa el lienzo en blanco.
+            }
+        }
+        Image blank = new Image(device, BLANK_TEMPLATE_WIDTH, BLANK_TEMPLATE_HEIGHT);
+        GC gc = new GC(blank);
+        try {
+            gc.setBackground(device.getSystemColor(SWT.COLOR_WHITE));
+            gc.fillRectangle(0, 0, BLANK_TEMPLATE_WIDTH, BLANK_TEMPLATE_HEIGHT);
+        } finally {
+            gc.dispose();
+        }
+        return blank;
     }
 
     public void drawCard(GC gc, Rectangle targetBounds, DungeonCard card) {

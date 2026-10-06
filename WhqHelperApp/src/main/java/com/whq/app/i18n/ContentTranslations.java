@@ -73,7 +73,7 @@ public final class ContentTranslations {
 
   // Traducciones del contenido base: shared home, solo lectura.
   static Path translationsFile(Path normalizedProjectRoot, Language language) {
-    return AppPaths.sharedPath(normalizedProjectRoot, RELATIVE_DIR).resolve("content-" + suffix(language) + ".xml");
+    return AppPaths.contentPath(normalizedProjectRoot, RELATIVE_DIR).resolve("content-" + suffix(language) + ".xml");
   }
 
   // Traducciones del contenido del usuario: runtime home escribible, aplicadas sobre las base.

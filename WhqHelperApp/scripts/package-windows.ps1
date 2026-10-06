@@ -15,7 +15,13 @@ $MainJar = "$ArtifactId-$Version.jar"
 $WindowsInputDir = Join-Path $ProjectRoot "target/windows-input"
 $OutputDir = Join-Path $ProjectRoot "target/windows-package"
 $WindowsSwtJar = Join-Path $ProjectRoot "lib/org.eclipse.swt.win32.win32.x86_64-3.127.0.jar"
-$WindowsIcon = Join-Path $ProjectRoot "../shared/branding/logo.ico"
+# El logo es contenido (va en el paquete de contenido, WHQ_CONTENT_HOME o ../whq-content); sin el,
+# se usa el icono neutro propio de la aplicacion.
+$ContentHome = if ($env:WHQ_CONTENT_HOME) { $env:WHQ_CONTENT_HOME } else { Join-Path $ProjectRoot "../../whq-content" }
+$WindowsIcon = Join-Path $ContentHome "branding/logo.ico"
+if (-not (Test-Path $WindowsIcon)) {
+    $WindowsIcon = Join-Path $ProjectRoot "../shared/icons/whq-helper.ico"
+}
 
 if (-not (Test-Path $WindowsSwtJar)) {
     throw "Falta el JAR de SWT para Windows: $WindowsSwtJar"

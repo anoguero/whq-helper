@@ -1,6 +1,12 @@
 *.bak
 userdefined-*
 
-# Tile drafts (not ready yet)
-/resources/tiles/ad/
-/resources/tiles/at/
+# El contenido de juego es un paquete aparte (WHQ_CONTENT_HOME, por defecto ../whq-content):
+# shared/ solo trae esquemas, i18n de interfaz, settings.cfg y el contenido inventado de sample/.
+/data/xml/**/*.xml
+/data/i18n/content-*.xml
+/data/graphics/
+/data/fonts/
+/resources/
+/branding/
+/content-manifest.json

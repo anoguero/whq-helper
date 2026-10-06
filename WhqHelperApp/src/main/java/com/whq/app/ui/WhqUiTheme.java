@@ -105,9 +105,9 @@ public final class WhqUiTheme {
             10,
             SWT.BOLD);
 
-    heroCastle = loadImage(AppPaths.sharedPath(projectRoot, "resources/ui/hero-castle.jpg"));
-    parchmentMap = loadImage(AppPaths.sharedPath(projectRoot, "resources/ui/parchment-map.jpg"));
-    manuscriptBorder = loadImage(AppPaths.sharedPath(projectRoot, "resources/ui/manuscript-border.jpg"));
+    heroCastle = loadImage(AppPaths.contentPath(projectRoot, "resources/ui/hero-castle.jpg"));
+    parchmentMap = loadImage(AppPaths.contentPath(projectRoot, "resources/ui/parchment-map.jpg"));
+    manuscriptBorder = loadImage(AppPaths.contentPath(projectRoot, "resources/ui/manuscript-border.jpg"));
   }
 
   public Image getHeroCastle() {

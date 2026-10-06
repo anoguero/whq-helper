@@ -757,8 +757,8 @@ public final class CardFactory {
       return null;
     }
 
-    // Plantillas e imagenes de carta son contenido base: se leen del shared home.
-    Path baseDir = AppPaths.sharedHome(Settings.getBaseDir());
+    // Plantillas e imagenes de carta son contenido base: se leen del paquete de contenido.
+    Path baseDir = AppPaths.contentHome(Settings.getBaseDir());
     if (baseDir != null) {
       Image image = loadCardImageFromPath(base, baseDir.resolve(relativePath).normalize());
       if (image != null) {
@@ -792,7 +792,7 @@ public final class CardFactory {
   }
 
   static String templateKey(String relativePath) {
-    Path baseDir = AppPaths.sharedHome(Settings.getBaseDir());
+    Path baseDir = AppPaths.contentHome(Settings.getBaseDir());
     return (baseDir == null ? "" : baseDir.toString()) + "|" + relativePath;
   }
 

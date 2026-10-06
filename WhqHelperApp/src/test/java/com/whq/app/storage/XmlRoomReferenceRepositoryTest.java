@@ -13,9 +13,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.whq.app.i18n.Language;
 import com.whq.app.model.WhiteDwarfRoomReferences.Reference;
+import com.whq.app.RealContent;
 
 /**
  * No-perdida de la migracion de WhiteDwarfRoomReferences.java a shared/data/xml/dungeon/room-references.xml.
@@ -127,6 +129,11 @@ class XmlRoomReferenceRepositoryTest {
     );
 
     private final XmlRoomReferenceRepository repository = new XmlRoomReferenceRepository(Path.of(""));
+
+    @BeforeEach
+    void requireRealContent() {
+        RealContent.assumeAvailable();
+    }
 
     @Test
     void sharedContentHasExactlyTheNineteenOriginalRooms() {

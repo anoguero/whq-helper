@@ -12,3 +12,8 @@ Desktop.ini
 .idea/
 .vscode/
 .metadata/
+
+# Paquete de contenido de juego: va fuera del repositorio (WHQ_CONTENT_HOME, por defecto
+# ../whq-content). Si alguien lo coloca dentro, no se versiona.
+/whq-content/
+/content/

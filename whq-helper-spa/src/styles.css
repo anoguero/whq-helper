@@ -1132,6 +1132,20 @@ body.dashboard-active {
   font-weight: bold;
 }
 
+.content-notice {
+  margin: 12px;
+  padding: 12px 16px;
+  border: 1px solid #b08a3e;
+  border-radius: 6px;
+  background: #f6efdf;
+  color: #2b2116;
+}
+
+.content-notice p {
+  margin: 6px 0 0;
+  white-space: pre-line;
+}
+
 .error {
   color: #f8d6cc;
   white-space: pre-wrap;

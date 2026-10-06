@@ -69,6 +69,9 @@
   <entry key="cardType.dungeonRoom">DUNGEON ROOM</entry>
   <entry key="cardType.objectiveRoom">OBJECTIVE ROOM</entry>
   <entry key="cardType.special">SPECIAL</entry>
+  <entry key="content.missing.body">WHQ Helper ships without game content: each user provides the texts, cards, tiles and images from their own materials.&#10;&#10;No content package was found at:&#10;{path}&#10;&#10;Put your package there or point to it with the WHQ_CONTENT_HOME environment variable (or -Dwhq.content.home). To see the application working with the sample content, set WHQ_CONTENT_HOME to:&#10;{sample}</entry>
+  <entry key="content.missing.spa.body">This web version was built without a content package: each user provides the texts, cards, tiles and images from their own materials.&#10;&#10;To include yours, build the application with the WHQ_CONTENT_HOME environment variable pointing to it. To try it with the sample content: WHQ_CONTENT_HOME=../shared/sample npm run build (or npm run dev).</entry>
+  <entry key="content.missing.title">Game content is missing</entry>
   <entry key="contentDashboard.addEncounterToTable">Add encounter to table</entry>
   <entry key="contentDashboard.addMonsterToEncounter">Add monster to encounter</entry>
   <entry key="contentDashboard.back">Back to application</entry>

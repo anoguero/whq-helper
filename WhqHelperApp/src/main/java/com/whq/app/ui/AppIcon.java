@@ -11,6 +11,8 @@ import com.whq.app.AppPaths;
 
 public final class AppIcon {
     private static final String ICON_PATH = "branding/logo.png";
+    // Sin logo en el paquete de contenido, el icono neutro propio de la aplicacion.
+    private static final String FALLBACK_ICON_PATH = "icons/whq-helper.png";
 
     private static Display iconDisplay;
     private static Image iconImage;
@@ -55,7 +57,10 @@ public final class AppIcon {
             return iconImage;
         }
 
-        Path iconPath = AppPaths.sharedPath(projectRoot, ICON_PATH).normalize();
+        Path iconPath = AppPaths.contentPath(projectRoot, ICON_PATH).normalize();
+        if (!Files.isRegularFile(iconPath)) {
+            iconPath = AppPaths.sharedPath(projectRoot, FALLBACK_ICON_PATH).normalize();
+        }
         if (!Files.isRegularFile(iconPath)) {
             return null;
         }

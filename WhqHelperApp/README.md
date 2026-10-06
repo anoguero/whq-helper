@@ -7,13 +7,13 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
 - UI SWT con dos paneles:
   - lista de habitaciones/cartas disponibles,
   - visor de renderizado de carta.
-- Renderizado de carta sobre plantilla (`shared/resources/dungeon-card-template.png`):
+- Renderizado de carta sobre plantilla (`resources/dungeon-card-template.png` del paquete de contenido; sin ella, un lienzo en blanco del mismo tamaño):
   - nombre,
   - texto descriptivo,
   - texto de reglas,
   - imagen de tile,
   - banda inferior con tipo (`DUNGEON ROOM`, `OBJECTIVE ROOM`, `CORRIDOR`, `SPECIAL`).
-- Repositorio XML de cartas de mazmorra (`shared/data/xml/dungeon/dungeon-cards.xml`) como fuente principal de mantenimiento.
+- Repositorio XML de cartas de mazmorra (`data/xml/dungeon/dungeon-cards.xml` del paquete de contenido) como fuente principal de mantenimiento.
 - Nuevo campo de datos `environment` en cada carta (por defecto: `The Old World`).
 - Dependencias de terceros mínimas:
   - SWT.
@@ -26,18 +26,22 @@ Aplicación Java + SWT para renderizar cartas de mazmorra estilo **Warhammer Que
 - `src/main/java/com/whq/app/storage/XmlDungeonCardStore.java`: acceso a cartas de mazmorra en XML.
 - `src/main/java/com/whq/app/io/CardCsvService.java`: import/export CSV.
 - `src/main/java/com/whq/app/model/*`: modelos de dominio.
-- `src/main/java/com/whq/app/AppPaths.java`: resolución del app home, del shared home y del directorio escribible.
-- `../shared/`: contenido base compartido con la SPA (XML, imágenes, fuentes, i18n). Ver el `README.md` de la raíz.
+- `src/main/java/com/whq/app/AppPaths.java`: resolución del app home, del shared home, del paquete de contenido y del directorio escribible.
+- `../shared/`: lo propio de la aplicación, compartido con la SPA (esquemas, i18n de interfaz, icono, contenido de ejemplo). Ver el `README.md` de la raíz.
+- `../../whq-content/`: paquete de contenido de juego, fuera del repositorio. Ver el `README.md` de la raíz.
 - `data/xml/**/userdefined-*.xml`: contenido creado por el usuario (no versionado).
 
 ## Contenido base y contenido del usuario
 
-La app distingue dos ubicaciones:
+La app distingue tres ubicaciones:
 
 | Tipo | Dónde | Permisos |
 |---|---|---|
-| Contenido base (XML, imágenes, fuentes, i18n) | shared home | Solo lectura |
+| Lo propio de la aplicación (esquemas, i18n de interfaz) | shared home | Solo lectura |
+| Contenido de juego (XML, imágenes, fuentes, traducciones de contenido) | paquete de contenido | Solo lectura |
 | Contenido del usuario (`userdefined-*`), `settings.cfg` | directorio escribible | Lectura y escritura |
+
+El paquete de contenido no se distribuye con la aplicación. Se busca en `-Dwhq.content.home` / `WHQ_CONTENT_HOME`, `<appHome>/content` (junto a `shared/`) y `<repo>/../whq-content` (desarrollo). Sin paquete, la app arranca vacía y avisa de dónde colocarlo; detalles y formato en el `README.md` de la raíz.
 
 El shared home se resuelve en este orden:
 
@@ -46,9 +50,9 @@ El shared home se resuelve en este orden:
 3. `<appHome>/../shared`: desarrollo, ejecutando desde `WhqHelperApp/`.
 4. `<appHome>`: compatibilidad con instalaciones antiguas que llevan `data/` y `resources/` dentro.
 
-El directorio escribible es el app home si se puede escribir en él; si no, `%APPDATA%/WHQ Helper` (Windows), `~/Library/Application Support/WHQ Helper` (macOS) o `$XDG_DATA_HOME/whq-helper` / `~/.local/share/whq-helper` (Linux). Se puede forzar con `-Dwhq.user.home` o `WHQ_USER_HOME`. Al prepararlo solo se copian `settings.cfg`, los `userdefined-*` y `lib/`: el contenido base se lee siempre del shared home y nunca queda una copia obsoleta.
+El directorio escribible es el app home si se puede escribir en él; si no, `%APPDATA%/WHQ Helper` (Windows), `~/Library/Application Support/WHQ Helper` (macOS) o `$XDG_DATA_HOME/whq-helper` / `~/.local/share/whq-helper` (Linux). Se puede forzar con `-Dwhq.user.home` o `WHQ_USER_HOME`. Al prepararlo solo se copian `settings.cfg`, los `userdefined-*` y `lib/`: el contenido base se lee siempre del paquete de contenido y nunca queda una copia obsoleta.
 
-Las traducciones del contenido del usuario se guardan en `data/i18n/userdefined-content-{es,en}.xml` del directorio escribible cuando el `content-*.xml` base no se puede escribir (instalación empaquetada). En desarrollo, el editor de contenido sigue escribiendo directamente en `shared/`.
+Las traducciones del contenido del usuario se guardan en `data/i18n/userdefined-content-{es,en}.xml` del directorio escribible cuando el `content-*.xml` base no se puede escribir (instalación empaquetada). En desarrollo, si el `content-*.xml` del paquete se puede escribir, el editor de contenido escribe directamente en él.
 
 ## Ejecutar
 
@@ -81,7 +85,7 @@ La opción recomendada para este proyecto es generar un bundle de aplicación y,
 
 Motivo:
 
-- la app SWT lee el contenido base de `shared/` y guarda el del usuario en disco (`userdefined-*`, `settings.cfg`),
+- la app SWT lee el contenido base del paquete de contenido y guarda el del usuario en disco (`userdefined-*`, `settings.cfg`),
 - el contenido XML no debe quedar enterrado dentro del JAR si quieres seguir editándolo, hacer backups o permitir contenido de usuario,
 - `jpackage` genera un `.exe` o `.msi` con runtime de Java incluido, sin pedir Java preinstalado al usuario final.
 
@@ -225,7 +229,7 @@ Salida:
 
 - `target/macos-package/`
 
-El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `shared/branding/logo.png`.
+El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `branding/logo.png` del paquete de contenido o, si no está, del icono neutro `shared/icons/whq-helper.png`.
 
 ### Generación automática en GitHub Actions
 
@@ -272,11 +276,11 @@ La release quedará publicada en:
 
 ## Cómo quedan los XML en el ejecutable
 
-Los XML no se empaquetan dentro del JAR principal. Los perfiles `*-dist` de Maven copian `../shared/` como `shared/` dentro del bundle de entrada (sin `userdefined-*`, `*.bak` ni las losetas borrador `resources/tiles/{ad,at}/`), y `jpackage` lo deja dentro del área `app/` de la imagen generada.
+Los XML no se empaquetan dentro del JAR principal. Los perfiles `*-dist` de Maven copian `../shared/` como `shared/` dentro del bundle de entrada (sin `userdefined-*` ni `*.bak`), y `jpackage` lo deja dentro del área `app/` de la imagen generada. El bundle no lleva contenido de juego: cada usuario coloca su paquete en `<app>/content` o lo indica con `WHQ_CONTENT_HOME`.
 
 En tiempo de ejecución la aplicación resuelve su base por la ubicación real del JAR empaquetado y encuentra `shared/` a su lado. Implicación práctica:
 
-- el contenido base es de solo lectura y se actualiza con cada versión instalada,
+- los esquemas y la interfaz son de solo lectura y se actualizan con cada versión instalada; el paquete de contenido es aparte,
 - el contenido del usuario (`userdefined-*.xml`, sus traducciones y `settings.cfg`) vive en el directorio escribible y sobrevive a las actualizaciones,
 - no necesitas descomprimir nada en cada arranque.
 

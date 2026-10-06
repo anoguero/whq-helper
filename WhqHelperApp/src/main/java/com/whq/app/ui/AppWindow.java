@@ -269,7 +269,26 @@ public class AppWindow {
         });
         shell.addListener(SWT.Activate, event -> refreshLocalizedTexts());
         shell.open();
+        if (!AppPaths.hasContent(projectRoot)) {
+            display.asyncExec(this::showMissingContentNotice);
+        }
         display.asyncExec(this::offerPendingAdventure);
+    }
+
+    // La aplicacion se distribuye sin contenido de juego: sin paquete arranca vacia y explica donde
+    // colocarlo, en lugar de fallar.
+    private void showMissingContentNotice() {
+        if (shell.isDisposed()) {
+            return;
+        }
+        MessageBox box = new MessageBox(shell, SWT.ICON_INFORMATION | SWT.OK);
+        box.setText(I18n.t("content.missing.title"));
+        box.setMessage(I18n.t(
+                "content.missing.body",
+                Map.of(
+                        "path", String.valueOf(AppPaths.contentHome(projectRoot)),
+                        "sample", String.valueOf(AppPaths.sharedPath(projectRoot, "sample")))));
+        box.open();
     }
 
     private void createMenuBar() {
@@ -1167,7 +1186,7 @@ public class AppWindow {
     }
 
     private List<SettlementLocation> loadSettlementLocations() throws Exception {
-        Path locationsDirectory = AppPaths.sharedPath(projectRoot, "data/xml/locations");
+        Path locationsDirectory = AppPaths.contentPath(projectRoot, "data/xml/locations");
         if (!Files.isDirectory(locationsDirectory)) {
             return List.of();
         }
@@ -1744,7 +1763,7 @@ public class AppWindow {
         session.setChangeListener(autoSave);
         autoSave.run();
 
-        Image dungeonBack = new Image(display, AppPaths.sharedPath(projectRoot, "resources/dungeon-back.jpeg").toString());
+        Image dungeonBack = new Image(display, AppPaths.contentPath(projectRoot, "resources/dungeon-back.jpeg").toString());
         simulator.addListener(SWT.Dispose, event -> {
             if (!dungeonBack.isDisposed()) {
                 dungeonBack.dispose();
@@ -2654,7 +2673,7 @@ public class AppWindow {
     }
 
     private java.util.List<WarriorCounterDefinition> loadWarriorCounters() throws Exception {
-        Path warriorsDirectory = AppPaths.sharedPath(projectRoot, "data/xml/warriors");
+        Path warriorsDirectory = AppPaths.contentPath(projectRoot, "data/xml/warriors");
         if (!Files.isDirectory(warriorsDirectory)) {
             return List.of();
         }

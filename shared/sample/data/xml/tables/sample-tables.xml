@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Contenido de ejemplo inventado para WHQ Helper. No procede de ningun producto publicado. -->
+<tables>
+  <table id="sample-monsters" name="Sample Monsters">
+    <monster id="sample-lantern-moth" number="2-4" level="1"/>
+    <monster id="sample-cellar-toad" number="1-2" level="1"/>
+    <group level="1">
+      <monster id="sample-cellar-toad" number="1"/>
+      <monster id="sample-lantern-moth" number="1-3"/>
+    </group>
+    <monster id="sample-rust-golem" number="1" level="2"/>
+  </table>
+</tables>

@@ -1,9 +1,12 @@
 package pms.whq.content;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,6 +16,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.whq.app.AppPaths;
 import com.whq.app.i18n.ContentTranslations;
 import com.whq.app.io.SafeXml;
 
@@ -27,6 +31,14 @@ import pms.whq.data.TravelEvent;
 public class RuntimeContentLoader {
 
   private static final String[] ALWAYS_LOADED_EVENT_FILES = {"main-gold.xml"};
+  private static final String[] CONTENT_DIRECTORY_SETTINGS = {
+    Settings.RULES_DIR,
+    Settings.MONSTER_DIR,
+    Settings.EVENT_DIR,
+    Settings.TRAVEL_DIR,
+    Settings.SETTLEMENT_DIR,
+    Settings.TABLE_DIR
+  };
 
   private final Path projectRoot;
   private final DocumentBuilderFactory parserFactory;
@@ -44,6 +56,7 @@ public class RuntimeContentLoader {
   public ContentRepository load(Consumer<ContentIssue> issueConsumer) {
     this.issueConsumer = issueConsumer == null ? issue -> {} : issueConsumer;
     Settings.load(projectRoot);
+    reportMissingContentDirectories();
     ContentTranslations translations = ContentTranslations.load(projectRoot, Settings.getLanguage());
 
     ContentRepository repository = new ContentRepository();
@@ -54,6 +67,31 @@ public class RuntimeContentLoader {
     loadSettlementEvents(repository, translations);
     loadTables(repository);
     return repository;
+  }
+
+  // Con un paquete de contenido incompleto se carga lo que haya y se avisa una vez de lo que falta.
+  // Sin paquete no se avisa aqui: la ventana principal ya explica que falta el contenido.
+  private void reportMissingContentDirectories() {
+    if (!AppPaths.hasContent(projectRoot)) {
+      return;
+    }
+    List<String> missing = new ArrayList<>();
+    for (String setting : CONTENT_DIRECTORY_SETTINGS) {
+      String directory = Settings.getSetting(setting);
+      if (directory != null && !directory.isBlank() && !Files.isDirectory(Path.of(directory))) {
+        missing.add(directory);
+      }
+    }
+    if (!missing.isEmpty()) {
+      issueConsumer.accept(
+          new ContentIssue(
+              "Incomplete Content Package",
+              "The content package at ["
+                  + AppPaths.contentHome(projectRoot)
+                  + "] is missing these directories, so their content was not loaded: "
+                  + String.join(", ", missing)
+                  + "."));
+    }
   }
 
   private void loadRules(ContentRepository repository, ContentTranslations translations) {

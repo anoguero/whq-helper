@@ -725,7 +725,7 @@ public class EventDeckApp {
   }
 
   private java.util.List<WarriorDefinition> loadWarriors() throws Exception {
-    Path warriorsDirectory = AppPaths.sharedPath(projectRoot, "data/xml/warriors");
+    Path warriorsDirectory = AppPaths.contentPath(projectRoot, "data/xml/warriors");
     if (!Files.isDirectory(warriorsDirectory)) {
       return List.of();
     }

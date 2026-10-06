@@ -25,6 +25,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.whq.app.AppPaths;
+import com.whq.app.RealContent;
 
 import pms.whq.data.Table;
 import pms.whq.data.TableIds;
@@ -119,6 +120,8 @@ class TableActiveSettingsTest {
 
   @Test
   void editorKeepsTheIdOfAUserTableWhenItIsRenamed() throws Exception {
+    // Guardar valida las referencias contra los monstruos del contenido real.
+    RealContent.assumeAvailable();
     XmlContentService service = new XmlContentService(Path.of(""));
     Path file = root.resolve("userdefined-tables.xml");
     Files.writeString(
@@ -138,7 +141,8 @@ class TableActiveSettingsTest {
 
   @Test
   void baseContentTableIdsArePresentAndUnique() throws Exception {
-    Path tablesDir = AppPaths.sharedPath(Path.of(""), "data/xml/tables");
+    RealContent.assumeAvailable();
+    Path tablesDir = AppPaths.contentPath(Path.of(""), "data/xml/tables");
     Set<String> ids = new HashSet<>();
     int tables = 0;
     try (Stream<Path> files = Files.list(tablesDir)) {
@@ -178,7 +182,12 @@ class TableActiveSettingsTest {
   }
 
   private void writeBaseTables(String... tables) throws Exception {
-    Path dir = Files.createDirectories(root.resolve("shared/data/xml/tables"));
+    Files.createDirectories(root.resolve("shared/data/xml"));
+    // Paquete de contenido completo (sin el resto de directorios se avisaria de paquete incompleto).
+    for (String directory : List.of("rules", "monsters", "events", "travel", "settlement")) {
+      Files.createDirectories(root.resolve("content/data/xml").resolve(directory));
+    }
+    Path dir = Files.createDirectories(root.resolve("content/data/xml/tables"));
     Files.writeString(
         dir.resolve("base-tables.xml"), "<tables>" + String.join("", tables) + "</tables>", StandardCharsets.UTF_8);
   }

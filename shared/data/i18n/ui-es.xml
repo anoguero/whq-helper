@@ -69,6 +69,9 @@
   <entry key="cardType.dungeonRoom">SALA DE MAZMORRA</entry>
   <entry key="cardType.objectiveRoom">SALA OBJETIVO</entry>
   <entry key="cardType.special">ESPECIAL</entry>
+  <entry key="content.missing.body">WHQ Helper se distribuye sin contenido de juego: los textos, cartas, losetas e imágenes los aporta cada usuario desde sus propios materiales.&#10;&#10;No se ha encontrado ningún paquete de contenido en:&#10;{path}&#10;&#10;Coloca ahí tu paquete o indica su ubicación con la variable de entorno WHQ_CONTENT_HOME (o -Dwhq.content.home). Para ver la aplicación funcionando con el contenido de ejemplo, apunta WHQ_CONTENT_HOME a:&#10;{sample}</entry>
+  <entry key="content.missing.spa.body">Esta versión web se ha generado sin paquete de contenido: los textos, cartas, losetas e imágenes los aporta cada usuario desde sus propios materiales.&#10;&#10;Para incluir el tuyo, genera la aplicación con la variable de entorno WHQ_CONTENT_HOME apuntando a él. Para probarla con el contenido de ejemplo: WHQ_CONTENT_HOME=../shared/sample npm run build (o npm run dev).</entry>
+  <entry key="content.missing.title">Falta el contenido de juego</entry>
   <entry key="contentDashboard.addEncounterToTable">Anadir encuentro a la tabla</entry>
   <entry key="contentDashboard.addMonsterToEncounter">Anadir monstruo al encuentro</entry>
   <entry key="contentDashboard.back">Volver a la aplicación</entry>

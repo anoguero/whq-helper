@@ -1,0 +1,7 @@
+{
+  "xmlFiles": [
+    "/data/xml/dungeon/dungeon-cards.xml",
+    "/data/xml/monsters/sample-monsters.xml",
+    "/data/xml/tables/sample-tables.xml"
+  ]
+}

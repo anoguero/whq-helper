@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
-"""Guard shared/ as the single source of game content.
+"""Guard shared/ and the game content package.
 
-Fails when a copy of the shared content reappears, when the manifest or the
-dungeon cards reference missing files, or when two tracked files in the repo
-have identical content.
+The applications ship without game content: shared/ only holds what belongs to
+the application (XSD schemas, UI translations, settings and the invented
+sample/ content), and the game content is an external package (WHQ_CONTENT_HOME,
+by default ../whq-content next to the repository).
+
+Always checked: the schemas, that no game content creeps back into shared/,
+the UI translations and duplicated tracked files. Checked on sample/ and, when
+present, on the content package: manifest, tiles, table ids, room references and
+validation of every XML against its schema (with xmllint, when installed).
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -19,11 +27,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SHARED = ROOT / "shared"
-MANIFEST = SHARED / "content-manifest.json"
-DUNGEON_CARDS = SHARED / "data" / "xml" / "dungeon" / "dungeon-cards.xml"
-ROOM_REFERENCES = SHARED / "data" / "xml" / "dungeon" / "room-references.xml"
-ADVENTURES = SHARED / "data" / "xml" / "adventures" / "original-objective-room-adventures.xml"
-TABLES_DIR = SHARED / "data" / "xml" / "tables"
+SAMPLE = SHARED / "sample"
+SCHEMAS = SHARED / "data" / "xml"
+MANIFEST = "content-manifest.json"
+DUNGEON_CARDS = Path("data/xml/dungeon/dungeon-cards.xml")
+ROOM_REFERENCES = Path("data/xml/dungeon/room-references.xml")
+ADVENTURES = Path("data/xml/adventures/original-objective-room-adventures.xml")
+TABLES_DIR = Path("data/xml/tables")
+# Lo unico que puede haber en shared/ fuera de sample/: lo propio de la aplicacion.
+SHARED_ALLOWED = (
+    re.compile(r"\.gitignore"),
+    re.compile(r"settings\.cfg"),
+    re.compile(r"data/i18n/ui-(es|en)\.xml"),
+    re.compile(r"data/xml/[\w-]+/[\w-]+\.xsd"),
+    re.compile(r"icons/whq-helper\.(png|ico)"),
+    re.compile(r"sample/.+"),
+)
 TABLE_ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
 UI_TRANSLATIONS = {language: SHARED / "data" / "i18n" / f"ui-{language}.xml" for language in ("es", "en")}
 JAVA_SOURCES = ROOT / "WhqHelperApp" / "src" / "main" / "java"
@@ -41,7 +60,79 @@ FORBIDDEN_COPIES = (
 
 
 def relative(path: Path) -> str:
-    return str(path.relative_to(ROOT))
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def content_home() -> Path | None:
+    """Paquete de contenido: WHQ_CONTENT_HOME o ../whq-content junto al repositorio; None si no hay."""
+    configured = os.environ.get("WHQ_CONTENT_HOME", "").strip()
+    path = Path(configured).expanduser().resolve() if configured else ROOT.parent / "whq-content"
+    return path if path.is_dir() else None
+
+
+def validate_schemas(errors: list[str]) -> None:
+    schemas = sorted(SCHEMAS.rglob("*.xsd"))
+    if not schemas:
+        errors.append(f"No XSD schemas found under {relative(SCHEMAS)}")
+    for schema in schemas:
+        try:
+            root = ET.parse(schema).getroot()
+        except ET.ParseError as error:
+            errors.append(f"Schema is not well-formed XML: {relative(schema)} ({error})")
+            continue
+        if not root.tag.endswith("}schema"):
+            errors.append(f"Not an XML schema: {relative(schema)}")
+
+
+def validate_no_content_in_shared(errors: list[str]) -> None:
+    for path in sorted(SHARED.rglob("*")):
+        if not path.is_file():
+            continue
+        name = path.relative_to(SHARED).as_posix()
+        if name.startswith(("data/xml/", "data/i18n/")) and "userdefined-" in name:
+            continue
+        if not any(pattern.fullmatch(name) for pattern in SHARED_ALLOWED):
+            errors.append(f"Game content must not live in shared/ (it belongs to the content package): {relative(path)}")
+
+
+# Viaje y asentamiento usan el esquema de eventos (como XmlContentService.validateTravelFile).
+SCHEMA_DIRECTORY_ALIASES = {"travel": "events", "settlement": "events"}
+
+
+def schema_for(xml: Path, root: Path) -> Path | None:
+    category = xml.parent.relative_to(root / "data" / "xml").as_posix()
+    directory = SCHEMAS / SCHEMA_DIRECTORY_ALIASES.get(category, category)
+    candidates = sorted(directory.glob("*.xsd"))
+    if xml.name == ROOM_REFERENCES.name:
+        candidates = [path for path in candidates if "room-references" in path.name]
+    elif len(candidates) > 1:
+        candidates = [path for path in candidates if "room-references" not in path.name]
+    return candidates[0] if candidates else None
+
+
+def validate_against_schemas(errors: list[str], root: Path) -> None:
+    xmllint = shutil.which("xmllint")
+    if xmllint is None:
+        print(f"Warning: xmllint not installed; skipping schema validation of {relative(root)}.", file=sys.stderr)
+        return
+    for xml in sorted((root / "data" / "xml").rglob("*.xml")):
+        if xml.name.startswith("userdefined-"):
+            continue
+        schema = schema_for(xml, root)
+        if schema is None:
+            errors.append(f"No schema for content file: {relative(xml)}")
+            continue
+        result = subprocess.run(
+            [xmllint, "--noout", "--schema", str(schema), str(xml)],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            detail = result.stderr.strip().splitlines()[0] if result.stderr.strip() else "invalid"
+            errors.append(f"Does not validate against {relative(schema)}: {relative(xml)} ({detail})")
 
 
 def validate_no_copies(errors: list[str]) -> None:
@@ -50,39 +141,40 @@ def validate_no_copies(errors: list[str]) -> None:
             errors.append(f"Copy of shared content must not exist: {relative(path)}")
 
 
-def validate_manifest(errors: list[str]) -> None:
-    if not MANIFEST.is_file():
-        errors.append(f"Missing manifest: {relative(MANIFEST)}")
+def validate_manifest(errors: list[str], root: Path) -> None:
+    manifest_path = root / MANIFEST
+    if not manifest_path.is_file():
+        errors.append(f"Missing manifest: {relative(manifest_path)}")
         return
-    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     for raw_path in manifest.get("xmlFiles", []):
         path = str(raw_path)
         if not path.startswith("/"):
-            errors.append(f"Manifest path must be absolute from shared root: {path}")
+            errors.append(f"Manifest path must be absolute from the content root: {path}")
             continue
-        if not (SHARED / path.lstrip("/")).is_file():
-            errors.append(f"Manifest references missing file: {path}")
+        if not (root / path.lstrip("/")).is_file():
+            errors.append(f"Manifest of {relative(root)} references missing file: {path}")
 
 
-def validate_tile_paths(errors: list[str]) -> None:
-    if not DUNGEON_CARDS.is_file():
-        errors.append(f"Missing dungeon cards: {relative(DUNGEON_CARDS)}")
+def validate_tile_paths(errors: list[str], root: Path) -> None:
+    cards = root / DUNGEON_CARDS
+    if not cards.is_file():
+        errors.append(f"Missing dungeon cards: {relative(cards)}")
         return
-    for element in ET.parse(DUNGEON_CARDS).iter("tileImagePath"):
+    for element in ET.parse(cards).iter("tileImagePath"):
         path = (element.text or "").strip()
-        if path and not (SHARED / path).is_file():
-            errors.append(f"Dungeon card references missing tile: {path}")
+        if path and not (root / path).is_file():
+            errors.append(f"Dungeon card in {relative(root)} references missing tile: {path}")
 
 
-def validate_room_references(errors: list[str]) -> None:
-    if not ROOM_REFERENCES.is_file():
-        errors.append(f"Missing room references: {relative(ROOM_REFERENCES)}")
+def validate_room_references(errors: list[str], root: Path) -> None:
+    # Opcional en un paquete: si lo trae, cada referencia apunta a una carta existente.
+    references = root / ROOM_REFERENCES
+    if not references.is_file() or not (root / DUNGEON_CARDS).is_file():
         return
-    if not DUNGEON_CARDS.is_file():
-        return
-    card_ids = {card.get("id") for card in ET.parse(DUNGEON_CARDS).iter("card")}
+    card_ids = {card.get("id") for card in ET.parse(root / DUNGEON_CARDS).iter("card")}
     seen: set[str] = set()
-    for reference in ET.parse(ROOM_REFERENCES).iter("reference"):
+    for reference in ET.parse(references).iter("reference"):
         card_id = (reference.get("cardId") or "").strip()
         if card_id not in card_ids:
             errors.append(f"Room reference points to missing dungeon card: cardId={card_id}")
@@ -91,14 +183,13 @@ def validate_room_references(errors: list[str]) -> None:
         seen.add(card_id)
 
 
-def validate_adventure_rooms(errors: list[str]) -> None:
-    if not ADVENTURES.is_file():
-        errors.append(f"Missing adventures: {relative(ADVENTURES)}")
+def validate_adventure_rooms(errors: list[str], root: Path) -> None:
+    # Opcional en un paquete: si trae aventuras, cada sala objetivo apunta a una carta existente.
+    adventures = root / ADVENTURES
+    if not adventures.is_file() or not (root / DUNGEON_CARDS).is_file():
         return
-    if not DUNGEON_CARDS.is_file():
-        return
-    card_ids = {card.get("id") for card in ET.parse(DUNGEON_CARDS).iter("card")}
-    for room in ET.parse(ADVENTURES).iter("objectiveRoom"):
+    card_ids = {card.get("id") for card in ET.parse(root / DUNGEON_CARDS).iter("card")}
+    for room in ET.parse(adventures).iter("objectiveRoom"):
         card_id = (room.get("cardId") or "").strip()
         if not card_id:
             errors.append(f"Objective room without cardId in adventures: {room.get('name')}")
@@ -106,11 +197,11 @@ def validate_adventure_rooms(errors: list[str]) -> None:
             errors.append(f"Adventure objective room points to missing dungeon card: cardId={card_id} ({room.get('name')})")
 
 
-def validate_table_ids(errors: list[str]) -> None:
+def validate_table_ids(errors: list[str], root: Path) -> None:
     # El estado activo de cada tabla se guarda por id (table.<id>.active): debe existir y ser unico
-    # en todo el contenido base. El esquema lo deja opcional por los ficheros antiguos del usuario.
+    # en el paquete. El esquema lo deja opcional por los ficheros antiguos del usuario.
     seen: dict[str, str] = {}
-    for path in sorted(TABLES_DIR.glob("*.xml")):
+    for path in sorted((root / TABLES_DIR).glob("*.xml")):
         for table in ET.parse(path).getroot().iter("table"):
             table_id = (table.get("id") or "").strip()
             name = table.get("name")
@@ -151,16 +242,17 @@ def validate_ui_translations(errors: list[str]) -> None:
         errors.append(f"UI translation key used in code but missing: {key} ({', '.join(sorted(used[key]))})")
 
 
-def validate_css_font_urls(errors: list[str]) -> None:
+def validate_css_font_urls(errors: list[str], content: Path | None) -> None:
+    # Las fuentes son contenido: si faltan, la SPA usa las del sistema. Solo se avisa.
     if not SPA_CSS.is_file():
         errors.append(f"Missing SPA CSS: {relative(SPA_CSS)}")
         return
+    if content is None:
+        return
     css = SPA_CSS.read_text(encoding="utf-8")
     for url in re.findall(r"url\(['\"]?([^'\")]+)['\"]?\)", css):
-        if not url.startswith("/data/fonts/"):
-            continue
-        if not (SHARED / url.lstrip("/")).is_file():
-            errors.append(f"CSS references missing font: {url}")
+        if url.startswith("/data/fonts/") and not (content / url.lstrip("/")).is_file():
+            print(f"Warning: CSS references a font the content package does not have: {url}", file=sys.stderr)
 
 
 def tracked_files() -> list[Path] | None:
@@ -199,14 +291,23 @@ def validate_no_duplicates(errors: list[str]) -> None:
 def main() -> int:
     errors: list[str] = []
     validate_no_copies(errors)
-    validate_manifest(errors)
-    validate_tile_paths(errors)
-    validate_room_references(errors)
-    validate_adventure_rooms(errors)
-    validate_table_ids(errors)
+    validate_schemas(errors)
+    validate_no_content_in_shared(errors)
     validate_ui_translations(errors)
-    validate_css_font_urls(errors)
     validate_no_duplicates(errors)
+
+    content = content_home()
+    roots = [SAMPLE] + ([content] if content else [])
+    for root in roots:
+        validate_manifest(errors, root)
+        validate_tile_paths(errors, root)
+        validate_room_references(errors, root)
+        validate_adventure_rooms(errors, root)
+        validate_table_ids(errors, root)
+        validate_against_schemas(errors, root)
+    validate_css_font_urls(errors, content)
+    where = f"content package {content}" if content else "no content package (only sample/)"
+    print(f"Checked shared/ and {where}.")
 
     if errors:
         print("Shared data validation failed:", file=sys.stderr)

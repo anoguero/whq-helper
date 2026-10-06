@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.whq.app.RealContent;
+
 import pms.whq.Settings;
 import pms.whq.data.Event;
 
@@ -86,6 +88,7 @@ class CardTemplateCacheTest {
 
   @Test
   void closingACardKeepsTheSharedTemplateForTheOthers() {
+    RealContent.assumeAvailable();
     // Settings es global y otros tests lo dejan apuntando a directorios temporales: las plantillas
     // se resuelven desde el shared home del proyecto.
     Settings.load(Path.of("").toAbsolutePath());

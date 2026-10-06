@@ -11,10 +11,12 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.whq.app.AppPaths;
+import com.whq.app.RealContent;
 
 import pms.whq.data.Table;
 import pms.whq.data.TableReferenceEntry;
@@ -22,9 +24,14 @@ import pms.whq.game.TableDrawService;
 
 class RuntimeContentServiceTest {
 
+  @BeforeEach
+  void requireRealContent() {
+    RealContent.assumeAvailable();
+  }
+
   @Test
   void catacombsTableFileParsesIntoLegacyTableModel() throws Exception {
-    Path file = AppPaths.sharedPath(Path.of(""), "data/xml/tables/cot-monster-tables.xml").toAbsolutePath().normalize();
+    Path file = AppPaths.contentPath(Path.of(""), "data/xml/tables/cot-monster-tables.xml").toAbsolutePath().normalize();
     var builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
     var document = builder.parse(file.toFile());
     NodeList nodes = document.getDocumentElement().getChildNodes();

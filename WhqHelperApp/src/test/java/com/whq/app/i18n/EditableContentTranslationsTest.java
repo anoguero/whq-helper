@@ -21,7 +21,7 @@ class EditableContentTranslationsTest {
     void savesUserTranslationsToRuntimeHomeWhenSharedFileIsReadOnly() throws Exception {
         Path sharedHome = tempDir.resolve("app/shared");
         Path runtimeHome = tempDir.resolve("user-home");
-        Path baseFile = sharedHome.resolve("data/i18n/content-es.xml");
+        Path baseFile = tempDir.resolve("app/content/data/i18n/content-es.xml");
         Files.createDirectories(sharedHome.resolve("data/xml"));
         Files.createDirectories(baseFile.getParent());
         Files.writeString(baseFile, """

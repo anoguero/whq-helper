@@ -32,17 +32,20 @@ Como es una SPA para hosting estático, no escribe en disco del servidor.
 - Estado de tablas activas: `localStorage`
 - Cambios de cartas de mazmorra / importaciones CSV: `localStorage`
 - Overrides de XML editados: `localStorage`
-- Los XML originales de `../shared/data/xml` se usan como base de lectura inicial.
+- Los XML del paquete de contenido se usan como base de lectura inicial.
 
 ## Contenido
 
-La SPA no tiene carpeta `public/`: `vite.config.ts` apunta `publicDir` a `../shared`, la fuente única de contenido del repositorio. Vite la sirve en `npm run dev` y la copia a `dist/` en `npm run build`, así que las rutas no cambian:
+La SPA no tiene carpeta `public/`. Se sirve desde dos sitios, con las mismas rutas en desarrollo y en `dist/`:
 
-- `/content-manifest.json`: lista de XML que carga la SPA.
-- `/settings.cfg`: configuración por defecto.
-- `/data/xml/...`, `/data/graphics/...`, `/data/fonts/...`, `/data/i18n/...`
-- `/resources/...`: plantillas, tiles, UI y contadores.
-- `/branding/logo.png`: favicon e icono.
+- `publicDir` es `../shared`, lo propio de la aplicación: `/settings.cfg` (configuración por defecto) y `/data/i18n/ui-*.xml` (textos de interfaz).
+- El paquete de contenido de juego (`WHQ_CONTENT_HOME`, por defecto `../../whq-content`) lo sirve el plugin de `content-plugin.ts` en `npm run dev` y lo copia a `dist/` en `npm run build`:
+  - `/content-manifest.json`: lista de XML que carga la SPA.
+  - `/data/xml/...`, `/data/graphics/...`, `/data/fonts/...`, `/data/i18n/content-*.xml`
+  - `/resources/...`: plantillas, tiles, UI y contadores.
+  - `/branding/logo.png`: favicon e icono.
+
+Sin paquete, la SPA se genera igual y muestra un aviso de contenido ausente. Para probarla con el contenido de ejemplo: `WHQ_CONTENT_HOME=../shared/sample npm run dev`.
 
 ## Ejecutar
 

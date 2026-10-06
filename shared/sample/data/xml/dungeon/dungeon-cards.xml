@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Contenido de ejemplo inventado para WHQ Helper. No procede de ningun producto publicado. -->
+<dungeonCards>
+  <card id="1" name="LANTERN HALL" type="DUNGEON_ROOM" environment="Sample" copyCount="1" enabled="true">
+    <description>A long hall where someone keeps leaving lit lanterns on the floor.</description>
+    <rules>When the warriors enter, roll a D6. On a 1 every lantern goes out and the room counts as dark until the end of the next turn.</rules>
+    <tileImagePath>resources/tiles/sample/lantern-hall.png</tileImagePath>
+  </card>
+</dungeonCards>
