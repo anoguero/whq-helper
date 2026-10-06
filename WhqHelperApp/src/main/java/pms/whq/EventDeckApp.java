@@ -933,7 +933,7 @@ public class EventDeckApp {
   }
 
   private void reloadControllerContent() {
-    controller.loadContent(issue -> SwtDialogs.showWarning(shell, issue.title(), issue.message()));
+    controller.loadContent(issue -> SwtDialogs.showWarning(resolveParent(shell), issue.title(), issue.message()));
   }
 
   private void resetEventList() {
