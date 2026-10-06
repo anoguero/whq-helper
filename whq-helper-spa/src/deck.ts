@@ -167,7 +167,9 @@ class TableList implements EventList {
 
     const fallbackAmbience = ambienceFiltered.length > 0 ? ambienceFiltered : monsters;
 
-    if (!this.settings.dungeonActive || this.kind !== 'dungeon') {
+    // El nivel destino de una referencia a otra tabla se aplica siempre, como en la app de escritorio;
+    // el nivel de la mazmorra, solo con la mazmorra activa.
+    if (forcedLevel === undefined && (!this.settings.dungeonActive || this.kind !== 'dungeon')) {
       return fallbackAmbience;
     }
 

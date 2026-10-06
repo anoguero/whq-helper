@@ -143,7 +143,6 @@ describe('buildDecks in table mode', () => {
     expect(ids(drawMany(buildDecks(repo, settings({ eventProbability: 100 })).dungeon, 10))).toEqual(Array(10).fill('ev'));
   });
 
-  // Con la mazmorra activa. Sin ella, la SPA ignora targetLevel (Java no): fallo anotado, sin cubrir aquí.
   it('resolves table references at their target level, combining repeated draws into a group', () => {
     const repo = repository([
       table('dungeon', { monsters: [tableRef('minions', { level: 3, targetLevel: 1, times: 2 })] }),
@@ -151,6 +150,16 @@ describe('buildDecks in table mode', () => {
     ]);
     const drawn = buildDecks(repo, settings({ dungeonActive: true, activeDungeonLevel: 3 })).dungeon.draw();
     expect(drawn).toEqual(group(3, [monster('rat', { level: 1 }), monster('rat', { level: 1 })]));
+  });
+
+  it('respects the target level of a table reference even without an active dungeon', () => {
+    // El fallo: sin mazmorra activa se ignoraba targetLevel y salia cualquier nivel (Java siempre lo aplica).
+    const repo = repository([
+      table('dungeon', { monsters: [tableRef('minions', { level: 3, targetLevel: 1 })] }),
+      table('minions', { active: false, monsters: [monster('rat', { level: 1 }), monster('ogre', { level: 5 })] })
+    ]);
+    const decks = buildDecks(repo, settings({ dungeonActive: false }));
+    expect(new Set(ids(drawMany(decks.dungeon, 40)))).toEqual(new Set(['rat']));
   });
 
   it('gives up on a table reference cycle instead of recursing forever', () => {
