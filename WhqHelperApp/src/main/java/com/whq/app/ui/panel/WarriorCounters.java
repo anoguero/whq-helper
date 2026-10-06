@@ -219,13 +219,19 @@ public final class WarriorCounters extends AppPanel {
         return name.endsWith(".xml") && !name.endsWith(".xml.bak");
     }
 
+    // La imagen del contador es contenido: se busca en el paquete de contenido (o, si es del usuario,
+    // en el runtime home), no junto a la aplicacion.
+    static Path counterImagePath(Path runtimeHome, String counterPath) {
+        return AppPaths.resolveContent(runtimeHome, counterPath);
+    }
+
     private void openWarriorCounterWindow(WarriorCounterDefinition warrior) {
         if (warrior == null || warrior.counterPath() == null || warrior.counterPath().isBlank()) {
             showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage", Map.of("path", "")));
             return;
         }
 
-        Path imagePath = projectRoot().resolve(warrior.counterPath()).normalize();
+        Path imagePath = counterImagePath(projectRoot(), warrior.counterPath());
         if (!Files.isRegularFile(imagePath)) {
             showError(I18n.t("dialog.warriorCounters.title"), I18n.t("dialog.warriorCounters.error.missingImage", Map.of("path", String.valueOf(imagePath))));
             return;
