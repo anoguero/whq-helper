@@ -503,4 +503,13 @@ public final class EditorSupport {
     int y = area.y + Math.max(0, (area.height - height) / 2);
     previewHost.setBounds(x, y, Math.max(1, width), Math.max(1, height));
   }
+
+  public static Composite createActionRow(Composite parent, int columns) {
+    Composite actions = new Composite(parent, SWT.NONE);
+    actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false));
+    GridLayout layout = new GridLayout(columns, false);
+    layout.marginWidth = 0;
+    actions.setLayout(layout);
+    return actions;
+  }
 }
