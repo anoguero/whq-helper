@@ -34,6 +34,9 @@ public interface AppContext {
 
     DungeonCardStore cardStore();
 
+    /** La carta seleccionada en la lista de la ventana, o null. */
+    DungeonCard selected();
+
     /** El panel de mazos de eventos, creandolo si hace falta. */
     EventDeckApp eventDeckApp();
 

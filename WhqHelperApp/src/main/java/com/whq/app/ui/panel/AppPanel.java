@@ -71,6 +71,10 @@ public abstract class AppPanel {
         return context.cardStore();
     }
 
+    protected DungeonCard selected() {
+        return context.selected();
+    }
+
     protected EventDeckApp getOrCreateEventDeckApp() {
         return context.eventDeckApp();
     }

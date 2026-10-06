@@ -1,20 +1,12 @@
 package com.whq.app.ui;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.graphics.TextLayout;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -22,19 +14,16 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Spinner;
 
 import com.whq.app.AppPaths;
 import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
-import com.whq.app.io.CardCsvService;
 import com.whq.app.model.DungeonCard;
 import com.whq.app.render.CardRenderer;
 import com.whq.app.storage.DungeonCardStorageException;
@@ -42,6 +31,8 @@ import com.whq.app.storage.DungeonCardStore;
 import com.whq.app.storage.XmlDungeonCardStore;
 import com.whq.app.ui.panel.AdventurePanel;
 import com.whq.app.ui.panel.AppContext;
+import com.whq.app.ui.panel.CardCsvActions;
+import com.whq.app.ui.panel.DungeonDefaultsDialog;
 import com.whq.app.ui.panel.SettlementPanel;
 import com.whq.app.ui.panel.WarriorCounters;
 import com.whq.app.ui.panel.WarriorCounters.WarriorCounterDefinition;
@@ -56,12 +47,13 @@ public class AppWindow {
     private final Shell shell;
     private final Path projectRoot;
     private final DungeonCardStore cardStore;
-    private final CardCsvService csvService;
     private final List<LocalizedUiAction> localizedActions;
     private final AppContext context = new WindowContext();
     private final WarriorCounters warriorCounters = new WarriorCounters(context);
     private final SettlementPanel settlementPanel = new SettlementPanel(context);
     private final AdventurePanel adventurePanel;
+    private final DungeonDefaultsDialog dungeonDefaultsDialog = new DungeonDefaultsDialog(context);
+    private final CardCsvActions cardCsvActions = new CardCsvActions(context);
 
     private CardRenderer renderer;
     private java.util.List<DungeonCard> cards;
@@ -121,21 +113,20 @@ public class AppWindow {
         AppIcon.apply(this.shell, projectRoot);
         this.cardStore = new XmlDungeonCardStore(projectRoot);
         this.adventurePanel = new AdventurePanel(context);
-        this.csvService = new CardCsvService();
         this.localizedActions = new ArrayList<>();
         this.newDungeonAction = registerAction(LocalizedUiAction.push("menu.item.newDungeon", adventurePanel::openNewDungeonDialog));
         this.newSettlementAction = registerAction(LocalizedUiAction.push("menu.item.newSettlement", settlementPanel::openNewSettlementDialog));
         this.genWarriorCounterAction = registerAction(LocalizedUiAction.push("menu.item.openWarriorCounter", warriorCounters::genWarriorCounter));
         this.closeWarriorCountersAction = registerAction(LocalizedUiAction.push("menu.item.closeWarriorCounters", warriorCounters::closeAllWarriorCounters));
         this.eventContentEditorAction = registerAction(LocalizedUiAction.push("menu.item.contentEditor", this::openEventContentEditor));
-        this.importCsvAction = registerAction(LocalizedUiAction.push("menu.item.importCsv", this::handleImportCsv));
+        this.importCsvAction = registerAction(LocalizedUiAction.push("menu.item.importCsv", cardCsvActions::handleImportCsv));
         this.exportAllCsvAction = registerAction(LocalizedUiAction.push(
                 "menu.item.exportAllCsv",
-                () -> handleExportCsv(cards),
+                () -> cardCsvActions.handleExportCsv(cards),
                 () -> cards != null && !cards.isEmpty()));
         this.exportEnvironmentCsvAction = registerAction(LocalizedUiAction.push(
                 "menu.item.exportEnvironmentCsv",
-                this::handleExportSelectedEnvironment,
+                cardCsvActions::handleExportSelectedEnvironment,
                 () -> selected != null));
         this.activateTablesAction = registerAction(LocalizedUiAction.push("menu.item.activateTables", this::openActivateTablesDialog));
         this.setPartyAction = registerAction(LocalizedUiAction.push("menu.item.setParty", this::openPartyDialog));
@@ -153,7 +144,7 @@ public class AppWindow {
                 () -> !isSimulateDeckModeSelected()));
         this.dungeonDefaultsAction = registerAction(LocalizedUiAction.push(
                 "menu.item.dungeonDefaults",
-                this::openDungeonDefaultsDialog));
+                dungeonDefaultsDialog::openDungeonDefaultsDialog));
         this.spanishLanguageAction = registerAction(LocalizedUiAction.radio(
                 "menu.item.spanish",
                 () -> setLanguageAndPersist(Language.ES),
@@ -475,115 +466,6 @@ public class AppWindow {
         return button;
     }
 
-    private Canvas createDialogHeader(Composite parent, String title, String subtitle) {
-        Canvas header = new Canvas(parent, SWT.DOUBLE_BUFFERED);
-        GridData data = new GridData(SWT.FILL, SWT.TOP, true, false);
-        data.heightHint = 210;
-        header.setLayoutData(data);
-        header.addPaintListener(event -> {
-            Rectangle area = header.getClientArea();
-            theme.paintHeroBanner(event.gc, area);
-            event.gc.setForeground(theme.mist);
-            Font titleFont = theme.heroTitleFont;
-            Font resizedTitleFont = null;
-            try {
-                int availableWidth = Math.max(120, area.width - 96);
-                Point titleExtent = measureHeaderText(event.gc, titleFont, title);
-                if (titleExtent.x > availableWidth) {
-                    FontData baseData = theme.heroTitleFont.getFontData()[0];
-                    for (int size = baseData.getHeight() - 1; size >= 14; size--) {
-                        Font candidate = new Font(display, baseData.getName(), size, baseData.getStyle());
-                        Point candidateExtent = measureHeaderText(event.gc, candidate, title);
-                        if (candidateExtent.x <= availableWidth) {
-                            resizedTitleFont = candidate;
-                            titleFont = candidate;
-                            break;
-                        }
-                        candidate.dispose();
-                    }
-                }
-                event.gc.setFont(titleFont);
-                event.gc.drawText(title, area.x + 28, area.y + 26, true);
-            } finally {
-                if (resizedTitleFont != null && !resizedTitleFont.isDisposed()) {
-                    resizedTitleFont.dispose();
-                }
-            }
-            TextLayout subtitleLayout = new TextLayout(display);
-            try {
-                subtitleLayout.setFont(theme.bodyFont);
-                subtitleLayout.setText(subtitle == null ? "" : subtitle);
-                subtitleLayout.setWidth(Math.max(120, area.width - 96));
-                event.gc.setForeground(theme.parchment);
-                subtitleLayout.draw(event.gc, area.x + 32, area.y + 78);
-            } finally {
-                subtitleLayout.dispose();
-            }
-        });
-        return header;
-    }
-
-    private Point measureHeaderText(org.eclipse.swt.graphics.GC gc, Font font, String text) {
-        gc.setFont(font);
-        return gc.textExtent(text == null ? "" : text, SWT.DRAW_TRANSPARENT);
-    }
-
-    private Composite createDarkPanel(Composite parent, int columns) {
-        Composite panel = new Composite(parent, SWT.DOUBLE_BUFFERED);
-        panel.setBackground(theme.panelBackground);
-        GridLayout layout = new GridLayout(columns, false);
-        layout.marginWidth = 18;
-        layout.marginHeight = 18;
-        layout.horizontalSpacing = 12;
-        layout.verticalSpacing = 10;
-        panel.setLayout(layout);
-        panel.addPaintListener(event -> theme.paintDarkPanel(event.gc, panel.getClientArea()));
-        return panel;
-    }
-
-    private Composite createParchmentPanel(Composite parent, int columns) {
-        Composite panel = new Composite(parent, SWT.DOUBLE_BUFFERED);
-        panel.setBackground(theme.parchment);
-        GridLayout layout = new GridLayout(columns, false);
-        layout.marginWidth = 18;
-        layout.marginHeight = 18;
-        layout.horizontalSpacing = 12;
-        layout.verticalSpacing = 10;
-        panel.setLayout(layout);
-        panel.addPaintListener(event -> theme.paintParchmentPanel(event.gc, panel.getClientArea()));
-        return panel;
-    }
-
-    private void styleDarkLabel(Label label, boolean title) {
-        label.setBackground(theme.panelBackground);
-        label.setForeground(title ? theme.mist : theme.parchment);
-        label.setFont(title ? theme.sectionTitleFont : theme.bodyFont);
-    }
-
-    private void styleParchmentLabel(Label label, boolean title) {
-        label.setBackground(theme.parchment);
-        label.setForeground(title ? theme.ink : theme.mutedInk);
-        label.setFont(title ? theme.sectionTitleFont : theme.bodyFont);
-    }
-
-    private void styleActionButton(Button button) {
-        button.setFont(theme.bodyFont);
-        button.setBackground(theme.brassDark);
-        button.setForeground(theme.parchment);
-    }
-
-    private void styleCombo(org.eclipse.swt.widgets.Combo combo) {
-        combo.setBackground(theme.mist);
-        combo.setForeground(theme.ink);
-        combo.setFont(theme.bodyFont);
-    }
-
-    private void styleSpinner(Spinner spinner) {
-        spinner.setBackground(theme.mist);
-        spinner.setForeground(theme.ink);
-        spinner.setFont(theme.bodyFont);
-    }
-
     private void refreshDashboardStats() {
         if (cards == null || theme == null) {
             return;
@@ -646,163 +528,6 @@ public class AppWindow {
         } catch (Exception ignored) {
             return I18n.t("dashboard.value.party.unavailable");
         }
-    }
-
-    private void openDungeonDefaultsDialog() {
-        Shell dialog = new Shell(shell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-        AppIcon.inherit(dialog, shell);
-        dialog.setText(I18n.t("dialog.dungeonDefaults.title"));
-        dialog.setBackground(theme.shellBackground);
-        dialog.setLayout(new GridLayout(1, false));
-        dialog.setSize(620, 430);
-
-        createDialogHeader(
-                dialog,
-                I18n.t("dialog.dungeonDefaults.title"),
-                I18n.t("dialog.dungeonDefaults.hint"));
-
-        Composite formPanel = createDarkPanel(dialog, 2);
-        formPanel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-        Label deckSizeLabel = new Label(formPanel, SWT.NONE);
-        deckSizeLabel.setText(I18n.t("dialog.dungeonDefaults.deckSize"));
-        styleDarkLabel(deckSizeLabel, false);
-
-        Spinner deckSizeSpinner = new Spinner(formPanel, SWT.BORDER);
-        styleSpinner(deckSizeSpinner);
-        deckSizeSpinner.setMinimum(2);
-        deckSizeSpinner.setMaximum(200);
-        deckSizeSpinner.setSelection(Math.max(2, Settings.getSettingAsInt(Settings.ADVENTURE_DEFAULT_DECK_SIZE)));
-        deckSizeSpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label roomCountLabel = new Label(formPanel, SWT.NONE);
-        roomCountLabel.setText(I18n.t("dialog.dungeonDefaults.roomCount"));
-        styleDarkLabel(roomCountLabel, false);
-
-        Spinner roomCountSpinner = new Spinner(formPanel, SWT.BORDER);
-        styleSpinner(roomCountSpinner);
-        roomCountSpinner.setMinimum(1);
-        roomCountSpinner.setMaximum(Math.max(1, deckSizeSpinner.getSelection() - 1));
-        roomCountSpinner.setSelection(
-                Math.max(
-                        1,
-                        Math.min(
-                                Settings.getSettingAsInt(Settings.ADVENTURE_DEFAULT_ROOM_COUNT),
-                                roomCountSpinner.getMaximum())));
-        roomCountSpinner.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-        Label hintLabel = new Label(formPanel, SWT.WRAP);
-        hintLabel.setText(I18n.t("dialog.dungeonDefaults.hint"));
-        hintLabel.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
-        styleDarkLabel(hintLabel, false);
-
-        deckSizeSpinner.addListener(SWT.Modify, event -> {
-            int maxRooms = Math.max(1, deckSizeSpinner.getSelection() - 1);
-            roomCountSpinner.setMaximum(maxRooms);
-            if (roomCountSpinner.getSelection() > maxRooms) {
-                roomCountSpinner.setSelection(maxRooms);
-            }
-        });
-
-        Composite actions = new Composite(formPanel, SWT.NONE);
-        actions.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false, 2, 1));
-        actions.setBackground(theme.panelBackground);
-        GridLayout actionsLayout = new GridLayout(2, true);
-        actionsLayout.marginWidth = 0;
-        actions.setLayout(actionsLayout);
-
-        Button acceptButton = new Button(actions, SWT.PUSH);
-        acceptButton.setText(I18n.t("button.accept"));
-        styleActionButton(acceptButton);
-        acceptButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        acceptButton.addListener(SWT.Selection, event -> {
-            int deckSize = deckSizeSpinner.getSelection();
-            int roomCount = roomCountSpinner.getSelection();
-            if (deckSize < 2 || roomCount < 1 || roomCount >= deckSize) {
-                showError(
-                        I18n.t("dialog.dungeonDefaults.invalidTitle"),
-                        I18n.t("dialog.dungeonDefaults.invalidMessage"));
-                return;
-            }
-
-            Settings.setSetting(Settings.ADVENTURE_DEFAULT_DECK_SIZE, Integer.toString(deckSize));
-            Settings.setSetting(Settings.ADVENTURE_DEFAULT_ROOM_COUNT, Integer.toString(roomCount));
-            Settings.save();
-            dialog.close();
-        });
-
-        Button cancelButton = new Button(actions, SWT.PUSH);
-        cancelButton.setText(I18n.t("button.cancel"));
-        styleActionButton(cancelButton);
-        cancelButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        cancelButton.addListener(SWT.Selection, event -> dialog.close());
-
-        dialog.open();
-        while (!dialog.isDisposed()) {
-            if (!display.readAndDispatch()) {
-                display.sleep();
-            }
-        }
-    }
-
-    private void handleImportCsv() {
-        FileDialog dialog = new FileDialog(shell, SWT.OPEN);
-        dialog.setText("Importar cartas desde CSV");
-        dialog.setFilterExtensions(new String[] {"*.csv", "*.*"});
-        dialog.setFilterNames(new String[] {"CSV files", "All files"});
-
-        String selectedPath = dialog.open();
-        if (selectedPath == null) {
-            return;
-        }
-
-        try {
-            List<DungeonCard> importedCards = csvService.importFromCsv(Path.of(selectedPath));
-            cardStore.insertCards(importedCards);
-            refreshCards();
-            showInfo("Importación completada", importedCards.size() + " cartas importadas correctamente.");
-        } catch (IOException | DungeonCardStorageException | IllegalArgumentException ex) {
-            showError("Error al importar CSV", ex.getMessage());
-        }
-    }
-
-    private void handleExportCsv(List<DungeonCard> cardsToExport) {
-        if (cardsToExport == null || cardsToExport.isEmpty()) {
-            showInfo("Exportación", "No hay cartas para exportar.");
-            return;
-        }
-
-        FileDialog dialog = new FileDialog(shell, SWT.SAVE);
-        dialog.setText("Exportar cartas a CSV");
-        dialog.setFileName("dungeon-cards.csv");
-        dialog.setFilterExtensions(new String[] {"*.csv", "*.*"});
-        dialog.setFilterNames(new String[] {"CSV files", "All files"});
-
-        String selectedPath = dialog.open();
-        if (selectedPath == null) {
-            return;
-        }
-
-        try {
-            csvService.exportToCsv(Path.of(selectedPath), cardsToExport);
-            showInfo("Exportación completada", cardsToExport.size() + " cartas exportadas.");
-        } catch (IOException ex) {
-            showError("Error al exportar CSV", ex.getMessage());
-        }
-    }
-
-    private void handleExportSelectedEnvironment() {
-        if (selected == null) {
-            showInfo("Exportación", "Selecciona una carta para exportar su grupo de entorno.");
-            return;
-        }
-
-        String environment = selected.getEnvironment();
-        List<DungeonCard> environmentGroup = cards.stream()
-                .filter(card -> environment.equalsIgnoreCase(card.getEnvironment()))
-                .collect(Collectors.toList());
-
-        handleExportCsv(environmentGroup);
     }
 
     /** Al arrancar: si quedo una aventura sin terminar, ofrece continuarla o descartarla. */
@@ -908,6 +633,11 @@ public class AppWindow {
         @Override
         public DungeonCardStore cardStore() {
             return cardStore;
+        }
+
+        @Override
+        public DungeonCard selected() {
+            return selected;
         }
 
         @Override
