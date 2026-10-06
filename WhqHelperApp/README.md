@@ -118,13 +118,14 @@ windows-input/
     org.eclipse.swt.win32.win32.x86_64-3.127.0.jar
   shared/
     data/
-      xml/
-      graphics/
-      fonts/
-      i18n/
-    resources/
+      xml/        esquemas .xsd
+      i18n/       textos de interfaz
     branding/
+    sample/
+    settings.cfg
 ```
+
+El contenido de juego no va en el instalable: cada usuario coloca su paquete en `<app>/content` o lo indica con `WHQ_CONTENT_HOME`.
 
 ### Generar `.exe` o `.msi`
 
@@ -229,7 +230,7 @@ Salida:
 
 - `target/macos-package/`
 
-El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `branding/logo.png` del paquete de contenido o, si no está, del icono neutro `shared/icons/whq-helper.png`.
+El script detecta la arquitectura del host y selecciona el JAR SWT correspondiente. También genera el icono `.icns` a partir de `shared/branding/logo.png`.
 
 ### Generación automática en GitHub Actions
 

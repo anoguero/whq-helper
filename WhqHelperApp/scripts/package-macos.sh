@@ -17,14 +17,8 @@ VERSION="$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' "$POM_PATH" | head -n 1
 MAIN_JAR="$ARTIFACT_ID-$VERSION.jar"
 MACOS_INPUT_DIR="$PROJECT_ROOT/target/macos-input"
 OUTPUT_DIR="$PROJECT_ROOT/target/macos-package"
-# El logo es contenido (va en el paquete de contenido, WHQ_CONTENT_HOME o ../whq-content); sin
-# el, se genera el .icns a partir del icono neutro propio de la aplicacion.
-CONTENT_HOME="${WHQ_CONTENT_HOME:-$PROJECT_ROOT/../../whq-content}"
-SOURCE_ICON="$CONTENT_HOME/branding/logo.png"
-if [[ ! -f "$SOURCE_ICON" ]]; then
-  SOURCE_ICON="$PROJECT_ROOT/../shared/icons/whq-helper.png"
-fi
-PREBUILT_MACOS_ICON="$CONTENT_HOME/branding/logo.icns"
+SOURCE_ICON="$PROJECT_ROOT/../shared/branding/logo.png"
+PREBUILT_MACOS_ICON="$PROJECT_ROOT/../shared/branding/logo.icns"
 ICONSET_DIR="$PROJECT_ROOT/target/macos-icon/whq-helper.iconset"
 MACOS_ICON="$PROJECT_ROOT/target/macos-icon/whq-helper.icns"
 SQUARE_ICON="$PROJECT_ROOT/target/macos-icon/whq-helper-1024.png"

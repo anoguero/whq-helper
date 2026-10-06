@@ -40,7 +40,7 @@ SHARED_ALLOWED = (
     re.compile(r"settings\.cfg"),
     re.compile(r"data/i18n/ui-(es|en)\.xml"),
     re.compile(r"data/xml/[\w-]+/[\w-]+\.xsd"),
-    re.compile(r"icons/whq-helper\.(png|ico)"),
+    re.compile(r"branding/logo\.(png|ico|icns)"),
     re.compile(r"sample/.+"),
 )
 TABLE_ID = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")

@@ -38,12 +38,11 @@ Como es una SPA para hosting estático, no escribe en disco del servidor.
 
 La SPA no tiene carpeta `public/`. Se sirve desde dos sitios, con las mismas rutas en desarrollo y en `dist/`:
 
-- `publicDir` es `../shared`, lo propio de la aplicación: `/settings.cfg` (configuración por defecto) y `/data/i18n/ui-*.xml` (textos de interfaz).
+- `publicDir` es `../shared`, lo propio de la aplicación: `/settings.cfg` (configuración por defecto), `/data/i18n/ui-*.xml` (textos de interfaz) y `/branding/logo.png` (favicon e icono).
 - El paquete de contenido de juego (`WHQ_CONTENT_HOME`, por defecto `../../whq-content`) lo sirve el plugin de `content-plugin.ts` en `npm run dev` y lo copia a `dist/` en `npm run build`:
   - `/content-manifest.json`: lista de XML que carga la SPA.
   - `/data/xml/...`, `/data/graphics/...`, `/data/fonts/...`, `/data/i18n/content-*.xml`
   - `/resources/...`: plantillas, tiles, UI y contadores.
-  - `/branding/logo.png`: favicon e icono.
 
 Sin paquete, la SPA se genera igual y muestra un aviso de contenido ausente. Para probarla con el contenido de ejemplo: `WHQ_CONTENT_HOME=../shared/sample npm run dev`.
 

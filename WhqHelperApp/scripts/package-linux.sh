@@ -18,13 +18,7 @@ MAIN_JAR="$ARTIFACT_ID-$VERSION.jar"
 LINUX_INPUT_DIR="$PROJECT_ROOT/target/linux-input"
 OUTPUT_DIR="$PROJECT_ROOT/target/linux-package"
 LINUX_SWT_JAR="$PROJECT_ROOT/lib/org.eclipse.swt.gtk.linux.x86_64-3.127.0.jar"
-# El logo es contenido (va en el paquete de contenido, WHQ_CONTENT_HOME o ../whq-content); sin
-# el, se usa el icono neutro propio de la aplicacion.
-CONTENT_HOME="${WHQ_CONTENT_HOME:-$PROJECT_ROOT/../../whq-content}"
-LINUX_ICON="$CONTENT_HOME/branding/logo.png"
-if [[ ! -f "$LINUX_ICON" ]]; then
-  LINUX_ICON="$PROJECT_ROOT/../shared/icons/whq-helper.png"
-fi
+LINUX_ICON="$PROJECT_ROOT/../shared/branding/logo.png"
 
 if [[ ! -f "$LINUX_SWT_JAR" ]]; then
   echo "Falta el JAR de SWT para Linux: $LINUX_SWT_JAR" >&2

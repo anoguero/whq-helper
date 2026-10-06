@@ -3,9 +3,9 @@ import { extname, isAbsolute, join, normalize, resolve, sep } from 'node:path';
 import type { Plugin } from 'vite';
 
 // Rutas que pertenecen al paquete de contenido (las mismas que en la app de escritorio).
-const CONTENT_PREFIXES = ['/data/', '/resources/', '/branding/', '/content-manifest.json'];
+const CONTENT_PREFIXES = ['/data/', '/resources/', '/content-manifest.json'];
 // Lo que se copia a dist/: solo lo que la SPA sirve (el paquete puede traer mas, como docs/).
-const CONTENT_ENTRIES = ['data', 'resources', 'branding', 'content-manifest.json'];
+const CONTENT_ENTRIES = ['data', 'resources', 'content-manifest.json'];
 
 const CONTENT_TYPES: Record<string, string> = {
   '.json': 'application/json',

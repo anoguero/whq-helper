@@ -21,7 +21,7 @@ whq-helper/                 ← este repositorio
 ├─ shared/                  ← lo propio de la aplicación, común a las dos apps
 │  ├─ data/xml/**/*.xsd     esquemas del formato del contenido
 │  ├─ data/i18n/ui-*.xml    textos de la interfaz
-│  ├─ icons/                icono neutro de la aplicación
+│  ├─ branding/             logo de la aplicación
 │  ├─ sample/               contenido de ejemplo inventado (un paquete de contenido mínimo)
 │  └─ settings.cfg          configuración por defecto de la SPA
 ├─ WhqHelperApp/            aplicación de escritorio (Java 25 + SWT)
@@ -36,7 +36,6 @@ whq-content/                ← paquete de contenido, fuera del repositorio
 │  ├─ graphics/
 │  └─ fonts/
 ├─ resources/               losetas, contadores, plantillas de carta, imágenes de la interfaz
-├─ branding/                logo
 └─ content-manifest.json    XML que carga la SPA
 ```
 
@@ -52,7 +51,7 @@ Las dos aplicaciones usan la misma variable de entorno, **`WHQ_CONTENT_HOME`**.
 
 **SPA:** al ejecutar `npm run dev` o `npm run build`, `WHQ_CONTENT_HOME` (relativa al directorio desde el que se lanza) o, por defecto, `<repo>/../whq-content`.
 - En desarrollo, Vite sirve el paquete junto a `shared/`.
-- Al construir, copia a `dist/` sus `data/`, `resources/`, `branding/` y `content-manifest.json`.
+- Al construir, copia a `dist/` sus `data/`, `resources/` y `content-manifest.json`.
 
 Esa variable va aparte de `WHQ_SHARED_HOME` porque son cosas distintas. `shared/` es parte de la aplicación y cambia con el código: sus esquemas validan cualquier paquete. El contenido es de cada usuario.
 
@@ -113,7 +112,7 @@ python3 scripts/validate_shared_data.py
 
 **Siempre comprueba:**
 - que los esquemas son XML bien formados;
-- que en `shared/` no hay contenido de juego (fuera de `sample/` solo puede haber esquemas, textos de interfaz, iconos y `settings.cfg`);
+- que en `shared/` no hay contenido de juego (fuera de `sample/` solo puede haber esquemas, textos de interfaz, el logo y `settings.cfg`);
 - que las claves de interfaz están en los dos idiomas;
 - que no hay ficheros versionados duplicados.
 
