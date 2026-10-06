@@ -74,6 +74,7 @@ Un paquete es un directorio con la estructura de arriba. Cada XML de `data/xml/<
 Además:
 - **Rutas:** las rutas de imágenes de los XML (por ejemplo, `tileImagePath`) son relativas a la raíz del paquete.
 - **Ids de tabla:** cada tabla lleva un `id` estable, el slug de su nombre. La configuración de qué tablas están activas se guarda por ese id.
+- **Referencias entre tablas:** el atributo `name` de `<tableRef>` admite el id de la tabla destino, que no cambia al renombrarla. También vale su nombre visible, pero esa referencia se rompe si se renombra la tabla. Se busca primero por id.
 - **Traducciones:** `data/i18n/content-{es,en}.xml` traduce el contenido; sin ellas se muestra el texto del XML.
 - **Manifiesto:** `content-manifest.json` lista los XML que carga la SPA, con rutas absolutas desde la raíz del paquete.
 - **Paquete incompleto:** si falta algún directorio, la aplicación carga lo que hay y avisa de lo que falta.

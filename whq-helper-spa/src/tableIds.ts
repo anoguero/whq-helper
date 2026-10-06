@@ -1,4 +1,4 @@
-import type { AppSettings, ContentRepository } from './types';
+import type { AppSettings, ContentRepository, TableModel } from './types';
 
 /**
  * Id estable de una tabla a partir de su nombre, para las tablas que no traen atributo id
@@ -14,6 +14,24 @@ export function tableIdFromName(name: string): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
   return slug || 'table';
+}
+
+/**
+ * Tabla a la que apunta una referencia (atributo name de tableRef): primero por id estable, para
+ * que renombrar la tabla no rompa la referencia, y si no, por nombre visible (referencias
+ * antiguas). Igual que Java (Table.findIn).
+ */
+export function findReferencedTable(tables: Map<string, TableModel>, reference: string): TableModel | undefined {
+  const trimmed = (reference ?? '').trim();
+  if (!trimmed) {
+    return undefined;
+  }
+  for (const table of tables.values()) {
+    if (table.id === trimmed) {
+      return table;
+    }
+  }
+  return tables.get(reference);
 }
 
 const warnedOrphans = new Set<string>();

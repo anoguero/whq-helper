@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { migrateLegacyTableActive, tableIdFromName } from './tableIds';
+import { findReferencedTable, migrateLegacyTableActive, tableIdFromName } from './tableIds';
 import { repository, settings, table } from './testing/fixtures';
 
 afterEach(() => {
@@ -12,6 +12,25 @@ describe('tableIdFromName', () => {
     expect(tableIdFromName('lm - Town Events')).toBe('lm-town-events');
     expect(tableIdFromName('  Tesoros de Salá Ñ! ')).toBe('tesoros-de-sala-n');
     expect(tableIdFromName(' -- ')).toBe('table');
+  });
+});
+
+describe('findReferencedTable', () => {
+  it('finds the table by stable id first and by visible name otherwise', () => {
+    const renamed = table('Minions (renamed)', { id: 'minions' });
+    const legacy = table('Old Name', { id: 'old-name' });
+    const tables = repository([renamed, legacy]).tables;
+    expect(findReferencedTable(tables, 'minions')).toBe(renamed);
+    expect(findReferencedTable(tables, ' minions ')).toBe(renamed);
+    expect(findReferencedTable(tables, 'Old Name')).toBe(legacy);
+    expect(findReferencedTable(tables, 'missing')).toBeUndefined();
+    expect(findReferencedTable(tables, '  ')).toBeUndefined();
+  });
+
+  it('prefers the id when a reference matches one table by id and another by name', () => {
+    const byId = table('Something', { id: 'ogres' });
+    const byName = table('ogres', { id: 'other' });
+    expect(findReferencedTable(repository([byName, byId]).tables, 'ogres')).toBe(byId);
   });
 });
 

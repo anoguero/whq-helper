@@ -1,4 +1,5 @@
 import { t } from '../i18n';
+import { findReferencedTable } from '../tableIds';
 import type {
   AppSettings,
   ContentRepository,
@@ -162,7 +163,7 @@ export function resolveObjectiveTableRef(
   entry: TableRefEntry,
   visited: Set<string>
 ): DrawEntry | null {
-  const referencedTable = repositoryToUse.tables.get(entry.tableName);
+  const referencedTable = findReferencedTable(repositoryToUse.tables, entry.tableName);
   if (!referencedTable || visited.has(entry.tableName)) {
     return null;
   }

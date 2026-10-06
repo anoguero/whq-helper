@@ -11,7 +11,7 @@ import type {
   TableKind,
   TableModel
 } from './types';
-import { migrateLegacyTableActive } from './tableIds';
+import { findReferencedTable, migrateLegacyTableActive } from './tableIds';
 
 const DUNGEON_GOLD_TREASURE_ID = 'rpb-treasure-dungeon-gold';
 
@@ -190,7 +190,7 @@ class TableList implements EventList {
       return entry;
     }
 
-    const referencedTable = this.repository.tables.get(entry.tableName);
+    const referencedTable = findReferencedTable(this.repository.tables, entry.tableName);
     if (!referencedTable || visited.has(entry.tableName)) {
       return null;
     }

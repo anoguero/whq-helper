@@ -48,7 +48,7 @@ public class RuntimeContentValidator {
           }
         }
         case TableReferenceEntry tableReferenceEntry -> {
-          if (!repository.tables().containsKey(tableReferenceEntry.tableName)) {
+          if (Table.findIn(repository.tables(), tableReferenceEntry.tableName) == null) {
             issueConsumer.accept(
                 new ContentIssue(
                     "Table Reference Not Found",

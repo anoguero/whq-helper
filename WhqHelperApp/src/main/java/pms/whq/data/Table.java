@@ -173,10 +173,25 @@ public class Table implements EventList {
     }
   }
 
-  public static Table findRegistered(String name) {
-    if (name == null || name.isBlank()) {
+  public static Table findRegistered(String reference) {
+    return findIn(TABLE_REGISTRY, reference);
+  }
+
+  /**
+   * Busca la tabla a la que apunta una referencia (atributo name de tableRef): primero por id
+   * estable, para que renombrar la tabla no rompa la referencia, y si no, por nombre visible
+   * (referencias antiguas). {@code tables} va indexado por nombre, como el repositorio.
+   */
+  public static Table findIn(Map<String, Table> tables, String reference) {
+    if (tables == null || reference == null || reference.isBlank()) {
       return null;
     }
-    return TABLE_REGISTRY.get(name);
+    String trimmed = reference.trim();
+    for (Table table : tables.values()) {
+      if (table.getId().equals(trimmed)) {
+        return table;
+      }
+    }
+    return tables.get(reference);
   }
 }

@@ -140,4 +140,12 @@ describe('objective room monsters', () => {
     expect(result?.difficulty).toBe(OBJECTIVE_DIFFICULTIES[0]);
     expect(result?.entries).toEqual([monster('rat', { level: 1 }), monster('rat', { level: 1 })]);
   });
+  it('resolves a table reference by stable id after the referenced table is renamed', () => {
+    const renamed = repository([
+      table('dungeon', { monsters: [tableRef('minions', { level: 6, targetLevel: 1 })] }),
+      table('Minions (renamed)', { id: 'minions', active: false, monsters: [monster('rat', { level: 1 })] })
+    ]);
+    const result = generateObjectiveRoomMonsterEntries(renamed, settings({ objectiveMonsterEasyWeight: 1 }), 6);
+    expect(result?.entries).toEqual([monster('rat', { level: 1 }), monster('rat', { level: 1 })]);
+  });
 });

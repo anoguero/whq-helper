@@ -162,6 +162,15 @@ describe('buildDecks in table mode', () => {
     expect(new Set(ids(drawMany(decks.dungeon, 40)))).toEqual(new Set(['rat']));
   });
 
+  it('resolves a table reference by stable id, so renaming the referenced table keeps it working', () => {
+    // El fallo: se buscaba solo por nombre visible y, al renombrar la tabla, la referencia no la encontraba.
+    const repo = repository([
+      table('dungeon', { monsters: [tableRef('minions', { targetLevel: 1 })] }),
+      table('Minions (renamed)', { id: 'minions', active: false, monsters: [monster('rat', { level: 1 })] })
+    ]);
+    expect(buildDecks(repo, settings()).dungeon.draw()).toEqual(monster('rat', { level: 1 }));
+  });
+
   it('gives up on a table reference cycle instead of recursing forever', () => {
     const repo = repository([
       table('a', { monsters: [tableRef('b')] }),

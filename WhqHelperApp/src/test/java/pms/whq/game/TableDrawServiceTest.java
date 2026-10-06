@@ -6,11 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.StringReader;
 import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.InputSource;
 
 import pms.whq.Settings;
 import pms.whq.data.EventEntry;
@@ -255,6 +259,43 @@ class TableDrawServiceTest {
         Object resolved = service.resolveEntry(reference);
 
         assertSame(rightLevel, resolved);
+    }
+
+    @Test
+    void resolveEntryFindsTheReferencedTableByStableIdAfterARename() throws Exception {
+        // El fallo: se buscaba solo por nombre visible y, al renombrar la tabla, la referencia no la encontraba.
+        Table renamed = tableFromXml("<table id=\"minions\" name=\"Minions (renamed)\" kind=\"dungeon\"/>");
+        MonsterEntry rat = monster("rat", 1);
+        renamed.addEntry(rat);
+        Table.registerAll(Map.of(renamed.getName(), renamed));
+
+        TableReferenceEntry reference = new TableReferenceEntry();
+        reference.tableName = "minions";
+        reference.targetLevel = 1;
+
+        assertSame(rat, service.resolveEntry(reference));
+    }
+
+    @Test
+    void resolveEntryStillFindsTheReferencedTableByVisibleName() throws Exception {
+        Table legacy = tableFromXml("<table id=\"minions\" name=\"Minions\" kind=\"dungeon\"/>");
+        MonsterEntry rat = monster("rat", 1);
+        legacy.addEntry(rat);
+        Table.registerAll(Map.of(legacy.getName(), legacy));
+
+        TableReferenceEntry reference = new TableReferenceEntry();
+        reference.tableName = "Minions";
+        reference.targetLevel = 1;
+
+        assertSame(rat, service.resolveEntry(reference));
+    }
+
+    private static Table tableFromXml(String xml) throws Exception {
+        return new Table(
+            DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder()
+                .parse(new InputSource(new StringReader(xml)))
+                .getDocumentElement());
     }
 
     @Test
