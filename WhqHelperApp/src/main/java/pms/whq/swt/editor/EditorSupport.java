@@ -78,22 +78,14 @@ public final class EditorSupport {
   }
 
   public static String extractId(Object entry) {
-    if (entry instanceof RuleEntry e) {
-      return safe(e.id);
-    }
-    if (entry instanceof EventEntry e) {
-      return safe(e.id);
-    }
-    if (entry instanceof MonsterEntry e) {
-      return safe(e.id);
-    }
-    if (entry instanceof WarriorEntry e) {
-      return safe(e.id);
-    }
-    if (entry instanceof LocationEntry e) {
-      return safe(e.id);
-    }
-    return "";
+    return switch (entry) {
+      case RuleEntry e -> safe(e.id);
+      case EventEntry e -> safe(e.id);
+      case MonsterEntry e -> safe(e.id);
+      case WarriorEntry e -> safe(e.id);
+      case LocationEntry e -> safe(e.id);
+      case null, default -> "";
+    };
   }
 
   public static <T> void selectById(
