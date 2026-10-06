@@ -37,10 +37,6 @@ import pms.whq.Settings;
 /** Contadores de aventurero: la reserva de contadores del grupo y sus ventanas. */
 public final class WarriorCounters extends AppPanel {
 
-    public WarriorCounters(AppContext context) {
-        super(context);
-    }
-
     public record WarriorCounterDefinition(
             String id,
             String name,
@@ -50,14 +46,14 @@ public final class WarriorCounters extends AppPanel {
     }
 
     private final java.util.List<WarriorCounterDefinition> remainingWarriorCounters = new ArrayList<>();
-
     private final java.util.List<Shell> openWarriorCounterShells = new ArrayList<>();
-
     private String warriorCounterPartySignature = "";
-
     private boolean warriorCounterPoolInitialized;
-
     private Point nextWarriorCounterLocation;
+
+    public WarriorCounters(AppContext context) {
+        super(context);
+    }
 
     public void genWarriorCounter() {
         try {

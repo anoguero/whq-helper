@@ -43,10 +43,6 @@ import pms.whq.swt.CardFactory;
 /** Dialogo de Nuevo Asentamiento: localizaciones del asentamiento y mazo de eventos de asentamiento. */
 public final class SettlementPanel extends AppPanel {
 
-    public SettlementPanel(AppContext context) {
-        super(context);
-    }
-
     private static final String SETTLEMENT_TYPE_ANY = "any";
 
     private record SettlementLocation(
@@ -56,6 +52,10 @@ public final class SettlementPanel extends AppPanel {
             String rules,
             List<String> visitors,
             Set<String> availableTypes) {
+    }
+
+    public SettlementPanel(AppContext context) {
+        super(context);
     }
 
     private Image loadSettlementDeckPreviewImage() {
