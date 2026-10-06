@@ -1,5 +1,6 @@
 import { appState } from '../../state';
 import type { GroupEntry, MonsterEntry, Rule } from '../../types';
+import { createUserContentUid, loadUserContentItems } from '../../userContent';
 import {
   createDefaultDungeonCard,
   createDefaultEvent,
@@ -9,8 +10,6 @@ import {
   createDefaultRule,
   createDefaultTable,
   createDefaultWarrior,
-  createUserContentUid,
-  loadUserContentItems,
   mapDungeonCardToUserData,
   mapEventToUserData,
   mapLocationToUserData,
@@ -19,7 +18,7 @@ import {
   mapRuleToUserData,
   mapTableToUserData,
   mapWarriorToUserData
-} from '../../userContent';
+} from '../../userContent/defaults';
 import type { UserContentItem, UserContentKind } from '../../userContent/types';
 import { serializeMonster, serializeSpecial } from '../../userContent/xml';
 import { escapeHtml } from '../formatting';

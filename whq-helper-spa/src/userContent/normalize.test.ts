@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { describe, expect, it } from 'vitest';
-import { createDefaultEvent, createDefaultMonster, createDefaultTable } from '../userContent';
+import { createDefaultEvent, createDefaultMonster, createDefaultTable } from './defaults';
 import type { UserContentItem } from './types';
 import { normalizeUserContentItem, slugify } from './normalize';
 
