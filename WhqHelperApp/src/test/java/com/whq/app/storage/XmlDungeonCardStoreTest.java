@@ -15,9 +15,13 @@ import com.whq.app.i18n.I18n;
 import com.whq.app.i18n.Language;
 import com.whq.app.model.CardType;
 import com.whq.app.model.DungeonCard;
+import com.whq.app.AppPaths;
 import com.whq.app.RealContent;
 
 class XmlDungeonCardStoreTest {
+
+    private static final Path SAMPLE_CATALOG = AppPaths.sharedHome(Path.of("").toAbsolutePath().normalize())
+            .resolve("sample/data/xml/dungeon/dungeon-cards.xml");
 
     @TempDir
     Path tempDir;
@@ -32,19 +36,42 @@ class XmlDungeonCardStoreTest {
     }
 
     @Test
-    void createsDefaultXmlStoreWhenNoSourceDataExists() throws Exception {
-        createDefaultTiles();
-        XmlDungeonCardStore store = new XmlDungeonCardStore(tempDir);
+    void writesNothingIntoAContentPackageWithoutACardCatalog() throws Exception {
+        // El fallo: con un paquete incompleto se escribia en el un catalogo de cartas por defecto.
+        Path runtimeHome = tempDir.resolve("user-home");
+        Path content = tempDir.resolve("partial-content");
+        Files.createDirectories(content.resolve("data/xml/tables"));
+        AppPaths.bindSharedHome(runtimeHome, AppPaths.sharedHome(Path.of("").toAbsolutePath().normalize()));
+        String previousContentHome = System.getProperty("whq.content.home");
+        System.setProperty("whq.content.home", content.toString());
+        try {
+            List<DungeonCard> cards = new XmlDungeonCardStore(runtimeHome).loadCards();
 
-        List<DungeonCard> cards = store.loadCards();
+            assertEquals(List.of(), cards);
+            assertFalse(Files.exists(content.resolve("data/xml/dungeon")));
+        } finally {
+            if (previousContentHome == null) {
+                System.clearProperty("whq.content.home");
+            } else {
+                System.setProperty("whq.content.home", previousContentHome);
+            }
+        }
+    }
 
-        assertEquals(4, cards.size());
-        assertTrue(Files.exists(tempDir.resolve("data/xml/dungeon/dungeon-cards.xml")));
+    @Test
+    void loadsTheOtherCatalogsOfAPackageWithoutTheMainOne() throws Exception {
+        Path dungeon = Files.createDirectories(tempDir.resolve("data/xml/dungeon"));
+        Files.copy(SAMPLE_CATALOG, dungeon.resolve("extra-cards.xml"));
+
+        List<DungeonCard> cards = new XmlDungeonCardStore(tempDir).loadCards();
+
+        assertEquals(List.of("LANTERN HALL"), cards.stream().map(DungeonCard::getName).toList());
+        assertFalse(Files.exists(dungeon.resolve("dungeon-cards.xml")));
     }
 
     @Test
     void persistsInsertedCardsAndAvailabilityChanges() throws Exception {
-        createDefaultTiles();
+        copySampleCatalog();
         XmlDungeonCardStore store = new XmlDungeonCardStore(tempDir);
         store.loadCards();
         createTile("resources/tiles/crypt-stairs.png");
@@ -85,7 +112,7 @@ class XmlDungeonCardStoreTest {
         Language previousLanguage = I18n.getLanguage();
         try {
             I18n.setLanguage(Language.ES);
-            createDefaultTiles();
+            copySampleCatalog();
             Files.createDirectories(tempDir.resolve("data/i18n"));
             Files.writeString(tempDir.resolve("data/i18n/content-es.xml"), """
                     <?xml version="1.0" encoding="UTF-8"?>
@@ -110,10 +137,11 @@ class XmlDungeonCardStoreTest {
         }
     }
 
-    private void createDefaultTiles() throws Exception {
-        for (DungeonCard card : XmlDungeonCardStore.defaultCards()) {
-            createTile(card.getTileImagePath());
-        }
+    // El catalogo base lo trae el paquete de contenido: el de ejemplo, con la carta 1.
+    private void copySampleCatalog() throws Exception {
+        Path dungeon = Files.createDirectories(tempDir.resolve("data/xml/dungeon"));
+        Files.copy(SAMPLE_CATALOG, dungeon.resolve("dungeon-cards.xml"));
+        createTile("resources/tiles/sample/lantern-hall.png");
     }
 
     private void createTile(String relativePath) throws Exception {

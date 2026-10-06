@@ -38,22 +38,20 @@ import com.whq.app.model.DungeonCard;
 public class XmlDungeonCardStore implements DungeonCardStore {
     private static final String DEFAULT_ENVIRONMENT = "The Old World";
     private static final String XML_DIR = "data/xml/dungeon";
-    private static final String XML_PATH = "data/xml/dungeon/dungeon-cards.xml";
     private static final String USER_XML_PATH = "data/xml/dungeon/userdefined-dungeon-cards.xml";
     private static final String SCHEMA_PATH = "data/xml/dungeon/whq-dungeon-cards-schema.xsd";
     // Comparte directorio con los catalogos de cartas, pero no es uno de ellos.
     private static final String ROOM_REFERENCES_FILE = "room-references.xml";
 
     private final Path projectRoot;
-    private final Path xmlPath;
     private final Path userXmlPath;
     private final Path schemaPath;
     private final DocumentBuilderFactory parserFactory;
 
     public XmlDungeonCardStore(Path projectRoot) {
         this.projectRoot = projectRoot.toAbsolutePath().normalize();
-        // Catalogo base y esquema en el shared home; las cartas del usuario en el runtime home.
-        this.xmlPath = AppPaths.contentPath(this.projectRoot, XML_PATH);
+        // Esquema en el shared home y cartas del usuario en el runtime home; los catalogos base se
+        // listan del paquete de contenido (listCardFiles).
         this.userXmlPath = this.projectRoot.resolve(USER_XML_PATH);
         this.schemaPath = AppPaths.sharedPath(this.projectRoot, SCHEMA_PATH);
         this.parserFactory = SafeXml.newFactory();
@@ -211,8 +209,9 @@ public class XmlDungeonCardStore implements DungeonCardStore {
      * operaciones de escritura, que necesitan tanto el fichero de usuario en crudo como la vista
      * fusionada y no deben parsear el mismo fichero mas de una vez.
      */
+    // Si el paquete de contenido no trae catalogo, no se crea ninguno: el paquete es del usuario y la
+    // aplicacion no escribe en el. Se cargan las cartas que haya (otros XML del directorio, las del usuario).
     private Map<Path, List<DungeonCard>> readRawCardsByFile() throws DungeonCardStorageException {
-        ensureBaseXmlExists();
         Map<Path, List<DungeonCard>> byFile = new LinkedHashMap<>();
         for (Path file : listCardFiles()) {
             byFile.put(file, readCardsFromFile(file));
@@ -373,20 +372,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         }
     }
 
-    private void ensureBaseXmlExists() throws DungeonCardStorageException {
-        if (Files.exists(xmlPath)) {
-            return;
-        }
-        // Sin paquete de contenido no se crea nada en su ubicacion: la aplicacion se distribuye vacia
-        // y, si se crease, el siguiente arranque tomaria ese directorio por un paquete de contenido.
-        if (!AppPaths.hasContent(projectRoot)) {
-            return;
-        }
-
-        ensureSchemaExists();
-        writeBaseCards(defaultCards());
-    }
-
     private void ensureSchemaExists() throws DungeonCardStorageException {
         try {
             Files.createDirectories(schemaPath.getParent());
@@ -396,31 +381,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
             Files.writeString(schemaPath, DungeonCardXmlValidator.defaultSchema());
         } catch (Exception ex) {
             throw new DungeonCardStorageException("No se ha podido crear el esquema XML de cartas.", ex);
-        }
-    }
-
-    private void writeBaseCards(List<DungeonCard> cards) throws DungeonCardStorageException {
-        try {
-            Document document = newDocument();
-            Element root = document.createElement("dungeonCards");
-            document.appendChild(root);
-            for (DungeonCard card : cards) {
-                Element node = document.createElement("card");
-                node.setAttribute("id", Long.toString(card.getId()));
-                node.setAttribute("name", require(card.getName(), "name"));
-                node.setAttribute("type", card.getType().name());
-                node.setAttribute("environment", normalizeEnvironment(card.getEnvironment()));
-                node.setAttribute("copyCount", Integer.toString(Math.max(0, card.getCopyCount())));
-                node.setAttribute("enabled", Boolean.toString(card.isEnabled()));
-                appendText(document, node, "description", nullToEmpty(card.getDescriptionText()));
-                appendText(document, node, "rules", nullToEmpty(card.getRulesText()));
-                appendText(document, node, "tileImagePath", require(card.getTileImagePath(), "tileImagePath"));
-                root.appendChild(node);
-            }
-            writeXmlAtomically(xmlPath, document);
-            validateFile(xmlPath);
-        } catch (Exception ex) {
-            throw new DungeonCardStorageException("No se han podido guardar las cartas base XML.", ex);
         }
     }
 
