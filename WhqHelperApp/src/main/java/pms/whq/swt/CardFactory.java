@@ -784,6 +784,18 @@ public final class CardFactory {
     }
   }
 
+  // Las plantillas se comparten entre todas las cartas del Display (CardTemplateCache): quien las
+  // usa no debe disponerlas.
+  private static Image loadCardTemplate(Composite base, String relativePath) {
+    return CardTemplateCache.get(
+        base.getDisplay(), templateKey(relativePath), () -> loadCardImage(base, relativePath));
+  }
+
+  static String templateKey(String relativePath) {
+    Path baseDir = AppPaths.sharedHome(Settings.getBaseDir());
+    return (baseDir == null ? "" : baseDir.toString()) + "|" + relativePath;
+  }
+
   private static Image loadCardImageFromPath(Composite base, Path path) {
     if (path == null || !Files.exists(path)) {
       return null;
@@ -818,7 +830,7 @@ public final class CardFactory {
       super(parent, SWT.DOUBLE_BUFFERED);
       this.event = event;
       this.objectiveTreasure = isObjectiveTreasure(event);
-      this.templateImage = loadCardImage(this, TREASURE_TEMPLATE_PATH);
+      this.templateImage = loadCardTemplate(this, TREASURE_TEMPLATE_PATH);
       this.coinImage = loadCardImage(this, TREASURE_COIN_PATH);
       this.accentColor =
           objectiveTreasure
@@ -880,9 +892,6 @@ public final class CardFactory {
             bodyBoldFont.dispose();
             if (usersLabelFont != null && usersLabelFont != bodyBoldFont && !usersLabelFont.isDisposed()) {
               usersLabelFont.dispose();
-            }
-            if (templateImage != null && !templateImage.isDisposed()) {
-              templateImage.dispose();
             }
             if (coinImage != null && !coinImage.isDisposed()) {
               coinImage.dispose();
@@ -1356,7 +1365,7 @@ public final class CardFactory {
       this.description = nullSafe(description);
       this.rules = nullSafe(rules);
       this.visitorsText = buildLocationVisitorsText(visitors);
-      this.templateImage = loadCardImage(this, DUNGEON_TEMPLATE_PATH);
+      this.templateImage = loadCardTemplate(this, DUNGEON_TEMPLATE_PATH);
       this.borderColor = new Color(getDisplay(), 20, 17, 14);
       this.accentColor = new Color(getDisplay(), 187, 165, 104);
       this.bodyTextColor = new Color(getDisplay(), 22, 18, 14);
@@ -1406,9 +1415,6 @@ public final class CardFactory {
             bodyTextColor.dispose();
             bodyFont.dispose();
             descriptionFont.dispose();
-            if (templateImage != null && !templateImage.isDisposed()) {
-              templateImage.dispose();
-            }
           });
 
       layoutLocationChildren();
