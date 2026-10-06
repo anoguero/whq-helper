@@ -1,4 +1,4 @@
-import type { UserContentItem, UserContentKind } from '../../userContent';
+import type { UserContentItem, UserContentKind } from '../../userContent/types';
 
 export interface DashboardCategoryMeta {
   kind: UserContentKind;

@@ -1,11 +1,7 @@
 import { t } from '../../i18n';
 import { appState } from '../../state';
-import {
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserObjectiveRoomAdventureData
-} from '../../userContent';
+import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserObjectiveRoomAdventureData } from '../../userContent/types';
 import { escapeHtml } from '../formatting';
 import { bindDashboardCommonActions, contentDashboardSubtitle } from './common';
 import { availableObjectiveRoomNames } from './data';

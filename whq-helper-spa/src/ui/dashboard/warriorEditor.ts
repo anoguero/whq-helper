@@ -1,12 +1,8 @@
 import { getCounterAssetDisplayName, resolveCounterAsset, saveCounterAsset } from '../../counterAssets';
 import { t } from '../../i18n';
 import { appState } from '../../state';
-import {
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserWarriorData
-} from '../../userContent';
+import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserWarriorData } from '../../userContent/types';
 import { escapeHtml, readFileAsDataUrl } from '../formatting';
 import { bindDashboardCommonActions, contentDashboardSubtitle } from './common';
 import { dashboardState } from './state';

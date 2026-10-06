@@ -1,12 +1,8 @@
 import { t } from '../../i18n';
 import { renderEventCard } from '../../render';
 import { appState } from '../../state';
-import {
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserEventData
-} from '../../userContent';
+import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserEventData } from '../../userContent/types';
 import { fitTreasureHeaderText } from '../cardWindows';
 import { escapeHtml, treasureUsersFromFlags, treasureUsersToFlags } from '../formatting';
 import { bindDashboardCommonActions, contentDashboardSubtitle } from './common';

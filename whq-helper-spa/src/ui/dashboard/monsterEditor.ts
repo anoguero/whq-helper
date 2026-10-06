@@ -1,11 +1,7 @@
 import { t } from '../../i18n';
 import { appState } from '../../state';
-import {
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserMonsterData
-} from '../../userContent';
+import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserMonsterData } from '../../userContent/types';
 import {
   buildSpecialRuleText,
   escapeHtml,

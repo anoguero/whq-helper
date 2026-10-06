@@ -3,12 +3,8 @@ import { t } from '../../i18n';
 import { appState } from '../../state';
 import { getTileAssetDisplayName, saveTileAsset } from '../../tileAssets';
 import type { DungeonCard } from '../../types';
-import {
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserDungeonCardData
-} from '../../userContent';
+import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserDungeonCardData } from '../../userContent/types';
 import { getWhiteDwarfReference } from '../../whiteDwarfReferences';
 import { escapeHtml, readFileAsDataUrl } from '../formatting';
 import { openWhiteDwarfReferenceDialog } from '../whiteDwarfReferenceDialog';

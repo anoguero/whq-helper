@@ -2,12 +2,8 @@ import { getSettlementTypes, t } from '../../i18n';
 import { renderSettlementLocationCard } from '../../render';
 import { appState } from '../../state';
 import type { SettlementLocation, SettlementType } from '../../types';
-import {
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserLocationData
-} from '../../userContent';
+import { upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserLocationData } from '../../userContent/types';
 import { escapeHtml } from '../formatting';
 import { locationVisitorLabel, settlementTypeLabel } from '../settlementPanel';
 import { bindDashboardCommonActions, contentDashboardSubtitle } from './common';

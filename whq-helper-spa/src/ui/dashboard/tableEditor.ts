@@ -1,13 +1,8 @@
 import { getAdventureAmbiences, t } from '../../i18n';
 import { appState } from '../../state';
 import type { GroupEntry, MonsterEntry } from '../../types';
-import {
-  parseTableMetadata,
-  upsertUserContentItem,
-  userContentItemXml,
-  type UserContentItem,
-  type UserTableData
-} from '../../userContent';
+import { parseTableMetadata, upsertUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem, UserTableData } from '../../userContent/types';
 import { escapeHtml } from '../formatting';
 import { bindDashboardCommonActions, contentDashboardSubtitle, renderDashboardEditorShell } from './common';
 import {

@@ -1,6 +1,6 @@
 import { t } from '../../i18n';
 import { appState } from '../../state';
-import type { UserContentKind } from '../../userContent';
+import type { UserContentKind } from '../../userContent/types';
 import { escapeHtml } from '../formatting';
 import { openMaintenanceDialog } from '../maintenanceDialog';
 import { renderObjectiveRoomAdventureEditor } from './adventureEditor';

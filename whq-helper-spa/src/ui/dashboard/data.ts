@@ -18,10 +18,9 @@ import {
   mapObjectiveRoomAdventureToUserData,
   mapRuleToUserData,
   mapTableToUserData,
-  mapWarriorToUserData,
-  type UserContentItem,
-  type UserContentKind
+  mapWarriorToUserData
 } from '../../userContent';
+import type { UserContentItem, UserContentKind } from '../../userContent/types';
 import { escapeHtml } from '../formatting';
 import { DASHBOARD_CREATE_PREFIX, dashboardState } from './state';
 

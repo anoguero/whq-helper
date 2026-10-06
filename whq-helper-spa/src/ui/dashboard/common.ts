@@ -1,6 +1,7 @@
 import { t } from '../../i18n';
 import { appState } from '../../state';
-import { deleteUserContentItem, userContentItemXml, type UserContentItem } from '../../userContent';
+import { deleteUserContentItem, userContentItemXml } from '../../userContent';
+import type { UserContentItem } from '../../userContent/types';
 import { escapeHtml } from '../formatting';
 import { isDashboardDraftSelected } from './data';
 import { dashboardState } from './state';
