@@ -21,6 +21,7 @@ import {
   mapWarriorToUserData
 } from '../../userContent';
 import type { UserContentItem, UserContentKind } from '../../userContent/types';
+import { serializeMonster, serializeSpecial } from '../../userContent/xml';
 import { escapeHtml } from '../formatting';
 import { DASHBOARD_CREATE_PREFIX, dashboardState } from './state';
 
