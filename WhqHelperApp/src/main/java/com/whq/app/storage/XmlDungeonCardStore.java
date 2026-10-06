@@ -423,50 +423,6 @@ public class XmlDungeonCardStore implements DungeonCardStore {
         return incoming;
     }
 
-    static List<DungeonCard> defaultCards() {
-        return List.of(
-                new DungeonCard(
-                        1,
-                        "SYLVAN RESPITE",
-                        CardType.DUNGEON_ROOM,
-                        DEFAULT_ENVIRONMENT,
-                        1,
-                        true,
-                        "Autumn scents fill the air as leaves crackle underfoot, a long hidden Elven shrine appears ahead.",
-                        "The Sylvan Respite will always trigger an event card. The Wood Elf player gains 1 extra attack should monsters appear.",
-                        "resources/tiles/sylvan-respite.png"),
-                new DungeonCard(
-                        2,
-                        "EERIE CHASM",
-                        CardType.CORRIDOR,
-                        DEFAULT_ENVIRONMENT,
-                        1,
-                        true,
-                        "The mists coil about your feet and fill the chasm ahead, be sure your chances to cross.",
-                        "The Eerie Chasm can be crossed through use of ropes taking D6 turns to prepare, or leap. Roll a D6 to leap, a 1 is a deadly fall.",
-                        "resources/tiles/eerie-chasm.png"),
-                new DungeonCard(
-                        3,
-                        "WICKED WELL",
-                        CardType.OBJECTIVE_ROOM,
-                        DEFAULT_ENVIRONMENT,
-                        1,
-                        true,
-                        "Vile waters stir beneath broken boards, the last sacred water font mere steps away.",
-                        "You arrive just in time to protect the sacred font. See the Adventure Book or ask the GM for what you encounter.",
-                        "resources/tiles/wicked-well.png"),
-                new DungeonCard(
-                        4,
-                        "RUNIC ANTECHAMBER",
-                        CardType.SPECIAL,
-                        DEFAULT_ENVIRONMENT,
-                        1,
-                        true,
-                        "Ancient runes glow as soon as a warrior crosses the threshold. Cold whispers fill the chamber.",
-                        "When revealed, draw one event card. Wizards gain +1 to all casting rolls until the start of the next Power Phase.",
-                        "resources/tiles/sylvan-respite.png"));
-    }
-
     private Document parse(Path file) throws Exception {
         DocumentBuilder builder = parserFactory.newDocumentBuilder();
         return builder.parse(file.toFile());
