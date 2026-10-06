@@ -6,10 +6,12 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -194,7 +196,11 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
     private Map<String, ObjectiveRoomAdventure> loadMergedAdventures(ContentTranslations translations) throws Exception {
         RoomIndex roomIndex = loadRoomIndex();
         Map<String, ObjectiveRoomAdventure> merged = new LinkedHashMap<>();
+        // Los ficheros de usuario se leen primero; una aventura de usuario no la tapa la base con el
+        // mismo id (como en el almacen de cartas y en la SPA).
+        Set<String> userKeys = new HashSet<>();
         for (Path file : listAdventureFiles()) {
+            boolean userFile = AppPaths.isUserDefined(file);
             Document document = parserFactory.newDocumentBuilder().parse(file.toFile());
             NodeList roomNodes = document.getDocumentElement().getChildNodes();
             for (int i = 0; i < roomNodes.getLength(); i++) {
@@ -232,7 +238,13 @@ public class XmlObjectiveRoomAdventureRepository implements ObjectiveRoomAdventu
                                     translations.t(fallbackKey + ".rules", childText(adventureElement, "rules"))),
                             Boolean.parseBoolean(adventureElement.getAttribute("generic")),
                             roomCardId);
-                    merged.put(adventureKey(adventure), adventure);
+                    String key = adventureKey(adventure);
+                    if (userFile) {
+                        userKeys.add(key);
+                    } else if (userKeys.contains(key)) {
+                        continue;
+                    }
+                    merged.put(key, adventure);
                 }
             }
         }

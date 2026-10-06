@@ -167,6 +167,29 @@ class XmlObjectiveRoomAdventureRepositoryTest {
         assertEquals("Otra", find(repository, fightingPit, "otra").name());
     }
 
+    @Test
+    void aUserAdventureOverridesTheBaseAdventureWithTheSameId() throws Exception {
+        Path runtimeHome = copySharedContent();
+        XmlObjectiveRoomAdventureRepository repository = new XmlObjectiveRoomAdventureRepository(runtimeHome);
+        I18n.setLanguage(Language.EN);
+        DungeonCard fightingPit = sharedCard(FIGHTING_PIT);
+        ObjectiveRoomAdventure base = repository.loadAdventuresForObjectiveRoom(fightingPit).stream()
+                .filter(adventure -> !adventure.generic())
+                .findFirst()
+                .orElseThrow();
+
+        // La version del usuario cambia un campo que no pasa por traducciones: generic.
+        repository.saveUserAdventure(new ObjectiveRoomAdventure(
+                "FIGHTING PIT", base.id(), base.name(), "Sabor", "Reglas", true));
+
+        // El fallo: el fichero base se procesaba despues y tapaba a la aventura del usuario.
+        List<ObjectiveRoomAdventure> withSameId = repository.loadAdventuresForObjectiveRoom(fightingPit).stream()
+                .filter(adventure -> base.id().equals(adventure.id()))
+                .toList();
+        assertEquals(1, withSameId.size());
+        assertTrue(withSameId.get(0).generic());
+    }
+
     private static ObjectiveRoomAdventure find(XmlObjectiveRoomAdventureRepository repository, DungeonCard room, String id)
             throws Exception {
         return repository.loadAdventuresForObjectiveRoom(room).stream()
